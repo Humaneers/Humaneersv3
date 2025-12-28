@@ -18,21 +18,25 @@ export function Home({ onViewChange }: HomeProps) {
       icon: <Shield className="w-8 h-8 text-[#B87333]" />,
       title: "Managed IT",
       desc: "Cloud-native infrastructure that just works. No downtime, just uptime.",
+      link: "managed-it" as const,
     },
     {
       icon: <BarChart3 className="w-8 h-8 text-[#B87333]" />,
       title: "Brand & Marketing",
       desc: "Making your products billboard-ready with enterprise-grade strategy.",
+      link: "growth" as const,
     },
     {
       icon: <Lock className="w-8 h-8 text-[#B87333]" />,
       title: "Family Protection",
       desc: "Closing the home-office security gap to keep your family safe.",
+      link: "family-protection" as const,
     },
     {
       icon: <Users className="w-8 h-8 text-[#B87333]" />,
       title: "Fractional Leadership",
       desc: "Your own CIO/CMO at an SMB price. Strategy without the salary cap.",
+      link: "fractional-leadership" as const,
     },
   ];
 
@@ -88,7 +92,7 @@ export function Home({ onViewChange }: HomeProps) {
       {/* No Minimums Banner */}
       <div className="bg-[#B87333] text-white py-4 relative z-20 shadow-md">
         <div className="container mx-auto px-6 text-center font-medium text-lg tracking-wide">
-          No user minimums. No offshore NOCs. Just local Tempe engineering.
+          No user minimums. No offshore NOCs. 100% US-Based Engineering.
         </div>
       </div>
 
@@ -112,7 +116,8 @@ export function Home({ onViewChange }: HomeProps) {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="bg-white p-8 rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 border-b-4 border-transparent hover:border-[#B87333] group"
+                onClick={() => onViewChange(pillar.link)}
+                className="bg-white p-8 rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 border-b-4 border-transparent hover:border-[#B87333] group cursor-pointer"
               >
                 <div className="mb-6 bg-[#F5F1E9] w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   {pillar.icon}
@@ -162,7 +167,7 @@ export function Home({ onViewChange }: HomeProps) {
               />
               <div className="absolute -bottom-6 -left-6 bg-[#B87333] p-6 rounded-lg text-white shadow-lg hidden md:block">
                 <p className="text-2xl font-bold">500+</p>
-                <p className="text-sm opacity-90">Local Families Protected</p>
+                <p className="text-sm opacity-90">Families Protected Nationwide</p>
               </div>
             </div>
           </div>
@@ -179,13 +184,13 @@ export function Home({ onViewChange }: HomeProps) {
         <div className="container mx-auto px-6 relative z-10 text-center">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Ready to upgrade your business?</h2>
           <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            Get the enterprise-grade support you deserve with the local touch you need.
+            Get the enterprise-grade support you deserve with the personal touch you need.
           </p>
           <Button
-            onClick={() => window.open("https://calendly.com", "_blank")}
+            onClick={() => onViewChange("contact")}
             className="bg-[#B87333] hover:bg-[#a0632a] text-white text-xl px-10 py-7 h-auto rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
           >
-            Book Your Strategy Session
+            Let's get to work
           </Button>
         </div>
       </section>

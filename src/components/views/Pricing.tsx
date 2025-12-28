@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { Check, X, HelpCircle, ArrowRight } from "lucide-react";
+import { Check, X, HelpCircle, ArrowRight, Shield, BarChart3, Users, Lock, Clock } from "lucide-react";
 import { Button } from "../ui/button";
 import { Switch } from "../ui/switch";
 import { View } from "../../App";
 import { motion } from "motion/react";
+import { DefinitionTooltip } from "../DefinitionTooltip";
 
 interface PricingProps {
   onViewChange: (view: View) => void;
@@ -14,26 +15,32 @@ export function Pricing({ onViewChange }: PricingProps) {
     document.title = "Humaneers | Pricing | Enterprise Strategy, Small Business Soul";
   }, []);
 
-  const [isNonprofit, setIsNonprofit] = useState(false);
+  const [pricingMode, setPricingMode] = useState<'business' | 'nonprofit' | 'household'>('business');
 
-  const tiers = [
+  const businessTiers = [
     {
       name: "Foundation",
       price: 90,
+      unit: "/user/mo",
       description: "Essential IT & Security for small teams.",
       features: [
-        "Cloud-native infrastructure",
+        "Hybrid/Cloud Infrastructure",
         "Unlimited remote support",
         "Basic Security Suite (Antivirus/Malware)",
-        "Includes Personal Device Protection",
+        <span><DefinitionTooltip term="MDM" definition="Mobile Device Management: Software that allows IT to secure, monitor, and manage mobile devices." /> (Mobile Device Management)</span>,
         "Microsoft 365 Management",
       ],
       cta: "Get Started",
       highlighted: false,
+      links: [
+        { label: "Managed IT Info", icon: <Shield size={12}/>, view: "managed-it" },
+        { label: "Family Protection", icon: <Lock size={12}/>, view: "family-protection" }
+      ]
     },
     {
       name: "Growth",
       price: 119,
+      unit: "/user/mo",
       description: "For businesses ready to scale their brand and ops.",
       features: [
         "Everything in Foundation",
@@ -44,10 +51,14 @@ export function Pricing({ onViewChange }: PricingProps) {
       ],
       cta: "Choose Growth",
       highlighted: true,
+      links: [
+        { label: "Americanization", icon: <BarChart3 size={12}/>, view: "growth" }
+      ]
     },
     {
       name: "Scale",
       price: 149,
+      unit: "/user/mo",
       description: "Full enterprise power with strategic leadership.",
       features: [
         "Everything in Growth",
@@ -58,8 +69,71 @@ export function Pricing({ onViewChange }: PricingProps) {
       ],
       cta: "Go Enterprise",
       highlighted: false,
+      links: [
+        { label: "vCIO Leadership", icon: <Users size={12}/>, view: "fractional-leadership" }
+      ]
     },
   ];
+
+  const householdTiers = [
+    {
+      name: "Family Foundation",
+      price: 50,
+      unit: "/household/mo",
+      description: "Essential protection for up to 6 family members.",
+      features: [
+        "Enterprise Endpoint Protection (Mac/PC)",
+        <span><DefinitionTooltip term="MDM" definition="Mobile Device Management: Software that allows IT to secure, monitor, and manage mobile devices." /> (Mobile Device Management)</span>,
+        "Content Filtering & Parental Controls",
+        "Identity Theft Monitoring",
+        "Remote Helpdesk Support"
+      ],
+      cta: "Secure My Family",
+      highlighted: false,
+      links: [
+        { label: "Family Protection", icon: <Lock size={12}/>, view: "family-protection" }
+      ]
+    },
+    {
+      name: "Family Estate",
+      price: 149,
+      unit: "/household/mo",
+      description: "Full digital concierge for the modern smart home.",
+      features: [
+        "Everything in Foundation",
+        "Custom Family Email (@surname.com)",
+        "Enterprise Wi-Fi Management",
+        "ISP & Vendor Management",
+        "Priority 24/7 Support"
+      ],
+      cta: "Get Concierge",
+      highlighted: true,
+      links: []
+    }
+  ];
+
+  const nonprofitTiers = [
+    {
+      name: "Nonprofit Foundation",
+      price: 299,
+      unit: "/org/mo + licenses",
+      description: "Flat-rate service fee plus at-cost licensing.",
+      features: [
+        "Flat Organization Service Fee",
+        "Per-User Licensing Cost Only",
+        "Unlimited Remote Support",
+        "Donor Data Protection",
+        "Volunteer Management"
+      ],
+      cta: "Verify 501(c)(3)",
+      highlighted: true,
+      links: [
+        { label: "Nonprofit Details", icon: <Shield size={12}/>, view: "non-profits" }
+      ]
+    }
+  ];
+
+  const currentTiers = pricingMode === 'household' ? householdTiers : (pricingMode === 'nonprofit' ? nonprofitTiers : businessTiers);
 
   return (
     <div className="bg-[#F5F1E9] min-h-screen py-24">
@@ -69,56 +143,39 @@ export function Pricing({ onViewChange }: PricingProps) {
             Transparent Pricing. No Hidden Fees.
           </h1>
           <p className="text-lg text-[#4E596F] mb-10">
-            Choose the plan that fits your stage of business. Change anytime as you grow.
+            Choose the plan that fits your stage of business or life.
           </p>
 
-          <div className="flex items-center justify-center gap-4 bg-white/50 backdrop-blur-sm p-4 rounded-full inline-flex mx-auto mb-8 shadow-sm">
-            <span
-              className={`text-sm font-semibold transition-colors ${
-                !isNonprofit ? "text-[#1B263B]" : "text-gray-400"
-              }`}
-            >
-              Standard Business
-            </span>
-            <Switch
-              checked={isNonprofit}
-              onCheckedChange={setIsNonprofit}
-              className="data-[state=checked]:bg-[#B87333]"
-            />
-            <span
-              className={`text-sm font-semibold transition-colors flex items-center gap-2 ${
-                isNonprofit ? "text-[#B87333]" : "text-gray-400"
-              }`}
-            >
-              Nonprofit Pricing
-              {isNonprofit && (
-                <span className="flex h-2 w-2 rounded-full bg-[#B87333] animate-pulse shadow-[0_0_8px_rgba(184,115,51,0.8)]"></span>
-              )}
-            </span>
+          <div className="flex items-center justify-center gap-2 bg-white/50 backdrop-blur-sm p-2 rounded-full inline-flex mx-auto mb-8 shadow-sm">
+             <button 
+                onClick={() => setPricingMode('business')}
+                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${pricingMode === 'business' ? 'bg-[#1B263B] text-white shadow-md' : 'text-gray-500 hover:text-[#1B263B]'}`}
+             >
+                Business
+             </button>
+             <button 
+                onClick={() => setPricingMode('household')}
+                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${pricingMode === 'household' ? 'bg-[#B87333] text-white shadow-md' : 'text-gray-500 hover:text-[#B87333]'}`}
+             >
+                Households
+             </button>
+             <button 
+                onClick={() => setPricingMode('nonprofit')}
+                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all flex items-center gap-2 ${pricingMode === 'nonprofit' ? 'bg-[#1B263B] text-white shadow-md' : 'text-gray-500 hover:text-[#1B263B]'}`}
+             >
+                Nonprofit
+             </button>
           </div>
           
-          {isNonprofit && (
-            <motion.div 
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              className="bg-[#1B263B] text-white p-6 rounded-lg shadow-lg mb-10 max-w-2xl mx-auto border border-[#B87333]"
-            >
-              <h3 className="text-xl font-bold mb-2 flex items-center justify-center gap-2">
-                <span className="text-[#B87333]">♥</span> Mission-Aligned Rates
-              </h3>
-              <p className="mb-4 text-gray-300">
-                We offer special discounted pricing for 501(c)(3) organizations making an impact in our community.
-              </p>
-              <Button className="bg-[#B87333] hover:bg-[#a0632a] text-white w-full sm:w-auto">
-                Contact for Nonprofit Rates
-              </Button>
-            </motion.div>
+          {pricingMode === 'nonprofit' && (
+             <div className="max-w-2xl mx-auto mb-12 bg-blue-50 border border-blue-200 p-4 rounded-lg text-blue-800 text-sm">
+                <strong>How Nonprofit Pricing Works:</strong> Unlike our for-profit plans which bundle service and licensing into a per-user fee, we charge a flat monthly service retainer for the entire organization, plus the direct cost of user licenses (Microsoft 365, etc). This saves growing nonprofits thousands per year.
+             </div>
           )}
         </div>
 
-        {!isNonprofit && (
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {tiers.map((tier, index) => (
+        <div className={`grid md:grid-cols-${currentTiers.length} gap-8 max-w-${currentTiers.length <= 2 ? '4xl' : '6xl'} mx-auto`}>
+            {currentTiers.map((tier, index) => (
               <motion.div
                 key={tier.name}
                 initial={{ opacity: 0, y: 20 }}
@@ -137,7 +194,7 @@ export function Pricing({ onViewChange }: PricingProps) {
                   <h3 className="text-2xl font-bold text-[#1B263B] mb-2">{tier.name}</h3>
                   <div className="flex items-baseline mb-4">
                     <span className="text-4xl font-bold text-[#1B263B]">${tier.price}</span>
-                    <span className="text-gray-500 ml-2">/user/mo</span>
+                    <span className="text-gray-500 ml-2">{tier.unit}</span>
                   </div>
                   <p className="text-sm text-gray-500 mb-8 h-10">{tier.description}</p>
                   
@@ -149,10 +206,21 @@ export function Pricing({ onViewChange }: PricingProps) {
                       </li>
                     ))}
                   </ul>
+
+                  {/* Links to feature pages */}
+                  <div className="mb-6 flex flex-wrap gap-2">
+                     {tier.links?.map((link, i) => (
+                        <button key={i} onClick={() => onViewChange(link.view as any)} className="text-xs flex items-center gap-1 bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded text-[#1B263B] font-medium transition-colors">
+                           {link.icon} {link.label}
+                        </button>
+                     ))}
+                  </div>
+
                 </div>
                 
                 <div className="p-8 bg-gray-50 pt-0 mt-auto">
                   <Button 
+                    onClick={() => onViewChange("contact")}
                     className={`w-full py-6 text-lg font-medium shadow-md transition-all ${
                       tier.highlighted 
                         ? "bg-[#B87333] hover:bg-[#a0632a] text-white hover:shadow-lg" 
@@ -165,14 +233,63 @@ export function Pricing({ onViewChange }: PricingProps) {
               </motion.div>
             ))}
           </div>
-        )}
         
+        <div className="mt-20 max-w-4xl mx-auto">
+            <div className="bg-[#1B263B] rounded-2xl p-8 md:p-12 text-white relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#B87333] opacity-10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+                
+                <div className="relative z-10">
+                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-8">
+                        <div>
+                           <div className="flex items-center gap-3 mb-4">
+                              <div className="bg-[#B87333] p-2 rounded-lg">
+                                 <Clock className="w-6 h-6 text-white" />
+                              </div>
+                              <h3 className="text-2xl font-bold">Retainer & Hourly Packs</h3>
+                           </div>
+                           <p className="text-gray-300 max-w-xl">
+                              Need support but not ready for a monthly subscription? Purchase a bucket of hours that never expires. Perfect for one-off projects or seasonal help.
+                           </p>
+                        </div>
+                        <div className="text-right shrink-0">
+                           <div className="text-4xl font-bold text-white mb-1">$150<span className="text-lg font-normal text-gray-400">/hr</span></div>
+                           <div className="text-sm text-[#B87333] font-medium">Sold in 10hr packs</div>
+                        </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-6 mb-8 border-t border-gray-700 pt-8">
+                        <div>
+                           <h4 className="font-bold mb-2 text-[#B87333]">Flexible Usage</h4>
+                           <p className="text-sm text-gray-400">Use for IT support, strategy, or design work. Hours are deducted as we work.</p>
+                        </div>
+                        <div>
+                           <h4 className="font-bold mb-2 text-[#B87333]">Never Expires</h4>
+                           <p className="text-sm text-gray-400">Your hours stay in your account forever. Use them next week or next year.</p>
+                        </div>
+                        <div>
+                           <h4 className="font-bold mb-2 text-[#B87333]">Priority Queue</h4>
+                           <p className="text-sm text-gray-400">Retainer clients get priority scheduling over standard ad-hoc requests.</p>
+                        </div>
+                    </div>
+
+                    <div className="flex justify-center md:justify-start">
+                       <Button 
+                          onClick={() => window.location.href = "mailto:hello@humaneers.dev?subject=Hourly Pack Inquiry"}
+                          className="bg-white text-[#1B263B] hover:bg-gray-100 px-8 py-3 font-bold"
+                       >
+                          Purchase Hours
+                       </Button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div className="mt-20 text-center">
             <h3 className="text-2xl font-bold text-[#1B263B] mb-6">Need a custom enterprise solution?</h3>
             <p className="text-[#4E596F] mb-8 max-w-2xl mx-auto">
                 We work with larger organizations to build custom infrastructure and growth plans.
             </p>
-            <Button variant="outline" onClick={() => window.open("https://calendly.com", "_blank")} className="border-[#1B263B] text-[#1B263B] hover:bg-[#1B263B] hover:text-white px-8 py-3">
+            <Button variant="outline" onClick={() => onViewChange("contact")} className="border-[#1B263B] text-[#1B263B] hover:bg-[#1B263B] hover:text-white px-8 py-3">
                 Contact Sales
             </Button>
         </div>
