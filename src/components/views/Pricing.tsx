@@ -192,7 +192,11 @@ export function Pricing({ onViewChange }: PricingProps) {
           )}
         </div>
 
-        <div className={`grid md:grid-cols-${currentTiers.length} gap-8 max-w-${currentTiers.length <= 2 ? '4xl' : '6xl'} mx-auto`}>
+        <div className={`grid gap-8 mx-auto ${
+           currentTiers.length === 1 ? 'max-w-md' : 
+           currentTiers.length === 2 ? 'max-w-4xl md:grid-cols-2' : 
+           'max-w-6xl md:grid-cols-3'
+        }`}>
             {currentTiers.map((tier, index) => (
               <motion.div
                 key={tier.name}

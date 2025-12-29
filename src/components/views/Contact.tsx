@@ -125,7 +125,7 @@ export function Contact({ onViewChange }: ContactProps) {
                                  <SelectValue placeholder="Select a topic" />
                               </SelectTrigger>
                               <SelectContent>
-                                 <SelectItem value="sales">Sales & Strategy (Talk to Sales)</SelectItem>
+                                 <SelectItem value="sales">Sales & Strategy (Start a Conversation)</SelectItem>
                                  <SelectItem value="support">Technical Support</SelectItem>
                                  <SelectItem value="partnerships">Partnerships</SelectItem>
                                  <SelectItem value="press">Press & Media</SelectItem>

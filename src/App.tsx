@@ -18,9 +18,13 @@ import { Services } from "./components/views/Services";
 import { TalkToSales } from "./components/views/TalkToSales";
 import { Personal } from "./components/views/Personal";
 import { Colophon } from "./components/views/Colophon";
+import { Ethics } from "./components/views/Ethics";
+import { Resources } from "./components/views/Resources";
 import { TalkToSalesModal } from "./components/TalkToSalesModal";
 
-export type View = "home" | "pricing" | "growth" | "about" | "terms" | "privacy" | "managed-it" | "family-protection" | "fractional-leadership" | "non-profits" | "contact" | "industries" | "services" | "talk-to-sales" | "personal" | "colophon";
+import { Status } from "./components/views/Status";
+
+export type View = "home" | "pricing" | "growth" | "about" | "terms" | "privacy" | "managed-it" | "family-protection" | "fractional-leadership" | "non-profits" | "contact" | "industries" | "services" | "talk-to-sales" | "personal" | "colophon" | "ethics" | "resources" | "status";
 
 export default function App() {
   const [currentView, setCurrentView] = useState<View>("home");
@@ -28,6 +32,38 @@ export default function App() {
   
   const [isSalesModalOpen, setIsSalesModalOpen] = useState(false);
   const [salesModalData, setSalesModalData] = useState<any>(null);
+
+  // Suppress external extension errors (Moxie, iFrameSizer)
+  useEffect(() => {
+    const originalLog = console.log;
+    const originalWarn = console.warn;
+    const originalError = console.error;
+
+    const filterMsg = (args: any[]) => {
+      return args.some(arg => 
+        typeof arg === 'string' && (
+          arg.includes("[iFrameSizer]") || 
+          arg.includes("moxie-web-devs-website-form")
+        )
+      );
+    };
+
+    console.log = (...args) => {
+      if (!filterMsg(args)) originalLog(...args);
+    };
+    console.warn = (...args) => {
+      if (!filterMsg(args)) originalWarn(...args);
+    };
+    console.error = (...args) => {
+      if (!filterMsg(args)) originalError(...args);
+    };
+
+    return () => {
+      console.log = originalLog;
+      console.warn = originalWarn;
+      console.error = originalError;
+    };
+  }, []);
 
   // Scroll to top on view change
   useEffect(() => {
@@ -82,6 +118,12 @@ export default function App() {
         return <Personal onViewChange={handleViewChange} />;
       case "colophon":
         return <Colophon onViewChange={handleViewChange} />;
+      case "ethics":
+        return <Ethics onViewChange={handleViewChange} />;
+      case "resources":
+        return <Resources onViewChange={handleViewChange} />;
+      case "status":
+        return <Status onViewChange={handleViewChange} />;
       case "terms":
         return <Terms onViewChange={handleViewChange} />;
       case "privacy":

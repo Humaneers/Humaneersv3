@@ -32,7 +32,7 @@ export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    document.title = "Humaneers | Talk to Sales";
+    document.title = "Humaneers | Start a Conversation";
     window.scrollTo(0, 0);
   }, []);
 

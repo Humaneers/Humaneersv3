@@ -1,5 +1,5 @@
 import { ReactNode, useState, useEffect, forwardRef } from "react";
-import { Menu, X, ShieldCheck } from "lucide-react";
+import { Menu, X, ShieldCheck, BookOpen } from "lucide-react";
 import { Button } from "./ui/button";
 import { View } from "../App";
 import { motion, AnimatePresence } from "motion/react";
@@ -136,13 +136,32 @@ export function Layout({ children, currentView, onViewChange }: LayoutProps) {
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
+                       <li className="col-span-2">
+                          <NavigationMenuLink asChild>
+                             <a
+                                className="flex w-full select-none flex-col justify-end rounded-md bg-[#B87333]/10 p-4 no-underline outline-none focus:shadow-md cursor-pointer border border-[#B87333]/20 hover:bg-[#B87333]/20 transition-colors"
+                                onClick={(e) => { e.preventDefault(); onViewChange("resources"); }}
+                                href="#"
+                             >
+                                <div className="text-base font-bold text-[#1B263B] flex items-center gap-2">
+                                   <BookOpen size={16} /> Knowledge Base Hub
+                                </div>
+                                <p className="text-xs text-[#4E596F] mt-1">
+                                   Explore guides, security explainers, and operational docs.
+                                </p>
+                             </a>
+                          </NavigationMenuLink>
+                       </li>
                        <ListItem title="Transparency & Colophon" onClick={() => onViewChange("colophon")}>
                         Our operating framework, open source credits, and ethics.
+                      </ListItem>
+                      <ListItem title="Ethics Charter" onClick={() => onViewChange("ethics")}>
+                        Our code of conduct, anti-corruption policy, and reporting.
                       </ListItem>
                       <ListItem title="Pricing" onClick={() => onViewChange("pricing")}>
                         Transparent pricing for all service tiers.
                       </ListItem>
-                      <ListItem title="Service Status" href="#" onClick={(e) => { e.preventDefault(); /* Mock external link */ }}>
+                      <ListItem title="Service Status" href="#" onClick={(e) => { e.preventDefault(); onViewChange("status"); }}>
                         Real-time system performance and uptime.
                       </ListItem>
                       <ListItem title="Blog (Coming Soon)" href="#" className="opacity-60 cursor-not-allowed">
@@ -192,7 +211,7 @@ export function Layout({ children, currentView, onViewChange }: LayoutProps) {
                   <NavigationMenuLink
                     className={cn(navigationMenuTriggerStyle(), "bg-transparent text-gray-300 hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white cursor-pointer")}
                     href="#"
-                    onClick={(e) => { e.preventDefault(); /* Mock Status Page */ }}
+                    onClick={(e) => { e.preventDefault(); onViewChange("status"); }}
                   >
                     Status
                   </NavigationMenuLink>
@@ -215,7 +234,7 @@ export function Layout({ children, currentView, onViewChange }: LayoutProps) {
               className="bg-[#B87333] hover:bg-[#a0632a] text-white font-medium rounded-md transition-all shadow-md hover:shadow-lg"
               onClick={() => onViewChange("talk-to-sales")}
             >
-              Talk to Sales
+              Let's Get Started
             </Button>
           </div>
 
@@ -261,6 +280,7 @@ export function Layout({ children, currentView, onViewChange }: LayoutProps) {
                 <div>
                    <h4 className="text-[#B87333] font-bold uppercase text-xs tracking-wider mb-3">Resources</h4>
                    <div className="flex flex-col gap-3 pl-2 border-l border-gray-700">
+                      <MobileLink onClick={() => { onViewChange("resources"); setIsMobileMenuOpen(false); }}>Knowledge Base</MobileLink>
                       <MobileLink onClick={() => { onViewChange("colophon"); setIsMobileMenuOpen(false); }}>Transparency & Colophon</MobileLink>
                       <MobileLink onClick={() => { onViewChange("pricing"); setIsMobileMenuOpen(false); }}>Pricing</MobileLink>
                    </div>
@@ -286,7 +306,7 @@ export function Layout({ children, currentView, onViewChange }: LayoutProps) {
                     className="bg-[#B87333] hover:bg-[#a0632a] text-white w-full"
                     onClick={() => { onViewChange("talk-to-sales"); setIsMobileMenuOpen(false); }}
                   >
-                    Talk to Sales
+                    Let's Get Started
                   </Button>
                 </div>
               </div>
@@ -370,6 +390,11 @@ export function Layout({ children, currentView, onViewChange }: LayoutProps) {
                     Pricing
                   </button>
                 </li>
+                 <li>
+                  <button onClick={() => onViewChange("resources")} className="hover:text-[#B87333] transition-colors">
+                    Resources
+                  </button>
+                </li>
                 <li>
                   <button onClick={() => onViewChange("contact")} className="hover:text-[#B87333] transition-colors">Contact</button>
                 </li>
@@ -397,6 +422,7 @@ export function Layout({ children, currentView, onViewChange }: LayoutProps) {
             <div className="flex flex-wrap justify-center items-center gap-6">
               <button onClick={() => onViewChange("privacy")} className="hover:text-[#B87333] transition-colors">Privacy Policy</button>
               <button onClick={() => onViewChange("terms")} className="hover:text-[#B87333] transition-colors">Terms of Service</button>
+              <button onClick={() => onViewChange("ethics")} className="hover:text-[#B87333] transition-colors">Ethics Charter</button>
               <button onClick={() => onViewChange("colophon")} className="hover:text-[#B87333] transition-colors">Colophon & Transparency</button>
               <span className="text-[#B87333]">Supporting 501(c)(3) Organizations</span>
             </div>
