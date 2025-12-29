@@ -7,7 +7,7 @@ import { motion } from "motion/react";
 import { DefinitionTooltip } from "../DefinitionTooltip";
 
 interface PricingProps {
-  onViewChange: (view: View) => void;
+  onViewChange: (view: View, data?: any) => void;
 }
 
 export function Pricing({ onViewChange }: PricingProps) {
@@ -77,10 +77,28 @@ export function Pricing({ onViewChange }: PricingProps) {
 
   const householdTiers = [
     {
-      name: "Family Foundation",
+      name: "Solo / Personal",
+      price: 25,
+      unit: "/user/mo",
+      description: "DNS, Domains & Email management only. No protection.",
+      features: [
+        "Domain Registrar Management",
+        "DNS Record Configuration",
+        "Email (G-Suite/O365) Admin",
+        "Remote Tech Support",
+        "No Active Security Software"
+      ],
+      cta: "Get Admin Help",
+      highlighted: false,
+      links: [
+        { label: "Personal Details", icon: <Users size={12}/>, view: "personal" }
+      ]
+    },
+    {
+      name: "Personal Foundation",
       price: 50,
       unit: "/household/mo",
-      description: "Essential protection for up to 6 family members.",
+      description: "Essential protection for up to 6 members.",
       features: [
         "Enterprise Endpoint Protection (Mac/PC)",
         <span><DefinitionTooltip term="MDM" definition="Mobile Device Management: Software that allows IT to secure, monitor, and manage mobile devices." /> (Mobile Device Management)</span>,
@@ -88,26 +106,26 @@ export function Pricing({ onViewChange }: PricingProps) {
         "Identity Theft Monitoring",
         "Remote Helpdesk Support"
       ],
-      cta: "Secure My Family",
-      highlighted: false,
+      cta: "Secure My Home",
+      highlighted: true,
       links: [
-        { label: "Family Protection", icon: <Lock size={12}/>, view: "family-protection" }
+        { label: "Protection Details", icon: <Lock size={12}/>, view: "family-protection" }
       ]
     },
     {
-      name: "Family Estate",
+      name: "Personal Estate",
       price: 149,
       unit: "/household/mo",
       description: "Full digital concierge for the modern smart home.",
       features: [
         "Everything in Foundation",
-        "Custom Family Email (@surname.com)",
+        "Custom Personal Email (@surname.com)",
         "Enterprise Wi-Fi Management",
         "ISP & Vendor Management",
         "Priority 24/7 Support"
       ],
       cta: "Get Concierge",
-      highlighted: true,
+      highlighted: false,
       links: []
     }
   ];
@@ -157,7 +175,7 @@ export function Pricing({ onViewChange }: PricingProps) {
                 onClick={() => setPricingMode('household')}
                 className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${pricingMode === 'household' ? 'bg-[#B87333] text-white shadow-md' : 'text-gray-500 hover:text-[#B87333]'}`}
              >
-                Households
+                Personal
              </button>
              <button 
                 onClick={() => setPricingMode('nonprofit')}
@@ -195,6 +213,9 @@ export function Pricing({ onViewChange }: PricingProps) {
                   <div className="flex items-baseline mb-4">
                     <span className="text-4xl font-bold text-[#1B263B]">${tier.price}</span>
                     <span className="text-gray-500 ml-2">{tier.unit}</span>
+                    <span className="ml-1 relative -top-3">
+                      <DefinitionTooltip term="*" definition="Subject to Terms of Service. Taxes may apply." className="text-xs text-gray-400 no-underline border-none" />
+                    </span>
                   </div>
                   <p className="text-sm text-gray-500 mb-8 h-10">{tier.description}</p>
                   
@@ -220,7 +241,15 @@ export function Pricing({ onViewChange }: PricingProps) {
                 
                 <div className="p-8 bg-gray-50 pt-0 mt-auto">
                   <Button 
-                    onClick={() => onViewChange("contact")}
+                    onClick={() => {
+                       let interest = "Managed IT Services";
+                       if (tier.name.includes("Personal") || tier.name.includes("Family") || tier.name.includes("Solo")) {
+                          interest = "Personal/Family IT";
+                       } else if (tier.name === "Scale") {
+                          interest = "Fractional Leadership";
+                       }
+                       onViewChange("talk-to-sales", { interest });
+                    }}
                     className={`w-full py-6 text-lg font-medium shadow-md transition-all ${
                       tier.highlighted 
                         ? "bg-[#B87333] hover:bg-[#a0632a] text-white hover:shadow-lg" 
@@ -252,7 +281,12 @@ export function Pricing({ onViewChange }: PricingProps) {
                            </p>
                         </div>
                         <div className="text-right shrink-0">
-                           <div className="text-4xl font-bold text-white mb-1">$150<span className="text-lg font-normal text-gray-400">/hr</span></div>
+                           <div className="text-4xl font-bold text-white mb-1">
+                              $150<span className="text-lg font-normal text-gray-400">/hr</span>
+                              <span className="ml-1 relative -top-3">
+                                <DefinitionTooltip term="*" definition="Subject to Terms of Service. unused hours never expire." className="text-xs text-gray-400 no-underline border-none" />
+                              </span>
+                           </div>
                            <div className="text-sm text-[#B87333] font-medium">Sold in 10hr packs</div>
                         </div>
                     </div>
@@ -289,7 +323,7 @@ export function Pricing({ onViewChange }: PricingProps) {
             <p className="text-[#4E596F] mb-8 max-w-2xl mx-auto">
                 We work with larger organizations to build custom infrastructure and growth plans.
             </p>
-            <Button variant="outline" onClick={() => onViewChange("contact")} className="border-[#1B263B] text-[#1B263B] hover:bg-[#1B263B] hover:text-white px-8 py-3">
+            <Button variant="outline" onClick={() => onViewChange("talk-to-sales")} className="border-[#1B263B] text-[#1B263B] hover:bg-[#1B263B] hover:text-white px-8 py-3">
                 Contact Sales
             </Button>
         </div>

@@ -83,10 +83,10 @@ export function Industries({ onViewChange }: IndustriesProps) {
             Whether you run a single dry cleaner or a multi-location clinic, we bring enterprise-grade reliability to your specific context.
           </p>
           <Button 
-            onClick={() => onViewChange("contact")}
+            onClick={() => onViewChange("talk-to-sales")}
             className="bg-[#B87333] hover:bg-[#a0632a] text-white text-lg px-8 py-4 h-auto rounded-full"
           >
-            Find Your Solution
+            Talk to Sales
           </Button>
         </div>
       </section>
@@ -147,10 +147,10 @@ export function Industries({ onViewChange }: IndustriesProps) {
                We've worked with everyone from architects to zoos. Technology is universal, even if your business is unique.
             </p>
             <Button 
-               onClick={() => onViewChange("contact")}
+               onClick={() => onViewChange("talk-to-sales")}
                className="bg-[#1B263B] hover:bg-[#2c3b55] text-white text-xl px-10 py-6 h-auto rounded-full"
             >
-               Talk to an Engineer <ArrowRight className="ml-2" />
+               Talk to Sales <ArrowRight className="ml-2" />
             </Button>
          </div>
       </section>

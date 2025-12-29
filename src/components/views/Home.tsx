@@ -1,17 +1,29 @@
 import { useState, useEffect } from "react";
-import { ArrowRight, Shield, BarChart3, Users, Lock, MapPin } from "lucide-react";
+import { ArrowRight, Shield, BarChart3, Users, Lock, MapPin, CheckCircle2 } from "lucide-react";
 import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 import { View } from "../../App";
 import { motion } from "motion/react";
 
 interface HomeProps {
-  onViewChange: (view: View) => void;
+  onViewChange: (view: View, data?: any) => void;
 }
 
 export function Home({ onViewChange }: HomeProps) {
+  const [email, setEmail] = useState("");
+
   useEffect(() => {
     document.title = "Humaneers | Home | Enterprise Strategy, Small Business Soul";
   }, []);
+
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      // Pass this email to the next step
+      console.log("Captured email:", email);
+      onViewChange("talk-to-sales", { email });
+    }
+  };
 
   const servicePillars = [
     {
@@ -70,20 +82,29 @@ export function Home({ onViewChange }: HomeProps) {
               IT, Security, and Brand Growth for teams that think big—even if
               they’re super-small.
             </h2>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                onClick={() => onViewChange("pricing")}
-                className="bg-[#B87333] hover:bg-[#a0632a] text-white text-lg px-8 py-6 h-auto rounded-md shadow-lg hover:shadow-xl transition-all"
-              >
-                View Our $90/User Foundation Plan
-              </Button>
-              <Button
-                variant="outline"
-                onClick={() => onViewChange("about")}
-                className="bg-transparent border-white text-white hover:bg-white/10 hover:text-white text-lg px-8 py-6 h-auto rounded-md transition-all"
-              >
-                Meet The Team
-              </Button>
+            <div className="flex flex-col gap-4 max-w-lg">
+               <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-3">
+                  <div className="flex-grow">
+                     <label htmlFor="hero-email" className="sr-only">Work Email</label>
+                     <Input 
+                        id="hero-email"
+                        type="email" 
+                        placeholder="Enter your work email..." 
+                        className="bg-white text-gray-900 h-14 text-lg border-0 focus-visible:ring-2 focus-visible:ring-[#B87333]"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                     />
+                  </div>
+                  <Button
+                    type="submit"
+                    className="bg-[#B87333] hover:bg-[#a0632a] text-white text-lg px-8 h-14 rounded-md shadow-lg hover:shadow-xl transition-all whitespace-nowrap"
+                  >
+                    Get Started
+                  </Button>
+               </form>
+               <p className="text-sm text-gray-400">
+                  Join 500+ businesses secured by Humaneers. No credit card required.
+               </p>
             </div>
           </motion.div>
         </div>

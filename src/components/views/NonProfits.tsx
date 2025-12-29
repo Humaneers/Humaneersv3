@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { View } from "../../App";
 import { Button } from "../ui/button";
 import { Heart, Users, Shield, Gift, CheckCircle2 } from "lucide-react";
+import { DefinitionTooltip } from "../DefinitionTooltip";
 
 interface NonProfitsProps {
   onViewChange: (view: View) => void;
@@ -91,6 +92,72 @@ export function NonProfits({ onViewChange }: NonProfitsProps) {
                      <p className="text-[#4E596F]">{item.desc}</p>
                   </div>
                ))}
+            </div>
+         </div>
+      </section>
+
+      {/* Pricing */}
+      <section className="py-24 bg-[#F5F1E9]">
+         <div className="container mx-auto px-6">
+            <div className="text-center max-w-3xl mx-auto mb-16">
+               <h2 className="text-3xl font-bold text-[#1B263B] mb-4">Nonprofit Foundation Pricing</h2>
+               <p className="text-[#4E596F] text-lg">
+                  Enterprise-grade security and growth tools, priced for the mission.
+               </p>
+            </div>
+
+            <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200 flex flex-col md:flex-row">
+               <div className="p-8 md:p-12 md:w-2/3">
+                  <h3 className="text-2xl font-bold text-[#1B263B] mb-2">Nonprofit Foundation</h3>
+                  <div className="flex items-baseline mb-6">
+                     <span className="text-4xl font-bold text-[#1B263B]">$299</span>
+                     <span className="text-gray-500 ml-2">/org/mo + licenses</span>
+                     <span className="ml-1 relative -top-3">
+                        <DefinitionTooltip term="*" definition="Subject to Terms of Service. Taxes may apply. Licenses for seats, where applicable, are billed at-cost plus tax if applicable." className="text-xs text-gray-400 no-underline border-none" />
+                     </span>
+                  </div>
+                  <p className="text-gray-500 mb-8">
+                     Includes all features from our Business Growth plan, tailored for nonprofits.
+                  </p>
+                  
+                  <div className="grid md:grid-cols-2 gap-4">
+                     {[
+                        "Hybrid/Cloud Infrastructure",
+                        "Unlimited Remote Support",
+                        "Basic Security Suite",
+                        "Mobile Device Management",
+                        "Microsoft 365 Management",
+                        "Quarterly Marketing Health Checks",
+                        "Priority On-site Support",
+                        "Advanced Threat Protection",
+                        "Vendor Management"
+                     ].map((feature, i) => (
+                        <div key={i} className="flex items-start gap-3 text-sm text-[#4E596F]">
+                           <CheckCircle2 className="w-5 h-5 text-[#B87333] shrink-0" />
+                           <span>{feature}</span>
+                        </div>
+                     ))}
+                  </div>
+
+                  <div className="mt-8 pt-8 border-t border-gray-100">
+                     <p className="text-sm text-gray-500 italic">
+                        * Fractional CIO and other leadership services are available by request.
+                     </p>
+                  </div>
+               </div>
+               
+               <div className="bg-[#1B263B] p-8 md:p-12 md:w-1/3 flex flex-col justify-center text-white text-center">
+                  <h4 className="text-xl font-bold mb-4">Ready to Start?</h4>
+                  <p className="text-gray-300 mb-8 text-sm">
+                     Verify your 501(c)(3) status to access this exclusive pricing.
+                  </p>
+                  <Button 
+                     onClick={() => onViewChange("contact")}
+                     className="bg-[#B87333] hover:bg-[#a0632a] text-white w-full py-6 text-lg h-auto rounded-lg shadow-lg"
+                  >
+                     Get Started
+                  </Button>
+               </div>
             </div>
          </div>
       </section>

@@ -155,10 +155,10 @@ export function Services({ onViewChange }: ServicesProps) {
                Our "Foundation" plan covers the essentials for most businesses. Let's chat about your needs.
             </p>
             <Button 
-               onClick={() => onViewChange("contact")}
+               onClick={() => onViewChange("talk-to-sales")}
                className="bg-[#B87333] hover:bg-[#a0632a] text-white text-xl px-10 py-6 h-auto rounded-full"
             >
-               Book a Free Consultation
+               Talk to Sales
             </Button>
          </div>
       </section>
