@@ -5,8 +5,10 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { Mail, MapPin, CheckCircle2, ArrowRight } from "lucide-react";
+import { Mail, MapPin, CheckCircle2, ArrowRight, Loader2 } from "lucide-react";
 import { Card, CardContent } from "../ui/card";
+import { submitContactForm } from "../../lib/api";
+import { toast } from "sonner@2.0.3";
 
 interface ContactProps {
   onViewChange: (view: View) => void;
@@ -22,20 +24,29 @@ export function Contact({ onViewChange }: ContactProps) {
     message: ""
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     document.title = "Humaneers | Contact Us";
     window.scrollTo(0, 0);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.category === "sales") {
        onViewChange("talk-to-sales");
        return;
     }
-    console.log("Contact Form Submitted:", formData);
-    setSubmitted(true);
+
+    setIsSubmitting(true);
+    try {
+      await submitContactForm(formData);
+      setSubmitted(true);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to send message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -202,8 +213,12 @@ export function Contact({ onViewChange }: ContactProps) {
                            />
                         </div>
 
-                        <Button type="submit" className="w-full bg-[#1B263B] hover:bg-[#2c3b55] text-white text-lg py-6 h-auto">
-                           Send Message <ArrowRight className="ml-2 w-5 h-5" />
+                        <Button type="submit" className="w-full bg-[#1B263B] hover:bg-[#2c3b55] text-white text-lg py-6 h-auto" disabled={isSubmitting}>
+                           {isSubmitting ? (
+                              <>Sending... <Loader2 className="ml-2 w-5 h-5 animate-spin" /></>
+                           ) : (
+                              <>Send Message <ArrowRight className="ml-2 w-5 h-5" /></>
+                           )}
                         </Button>
                      </form>
                   )}

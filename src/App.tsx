@@ -20,11 +20,12 @@ import { Personal } from "./components/views/Personal";
 import { Colophon } from "./components/views/Colophon";
 import { Ethics } from "./components/views/Ethics";
 import { Resources } from "./components/views/Resources";
+import { Support } from "./components/views/Support";
 import { TalkToSalesModal } from "./components/TalkToSalesModal";
 
 import { Status } from "./components/views/Status";
 
-export type View = "home" | "pricing" | "growth" | "about" | "terms" | "privacy" | "managed-it" | "family-protection" | "fractional-leadership" | "non-profits" | "contact" | "industries" | "services" | "talk-to-sales" | "personal" | "colophon" | "ethics" | "resources" | "status";
+export type View = "home" | "pricing" | "growth" | "about" | "terms" | "privacy" | "managed-it" | "family-protection" | "fractional-leadership" | "non-profits" | "contact" | "industries" | "services" | "talk-to-sales" | "personal" | "colophon" | "ethics" | "resources" | "status" | "support";
 
 export default function App() {
   const [currentView, setCurrentView] = useState<View>("home");
@@ -124,6 +125,8 @@ export default function App() {
         return <Resources onViewChange={handleViewChange} />;
       case "status":
         return <Status onViewChange={handleViewChange} />;
+      case "support":
+        return <Support onViewChange={handleViewChange} />;
       case "terms":
         return <Terms onViewChange={handleViewChange} />;
       case "privacy":

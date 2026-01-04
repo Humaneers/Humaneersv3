@@ -6,7 +6,9 @@ import { Textarea } from "./ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { Checkbox } from "./ui/checkbox";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "./ui/dialog";
-import { CheckCircle2, ArrowRight, ShieldCheck, Globe } from "lucide-react";
+import { CheckCircle2, Loader2 } from "lucide-react";
+import { submitSalesForm } from "../lib/api";
+import { toast } from "sonner@2.0.3";
 
 interface TalkToSalesModalProps {
   open: boolean;
@@ -30,6 +32,7 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
   });
   
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Update form data when initialData changes
   useEffect(() => {
@@ -42,11 +45,17 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
     }
   }, [open, initialData]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real implementation, this would send data to the CRM
-    console.log("Sales Lead Submitted:", formData);
-    setSubmitted(true);
+    setIsSubmitting(true);
+    try {
+      await submitSalesForm(formData);
+      setSubmitted(true);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to submit. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -245,8 +254,12 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
                        />
                     </div>
 
-                    <Button type="submit" className="w-full bg-[#B87333] hover:bg-[#a0632a] text-white py-5 mt-2">
-                       Submit Request
+                    <Button type="submit" className="w-full bg-[#B87333] hover:bg-[#a0632a] text-white py-5 mt-2" disabled={isSubmitting}>
+                       {isSubmitting ? (
+                          <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting...</>
+                       ) : (
+                          "Submit Request"
+                       )}
                     </Button>
                  </form>
             </div>

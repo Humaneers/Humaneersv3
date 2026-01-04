@@ -1,0 +1,15 @@
+node_modules
+.env
+.env.local
+.env.*.local
+.vercel
+.env*.local
+
+# Build artifacts
+build/
+dist/
+
+# Pinegrow editor files
+_pgbackup/
+_pginfo/
+pinegrow.json

@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { View } from "../../App";
-import { Scale, Shield, FileText, AlertTriangle, Lock, CheckCircle2, Send, HeartHandshake } from "lucide-react";
+import { Scale, Shield, FileText, AlertTriangle, Lock, CheckCircle2, Send, HeartHandshake, Loader2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Label } from "../ui/label";
 import { Switch } from "../ui/switch";
 import { toast } from "sonner@2.0.3";
+import { submitEthicsReport } from "../../lib/api";
 
 interface EthicsProps {
   onViewChange: (view: View) => void;
@@ -15,6 +16,9 @@ interface EthicsProps {
 export function Ethics({ onViewChange }: EthicsProps) {
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [reportType, setReportType] = useState("general");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [details, setDetails] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -23,16 +27,25 @@ export function Ethics({ onViewChange }: EthicsProps) {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
+
+    try {
+      await submitEthicsReport({
+        isAnonymous,
+        name: isAnonymous ? undefined : name,
+        email: isAnonymous ? undefined : email,
+        reportType,
+        details,
+      });
       setIsSuccess(true);
       toast.success("Report submitted successfully. Thank you for speaking up.");
-    }, 1500);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to submit report. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -45,7 +58,7 @@ export function Ethics({ onViewChange }: EthicsProps) {
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6">Ethics Charter</h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto font-light leading-relaxed">
-            Our commitment to integrity, transparency, and doing the right thing—even when no one is watching.
+            Our commitment to integrity, transparency, and doing the right thing, even when no one is watching.
           </p>
         </div>
       </section>
@@ -160,11 +173,11 @@ export function Ethics({ onViewChange }: EthicsProps) {
                            <div className="grid grid-cols-2 gap-4">
                               <div className="space-y-2">
                                  <Label htmlFor="name">Name</Label>
-                                 <Input id="name" placeholder="Your name" required />
+                                 <Input id="name" placeholder="Your name" required value={name} onChange={(e) => setName(e.target.value)} />
                               </div>
                               <div className="space-y-2">
                                  <Label htmlFor="email">Email</Label>
-                                 <Input id="email" type="email" placeholder="work@email.com" required />
+                                 <Input id="email" type="email" placeholder="work@email.com" required value={email} onChange={(e) => setEmail(e.target.value)} />
                               </div>
                            </div>
                         )}
@@ -187,11 +200,13 @@ export function Ethics({ onViewChange }: EthicsProps) {
 
                         <div className="space-y-2">
                            <Label htmlFor="details">Incident Details</Label>
-                           <Textarea 
-                              id="details" 
-                              placeholder="Please provide as much detail as possible (dates, people involved, description of events)..." 
+                           <Textarea
+                              id="details"
+                              placeholder="Please provide as much detail as possible (dates, people involved, description of events)..."
                               className="min-h-[150px]"
                               required
+                              value={details}
+                              onChange={(e) => setDetails(e.target.value)}
                            />
                         </div>
 
@@ -204,12 +219,16 @@ export function Ethics({ onViewChange }: EthicsProps) {
                            </div>
                         </div>
 
-                        <Button 
-                           type="submit" 
+                        <Button
+                           type="submit"
                            className="w-full bg-[#B87333] hover:bg-[#a0632a] text-white"
                            disabled={isSubmitting}
                         >
-                           {isSubmitting ? "Encrypting & Sending..." : (
+                           {isSubmitting ? (
+                              <span className="flex items-center gap-2">
+                                 <Loader2 size={16} className="animate-spin" /> Encrypting & Sending...
+                              </span>
+                           ) : (
                               <span className="flex items-center gap-2">
                                  Submit Secure Report <Send size={16} />
                               </span>

@@ -226,7 +226,7 @@ export function Layout({ children, currentView, onViewChange }: LayoutProps) {
             <Button
               variant="ghost"
               className="text-gray-300 hover:text-white hover:bg-white/10 font-medium hidden lg:inline-flex"
-              onClick={() => onViewChange("contact")}
+              onClick={() => onViewChange("support")}
             >
               Get Support
             </Button>
@@ -298,7 +298,7 @@ export function Layout({ children, currentView, onViewChange }: LayoutProps) {
                   <Button
                     variant="outline"
                     className="border-gray-600 text-gray-300 hover:text-white hover:bg-white/10 w-full"
-                    onClick={() => { onViewChange("contact"); setIsMobileMenuOpen(false); }}
+                    onClick={() => { onViewChange("support"); setIsMobileMenuOpen(false); }}
                   >
                     Get Support
                   </Button>

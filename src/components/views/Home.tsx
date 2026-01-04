@@ -79,7 +79,7 @@ export function Home({ onViewChange }: HomeProps) {
               <span className="text-[#B87333]">Small Business Soul.</span>
             </h1>
             <h2 className="text-xl md:text-2xl text-gray-200 mb-10 leading-relaxed font-light">
-              IT, Security, and Brand Growth for teams that think big—even if
+              IT, security, and brand growth for teams that think big — even if
               they’re super-small.
             </h2>
             <div className="flex flex-col gap-4 max-w-lg">
@@ -89,7 +89,7 @@ export function Home({ onViewChange }: HomeProps) {
                      <Input 
                         id="hero-email"
                         type="email" 
-                        placeholder="Enter your work email..." 
+                        placeholder="Enter your email..." 
                         className="bg-white text-gray-900 h-14 text-lg border-0 focus-visible:ring-2 focus-visible:ring-[#B87333]"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -103,7 +103,7 @@ export function Home({ onViewChange }: HomeProps) {
                   </Button>
                </form>
                <p className="text-sm text-gray-400">
-                  Join 500+ businesses secured by Humaneers. No credit card required.
+                  Join 200+ businesses secured by Humaneers. No credit card required.
                </p>
             </div>
           </motion.div>
@@ -113,7 +113,7 @@ export function Home({ onViewChange }: HomeProps) {
       {/* No Minimums Banner */}
       <div className="bg-[#B87333] text-white py-4 relative z-20 shadow-md">
         <div className="container mx-auto px-6 text-center font-medium text-lg tracking-wide">
-          No user minimums. No offshore NOCs. 100% US-Based Engineering.
+          No user minimums. No offshore NOCs. 100% US-based engineering.
         </div>
       </div>
 
@@ -167,8 +167,8 @@ export function Home({ onViewChange }: HomeProps) {
                 Security & Trust You Can Rely On
               </h2>
               <p className="text-[#4E596F] mb-8 text-lg leading-relaxed">
-                We take security seriously. All our services are SOC 2 compliant
-                and we are proud to be 100% US-Based. Your data never leaves
+                We take security seriously. All of our services are SOC 2 compliant
+                and we are proud to be 100% US-based. Your data never leaves
                 domestic soil without your explicit permission.
               </p>
               <div className="flex gap-4">
@@ -176,7 +176,7 @@ export function Home({ onViewChange }: HomeProps) {
                   <Shield size={18} className="text-[#B87333]" /> SOC 2 Compliant
                 </div>
                 <div className="bg-[#F5F1E9] px-4 py-2 rounded border border-gray-200 flex items-center gap-2 font-semibold text-[#1B263B]">
-                  <MapPin size={18} className="text-[#B87333]" /> 100% US-Based
+                  <MapPin size={18} className="text-[#B87333]" /> 100% US-based
                 </div>
               </div>
             </div>
@@ -187,7 +187,7 @@ export function Home({ onViewChange }: HomeProps) {
                 className="rounded-lg shadow-2xl"
               />
               <div className="absolute -bottom-6 -left-6 bg-[#B87333] p-6 rounded-lg text-white shadow-lg hidden md:block">
-                <p className="text-2xl font-bold">500+</p>
+                <p className="text-2xl font-bold">100+</p>
                 <p className="text-sm opacity-90">Families Protected Nationwide</p>
               </div>
             </div>

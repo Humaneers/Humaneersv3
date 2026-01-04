@@ -191,7 +191,7 @@ export function Resources({ onViewChange }: ResourcesProps) {
                   <HelpCircle size={16} className="text-gray-400" />
                   <span className="font-medium text-[#1B263B]">Submit Support Ticket</span>
                 </div>
-                <Button variant="ghost" size="sm" className="text-[#B87333] hover:text-[#a0632a]" onClick={() => onViewChange("contact")}>Open Portal</Button>
+                <Button variant="ghost" size="sm" className="text-[#B87333] hover:text-[#a0632a]" onClick={() => onViewChange("support")}>Open Portal</Button>
               </div>
               <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100">
                 <div className="flex items-center gap-3">

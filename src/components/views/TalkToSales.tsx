@@ -7,7 +7,9 @@ import { Textarea } from "../ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Checkbox } from "../ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { CheckCircle2, ShieldCheck, ArrowRight, Building2, Globe } from "lucide-react";
+import { CheckCircle2, ShieldCheck, ArrowRight, Globe, Loader2 } from "lucide-react";
+import { submitSalesForm } from "../../lib/api";
+import { toast } from "sonner@2.0.3";
 
 interface TalkToSalesProps {
   onViewChange: (view: View, data?: any) => void;
@@ -30,17 +32,24 @@ export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
   });
   
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     document.title = "Humaneers | Start a Conversation";
     window.scrollTo(0, 0);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real implementation, this would send data to the CRM
-    console.log("Sales Lead Submitted:", formData);
-    setSubmitted(true);
+    setIsSubmitting(true);
+    try {
+      await submitSalesForm(formData);
+      setSubmitted(true);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to submit. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -292,8 +301,12 @@ export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
                        />
                     </div>
 
-                    <Button type="submit" className="w-full bg-[#B87333] hover:bg-[#a0632a] text-white text-lg py-6 h-auto">
-                       Submit Request <ArrowRight className="ml-2 w-5 h-5" />
+                    <Button type="submit" className="w-full bg-[#B87333] hover:bg-[#a0632a] text-white text-lg py-6 h-auto" disabled={isSubmitting}>
+                       {isSubmitting ? (
+                          <>Submitting... <Loader2 className="ml-2 w-5 h-5 animate-spin" /></>
+                       ) : (
+                          <>Submit Request <ArrowRight className="ml-2 w-5 h-5" /></>
+                       )}
                     </Button>
                     <p className="text-xs text-center text-gray-500 mt-4">
                        By submitting this form, you agree to our Privacy Policy. Your data is secure and will never be sold.

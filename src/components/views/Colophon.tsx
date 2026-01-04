@@ -197,7 +197,7 @@ export function Colophon({ onViewChange }: ColophonProps) {
                       </li>
                       <li className="flex flex-col gap-1">
                          <span className="font-medium text-gray-700">Portraits</span>
-                         <span className="text-gray-400">Various Unsplash Contributors</span>
+                         <span className="text-gray-400">Respective Contributors</span>
                       </li>
                    </ul>
                </div>
