@@ -8,6 +8,14 @@ interface EthicsReport {
   details: string;
 }
 
+const reportTypeLabels: Record<string, string> = {
+  general: 'General Ethics Concern',
+  fraud: 'Fraud / Corruption',
+  harassment: 'Harassment / Discrimination',
+  security: 'Security / Data Breach',
+  other: 'Other',
+};
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -21,11 +29,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const apiKey = process.env.MOXIE_API_KEY;
-  const baseUrl = process.env.MOXIE_BASE_URL;
+  const resendApiKey = process.env.RESEND_API_KEY;
+  const zohoCrmEmail = process.env.ZOHO_CRM_EMAIL;
 
-  if (!apiKey || !baseUrl) {
-    console.error('Missing Moxie API configuration');
+  if (!resendApiKey || !zohoCrmEmail) {
+    console.error('Missing RESEND_API_KEY or ZOHO_CRM_EMAIL');
     return res.status(500).json({ error: 'Server configuration error' });
   }
 
@@ -36,45 +44,49 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    // Build Moxie payload for ethics report
-    const moxiePayload = {
-      formName: 'Ethics Report',
-      firstName: body.isAnonymous ? 'Anonymous' : (body.name?.split(' ')[0] || 'Anonymous'),
-      lastName: body.isAnonymous ? 'Reporter' : (body.name?.split(' ').slice(1).join(' ') || 'Reporter'),
-      email: body.isAnonymous ? 'ethics-anonymous@humaneers.dev' : body.email,
-      notes: `[${body.reportType.toUpperCase()}] ${body.details}`,
-      answers: [
-        {
-          fieldKey: 'report_type',
-          question: 'Report Type',
-          answer: body.reportType,
-        },
-        {
-          fieldKey: 'is_anonymous',
-          question: 'Anonymous Submission',
-          answer: body.isAnonymous ? 'Yes' : 'No',
-        },
-        {
-          fieldKey: 'incident_details',
-          question: 'Incident Details',
-          answer: body.details,
-        },
-      ],
-    };
+    const reportTypeLabel = reportTypeLabels[body.reportType] || body.reportType;
 
-    const moxieResponse = await fetch(`${baseUrl}/action/formSubmissions/create`, {
+    // Parse name for non-anonymous submissions
+    let reporterName = 'Anonymous Reporter';
+    let reporterEmail = 'ethics-anonymous@humaneers.dev';
+
+    if (!body.isAnonymous && body.name) {
+      reporterName = body.name.trim();
+      reporterEmail = body.email || reporterEmail;
+    }
+
+    // Build email content for Zoho CRM
+    const emailBody = `
+Name: ${reporterName}
+Email: ${reporterEmail}
+Company: Ethics Report
+
+Report Type: ${reportTypeLabel}
+Anonymous: ${body.isAnonymous ? 'Yes' : 'No'}
+
+Incident Details:
+${body.details}
+`.trim();
+
+    // Send to Zoho CRM via email
+    const emailResponse = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${resendApiKey}`,
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'X-API-KEY': apiKey,
       },
-      body: JSON.stringify(moxiePayload),
+      body: JSON.stringify({
+        from: 'Ethics Hotline <ethics@humaneers.dev>',
+        to: [zohoCrmEmail],
+        reply_to: reporterEmail,
+        subject: `[Ethics Report] ${reportTypeLabel}`,
+        text: emailBody,
+      }),
     });
 
-    if (!moxieResponse.ok) {
-      const errorText = await moxieResponse.text();
-      console.error('Moxie API error:', moxieResponse.status, errorText);
+    if (!emailResponse.ok) {
+      const errorData = await emailResponse.text();
+      console.error('Resend API error:', emailResponse.status, errorData);
       return res.status(502).json({ error: 'Failed to submit report' });
     }
 

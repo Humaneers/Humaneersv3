@@ -44,15 +44,10 @@ export function Layout({ children, currentView, onViewChange }: LayoutProps) {
         <div className="container mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
           <div
-            className="flex items-center gap-2 cursor-pointer shrink-0 mr-8"
+            className="flex items-center cursor-pointer shrink-0 mr-8"
             onClick={() => onViewChange("home")}
           >
-            <div className="w-8 h-8 bg-[#B87333] rounded-sm flex items-center justify-center text-white font-bold text-xl font-serif">
-              H
-            </div>
-            <span className="text-white text-xl font-bold tracking-tight">
-              Humaneers
-            </span>
+            <img src="/logo.svg" alt="Humaneers" className="h-6 invert" />
           </div>
 
           {/* Desktop Nav */}
@@ -161,9 +156,32 @@ export function Layout({ children, currentView, onViewChange }: LayoutProps) {
                       <ListItem title="Pricing" onClick={() => onViewChange("pricing")}>
                         Transparent pricing for all service tiers.
                       </ListItem>
-                      <ListItem title="Service Status" href="#" onClick={(e) => { e.preventDefault(); onViewChange("status"); }}>
-                        Real-time system performance and uptime.
-                      </ListItem>
+                      <li>
+                        <a
+                          href="https://status.humaneers.dev/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground cursor-pointer text-[#1B263B] hover:bg-gray-100"
+                        >
+                          <div className="text-sm font-medium leading-none text-[#1B263B]">Service Status</div>
+                          <p className="line-clamp-2 text-sm leading-snug text-gray-500">
+                            Real-time system performance and uptime.
+                          </p>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="https://support.humaneers.dev/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground cursor-pointer text-[#1B263B] hover:bg-gray-100"
+                        >
+                          <div className="text-sm font-medium leading-none text-[#1B263B]">Support Portal</div>
+                          <p className="line-clamp-2 text-sm leading-snug text-gray-500">
+                            Access your tickets and knowledge base.
+                          </p>
+                        </a>
+                      </li>
                       <ListItem title="Blog (Coming Soon)" href="#" className="opacity-60 cursor-not-allowed">
                         Insights on security and business growth.
                       </ListItem>
@@ -208,13 +226,14 @@ export function Layout({ children, currentView, onViewChange }: LayoutProps) {
                 </NavigationMenuItem>
                 
                  <NavigationMenuItem>
-                  <NavigationMenuLink
+                  <a
+                    href="https://status.humaneers.dev/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={cn(navigationMenuTriggerStyle(), "bg-transparent text-gray-300 hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white cursor-pointer")}
-                    href="#"
-                    onClick={(e) => { e.preventDefault(); onViewChange("status"); }}
                   >
                     Status
-                  </NavigationMenuLink>
+                  </a>
                 </NavigationMenuItem>
 
               </NavigationMenuList>
@@ -323,13 +342,8 @@ export function Layout({ children, currentView, onViewChange }: LayoutProps) {
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
             <div className="col-span-1 md:col-span-2 lg:col-span-2">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 bg-[#B87333] rounded-sm flex items-center justify-center text-white font-bold text-xl font-serif">
-                  H
-                </div>
-                <span className="text-white text-xl font-bold tracking-tight">
-                  Humaneers
-                </span>
+              <div className="flex items-center mb-4">
+                <img src="/logo.svg" alt="Humaneers" className="h-6 invert" />
               </div>
               <p className="max-w-xs mb-6 text-sm">
                 Enterprise Strategy. Small Business Soul. We bring high-end IT

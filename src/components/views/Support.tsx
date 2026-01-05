@@ -6,7 +6,7 @@ import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { LifeBuoy, CheckCircle2, ArrowRight, Loader2, Clock, Shield, Headphones } from "lucide-react";
-import { toast } from "sonner@2.0.3";
+import { toast } from "sonner";
 
 interface SupportProps {
   onViewChange: (view: View) => void;

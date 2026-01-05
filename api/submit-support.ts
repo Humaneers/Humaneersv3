@@ -40,21 +40,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const resendApiKey = process.env.RESEND_API_KEY;
+  const zohoDeskEmail = process.env.ZOHO_DESK_EMAIL;
 
-  if (!resendApiKey) {
-    console.error('Missing RESEND_API_KEY');
+  if (!resendApiKey || !zohoDeskEmail) {
+    console.error('Missing RESEND_API_KEY or ZOHO_DESK_EMAIL');
     return res.status(500).json({ error: 'Server configuration error' });
   }
 
   try {
     const body = req.body as SupportTicket;
 
-    // Validate required fields
     if (!body.name || !body.email || !body.subject || !body.description || !body.priority || !body.category) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(body.email)) {
       return res.status(400).json({ error: 'Invalid email format' });
@@ -64,87 +63,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const priorityLabel = PRIORITY_LABELS[body.priority] || body.priority;
     const categoryLabel = CATEGORY_LABELS[body.category] || body.category;
 
-    // Build email content
-    const emailHtml = `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <div style="background: #1B263B; padding: 20px; text-align: center;">
-          <h1 style="color: #B87333; margin: 0;">New Support Ticket</h1>
-          <p style="color: #fff; margin: 10px 0 0 0;">Ticket ID: ${ticketId}</p>
-        </div>
-
-        <div style="padding: 20px; background: #f5f5f5;">
-          <table style="width: 100%; border-collapse: collapse;">
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd; font-weight: bold; width: 30%;">Priority</td>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd; color: ${body.priority === 'critical' ? '#dc2626' : body.priority === 'high' ? '#ea580c' : '#1B263B'}; font-weight: bold;">${priorityLabel}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd; font-weight: bold;">Category</td>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd;">${categoryLabel}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd; font-weight: bold;">Name</td>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd;">${body.name}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd; font-weight: bold;">Email</td>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd;"><a href="mailto:${body.email}">${body.email}</a></td>
-            </tr>
-            ${body.phone ? `
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd; font-weight: bold;">Phone</td>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd;">${body.phone}</td>
-            </tr>
-            ` : ''}
-            ${body.company ? `
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd; font-weight: bold;">Company</td>
-              <td style="padding: 10px; border-bottom: 1px solid #ddd;">${body.company}</td>
-            </tr>
-            ` : ''}
-          </table>
-
-          <div style="margin-top: 20px; background: #fff; padding: 15px; border-radius: 4px;">
-            <h3 style="margin: 0 0 10px 0; color: #1B263B;">Subject</h3>
-            <p style="margin: 0; color: #333;">${body.subject}</p>
-          </div>
-
-          <div style="margin-top: 15px; background: #fff; padding: 15px; border-radius: 4px;">
-            <h3 style="margin: 0 0 10px 0; color: #1B263B;">Description</h3>
-            <p style="margin: 0; color: #333; white-space: pre-wrap;">${body.description}</p>
-          </div>
-        </div>
-
-        <div style="background: #1B263B; padding: 15px; text-align: center;">
-          <p style="color: #888; margin: 0; font-size: 12px;">
-            This ticket was submitted via humaneers.dev/support
-          </p>
-        </div>
-      </div>
-    `;
-
-    const emailText = `
-New Support Ticket - ${ticketId}
-
+    // Build email content for Zoho Desk
+    // Zoho Desk will create a ticket from this email
+    const emailBody = `
 Priority: ${priorityLabel}
 Category: ${categoryLabel}
-
-Contact Information:
-- Name: ${body.name}
-- Email: ${body.email}
-${body.phone ? `- Phone: ${body.phone}` : ''}
-${body.company ? `- Company: ${body.company}` : ''}
-
-Subject: ${body.subject}
-
-Description:
-${body.description}
+${body.phone ? `Phone: ${body.phone}` : ''}
+${body.company ? `Company: ${body.company}` : ''}
+Internal Ticket ID: ${ticketId}
 
 ---
-Submitted via humaneers.dev/support
-    `.trim();
 
-    // Send email via Resend
+${body.description}
+`.trim();
+
+    // Send to Zoho Desk via email - ticket created automatically
+    // Using the submitter's email as the "from" address via reply_to
+    // so Zoho Desk associates the ticket with the correct contact
     const emailResponse = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -152,22 +87,28 @@ Submitted via humaneers.dev/support
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Humaneers Support <support@humaneers.dev>',
-        to: ['ccs-autosupport@humaneers.dev'],
+        from: `${body.name} <support@humaneers.dev>`,
+        to: [zohoDeskEmail],
         reply_to: body.email,
-        subject: `[${priorityLabel}] ${body.subject} - ${ticketId}`,
-        html: emailHtml,
-        text: emailText,
+        subject: `[${priorityLabel}] ${body.subject}`,
+        text: emailBody,
+        headers: {
+          'X-Customer-Email': body.email,
+          'X-Customer-Name': body.name,
+        },
       }),
     });
 
     if (!emailResponse.ok) {
       const errorData = await emailResponse.text();
       console.error('Resend API error:', emailResponse.status, errorData);
-      return res.status(502).json({ error: 'Failed to send support ticket' });
+      return res.status(502).json({ error: 'Failed to submit support ticket' });
     }
 
-    return res.status(200).json({ success: true, ticketId });
+    return res.status(200).json({
+      success: true,
+      ticketId,
+    });
   } catch (error) {
     console.error('Support ticket submission error:', error);
     return res.status(500).json({ error: 'Internal server error' });

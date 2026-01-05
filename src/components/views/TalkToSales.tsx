@@ -9,7 +9,7 @@ import { Checkbox } from "../ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { CheckCircle2, ShieldCheck, ArrowRight, Globe, Loader2 } from "lucide-react";
 import { submitSalesForm } from "../../lib/api";
-import { toast } from "sonner@2.0.3";
+import { toast } from "sonner";
 
 interface TalkToSalesProps {
   onViewChange: (view: View, data?: any) => void;

@@ -31,10 +31,23 @@ export interface EthicsFormData {
   details: string;
 }
 
+export interface SupportFormData {
+  name: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  priority: string;
+  category: string;
+  subject: string;
+  description: string;
+}
+
 export interface ApiResponse {
   success: boolean;
   error?: string;
   id?: string;
+  ticketId?: string;
+  zohoTicketNumber?: string;
 }
 
 async function handleResponse(response: Response): Promise<ApiResponse> {
@@ -50,16 +63,13 @@ export async function submitContactForm(data: ContactFormData): Promise<ApiRespo
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      formName: 'Contact Form',
+      formType: 'contact',
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
       phone: data.phone,
-      pipelineStageName: 'New Inquiry',
-      answers: [
-        { fieldKey: 'category', question: 'Inquiry Category', answer: data.category },
-        { fieldKey: 'message', question: 'Message', answer: data.message },
-      ],
+      category: data.category,
+      message: data.message,
     }),
   });
   return handleResponse(response);
@@ -70,21 +80,18 @@ export async function submitSalesForm(data: SalesFormData): Promise<ApiResponse>
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      formName: 'Sales Inquiry',
+      formType: 'sales',
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
       phone: data.phone,
-      businessName: data.company,
+      company: data.company,
       website: data.website,
       role: data.role,
-      pipelineStageName: 'New Lead',
-      answers: [
-        { fieldKey: 'company_size', question: 'Company Size', answer: data.employees },
-        { fieldKey: 'budget', question: 'Monthly Budget', answer: data.budget || 'Not specified' },
-        { fieldKey: 'interests', question: 'Interests', answer: data.interests.join(', ') },
-        { fieldKey: 'message', question: 'Additional Notes', answer: data.message || '' },
-      ],
+      employees: data.employees,
+      budget: data.budget,
+      interests: data.interests,
+      message: data.message,
     }),
   });
   return handleResponse(response);
@@ -92,6 +99,15 @@ export async function submitSalesForm(data: SalesFormData): Promise<ApiResponse>
 
 export async function submitEthicsReport(data: EthicsFormData): Promise<ApiResponse> {
   const response = await fetch(`${API_BASE}/submit-ethics`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  return handleResponse(response);
+}
+
+export async function submitSupportTicket(data: SupportFormData): Promise<ApiResponse> {
+  const response = await fetch(`${API_BASE}/submit-support`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),

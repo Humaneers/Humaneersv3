@@ -8,7 +8,7 @@ import { Checkbox } from "./ui/checkbox";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "./ui/dialog";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { submitSalesForm } from "../lib/api";
-import { toast } from "sonner@2.0.3";
+import { toast } from "sonner";
 
 interface TalkToSalesModalProps {
   open: boolean;

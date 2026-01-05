@@ -6,7 +6,7 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Label } from "../ui/label";
 import { Switch } from "../ui/switch";
-import { toast } from "sonner@2.0.3";
+import { toast } from "sonner";
 import { submitEthicsReport } from "../../lib/api";
 
 interface EthicsProps {

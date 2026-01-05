@@ -184,14 +184,14 @@ export function Resources({ onViewChange }: ResourcesProps) {
                   <div className="w-2 h-2 rounded-full bg-green-500"></div>
                   <span className="font-medium text-[#1B263B]">System Status</span>
                 </div>
-                <Button variant="ghost" size="sm" className="text-[#B87333] hover:text-[#a0632a]" onClick={() => onViewChange("status")}>Check Status</Button>
+                <a href="https://status.humaneers.dev/" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-[#B87333] hover:text-[#a0632a]">Check Status →</a>
               </div>
               <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100">
                 <div className="flex items-center gap-3">
                   <HelpCircle size={16} className="text-gray-400" />
-                  <span className="font-medium text-[#1B263B]">Submit Support Ticket</span>
+                  <span className="font-medium text-[#1B263B]">Support Portal</span>
                 </div>
-                <Button variant="ghost" size="sm" className="text-[#B87333] hover:text-[#a0632a]" onClick={() => onViewChange("support")}>Open Portal</Button>
+                <a href="https://support.humaneers.dev/" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-[#B87333] hover:text-[#a0632a]">Open Portal →</a>
               </div>
               <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100">
                 <div className="flex items-center gap-3">
