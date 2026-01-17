@@ -47,7 +47,11 @@ export function Layout({ children, currentView, onViewChange }: LayoutProps) {
             className="flex items-center cursor-pointer shrink-0 mr-8"
             onClick={() => onViewChange("home")}
           >
-            <img src="/logo.svg" alt="Humaneers" className="h-6 invert" />
+            <img
+              src="/HumaneersWhiteWordmark.webp"
+              alt="Humaneers"
+              className="h-6 sm:h-7 md:h-8 w-auto max-w-[160px] sm:max-w-[200px] invert"
+            />
           </div>
 
           {/* Desktop Nav */}
@@ -343,7 +347,11 @@ export function Layout({ children, currentView, onViewChange }: LayoutProps) {
           <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
             <div className="col-span-1 md:col-span-2 lg:col-span-2">
               <div className="flex items-center mb-4">
-                <img src="/logo.svg" alt="Humaneers" className="h-6 invert" />
+                <img
+                  src="/HumaneersWhiteWordmark.webp"
+                  alt="Humaneers"
+                  className="h-6 sm:h-7 md:h-8 w-auto max-w-[160px] sm:max-w-[200px] invert"
+                />
               </div>
               <p className="max-w-xs mb-6 text-sm">
                 Enterprise Strategy. Small Business Soul. We bring high-end IT

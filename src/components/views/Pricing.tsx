@@ -98,7 +98,7 @@ export function Pricing({ onViewChange }: PricingProps) {
       name: "Personal Foundation",
       price: 50,
       unit: "/household/mo",
-      description: "Essential protection for up to 6 members.",
+      description: "Essential protection for up to 4 members and their devices.",
       features: [
         "Enterprise Endpoint Protection (Mac/PC)",
         <span><DefinitionTooltip term="MDM" definition="Mobile Device Management: Software that allows IT to secure, monitor, and manage mobile devices." /> (Mobile Device Management)</span>,
@@ -164,22 +164,22 @@ export function Pricing({ onViewChange }: PricingProps) {
             Choose the plan that fits your stage of business or life.
           </p>
 
-          <div className="flex items-center justify-center gap-2 bg-white/50 backdrop-blur-sm p-2 rounded-full inline-flex mx-auto mb-8 shadow-sm">
+          <div className="flex flex-wrap items-center justify-center gap-2 bg-white/50 backdrop-blur-sm p-2 rounded-2xl sm:rounded-full w-full sm:w-auto mx-auto mb-8 shadow-sm">
              <button 
                 onClick={() => setPricingMode('business')}
-                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${pricingMode === 'business' ? 'bg-[#1B263B] text-white shadow-md' : 'text-gray-500 hover:text-[#1B263B]'}`}
+                className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${pricingMode === 'business' ? 'bg-[#1B263B] text-white shadow-md' : 'text-gray-500 hover:text-[#1B263B]'}`}
              >
                 Business
              </button>
              <button 
                 onClick={() => setPricingMode('household')}
-                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${pricingMode === 'household' ? 'bg-[#B87333] text-white shadow-md' : 'text-gray-500 hover:text-[#B87333]'}`}
+                className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${pricingMode === 'household' ? 'bg-[#B87333] text-white shadow-md' : 'text-gray-500 hover:text-[#B87333]'}`}
              >
                 Personal
              </button>
              <button 
                 onClick={() => setPricingMode('nonprofit')}
-                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all flex items-center gap-2 ${pricingMode === 'nonprofit' ? 'bg-[#1B263B] text-white shadow-md' : 'text-gray-500 hover:text-[#1B263B]'}`}
+                className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 whitespace-nowrap ${pricingMode === 'nonprofit' ? 'bg-[#1B263B] text-white shadow-md' : 'text-gray-500 hover:text-[#1B263B]'}`}
              >
                 Nonprofit
              </button>

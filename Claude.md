@@ -15,6 +15,7 @@ This document defines the visual identity, design system, and brand voice for th
 5. [Component Patterns](#component-patterns)
 6. [Interactions & Motion](#interactions--motion)
 7. [Brand Voice & Tone](#brand-voice--tone)
+8. [Project Workflow](#project-workflow)
 
 ---
 
@@ -517,6 +518,13 @@ Key files implementing these guidelines:
 - **Component Library**: Radix UI + shadcn/ui
 - **Animation**: Framer Motion
 - **Color System**: CSS Custom Properties + OKLCH
+
+---
+
+## Project Workflow
+
+- Review `TODO.md` at the start of work and keep updates aligned with current tasks.
+- Note any completed items or new issues directly in `TODO.md`.
 
 ---
 
