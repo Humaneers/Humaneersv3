@@ -6,8 +6,8 @@ import { Textarea } from "./ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { Checkbox } from "./ui/checkbox";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "./ui/dialog";
-import { CheckCircle2, Loader2 } from "lucide-react";
-import { submitSalesForm } from "../lib/api";
+import { Loader2 } from "lucide-react";
+import { redirectToSalesBooking, validateSalesForm, type SalesFormData } from "../lib/cal";
 import { toast } from "sonner";
 
 interface TalkToSalesModalProps {
@@ -17,7 +17,7 @@ interface TalkToSalesModalProps {
 }
 
 export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSalesModalProps) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<SalesFormData>({
     firstName: "",
     lastName: "",
     email: "",
@@ -30,8 +30,7 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
     interests: [] as string[],
     message: ""
   });
-  
-  const [submitted, setSubmitted] = useState(false);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Update form data when initialData changes
@@ -47,13 +46,21 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validate form data
+    const validation = validateSalesForm(formData);
+    if (!validation.valid) {
+      toast.error(validation.errors[0]);
+      return;
+    }
+
     setIsSubmitting(true);
+
     try {
-      await submitSalesForm(formData);
-      setSubmitted(true);
+      // Redirect to Cal.com booking with form data
+      redirectToSalesBooking(formData);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Failed to submit. Please try again.");
-    } finally {
+      toast.error(error instanceof Error ? error.message : "Failed to redirect to booking. Please try again.");
       setIsSubmitting(false);
     }
   };
@@ -76,45 +83,10 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
     });
   };
 
-  const resetForm = () => {
-    setSubmitted(false);
-    setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        company: "",
-        website: "",
-        role: "",
-        employees: "",
-        phone: "",
-        budget: "",
-        interests: [],
-        message: ""
-    });
-    onOpenChange(false);
-  };
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto p-0 bg-white">
-        {submitted ? (
-          <div className="flex flex-col items-center justify-center w-full py-16 px-8 text-center">
-             <div className="bg-green-100 p-4 rounded-full mb-6">
-                <CheckCircle2 className="w-10 h-10 text-green-600" />
-             </div>
-             <h2 className="text-2xl font-bold text-[#1B263B] mb-2">Message Received</h2>
-             <p className="text-[#4E596F] max-w-sm mb-8">
-                Thanks for reaching out! A member of our sales team will be in touch within 24 hours.
-             </p>
-             <Button 
-                onClick={resetForm}
-                className="bg-[#1B263B] text-white hover:bg-[#2c3b55] px-8"
-             >
-                Close
-             </Button>
-          </div>
-        ) : (
-          <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full">
             <div className="px-6 py-6 border-b border-gray-100 bg-gray-50/50">
                 <DialogHeader>
                     <DialogTitle className="text-xl font-bold text-[#1B263B]">Start a Conversation</DialogTitle>
@@ -189,6 +161,18 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
                        </div>
                     </div>
 
+                    <div className="space-y-2">
+                       <Label htmlFor="role">Your Role</Label>
+                       <Input
+                          id="role"
+                          name="role"
+                          placeholder="e.g., CEO, CTO, Marketing Director"
+                          required
+                          value={formData.role}
+                          onChange={handleChange}
+                       />
+                    </div>
+
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
                             <Label htmlFor="employees">Size</Label>
@@ -256,15 +240,14 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
 
                     <Button type="submit" className="w-full bg-[#B87333] hover:bg-[#a0632a] text-white py-5 mt-2" disabled={isSubmitting}>
                        {isSubmitting ? (
-                          <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting...</>
+                          <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Redirecting to Booking...</>
                        ) : (
-                          "Submit Request"
+                          "Continue to Schedule Meeting"
                        )}
                     </Button>
                  </form>
             </div>
-          </div>
-        )}
+        </div>
       </DialogContent>
     </Dialog>
   );

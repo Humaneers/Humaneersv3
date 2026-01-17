@@ -7,8 +7,8 @@ import { Textarea } from "../ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Checkbox } from "../ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { CheckCircle2, ShieldCheck, ArrowRight, Globe, Loader2 } from "lucide-react";
-import { submitSalesForm } from "../../lib/api";
+import { ShieldCheck, ArrowRight, Globe, Loader2 } from "lucide-react";
+import { redirectToSalesBooking, validateSalesForm, type SalesFormData } from "../../lib/cal";
 import { toast } from "sonner";
 
 interface TalkToSalesProps {
@@ -17,7 +17,7 @@ interface TalkToSalesProps {
 }
 
 export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<SalesFormData>({
     firstName: "",
     lastName: "",
     email: initialData?.email || "",
@@ -30,8 +30,7 @@ export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
     interests: initialData?.interest ? [initialData.interest] : [] as string[],
     message: ""
   });
-  
-  const [submitted, setSubmitted] = useState(false);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
@@ -41,13 +40,21 @@ export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validate form data
+    const validation = validateSalesForm(formData);
+    if (!validation.valid) {
+      toast.error(validation.errors[0]);
+      return;
+    }
+
     setIsSubmitting(true);
+
     try {
-      await submitSalesForm(formData);
-      setSubmitted(true);
+      // Redirect to Cal.com booking with form data
+      redirectToSalesBooking(formData);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Failed to submit. Please try again.");
-    } finally {
+      toast.error(error instanceof Error ? error.message : "Failed to redirect to booking. Please try again.");
       setIsSubmitting(false);
     }
   };
@@ -69,32 +76,6 @@ export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
       return { ...prev, interests };
     });
   };
-
-  if (submitted) {
-    return (
-      <div className="min-h-screen bg-[#F5F1E9] py-20 px-6 flex items-center justify-center">
-         <Card className="max-w-xl w-full border-t-4 border-[#B87333] shadow-xl">
-            <CardHeader className="text-center pb-2">
-               <div className="mx-auto bg-green-100 p-3 rounded-full w-fit mb-4">
-                  <CheckCircle2 className="w-8 h-8 text-green-600" />
-               </div>
-               <CardTitle className="text-3xl font-bold text-[#1B263B]">Message Received</CardTitle>
-               <CardDescription className="text-lg text-[#4E596F] mt-2">
-                  Thanks for reaching out! A member of our sales team will be in touch within 24 hours to discuss your strategy.
-               </CardDescription>
-            </CardHeader>
-            <CardContent className="pt-6 flex justify-center">
-               <Button 
-                  onClick={() => onViewChange("home")}
-                  className="bg-[#1B263B] text-white hover:bg-[#2c3b55]"
-               >
-                  Return Home
-               </Button>
-            </CardContent>
-         </Card>
-      </div>
-    );
-  }
 
   return (
     <div className="bg-[#F5F1E9] min-h-screen">
@@ -303,9 +284,9 @@ export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
 
                     <Button type="submit" className="w-full bg-[#B87333] hover:bg-[#a0632a] text-white text-lg py-6 h-auto" disabled={isSubmitting}>
                        {isSubmitting ? (
-                          <>Submitting... <Loader2 className="ml-2 w-5 h-5 animate-spin" /></>
+                          <>Redirecting to Booking... <Loader2 className="ml-2 w-5 h-5 animate-spin" /></>
                        ) : (
-                          <>Submit Request <ArrowRight className="ml-2 w-5 h-5" /></>
+                          <>Continue to Schedule Meeting <ArrowRight className="ml-2 w-5 h-5" /></>
                        )}
                     </Button>
                     <p className="text-xs text-center text-gray-500 mt-4">

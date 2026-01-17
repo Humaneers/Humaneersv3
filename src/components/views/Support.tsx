@@ -5,22 +5,12 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { LifeBuoy, CheckCircle2, ArrowRight, Loader2, Clock, Shield, Headphones } from "lucide-react";
+import { LifeBuoy, ArrowRight, Loader2, Clock, Shield, Headphones } from "lucide-react";
+import { redirectToSupportBooking, validateSupportForm, type SupportFormData } from "../../lib/cal";
 import { toast } from "sonner";
 
 interface SupportProps {
   onViewChange: (view: View) => void;
-}
-
-interface SupportFormData {
-  name: string;
-  email: string;
-  phone: string;
-  company: string;
-  priority: string;
-  category: string;
-  subject: string;
-  description: string;
 }
 
 export function Support({ onViewChange }: SupportProps) {
@@ -34,7 +24,6 @@ export function Support({ onViewChange }: SupportProps) {
     subject: "",
     description: ""
   });
-  const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
@@ -44,24 +33,21 @@ export function Support({ onViewChange }: SupportProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validate form data
+    const validation = validateSupportForm(formData);
+    if (!validation.valid) {
+      toast.error(validation.errors[0]);
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/submit-support', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        const data = await response.json().catch(() => ({}));
-        throw new Error(data.error || 'Failed to submit support ticket');
-      }
-
-      setSubmitted(true);
+      // Redirect to Cal.com booking with support ticket data
+      redirectToSupportBooking(formData);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Failed to submit ticket. Please try again.");
-    } finally {
+      toast.error(error instanceof Error ? error.message : "Failed to redirect to booking. Please try again.");
       setIsSubmitting(false);
     }
   };
@@ -156,23 +142,7 @@ export function Support({ onViewChange }: SupportProps) {
             {/* Form Side */}
             <div className="lg:w-2/3">
               <div className="bg-white p-8 rounded-xl shadow-lg">
-                {submitted ? (
-                  <div className="text-center py-12">
-                    <div className="mx-auto bg-green-100 p-4 rounded-full w-fit mb-6">
-                      <CheckCircle2 className="w-12 h-12 text-green-600" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-[#1B263B] mb-2">Ticket Submitted</h3>
-                    <p className="text-[#4E596F] mb-8">
-                      We've received your support request and will respond based on the priority level indicated.
-                      Check your email for a confirmation with your ticket number.
-                    </p>
-                    <div className="flex gap-4 justify-center">
-                      <Button onClick={() => setSubmitted(false)} variant="outline">Submit Another Ticket</Button>
-                      <Button onClick={() => onViewChange("status")} className="bg-[#1B263B] hover:bg-[#2c3b55]">Check System Status</Button>
-                    </div>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="name">Full Name</Label>
@@ -287,13 +257,12 @@ export function Support({ onViewChange }: SupportProps) {
 
                     <Button type="submit" className="w-full bg-[#1B263B] hover:bg-[#2c3b55] text-white text-lg py-6 h-auto" disabled={isSubmitting}>
                       {isSubmitting ? (
-                        <>Submitting... <Loader2 className="ml-2 w-5 h-5 animate-spin" /></>
+                        <>Redirecting to Booking... <Loader2 className="ml-2 w-5 h-5 animate-spin" /></>
                       ) : (
-                        <>Submit Support Ticket <ArrowRight className="ml-2 w-5 h-5" /></>
+                        <>Continue to Schedule Support Call <ArrowRight className="ml-2 w-5 h-5" /></>
                       )}
                     </Button>
                   </form>
-                )}
               </div>
             </div>
           </div>
