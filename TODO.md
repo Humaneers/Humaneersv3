@@ -138,6 +138,7 @@ Development tasks and outstanding items for the Humaneers website.
 - [x] Updated sales form to support Company or Family Name
 - [x] Improved footer text layout and hierarchy
 - [x] Updated CLAUDE.md with footer messaging patterns
+- [x] Fixed crash when selecting interests in sales form (onCheckedChange handler)
 
 ---
 
@@ -166,6 +167,7 @@ Completed footer, navigation, and form improvements:
 - **Footer**: Added "Built by humans with ❤️+☕️ in Arizona & Texas" to copyright banner
 - **Navigation**: Migrated System Status link from header to footer meta links
 - **Forms**: Updated TalkToSalesModal to support Company or Family Name distinction
+- **Bug Fix**: Fixed crash when selecting interests (onCheckedChange handler issue)
 - **Documentation**: Updated CLAUDE.md with footer messaging patterns and file references
 - **Layout**: Improved footer text hierarchy and responsive behavior
 
