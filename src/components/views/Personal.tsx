@@ -107,15 +107,15 @@ export function Personal({ onViewChange }: PersonalProps) {
                         <ul className="space-y-4">
                            <li className="flex items-start gap-3">
                               <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
-                              <span className="text-sm text-[#4E596F]"><strong>Domain & DNS Management</strong><br/><span className="text-xs text-gray-500">We handle the technical records.</span></span>
+                              <span className="text-sm text-[#4E596F]"><strong>Domain + DNS Management</strong></span>
                            </li>
                            <li className="flex items-start gap-3">
                               <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
-                              <span className="text-sm text-[#4E596F]"><strong>Professional Email Admin</strong><br/><span className="text-xs text-gray-500">Google/Microsoft setup & aliases.</span></span>
+                              <span className="text-sm text-[#4E596F]"><strong>Professional Email Admin</strong></span>
                            </li>
                            <li className="flex items-start gap-3">
                               <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
-                              <span className="text-sm text-[#4E596F]"><strong>Tech Support</strong><br/><span className="text-xs text-gray-500">For most consumer devices.</span></span>
+                              <span className="text-sm text-[#4E596F]"><strong>Tech Support</strong></span>
                            </li>
                            <li className="flex items-start gap-3 text-gray-400">
                               <XCircle className="w-5 h-5 text-gray-300 shrink-0 mt-0.5" />
@@ -159,19 +159,19 @@ export function Personal({ onViewChange }: PersonalProps) {
                            </li>
                            <li className="flex items-start gap-3">
                               <CheckCircle2 className="w-5 h-5 text-[#B87333] shrink-0 mt-0.5" />
-                              <span className="text-sm text-[#4E596F]"><strong>Active Antivirus & Malware</strong><br/><span className="text-xs text-gray-500">Enterprise-grade endpoint protection.</span></span>
+                              <span className="text-sm text-[#4E596F]"><strong>Active Antivirus & Malware</strong></span>
                            </li>
                            <li className="flex items-start gap-3">
                               <CheckCircle2 className="w-5 h-5 text-[#B87333] shrink-0 mt-0.5" />
-                              <span className="text-sm text-[#4E596F]"><strong>Content Filtering</strong><br/><span className="text-xs text-gray-500">Safe browsing for the whole family.</span></span>
+                              <span className="text-sm text-[#4E596F]"><strong>Content Filtering</strong></span>
                            </li>
                            <li className="flex items-start gap-3">
                               <CheckCircle2 className="w-5 h-5 text-[#B87333] shrink-0 mt-0.5" />
-                              <span className="text-sm text-[#4E596F]"><strong>Identity Monitoring</strong><br/><span className="text-xs text-gray-500">Dark web scanning and alerts.</span></span>
+                              <span className="text-sm text-[#4E596F]"><strong>Identity Monitoring</strong></span>
                            </li>
                            <li className="flex items-start gap-3">
                               <CheckCircle2 className="w-5 h-5 text-[#B87333] shrink-0 mt-0.5" />
-                              <span className="text-sm text-[#4E596F]"><strong>Priority Support</strong><br/><span className="text-xs text-gray-500">Skip the line access to engineers.</span></span>
+                              <span className="text-sm text-[#4E596F]"><strong>Priority Support</strong></span>
                            </li>
                         </ul>
                      </div>

@@ -58,7 +58,7 @@ export function FractionalLeadership({ onViewChange }: FractionalLeadershipProps
                     </div>
                     <div>
                        <h3 className="text-xl font-bold text-[#1B263B] mb-2">Quarterly Business Reviews (QBRs)</h3>
-                       <p className="text-[#4E596F] text-sm">We sit down every 90 days to review your tech stack, security posture, and budget. No surprises, just alignment.</p>
+                       <p className="text-[#4E596F] text-sm">Quarterly reviews of stack, security, and budget.</p>
                     </div>
                  </div>
                  <div className="flex gap-4">
@@ -67,7 +67,7 @@ export function FractionalLeadership({ onViewChange }: FractionalLeadershipProps
                     </div>
                     <div>
                        <h3 className="text-xl font-bold text-[#1B263B] mb-2">Budgeting & Procurement</h3>
-                       <p className="text-[#4E596F] text-sm">Stop overspending on shelf-ware. We negotiate with vendors on your behalf and build a 3-year IT roadmap.</p>
+                       <p className="text-[#4E596F] text-sm">Vendor negotiation and a 3-year IT roadmap.</p>
                     </div>
                  </div>
                  <div className="flex gap-4">
@@ -76,7 +76,7 @@ export function FractionalLeadership({ onViewChange }: FractionalLeadershipProps
                     </div>
                     <div>
                        <h3 className="text-xl font-bold text-[#1B263B] mb-2">Board-Level Representation</h3>
-                       <p className="text-[#4E596F] text-sm">Need to present a cyber risk strategy to your investors or board? We stand beside you and speak the language of business.</p>
+                       <p className="text-[#4E596F] text-sm">Board-ready risk and strategy translation.</p>
                     </div>
                  </div>
               </div>

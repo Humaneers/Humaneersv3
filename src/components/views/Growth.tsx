@@ -17,22 +17,22 @@ export function Growth({ onViewChange }: GrowthProps) {
     {
       icon: <Search className="w-6 h-6 text-white" />,
       title: "The 'Secret Shopper' Audit",
-      desc: "We buy your product anonymously to experience the customer journey exactly as a US buyer would. We flag every friction point from checkout flow to unboxing."
+      desc: "We buy like a US customer and flag every friction point."
     },
     {
       icon: <PenTool className="w-6 h-6 text-white" />,
       title: "Cultural Realignment",
-      desc: "We scrub 'translated' text. We replace generic manuals with brand-voice guides. We ensure specific idioms and humor land correctly with an American audience."
+      desc: "We rewrite copy so it sounds native and on-brand."
     },
     {
       icon: <Package className="w-6 h-6 text-white" />,
       title: "Visual & Physical Overhaul",
-      desc: "Americans buy with their eyes. We coordinate professional product photography and redesign packaging to meet premium retail standards."
+      desc: "Premium visuals, packaging, and photography that sell."
     },
     {
       icon: <Rocket className="w-6 h-6 text-white" />,
       title: "Launch & Channel Strategy",
-      desc: "Once the product is ready, we open doors. From Amazon Prime optimization to introductions with boutique retail buyers in the Southwest."
+      desc: "Channel strategy from Amazon to boutique retail."
     }
   ];
 
@@ -168,7 +168,7 @@ export function Growth({ onViewChange }: GrowthProps) {
                                 <Globe2 className="text-[#B87333] w-5 h-5"/> Visual Identity
                             </h3>
                             <p className="text-[#4E596F]">
-                                We refine your visual language to match the expectations of high-end US consumers. Colors, typography, and imagery that speak trust and quality.
+                                Colors, type, and imagery tuned for US trust.
                             </p>
                         </div>
                         <div>
@@ -176,7 +176,7 @@ export function Growth({ onViewChange }: GrowthProps) {
                                 <Globe2 className="text-[#B87333] w-5 h-5"/> Cultural Translation
                             </h3>
                             <p className="text-[#4E596F]">
-                                It's not just language; it's context. We ensure your brand voice resonates with local values, humor, and communication styles.
+                                Voice and context that land with US audiences.
                             </p>
                         </div>
                         <div>
@@ -184,7 +184,7 @@ export function Growth({ onViewChange }: GrowthProps) {
                                 <Globe2 className="text-[#B87333] w-5 h-5"/> Go-To-Market Strategy
                             </h3>
                             <p className="text-[#4E596F]">
-                                From digital channels to retail partnerships, we build the roadmap for your product's journey into American homes and businesses.
+                                Channel roadmap across digital, retail, and partners.
                             </p>
                         </div>
                     </div>

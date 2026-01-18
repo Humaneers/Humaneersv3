@@ -113,7 +113,7 @@ export function NonProfits({ onViewChange }: NonProfitsProps) {
               </div>
               <h3 className="text-xl font-bold text-[#1B263B] mb-3">Donor Trust Vault</h3>
               <p className="text-[#4E596F] text-sm leading-relaxed mb-4">
-                Bank-level encryption for donor databases. We ensure you meet GDPR, CCPA, and internal governance standards without needing a dedicated CISO.
+                Encrypt donor data and meet GDPR/CCPA without a full CISO.
               </p>
               <ul className="text-xs text-gray-500 space-y-1 font-mono">
                 <li className="flex items-center gap-2"><Check size={10} /> SOC 2 Compliant</li>
@@ -128,7 +128,7 @@ export function NonProfits({ onViewChange }: NonProfitsProps) {
               </div>
               <h3 className="text-xl font-bold text-[#1B263B] mb-3">Volunteer Access</h3>
               <p className="text-[#4E596F] text-sm leading-relaxed mb-4">
-                Securely onboard temporary volunteers in minutes. Give them access only to what they need, and revoke it instantly when they leave.
+                Onboard volunteers fast with least-privilege access.
               </p>
               <ul className="text-xs text-gray-500 space-y-1 font-mono">
                 <li className="flex items-center gap-2"><Check size={10} /> Zero-Trust Identity</li>
@@ -143,7 +143,7 @@ export function NonProfits({ onViewChange }: NonProfitsProps) {
               </div>
               <h3 className="text-xl font-bold text-[#1B263B] mb-3">Grant Intelligence</h3>
               <p className="text-[#4E596F] text-sm leading-relaxed mb-4">
-                We configure your systems to generate the data you need for grant reporting. Plus, we manage your TechSoup & Microsoft credits for you.
+                Automated grant reporting with TechSoup/Microsoft credits.
               </p>
               <ul className="text-xs text-gray-500 space-y-1 font-mono">
                 <li className="flex items-center gap-2"><Check size={10} /> Microsoft 365 NPO</li>

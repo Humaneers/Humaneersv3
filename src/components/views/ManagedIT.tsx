@@ -18,27 +18,27 @@ export function ManagedIT({ onViewChange }: ManagedITProps) {
     {
       icon: <Headphones className="w-6 h-6 text-[#B87333]" />,
       title: "100% US-Based Helpdesk",
-      desc: "No offshore call centers. Speak directly to an engineer in the US who understands your context and your urgency."
+      desc: "Talk to a US-based engineer who knows your business."
     },
     {
       icon: <Server className="w-6 h-6 text-[#B87333]" />,
       title: "Hybrid & Cloud Infrastructure",
-      desc: "Whether you need to stay on-premise or move to the cloud (Azure/AWS), we build secure, flexible environments that fit your workflow."
+      desc: "Secure on-prem or cloud environments tuned to your workflow."
     },
     {
       icon: <Smartphone className="w-6 h-6 text-[#B87333]" />,
       title: <span>Mobile Device Management (<DefinitionTooltip term="MDM" definition="Software that allows IT to secure, monitor, and manage mobile devices like smartphones and tablets." />)</span>,
-      desc: "Secure company data on employee phones without spying. We containerize work apps so business data stays safe, even on personal devices."
+      desc: "Protect work data on personal devices without overreach."
     },
     {
       icon: <Shield className="w-6 h-6 text-[#B87333]" />,
       title: "Proactive Security Monitoring",
-      desc: "We don't just fix things when they break. We monitor your network 24/7/365 to prevent downtime before it happens."
+      desc: "24/7 monitoring to stop issues before they hit."
     },
     {
       icon: <Wifi className="w-6 h-6 text-[#B87333]" />,
       title: "Remote & On-Site Support",
-      desc: "While we solve 98% of issues remotely, we have a nationwide network of field engineers for hands-on emergencies."
+      desc: "Remote-first support with nationwide on-site backup."
     }
   ];
 

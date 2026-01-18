@@ -31,6 +31,7 @@ export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
     message: ""
   });
 
+  const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
@@ -40,6 +41,11 @@ export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (step === 1) {
+      handleNext();
+      return;
+    }
 
     // Validate form data
     const validation = validateSalesForm(formData);
@@ -75,6 +81,30 @@ export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
         : [...prev.interests, interest];
       return { ...prev, interests };
     });
+  };
+
+  const validateStepOne = () => {
+    const errors: string[] = [];
+    if (!formData.firstName.trim()) errors.push("First name is required");
+    if (!formData.lastName.trim()) errors.push("Last name is required");
+    if (!formData.email.trim()) errors.push("Email is required");
+    if (!formData.company.trim()) errors.push("Company name is required");
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (formData.email && !emailRegex.test(formData.email)) {
+      errors.push("Invalid email format");
+    }
+
+    return errors;
+  };
+
+  const handleNext = () => {
+    const errors = validateStepOne();
+    if (errors.length > 0) {
+      toast.error(errors[0]);
+      return;
+    }
+    setStep(2);
   };
 
   return (
@@ -125,173 +155,200 @@ export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
               </CardHeader>
               <CardContent>
                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                       <div className="space-y-2">
-                          <Label htmlFor="firstName">First Name *</Label>
-                          <Input 
-                             id="firstName" 
-                             name="firstName" 
-                             placeholder="Jane" 
-                             required 
-                             value={formData.firstName}
-                             onChange={handleChange}
-                          />
-                       </div>
-                       <div className="space-y-2">
-                          <Label htmlFor="lastName">Last Name *</Label>
-                          <Input 
-                             id="lastName" 
-                             name="lastName" 
-                             placeholder="Doe" 
-                             required 
-                             value={formData.lastName}
-                             onChange={handleChange}
-                          />
-                       </div>
+                    <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-gray-400">
+                      <span>Step {step} of 2</span>
+                      <span>{step === 1 ? "Contact details" : "Project details"}</span>
                     </div>
 
-                    <div className="space-y-2">
-                       <Label htmlFor="email">Work Email *</Label>
-                       <Input 
-                          id="email" 
-                          name="email" 
-                          type="email" 
-                          placeholder="jane@company.com" 
-                          required 
-                          value={formData.email}
-                          onChange={handleChange}
-                       />
-                    </div>
+                    {step === 1 ? (
+                      <>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="firstName">First Name *</Label>
+                            <Input
+                              id="firstName"
+                              name="firstName"
+                              placeholder="Jane"
+                              required
+                              value={formData.firstName}
+                              onChange={handleChange}
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="lastName">Last Name *</Label>
+                            <Input
+                              id="lastName"
+                              name="lastName"
+                              placeholder="Doe"
+                              required
+                              value={formData.lastName}
+                              onChange={handleChange}
+                            />
+                          </div>
+                        </div>
 
-                    <div className="grid grid-cols-2 gap-4">
-                       <div className="space-y-2">
+                        <div className="space-y-2">
+                          <Label htmlFor="email">Work Email *</Label>
+                          <Input
+                            id="email"
+                            name="email"
+                            type="email"
+                            placeholder="jane@company.com"
+                            required
+                            value={formData.email}
+                            onChange={handleChange}
+                          />
+                        </div>
+
+                        <div className="space-y-2">
                           <Label htmlFor="company">Company Name *</Label>
-                          <Input 
-                             id="company" 
-                             name="company" 
-                             placeholder="Acme Inc." 
-                             required 
-                             value={formData.company}
-                             onChange={handleChange}
+                          <Input
+                            id="company"
+                            name="company"
+                            placeholder="Acme Inc."
+                            required
+                            value={formData.company}
+                            onChange={handleChange}
                           />
-                       </div>
-                       <div className="space-y-2">
-                          <Label htmlFor="website">Website URL</Label>
-                          <div className="relative">
-                             <Globe className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
-                             <Input 
-                                id="website" 
-                                name="website" 
+                        </div>
+
+                        <Button
+                          type="button"
+                          onClick={handleNext}
+                          className="w-full bg-[#B87333] hover:bg-[#a0632a] text-white text-lg py-6 h-auto"
+                        >
+                          Continue
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="website">Website URL</Label>
+                            <div className="relative">
+                              <Globe className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                              <Input
+                                id="website"
+                                name="website"
                                 type="url"
-                                placeholder="https://acme.com" 
+                                placeholder="https://acme.com"
                                 className="pl-9"
                                 value={formData.website}
                                 onChange={handleChange}
-                             />
+                              />
+                            </div>
                           </div>
-                       </div>
-                    </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="role">Job Title *</Label>
+                            <Input
+                              id="role"
+                              name="role"
+                              placeholder="CEO, CTO, etc."
+                              required
+                              value={formData.role}
+                              onChange={handleChange}
+                            />
+                          </div>
+                        </div>
 
-                    <div className="grid grid-cols-2 gap-4">
-                       <div className="space-y-2">
-                          <Label htmlFor="role">Job Title *</Label>
-                          <Input 
-                             id="role" 
-                             name="role" 
-                             placeholder="CEO, CTO, etc." 
-                             required 
-                             value={formData.role}
-                             onChange={handleChange}
-                          />
-                       </div>
-                       <div className="space-y-2">
-                          <Label htmlFor="phone">Phone Number</Label>
-                          <Input 
-                             id="phone" 
-                             name="phone" 
-                             type="tel" 
-                             placeholder="(555) 123-4567" 
-                             value={formData.phone}
-                             onChange={handleChange}
-                          />
-                       </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                       <div className="space-y-2">
-                          <Label htmlFor="employees">Company Size *</Label>
-                          <Select onValueChange={(val) => handleSelectChange('employees', val)} required>
-                             <SelectTrigger>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="phone">Phone Number</Label>
+                            <Input
+                              id="phone"
+                              name="phone"
+                              type="tel"
+                              placeholder="(555) 123-4567"
+                              value={formData.phone}
+                              onChange={handleChange}
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="employees">Company Size *</Label>
+                            <Select onValueChange={(val) => handleSelectChange("employees", val)} required>
+                              <SelectTrigger>
                                 <SelectValue placeholder="Select size" />
-                             </SelectTrigger>
-                             <SelectContent>
+                              </SelectTrigger>
+                              <SelectContent>
                                 <SelectItem value="1-10">1-10 Employees</SelectItem>
                                 <SelectItem value="11-50">11-50 Employees</SelectItem>
                                 <SelectItem value="51-200">51-200 Employees</SelectItem>
                                 <SelectItem value="201+">201+ Employees</SelectItem>
-                             </SelectContent>
-                          </Select>
-                       </div>
-                       <div className="space-y-2">
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+
+                        <div className="space-y-2">
                           <Label htmlFor="budget">Monthly IT Budget</Label>
-                          <Select onValueChange={(val) => handleSelectChange('budget', val)}>
-                             <SelectTrigger>
-                                <SelectValue placeholder="Select range" />
-                             </SelectTrigger>
-                             <SelectContent>
-                                <SelectItem value="<2k">Less than $2,000</SelectItem>
-                                <SelectItem value="2k-5k">$2,000 - $5,000</SelectItem>
-                                <SelectItem value="5k-10k">$5,000 - $10,000</SelectItem>
-                                <SelectItem value="10k+">$10,000+</SelectItem>
-                                <SelectItem value="unsure">Unsure / Not set</SelectItem>
-                             </SelectContent>
+                          <Select onValueChange={(val) => handleSelectChange("budget", val)}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select range" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="<2k">Less than $2,000</SelectItem>
+                              <SelectItem value="2k-5k">$2,000 - $5,000</SelectItem>
+                              <SelectItem value="5k-10k">$5,000 - $10,000</SelectItem>
+                              <SelectItem value="10k+">$10,000+</SelectItem>
+                              <SelectItem value="unsure">Unsure / Not set</SelectItem>
+                            </SelectContent>
                           </Select>
-                       </div>
-                    </div>
+                        </div>
 
-                    <div className="space-y-3 pt-2">
-                       <Label>What are you looking for?</Label>
-                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                          {["Managed IT Services", "Cybersecurity Audit", "Compliance (SOC2/HIPAA)", "Fractional Leadership", "Cloud Migration", "Personal/Family IT"].map((item) => (
-                             <div key={item} className="flex items-center space-x-2 border rounded-md p-3 hover:bg-gray-50 transition-colors cursor-pointer" onClick={() => handleInterestChange(item)}>
-                                <Checkbox 
-                                   id={`interest-${item}`} 
-                                   checked={formData.interests.includes(item)}
-                                   onCheckedChange={() => handleInterestChange(item)}
+                        <div className="space-y-3 pt-2">
+                          <Label>What are you looking for?</Label>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            {["Managed IT Services", "Cybersecurity Audit", "Compliance (SOC2/HIPAA)", "Fractional Leadership", "Cloud Migration", "Personal/Family IT"].map((item) => (
+                              <div key={item} className="flex items-center space-x-2 border rounded-md p-3 hover:bg-gray-50 transition-colors cursor-pointer" onClick={() => handleInterestChange(item)}>
+                                <Checkbox
+                                  id={`interest-${item}`}
+                                  checked={formData.interests.includes(item)}
+                                  onCheckedChange={() => handleInterestChange(item)}
                                 />
-                                <label 
-                                   htmlFor={`interest-${item}`}
-                                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer w-full"
+                                <label
+                                  htmlFor={`interest-${item}`}
+                                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer w-full"
                                 >
-                                   {item}
+                                  {item}
                                 </label>
-                             </div>
-                          ))}
-                       </div>
-                    </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
 
-                    <div className="space-y-2">
-                       <Label htmlFor="message">Anything specific you'd like to discuss?</Label>
-                       <Textarea 
-                          id="message" 
-                          name="message" 
-                          placeholder="Tell us about your current infrastructure or goals..." 
-                          className="min-h-[100px]"
-                          value={formData.message}
-                          onChange={handleChange}
-                       />
-                    </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="message">Anything specific you'd like to discuss?</Label>
+                          <Textarea
+                            id="message"
+                            name="message"
+                            placeholder="Tell us about your current infrastructure or goals..."
+                            className="min-h-[100px]"
+                            value={formData.message}
+                            onChange={handleChange}
+                          />
+                        </div>
 
-                    <Button type="submit" className="w-full bg-[#B87333] hover:bg-[#a0632a] text-white text-lg py-6 h-auto" disabled={isSubmitting}>
-                       {isSubmitting ? (
-                          <>Redirecting to Booking... <Loader2 className="ml-2 w-5 h-5 animate-spin" /></>
-                       ) : (
-                          <>Continue to Schedule Meeting <ArrowRight className="ml-2 w-5 h-5" /></>
-                       )}
-                    </Button>
-                    <p className="text-xs text-center text-gray-500 mt-4">
-                       By submitting this form, you agree to our Privacy Policy. Your data is secure and will never be sold.
-                    </p>
+                        <div className="flex flex-col sm:flex-row gap-3">
+                          <Button type="button" variant="outline" onClick={() => setStep(1)} className="w-full">
+                            Back
+                          </Button>
+                          <Button type="submit" className="w-full bg-[#B87333] hover:bg-[#a0632a] text-white text-lg py-6 h-auto" disabled={isSubmitting}>
+                            {isSubmitting ? (
+                              <>
+                                Redirecting to Booking... <Loader2 className="ml-2 w-5 h-5 animate-spin" />
+                              </>
+                            ) : (
+                              <>
+                                Continue to Schedule Meeting <ArrowRight className="ml-2 w-5 h-5" />
+                              </>
+                            )}
+                          </Button>
+                        </div>
+                        <p className="text-xs text-center text-gray-500 mt-4">
+                          By submitting this form, you agree to our Privacy Policy. Your data is secure and will never be sold.
+                        </p>
+                      </>
+                    )}
                  </form>
               </CardContent>
            </Card>
