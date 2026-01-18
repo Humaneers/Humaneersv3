@@ -50,12 +50,18 @@ interface CalConfig {
  * @throws Error if required environment variables are missing
  */
 function getCalConfig(): CalConfig {
-  const orgUrl = import.meta.env.VITE_CAL_ORG_URL || '';
-  const salesFormId = import.meta.env.VITE_CAL_SALES_FORM_ID || '';
-  const supportFormId = import.meta.env.VITE_CAL_SUPPORT_FORM_ID || '';
-  const newsletterFormId = import.meta.env.VITE_CAL_NEWSLETTER_FORM_ID || '';
+  const orgUrl = import.meta.env.VITE_CAL_ORG_URL?.trim() || '';
+  const salesFormId = import.meta.env.VITE_CAL_SALES_FORM_ID?.trim() || '';
+  const supportFormId = import.meta.env.VITE_CAL_SUPPORT_FORM_ID?.trim() || '';
+  const newsletterFormId = import.meta.env.VITE_CAL_NEWSLETTER_FORM_ID?.trim() || '';
 
-  if (!orgUrl || !salesFormId || !supportFormId) {
+  const missing: string[] = [];
+  if (!orgUrl) missing.push('VITE_CAL_ORG_URL');
+  if (!salesFormId) missing.push('VITE_CAL_SALES_FORM_ID');
+  if (!supportFormId) missing.push('VITE_CAL_SUPPORT_FORM_ID');
+
+  if (missing.length > 0) {
+    console.error('Missing Cal.com configuration:', missing);
     throw new Error('Booking system is not configured. Please contact support at support@humaneers.dev');
   }
 
