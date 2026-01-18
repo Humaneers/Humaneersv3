@@ -1,3 +1,4 @@
+import { APP_VERSION } from "../version";
 /**
  * Layout Component
  *
@@ -178,9 +179,8 @@ export function Layout() {
   return (
     <div className="font-sans antialiased text-brand-slate bg-brand-cream min-h-screen flex flex-col">
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? "bg-brand-oxford shadow-lg py-3" : "bg-brand-oxford/95 backdrop-blur-sm py-5"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-brand-oxford shadow-lg py-3" : "bg-brand-oxford/95 backdrop-blur-sm py-5"
+          }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
           <Link className="flex items-center cursor-pointer shrink-0 mr-8" to="/">
@@ -470,45 +470,51 @@ export function Layout() {
             </div>
           </div>
 
-          <div className="pt-8 border-t border-gray-800 flex flex-col lg:flex-row justify-between items-center gap-6 text-xs">
-            <div className="flex flex-col md:flex-row items-center gap-6 text-gray-500">
-              <p className="text-gray-400 text-center md:text-left">
-                Built by humans with ❤️+☕️ in Arizona & Texas.
-              </p>
-              <p className="text-center md:text-left leading-tight">
-                &copy; {new Date().getFullYear()} Humaneers Limited Company. All rights reserved.
-                "Humaneers" is a trademark of Human IP LP and is used under license. All other
-                trademarks are the property of their respective owner.
-              </p>
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-brand-copper" />
-                <span>SOC 2 Type II Compliant</span>
-              </div>
+
+          <div className="flex flex-col gap-2 items-center md:items-start text-center md:text-left">
+            <p className="text-gray-400 font-medium">
+              Built by humans with ❤️ + ☕️ in Arizona & Texas.
+            </p>
+            <div className="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-1">
+              <span>&copy; {new Date().getFullYear()} Humaneers Limited Company.</span>
             </div>
-            <div className="flex flex-wrap justify-center items-center gap-6">
-              {footerMetaLinks.map((item) =>
-                item.href ? (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    target={item.external ? "_blank" : undefined}
-                    rel={item.external ? "noopener noreferrer" : undefined}
-                    className="hover:text-brand-copper transition-colors"
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.label}
-                    to={item.to!}
-                    className="hover:text-brand-copper transition-colors"
-                  >
-                    {item.label}
-                  </Link>
-                )
-              )}
-              <span className="text-brand-copper">Supporting 501(c)(3) Organizations</span>
+            <p className="leading-tight opacity-60 max-w-lg">
+              "Humaneers" is a trademark of Human IP LP and is used under license.
+            </p>
+            <div className="flex items-center gap-2 mt-1 text-brand-copper">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span className="font-medium">SOC 2 Type II Compliant</span>
             </div>
+          </div>
+
+          <div className="flex flex-wrap justify-center md:justify-end items-center gap-x-6 gap-y-3">
+            {footerMetaLinks.map((item) =>
+              item.href ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target={item.external ? "_blank" : undefined}
+                  rel={item.external ? "noopener noreferrer" : undefined}
+                  className="hover:text-brand-copper transition-colors"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={item.to!}
+                  className="hover:text-brand-copper transition-colors"
+                >
+                  {item.label}
+                </Link>
+              )
+            )}
+            <span className="text-brand-copper font-medium px-3 py-1 bg-brand-copper/10 rounded-full">
+              Supporting 501(c)(3) Organizations
+            </span>
+            <span className="text-white/10 text-[10px] hover:text-white/30 transition-colors cursor-default">
+              v{APP_VERSION}
+            </span>
           </div>
         </div>
       </footer>
