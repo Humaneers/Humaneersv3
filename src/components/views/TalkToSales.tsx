@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View } from "../../App";
+import { useLocation } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -11,12 +11,11 @@ import { ShieldCheck, ArrowRight, Globe, Loader2 } from "lucide-react";
 import { redirectToSalesBooking, validateSalesForm, type SalesFormData } from "../../lib/cal";
 import { toast } from "sonner";
 
-interface TalkToSalesProps {
-  onViewChange: (view: View, data?: any) => void;
-  initialData?: { email?: string; interest?: string };
-}
+type TalkToSalesState = { email?: string; interest?: string; source?: string } | null;
 
-export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
+export function TalkToSales() {
+  const location = useLocation();
+  const initialData = (location.state as TalkToSalesState) ?? {};
   const [formData, setFormData] = useState<SalesFormData>({
     firstName: "",
     lastName: "",
@@ -35,9 +34,16 @@ export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    document.title = "Humaneers | Start a Conversation";
-    window.scrollTo(0, 0);
-  }, []);
+    if (!initialData?.email && !initialData?.interest) {
+      return;
+    }
+
+    setFormData(prev => ({
+      ...prev,
+      email: initialData?.email || prev.email,
+      interests: initialData?.interest ? [initialData.interest] : prev.interests,
+    }));
+  }, [initialData?.email, initialData?.interest]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -108,8 +114,8 @@ export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
   };
 
   return (
-    <div className="bg-[#F5F1E9] min-h-screen">
-      <div className="bg-[#1B263B] text-white py-16">
+    <div className="bg-brand-cream min-h-screen">
+      <div className="bg-brand-oxford text-white py-16">
         <div className="container mx-auto px-6 text-center">
            <h1 className="text-4xl md:text-5xl font-bold mb-4">Let's Build Your Strategy</h1>
            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
@@ -122,7 +128,7 @@ export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
         <div className="grid md:grid-cols-5 gap-8 max-w-6xl mx-auto">
            {/* Sidebar / Value Prop */}
            <div className="md:col-span-2 space-y-6">
-              <div className="bg-[#B87333] text-white p-6 rounded-lg shadow-lg">
+              <div className="bg-brand-copper text-white p-6 rounded-lg shadow-lg">
                  <h3 className="font-bold text-xl mb-2">Why Humaneers?</h3>
                  <p className="text-white/90 mb-4">We don't just fix computers. We align technology with your business goals.</p>
                  <ul className="space-y-3">
@@ -141,16 +147,16 @@ export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
                  </ul>
               </div>
               
-              <div className="bg-white p-6 rounded-lg shadow text-[#4E596F]">
+              <div className="bg-white p-6 rounded-lg shadow text-brand-slate">
                  <p className="italic font-medium">"Humaneers helped us scale from 15 to 50 employees without a single hiccup in our operations. They are true partners."</p>
-                 <div className="mt-4 text-sm font-bold text-[#1B263B]">— CEO, Legal Firm</div>
+                 <div className="mt-4 text-sm font-bold text-brand-oxford">— CEO, Legal Firm</div>
               </div>
            </div>
 
            {/* Form */}
-           <Card className="md:col-span-3 shadow-xl border-t-4 border-[#1B263B]">
+           <Card className="md:col-span-3 shadow-xl border-t-4 border-brand-oxford">
               <CardHeader>
-                 <CardTitle className="text-2xl text-[#1B263B]">Request a Consultation</CardTitle>
+                 <CardTitle className="text-2xl text-brand-oxford">Request a Consultation</CardTitle>
                  <CardDescription>Fill out the form below and we'll get back to you shortly.</CardDescription>
               </CardHeader>
               <CardContent>
@@ -215,7 +221,7 @@ export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
                         <Button
                           type="button"
                           onClick={handleNext}
-                          className="w-full bg-[#B87333] hover:bg-[#a0632a] text-white text-lg py-6 h-auto"
+                          className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white text-lg py-6 h-auto"
                         >
                           Continue
                         </Button>
@@ -266,7 +272,7 @@ export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
                           <div className="space-y-2">
                             <Label htmlFor="employees">Company Size *</Label>
                             <Select onValueChange={(val) => handleSelectChange("employees", val)} required>
-                              <SelectTrigger>
+                              <SelectTrigger id="employees">
                                 <SelectValue placeholder="Select size" />
                               </SelectTrigger>
                               <SelectContent>
@@ -282,7 +288,7 @@ export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
                         <div className="space-y-2">
                           <Label htmlFor="budget">Monthly IT Budget</Label>
                           <Select onValueChange={(val) => handleSelectChange("budget", val)}>
-                            <SelectTrigger>
+                            <SelectTrigger id="budget">
                               <SelectValue placeholder="Select range" />
                             </SelectTrigger>
                             <SelectContent>
@@ -332,7 +338,7 @@ export function TalkToSales({ onViewChange, initialData }: TalkToSalesProps) {
                           <Button type="button" variant="outline" onClick={() => setStep(1)} className="w-full">
                             Back
                           </Button>
-                          <Button type="submit" className="w-full bg-[#B87333] hover:bg-[#a0632a] text-white text-lg py-6 h-auto" disabled={isSubmitting}>
+                          <Button type="submit" className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white text-lg py-6 h-auto" disabled={isSubmitting}>
                             {isSubmitting ? (
                               <>
                                 Redirecting to Booking... <Loader2 className="ml-2 w-5 h-5 animate-spin" />

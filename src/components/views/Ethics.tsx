@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { View } from "../../App";
+import { useState } from "react";
 import { Scale, Shield, FileText, AlertTriangle, Lock, CheckCircle2, Send, HeartHandshake, Loader2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -9,11 +8,7 @@ import { Switch } from "../ui/switch";
 import { toast } from "sonner";
 import { submitEthicsReport } from "../../lib/api";
 
-interface EthicsProps {
-  onViewChange: (view: View) => void;
-}
-
-export function Ethics({ onViewChange }: EthicsProps) {
+export function Ethics() {
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [reportType, setReportType] = useState("general");
   const [name, setName] = useState("");
@@ -21,11 +16,6 @@ export function Ethics({ onViewChange }: EthicsProps) {
   const [details, setDetails] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-
-  useEffect(() => {
-    document.title = "Humaneers | Ethics Charter & Reporting";
-    window.scrollTo(0, 0);
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,9 +41,9 @@ export function Ethics({ onViewChange }: EthicsProps) {
   return (
     <div className="bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-[#1B263B] text-white py-20 relative overflow-hidden">
+      <section className="bg-brand-oxford text-white py-20 relative overflow-hidden">
         <div className="container mx-auto px-6 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 bg-[#B87333]/20 text-[#B87333] px-4 py-1.5 rounded-full text-sm font-medium mb-6 border border-[#B87333]/30">
+          <div className="inline-flex items-center gap-2 bg-brand-copper/20 text-brand-copper px-4 py-1.5 rounded-full text-sm font-medium mb-6 border border-brand-copper/30">
             <Scale size={16} /> Corporate Governance
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6">Ethics Charter</h1>
@@ -70,48 +60,48 @@ export function Ethics({ onViewChange }: EthicsProps) {
           <div className="lg:col-span-7 space-y-16">
             
             <section>
-              <h2 className="text-3xl font-bold text-[#1B263B] mb-8 flex items-center gap-3">
-                <FileText className="text-[#B87333]" /> Core Principles
+              <h2 className="text-3xl font-bold text-brand-oxford mb-8 flex items-center gap-3">
+                <FileText className="text-brand-copper" /> Core Principles
               </h2>
               
               <div className="space-y-8">
-                <div className="bg-[#F5F1E9] p-8 rounded-xl border border-[#B87333]/20">
-                  <h3 className="text-xl font-bold text-[#1B263B] mb-3">1. Mission Statement</h3>
-                  <p className="text-[#4E596F] leading-relaxed">
+                <div className="bg-brand-cream p-8 rounded-xl border border-brand-copper/20">
+                  <h3 className="text-xl font-bold text-brand-oxford mb-3">1. Mission Statement</h3>
+                  <p className="text-brand-slate leading-relaxed">
                     We exist to bring enterprise-grade discipline and security to the small businesses that power our community. We believe that robust technology infrastructure is a right, not a luxury reserved for the Fortune 500.
                   </p>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
-                   <div className="border-l-4 border-[#B87333] pl-6 py-2">
-                      <h4 className="font-bold text-[#1B263B] mb-2 flex items-center gap-2">
-                         <HeartHandshake className="w-4 h-4 text-[#B87333]" /> Client-First
+                   <div className="border-l-4 border-brand-copper pl-6 py-2">
+                      <h4 className="font-bold text-brand-oxford mb-2 flex items-center gap-2">
+                         <HeartHandshake className="w-4 h-4 text-brand-copper" /> Client-First
                       </h4>
-                      <p className="text-sm text-[#4E596F]">
+                      <p className="text-sm text-brand-slate">
                          Our "No-BS" promise means we practice strict vendor neutrality. We recommend what works for you, not what pays us the highest commission.
                       </p>
                    </div>
-                   <div className="border-l-4 border-[#B87333] pl-6 py-2">
-                      <h4 className="font-bold text-[#1B263B] mb-2 flex items-center gap-2">
-                         <Shield className="w-4 h-4 text-[#B87333]" /> Anti-Corruption
+                   <div className="border-l-4 border-brand-copper pl-6 py-2">
+                      <h4 className="font-bold text-brand-oxford mb-2 flex items-center gap-2">
+                         <Shield className="w-4 h-4 text-brand-copper" /> Anti-Corruption
                       </h4>
-                      <p className="text-sm text-[#4E596F]">
+                      <p className="text-sm text-brand-slate">
                          Zero tolerance for kickbacks, bribery, or undisclosed referral fees. All procurement decisions are documented and available for client review.
                       </p>
                    </div>
-                   <div className="border-l-4 border-[#B87333] pl-6 py-2">
-                      <h4 className="font-bold text-[#1B263B] mb-2 flex items-center gap-2">
-                         <Lock className="w-4 h-4 text-[#B87333]" /> Data Ethics
+                   <div className="border-l-4 border-brand-copper pl-6 py-2">
+                      <h4 className="font-bold text-brand-oxford mb-2 flex items-center gap-2">
+                         <Lock className="w-4 h-4 text-brand-copper" /> Data Ethics
                       </h4>
-                      <p className="text-sm text-[#4E596F]">
+                      <p className="text-sm text-brand-slate">
                          We are custodians, not owners, of your data. We never sell client information. We adhere to SOC 2 Type II standards for all data handling.
                       </p>
                    </div>
-                   <div className="border-l-4 border-[#B87333] pl-6 py-2">
-                      <h4 className="font-bold text-[#1B263B] mb-2 flex items-center gap-2">
-                         <Scale className="w-4 h-4 text-[#B87333]" /> Accountability
+                   <div className="border-l-4 border-brand-copper pl-6 py-2">
+                      <h4 className="font-bold text-brand-oxford mb-2 flex items-center gap-2">
+                         <Scale className="w-4 h-4 text-brand-copper" /> Accountability
                       </h4>
-                      <p className="text-sm text-[#4E596F]">
+                      <p className="text-sm text-brand-slate">
                          If we break it, we fix it. If we recommend it and it fails, we own the remediation. We stand behind our engineering.
                       </p>
                    </div>
@@ -120,14 +110,14 @@ export function Ethics({ onViewChange }: EthicsProps) {
             </section>
 
             <section>
-               <h2 className="text-2xl font-bold text-[#1B263B] mb-6 flex items-center gap-3">
-                <AlertTriangle className="text-[#B87333]" /> Whistleblowing Policy
+               <h2 className="text-2xl font-bold text-brand-oxford mb-6 flex items-center gap-3">
+                <AlertTriangle className="text-brand-copper" /> Whistleblowing Policy
               </h2>
-              <div className="prose prose-gray max-w-none text-[#4E596F]">
+              <div className="prose prose-gray max-w-none text-brand-slate">
                  <p>
                     Humaneers fosters a culture of "Speaking Up." We encourage employees, contractors, suppliers, and clients to report any suspected wrongdoing without fear of retaliation.
                  </p>
-                 <h4 className="font-bold text-[#1B263B] mt-4 mb-2">Scope of Reportable Issues</h4>
+                 <h4 className="font-bold text-brand-oxford mt-4 mb-2">Scope of Reportable Issues</h4>
                  <ul className="list-disc pl-5 space-y-1 mb-4">
                     <li>Financial fraud or accounting irregularities</li>
                     <li>Bribery, corruption, or conflict of interest</li>
@@ -135,7 +125,7 @@ export function Ethics({ onViewChange }: EthicsProps) {
                     <li>Security breaches or data privacy violations</li>
                     <li>Unethical business practices</li>
                  </ul>
-                 <h4 className="font-bold text-[#1B263B] mt-4 mb-2">Non-Retaliation Guarantee</h4>
+                 <h4 className="font-bold text-brand-oxford mt-4 mb-2">Non-Retaliation Guarantee</h4>
                  <p>
                     We strictly prohibit retaliation against anyone who raises a concern in good faith. Reports are handled with the utmost confidentiality by our independent Compliance Officer.
                  </p>
@@ -150,7 +140,7 @@ export function Ethics({ onViewChange }: EthicsProps) {
                
                {!isSuccess ? (
                   <div key="form">
-                     <h3 className="text-2xl font-bold text-[#1B263B] mb-2">Submit a Report</h3>
+                     <h3 className="text-2xl font-bold text-brand-oxford mb-2">Submit a Report</h3>
                      <p className="text-sm text-gray-500 mb-6">
                         Use this secure form to report ethical concerns. You may choose to remain anonymous.
                      </p>
@@ -159,7 +149,7 @@ export function Ethics({ onViewChange }: EthicsProps) {
                         
                         <div className="flex items-center justify-between bg-white p-3 rounded-lg border border-gray-200">
                            <div className="flex items-center gap-2">
-                              <Lock size={16} className={isAnonymous ? "text-[#B87333]" : "text-gray-400"} />
+                              <Lock size={16} className={isAnonymous ? "text-brand-copper" : "text-gray-400"} />
                               <Label htmlFor="anonymous-mode" className="cursor-pointer">Submit Anonymously</Label>
                            </div>
                            <Switch 
@@ -221,7 +211,7 @@ export function Ethics({ onViewChange }: EthicsProps) {
 
                         <Button
                            type="submit"
-                           className="w-full bg-[#B87333] hover:bg-[#a0632a] text-white"
+                           className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white"
                            disabled={isSubmitting}
                         >
                            {isSubmitting ? (
@@ -245,7 +235,7 @@ export function Ethics({ onViewChange }: EthicsProps) {
                      <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
                         <CheckCircle2 size={32} />
                      </div>
-                     <h3 className="text-2xl font-bold text-[#1B263B] mb-4">Report Received</h3>
+                     <h3 className="text-2xl font-bold text-brand-oxford mb-4">Report Received</h3>
                      <p className="text-gray-600 mb-8">
                         Thank you for speaking up. Your report has been securely transmitted. A case number has been generated for our internal records.
                      </p>

@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { View } from "../../App";
+import { useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -9,11 +8,7 @@ import { LifeBuoy, ArrowRight, Loader2, Clock, Shield, Headphones } from "lucide
 import { redirectToSupportBooking, validateSupportForm, type SupportFormData } from "../../lib/cal";
 import { toast } from "sonner";
 
-interface SupportProps {
-  onViewChange: (view: View) => void;
-}
-
-export function Support({ onViewChange }: SupportProps) {
+export function Support() {
   const [formData, setFormData] = useState<SupportFormData>({
     name: "",
     email: "",
@@ -25,11 +20,6 @@ export function Support({ onViewChange }: SupportProps) {
     description: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useEffect(() => {
-    document.title = "Humaneers | Support";
-    window.scrollTo(0, 0);
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,11 +52,11 @@ export function Support({ onViewChange }: SupportProps) {
   };
 
   return (
-    <div className="bg-[#F5F1E9] min-h-screen">
-      <section className="bg-[#1B263B] text-white py-20">
+    <div className="bg-brand-cream min-h-screen">
+      <section className="bg-brand-oxford text-white py-20">
         <div className="container mx-auto px-6 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-[#B87333]/20 rounded-full mb-6">
-            <LifeBuoy className="w-8 h-8 text-[#B87333]" />
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-copper/20 rounded-full mb-6">
+            <LifeBuoy className="w-8 h-8 text-brand-copper" />
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6">Support Center</h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-2xl mx-auto">
@@ -81,8 +71,8 @@ export function Support({ onViewChange }: SupportProps) {
             {/* Support Info Side */}
             <div className="lg:w-1/3 space-y-8">
               <div>
-                <h2 className="text-2xl font-bold text-[#1B263B] mb-6">Need Help?</h2>
-                <p className="text-[#4E596F] mb-8">
+                <h2 className="text-2xl font-bold text-brand-oxford mb-6">Need Help?</h2>
+                <p className="text-brand-slate mb-8">
                   Fill out the form to submit a support ticket. Our team monitors tickets during business hours and will respond based on priority level.
                 </p>
               </div>
@@ -91,46 +81,46 @@ export function Support({ onViewChange }: SupportProps) {
                 <div className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-red-500">
                   <div className="flex items-center gap-3 mb-2">
                     <Clock className="w-5 h-5 text-red-500" />
-                    <h3 className="font-bold text-[#1B263B]">Critical (P1)</h3>
+                    <h3 className="font-bold text-brand-oxford">Critical (P1)</h3>
                   </div>
-                  <p className="text-sm text-[#4E596F]">System down or data breach. Response within 15 minutes.</p>
+                  <p className="text-sm text-brand-slate">System down or data breach. Response within 15 minutes.</p>
                 </div>
 
                 <div className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-orange-500">
                   <div className="flex items-center gap-3 mb-2">
                     <Clock className="w-5 h-5 text-orange-500" />
-                    <h3 className="font-bold text-[#1B263B]">High (P2)</h3>
+                    <h3 className="font-bold text-brand-oxford">High (P2)</h3>
                   </div>
-                  <p className="text-sm text-[#4E596F]">Major functionality impacted. Response within 1 hour.</p>
+                  <p className="text-sm text-brand-slate">Major functionality impacted. Response within 1 hour.</p>
                 </div>
 
                 <div className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-yellow-500">
                   <div className="flex items-center gap-3 mb-2">
                     <Clock className="w-5 h-5 text-yellow-500" />
-                    <h3 className="font-bold text-[#1B263B]">Medium (P3)</h3>
+                    <h3 className="font-bold text-brand-oxford">Medium (P3)</h3>
                   </div>
-                  <p className="text-sm text-[#4E596F]">Minor issue with workaround. Response within 4 hours.</p>
+                  <p className="text-sm text-brand-slate">Minor issue with workaround. Response within 4 hours.</p>
                 </div>
 
                 <div className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
                   <div className="flex items-center gap-3 mb-2">
                     <Clock className="w-5 h-5 text-blue-500" />
-                    <h3 className="font-bold text-[#1B263B]">Low (P4)</h3>
+                    <h3 className="font-bold text-brand-oxford">Low (P4)</h3>
                   </div>
-                  <p className="text-sm text-[#4E596F]">General question or request. Response within 24 hours.</p>
+                  <p className="text-sm text-brand-slate">General question or request. Response within 24 hours.</p>
                 </div>
               </div>
 
-              <div className="bg-[#1B263B] p-6 rounded-lg text-white">
+              <div className="bg-brand-oxford p-6 rounded-lg text-white">
                 <div className="flex items-center gap-3 mb-3">
-                  <Shield className="w-5 h-5 text-[#B87333]" />
+                  <Shield className="w-5 h-5 text-brand-copper" />
                   <h3 className="font-bold">Security Issues?</h3>
                 </div>
                 <p className="text-sm text-gray-300 mb-4">
-                  For security vulnerabilities, please email security@humaneers.co directly with details.
+                  For security vulnerabilities, please email security@humaneers.dev directly with details.
                 </p>
                 <div className="flex items-center gap-3">
-                  <Headphones className="w-5 h-5 text-[#B87333]" />
+                  <Headphones className="w-5 h-5 text-brand-copper" />
                   <h3 className="font-bold">Existing Client?</h3>
                 </div>
                 <p className="text-sm text-gray-300 mt-2">
@@ -201,7 +191,7 @@ export function Support({ onViewChange }: SupportProps) {
                       <div className="space-y-2">
                         <Label htmlFor="priority">Priority Level</Label>
                         <Select onValueChange={handleSelectChange("priority")} required>
-                          <SelectTrigger className="h-12 bg-gray-50 border-gray-200">
+                          <SelectTrigger id="priority" className="h-12 bg-gray-50 border-gray-200">
                             <SelectValue placeholder="Select priority" />
                           </SelectTrigger>
                           <SelectContent>
@@ -215,7 +205,7 @@ export function Support({ onViewChange }: SupportProps) {
                       <div className="space-y-2">
                         <Label htmlFor="category">Category</Label>
                         <Select onValueChange={handleSelectChange("category")} required>
-                          <SelectTrigger className="h-12 bg-gray-50 border-gray-200">
+                          <SelectTrigger id="category" className="h-12 bg-gray-50 border-gray-200">
                             <SelectValue placeholder="Select category" />
                           </SelectTrigger>
                           <SelectContent>
@@ -255,7 +245,7 @@ export function Support({ onViewChange }: SupportProps) {
                       />
                     </div>
 
-                    <Button type="submit" className="w-full bg-[#1B263B] hover:bg-[#2c3b55] text-white text-lg py-6 h-auto" disabled={isSubmitting}>
+                    <Button type="submit" className="w-full bg-brand-oxford hover:bg-brand-oxford-muted text-white text-lg py-6 h-auto" disabled={isSubmitting}>
                       {isSubmitting ? (
                         <>Redirecting to Booking... <Loader2 className="ml-2 w-5 h-5 animate-spin" /></>
                       ) : (

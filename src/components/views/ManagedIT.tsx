@@ -1,42 +1,35 @@
-import { useEffect } from "react";
-import { View } from "../../App";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Shield, Server, Wifi, Headphones, MapPin, Globe, CheckCircle2, Smartphone } from "lucide-react";
 import { DefinitionTooltip } from "../DefinitionTooltip";
+import { routePaths } from "../../routes";
 
-interface ManagedITProps {
-  onViewChange: (view: View, data?: any) => void;
-}
-
-export function ManagedIT({ onViewChange }: ManagedITProps) {
-  useEffect(() => {
-    document.title = "Humaneers | Managed IT | Nationwide Support";
-    window.scrollTo(0, 0);
-  }, []);
+export function ManagedIT() {
+  const navigate = useNavigate();
 
   const features = [
     {
-      icon: <Headphones className="w-6 h-6 text-[#B87333]" />,
+      icon: <Headphones className="w-6 h-6 text-brand-copper" />,
       title: "100% US-Based Helpdesk",
       desc: "Talk to a US-based engineer who knows your business."
     },
     {
-      icon: <Server className="w-6 h-6 text-[#B87333]" />,
+      icon: <Server className="w-6 h-6 text-brand-copper" />,
       title: "Hybrid & Cloud Infrastructure",
       desc: "Secure on-prem or cloud environments tuned to your workflow."
     },
     {
-      icon: <Smartphone className="w-6 h-6 text-[#B87333]" />,
+      icon: <Smartphone className="w-6 h-6 text-brand-copper" />,
       title: <span>Mobile Device Management (<DefinitionTooltip term="MDM" definition="Software that allows IT to secure, monitor, and manage mobile devices like smartphones and tablets." />)</span>,
       desc: "Protect work data on personal devices without overreach."
     },
     {
-      icon: <Shield className="w-6 h-6 text-[#B87333]" />,
+      icon: <Shield className="w-6 h-6 text-brand-copper" />,
       title: "Proactive Security Monitoring",
       desc: "24/7 monitoring to stop issues before they hit."
     },
     {
-      icon: <Wifi className="w-6 h-6 text-[#B87333]" />,
+      icon: <Wifi className="w-6 h-6 text-brand-copper" />,
       title: "Remote & On-Site Support",
       desc: "Remote-first support with nationwide on-site backup."
     }
@@ -45,7 +38,7 @@ export function ManagedIT({ onViewChange }: ManagedITProps) {
   return (
     <div className="bg-white">
       {/* Hero */}
-      <section className="bg-[#1B263B] text-white py-20 relative overflow-hidden">
+      <section className="bg-brand-oxford text-white py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558494949-ef526b01201b?auto=format&fit=crop&q=80')] opacity-10 bg-cover bg-center mix-blend-overlay"></div>
         <div className="container mx-auto px-6 relative z-10 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">Managed IT that Sleeps<br/>So You Don't Have To.</h1>
@@ -53,8 +46,8 @@ export function ManagedIT({ onViewChange }: ManagedITProps) {
             Enterprise-grade infrastructure for teams that value craftsmanship over ticket numbers.
           </p>
           <Button
-            onClick={() => onViewChange("talk-to-sales", { interest: "Managed IT" })}
-            className="bg-[#B87333] hover:bg-[#a0632a] text-white text-lg px-8 py-4 h-auto rounded-full"
+            onClick={() => navigate(routePaths.talkToSales, { state: { interest: "Managed IT" } })}
+            className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-4 h-auto rounded-full"
           >
             Get a Network Assessment
           </Button>
@@ -62,32 +55,32 @@ export function ManagedIT({ onViewChange }: ManagedITProps) {
       </section>
 
       {/* The Difference */}
-      <section className="py-24 bg-[#F5F1E9]">
+      <section className="py-24 bg-brand-cream">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row gap-16 items-center">
              <div className="md:w-1/2">
-                <h2 className="text-3xl font-bold text-[#1B263B] mb-6">Not Your Average Helpdesk</h2>
-                <p className="text-[#4E596F] text-lg mb-6 leading-relaxed">
+                <h2 className="text-3xl font-bold text-brand-oxford mb-6">Not Your Average Helpdesk</h2>
+                <p className="text-brand-slate text-lg mb-6 leading-relaxed">
                   Most <DefinitionTooltip term="MSPs" definition="Managed Service Providers: Third-party companies that remotely manage customer's IT infrastructure." /> operate on a "break/fix" model—they profit when you have problems. We operate on a subscription model, which means <strong>we only profit when your systems are running perfectly.</strong>
                 </p>
-                <p className="text-[#4E596F] text-lg mb-6 leading-relaxed">
+                <p className="text-brand-slate text-lg mb-6 leading-relaxed">
                   We are "The Modern Craftsman" of IT. We don't just patch cables; we architect resilience.
                 </p>
-                <div className="flex items-center gap-4 text-[#1B263B] font-semibold mt-8">
+                <div className="flex items-center gap-4 text-brand-oxford font-semibold mt-8">
                    <div className="flex items-center gap-2">
-                      <MapPin className="text-[#B87333]" /> Nationwide Coverage
+                      <MapPin className="text-brand-copper" /> Nationwide Coverage
                    </div>
                    <div className="flex items-center gap-2">
-                      <Globe className="text-[#B87333]" /> Remote First
+                      <Globe className="text-brand-copper" /> Remote First
                    </div>
                 </div>
              </div>
              <div className="md:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {features.map((f, i) => (
-                  <div key={i} className="bg-white p-6 rounded-lg shadow-sm border-b-2 border-[#B87333]">
+                  <div key={i} className="bg-white p-6 rounded-lg shadow-sm border-b-2 border-brand-copper">
                      <div className="mb-4">{f.icon}</div>
-                     <h3 className="text-lg font-bold text-[#1B263B] mb-2">{f.title}</h3>
-                     <p className="text-sm text-[#4E596F]">{f.desc}</p>
+                     <h3 className="text-lg font-bold text-brand-oxford mb-2">{f.title}</h3>
+                     <p className="text-sm text-brand-slate">{f.desc}</p>
                   </div>
                 ))}
              </div>
@@ -98,8 +91,8 @@ export function ManagedIT({ onViewChange }: ManagedITProps) {
       {/* National Reach */}
       <section className="py-24 bg-white">
          <div className="container mx-auto px-6 text-center">
-            <h2 className="text-3xl font-bold text-[#1B263B] mb-8">We Serve Clients Everywhere</h2>
-            <p className="text-[#4E596F] max-w-2xl mx-auto mb-12">
+            <h2 className="text-3xl font-bold text-brand-oxford mb-8">We Serve Clients Everywhere</h2>
+            <p className="text-brand-slate max-w-2xl mx-auto mb-12">
                Our Tempe HQ is just the beginning. We use advanced remote management tools to support clients in all 50 states. We ship pre-configured hardware directly to your door, plug-and-play ready.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-left">
@@ -109,8 +102,8 @@ export function ManagedIT({ onViewChange }: ManagedITProps) {
                   <span key="vcio">Virtual <DefinitionTooltip term="CIO" definition="Chief Information Officer: An executive responsible for the management, implementation, and usability of information and computer technologies." /> Meetings</span>, 
                   "Nationwide On-site Dispatch"
                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2 text-[#1B263B] font-medium p-4 bg-gray-50 rounded">
-                     <CheckCircle2 className="w-5 h-5 text-[#B87333] shrink-0" /> {item}
+                  <div key={i} className="flex items-center gap-2 text-brand-oxford font-medium p-4 bg-gray-50 rounded">
+                     <CheckCircle2 className="w-5 h-5 text-brand-copper shrink-0" /> {item}
                   </div>
                ))}
             </div>

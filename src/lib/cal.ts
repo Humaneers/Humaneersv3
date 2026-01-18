@@ -41,6 +41,7 @@ interface CalConfig {
 
 /**
  * Get Cal.com configuration from environment variables
+ * @throws Error if required environment variables are missing
  */
 function getCalConfig(): CalConfig {
   const orgUrl = import.meta.env.VITE_CAL_ORG_URL || '';
@@ -48,7 +49,7 @@ function getCalConfig(): CalConfig {
   const supportFormId = import.meta.env.VITE_CAL_SUPPORT_FORM_ID || '';
 
   if (!orgUrl || !salesFormId || !supportFormId) {
-    console.error('Missing Cal.com configuration. Please set VITE_CAL_ORG_URL, VITE_CAL_SALES_FORM_ID, and VITE_CAL_SUPPORT_FORM_ID');
+    throw new Error('Booking system is not configured. Please contact support at support@humaneers.dev');
   }
 
   return { orgUrl, salesFormId, supportFormId };
@@ -163,8 +164,8 @@ export function validateSalesForm(data: Partial<SalesFormData>): { valid: boolea
   if (!data.role?.trim()) errors.push('Role is required');
   if (!data.employees?.trim()) errors.push('Company size is required');
 
-  // Email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // Email validation - more robust pattern
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   if (data.email && !emailRegex.test(data.email)) {
     errors.push('Invalid email format');
   }
@@ -188,8 +189,8 @@ export function validateSupportForm(data: Partial<SupportFormData>): { valid: bo
   if (!data.subject?.trim()) errors.push('Subject is required');
   if (!data.description?.trim()) errors.push('Description is required');
 
-  // Email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // Email validation - more robust pattern
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   if (data.email && !emailRegex.test(data.email)) {
     errors.push('Invalid email format');
   }

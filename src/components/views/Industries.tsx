@@ -1,23 +1,16 @@
-import { useEffect } from "react";
-import { View } from "../../App";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Store, Palmtree, Stethoscope, Truck, Building2, ArrowRight, Wifi, ShieldCheck, Tablet, Sprout, Anchor } from "lucide-react";
 import { DefinitionTooltip } from "../DefinitionTooltip";
+import { routePaths } from "../../routes";
 
-interface IndustriesProps {
-  onViewChange: (view: View) => void;
-}
-
-export function Industries({ onViewChange }: IndustriesProps) {
-  useEffect(() => {
-    document.title = "Humaneers | Industries We Serve";
-    window.scrollTo(0, 0);
-  }, []);
+export function Industries() {
+  const navigate = useNavigate();
 
   const industries = [
     {
       id: "retail",
-      icon: <Store className="w-12 h-12 text-[#B87333]" />,
+      icon: <Store className="w-12 h-12 text-brand-copper" />,
       title: "Main Street & Retail",
       subtitle: "Dry Cleaners, Cafes, Boutiques",
       description: <span>When your <DefinitionTooltip term="POS" definition="Point of Sale: The system where a customer makes a payment for goods or services." /> goes down, you lose money instantly. We ensure your checkout systems, guest Wi-Fi, and inventory software stay online so you can keep serving customers.</span>,
@@ -25,7 +18,7 @@ export function Industries({ onViewChange }: IndustriesProps) {
     },
     {
       id: "healthcare",
-      icon: <Stethoscope className="w-12 h-12 text-[#B87333]" />,
+      icon: <Stethoscope className="w-12 h-12 text-brand-copper" />,
       title: "Clinics & Healthcare",
       subtitle: "Dental, Medical, Therapy",
       description: <span>Patient trust is everything. We provide rigorous <DefinitionTooltip term="HIPAA" definition="Health Insurance Portability and Accountability Act: A federal law that required the creation of national standards to protect sensitive patient health information." />-compliant security configurations that protect sensitive medical records without slowing down your practitioners.</span>,
@@ -33,7 +26,7 @@ export function Industries({ onViewChange }: IndustriesProps) {
     },
     {
       id: "hospitality",
-      icon: <Palmtree className="w-12 h-12 text-[#B87333]" />,
+      icon: <Palmtree className="w-12 h-12 text-brand-copper" />,
       title: "Hospitality & Short-Term Rentals",
       subtitle: "AirBnBs, Boutique Hotels",
       description: "Bad Wi-Fi leads to bad reviews. We design robust mesh networks that cover every corner of your property and secure smart locks/thermostats against hacking.",
@@ -41,7 +34,7 @@ export function Industries({ onViewChange }: IndustriesProps) {
     },
     {
       id: "field",
-      icon: <Truck className="w-12 h-12 text-[#B87333]" />,
+      icon: <Truck className="w-12 h-12 text-brand-copper" />,
       title: "Field Services",
       subtitle: "Landscapers, HVAC, Contractors",
       description: "Your office is a truck. We secure the mobile devices your crew uses in the field and ensure job data syncs back to HQ instantly.",
@@ -49,7 +42,7 @@ export function Industries({ onViewChange }: IndustriesProps) {
     },
     {
       id: "enterprise",
-      icon: <Building2 className="w-12 h-12 text-[#B87333]" />,
+      icon: <Building2 className="w-12 h-12 text-brand-copper" />,
       title: "Small Enterprise",
       subtitle: "Legal, Financial, Consulting",
       description: "For firms with 20-100 employees, we act as your full-service IT department. From SOC2 compliance to automated onboarding for new hires.",
@@ -57,7 +50,7 @@ export function Industries({ onViewChange }: IndustriesProps) {
     },
     {
       id: "agriculture",
-      icon: <Sprout className="w-12 h-12 text-[#B87333]" />,
+      icon: <Sprout className="w-12 h-12 text-brand-copper" />,
       title: "Family Farms & Ag",
       subtitle: "Growers, Distributors, Co-ops",
       description: "Modern farming runs on data, not just diesel. We help multigenerational farms secure their IoT sensors, automate supply chain tracking, and ensure that connectivity reaches the furthest acre of the property.",
@@ -65,7 +58,7 @@ export function Industries({ onViewChange }: IndustriesProps) {
     },
     {
       id: "legacy",
-      icon: <Anchor className="w-12 h-12 text-[#B87333]" />,
+      icon: <Anchor className="w-12 h-12 text-brand-copper" />,
       title: "Legacy Business",
       subtitle: "Manufacturers, Logistics, Trades",
       description: "For the business owner who never wanted a website but knows they need one now. We digitize your operations without losing the soul of what made you successful for the last 30 years.",
@@ -76,15 +69,15 @@ export function Industries({ onViewChange }: IndustriesProps) {
   return (
     <div className="bg-white">
       {/* Hero */}
-      <section className="bg-[#1B263B] text-white py-20 relative overflow-hidden">
+      <section className="bg-brand-oxford text-white py-20 relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">Built for the Backbone<br/>of the Economy.</h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-8">
             Whether you run a single dry cleaner or a multi-location clinic, we bring enterprise-grade reliability to your specific context.
           </p>
           <Button 
-            onClick={() => onViewChange("talk-to-sales")}
-            className="bg-[#B87333] hover:bg-[#a0632a] text-white text-lg px-8 py-4 h-auto rounded-full"
+            onClick={() => navigate(routePaths.talkToSales)}
+            className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-4 h-auto rounded-full"
           >
             Talk to Sales
           </Button>
@@ -92,23 +85,23 @@ export function Industries({ onViewChange }: IndustriesProps) {
       </section>
 
       {/* Industries Grid */}
-      <section className="py-24 bg-[#F5F1E9]">
+      <section className="py-24 bg-brand-cream">
         <div className="container mx-auto px-6">
           <div className="space-y-24">
             {industries.map((industry, index) => (
               <div key={industry.id} className={`flex flex-col md:flex-row gap-12 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
                 <div className="md:w-1/2">
-                  <div className="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-[#B87333]">
+                  <div className="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-brand-copper">
                     <div className="mb-6">{industry.icon}</div>
-                    <h2 className="text-3xl font-bold text-[#1B263B] mb-2">{industry.title}</h2>
-                    <p className="text-[#B87333] font-medium mb-6 uppercase tracking-wider text-sm">{industry.subtitle}</p>
-                    <p className="text-[#4E596F] text-lg mb-8 leading-relaxed">
+                    <h2 className="text-3xl font-bold text-brand-oxford mb-2">{industry.title}</h2>
+                    <p className="text-brand-copper font-medium mb-6 uppercase tracking-wider text-sm">{industry.subtitle}</p>
+                    <p className="text-brand-slate text-lg mb-8 leading-relaxed">
                       {industry.description}
                     </p>
                     <ul className="space-y-3">
                       {industry.features.map((feature, i) => (
-                        <li key={i} className="flex items-center gap-3 text-[#1B263B] font-medium">
-                          <ShieldCheck className="w-5 h-5 text-[#B87333]" /> {feature}
+                        <li key={i} className="flex items-center gap-3 text-brand-oxford font-medium">
+                          <ShieldCheck className="w-5 h-5 text-brand-copper" /> {feature}
                         </li>
                       ))}
                     </ul>
@@ -130,7 +123,7 @@ export function Industries({ onViewChange }: IndustriesProps) {
                          alt={industry.title}
                          className="absolute inset-0 w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-[#1B263B] opacity-20 mix-blend-multiply"></div>
+                      <div className="absolute inset-0 bg-brand-oxford opacity-20 mix-blend-multiply"></div>
                    </div>
                 </div>
               </div>
@@ -142,13 +135,13 @@ export function Industries({ onViewChange }: IndustriesProps) {
       {/* CTA */}
       <section className="py-20 bg-white text-center">
          <div className="container mx-auto px-6">
-            <h2 className="text-3xl font-bold text-[#1B263B] mb-6">Don't See Your Industry?</h2>
-            <p className="text-[#4E596F] max-w-2xl mx-auto mb-10">
+            <h2 className="text-3xl font-bold text-brand-oxford mb-6">Don't See Your Industry?</h2>
+            <p className="text-brand-slate max-w-2xl mx-auto mb-10">
                We've worked with everyone from architects to zoos. Technology is universal, even if your business is unique.
             </p>
             <Button 
-               onClick={() => onViewChange("talk-to-sales")}
-               className="bg-[#1B263B] hover:bg-[#2c3b55] text-white text-xl px-10 py-6 h-auto rounded-full"
+               onClick={() => navigate(routePaths.talkToSales)}
+               className="bg-brand-oxford hover:bg-brand-oxford-muted text-white text-xl px-10 py-6 h-auto rounded-full"
             >
                Talk to Sales <ArrowRight className="ml-2" />
             </Button>

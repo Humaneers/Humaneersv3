@@ -32,18 +32,18 @@ export class ErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen bg-[#F5F1E9] flex items-center justify-center p-6">
+        <div className="min-h-screen bg-brand-cream flex items-center justify-center p-6">
           <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 text-center">
             <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
               <AlertTriangle className="w-8 h-8 text-red-600" />
             </div>
-            <h1 className="text-2xl font-bold text-[#1B263B] mb-3">Something went wrong</h1>
-            <p className="text-[#4E596F] mb-6">
+            <h1 className="text-2xl font-bold text-brand-oxford mb-3">Something went wrong</h1>
+            <p className="text-brand-slate mb-6">
               We apologize for the inconvenience. Please try refreshing the page.
             </p>
             <Button
               onClick={this.handleReload}
-              className="bg-[#1B263B] hover:bg-[#2c3b55] text-white"
+              className="bg-brand-oxford hover:bg-brand-oxford-muted text-white"
             >
               <RefreshCw className="w-4 h-4 mr-2" />
               Refresh Page

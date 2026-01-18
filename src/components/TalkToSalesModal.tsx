@@ -125,7 +125,7 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
         <div className="flex flex-col h-full">
             <div className="px-6 py-6 border-b border-gray-100 bg-gray-50/50">
                 <DialogHeader>
-                    <DialogTitle className="text-xl font-bold text-[#1B263B]">Start a Conversation</DialogTitle>
+                    <DialogTitle className="text-xl font-bold text-brand-oxford">Start a Conversation</DialogTitle>
                     <DialogDescription>
                         Tell us about your organization and we'll design a custom roadmap.
                     </DialogDescription>
@@ -194,7 +194,7 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
                         <Button
                           type="button"
                           onClick={handleNext}
-                          className="w-full bg-[#B87333] hover:bg-[#a0632a] text-white py-5 mt-2"
+                          className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white py-5 mt-2"
                         >
                           Continue
                         </Button>
@@ -228,9 +228,9 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
 
                         <div className="grid grid-cols-2 gap-4">
                           <div className="space-y-2">
-                            <Label htmlFor="employees">Size</Label>
+                            <Label htmlFor="sales-employees">Size</Label>
                             <Select onValueChange={(val) => handleSelectChange("employees", val)} required>
-                              <SelectTrigger>
+                              <SelectTrigger id="sales-employees">
                                 <SelectValue placeholder="Select..." />
                               </SelectTrigger>
                               <SelectContent>
@@ -242,9 +242,9 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
                             </Select>
                           </div>
                           <div className="space-y-2">
-                            <Label htmlFor="budget">Budget (Monthly)</Label>
+                            <Label htmlFor="sales-budget">Budget (Monthly)</Label>
                             <Select onValueChange={(val) => handleSelectChange("budget", val)}>
-                              <SelectTrigger>
+                              <SelectTrigger id="sales-budget">
                                 <SelectValue placeholder="Select..." />
                               </SelectTrigger>
                               <SelectContent>
@@ -300,7 +300,7 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
                           >
                             Back
                           </Button>
-                          <Button type="submit" className="w-full bg-[#B87333] hover:bg-[#a0632a] text-white py-5" disabled={isSubmitting}>
+                          <Button type="submit" className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white py-5" disabled={isSubmitting}>
                             {isSubmitting ? (
                               <>
                                 <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Redirecting to Booking...

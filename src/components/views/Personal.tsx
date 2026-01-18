@@ -1,28 +1,21 @@
-import { useEffect } from "react";
-import { View } from "../../App";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Globe, Mail, Server, ArrowRight, ShieldAlert, Wifi, User, AlertCircle, Fingerprint, Smartphone, XCircle, Briefcase, HelpCircle } from "lucide-react";
 import { CheckCircle2 } from "lucide-react";
 import { DefinitionTooltip } from "../DefinitionTooltip";
+import { routePaths } from "../../routes";
 
-interface PersonalProps {
-  onViewChange: (view: View, data?: any) => void;
-}
-
-export function Personal({ onViewChange }: PersonalProps) {
-  useEffect(() => {
-    document.title = "Humaneers | Personal & Solo Entrepreneur IT";
-    window.scrollTo(0, 0);
-  }, []);
+export function Personal() {
+  const navigate = useNavigate();
 
   return (
     <div className="bg-white">
       {/* Hero */}
-      <section className="bg-[#1B263B] text-white py-20 relative overflow-hidden">
+      <section className="bg-brand-oxford text-white py-20 relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10 text-center">
-          <div className="inline-flex items-center justify-center p-3 bg-[#B87333]/20 rounded-full mb-6">
-              <User className="w-6 h-6 text-[#B87333] mr-2" />
-              <span className="text-[#B87333] font-bold uppercase tracking-widest text-sm">For Solo Entrepreneurs</span>
+          <div className="inline-flex items-center justify-center p-3 bg-brand-copper/20 rounded-full mb-6">
+              <User className="w-6 h-6 text-brand-copper mr-2" />
+              <span className="text-brand-copper font-bold uppercase tracking-widest text-sm">For Solo Entrepreneurs</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6">Own Your Name.<br/>Secure Your Brand.</h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-8">
@@ -30,8 +23,8 @@ export function Personal({ onViewChange }: PersonalProps) {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
              <Button 
-               onClick={() => onViewChange("talk-to-sales", { interest: "Personal Plans" })}
-               className="bg-[#B87333] hover:bg-[#a0632a] text-white text-lg px-8 py-4 h-auto rounded-full"
+               onClick={() => navigate(routePaths.talkToSales, { state: { interest: "Personal Plans" } })}
+               className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-4 h-auto rounded-full"
              >
                View Plans
              </Button>
@@ -40,19 +33,19 @@ export function Personal({ onViewChange }: PersonalProps) {
       </section>
 
       {/* Main Offering */}
-      <section className="py-24 bg-[#F5F1E9]">
+      <section className="py-24 bg-brand-cream">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
              
              {/* The Problem */}
              <div className="mb-20 grid md:grid-cols-2 gap-12 items-center">
                 <div>
-                   <h2 className="text-3xl font-bold text-[#1B263B] mb-4">Don't Let Squatters Take Your Name</h2>
-                   <p className="text-[#4E596F] text-lg mb-6 leading-relaxed">
+                   <h2 className="text-3xl font-bold text-brand-oxford mb-4">Don't Let Squatters Take Your Name</h2>
+                   <p className="text-brand-slate text-lg mb-6 leading-relaxed">
                       "Domain Camping" is when someone buys your personal name or business idea before you do, just to sell it back to you for thousands. 
                       <DefinitionTooltip term="Domain Camping" definition="The practice of registering a domain name with the intent of reselling it at a premium price." className="ml-1" />
                    </p>
-                   <p className="text-[#4E596F] text-lg mb-6 leading-relaxed">
+                   <p className="text-brand-slate text-lg mb-6 leading-relaxed">
                       We act fast to find and secure the best available domains for your brand. We manage the renewals so you never accidentally lose it.
                    </p>
                 </div>
@@ -71,8 +64,8 @@ export function Personal({ onViewChange }: PersonalProps) {
                          <CheckCircle2 size={20} />
                       </div>
                       <div>
-                         <div className="text-sm font-bold text-[#B87333]">The Professional Standard</div>
-                         <div className="text-lg font-mono text-[#1B263B] font-bold">john@johndoe.com</div>
+                         <div className="text-sm font-bold text-brand-copper">The Professional Standard</div>
+                         <div className="text-lg font-mono text-brand-oxford font-bold">john@johndoe.com</div>
                       </div>
                    </div>
                 </div>
@@ -80,8 +73,8 @@ export function Personal({ onViewChange }: PersonalProps) {
 
             {/* Pricing / Plans */}
             <div className="mb-20">
-               <h2 className="text-3xl md:text-4xl font-bold text-center text-[#1B263B] mb-4">Personal & Household Plans</h2>
-               <p className="text-center text-[#4E596F] max-w-2xl mx-auto mb-12">
+               <h2 className="text-3xl md:text-4xl font-bold text-center text-brand-oxford mb-4">Personal & Household Plans</h2>
+               <p className="text-center text-brand-slate max-w-2xl mx-auto mb-12">
                   Comprehensive management for your digital life. Covers up to 6 family members.
                </p>
 
@@ -89,16 +82,16 @@ export function Personal({ onViewChange }: PersonalProps) {
                   {/* Personal Foundation */}
                   <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col">
                      <div className="p-8 border-b border-gray-100">
-                        <h3 className="text-2xl font-bold text-[#1B263B] mb-2">Personal Foundation</h3>
-                        <p className="text-[#4E596F] text-sm mb-6">Essential management and support for your household.</p>
+                        <h3 className="text-2xl font-bold text-brand-oxford mb-2">Personal Foundation</h3>
+                        <p className="text-brand-slate text-sm mb-6">Essential management and support for your household.</p>
                         <div className="flex items-baseline mb-2">
-                           <span className="text-4xl font-bold text-[#1B263B]">$100</span>
+                           <span className="text-4xl font-bold text-brand-oxford">$100</span>
                            <span className="text-gray-500 ml-2">/month</span>
                         </div>
                         <p className="text-xs text-gray-400 mb-6">Covers up to 6 humans. Additional users billed at market rates.</p>
                         <Button 
-                           onClick={() => onViewChange("talk-to-sales", { interest: "Personal Foundation" })}
-                           className="w-full bg-white border-2 border-[#1B263B] text-[#1B263B] hover:bg-gray-50"
+                           onClick={() => navigate(routePaths.talkToSales, { state: { interest: "Personal Foundation" } })}
+                           className="w-full bg-white border-2 border-brand-oxford text-brand-oxford hover:bg-gray-50"
                         >
                            Get Started
                         </Button>
@@ -107,15 +100,15 @@ export function Personal({ onViewChange }: PersonalProps) {
                         <ul className="space-y-4">
                            <li className="flex items-start gap-3">
                               <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
-                              <span className="text-sm text-[#4E596F]"><strong>Domain + DNS Management</strong></span>
+                              <span className="text-sm text-brand-slate"><strong>Domain + DNS Management</strong></span>
                            </li>
                            <li className="flex items-start gap-3">
                               <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
-                              <span className="text-sm text-[#4E596F]"><strong>Professional Email Admin</strong></span>
+                              <span className="text-sm text-brand-slate"><strong>Professional Email Admin</strong></span>
                            </li>
                            <li className="flex items-start gap-3">
                               <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
-                              <span className="text-sm text-[#4E596F]"><strong>Tech Support</strong></span>
+                              <span className="text-sm text-brand-slate"><strong>Tech Support</strong></span>
                            </li>
                            <li className="flex items-start gap-3 text-gray-400">
                               <XCircle className="w-5 h-5 text-gray-300 shrink-0 mt-0.5" />
@@ -134,19 +127,19 @@ export function Personal({ onViewChange }: PersonalProps) {
                   </div>
 
                   {/* Personal Estate */}
-                  <div className="bg-white rounded-2xl shadow-xl border-t-4 border-[#B87333] overflow-hidden flex flex-col relative">
-                     <div className="absolute top-0 right-0 bg-[#B87333] text-white text-xs font-bold px-3 py-1 rounded-bl-lg">BEST VALUE</div>
+                  <div className="bg-white rounded-2xl shadow-xl border-t-4 border-brand-copper overflow-hidden flex flex-col relative">
+                     <div className="absolute top-0 right-0 bg-brand-copper text-white text-xs font-bold px-3 py-1 rounded-bl-lg">BEST VALUE</div>
                      <div className="p-8 border-b border-gray-100">
-                        <h3 className="text-2xl font-bold text-[#1B263B] mb-2">Personal Estate</h3>
-                        <p className="text-[#4E596F] text-sm mb-6">Complete protection and management for peace of mind.</p>
+                        <h3 className="text-2xl font-bold text-brand-oxford mb-2">Personal Estate</h3>
+                        <p className="text-brand-slate text-sm mb-6">Complete protection and management for peace of mind.</p>
                         <div className="flex items-baseline mb-2">
-                           <span className="text-4xl font-bold text-[#1B263B]">$200</span>
+                           <span className="text-4xl font-bold text-brand-oxford">$200</span>
                            <span className="text-gray-500 ml-2">/month</span>
                         </div>
                         <p className="text-xs text-gray-400 mb-6">Covers up to 6 humans. Additional users billed at market rates.</p>
                         <Button 
-                           onClick={() => onViewChange("talk-to-sales", { interest: "Personal Estate" })}
-                           className="w-full bg-[#1B263B] text-white hover:bg-[#2c3b55]"
+                           onClick={() => navigate(routePaths.talkToSales, { state: { interest: "Personal Estate" } })}
+                           className="w-full bg-brand-oxford text-white hover:bg-brand-oxford-muted"
                         >
                            Get Started
                         </Button>
@@ -154,24 +147,24 @@ export function Personal({ onViewChange }: PersonalProps) {
                      <div className="p-8 flex-grow bg-white">
                         <ul className="space-y-4">
                            <li className="flex items-start gap-3">
-                              <CheckCircle2 className="w-5 h-5 text-[#B87333] shrink-0 mt-0.5" />
-                              <span className="text-sm text-[#4E596F]"><strong>Everything in Foundation</strong></span>
+                              <CheckCircle2 className="w-5 h-5 text-brand-copper shrink-0 mt-0.5" />
+                              <span className="text-sm text-brand-slate"><strong>Everything in Foundation</strong></span>
                            </li>
                            <li className="flex items-start gap-3">
-                              <CheckCircle2 className="w-5 h-5 text-[#B87333] shrink-0 mt-0.5" />
-                              <span className="text-sm text-[#4E596F]"><strong>Active Antivirus & Malware</strong></span>
+                              <CheckCircle2 className="w-5 h-5 text-brand-copper shrink-0 mt-0.5" />
+                              <span className="text-sm text-brand-slate"><strong>Active Antivirus & Malware</strong></span>
                            </li>
                            <li className="flex items-start gap-3">
-                              <CheckCircle2 className="w-5 h-5 text-[#B87333] shrink-0 mt-0.5" />
-                              <span className="text-sm text-[#4E596F]"><strong>Content Filtering</strong></span>
+                              <CheckCircle2 className="w-5 h-5 text-brand-copper shrink-0 mt-0.5" />
+                              <span className="text-sm text-brand-slate"><strong>Content Filtering</strong></span>
                            </li>
                            <li className="flex items-start gap-3">
-                              <CheckCircle2 className="w-5 h-5 text-[#B87333] shrink-0 mt-0.5" />
-                              <span className="text-sm text-[#4E596F]"><strong>Identity Monitoring</strong></span>
+                              <CheckCircle2 className="w-5 h-5 text-brand-copper shrink-0 mt-0.5" />
+                              <span className="text-sm text-brand-slate"><strong>Identity Monitoring</strong></span>
                            </li>
                            <li className="flex items-start gap-3">
-                              <CheckCircle2 className="w-5 h-5 text-[#B87333] shrink-0 mt-0.5" />
-                              <span className="text-sm text-[#4E596F]"><strong>Priority Support</strong></span>
+                              <CheckCircle2 className="w-5 h-5 text-brand-copper shrink-0 mt-0.5" />
+                              <span className="text-sm text-brand-slate"><strong>Priority Support</strong></span>
                            </li>
                         </ul>
                      </div>
@@ -184,19 +177,19 @@ export function Personal({ onViewChange }: PersonalProps) {
                <div className="flex flex-col md:flex-row gap-12">
                   <div className="flex-1">
                      <div className="flex items-center gap-3 mb-6">
-                        <div className="bg-[#1B263B] p-2 rounded text-white">
+                        <div className="bg-brand-oxford p-2 rounded text-white">
                            <Briefcase size={24} />
                         </div>
-                        <h3 className="text-2xl font-bold text-[#1B263B]">Ad-hoc & Retainers</h3>
+                        <h3 className="text-2xl font-bold text-brand-oxford">Ad-hoc & Retainers</h3>
                      </div>
-                     <p className="text-[#4E596F] mb-6">
+                     <p className="text-brand-slate mb-6">
                         Need help with a specific project or just want support without the monthly plan? We offer flexible options.
                      </p>
                      
                      <div className="space-y-6">
                         <div className="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
                            <div className="flex justify-between items-center mb-2">
-                              <h4 className="font-bold text-[#1B263B]">Support Retainers</h4>
+                              <h4 className="font-bold text-brand-oxford">Support Retainers</h4>
                               <span className="text-sm font-semibold bg-green-100 text-green-800 px-2 py-1 rounded">5-Hour Packs</span>
                            </div>
                            <p className="text-sm text-gray-600 mb-3">Pre-purchase hours for on-demand help.</p>
@@ -208,8 +201,8 @@ export function Personal({ onViewChange }: PersonalProps) {
 
                         <div className="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
                            <div className="flex justify-between items-center mb-2">
-                              <h4 className="font-bold text-[#1B263B]">Project / Hourly</h4>
-                              <span className="font-bold text-[#1B263B]">$150<span className="text-sm font-normal text-gray-500">/hr</span></span>
+                              <h4 className="font-bold text-brand-oxford">Project / Hourly</h4>
+                              <span className="font-bold text-brand-oxford">$150<span className="text-sm font-normal text-gray-500">/hr</span></span>
                            </div>
                            <p className="text-sm text-gray-600">
                               For consulting outside of an agreement. Plus expenses. Terms apply.
@@ -219,23 +212,23 @@ export function Personal({ onViewChange }: PersonalProps) {
                   </div>
 
                   <div className="flex-1 border-l border-gray-200 pl-0 md:pl-12 pt-8 md:pt-0">
-                     <h4 className="font-bold text-[#1B263B] mb-4 flex items-center gap-2">
+                     <h4 className="font-bold text-brand-oxford mb-4 flex items-center gap-2">
                         <Smartphone size={20} /> Device Support
                      </h4>
-                     <p className="text-sm text-[#4E596F] mb-6">
+                     <p className="text-sm text-brand-slate mb-6">
                         Technology support includes most consumer devices. Enterprise device support is only available to business clients. We'll be transparent and helpful if you're unsure.
                      </p>
 
-                     <h4 className="font-bold text-[#1B263B] mb-4 flex items-center gap-2">
+                     <h4 className="font-bold text-brand-oxford mb-4 flex items-center gap-2">
                         <HelpCircle size={20} /> Our Promise
                      </h4>
-                     <p className="text-sm text-[#4E596F] mb-6">
+                     <p className="text-sm text-brand-slate mb-6">
                         If we don't know something, we'll find a partner who does at our expense and with your coordination.
                      </p>
                      
                      <Button 
                         variant="outline"
-                        onClick={() => onViewChange("talk-to-sales", { interest: "Ad-hoc Support" })}
+                        onClick={() => navigate(routePaths.talkToSales, { state: { interest: "Ad-hoc Support" } })}
                         className="w-full"
                      >
                         Inquire About Support

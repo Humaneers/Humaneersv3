@@ -1,34 +1,27 @@
-import { useEffect } from "react";
-import { View } from "../../App";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Heart, Shield, Users, Check, HandHeart, GraduationCap, ArrowRight, FileText, Lock } from "lucide-react";
 import { DefinitionTooltip } from "../DefinitionTooltip";
+import { routePaths } from "../../routes";
 
-interface NonProfitsProps {
-  onViewChange: (view: View, data?: any) => void;
-}
-
-export function NonProfits({ onViewChange }: NonProfitsProps) {
-  useEffect(() => {
-    document.title = "Humaneers | Nonprofits | Empowering Good";
-    window.scrollTo(0, 0);
-  }, []);
+export function NonProfits() {
+  const navigate = useNavigate();
 
   return (
-    <div className="bg-[#F5F1E9] min-h-screen font-sans text-[#1B263B]">
+    <div className="bg-brand-cream min-h-screen font-sans text-brand-oxford">
       {/* Hero Section - Split Layout */}
-      <section className="relative bg-[#1B263B] text-white overflow-hidden">
+      <section className="relative bg-brand-oxford text-white overflow-hidden">
         <div className="grid lg:grid-cols-2 min-h-[90vh]">
           {/* Content Side */}
           <div className="flex flex-col justify-center px-8 md:px-16 py-20 relative z-10 order-2 lg:order-1">
-            <div className="mb-6 inline-flex items-center gap-2 text-[#B87333] font-bold tracking-widest uppercase text-xs">
-              <span className="w-8 h-[1px] bg-[#B87333]"></span>
+            <div className="mb-6 inline-flex items-center gap-2 text-brand-copper font-bold tracking-widest uppercase text-xs">
+              <span className="w-8 h-[1px] bg-brand-copper"></span>
               Nonprofit Program
             </div>
             
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-8 font-serif">
               You Serve the World. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B87333] to-[#e5a060]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-copper to-brand-copper-light">
                 We Serve You.
               </span>
             </h1>
@@ -39,8 +32,12 @@ export function NonProfits({ onViewChange }: NonProfitsProps) {
             
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
-                onClick={() => onViewChange("talk-to-sales", { interest: "Managed IT", source: "Nonprofit Program" })}
-                className="bg-[#B87333] hover:bg-[#a0632a] text-white text-lg px-8 py-7 h-auto rounded-none border border-[#B87333] hover:border-[#a0632a] transition-all"
+                onClick={() =>
+                  navigate(routePaths.talkToSales, {
+                    state: { interest: "Managed IT", source: "Nonprofit Program" },
+                  })
+                }
+                className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-7 h-auto rounded-none border border-brand-copper hover:border-brand-copper-dark transition-all"
               >
                 Apply for Program
               </Button>
@@ -56,7 +53,7 @@ export function NonProfits({ onViewChange }: NonProfitsProps) {
 
           {/* Image Side */}
           <div className="relative h-[50vh] lg:h-auto order-1 lg:order-2">
-            <div className="absolute inset-0 bg-[#1B263B]/20 z-10 mix-blend-multiply"></div>
+            <div className="absolute inset-0 bg-brand-oxford/20 z-10 mix-blend-multiply"></div>
             <img 
               src="https://images.unsplash.com/photo-1560220604-1985ebfe28b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxub25wcm9maXQlMjBjb21tdW5pdHklMjB0ZWFtd29yayUyMHZvbHVudGVlcmluZyUyMHdhcm18ZW58MXx8fHwxNzY2OTg2NDE3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" 
               alt="Volunteers working together" 
@@ -67,13 +64,13 @@ export function NonProfits({ onViewChange }: NonProfitsProps) {
       </section>
 
       {/* The Manifesto / Problem Statement */}
-      <section className="py-24 px-6 md:px-12 bg-[#F5F1E9]">
+      <section className="py-24 px-6 md:px-12 bg-brand-cream">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-[#1B263B]">The Stewardship Gap</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-brand-oxford">The Stewardship Gap</h2>
           
-          <div className="grid md:grid-cols-2 gap-12 text-lg leading-relaxed text-[#4E596F]">
+          <div className="grid md:grid-cols-2 gap-12 text-lg leading-relaxed text-brand-slate">
             <div>
-              <p className="mb-6 drop-cap first-letter:float-left first-letter:text-5xl first-letter:pr-3 first-letter:font-bold first-letter:text-[#B87333]">
+              <p className="mb-6 drop-cap first-letter:float-left first-letter:text-5xl first-letter:pr-3 first-letter:font-bold first-letter:text-brand-copper">
                 Nonprofits face a unique paradox: they handle sensitive data (donor lists, beneficiary records) comparable to financial institutions, yet they are expected to operate on a shoestring budget.
               </p>
               <p>
@@ -82,7 +79,7 @@ export function NonProfits({ onViewChange }: NonProfitsProps) {
             </div>
             <div>
               <p className="mb-6">
-                We believe that <strong className="text-[#1B263B]">security is a human right</strong>, not a luxury product. That is why we built the Humaneers Nonprofit Program.
+                We believe that <strong className="text-brand-oxford">security is a human right</strong>, not a luxury product. That is why we built the Humaneers Nonprofit Program.
               </p>
               <p>
                 We don't offer a "lite" version of our services. We offer our full, enterprise-grade stack—subsidized by our corporate profits—to ensure you can focus on saving the world, while we keep it safe.
@@ -93,26 +90,26 @@ export function NonProfits({ onViewChange }: NonProfitsProps) {
       </section>
 
       {/* Features "Blueprint" Style */}
-      <section className="py-24 bg-white border-y border-[#1B263B]/10">
+      <section className="py-24 bg-white border-y border-brand-oxford/10">
         <div className="container mx-auto px-6">
-          <div className="mb-16 md:flex justify-between items-end border-b border-[#1B263B]/10 pb-6">
+          <div className="mb-16 md:flex justify-between items-end border-b border-brand-oxford/10 pb-6">
             <div className="max-w-2xl">
-              <h2 className="text-3xl font-bold text-[#1B263B] mb-2">Operational Architecture</h2>
-              <p className="text-[#4E596F]">Systems designed for the unique constraints of the 501(c)(3) sector.</p>
+              <h2 className="text-3xl font-bold text-brand-oxford mb-2">Operational Architecture</h2>
+              <p className="text-brand-slate">Systems designed for the unique constraints of the 501(c)(3) sector.</p>
             </div>
-            <div className="hidden md:block text-[#B87333] font-mono text-sm">
+            <div className="hidden md:block text-brand-copper font-mono text-sm">
               REF: NPO-2025-A
             </div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="group border border-gray-200 p-8 hover:border-[#B87333] transition-colors bg-[#F9FAFB] hover:bg-white">
-              <div className="w-12 h-12 bg-[#1B263B] text-white flex items-center justify-center mb-6 rounded-none group-hover:bg-[#B87333] transition-colors">
+            <div className="group border border-gray-200 p-8 hover:border-brand-copper transition-colors bg-brand-surface hover:bg-white">
+              <div className="w-12 h-12 bg-brand-oxford text-white flex items-center justify-center mb-6 rounded-none group-hover:bg-brand-copper transition-colors">
                 <Shield size={24} />
               </div>
-              <h3 className="text-xl font-bold text-[#1B263B] mb-3">Donor Trust Vault</h3>
-              <p className="text-[#4E596F] text-sm leading-relaxed mb-4">
+              <h3 className="text-xl font-bold text-brand-oxford mb-3">Donor Trust Vault</h3>
+              <p className="text-brand-slate text-sm leading-relaxed mb-4">
                 Encrypt donor data and meet GDPR/CCPA without a full CISO.
               </p>
               <ul className="text-xs text-gray-500 space-y-1 font-mono">
@@ -122,12 +119,12 @@ export function NonProfits({ onViewChange }: NonProfitsProps) {
             </div>
 
             {/* Feature 2 */}
-            <div className="group border border-gray-200 p-8 hover:border-[#B87333] transition-colors bg-[#F9FAFB] hover:bg-white">
-              <div className="w-12 h-12 bg-[#1B263B] text-white flex items-center justify-center mb-6 rounded-none group-hover:bg-[#B87333] transition-colors">
+            <div className="group border border-gray-200 p-8 hover:border-brand-copper transition-colors bg-brand-surface hover:bg-white">
+              <div className="w-12 h-12 bg-brand-oxford text-white flex items-center justify-center mb-6 rounded-none group-hover:bg-brand-copper transition-colors">
                 <Users size={24} />
               </div>
-              <h3 className="text-xl font-bold text-[#1B263B] mb-3">Volunteer Access</h3>
-              <p className="text-[#4E596F] text-sm leading-relaxed mb-4">
+              <h3 className="text-xl font-bold text-brand-oxford mb-3">Volunteer Access</h3>
+              <p className="text-brand-slate text-sm leading-relaxed mb-4">
                 Onboard volunteers fast with least-privilege access.
               </p>
               <ul className="text-xs text-gray-500 space-y-1 font-mono">
@@ -137,12 +134,12 @@ export function NonProfits({ onViewChange }: NonProfitsProps) {
             </div>
 
             {/* Feature 3 */}
-            <div className="group border border-gray-200 p-8 hover:border-[#B87333] transition-colors bg-[#F9FAFB] hover:bg-white">
-              <div className="w-12 h-12 bg-[#1B263B] text-white flex items-center justify-center mb-6 rounded-none group-hover:bg-[#B87333] transition-colors">
+            <div className="group border border-gray-200 p-8 hover:border-brand-copper transition-colors bg-brand-surface hover:bg-white">
+              <div className="w-12 h-12 bg-brand-oxford text-white flex items-center justify-center mb-6 rounded-none group-hover:bg-brand-copper transition-colors">
                 <GraduationCap size={24} />
               </div>
-              <h3 className="text-xl font-bold text-[#1B263B] mb-3">Grant Intelligence</h3>
-              <p className="text-[#4E596F] text-sm leading-relaxed mb-4">
+              <h3 className="text-xl font-bold text-brand-oxford mb-3">Grant Intelligence</h3>
+              <p className="text-brand-slate text-sm leading-relaxed mb-4">
                 Automated grant reporting with TechSoup/Microsoft credits.
               </p>
               <ul className="text-xs text-gray-500 space-y-1 font-mono">
@@ -155,7 +152,7 @@ export function NonProfits({ onViewChange }: NonProfitsProps) {
       </section>
 
       {/* The Pricing Ledger */}
-      <section id="pricing" className="py-24 bg-[#1B263B] text-white">
+      <section id="pricing" className="py-24 bg-brand-oxford text-white">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
@@ -163,9 +160,9 @@ export function NonProfits({ onViewChange }: NonProfitsProps) {
               <p className="text-gray-400">Transparent pricing for 501(c)(3) organizations.</p>
             </div>
 
-            <div className="bg-white text-[#1B263B] rounded-sm overflow-hidden shadow-2xl">
+            <div className="bg-white text-brand-oxford rounded-sm overflow-hidden shadow-2xl">
               {/* Ledger Header */}
-              <div className="bg-[#e5e7eb] px-8 py-4 border-b border-gray-300 flex justify-between items-center font-mono text-xs uppercase tracking-wider text-gray-500">
+              <div className="bg-brand-neutral-200 px-8 py-4 border-b border-gray-300 flex justify-between items-center font-mono text-xs uppercase tracking-wider text-gray-500">
                 <span>Item Description</span>
                 <span>Monthly Cost</span>
               </div>
@@ -192,10 +189,10 @@ export function NonProfits({ onViewChange }: NonProfitsProps) {
                   </div>
                 </div>
 
-                <div className="flex justify-between items-start text-[#B87333]">
+                <div className="flex justify-between items-start text-brand-copper">
                   <div>
                     <h3 className="font-bold text-lg">Humaneers Mission Grant</h3>
-                    <p className="text-sm text-[#B87333]/80 mt-1">Automatic subsidy for verified 501(c)(3)s</p>
+                    <p className="text-sm text-brand-copper/80 mt-1">Automatic subsidy for verified 501(c)(3)s</p>
                   </div>
                   <div className="text-right font-mono text-lg">
                     - $76.00
@@ -204,7 +201,7 @@ export function NonProfits({ onViewChange }: NonProfitsProps) {
               </div>
 
               {/* Ledger Total */}
-              <div className="bg-[#1B263B] text-white px-8 py-6 flex justify-between items-center">
+              <div className="bg-brand-oxford text-white px-8 py-6 flex justify-between items-center">
                 <div>
                   <div className="text-xs uppercase tracking-widest text-gray-400 mb-1">Total Monthly Investment</div>
                   <div className="text-sm text-gray-400 flex items-center gap-1">
@@ -221,8 +218,12 @@ export function NonProfits({ onViewChange }: NonProfitsProps) {
             <div className="mt-12 text-center">
                <p className="text-gray-300 mb-6">Ready to secure your mission?</p>
                <Button
-                onClick={() => onViewChange("talk-to-sales", { interest: "Managed IT", source: "Nonprofit Program" })}
-                className="bg-[#B87333] hover:bg-[#a0632a] text-white text-xl px-12 py-6 h-auto rounded-none shadow-lg hover:shadow-[#B87333]/20 transition-all"
+                onClick={() =>
+                  navigate(routePaths.talkToSales, {
+                    state: { interest: "Managed IT", source: "Nonprofit Program" },
+                  })
+                }
+                className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-12 py-6 h-auto rounded-none shadow-lg hover:shadow-brand-copper/20 transition-all"
               >
                 Start Verification
               </Button>
@@ -232,9 +233,9 @@ export function NonProfits({ onViewChange }: NonProfitsProps) {
       </section>
 
       {/* Trust Footer */}
-      <section className="py-16 bg-[#F5F1E9] text-center border-t border-gray-200">
+      <section className="py-16 bg-brand-cream text-center border-t border-gray-200">
         <div className="container mx-auto px-6">
-          <p className="text-[#1B263B] font-bold mb-8 uppercase tracking-widest text-sm">Proud to support</p>
+          <p className="text-brand-oxford font-bold mb-8 uppercase tracking-widest text-sm">Proud to support</p>
           <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale">
              {/* Placeholders for logos - simplified for this view */}
              <div className="text-xl font-serif font-bold">Local Food Banks</div>

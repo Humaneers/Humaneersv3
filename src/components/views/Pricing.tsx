@@ -1,20 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Check, X, HelpCircle, ArrowRight, Shield, BarChart3, Users, Lock, Clock } from "lucide-react";
 import { Button } from "../ui/button";
 import { Switch } from "../ui/switch";
-import { View } from "../../App";
 import { motion } from "motion/react";
 import { DefinitionTooltip } from "../DefinitionTooltip";
+import { routePaths } from "../../routes";
 
-interface PricingProps {
-  onViewChange: (view: View, data?: any) => void;
-}
-
-export function Pricing({ onViewChange }: PricingProps) {
-  useEffect(() => {
-    document.title = "Humaneers | Pricing | Enterprise Strategy, Small Business Soul";
-  }, []);
-
+export function Pricing() {
+  const navigate = useNavigate();
   const [pricingMode, setPricingMode] = useState<'business' | 'nonprofit' | 'household'>('business');
 
   const businessTiers = [
@@ -33,8 +27,8 @@ export function Pricing({ onViewChange }: PricingProps) {
       cta: "Get Started",
       highlighted: false,
       links: [
-        { label: "Managed IT Info", icon: <Shield size={12}/>, view: "managed-it" },
-        { label: "Family Protection", icon: <Lock size={12}/>, view: "family-protection" }
+        { label: "Managed IT Info", icon: <Shield size={12} />, to: routePaths.managedIt },
+        { label: "Family Protection", icon: <Lock size={12} />, to: routePaths.familyProtection },
       ]
     },
     {
@@ -51,9 +45,7 @@ export function Pricing({ onViewChange }: PricingProps) {
       ],
       cta: "Choose Growth",
       highlighted: true,
-      links: [
-        { label: "Americanization", icon: <BarChart3 size={12}/>, view: "growth" }
-      ]
+      links: [{ label: "Americanization", icon: <BarChart3 size={12} />, to: routePaths.growth }]
     },
     {
       name: "Scale",
@@ -70,7 +62,7 @@ export function Pricing({ onViewChange }: PricingProps) {
       cta: "Go Enterprise",
       highlighted: false,
       links: [
-        { label: "vCIO Leadership", icon: <Users size={12}/>, view: "fractional-leadership" }
+        { label: "vCIO Leadership", icon: <Users size={12} />, to: routePaths.fractionalLeadership },
       ]
     },
   ];
@@ -90,9 +82,7 @@ export function Pricing({ onViewChange }: PricingProps) {
       ],
       cta: "Get Admin Help",
       highlighted: false,
-      links: [
-        { label: "Personal Details", icon: <Users size={12}/>, view: "personal" }
-      ]
+      links: [{ label: "Personal Details", icon: <Users size={12} />, to: routePaths.personal }]
     },
     {
       name: "Personal Foundation",
@@ -108,9 +98,7 @@ export function Pricing({ onViewChange }: PricingProps) {
       ],
       cta: "Secure My Home",
       highlighted: true,
-      links: [
-        { label: "Protection Details", icon: <Lock size={12}/>, view: "family-protection" }
-      ]
+      links: [{ label: "Protection Details", icon: <Lock size={12} />, to: routePaths.familyProtection }]
     },
     {
       name: "Personal Estate",
@@ -145,41 +133,39 @@ export function Pricing({ onViewChange }: PricingProps) {
       ],
       cta: "Verify 501(c)(3)",
       highlighted: true,
-      links: [
-        { label: "Nonprofit Details", icon: <Shield size={12}/>, view: "non-profits" }
-      ]
+      links: [{ label: "Nonprofit Details", icon: <Shield size={12} />, to: routePaths.nonProfits }]
     }
   ];
 
   const currentTiers = pricingMode === 'household' ? householdTiers : (pricingMode === 'nonprofit' ? nonprofitTiers : businessTiers);
 
   return (
-    <div className="bg-[#F5F1E9] min-h-screen py-24">
+    <div className="bg-brand-cream min-h-screen py-24">
       <div className="container mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-[#1B263B] mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold text-brand-oxford mb-6">
             Transparent Pricing. No Hidden Fees.
           </h1>
-          <p className="text-lg text-[#4E596F] mb-10">
+          <p className="text-lg text-brand-slate mb-10">
             Choose the plan that fits your stage of business or life.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-2 bg-white/50 backdrop-blur-sm p-2 rounded-2xl sm:rounded-full w-full sm:w-auto mx-auto mb-8 shadow-sm">
              <button 
                 onClick={() => setPricingMode('business')}
-                className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${pricingMode === 'business' ? 'bg-[#1B263B] text-white shadow-md' : 'text-gray-500 hover:text-[#1B263B]'}`}
+                className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${pricingMode === 'business' ? 'bg-brand-oxford text-white shadow-md' : 'text-gray-500 hover:text-brand-oxford'}`}
              >
                 Business
              </button>
              <button 
                 onClick={() => setPricingMode('household')}
-                className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${pricingMode === 'household' ? 'bg-[#B87333] text-white shadow-md' : 'text-gray-500 hover:text-[#B87333]'}`}
+                className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${pricingMode === 'household' ? 'bg-brand-copper text-white shadow-md' : 'text-gray-500 hover:text-brand-copper'}`}
              >
                 Personal
              </button>
              <button 
                 onClick={() => setPricingMode('nonprofit')}
-                className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 whitespace-nowrap ${pricingMode === 'nonprofit' ? 'bg-[#1B263B] text-white shadow-md' : 'text-gray-500 hover:text-[#1B263B]'}`}
+                className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 whitespace-nowrap ${pricingMode === 'nonprofit' ? 'bg-brand-oxford text-white shadow-md' : 'text-gray-500 hover:text-brand-oxford'}`}
              >
                 Nonprofit
              </button>
@@ -204,18 +190,18 @@ export function Pricing({ onViewChange }: PricingProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className={`relative bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col ${
-                  tier.highlighted ? "border-2 border-[#B87333] transform md:-translate-y-4" : "border border-gray-100"
+                  tier.highlighted ? "border-2 border-brand-copper transform md:-translate-y-4" : "border border-gray-100"
                 }`}
               >
                 {tier.highlighted && (
-                  <div className="bg-[#B87333] text-white text-center text-sm font-bold py-2 uppercase tracking-wide">
+                  <div className="bg-brand-copper text-white text-center text-sm font-bold py-2 uppercase tracking-wide">
                     Most Popular
                   </div>
                 )}
                 <div className="p-8 flex-grow">
-                  <h3 className="text-2xl font-bold text-[#1B263B] mb-2">{tier.name}</h3>
+                  <h3 className="text-2xl font-bold text-brand-oxford mb-2">{tier.name}</h3>
                   <div className="flex items-baseline mb-4">
-                    <span className="text-4xl font-bold text-[#1B263B]">${tier.price}</span>
+                    <span className="text-4xl font-bold text-brand-oxford">${tier.price}</span>
                     <span className="text-gray-500 ml-2">{tier.unit}</span>
                     <span className="ml-1 relative -top-3">
                       <DefinitionTooltip term="*" definition="Subject to Terms of Service. Taxes may apply." className="text-xs text-gray-400 no-underline border-none" />
@@ -225,8 +211,8 @@ export function Pricing({ onViewChange }: PricingProps) {
                   
                   <ul className="space-y-4 mb-8">
                     {tier.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-3 text-sm text-[#4E596F]">
-                        <Check className="w-5 h-5 text-[#B87333] shrink-0" />
+                      <li key={i} className="flex items-start gap-3 text-sm text-brand-slate">
+                        <Check className="w-5 h-5 text-brand-copper shrink-0" />
                         <span>{feature}</span>
                       </li>
                     ))}
@@ -235,7 +221,7 @@ export function Pricing({ onViewChange }: PricingProps) {
                   {/* Links to feature pages */}
                   <div className="mb-6 flex flex-wrap gap-2">
                      {tier.links?.map((link, i) => (
-                        <button key={i} onClick={() => onViewChange(link.view as any)} className="text-xs flex items-center gap-1 bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded text-[#1B263B] font-medium transition-colors">
+                        <button key={i} onClick={() => navigate(link.to)} className="text-xs flex items-center gap-1 bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded text-brand-oxford font-medium transition-colors">
                            {link.icon} {link.label}
                         </button>
                      ))}
@@ -252,12 +238,12 @@ export function Pricing({ onViewChange }: PricingProps) {
                        } else if (tier.name === "Scale") {
                           interest = "Fractional Leadership";
                        }
-                       onViewChange("talk-to-sales", { interest });
+                       navigate(routePaths.talkToSales, { state: { interest } });
                     }}
                     className={`w-full py-6 text-lg font-medium shadow-md transition-all ${
                       tier.highlighted 
-                        ? "bg-[#B87333] hover:bg-[#a0632a] text-white hover:shadow-lg" 
-                        : "bg-[#1B263B] hover:bg-[#2c3b55] text-white"
+                        ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-lg" 
+                        : "bg-brand-oxford hover:bg-brand-oxford-muted text-white"
                     }`}
                   >
                     {tier.cta}
@@ -268,14 +254,14 @@ export function Pricing({ onViewChange }: PricingProps) {
           </div>
         
         <div className="mt-20 max-w-4xl mx-auto">
-            <div className="bg-[#1B263B] rounded-2xl p-8 md:p-12 text-white relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-[#B87333] opacity-10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+            <div className="bg-brand-oxford rounded-2xl p-8 md:p-12 text-white relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-brand-copper opacity-10 rounded-full blur-3xl -mr-32 -mt-32"></div>
                 
                 <div className="relative z-10">
                     <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-8">
                         <div>
                            <div className="flex items-center gap-3 mb-4">
-                              <div className="bg-[#B87333] p-2 rounded-lg">
+                              <div className="bg-brand-copper p-2 rounded-lg">
                                  <Clock className="w-6 h-6 text-white" />
                               </div>
                               <h3 className="text-2xl font-bold">Retainer & Hourly Packs</h3>
@@ -291,21 +277,21 @@ export function Pricing({ onViewChange }: PricingProps) {
                                 <DefinitionTooltip term="*" definition="Subject to Terms of Service. unused hours never expire." className="text-xs text-gray-400 no-underline border-none" />
                               </span>
                            </div>
-                           <div className="text-sm text-[#B87333] font-medium">Sold in 10hr packs</div>
+                           <div className="text-sm text-brand-copper font-medium">Sold in 10hr packs</div>
                         </div>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-6 mb-8 border-t border-gray-700 pt-8">
                         <div>
-                           <h4 className="font-bold mb-2 text-[#B87333]">Flexible Usage</h4>
+                           <h4 className="font-bold mb-2 text-brand-copper">Flexible Usage</h4>
                            <p className="text-sm text-gray-400">Use for IT support, strategy, or design work. Hours are deducted as we work.</p>
                         </div>
                         <div>
-                           <h4 className="font-bold mb-2 text-[#B87333]">Never Expires</h4>
+                           <h4 className="font-bold mb-2 text-brand-copper">Never Expires</h4>
                            <p className="text-sm text-gray-400">Your hours stay in your account forever. Use them next week or next year.</p>
                         </div>
                         <div>
-                           <h4 className="font-bold mb-2 text-[#B87333]">Priority Queue</h4>
+                           <h4 className="font-bold mb-2 text-brand-copper">Priority Queue</h4>
                            <p className="text-sm text-gray-400">Retainer clients get priority scheduling over standard ad-hoc requests.</p>
                         </div>
                     </div>
@@ -313,7 +299,7 @@ export function Pricing({ onViewChange }: PricingProps) {
                     <div className="flex justify-center md:justify-start">
                        <Button 
                           onClick={() => window.location.href = "mailto:hello@humaneers.dev?subject=Hourly Pack Inquiry"}
-                          className="bg-white text-[#1B263B] hover:bg-gray-100 px-8 py-3 font-bold"
+                          className="bg-white text-brand-oxford hover:bg-gray-100 px-8 py-3 font-bold"
                        >
                           Purchase Hours
                        </Button>
@@ -323,11 +309,11 @@ export function Pricing({ onViewChange }: PricingProps) {
         </div>
 
         <div className="mt-20 text-center">
-            <h3 className="text-2xl font-bold text-[#1B263B] mb-6">Need a custom enterprise solution?</h3>
-            <p className="text-[#4E596F] mb-8 max-w-2xl mx-auto">
+            <h3 className="text-2xl font-bold text-brand-oxford mb-6">Need a custom enterprise solution?</h3>
+            <p className="text-brand-slate mb-8 max-w-2xl mx-auto">
                 We work with larger organizations to build custom infrastructure and growth plans.
             </p>
-            <Button variant="outline" onClick={() => onViewChange("talk-to-sales")} className="border-[#1B263B] text-[#1B263B] hover:bg-[#1B263B] hover:text-white px-8 py-3">
+            <Button variant="outline" onClick={() => navigate(routePaths.talkToSales)} className="border-brand-oxford text-brand-oxford hover:bg-brand-oxford hover:text-white px-8 py-3">
                 Contact Sales
             </Button>
         </div>

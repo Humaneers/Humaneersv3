@@ -1,24 +1,14 @@
-import { useEffect, useState } from "react";
-import { View } from "../../App";
+import { useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { Search, BookOpen, Shield, FileText, HelpCircle, ArrowRight, Tag, Server, Zap, Lock } from "lucide-react";
 import { Badge } from "../ui/badge";
 
-interface ResourcesProps {
-  onViewChange: (view: View) => void;
-}
-
 type Audience = "All" | "Founder" | "IT Admin" | "Ops";
 
-export function Resources({ onViewChange }: ResourcesProps) {
+export function Resources() {
   const [activeTab, setActiveTab] = useState<Audience>("All");
-
-  useEffect(() => {
-    document.title = "Humaneers | Resources & Knowledge Base";
-    window.scrollTo(0, 0);
-  }, []);
 
   const resources = [
     {
@@ -89,10 +79,10 @@ export function Resources({ onViewChange }: ResourcesProps) {
     : resources.filter(r => r.audience === activeTab || r.audience === "All");
 
   return (
-    <div className="bg-[#F5F1E9] min-h-screen">
+    <div className="bg-brand-cream min-h-screen">
       {/* Hero */}
-      <section className="bg-[#1B263B] text-white py-20 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-[#B87333]/10 skew-y-12 transform translate-x-20"></div>
+      <section className="bg-brand-oxford text-white py-20 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-copper/10 skew-y-12 transform translate-x-20"></div>
         <div className="container mx-auto px-6 relative z-10 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Knowledge Base & Resources</h1>
           <p className="text-xl max-w-2xl mx-auto text-gray-300 font-light mb-8">
@@ -102,6 +92,7 @@ export function Resources({ onViewChange }: ResourcesProps) {
           <div className="max-w-xl mx-auto relative">
             <Search className="absolute left-3 top-3.5 text-gray-400" size={20} />
             <Input 
+              aria-label="Search resources"
               type="text" 
               placeholder="Search guides, terms, or error codes..." 
               className="pl-10 h-12 bg-white/10 border-white/20 text-white placeholder-gray-400 focus:bg-white/20 transition-all rounded-lg"
@@ -121,8 +112,8 @@ export function Resources({ onViewChange }: ResourcesProps) {
                 onClick={() => setActiveTab(tab)}
                 className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
                   activeTab === tab 
-                    ? "bg-[#1B263B] text-white shadow-sm" 
-                    : "text-gray-500 hover:text-[#1B263B] hover:bg-gray-50"
+                    ? "bg-brand-oxford text-white shadow-sm" 
+                    : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
                 }`}
               >
                 {tab}
@@ -130,7 +121,7 @@ export function Resources({ onViewChange }: ResourcesProps) {
             ))}
           </div>
           <div className="text-sm text-gray-500 italic">
-            Showing resources for: <span className="font-semibold text-[#1B263B]">{activeTab}</span>
+            Showing resources for: <span className="font-semibold text-brand-oxford">{activeTab}</span>
           </div>
         </div>
 
@@ -139,7 +130,7 @@ export function Resources({ onViewChange }: ResourcesProps) {
           {filteredResources.map((resource) => (
             <div key={resource.id} className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all group flex flex-col h-full">
               <div className="flex justify-between items-start mb-4">
-                <div className="w-10 h-10 bg-[#F5F1E9] rounded-lg flex items-center justify-center text-[#B87333]">
+                <div className="w-10 h-10 bg-brand-cream rounded-lg flex items-center justify-center text-brand-copper">
                   <resource.icon size={20} />
                 </div>
                 <Badge variant="outline" className="text-xs font-normal border-gray-200 text-gray-500">
@@ -147,7 +138,7 @@ export function Resources({ onViewChange }: ResourcesProps) {
                 </Badge>
               </div>
               
-              <h3 className="text-lg font-bold text-[#1B263B] mb-2 group-hover:text-[#B87333] transition-colors">
+              <h3 className="text-lg font-bold text-brand-oxford mb-2 group-hover:text-brand-copper transition-colors">
                 {resource.title}
               </h3>
               <p className="text-gray-500 text-sm mb-6 flex-grow">
@@ -159,7 +150,7 @@ export function Resources({ onViewChange }: ResourcesProps) {
                   <Tag size={12} />
                   <span>{resource.audience}</span>
                 </div>
-                <button className="text-[#B87333] text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                <button className="text-brand-copper text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                   Read <ArrowRight size={14} />
                 </button>
               </div>
@@ -171,47 +162,47 @@ export function Resources({ onViewChange }: ResourcesProps) {
         <div className="grid lg:grid-cols-2 gap-12 mb-20">
           
           {/* Operational Documentation */}
-          <div className="bg-white p-8 rounded-xl border-l-4 border-[#1B263B] shadow-sm">
-            <h2 className="text-2xl font-bold text-[#1B263B] mb-6 flex items-center gap-3">
-              <Server className="text-[#1B263B]" /> Operational Documentation
+          <div className="bg-white p-8 rounded-xl border-l-4 border-brand-oxford shadow-sm">
+            <h2 className="text-2xl font-bold text-brand-oxford mb-6 flex items-center gap-3">
+              <Server className="text-brand-oxford" /> Operational Documentation
             </h2>
-            <p className="text-[#4E596F] mb-6">
+            <p className="text-brand-slate mb-6">
               Technical manuals and live system status for active clients. These resources are maintained by our engineering team.
             </p>
             <div className="space-y-4">
               <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100">
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                  <span className="font-medium text-[#1B263B]">System Status</span>
+                  <span className="font-medium text-brand-oxford">System Status</span>
                 </div>
-                <a href="https://status.humaneers.dev/" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-[#B87333] hover:text-[#a0632a]">Check Status →</a>
+                <a href="https://status.humaneers.dev/" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-brand-copper hover:text-brand-copper-dark">Check Status →</a>
               </div>
               <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100">
                 <div className="flex items-center gap-3">
                   <HelpCircle size={16} className="text-gray-400" />
-                  <span className="font-medium text-[#1B263B]">Support Portal</span>
+                  <span className="font-medium text-brand-oxford">Support Portal</span>
                 </div>
-                <a href="https://support.humaneers.dev/" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-[#B87333] hover:text-[#a0632a]">Open Portal →</a>
+                <a href="https://support.humaneers.dev/" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-brand-copper hover:text-brand-copper-dark">Open Portal →</a>
               </div>
               <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100">
                 <div className="flex items-center gap-3">
                   <BookOpen size={16} className="text-gray-400" />
-                  <span className="font-medium text-[#1B263B]">Client Onboarding Manual</span>
+                  <span className="font-medium text-brand-oxford">Client Onboarding Manual</span>
                 </div>
-                <Button variant="ghost" size="sm" className="text-[#B87333] hover:text-[#a0632a]">Download PDF</Button>
+                <Button variant="ghost" size="sm" className="text-brand-copper hover:text-brand-copper-dark">Download PDF</Button>
               </div>
             </div>
           </div>
 
           {/* Glossary */}
-          <div className="bg-[#1B263B] p-8 rounded-xl text-white shadow-sm">
+          <div className="bg-brand-oxford p-8 rounded-xl text-white shadow-sm">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-              <BookOpen className="text-[#B87333]" /> IT Glossary
+              <BookOpen className="text-brand-copper" /> IT Glossary
             </h2>
             <div className="space-y-6">
               {glossaryTerms.map((item, i) => (
                 <div key={i} className="border-b border-gray-700 pb-4 last:border-0 last:pb-0">
-                  <h4 className="font-bold text-[#B87333] mb-1">{item.term}</h4>
+                  <h4 className="font-bold text-brand-copper mb-1">{item.term}</h4>
                   <p className="text-gray-300 text-sm leading-relaxed">{item.def}</p>
                 </div>
               ))}
@@ -225,23 +216,23 @@ export function Resources({ onViewChange }: ResourcesProps) {
 
         {/* Security FAQ */}
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold text-[#1B263B] mb-8 text-center">Incident Response FAQ</h2>
+          <h2 className="text-3xl font-bold text-brand-oxford mb-8 text-center">Incident Response FAQ</h2>
           <div className="space-y-4">
              <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                <h4 className="font-bold text-[#1B263B] mb-2">What qualifies as a P1 Critical Incident?</h4>
-                <p className="text-[#4E596F] text-sm">
+                <h4 className="font-bold text-brand-oxford mb-2">What qualifies as a P1 Critical Incident?</h4>
+                <p className="text-brand-slate text-sm">
                    Any outage affecting &gt;50% of users, a confirmed data breach, or active ransomware attack. P1 incidents trigger our 15-minute SLA response protocol.
                 </p>
              </div>
              <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                <h4 className="font-bold text-[#1B263B] mb-2">How do I report a security vulnerability?</h4>
-                <p className="text-[#4E596F] text-sm">
+                <h4 className="font-bold text-brand-oxford mb-2">How do I report a security vulnerability?</h4>
+                <p className="text-brand-slate text-sm">
                    We maintain a responsible disclosure program. Please email security@humaneers.co (PGP key available in Colophon) with details. We do not offer bounties but we publicly credit researchers.
                 </p>
              </div>
              <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                <h4 className="font-bold text-[#1B263B] mb-2">What is your data retention policy on logs?</h4>
-                <p className="text-[#4E596F] text-sm">
+                <h4 className="font-bold text-brand-oxford mb-2">What is your data retention policy on logs?</h4>
+                <p className="text-brand-slate text-sm">
                    Security logs are retained for 365 days in cold storage (immutable). Operational logs are cycled every 30 days.
                 </p>
              </div>

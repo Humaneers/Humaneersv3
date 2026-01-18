@@ -31,11 +31,11 @@ export function DefinitionTooltip({ term, definition, className = "" }: Definiti
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <span className={`cursor-help border-b border-dotted border-[#B87333] hover:text-[#B87333] transition-colors inline-flex items-center gap-0.5 ${className}`}>
+        <span className={`cursor-help border-b border-dotted border-brand-copper hover:text-brand-copper transition-colors inline-flex items-center gap-0.5 ${className}`}>
           {term}
         </span>
       </TooltipTrigger>
-      <TooltipContent className="bg-[#1B263B] text-white border border-[#B87333] max-w-xs p-3">
+      <TooltipContent className="bg-brand-oxford text-white border border-brand-copper max-w-xs p-3">
         <p>{definition}</p>
       </TooltipContent>
     </Tooltip>
