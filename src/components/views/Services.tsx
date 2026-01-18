@@ -20,7 +20,7 @@ export function Services({ onViewChange }: ServicesProps) {
       title: "Managed IT",
       icon: <Server className="w-8 h-8 text-white" />,
       image: "https://images.unsplash.com/photo-1591238372358-dbbb7a59f22c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYW5hZ2VkJTIwaXQlMjBzZXJ2ZXIlMjByb29tJTIwZW5naW5lZXJ8ZW58MXx8fHwxNzY2OTUyMTUxfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      description: "Enterprise-grade infrastructure for teams that value craftsmanship over ticket numbers.",
+      description: "Enterprise infrastructure with a craftsman touch.",
       features: ["100% US-Based Helpdesk", "Hybrid & Cloud Infrastructure", "Proactive Security Monitoring"],
       link: "managed-it" as const,
       color: "bg-[#1B263B]"
@@ -30,7 +30,7 @@ export function Services({ onViewChange }: ServicesProps) {
       title: "Brand & Marketing",
       icon: <BarChart3 className="w-8 h-8 text-white" />,
       image: "https://images.unsplash.com/photo-1758873272540-439a105db676?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMGJyYW5kaW5nJTIwbWVldGluZyUyMG9mZmljZXxlbnwxfHx8fDE3NjY5NTIxNTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      description: "Making your products billboard-ready with enterprise-grade strategy.",
+      description: "US-ready brand and go-to-market strategy.",
       features: ["Americanization Strategy", "Visual Identity Refinement", "Go-To-Market Planning"],
       link: "growth" as const,
       color: "bg-[#B87333]"
@@ -40,7 +40,7 @@ export function Services({ onViewChange }: ServicesProps) {
       title: "Family Protection",
       icon: <Shield className="w-8 h-8 text-white" />,
       image: "https://images.unsplash.com/photo-1640622304233-7335e936f11b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYW1pbHklMjB1c2luZyUyMHRhYmxldCUyMGhvbWUlMjBzZWN1cmV8ZW58MXx8fHwxNzY2OTUyMTUxfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      description: "Closing the home-office security gap to keep your family and business safe.",
+      description: "Secure home-office tech for families and execs.",
       features: ["Home Network Segmentation", "Content Filtering", "Dark Web Monitoring"],
       link: "family-protection" as const,
       color: "bg-[#4E596F]"
@@ -50,7 +50,7 @@ export function Services({ onViewChange }: ServicesProps) {
       title: "Fractional Leadership",
       icon: <Users className="w-8 h-8 text-white" />,
       image: "https://images.unsplash.com/photo-1764810815228-b7f9432eec5c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxleGVjdXRpdmUlMjBib2FyZHJvb20lMjBtZWV0aW5nfGVufDF8fHx8MTc2Njk1MjE1MXww&ixlib=rb-4.1.0&q=80&w=1080",
-      description: <span>Your own <DefinitionTooltip term="CIO" definition="Chief Information Officer" />/<DefinitionTooltip term="CMO" definition="Chief Marketing Officer" /> at an SMB price. Strategy without the salary cap.</span>,
+      description: <span>vCIO/vCMO strategy without the full-time cost.</span>,
       features: ["Quarterly Business Reviews", "Budgeting & Procurement", "Board Representation"],
       link: "fractional-leadership" as const,
       color: "bg-[#1B263B]"

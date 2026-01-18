@@ -65,21 +65,21 @@ export function FamilyProtection({ onViewChange }: FamilyProtectionProps) {
                  <Wifi className="w-10 h-10 text-[#1B263B] mb-4" />
                  <h3 className="text-xl font-bold text-[#1B263B] mb-3">Network Segmentation</h3>
                  <p className="text-[#4E596F]">
-                    We create separate, invisible Wi-Fi networks for your work devices, your family's iPads, and your smart fridge. If the fridge gets hacked, your work stays safe.
+                    Separate work, family, and IoT so breaches don’t spread.
                  </p>
               </div>
               <div className="bg-[#F5F1E9] p-8 rounded-xl border-t-4 border-[#B87333]">
                  <Eye className="w-10 h-10 text-[#1B263B] mb-4" />
                  <h3 className="text-xl font-bold text-[#1B263B] mb-3">Content Filtering</h3>
                  <p className="text-[#4E596F]">
-                    Protect your children from malicious or inappropriate content with enterprise-grade <DefinitionTooltip term="DNS" definition="Domain Name System: The phonebook of the Internet. DNS filtering blocks access to harmful sites at the network level." /> filtering that works on every device in the house automatically.
+                    DNS-level filtering across every device, managed for you.
                  </p>
               </div>
               <div className="bg-[#F5F1E9] p-8 rounded-xl border-t-4 border-[#B87333]">
                  <Smartphone className="w-10 h-10 text-[#1B263B] mb-4" />
                  <h3 className="text-xl font-bold text-[#1B263B] mb-3">Managed Family Devices</h3>
                  <p className="text-[#4E596F]">
-                    We use enterprise <DefinitionTooltip term="MDM" definition="Mobile Device Management: Enterprise software that secures mobile devices." /> to secure your family's iPads and phones. It's managed by us but controlled by you—the designated household manager—under strict non-disclosure terms.
+                    Enterprise MDM with household control and strict privacy.
                  </p>
               </div>
            </div>

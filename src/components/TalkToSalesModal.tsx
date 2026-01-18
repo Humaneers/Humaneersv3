@@ -31,6 +31,7 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
     message: ""
   });
 
+  const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Update form data when initialData changes
@@ -65,6 +66,11 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
 
   const handleFinalSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (step === 1) {
+      handleNext();
+      return;
+    }
 
     // Validate form data
     const validation = validateSalesForm(formData);

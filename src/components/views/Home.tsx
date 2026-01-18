@@ -194,12 +194,44 @@ export function Home({ onViewChange }: HomeProps) {
           </div>
         </div>
       </section>
+
+      {/* Objection Handler */}
+      <section className="py-24 bg-[#F5F1E9]">
+        <div className="container mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <h2 className="text-3xl font-bold text-[#1B263B] mb-4">Common Objections, Straight Answers</h2>
+            <p className="text-[#4E596F] text-lg">
+              We hear these a lot. Here’s how Humaneers makes it easy to say yes.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-[#B87333]/20">
+              <h3 className="text-lg font-bold text-[#1B263B] mb-2">“We already have IT.”</h3>
+              <p className="text-[#4E596F] text-sm">
+                We slot in as strategy + escalation, or replace just the gaps.
+              </p>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-[#B87333]/20">
+              <h3 className="text-lg font-bold text-[#1B263B] mb-2">“We’re too small for this.”</h3>
+              <p className="text-[#4E596F] text-sm">
+                No minimums. Enterprise-grade support scaled to your team size.
+              </p>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-[#B87333]/20">
+              <h3 className="text-lg font-bold text-[#1B263B] mb-2">“Switching sounds painful.”</h3>
+              <p className="text-[#4E596F] text-sm">
+                We migrate in phases with no downtime and clear handoffs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
       
       {/* Call to Action */}
       <section className="py-24 bg-[#1B263B] relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
            <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-             <path d="M0 100 C 20 0 50 0 100 100 Z" fill="#B87333" />
+             <path d="M0 100 C 20 0 50 0 100 100 Z" fill="var(--brand-copper)" />
            </svg>
         </div>
         <div className="container mx-auto px-6 relative z-10 text-center">
