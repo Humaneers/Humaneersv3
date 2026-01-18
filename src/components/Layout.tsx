@@ -1,3 +1,21 @@
+/**
+ * Layout Component
+ *
+ * Main application layout providing persistent header, navigation, and footer.
+ * Handles responsive mobile menu and scroll-based header styling.
+ *
+ * Features:
+ * - Sticky header with scroll-based styling changes
+ * - Responsive mobile navigation with slide-down menu
+ * - Consistent footer across all pages
+ * - Brand-colored navigation elements (Oxford Blue background, Copper accents)
+ *
+ * @example
+ * <Layout currentView="home" onViewChange={handleViewChange}>
+ *   <HomePage />
+ * </Layout>
+ */
+
 import { ReactNode, useState, useEffect, forwardRef } from "react";
 import { Menu, X, ShieldCheck, BookOpen } from "lucide-react";
 import { Button } from "./ui/button";
@@ -15,8 +33,11 @@ import {
 import { cn } from "./ui/utils";
 
 interface LayoutProps {
+  /** Content to render within the layout */
   children: ReactNode;
+  /** Current active view for navigation highlighting */
   currentView: View;
+  /** Callback function when navigation changes */
   onViewChange: (view: View) => void;
 }
 

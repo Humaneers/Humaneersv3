@@ -15,7 +15,9 @@ This document defines the visual identity, design system, and brand voice for th
 5. [Component Patterns](#component-patterns)
 6. [Interactions & Motion](#interactions--motion)
 7. [Brand Voice & Tone](#brand-voice--tone)
-8. [Project Workflow](#project-workflow)
+8. [Development Workflow](#development-workflow)
+9. [Technical Standards](#technical-standards)
+10. [Project Workflow](#project-workflow)
 
 ---
 
@@ -521,11 +523,458 @@ Key files implementing these guidelines:
 
 ---
 
-## Project Workflow
+## Development Workflow
 
-- Review `TODO.md` at the start of work and keep updates aligned with current tasks.
-- Note any completed items or new issues directly in `TODO.md`.
+### Overview
+This workflow ensures code quality, brand consistency, and proper task management throughout the development lifecycle.
+
+### Before Starting Work
+
+1. **Review Current Priorities**
+   - Check `TODO.md` for High/Medium/Low priority items
+   - Identify which task aligns with current sprint or business needs
+   - Verify dependencies between tasks
+
+2. **Understand Brand Requirements**
+   - Review relevant sections of CLAUDE.md (Color System, Typography, Component Patterns)
+   - Ensure familiarity with "Modern Craftsman" aesthetic principles
+   - Check Brand Voice & Tone for any copy changes
+
+3. **Technical Preparation**
+   - Verify development environment is up to date
+   - Review [Technical Standards](#technical-standards) for applicable patterns
+   - Check existing component library before building new components
+
+### During Development
+
+1. **Brand Consistency**
+   - Use established color tokens (Oxford Blue `#1B263B`, Copper `#B87333`, Cream `#F5F1E9`)
+   - Follow typography scale and font weights (see [Typography](#typography))
+   - Apply correct spacing using 4px base unit
+   - Use standard border radius (`--radius-lg`: 10px default)
+
+2. **Component Patterns**
+   - Reuse existing UI components from `src/components/ui/`
+   - Follow button variants and sizing (see [Component Patterns](#component-patterns))
+   - Maintain consistent card, badge, and input styling
+   - Reference `Layout.tsx`, `Home.tsx` for established patterns
+
+3. **Error Handling**
+   - Implement error boundaries around major feature sections
+   - Provide user-friendly error messages aligned with brand voice
+   - Include fallback UI that maintains visual consistency
+
+4. **Loading States**
+   - Add skeleton screens for async content
+   - Use loading indicators for button actions
+   - Maintain layout stability during loading (prevent layout shift)
+
+5. **Responsive Design**
+   - Test on mobile (sm: 640px), tablet (md: 768px), desktop (lg: 1024px+)
+   - Ensure touch targets are minimum 44x44px
+   - Verify navigation works on all screen sizes
+
+### Before Committing
+
+**Quality Checklist:**
+- [ ] **Brand Consistency**: Colors, typography, spacing match guidelines
+- [ ] **Component Patterns**: Using established UI components correctly
+- [ ] **Error Boundaries**: Critical sections have error handling
+- [ ] **Loading States**: Async operations show appropriate feedback
+- [ ] **Mobile Responsive**: Tested across breakpoints
+- [ ] **Accessibility**: Keyboard navigation, ARIA labels, color contrast
+- [ ] **Documentation**: JSDoc comments on new functions/components
+- [ ] **Bundle Impact**: No unnecessary dependencies added
+- [ ] **SEO**: Meta tags, semantic HTML, heading hierarchy
+- [ ] **TODO.md**: Updated with completed items or new issues
+
+**Testing Requirements:**
+- Manual testing on Chrome, Safari, Firefox
+- Mobile device testing (iOS Safari, Android Chrome)
+- Keyboard-only navigation test
+- Screen reader compatibility check (VoiceOver/NVDA)
+
+### Code Review Checklist
+
+When reviewing PRs or your own code:
+
+1. **Visual Consistency**
+   - Matches Figma/design specifications
+   - Follows "Modern Craftsman" aesthetic
+   - Proper use of brand colors and typography
+
+2. **Technical Quality**
+   - No console errors or warnings
+   - Proper TypeScript types (no `any` unless justified)
+   - Error boundaries present
+   - Loading states implemented
+
+3. **Performance**
+   - No unnecessary re-renders
+   - Images optimized and lazy-loaded
+   - Code-splitting where appropriate
+   - Bundle size impact assessed
+
+4. **User Experience**
+   - Intuitive interactions
+   - Clear feedback on user actions
+   - Graceful error handling
+   - Smooth animations (0.3s or less)
+
+5. **Accessibility**
+   - WCAG 2.1 AA compliance
+   - Keyboard navigation works
+   - Screen reader friendly
+   - Sufficient color contrast (4.5:1 for text)
 
 ---
 
-*This document serves as the single source of truth for all brand and design decisions across the Humaneers digital presence.*
+## Technical Standards
+
+### Performance Best Practices
+
+#### Bundle Optimization
+- **Code Splitting**: Use dynamic imports for routes and heavy components
+- **Tree Shaking**: Import only what you need (e.g., `import { Button } from './button'` not `import * as UI from './ui'`)
+- **Lazy Loading**: Use `React.lazy()` for non-critical components
+- **Asset Optimization**: Compress images, use WebP format, implement lazy loading
+
+**Example**:
+```tsx
+// Good: Code splitting for routes
+const ManagedIT = lazy(() => import('./pages/ManagedIT'))
+
+// Good: Specific imports
+import { Button } from '@/components/ui/button'
+
+// Bad: Importing everything
+import * as Icons from 'lucide-react'
+```
+
+#### Performance Targets
+- **First Contentful Paint**: < 1.8s
+- **Time to Interactive**: < 3.8s
+- **Largest Contentful Paint**: < 2.5s
+- **Cumulative Layout Shift**: < 0.1
+
+#### Monitoring
+- Use Lighthouse for performance audits
+- Check bundle size with `npm run build`
+- Monitor Core Web Vitals in production
+
+### Error Handling
+
+#### Error Boundary Pattern
+
+**File Structure**:
+```
+src/components/ErrorBoundary.tsx  # Reusable error boundary component
+```
+
+**Implementation**:
+```tsx
+import { Component, ErrorInfo, ReactNode } from 'react'
+
+interface Props {
+  children: ReactNode
+  fallback?: ReactNode
+}
+
+interface State {
+  hasError: boolean
+  error?: Error
+}
+
+class ErrorBoundary extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props)
+    this.state = { hasError: false }
+  }
+
+  static getDerivedStateFromError(error: Error): State {
+    return { hasError: true, error }
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error('Error caught by boundary:', error, errorInfo)
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback || (
+        <div className="min-h-screen flex items-center justify-center bg-[#F5F1E9]">
+          <div className="text-center">
+            <h2 className="text-2xl font-medium text-[#1B263B] mb-4">
+              Something went wrong
+            </h2>
+            <p className="text-[#4E596F] mb-6">
+              We're working on fixing this. Please try refreshing the page.
+            </p>
+            <button
+              onClick={() => window.location.reload()}
+              className="bg-[#B87333] hover:bg-[#a0632a] text-white px-6 py-3 rounded-md"
+            >
+              Refresh Page
+            </button>
+          </div>
+        </div>
+      )
+    }
+
+    return this.props.children
+  }
+}
+
+export default ErrorBoundary
+```
+
+**Usage**:
+```tsx
+// Wrap major sections or routes
+<ErrorBoundary>
+  <ManagedITPage />
+</ErrorBoundary>
+```
+
+#### User-Friendly Error Messages
+
+Follow brand voice for error states:
+- ✅ "We couldn't load that page. Let's try again."
+- ❌ "Error 404: Resource not found"
+
+- ✅ "Something went wrong on our end. We're on it."
+- ❌ "Unhandled exception in component tree"
+
+### Component Development
+
+#### When to Use Animations
+
+Follow these principles from [Interactions & Motion](#interactions--motion):
+
+**Do Animate**:
+- Page transitions (fade in + subtle upward movement)
+- Hover states (color, shadow, transform)
+- Modal/drawer open/close
+- Loading state changes
+- Success/error feedback
+
+**Don't Animate**:
+- Initial page load (except hero section)
+- Every small UI change
+- Decorative purposes only
+- Distracting movements
+
+**Service Card Animations** (Future Enhancement):
+```tsx
+// Hover effect example for service cards
+<motion.div
+  whileHover={{ y: -4, boxShadow: "0 10px 20px rgba(0,0,0,0.1)" }}
+  transition={{ duration: 0.2 }}
+  className="service-card"
+>
+  {/* Card content */}
+</motion.div>
+```
+
+#### Loading State Patterns
+
+**Button Loading**:
+```tsx
+<Button disabled={isLoading}>
+  {isLoading ? (
+    <>
+      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+      Submitting...
+    </>
+  ) : (
+    'Submit'
+  )}
+</Button>
+```
+
+**Skeleton Screens**:
+```tsx
+// For content areas
+{isLoading ? (
+  <div className="space-y-4">
+    <Skeleton className="h-12 w-full" />
+    <Skeleton className="h-32 w-full" />
+    <Skeleton className="h-8 w-2/3" />
+  </div>
+) : (
+  <ContentComponent data={data} />
+)}
+```
+
+**Full Page Loading**:
+```tsx
+if (isLoading) {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <Loader2 className="h-8 w-8 animate-spin text-[#B87333]" />
+    </div>
+  )
+}
+```
+
+### Documentation Standards
+
+#### Component Documentation
+
+Every component should have:
+
+1. **File Header Comment**:
+```tsx
+/**
+ * ServiceCard Component
+ *
+ * Displays a service offering with icon, title, description, and CTA.
+ * Used on the homepage and service pages.
+ *
+ * @example
+ * <ServiceCard
+ *   icon={<Server />}
+ *   title="Managed IT"
+ *   description="Cloud-native infrastructure that just works"
+ *   href="/managed-it"
+ * />
+ */
+```
+
+2. **Prop Type Documentation**:
+```tsx
+interface ServiceCardProps {
+  /** Icon component to display (from lucide-react) */
+  icon: ReactNode
+  /** Service title (2-4 words, title case) */
+  title: string
+  /** Short description (under 100 characters) */
+  description: string
+  /** Link destination */
+  href: string
+  /** Optional CSS classes to apply */
+  className?: string
+}
+```
+
+#### JSDoc Comments
+
+Add JSDoc to utility functions:
+
+```tsx
+/**
+ * Formats a phone number to (XXX) XXX-XXXX format
+ * @param phone - Raw phone number string (digits only)
+ * @returns Formatted phone number or original if invalid
+ */
+export function formatPhone(phone: string): string {
+  const cleaned = phone.replace(/\D/g, '')
+  if (cleaned.length !== 10) return phone
+  return `(${cleaned.slice(0,3)}) ${cleaned.slice(3,6)}-${cleaned.slice(6)}`
+}
+```
+
+### Accessibility Standards
+
+#### Required Practices
+
+1. **Semantic HTML**: Use proper heading hierarchy (h1 → h2 → h3)
+2. **ARIA Labels**: Add `aria-label` to icon-only buttons
+3. **Keyboard Navigation**: All interactive elements reachable via Tab
+4. **Focus Indicators**: Visible focus rings (never remove outlines without replacement)
+5. **Color Contrast**: Minimum 4.5:1 for text, 3:1 for UI components
+
+#### Testing Checklist
+
+- [ ] Tab through entire page (logical order)
+- [ ] Shift+Tab works in reverse
+- [ ] Enter/Space activates buttons and links
+- [ ] Escape closes modals/dropdowns
+- [ ] Focus visible on all interactive elements
+- [ ] Screen reader announces all content correctly
+- [ ] Images have alt text
+- [ ] Form inputs have labels
+
+### Content & SEO Standards
+
+#### Service Page Content
+
+Each service page should include:
+
+1. **Hero Section**: Clear value proposition (1-2 sentences)
+2. **Features List**: 3-6 key features with icons
+3. **Benefits**: How it helps the customer (not just what it is)
+4. **Social Proof**: Case studies, testimonials, or trust indicators
+5. **CTA**: Context-aware call to action (pre-fills interest)
+
+**Content Review Checklist**:
+- [ ] Follows brand voice (clear over clever, warm professionalism)
+- [ ] No jargon without explanation
+- [ ] Active voice, direct statements
+- [ ] Specific and concrete (not vague promises)
+- [ ] Includes relevant keywords naturally
+- [ ] Scannable (headings, bullets, short paragraphs)
+
+#### SEO Meta Tags
+
+Every page needs:
+
+```tsx
+<Helmet>
+  <title>Service Name | Humaneers</title>
+  <meta name="description" content="150-160 character description with primary keyword" />
+  <meta property="og:title" content="Service Name | Humaneers" />
+  <meta property="og:description" content="Same as meta description" />
+  <meta property="og:image" content="/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+</Helmet>
+```
+
+**SEO Checklist**:
+- [ ] Title tag: 50-60 characters, includes brand
+- [ ] Meta description: 150-160 characters, compelling
+- [ ] H1 tag: One per page, matches title intent
+- [ ] Internal links: Link to related services
+- [ ] Image alt text: Descriptive, includes context
+- [ ] URL structure: Clean, readable, keyword-rich
+
+---
+
+## Project Workflow
+
+### Task Management
+
+1. **Review TODO.md** at the start of work
+   - Check High/Medium/Low priority sections
+   - Identify blockers or dependencies
+   - Choose task aligned with current sprint
+
+2. **During Work**
+   - Follow [Development Workflow](#development-workflow) practices
+   - Keep updates aligned with current tasks
+   - Reference [Technical Standards](#technical-standards) as needed
+
+3. **Completion**
+   - Update `TODO.md` with completed items
+   - Move item from current section to "Completed ✅"
+   - Note any new issues discovered during work
+   - Add date stamp to major completions
+
+### Priority System
+
+From `TODO.md`:
+
+- **High Priority**: Blockers, critical features, deployment dependencies
+- **Medium Priority**: Important but not blocking, quality improvements
+- **Low Priority**: Future enhancements, nice-to-haves, long-term improvements
+
+### Documentation Updates
+
+- Keep CLAUDE.md updated when design patterns change
+- Update TODO.md immediately when completing tasks
+- Add inline code comments for complex logic
+- Update component documentation when props change
+
+---
+
+*This document serves as the single source of truth for all brand, design, and development decisions across the Humaneers digital presence.*

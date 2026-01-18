@@ -1,29 +1,30 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Layout } from "./components/Layout";
 import { Home } from "./components/views/Home";
-import { Pricing } from "./components/views/Pricing";
-import { Growth } from "./components/views/Growth";
-import { About } from "./components/views/About";
-
-import { Terms } from "./components/views/Terms";
-import { Privacy } from "./components/views/Privacy";
-
-import { Contact } from "./components/views/Contact";
-import { NonProfits } from "./components/views/NonProfits";
-import { ManagedIT } from "./components/views/ManagedIT";
-import { FamilyProtection } from "./components/views/FamilyProtection";
-import { FractionalLeadership } from "./components/views/FractionalLeadership";
-import { Industries } from "./components/views/Industries";
-import { Services } from "./components/views/Services";
-import { TalkToSales } from "./components/views/TalkToSales";
-import { Personal } from "./components/views/Personal";
-import { Colophon } from "./components/views/Colophon";
-import { Ethics } from "./components/views/Ethics";
-import { Resources } from "./components/views/Resources";
-import { Support } from "./components/views/Support";
 import { TalkToSalesModal } from "./components/TalkToSalesModal";
+import { ErrorBoundary } from "./components/ErrorBoundary";
+import { Skeleton } from "./components/ui/skeleton";
 
-import { Status } from "./components/views/Status";
+// Lazy load all non-critical views to improve bundle size
+const Pricing = lazy(() => import("./components/views/Pricing").then(m => ({ default: m.Pricing })));
+const Growth = lazy(() => import("./components/views/Growth").then(m => ({ default: m.Growth })));
+const About = lazy(() => import("./components/views/About").then(m => ({ default: m.About })));
+const Terms = lazy(() => import("./components/views/Terms").then(m => ({ default: m.Terms })));
+const Privacy = lazy(() => import("./components/views/Privacy").then(m => ({ default: m.Privacy })));
+const Contact = lazy(() => import("./components/views/Contact").then(m => ({ default: m.Contact })));
+const NonProfits = lazy(() => import("./components/views/NonProfits").then(m => ({ default: m.NonProfits })));
+const ManagedIT = lazy(() => import("./components/views/ManagedIT").then(m => ({ default: m.ManagedIT })));
+const FamilyProtection = lazy(() => import("./components/views/FamilyProtection").then(m => ({ default: m.FamilyProtection })));
+const FractionalLeadership = lazy(() => import("./components/views/FractionalLeadership").then(m => ({ default: m.FractionalLeadership })));
+const Industries = lazy(() => import("./components/views/Industries").then(m => ({ default: m.Industries })));
+const Services = lazy(() => import("./components/views/Services").then(m => ({ default: m.Services })));
+const TalkToSales = lazy(() => import("./components/views/TalkToSales").then(m => ({ default: m.TalkToSales })));
+const Personal = lazy(() => import("./components/views/Personal").then(m => ({ default: m.Personal })));
+const Colophon = lazy(() => import("./components/views/Colophon").then(m => ({ default: m.Colophon })));
+const Ethics = lazy(() => import("./components/views/Ethics").then(m => ({ default: m.Ethics })));
+const Resources = lazy(() => import("./components/views/Resources").then(m => ({ default: m.Resources })));
+const Support = lazy(() => import("./components/views/Support").then(m => ({ default: m.Support })));
+const Status = lazy(() => import("./components/views/Status").then(m => ({ default: m.Status })));
 
 export type View = "home" | "pricing" | "growth" | "about" | "terms" | "privacy" | "managed-it" | "family-protection" | "fractional-leadership" | "non-profits" | "contact" | "industries" | "services" | "talk-to-sales" | "personal" | "colophon" | "ethics" | "resources" | "status" | "support";
 
@@ -137,15 +138,31 @@ export default function App() {
   };
 
   return (
-    <div className="font-sans antialiased text-[#4E596F] bg-[#F5F1E9] min-h-screen flex flex-col">
-      <Layout currentView={currentView} onViewChange={handleViewChange}>
-        {renderView()}
-      </Layout>
-      <TalkToSalesModal 
-        open={isSalesModalOpen} 
-        onOpenChange={setIsSalesModalOpen} 
-        initialData={salesModalData} 
-      />
-    </div>
+    <ErrorBoundary>
+      <div className="font-sans antialiased text-[#4E596F] bg-[#F5F1E9] min-h-screen flex flex-col">
+        <Layout currentView={currentView} onViewChange={handleViewChange}>
+          <ErrorBoundary>
+            <Suspense
+              fallback={
+                <div className="min-h-screen flex items-center justify-center">
+                  <div className="max-w-4xl w-full space-y-4 px-6">
+                    <Skeleton className="h-12 w-full" />
+                    <Skeleton className="h-64 w-full" />
+                    <Skeleton className="h-32 w-full" />
+                  </div>
+                </div>
+              }
+            >
+              {renderView()}
+            </Suspense>
+          </ErrorBoundary>
+        </Layout>
+        <TalkToSalesModal
+          open={isSalesModalOpen}
+          onOpenChange={setIsSalesModalOpen}
+          initialData={salesModalData}
+        />
+      </div>
+    </ErrorBoundary>
   );
 }
