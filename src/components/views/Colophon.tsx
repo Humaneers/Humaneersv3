@@ -1,4 +1,4 @@
-import { Code, Image, Scale, Heart, Shield, Users, Globe, Layout, ArrowRight } from "lucide-react";
+import { Code, Image, Scale, Heart, Shield, ShieldCheck, Users, Globe, Layout, ArrowRight } from "lucide-react";
 export function Colophon() {
   return (
     <div className="bg-white min-h-screen">
@@ -215,7 +215,20 @@ export function Colophon() {
 
           {/* Sidebar: Colophon Credits */}
           <div className="md:col-span-4 space-y-12">
-            <div className="bg-gray-50 p-6 rounded-xl border border-gray-100 sticky top-24">
+            <div className="bg-brand-oxford/5 p-6 rounded-xl border border-brand-copper/20 sticky top-24">
+              <h3 className="font-bold text-brand-oxford mb-4 flex items-center gap-2">
+                <ShieldCheck className="w-5 h-5 text-brand-copper" /> Security
+              </h3>
+              <div className="flex items-center gap-3 mb-2">
+                <ShieldCheck className="w-8 h-8 text-brand-copper shrink-0" />
+                <span className="font-bold text-brand-oxford">SOC 2 Type II Compliant</span>
+              </div>
+              <p className="text-xs text-brand-slate">
+                We independently audit our controls to ensure client data security, availability, and confidentiality.
+              </p>
+            </div>
+
+            <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
               <h3 className="font-bold text-brand-oxford mb-4 flex items-center gap-2">
                 <Code className="w-5 h-5 text-brand-copper" /> Technical Colophon
               </h3>
