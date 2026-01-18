@@ -536,9 +536,26 @@ Key files implementing these guidelines:
 
 ---
 
-## Version
+## Versioning
+- **Current Version**: 0.1.0
+- **System**: SemVer-like patch increment on every release
+- **Command**: `npm run release`
+- **Output**: Updates `package.json` and `src/version.ts`
+- **Automation**: The `release` script automates:
+  1. Incrementing the patch version
+  2. Committing changes
+  3. Pushing to remote
 
-- **Last Updated**: January 2026
+**How to Release**:
+Instead of `git push` for deployment, run:
+```bash
+npm run release
+```
+This ensures the version number is bumped and captured in the deployment.
+
+---
+
+## Design System Summary
 - **Design System**: Tailwind CSS v4.1.3
 - **Component Library**: Radix UI + shadcn/ui
 - **Animation**: Framer Motion
