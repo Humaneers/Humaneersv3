@@ -1,3 +1,3 @@
-import { Compass } from "lucide-react"
+import { Compass } from "lucide-react";
 
-export { Compass }
+export { Compass };

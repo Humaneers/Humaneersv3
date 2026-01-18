@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Homepage -->
   <url>
-    <loc>https://humaneers.com/</loc>
+    <loc>https://humaneers.dev/</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -10,25 +10,25 @@
 
   <!-- Primary Services -->
   <url>
-    <loc>https://humaneers.com/managed-it</loc>
+    <loc>https://humaneers.dev/managed-it</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://humaneers.com/growth</loc>
+    <loc>https://humaneers.dev/growth</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://humaneers.com/family-protection</loc>
+    <loc>https://humaneers.dev/family-protection</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://humaneers.com/fractional-leadership</loc>
+    <loc>https://humaneers.dev/fractional-leadership</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -36,13 +36,13 @@
 
   <!-- Service Pages -->
   <url>
-    <loc>https://humaneers.com/services</loc>
+    <loc>https://humaneers.dev/services</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://humaneers.com/pricing</loc>
+    <loc>https://humaneers.dev/pricing</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -50,19 +50,19 @@
 
   <!-- Industry Pages -->
   <url>
-    <loc>https://humaneers.com/non-profits</loc>
+    <loc>https://humaneers.dev/non-profits</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://humaneers.com/industries</loc>
+    <loc>https://humaneers.dev/industries</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://humaneers.com/personal</loc>
+    <loc>https://humaneers.dev/personal</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -70,13 +70,13 @@
 
   <!-- Conversion Pages -->
   <url>
-    <loc>https://humaneers.com/contact</loc>
+    <loc>https://humaneers.dev/contact</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://humaneers.com/talk-to-sales</loc>
+    <loc>https://humaneers.dev/talk-to-sales</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
@@ -84,25 +84,25 @@
 
   <!-- Company Pages -->
   <url>
-    <loc>https://humaneers.com/about</loc>
+    <loc>https://humaneers.dev/about</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>quarterly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://humaneers.com/resources</loc>
+    <loc>https://humaneers.dev/resources</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://humaneers.com/colophon</loc>
+    <loc>https://humaneers.dev/colophon</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://humaneers.com/ethics</loc>
+    <loc>https://humaneers.dev/ethics</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -110,13 +110,13 @@
 
   <!-- Support Pages -->
   <url>
-    <loc>https://humaneers.com/support</loc>
+    <loc>https://humaneers.dev/support</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://humaneers.com/status</loc>
+    <loc>https://humaneers.dev/status</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.4</priority>
@@ -124,13 +124,13 @@
 
   <!-- Legal Pages -->
   <url>
-    <loc>https://humaneers.com/privacy</loc>
+    <loc>https://humaneers.dev/privacy</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>quarterly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://humaneers.com/terms</loc>
+    <loc>https://humaneers.dev/terms</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>quarterly</changefreq>
     <priority>0.2</priority>

@@ -50,30 +50,26 @@ interface CalConfig {
  * @throws Error if required environment variables are missing
  */
 function getCalConfig(): CalConfig {
-  const orgUrl = import.meta.env.VITE_CAL_ORG_URL?.trim() || '';
-  const salesFormId = import.meta.env.VITE_CAL_SALES_FORM_ID?.trim() || '';
-  const supportFormId = import.meta.env.VITE_CAL_SUPPORT_FORM_ID?.trim() || '';
-  const newsletterFormId = import.meta.env.VITE_CAL_NEWSLETTER_FORM_ID?.trim() || '';
+  const orgUrl = import.meta.env.VITE_CAL_ORG_URL?.trim() || "";
+  const salesFormId = import.meta.env.VITE_CAL_SALES_FORM_ID?.trim() || "";
+  const supportFormId = import.meta.env.VITE_CAL_SUPPORT_FORM_ID?.trim() || "";
+  const newsletterFormId = import.meta.env.VITE_CAL_NEWSLETTER_FORM_ID?.trim() || "";
 
   const missing: string[] = [];
-  if (!orgUrl) missing.push('VITE_CAL_ORG_URL');
-  if (!salesFormId) missing.push('VITE_CAL_SALES_FORM_ID');
-  if (!supportFormId) missing.push('VITE_CAL_SUPPORT_FORM_ID');
+  if (!orgUrl) missing.push("VITE_CAL_ORG_URL");
+  if (!salesFormId) missing.push("VITE_CAL_SALES_FORM_ID");
+  if (!supportFormId) missing.push("VITE_CAL_SUPPORT_FORM_ID");
 
   if (missing.length > 0) {
-    console.error('Missing Cal.com configuration:', missing);
-    throw new Error('Booking system is not configured. Please contact support at support@humaneers.dev');
+    if (import.meta.env.DEV) {
+      console.error("Missing Cal.com configuration:", missing);
+    }
+    throw new Error(
+      "Booking system is not configured. Please contact support at support@humaneers.dev"
+    );
   }
 
   return { orgUrl, salesFormId, supportFormId, newsletterFormId };
-}
-
-/**
- * Encode a value for use in URL parameters
- */
-function encodeParam(value: string | undefined): string {
-  if (!value) return '';
-  return encodeURIComponent(value);
 }
 
 /**
@@ -83,11 +79,11 @@ function buildCalUrl(formId: string, params: Record<string, string>): string {
   const { orgUrl } = getCalConfig();
 
   if (!orgUrl) {
-    throw new Error('Cal.com organization URL is not configured');
+    throw new Error("Cal.com organization URL is not configured");
   }
 
   const queryParams = new URLSearchParams();
-  queryParams.set('form', formId);
+  queryParams.set("form", formId);
 
   // Add all parameters to query string
   Object.entries(params).forEach(([key, value]) => {
@@ -108,7 +104,7 @@ export function redirectToSalesBooking(data: SalesFormData): void {
   const { salesFormId } = getCalConfig();
 
   if (!salesFormId) {
-    throw new Error('Sales form ID is not configured');
+    throw new Error("Sales form ID is not configured");
   }
 
   const params: Record<string, string> = {
@@ -124,7 +120,7 @@ export function redirectToSalesBooking(data: SalesFormData): void {
   if (data.website) params.website = data.website;
   if (data.phone) params.phone = data.phone;
   if (data.budget) params.budget = data.budget;
-  if (data.interests.length > 0) params.interests = data.interests.join(', ');
+  if (data.interests.length > 0) params.interests = data.interests.join(", ");
   if (data.message) params.message = data.message;
 
   const calUrl = buildCalUrl(salesFormId, params);
@@ -142,7 +138,7 @@ export function redirectToSupportBooking(data: SupportFormData): void {
   const { supportFormId } = getCalConfig();
 
   if (!supportFormId) {
-    throw new Error('Support form ID is not configured');
+    throw new Error("Support form ID is not configured");
   }
 
   const params: Record<string, string> = {
@@ -167,20 +163,24 @@ export function redirectToSupportBooking(data: SupportFormData): void {
 /**
  * Validate sales form data before submission
  */
-export function validateSalesForm(data: Partial<SalesFormData>): { valid: boolean; errors: string[] } {
+export function validateSalesForm(data: Partial<SalesFormData>): {
+  valid: boolean;
+  errors: string[];
+} {
   const errors: string[] = [];
 
-  if (!data.firstName?.trim()) errors.push('First name is required');
-  if (!data.lastName?.trim()) errors.push('Last name is required');
-  if (!data.email?.trim()) errors.push('Email is required');
-  if (!data.company?.trim()) errors.push('Company name is required');
-  if (!data.role?.trim()) errors.push('Role is required');
-  if (!data.employees?.trim()) errors.push('Company size is required');
+  if (!data.firstName?.trim()) errors.push("First name is required");
+  if (!data.lastName?.trim()) errors.push("Last name is required");
+  if (!data.email?.trim()) errors.push("Email is required");
+  if (!data.company?.trim()) errors.push("Company name is required");
+  if (!data.role?.trim()) errors.push("Role is required");
+  if (!data.employees?.trim()) errors.push("Company size is required");
 
   // Email validation - more robust pattern
-  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  const emailRegex =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   if (data.email && !emailRegex.test(data.email)) {
-    errors.push('Invalid email format');
+    errors.push("Invalid email format");
   }
 
   return {
@@ -192,20 +192,24 @@ export function validateSalesForm(data: Partial<SalesFormData>): { valid: boolea
 /**
  * Validate support form data before submission
  */
-export function validateSupportForm(data: Partial<SupportFormData>): { valid: boolean; errors: string[] } {
+export function validateSupportForm(data: Partial<SupportFormData>): {
+  valid: boolean;
+  errors: string[];
+} {
   const errors: string[] = [];
 
-  if (!data.name?.trim()) errors.push('Name is required');
-  if (!data.email?.trim()) errors.push('Email is required');
-  if (!data.priority?.trim()) errors.push('Priority is required');
-  if (!data.category?.trim()) errors.push('Category is required');
-  if (!data.subject?.trim()) errors.push('Subject is required');
-  if (!data.description?.trim()) errors.push('Description is required');
+  if (!data.name?.trim()) errors.push("Name is required");
+  if (!data.email?.trim()) errors.push("Email is required");
+  if (!data.priority?.trim()) errors.push("Priority is required");
+  if (!data.category?.trim()) errors.push("Category is required");
+  if (!data.subject?.trim()) errors.push("Subject is required");
+  if (!data.description?.trim()) errors.push("Description is required");
 
   // Email validation - more robust pattern
-  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  const emailRegex =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   if (data.email && !emailRegex.test(data.email)) {
-    errors.push('Invalid email format');
+    errors.push("Invalid email format");
   }
 
   return {
@@ -223,7 +227,7 @@ export function redirectToNewsletterBooking(data: NewsletterFormData): void {
   const { newsletterFormId } = getCalConfig();
 
   if (!newsletterFormId) {
-    throw new Error('Newsletter form ID is not configured');
+    throw new Error("Newsletter form ID is not configured");
   }
 
   const params: Record<string, string> = {
@@ -242,15 +246,19 @@ export function redirectToNewsletterBooking(data: NewsletterFormData): void {
 /**
  * Validate newsletter form data before submission
  */
-export function validateNewsletterForm(data: Partial<NewsletterFormData>): { valid: boolean; errors: string[] } {
+export function validateNewsletterForm(data: Partial<NewsletterFormData>): {
+  valid: boolean;
+  errors: string[];
+} {
   const errors: string[] = [];
 
-  if (!data.email?.trim()) errors.push('Email is required');
+  if (!data.email?.trim()) errors.push("Email is required");
 
   // Email validation - more robust pattern
-  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  const emailRegex =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   if (data.email && !emailRegex.test(data.email)) {
-    errors.push('Invalid email format');
+    errors.push("Invalid email format");
   }
 
   return {
@@ -263,10 +271,13 @@ export function validateNewsletterForm(data: Partial<NewsletterFormData>): { val
  * Get a preview URL for testing (doesn't redirect, returns URL)
  * Useful for debugging and development
  */
-export function getCalPreviewUrl(type: 'sales' | 'support', data: SalesFormData | SupportFormData): string {
+export function getCalPreviewUrl(
+  type: "sales" | "support",
+  data: SalesFormData | SupportFormData
+): string {
   const { salesFormId, supportFormId } = getCalConfig();
 
-  if (type === 'sales') {
+  if (type === "sales") {
     const salesData = data as SalesFormData;
     const params: Record<string, string> = {
       firstName: salesData.firstName,
@@ -280,7 +291,7 @@ export function getCalPreviewUrl(type: 'sales' | 'support', data: SalesFormData 
     if (salesData.website) params.website = salesData.website;
     if (salesData.phone) params.phone = salesData.phone;
     if (salesData.budget) params.budget = salesData.budget;
-    if (salesData.interests.length > 0) params.interests = salesData.interests.join(', ');
+    if (salesData.interests.length > 0) params.interests = salesData.interests.join(", ");
     if (salesData.message) params.message = salesData.message;
 
     return buildCalUrl(salesFormId, params);

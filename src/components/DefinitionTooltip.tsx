@@ -16,7 +16,6 @@
  */
 
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-import { HelpCircle } from "lucide-react";
 
 interface DefinitionTooltipProps {
   /** The term or acronym to display with underline */
@@ -31,7 +30,9 @@ export function DefinitionTooltip({ term, definition, className = "" }: Definiti
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <span className={`cursor-help border-b border-dotted border-brand-copper hover:text-brand-copper transition-colors inline-flex items-center gap-0.5 ${className}`}>
+        <span
+          className={`cursor-help border-b border-dotted border-brand-copper hover:text-brand-copper transition-colors inline-flex items-center gap-0.5 ${className}`}
+        >
           {term}
         </span>
       </TooltipTrigger>

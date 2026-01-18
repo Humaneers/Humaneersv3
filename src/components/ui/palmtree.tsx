@@ -1,3 +1,3 @@
-import { Palmtree } from "lucide-react"
+import { Palmtree } from "lucide-react";
 
-export { Palmtree }
+export { Palmtree };

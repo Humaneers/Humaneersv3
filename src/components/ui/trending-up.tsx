@@ -1,3 +1,3 @@
-import { TrendingUp } from "lucide-react"
+import { TrendingUp } from "lucide-react";
 
-export { TrendingUp }
+export { TrendingUp };

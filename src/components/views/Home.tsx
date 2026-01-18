@@ -69,8 +69,7 @@ export function Home() {
               <span className="text-brand-copper">Small Business Soul.</span>
             </h1>
             <h2 className="text-xl md:text-2xl text-gray-200 mb-10 leading-relaxed font-light">
-              IT, security, and brand growth for teams that think big — even if
-              they’re super-small.
+              IT, security, and brand growth for teams that think big — even if they’re super-small.
             </h2>
             <div className="flex flex-col gap-4 max-w-lg">
               <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-3">
@@ -113,7 +112,9 @@ export function Home() {
 
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h3 className="text-brand-copper font-bold tracking-widest uppercase mb-3 text-sm">Our Expertise</h3>
+            <h3 className="text-brand-copper font-bold tracking-widest uppercase mb-3 text-sm">
+              Our Expertise
+            </h3>
             <h2 className="text-4xl font-bold text-brand-oxford">Everything You Need to Grow</h2>
           </div>
 
@@ -151,9 +152,9 @@ export function Home() {
                 Security & Trust You Can Rely On
               </h2>
               <p className="text-brand-slate mb-8 text-lg leading-relaxed">
-                We take security seriously. All of our services are SOC 2 compliant
-                and we are proud to be 100% US-based. Your data never leaves
-                domestic soil without your explicit permission.
+                We take security seriously. All of our services are SOC 2 compliant and we are proud
+                to be 100% US-based. Your data never leaves domestic soil without your explicit
+                permission.
               </p>
               <div className="flex gap-4">
                 <div className="bg-brand-cream px-4 py-2 rounded border border-gray-200 flex items-center gap-2 font-semibold text-brand-oxford">

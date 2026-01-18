@@ -1,3 +1,3 @@
-import { ArrowRight } from "lucide-react"
+import { ArrowRight } from "lucide-react";
 
-export { ArrowRight }
+export { ArrowRight };

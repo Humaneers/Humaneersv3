@@ -1,9 +1,11 @@
 # Project Plan: Humaneers Web Application
 
 ## Current State
+
 The application is a React Single Page Application (SPA) styled with Tailwind CSS. It serves as the digital presence for "Humaneers," an IT and brand consultancy. The design follows a "Modern Craftsman" aesthetic (Oxford Blue, Copper, Cream).
 
 ### Key Features Implemented:
+
 - **Routing**: Custom view-based routing in `App.tsx`.
 - **Layout**: Sticky header, responsive navigation with mega-menus, comprehensive footer.
 - **Pages**:
@@ -20,7 +22,8 @@ The application is a React Single Page Application (SPA) styled with Tailwind CS
 ## Change Log
 
 ### Session: Trust & Reliability Overhaul (Current)
-*Focus: Redesigning key pages for "Modern Craftsman" aesthetic, ensuring reliability, and fixing layout bugs.*
+
+_Focus: Redesigning key pages for "Modern Craftsman" aesthetic, ensuring reliability, and fixing layout bugs._
 
 - **`/components/TalkToSalesModal.tsx`**
   - **Refactor**: Switched to a cleaner, native-style single-column layout.
@@ -55,11 +58,13 @@ The application is a React Single Page Application (SPA) styled with Tailwind CS
 ## Remaining Tasks / Missing Features
 
 ### Content & Pages
+
 - [ ] **Blog**: Currently missing. Needs a `Blog` view in `App.tsx` and a listing/post component.
 - [ ] **Careers**: Currently missing. Needs a `Careers` view in `App.tsx` and a job listing component.
 - [ ] **Service Detail Pages**: While high-level pages exist, deeper "sub-service" pages could be beneficial if content allows.
 
 ### Functionality
+
 - [ ] **Backend Integration for Forms**:
   - `Contact.tsx`: Currently logs to console. Needs API endpoint.
   - `TalkToSales.tsx` & `TalkToSalesModal.tsx`: Currently logs to console. Needs API endpoint.
@@ -74,5 +79,6 @@ The application is a React Single Page Application (SPA) styled with Tailwind CS
   - Needs actual authentication (Supabase Auth) and a protected dashboard view.
 
 ### Design & Polish
+
 - [ ] **Accessibility Audit**: Ensure all colors meet WCAG contrast ratios (mostly done, but needs verification on lighter text).
 - [ ] **Mobile Optimization**: Double-check complex tables or grids on small screens.

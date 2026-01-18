@@ -1,11 +1,99 @@
+# Humaneers Website
 
-  # Humaneers Website Design
+> **Enterprise Strategy. Small Business Soul.**
 
-  This is a code bundle for Humaneers Website Design. The original project is available at https://www.figma.com/design/F8cpSsOZXMUfQxxmFU5TLO/Humaneers-Website-Design.
+The official website for Humaneers, built with modern web technologies to deliver a "Modern Craftsman" digital experience.
 
-  ## Running the code
+## 🛠 Tech Stack
 
-  Run `npm i` to install the dependencies.
+- **Framework**: [React](https://react.dev/) + [Vite](https://vitejs.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **UI Architecture**: [Radix UI](https://www.radix-ui.com/) + Shadcn/UI patterns
+- **Animation**: [Framer Motion](https://www.framer.com/motion/)
+- **Forms/Routing**: [Cal.com](https://cal.com/) Headless API
+- **Analytics**: Zoho PageSense + SalesIQ
 
-  Run `npm run dev` to start the development server.
-  
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm (v9 or higher)
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Development
+
+Start the development server:
+```bash
+npm run dev
+```
+
+### Build
+
+Build for production:
+```bash
+npm run build
+```
+
+The output will be in the `dist` directory.
+
+## ⚙️ Configuration
+
+Copy `.env.example` to `.env.local` and configure your environment variables:
+
+```bash
+cp .env.example .env.local
+```
+
+### Required Variables
+
+| Variable | Description |
+|----------|-------------|
+| `VITE_CAL_ORG_URL` | Your Cal.com organization URL (e.g., https://app.cal.com/org/humaneers) |
+| `VITE_CAL_SALES_FORM_ID` | UUID for the Sales Routing Form |
+| `VITE_CAL_SUPPORT_FORM_ID` | UUID for the Support Routing Form |
+
+## 🎨 Design System
+
+This project follows the **Modern Craftsman** design aesthetic:
+- **Colors**: Oxford Blue (`#1B263B`), Copper (`#B87333`), Cream (`#F5F1E9`)
+- **Typography**: System sans-serif stack for clarity and performance
+- **Principles**: Clarity over cleverness, warmth in professionalism
+
+See `CLAUDE.md` for detailed brand guidelines and component patterns.
+
+## 📦 Project Structure
+
+```
+src/
+├── components/
+│   ├── ui/          # Reusable UI components (buttons, inputs, etc.)
+│   ├── views/       # Page components (Home, Services, etc.)
+│   └── Layout.tsx   # Main application shell
+├── lib/
+│   ├── cal.ts       # Cal.com integration logic
+│   └── utils.ts     # Helper functions
+├── guidelines/      # Project documentation
+└── styles/
+    └── globals.css  # Global styles and Tailwind directives
+```
+
+## 🚢 Deployment
+
+This project is optimized for deployment on **Vercel**.
+
+1. Connect your repository to Vercel
+2. Configure the Environment Variables in the project settings
+3. Deploy
+
+## 📄 License
+
+Copyright © 2026 Humaneers. All rights reserved.

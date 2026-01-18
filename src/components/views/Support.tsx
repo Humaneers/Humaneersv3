@@ -17,7 +17,7 @@ export function Support() {
     priority: "",
     category: "",
     subject: "",
-    description: ""
+    description: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -37,18 +37,20 @@ export function Support() {
       // Redirect to Cal.com booking with support ticket data
       redirectToSupportBooking(formData);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Failed to redirect to booking. Please try again.");
+      toast.error(
+        error instanceof Error ? error.message : "Failed to redirect to booking. Please try again."
+      );
       setIsSubmitting(false);
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSelectChange = (name: string) => (value: string) => {
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -73,7 +75,8 @@ export function Support() {
               <div>
                 <h2 className="text-2xl font-bold text-brand-oxford mb-6">Need Help?</h2>
                 <p className="text-brand-slate mb-8">
-                  Fill out the form to submit a support ticket. Our team monitors tickets during business hours and will respond based on priority level.
+                  Fill out the form to submit a support ticket. Our team monitors tickets during
+                  business hours and will respond based on priority level.
                 </p>
               </div>
 
@@ -83,7 +86,9 @@ export function Support() {
                     <Clock className="w-5 h-5 text-red-500" />
                     <h3 className="font-bold text-brand-oxford">Critical (P1)</h3>
                   </div>
-                  <p className="text-sm text-brand-slate">System down or data breach. Response within 15 minutes.</p>
+                  <p className="text-sm text-brand-slate">
+                    System down or data breach. Response within 15 minutes.
+                  </p>
                 </div>
 
                 <div className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-orange-500">
@@ -91,7 +96,9 @@ export function Support() {
                     <Clock className="w-5 h-5 text-orange-500" />
                     <h3 className="font-bold text-brand-oxford">High (P2)</h3>
                   </div>
-                  <p className="text-sm text-brand-slate">Major functionality impacted. Response within 1 hour.</p>
+                  <p className="text-sm text-brand-slate">
+                    Major functionality impacted. Response within 1 hour.
+                  </p>
                 </div>
 
                 <div className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-yellow-500">
@@ -99,7 +106,9 @@ export function Support() {
                     <Clock className="w-5 h-5 text-yellow-500" />
                     <h3 className="font-bold text-brand-oxford">Medium (P3)</h3>
                   </div>
-                  <p className="text-sm text-brand-slate">Minor issue with workaround. Response within 4 hours.</p>
+                  <p className="text-sm text-brand-slate">
+                    Minor issue with workaround. Response within 4 hours.
+                  </p>
                 </div>
 
                 <div className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
@@ -107,7 +116,9 @@ export function Support() {
                     <Clock className="w-5 h-5 text-blue-500" />
                     <h3 className="font-bold text-brand-oxford">Low (P4)</h3>
                   </div>
-                  <p className="text-sm text-brand-slate">General question or request. Response within 24 hours.</p>
+                  <p className="text-sm text-brand-slate">
+                    General question or request. Response within 24 hours.
+                  </p>
                 </div>
               </div>
 
@@ -117,7 +128,8 @@ export function Support() {
                   <h3 className="font-bold">Security Issues?</h3>
                 </div>
                 <p className="text-sm text-gray-300 mb-4">
-                  For security vulnerabilities, please email security@humaneers.dev directly with details.
+                  For security vulnerabilities, please email security@humaneers.dev directly with
+                  details.
                 </p>
                 <div className="flex items-center gap-3">
                   <Headphones className="w-5 h-5 text-brand-copper" />
@@ -133,126 +145,134 @@ export function Support() {
             <div className="lg:w-2/3">
               <div className="bg-white p-8 rounded-xl shadow-lg">
                 <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <Label htmlFor="name">Full Name</Label>
-                        <Input
-                          id="name"
-                          name="name"
-                          placeholder="Jane Doe"
-                          required
-                          className="h-12 bg-gray-50 border-gray-200"
-                          value={formData.name}
-                          onChange={handleChange}
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email Address</Label>
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          placeholder="jane@company.com"
-                          required
-                          className="h-12 bg-gray-50 border-gray-200"
-                          value={formData.email}
-                          onChange={handleChange}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <Label htmlFor="phone">Phone (Optional)</Label>
-                        <Input
-                          id="phone"
-                          name="phone"
-                          type="tel"
-                          placeholder="(555) 123-4567"
-                          className="h-12 bg-gray-50 border-gray-200"
-                          value={formData.phone}
-                          onChange={handleChange}
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="company">Company (Optional)</Label>
-                        <Input
-                          id="company"
-                          name="company"
-                          placeholder="Acme Inc."
-                          className="h-12 bg-gray-50 border-gray-200"
-                          value={formData.company}
-                          onChange={handleChange}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <Label htmlFor="priority">Priority Level</Label>
-                        <Select onValueChange={handleSelectChange("priority")} required>
-                          <SelectTrigger id="priority" className="h-12 bg-gray-50 border-gray-200">
-                            <SelectValue placeholder="Select priority" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="critical">Critical (P1) - System Down</SelectItem>
-                            <SelectItem value="high">High (P2) - Major Impact</SelectItem>
-                            <SelectItem value="medium">Medium (P3) - Minor Issue</SelectItem>
-                            <SelectItem value="low">Low (P4) - General Question</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="category">Category</Label>
-                        <Select onValueChange={handleSelectChange("category")} required>
-                          <SelectTrigger id="category" className="h-12 bg-gray-50 border-gray-200">
-                            <SelectValue placeholder="Select category" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="technical">Technical Issue</SelectItem>
-                            <SelectItem value="account">Account / Billing</SelectItem>
-                            <SelectItem value="security">Security Concern</SelectItem>
-                            <SelectItem value="feature">Feature Request</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="subject">Subject</Label>
+                      <Label htmlFor="name">Full Name</Label>
                       <Input
-                        id="subject"
-                        name="subject"
-                        placeholder="Brief description of the issue"
+                        id="name"
+                        name="name"
+                        placeholder="Jane Doe"
                         required
                         className="h-12 bg-gray-50 border-gray-200"
-                        value={formData.subject}
+                        value={formData.name}
                         onChange={handleChange}
                       />
                     </div>
-
                     <div className="space-y-2">
-                      <Label htmlFor="description">Description</Label>
-                      <Textarea
-                        id="description"
-                        name="description"
-                        placeholder="Please provide as much detail as possible: What happened? What were you trying to do? Any error messages?"
-                        className="min-h-[150px] bg-gray-50 border-gray-200"
+                      <Label htmlFor="email">Email Address</Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="jane@company.com"
                         required
-                        value={formData.description}
+                        className="h-12 bg-gray-50 border-gray-200"
+                        value={formData.email}
                         onChange={handleChange}
                       />
                     </div>
+                  </div>
 
-                    <Button type="submit" className="w-full bg-brand-oxford hover:bg-brand-oxford-muted text-white text-lg py-6 h-auto" disabled={isSubmitting}>
-                      {isSubmitting ? (
-                        <>Redirecting to Booking... <Loader2 className="ml-2 w-5 h-5 animate-spin" /></>
-                      ) : (
-                        <>Continue to Schedule Support Call <ArrowRight className="ml-2 w-5 h-5" /></>
-                      )}
-                    </Button>
-                  </form>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="phone">Phone (Optional)</Label>
+                      <Input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        placeholder="(555) 123-4567"
+                        className="h-12 bg-gray-50 border-gray-200"
+                        value={formData.phone}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="company">Company (Optional)</Label>
+                      <Input
+                        id="company"
+                        name="company"
+                        placeholder="Acme Inc."
+                        className="h-12 bg-gray-50 border-gray-200"
+                        value={formData.company}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="priority">Priority Level</Label>
+                      <Select onValueChange={handleSelectChange("priority")} required>
+                        <SelectTrigger id="priority" className="h-12 bg-gray-50 border-gray-200">
+                          <SelectValue placeholder="Select priority" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="critical">Critical (P1) - System Down</SelectItem>
+                          <SelectItem value="high">High (P2) - Major Impact</SelectItem>
+                          <SelectItem value="medium">Medium (P3) - Minor Issue</SelectItem>
+                          <SelectItem value="low">Low (P4) - General Question</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="category">Category</Label>
+                      <Select onValueChange={handleSelectChange("category")} required>
+                        <SelectTrigger id="category" className="h-12 bg-gray-50 border-gray-200">
+                          <SelectValue placeholder="Select category" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="technical">Technical Issue</SelectItem>
+                          <SelectItem value="account">Account / Billing</SelectItem>
+                          <SelectItem value="security">Security Concern</SelectItem>
+                          <SelectItem value="feature">Feature Request</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="subject">Subject</Label>
+                    <Input
+                      id="subject"
+                      name="subject"
+                      placeholder="Brief description of the issue"
+                      required
+                      className="h-12 bg-gray-50 border-gray-200"
+                      value={formData.subject}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="description">Description</Label>
+                    <Textarea
+                      id="description"
+                      name="description"
+                      placeholder="Please provide as much detail as possible: What happened? What were you trying to do? Any error messages?"
+                      className="min-h-[150px] bg-gray-50 border-gray-200"
+                      required
+                      value={formData.description}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <Button
+                    type="submit"
+                    className="w-full bg-brand-oxford hover:bg-brand-oxford-muted text-white text-lg py-6 h-auto"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        Redirecting to Booking... <Loader2 className="ml-2 w-5 h-5 animate-spin" />
+                      </>
+                    ) : (
+                      <>
+                        Continue to Schedule Support Call <ArrowRight className="ml-2 w-5 h-5" />
+                      </>
+                    )}
+                  </Button>
+                </form>
               </div>
             </div>
           </div>

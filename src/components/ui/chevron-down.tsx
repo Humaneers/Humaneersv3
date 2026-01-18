@@ -1,3 +1,3 @@
-import { ChevronDown } from "lucide-react"
+import { ChevronDown } from "lucide-react";
 
-export { ChevronDown }
+export { ChevronDown };

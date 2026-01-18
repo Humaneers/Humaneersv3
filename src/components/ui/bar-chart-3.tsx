@@ -1,3 +1,3 @@
-import { BarChart3 } from "lucide-react"
+import { BarChart3 } from "lucide-react";
 
-export { BarChart3 }
+export { BarChart3 };

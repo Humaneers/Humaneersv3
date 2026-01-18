@@ -1,3 +1,3 @@
-import { Clock } from "lucide-react"
+import { Clock } from "lucide-react";
 
-export { Clock }
+export { Clock };

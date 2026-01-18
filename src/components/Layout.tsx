@@ -17,10 +17,13 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
 import { cn } from "./ui/utils";
-import { redirectToNewsletterBooking, validateNewsletterForm, type NewsletterFormData } from "../lib/cal";
+import {
+  redirectToNewsletterBooking,
+  validateNewsletterForm,
+  type NewsletterFormData,
+} from "../lib/cal";
 import { toast } from "sonner";
 import {
   navSections,
@@ -51,7 +54,7 @@ export function Layout() {
 
     const formData: NewsletterFormData = {
       email: newsletterEmail,
-      source: 'footer',
+      source: "footer",
     };
 
     const validation = validateNewsletterForm(formData);
@@ -65,7 +68,9 @@ export function Layout() {
     try {
       redirectToNewsletterBooking(formData);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Failed to subscribe. Please try again.");
+      toast.error(
+        error instanceof Error ? error.message : "Failed to subscribe. Please try again."
+      );
       setIsNewsletterSubmitting(false);
     }
   };
@@ -75,9 +80,7 @@ export function Layout() {
       <>
         <div className="text-sm font-medium leading-none text-brand-oxford">{item.title}</div>
         {item.description ? (
-          <p className="line-clamp-2 text-sm leading-snug text-brand-slate">
-            {item.description}
-          </p>
+          <p className="line-clamp-2 text-sm leading-snug text-brand-slate">{item.description}</p>
         ) : null}
       </>
     );
@@ -133,7 +136,10 @@ export function Layout() {
 
     if (item.disabled) {
       return (
-        <span className="text-left text-brand-slate/60 font-medium cursor-not-allowed" aria-disabled="true">
+        <span
+          className="text-left text-brand-slate/60 font-medium cursor-not-allowed"
+          aria-disabled="true"
+        >
           {label}
         </span>
       );
@@ -173,9 +179,7 @@ export function Layout() {
     <div className="font-sans antialiased text-brand-slate bg-brand-cream min-h-screen flex flex-col">
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? "bg-brand-oxford shadow-lg py-3"
-            : "bg-brand-oxford/95 backdrop-blur-sm py-5"
+          isScrolled ? "bg-brand-oxford shadow-lg py-3" : "bg-brand-oxford/95 backdrop-blur-sm py-5"
         }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
@@ -343,18 +347,20 @@ export function Layout() {
             >
               <div className="flex flex-col p-6 gap-6 max-h-[80vh] overflow-y-auto">
                 {navSections.map((section) => {
-                  const mobileItems = section.featured ? [section.featured, ...section.items] : section.items;
+                  const mobileItems = section.featured
+                    ? [section.featured, ...section.items]
+                    : section.items;
                   return (
-                  <div key={section.id}>
-                    <h4 className="text-brand-copper font-bold uppercase text-xs tracking-wider mb-3">
-                      {section.label}
-                    </h4>
-                    <div className="flex flex-col gap-3 pl-2 border-l border-gray-700">
-                      {mobileItems.map((item) => (
-                        <div key={item.title}>{renderMobileItem(item)}</div>
-                      ))}
+                    <div key={section.id}>
+                      <h4 className="text-brand-copper font-bold uppercase text-xs tracking-wider mb-3">
+                        {section.label}
+                      </h4>
+                      <div className="flex flex-col gap-3 pl-2 border-l border-gray-700">
+                        {mobileItems.map((item) => (
+                          <div key={item.title}>{renderMobileItem(item)}</div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
                   );
                 })}
 
@@ -368,7 +374,10 @@ export function Layout() {
                       {ctaLinks.support.label}
                     </Link>
                   </Button>
-                  <Button className="bg-brand-copper hover:bg-brand-copper-dark text-white w-full" asChild>
+                  <Button
+                    className="bg-brand-copper hover:bg-brand-copper-dark text-white w-full"
+                    asChild
+                  >
                     <Link to={ctaLinks.sales.to} onClick={closeMobileMenu}>
                       {ctaLinks.sales.label}
                     </Link>
@@ -454,7 +463,7 @@ export function Layout() {
                       Subscribing...
                     </>
                   ) : (
-                    'Subscribe'
+                    "Subscribe"
                   )}
                 </Button>
               </form>
@@ -477,7 +486,7 @@ export function Layout() {
               </div>
             </div>
             <div className="flex flex-wrap justify-center items-center gap-6">
-              {footerMetaLinks.map((item) => (
+              {footerMetaLinks.map((item) =>
                 item.href ? (
                   <a
                     key={item.label}
@@ -489,11 +498,15 @@ export function Layout() {
                     {item.label}
                   </a>
                 ) : (
-                  <Link key={item.label} to={item.to!} className="hover:text-brand-copper transition-colors">
+                  <Link
+                    key={item.label}
+                    to={item.to!}
+                    className="hover:text-brand-copper transition-colors"
+                  >
                     {item.label}
                   </Link>
                 )
-              ))}
+              )}
               <span className="text-brand-copper">Supporting 501(c)(3) Organizations</span>
             </div>
           </div>
@@ -504,7 +517,7 @@ export function Layout() {
 }
 
 const ListItem = forwardRef<
-  React.ElementRef<"a">,
+  HTMLAnchorElement,
   React.ComponentPropsWithoutRef<"a"> & { item: NavItem }
 >(({ className, item }, ref) => {
   if (item.disabled) {
@@ -512,7 +525,6 @@ const ListItem = forwardRef<
       <li>
         <NavigationMenuLink asChild>
           <div
-            ref={ref}
             className={cn(
               "block select-none space-y-1 rounded-md p-3 leading-none text-brand-oxford/60 cursor-not-allowed",
               className

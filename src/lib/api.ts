@@ -25,7 +25,7 @@ export interface ApiResponse {
 async function handleResponse(response: Response): Promise<ApiResponse> {
   if (!response.ok) {
     const data = await response.json().catch(() => ({}));
-    throw new Error(data.error || 'Something went wrong. Please try again.');
+    throw new Error(data.error || "Something went wrong. Please try again.");
   }
   return response.json();
 }
@@ -33,8 +33,8 @@ async function handleResponse(response: Response): Promise<ApiResponse> {
 // Ethics reporting endpoint (if you still need this functionality)
 export async function submitEthicsReport(data: EthicsFormData): Promise<ApiResponse> {
   const response = await fetch(`/api/submit-ethics`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
   return handleResponse(response);

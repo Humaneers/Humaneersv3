@@ -1,3 +1,3 @@
-import { MapPin } from "lucide-react"
+import { MapPin } from "lucide-react";
 
-export { MapPin }
+export { MapPin };

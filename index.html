@@ -1,80 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
 
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      <!-- SEO Meta Tags -->
-      <title>Humaneers | Enterprise Strategy, Small Business Soul | IT & Brand Growth</title>
-      <meta name="description" content="Enterprise-grade IT, security, and brand growth for small businesses. SOC 2 compliant, 100% US-based managed IT services, family protection, and fractional leadership." />
-      <meta name="keywords" content="managed IT, small business IT, cybersecurity, brand growth, fractional CIO, CMO, SOC 2 compliance, US-based IT support" />
-      <meta name="author" content="Humaneers" />
+  <!-- SEO Meta Tags -->
+  <title>Humaneers | Enterprise Strategy, Small Business Soul | IT & Brand Growth</title>
+  <meta name="description"
+    content="Enterprise-grade IT, security, and brand growth for small businesses. SOC 2 compliant, 100% US-based managed IT services, family protection, and fractional leadership." />
+  <meta name="keywords"
+    content="managed IT, small business IT, cybersecurity, brand growth, fractional CIO, CMO, SOC 2 compliance, US-based IT support" />
+  <meta name="author" content="Humaneers" />
 
-      <!-- Open Graph / Facebook -->
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content="https://humaneers.com/" />
-      <meta property="og:title" content="Humaneers | Enterprise Strategy, Small Business Soul" />
-      <meta property="og:description" content="Enterprise-grade IT, security, and brand growth for small businesses. SOC 2 compliant, 100% US-based services." />
-      <meta property="og:image" content="https://humaneers.com/og-image.jpg" />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://humaneers.dev/" />
+  <meta property="og:title" content="Humaneers | Enterprise Strategy, Small Business Soul" />
+  <meta property="og:description"
+    content="Enterprise-grade IT, security, and brand growth for small businesses. SOC 2 compliant, 100% US-based services." />
+  <meta property="og:image" content="https://humaneers.dev/og-image.svg" />
 
-      <!-- Twitter -->
-      <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content="https://humaneers.com/" />
-      <meta property="twitter:title" content="Humaneers | Enterprise Strategy, Small Business Soul" />
-      <meta property="twitter:description" content="Enterprise-grade IT, security, and brand growth for small businesses. SOC 2 compliant, 100% US-based services." />
-      <meta property="twitter:image" content="https://humaneers.com/og-image.jpg" />
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://humaneers.dev/" />
+  <meta property="twitter:title" content="Humaneers | Enterprise Strategy, Small Business Soul" />
+  <meta property="twitter:description"
+    content="Enterprise-grade IT, security, and brand growth for small businesses. SOC 2 compliant, 100% US-based services." />
+  <meta property="twitter:image" content="https://humaneers.dev/og-image.svg" />
 
-      <!-- Favicon -->
-      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-      <!-- Canonical URL -->
-      <link rel="canonical" href="https://humaneers.com/" />
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://humaneers.dev/" />
 
-      <!-- Critical CSS to prevent FOUC -->
-      <style>
-        /* Prevent flash of unstyled content */
-        html, body {
-          margin: 0;
-          padding: 0;
-          background-color: #F5F1E9; /* brand-cream */
-          color: #4E596F; /* default text color */
-          font-family: ui-sans-serif, system-ui, sans-serif;
-        }
+  <!-- Critical CSS to prevent FOUC -->
+  <style>
+    /* Prevent flash of unstyled content */
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #F5F1E9;
+      /* brand-cream */
+      color: #4E596F;
+      /* default text color */
+      font-family: ui-sans-serif, system-ui, sans-serif;
+    }
 
-        #root {
-          min-height: 100vh;
-          opacity: 1;
-        }
+    #root {
+      min-height: 100vh;
+      opacity: 1;
+    }
 
-        /* Minimal loading state */
-        #root:empty {
-          display: flex;
-          align-items: center;
-          justify-center;
-          min-height: 100vh;
-        }
+    /* Minimal loading state */
+    #root:empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
 
-        #root:empty::after {
-          content: "";
-          width: 40px;
-          height: 40px;
-          border: 3px solid #B87333; /* brand-copper */
-          border-top-color: transparent;
-          border-radius: 50%;
-          animation: spin 0.8s linear infinite;
-        }
+    #root:empty::after {
+      content: "";
+      width: 40px;
+      height: 40px;
+      border: 3px solid #B87333;
+      /* brand-copper */
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
 
-        @keyframes spin {
-          to { transform: rotate(360deg); }
-        }
-      </style>
-    </head>
-    <script src="https://cdn.pagesense.io/js/911811328/0172b61c43a2473c98eef23da6d865af.js"></script>
-    <body>
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-      <script>window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}</script><script id="zsiqscript" src="https://salesiq.zohopublic.com/widget?wc=siq5af82cc1e8970552a081c3ee50f7191d30ebfca6797a53e74bd40b6d10c3dbee" defer></script>
-    </body>
-  </html>
-  
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<script src="https://cdn.pagesense.io/js/911811328/0172b61c43a2473c98eef23da6d865af.js"></script>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+  <script>window.$zoho = window.$zoho || {}; $zoho.salesiq = $zoho.salesiq || { ready: function () { } }</script>
+  <script id="zsiqscript"
+    src="https://salesiq.zohopublic.com/widget?wc=siq5af82cc1e8970552a081c3ee50f7191d30ebfca6797a53e74bd40b6d10c3dbee"
+    defer></script>
+</body>
+
+</html>

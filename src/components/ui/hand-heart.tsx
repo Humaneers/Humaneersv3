@@ -1,3 +1,3 @@
-import { HandHeart } from "lucide-react"
+import { HandHeart } from "lucide-react";
 
-export { HandHeart }
+export { HandHeart };

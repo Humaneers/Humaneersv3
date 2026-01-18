@@ -1,3 +1,3 @@
-import { Headphones } from "lucide-react"
+import { Headphones } from "lucide-react";
 
-export { Headphones }
+export { Headphones };

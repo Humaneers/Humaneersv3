@@ -1,3 +1,3 @@
-import { Building2 } from "lucide-react"
+import { Building2 } from "lucide-react";
 
-export { Building2 }
+export { Building2 };

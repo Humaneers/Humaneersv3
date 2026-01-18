@@ -1,3 +1,3 @@
-import { Server } from "lucide-react"
+import { Server } from "lucide-react";
 
-export { Server }
+export { Server };

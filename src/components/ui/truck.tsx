@@ -1,3 +1,3 @@
-import { Truck } from "lucide-react"
+import { Truck } from "lucide-react";
 
-export { Truck }
+export { Truck };

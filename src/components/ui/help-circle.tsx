@@ -1,3 +1,3 @@
-import { HelpCircle } from "lucide-react"
+import { HelpCircle } from "lucide-react";
 
-export { HelpCircle }
+export { HelpCircle };

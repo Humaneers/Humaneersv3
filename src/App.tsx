@@ -12,15 +12,9 @@ import { NotFound } from "./components/views/NotFound";
 const Pricing = lazy(() =>
   import("./components/views/Pricing").then((m) => ({ default: m.Pricing }))
 );
-const Growth = lazy(() =>
-  import("./components/views/Growth").then((m) => ({ default: m.Growth }))
-);
-const About = lazy(() =>
-  import("./components/views/About").then((m) => ({ default: m.About }))
-);
-const Terms = lazy(() =>
-  import("./components/views/Terms").then((m) => ({ default: m.Terms }))
-);
+const Growth = lazy(() => import("./components/views/Growth").then((m) => ({ default: m.Growth })));
+const About = lazy(() => import("./components/views/About").then((m) => ({ default: m.About })));
+const Terms = lazy(() => import("./components/views/Terms").then((m) => ({ default: m.Terms })));
 const Privacy = lazy(() =>
   import("./components/views/Privacy").then((m) => ({ default: m.Privacy }))
 );
@@ -56,18 +50,14 @@ const Personal = lazy(() =>
 const Colophon = lazy(() =>
   import("./components/views/Colophon").then((m) => ({ default: m.Colophon }))
 );
-const Ethics = lazy(() =>
-  import("./components/views/Ethics").then((m) => ({ default: m.Ethics }))
-);
+const Ethics = lazy(() => import("./components/views/Ethics").then((m) => ({ default: m.Ethics })));
 const Resources = lazy(() =>
   import("./components/views/Resources").then((m) => ({ default: m.Resources }))
 );
 const Support = lazy(() =>
   import("./components/views/Support").then((m) => ({ default: m.Support }))
 );
-const Status = lazy(() =>
-  import("./components/views/Status").then((m) => ({ default: m.Status }))
-);
+const Status = lazy(() => import("./components/views/Status").then((m) => ({ default: m.Status })));
 
 const suspenseFallback = (
   <div className="min-h-screen flex items-center justify-center bg-brand-cream">

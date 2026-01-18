@@ -1,3 +1,3 @@
-import { Layers } from "lucide-react"
+import { Layers } from "lucide-react";
 
-export { Layers }
+export { Layers };

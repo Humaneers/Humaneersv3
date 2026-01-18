@@ -1,3 +1,3 @@
-import { Lock } from "lucide-react"
+import { Lock } from "lucide-react";
 
-export { Lock }
+export { Lock };

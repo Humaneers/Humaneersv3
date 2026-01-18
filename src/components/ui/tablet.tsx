@@ -1,3 +1,3 @@
-import { Tablet } from "lucide-react"
+import { Tablet } from "lucide-react";
 
-export { Tablet }
+export { Tablet };

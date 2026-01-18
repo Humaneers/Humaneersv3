@@ -1,3 +1,3 @@
-import { Stethoscope } from "lucide-react"
+import { Stethoscope } from "lucide-react";
 
-export { Stethoscope }
+export { Stethoscope };

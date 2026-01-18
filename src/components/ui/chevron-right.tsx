@@ -1,3 +1,3 @@
-import { ChevronRight } from "lucide-react"
+import { ChevronRight } from "lucide-react";
 
-export { ChevronRight }
+export { ChevronRight };

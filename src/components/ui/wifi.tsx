@@ -1,3 +1,3 @@
-import { Wifi } from "lucide-react"
+import { Wifi } from "lucide-react";
 
-export { Wifi }
+export { Wifi };

@@ -1,3 +1,3 @@
-import { FileText } from "lucide-react"
+import { FileText } from "lucide-react";
 
-export { FileText }
+export { FileText };

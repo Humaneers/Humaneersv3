@@ -193,8 +193,8 @@ export const footerSections = [
 
 export interface FooterMetaLink {
   label: string;
-  to?: string;        // Internal route
-  href?: string;      // External URL
+  to?: string; // Internal route
+  href?: string; // External URL
   external?: boolean; // Open in new tab
 }
 

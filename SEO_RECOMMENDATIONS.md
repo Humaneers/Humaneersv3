@@ -42,7 +42,7 @@ export function ManagedIT() {
         <meta name="description" content="Cloud-native managed IT infrastructure with 100% US-based engineering. No user minimums, no offshore NOCs. SOC 2 compliant nationwide support." />
         <meta property="og:title" content="Managed IT Services | Humaneers" />
         <meta property="og:description" content="Enterprise-grade managed IT for small businesses. 24/7 monitoring, proactive security, hybrid cloud infrastructure." />
-        <link rel="canonical" content="https://humaneers.com/managed-it" />
+        <link rel="canonical" content="https://humaneers.dev/managed-it" />
       </Helmet>
       {/* Page content */}
     </>
@@ -60,8 +60,8 @@ Add JSON-LD structured data for:
   "@type": "Organization",
   "name": "Humaneers",
   "description": "Enterprise Strategy, Small Business Soul",
-  "url": "https://humaneers.com",
-  "logo": "https://humaneers.com/logo.svg",
+  "url": "https://humaneers.dev",
+  "logo": "https://humaneers.dev/logo.svg",
   "contactPoint": {
     "@type": "ContactPoint",
     "telephone": "+1-XXX-XXX-XXXX",
@@ -117,7 +117,7 @@ Current: Client-side routing with single HTML file
 ```
 User-agent: *
 Allow: /
-Sitemap: https://humaneers.com/sitemap.xml
+Sitemap: https://humaneers.dev/sitemap.xml
 ```
 
 **Create public/sitemap.xml:**
@@ -125,13 +125,13 @@ Sitemap: https://humaneers.com/sitemap.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://humaneers.com/</loc>
+    <loc>https://humaneers.dev/</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://humaneers.com/managed-it</loc>
+    <loc>https://humaneers.dev/managed-it</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

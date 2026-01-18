@@ -1,3 +1,3 @@
-import { Shield } from "lucide-react"
+import { Shield } from "lucide-react";
 
-export { Shield }
+export { Shield };

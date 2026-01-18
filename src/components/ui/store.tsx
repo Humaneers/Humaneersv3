@@ -1,3 +1,3 @@
-import { Store } from "lucide-react"
+import { Store } from "lucide-react";
 
-export { Store }
+export { Store };

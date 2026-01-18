@@ -119,16 +119,16 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   /* Brand Colors */
-  --color-brand-oxford: #1B263B;
-  --color-brand-oxford-muted: #2C3B55;
-  --color-brand-oxford-deep: #0F1521;
-  --color-brand-copper: #B87333;
-  --color-brand-copper-dark: #A0632A;
-  --color-brand-copper-light: #E5A060;
-  --color-brand-slate: #4E596F;
-  --color-brand-cream: #F5F1E9;
-  --color-brand-surface: #F9FAFB;
-  --color-brand-neutral-200: #E5E7EB;
+  --color-brand-oxford: #1b263b;
+  --color-brand-oxford-muted: #2c3b55;
+  --color-brand-oxford-deep: #0f1521;
+  --color-brand-copper: #b87333;
+  --color-brand-copper-dark: #a0632a;
+  --color-brand-copper-light: #e5a060;
+  --color-brand-slate: #4e596f;
+  --color-brand-cream: #f5f1e9;
+  --color-brand-surface: #f9fafb;
+  --color-brand-neutral-200: #e5e7eb;
 }
 
 @layer base {
@@ -147,7 +147,7 @@
  * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
  */
 @layer base {
-  :where(:not(:has([class*=' text-']), :not(:has([class^='text-'])))) {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
     h1 {
       font-size: var(--text-2xl);
       font-weight: var(--font-weight-medium);
