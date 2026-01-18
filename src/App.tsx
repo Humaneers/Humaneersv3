@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import { Layout } from "./components/Layout";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { Skeleton } from "./components/ui/skeleton";
@@ -330,6 +331,7 @@ export default function App() {
         </Routes>
       </Suspense>
       <ScrollToTop />
+      <Analytics />
     </ErrorBoundary>
   );
 }
