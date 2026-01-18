@@ -27,7 +27,7 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
     employees: "",
     phone: "",
     budget: "",
-    interests: [] as string[],
+    interests: [],
     message: ""
   });
 
@@ -269,8 +269,20 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
                               <div key={item} className="flex items-center space-x-2">
                                 <Checkbox
                                   id={`modal-interest-${item}`}
-                                  checked={formData.interests.includes(item)}
-                                  onCheckedChange={() => handleInterestChange(item)}
+                                  checked={formData.interests?.includes(item) || false}
+                                  onCheckedChange={(checked) => {
+                                    if (checked) {
+                                      setFormData(prev => ({
+                                        ...prev,
+                                        interests: [...(prev.interests || []), item]
+                                      }));
+                                    } else {
+                                      setFormData(prev => ({
+                                        ...prev,
+                                        interests: (prev.interests || []).filter(i => i !== item)
+                                      }));
+                                    }
+                                  }}
                                 />
                                 <label
                                   htmlFor={`modal-interest-${item}`}
