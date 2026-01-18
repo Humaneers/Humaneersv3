@@ -1,4 +1,6 @@
 import { APP_VERSION } from "../version";
+import { Suspense } from "react";
+import { PageLoader } from "./PageLoader";
 /**
  * Layout Component
  *
@@ -389,8 +391,12 @@ export function Layout() {
         </AnimatePresence>
       </header>
 
+
+
       <main className="flex-grow pt-20">
-        <Outlet />
+        <Suspense fallback={<PageLoader />}>
+          <Outlet />
+        </Suspense>
       </main>
 
       <footer className="bg-brand-oxford text-gray-400 py-12 border-t border-brand-copper">

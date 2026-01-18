@@ -1,8 +1,7 @@
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { ErrorBoundary } from "./components/ErrorBoundary";
-import { Skeleton } from "./components/ui/skeleton";
 import { Seo } from "./components/Seo";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { routePaths } from "./routes";
@@ -59,276 +58,261 @@ const Support = lazy(() =>
 );
 const Status = lazy(() => import("./components/views/Status").then((m) => ({ default: m.Status })));
 
-const suspenseFallback = (
-  <div className="min-h-screen flex items-center justify-center bg-brand-cream">
-    <div className="max-w-4xl w-full space-y-4 px-6">
-      <Skeleton className="h-12 w-full bg-gray-200">
-        <div className="h-full w-1/4 bg-brand-copper/20 rounded animate-pulse" />
-      </Skeleton>
-      <Skeleton className="h-64 w-full bg-gray-200">
-        <div className="h-4 w-3/4 bg-brand-copper/20 rounded mt-4 ml-4 animate-pulse" />
-      </Skeleton>
-      <Skeleton className="h-32 w-full bg-gray-200" />
-    </div>
-  </div>
-);
-
 export default function App() {
   return (
     <ErrorBoundary>
-      <Suspense fallback={suspenseFallback}>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route
-              path={routePaths.home}
-              element={
-                <Seo
-                  title="Humaneers | Enterprise Strategy, Small Business Soul"
-                  canonicalPath={routePaths.home}
-                >
-                  <Home />
-                </Seo>
-              }
-            />
-            <Route
-              path={routePaths.pricing}
-              element={
-                <Seo
-                  title="Humaneers | Pricing"
-                  description="Enterprise IT, brand strategy, and family cybersecurity starting at $1,500/mo. SOC 2 Type II compliant."
-                  canonicalPath={routePaths.pricing}
-                >
-                  <Pricing />
-                </Seo>
-              }
-            />
-            <Route
-              path={routePaths.growth}
-              element={
-                <Seo
-                  title="Humaneers | Brand Growth"
-                  description="Brand strategy and marketing leadership for fast-growing teams."
-                  canonicalPath={routePaths.growth}
-                >
-                  <Growth />
-                </Seo>
-              }
-            />
-            <Route
-              path={routePaths.about}
-              element={
-                <Seo
-                  title="Humaneers | About"
-                  description="Built by engineers for businesses. SOC 2 certified. Tempe-based, serving clients nationwide."
-                  canonicalPath={routePaths.about}
-                >
-                  <About />
-                </Seo>
-              }
-            />
-            <Route
-              path={routePaths.managedIt}
-              element={
-                <Seo
-                  title="Humaneers | Managed IT"
-                  description="99.9% uptime SLA. Cloud-native infrastructure, 24/7 monitoring, 15-minute P1 response. No downtime, just uptime."
-                  canonicalPath={routePaths.managedIt}
-                >
-                  <ManagedIT />
-                </Seo>
-              }
-            />
-            <Route
-              path={routePaths.familyProtection}
-              element={
-                <Seo
-                  title="Humaneers | Family Protection"
-                  description="Close the home-office security gap. Enterprise cybersecurity for your family, your home network, and your peace of mind."
-                  canonicalPath={routePaths.familyProtection}
-                >
-                  <FamilyProtection />
-                </Seo>
-              }
-            />
-            <Route
-              path={routePaths.fractionalLeadership}
-              element={
-                <Seo
-                  title="Humaneers | Fractional Leadership"
-                  description="Your own CIO/CMO without the salary cap. Strategic planning, vendor management, and executive guidance."
-                  canonicalPath={routePaths.fractionalLeadership}
-                >
-                  <FractionalLeadership />
-                </Seo>
-              }
-            />
-            <Route
-              path={routePaths.nonProfits}
-              element={
-                <Seo
-                  title="Humaneers | Nonprofits"
-                  description="Mission-focused IT for 501(c)(3) organizations. Special pricing, grant-ready documentation, volunteer-friendly systems."
-                  canonicalPath={routePaths.nonProfits}
-                >
-                  <NonProfits />
-                </Seo>
-              }
-            />
-            <Route
-              path={routePaths.industries}
-              element={
-                <Seo
-                  title="Humaneers | Regulated Industries"
-                  description="HIPAA, PCI DSS, and SOX compliance built-in. BAAs available. Purpose-built for healthcare and finance."
-                  canonicalPath={routePaths.industries}
-                >
-                  <Industries />
-                </Seo>
-              }
-            />
-            <Route
-              path={routePaths.services}
-              element={
-                <Seo
-                  title="Humaneers | Services"
-                  description="Managed IT, brand growth, family protection, and fractional leadership. Enterprise strategy, small business soul."
-                  canonicalPath={routePaths.services}
-                >
-                  <Services />
-                </Seo>
-              }
-            />
-            <Route
-              path={routePaths.contact}
-              element={
-                <Seo
-                  title="Humaneers | Contact"
-                  description="Contact Humaneers for sales, support, or partnership inquiries."
-                  canonicalPath={routePaths.contact}
-                >
-                  <Contact />
-                </Seo>
-              }
-            />
-            <Route
-              path={routePaths.talkToSales}
-              element={
-                <Seo
-                  title="Humaneers | Start a Conversation"
-                  description="Tell us about your organization and we'll design a custom roadmap."
-                  canonicalPath={routePaths.talkToSales}
-                >
-                  <TalkToSales />
-                </Seo>
-              }
-            />
-            <Route
-              path={routePaths.personal}
-              element={
-                <Seo
-                  title="Humaneers | Personal Plans"
-                  description="Home network security, device management, and family tech support. Protect what matters most."
-                  canonicalPath={routePaths.personal}
-                >
-                  <Personal />
-                </Seo>
-              }
-            />
-            <Route
-              path={routePaths.colophon}
-              element={
-                <Seo
-                  title="Humaneers | Colophon"
-                  description="Transparency, ethics, and the tools that power Humaneers."
-                  canonicalPath={routePaths.colophon}
-                >
-                  <Colophon />
-                </Seo>
-              }
-            />
-            <Route
-              path={routePaths.ethics}
-              element={
-                <Seo
-                  title="Humaneers | Ethics Charter"
-                  description="Our code of conduct, anti-corruption policy, and reporting."
-                  canonicalPath={routePaths.ethics}
-                >
-                  <Ethics />
-                </Seo>
-              }
-            />
-            <Route
-              path={routePaths.resources}
-              element={
-                <Seo
-                  title="Humaneers | Resources"
-                  description="Guides, security explainers, and operational documentation."
-                  canonicalPath={routePaths.resources}
-                >
-                  <Resources />
-                </Seo>
-              }
-            />
-            <Route
-              path={routePaths.status}
-              element={
-                <Seo
-                  title="Humaneers | Status"
-                  description="Service status and operational updates."
-                  canonicalPath={routePaths.status}
-                >
-                  <Status />
-                </Seo>
-              }
-            />
-            <Route
-              path={routePaths.support}
-              element={
-                <Seo
-                  title="Humaneers | Support"
-                  description="Get help with Humaneers services and support requests."
-                  canonicalPath={routePaths.support}
-                >
-                  <Support />
-                </Seo>
-              }
-            />
-            <Route
-              path={routePaths.terms}
-              element={
-                <Seo
-                  title="Humaneers | Terms of Service"
-                  description="Terms of service for Humaneers."
-                  canonicalPath={routePaths.terms}
-                >
-                  <Terms />
-                </Seo>
-              }
-            />
-            <Route
-              path={routePaths.privacy}
-              element={
-                <Seo
-                  title="Humaneers | Privacy Policy"
-                  description="Privacy policy for Humaneers."
-                  canonicalPath={routePaths.privacy}
-                >
-                  <Privacy />
-                </Seo>
-              }
-            />
-            <Route
-              path="*"
-              element={
-                <Seo title="Humaneers | Page Not Found" noIndex>
-                  <NotFound />
-                </Seo>
-              }
-            />
-          </Route>
-        </Routes>
-      </Suspense>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route
+            path={routePaths.home}
+            element={
+              <Seo
+                title="Humaneers | Enterprise Strategy, Small Business Soul"
+                canonicalPath={routePaths.home}
+              >
+                <Home />
+              </Seo>
+            }
+          />
+          {/* ... other routes ... */}
+          <Route
+            path={routePaths.pricing}
+            element={
+              <Seo
+                title="Humaneers | Pricing"
+                description="Enterprise IT, brand strategy, and family cybersecurity starting at $1,500/mo. SOC 2 Type II compliant."
+                canonicalPath={routePaths.pricing}
+              >
+                <Pricing />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.growth}
+            element={
+              <Seo
+                title="Humaneers | Brand Growth"
+                description="Brand strategy and marketing leadership for fast-growing teams."
+                canonicalPath={routePaths.growth}
+              >
+                <Growth />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.about}
+            element={
+              <Seo
+                title="Humaneers | About"
+                description="Built by engineers for businesses. SOC 2 certified. Tempe-based, serving clients nationwide."
+                canonicalPath={routePaths.about}
+              >
+                <About />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.managedIt}
+            element={
+              <Seo
+                title="Humaneers | Managed IT"
+                description="99.9% uptime SLA. Cloud-native infrastructure, 24/7 monitoring, 15-minute P1 response. No downtime, just uptime."
+                canonicalPath={routePaths.managedIt}
+              >
+                <ManagedIT />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.familyProtection}
+            element={
+              <Seo
+                title="Humaneers | Family Protection"
+                description="Close the home-office security gap. Enterprise cybersecurity for your family, your home network, and your peace of mind."
+                canonicalPath={routePaths.familyProtection}
+              >
+                <FamilyProtection />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.fractionalLeadership}
+            element={
+              <Seo
+                title="Humaneers | Fractional Leadership"
+                description="Your own CIO/CMO without the salary cap. Strategic planning, vendor management, and executive guidance."
+                canonicalPath={routePaths.fractionalLeadership}
+              >
+                <FractionalLeadership />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.nonProfits}
+            element={
+              <Seo
+                title="Humaneers | Nonprofits"
+                description="Mission-focused IT for 501(c)(3) organizations. Special pricing, grant-ready documentation, volunteer-friendly systems."
+                canonicalPath={routePaths.nonProfits}
+              >
+                <NonProfits />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.industries}
+            element={
+              <Seo
+                title="Humaneers | Regulated Industries"
+                description="HIPAA, PCI DSS, and SOX compliance built-in. BAAs available. Purpose-built for healthcare and finance."
+                canonicalPath={routePaths.industries}
+              >
+                <Industries />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.services}
+            element={
+              <Seo
+                title="Humaneers | Services"
+                description="Managed IT, brand growth, family protection, and fractional leadership. Enterprise strategy, small business soul."
+                canonicalPath={routePaths.services}
+              >
+                <Services />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.contact}
+            element={
+              <Seo
+                title="Humaneers | Contact"
+                description="Contact Humaneers for sales, support, or partnership inquiries."
+                canonicalPath={routePaths.contact}
+              >
+                <Contact />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.talkToSales}
+            element={
+              <Seo
+                title="Humaneers | Start a Conversation"
+                description="Tell us about your organization and we'll design a custom roadmap."
+                canonicalPath={routePaths.talkToSales}
+              >
+                <TalkToSales />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.personal}
+            element={
+              <Seo
+                title="Humaneers | Personal Plans"
+                description="Home network security, device management, and family tech support. Protect what matters most."
+                canonicalPath={routePaths.personal}
+              >
+                <Personal />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.colophon}
+            element={
+              <Seo
+                title="Humaneers | Colophon"
+                description="Transparency, ethics, and the tools that power Humaneers."
+                canonicalPath={routePaths.colophon}
+              >
+                <Colophon />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.ethics}
+            element={
+              <Seo
+                title="Humaneers | Ethics Charter"
+                description="Our code of conduct, anti-corruption policy, and reporting."
+                canonicalPath={routePaths.ethics}
+              >
+                <Ethics />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.resources}
+            element={
+              <Seo
+                title="Humaneers | Resources"
+                description="Guides, security explainers, and operational documentation."
+                canonicalPath={routePaths.resources}
+              >
+                <Resources />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.status}
+            element={
+              <Seo
+                title="Humaneers | Status"
+                description="Service status and operational updates."
+                canonicalPath={routePaths.status}
+              >
+                <Status />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.support}
+            element={
+              <Seo
+                title="Humaneers | Support"
+                description="Get help with Humaneers services and support requests."
+                canonicalPath={routePaths.support}
+              >
+                <Support />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.terms}
+            element={
+              <Seo
+                title="Humaneers | Terms of Service"
+                description="Terms of service for Humaneers."
+                canonicalPath={routePaths.terms}
+              >
+                <Terms />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.privacy}
+            element={
+              <Seo
+                title="Humaneers | Privacy Policy"
+                description="Privacy policy for Humaneers."
+                canonicalPath={routePaths.privacy}
+              >
+                <Privacy />
+              </Seo>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <Seo title="Humaneers | Page Not Found" noIndex>
+                <NotFound />
+              </Seo>
+            }
+          />
+        </Route>
+      </Routes>
       <ScrollToTop />
     </ErrorBoundary>
   );
