@@ -208,7 +208,7 @@ export function Home({ onViewChange }: HomeProps) {
             Get the enterprise-grade support you deserve with the personal touch you need.
           </p>
           <Button
-            onClick={() => onViewChange("contact")}
+            onClick={() => onViewChange("talk-to-sales")}
             className="bg-[#B87333] hover:bg-[#a0632a] text-white text-xl px-10 py-7 h-auto rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
           >
             Let's get to work

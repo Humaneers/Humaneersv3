@@ -5,7 +5,7 @@ import { Shield, Server, Wifi, Headphones, MapPin, Globe, CheckCircle2, Smartpho
 import { DefinitionTooltip } from "../DefinitionTooltip";
 
 interface ManagedITProps {
-  onViewChange: (view: View) => void;
+  onViewChange: (view: View, data?: any) => void;
 }
 
 export function ManagedIT({ onViewChange }: ManagedITProps) {
@@ -52,8 +52,8 @@ export function ManagedIT({ onViewChange }: ManagedITProps) {
           <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-8">
             Enterprise-grade infrastructure for teams that value craftsmanship over ticket numbers.
           </p>
-          <Button 
-            onClick={() => onViewChange("contact")}
+          <Button
+            onClick={() => onViewChange("talk-to-sales", { interest: "Managed IT" })}
             className="bg-[#B87333] hover:bg-[#a0632a] text-white text-lg px-8 py-4 h-auto rounded-full"
           >
             Get a Network Assessment

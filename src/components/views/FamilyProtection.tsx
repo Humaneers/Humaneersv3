@@ -5,7 +5,7 @@ import { Lock, Home, ShieldCheck, Smartphone, Eye, Wifi } from "lucide-react";
 import { DefinitionTooltip } from "../DefinitionTooltip";
 
 interface FamilyProtectionProps {
-  onViewChange: (view: View) => void;
+  onViewChange: (view: View, data?: any) => void;
 }
 
 export function FamilyProtection({ onViewChange }: FamilyProtectionProps) {
@@ -30,8 +30,8 @@ export function FamilyProtection({ onViewChange }: FamilyProtectionProps) {
               <p className="text-xl text-gray-300 font-light leading-relaxed mb-8">
                 Your home network is the new corporate perimeter. We secure your personal devices with the same rigor we use for Fortune 500 banks.
               </p>
-              <Button 
-                onClick={() => onViewChange("contact")}
+              <Button
+                onClick={() => onViewChange("talk-to-sales", { interest: "Family IT" })}
                 className="bg-[#B87333] hover:bg-[#a0632a] text-white text-lg px-8 py-4 h-auto rounded-full"
               >
                 Secure My Home

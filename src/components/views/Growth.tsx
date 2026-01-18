@@ -5,7 +5,7 @@ import { ArrowRight, Search, PenTool, Package, Rocket, CheckCircle2, AlertTriang
 import { motion } from "motion/react";
 
 interface GrowthProps {
-  onViewChange: (view: View) => void;
+  onViewChange: (view: View, data?: any) => void;
 }
 
 export function Growth({ onViewChange }: GrowthProps) {
@@ -208,8 +208,8 @@ export function Growth({ onViewChange }: GrowthProps) {
             </div>
             
             <div className="mt-20 text-center">
-                <Button 
-                    onClick={() => onViewChange("contact")}
+                <Button
+                    onClick={() => onViewChange("talk-to-sales", { interest: "Brand & Growth" })}
                     className="bg-[#1B263B] hover:bg-[#2c3b55] text-white px-8 py-4 text-lg h-auto rounded-full"
                 >
                     Start Your American Journey <ArrowRight className="ml-2 w-5 h-5" />

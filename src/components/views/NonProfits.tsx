@@ -5,7 +5,7 @@ import { Heart, Shield, Users, Check, HandHeart, GraduationCap, ArrowRight, File
 import { DefinitionTooltip } from "../DefinitionTooltip";
 
 interface NonProfitsProps {
-  onViewChange: (view: View) => void;
+  onViewChange: (view: View, data?: any) => void;
 }
 
 export function NonProfits({ onViewChange }: NonProfitsProps) {
@@ -38,8 +38,8 @@ export function NonProfits({ onViewChange }: NonProfitsProps) {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button 
-                onClick={() => onViewChange("contact")}
+              <Button
+                onClick={() => onViewChange("talk-to-sales", { interest: "Managed IT", source: "Nonprofit Program" })}
                 className="bg-[#B87333] hover:bg-[#a0632a] text-white text-lg px-8 py-7 h-auto rounded-none border border-[#B87333] hover:border-[#a0632a] transition-all"
               >
                 Apply for Program
@@ -220,8 +220,8 @@ export function NonProfits({ onViewChange }: NonProfitsProps) {
 
             <div className="mt-12 text-center">
                <p className="text-gray-300 mb-6">Ready to secure your mission?</p>
-               <Button 
-                onClick={() => onViewChange("contact")}
+               <Button
+                onClick={() => onViewChange("talk-to-sales", { interest: "Managed IT", source: "Nonprofit Program" })}
                 className="bg-[#B87333] hover:bg-[#a0632a] text-white text-xl px-12 py-6 h-auto rounded-none shadow-lg hover:shadow-[#B87333]/20 transition-all"
               >
                 Start Verification

@@ -208,7 +208,7 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
                     <div className="space-y-3 pt-2">
                        <Label>Interests</Label>
                        <div className="grid grid-cols-2 gap-3">
-                          {["Managed IT", "Cybersecurity", "Compliance", "Leadership", "Cloud", "Family IT"].map((item) => (
+                          {["Managed IT", "Brand & Growth", "Cybersecurity", "Compliance", "Leadership", "Cloud", "Family IT"].map((item) => (
                              <div key={item} className="flex items-center space-x-2">
                                 <Checkbox 
                                    id={`modal-interest-${item}`} 

@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 import { Compass, TrendingUp, Users, FileText, Check, ArrowRight } from "lucide-react";
 
 interface FractionalLeadershipProps {
-  onViewChange: (view: View) => void;
+  onViewChange: (view: View, data?: any) => void;
 }
 
 export function FractionalLeadership({ onViewChange }: FractionalLeadershipProps) {
@@ -26,8 +26,8 @@ export function FractionalLeadership({ onViewChange }: FractionalLeadershipProps
            <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">
               You don't need a full-time CIO to have a full-time strategy. Get the roadmap, budget, and leadership you need at a fraction of the cost.
            </p>
-           <Button 
-             onClick={() => onViewChange("contact")}
+           <Button
+             onClick={() => onViewChange("talk-to-sales", { interest: "Leadership" })}
              className="bg-[#B87333] hover:bg-[#a0632a] text-white text-lg px-8 py-4 h-auto rounded-full"
            >
              Schedule a Discovery Call
@@ -108,8 +108,8 @@ export function FractionalLeadership({ onViewChange }: FractionalLeadershipProps
       {/* CTA */}
       <section className="py-20 bg-white">
          <div className="container mx-auto px-6 text-center">
-            <Button 
-               onClick={() => onViewChange("contact")}
+            <Button
+               onClick={() => onViewChange("talk-to-sales", { interest: "Leadership" })}
                className="bg-[#1B263B] hover:bg-[#2c3b55] text-white text-xl px-10 py-6 h-auto rounded-md"
             >
                Meet Your New CIO <ArrowRight className="ml-2" />

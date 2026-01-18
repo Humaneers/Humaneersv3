@@ -6,11 +6,15 @@ Development tasks and outstanding items for the Humaneers website.
 
 ## High Priority
 
-### Cal.com Integration (In Progress)
-- [ ] Finish Cal.com integration for Contact form
-  - Currently Contact form acts as a router to Sales/Support pages
-  - Decision needed: Keep as router OR create unified Cal.com contact form
-  - See `CAL_MIGRATION.md` for details
+### Cal.com Account Setup (Action Required)
+- [ ] Create Cal.com routing forms in your Cal.com account:
+  - Sales Inquiries form (fields: firstName, lastName, email, company, role, employees, website, phone, budget, interests, message)
+  - Support Tickets form (fields: name, email, phone, company, priority, category, subject, description)
+- [ ] Configure `.env` with your Cal.com credentials:
+  - `VITE_CAL_ORG_URL` - Your Cal.com organization URL
+  - `VITE_CAL_SALES_FORM_ID` - Sales routing form ID
+  - `VITE_CAL_SUPPORT_FORM_ID` - Support routing form ID
+- [ ] Test end-to-end booking flow in production
 
 ---
 
@@ -23,7 +27,6 @@ Development tasks and outstanding items for the Humaneers website.
 
 ### Forms & User Experience
 - [ ] Test all forms end-to-end (Sales, Support, Ethics)
-- [ ] Verify Cal.com routing works correctly for Sales and Support
 - [ ] Test mobile responsiveness across all pages
 - [ ] Accessibility audit (keyboard navigation, screen readers, ARIA labels)
 
@@ -32,7 +35,6 @@ Development tasks and outstanding items for the Humaneers website.
   - `CAL_MIGRATION.md`
   - `CAL_SETUP_GUIDE.md`
   - `src/lib/cal.ts`
-- [ ] Update `.env.example` with all current environment variables
 - [ ] Add error boundaries for better error handling
 - [ ] Review and optimize bundle size
 
@@ -68,17 +70,26 @@ Development tasks and outstanding items for the Humaneers website.
 
 - [x] Create CLAUDE.md brand guidelines
 - [x] Migrate TalkToSalesModal to Cal.com
+- [x] Migrate TalkToSales full page to Cal.com
 - [x] Migrate Support form to Cal.com
 - [x] Replace Zoho/Resend integration with Cal.com
 - [x] Create Cal.com migration documentation
-- [x] Update environment variables for Cal.com
+- [x] Update `.env.example` with Cal.com environment variables
+- [x] Context-aware CTAs on all service pages
+  - ManagedIT → pre-selects "Managed IT" interest
+  - Growth → pre-selects "Brand & Growth" interest
+  - FamilyProtection → pre-selects "Family IT" interest
+  - FractionalLeadership → pre-selects "Leadership" interest
+  - NonProfits → pre-selects "Managed IT" + nonprofit source context
+- [x] Contact page routes to Sales/Support forms (decision: keep as router)
+- [x] Add "Brand & Growth" to sales modal interests
 
 ---
 
 ## Notes
 
 - **Design System**: "Modern Craftsman" aesthetic with Oxford Blue, Copper, and Cream
-- **Cal.com Status**: Sales modal and Support forms migrated ✅ | Contact form pending decision
+- **Cal.com Status**: All forms migrated ✅ | Awaiting Cal.com account configuration
 - **No Backend**: Currently client-side only, forms redirect to Cal.com
 - **Future Backend**: Supabase planned for client portal feature
 

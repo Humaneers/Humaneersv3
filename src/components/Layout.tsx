@@ -48,7 +48,7 @@ export function Layout({ children, currentView, onViewChange }: LayoutProps) {
             onClick={() => onViewChange("home")}
           >
             <img
-              src="/logomark_white.svg"
+              src="/WordMarkV-2.svg"
               alt="Humaneers"
               className="h-6 sm:h-7 md:h-8 w-auto max-w-[160px] sm:max-w-[200px]"
             />
@@ -348,7 +348,7 @@ export function Layout({ children, currentView, onViewChange }: LayoutProps) {
             <div className="col-span-1 md:col-span-2 lg:col-span-2">
               <div className="flex items-center mb-4">
                 <img
-                  src="/logomark_white.svg"
+                  src="/WordMarkV-2.svg"
                   alt="Humaneers"
                   className="h-6 sm:h-7 md:h-8 w-auto max-w-[160px] sm:max-w-[200px]"
                 />
