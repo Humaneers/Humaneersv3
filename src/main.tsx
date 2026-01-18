@@ -4,7 +4,7 @@ import { HelmetProvider } from "react-helmet-async";
 import App from "./App.tsx";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { Toaster } from "sonner";
-import "./styles/globals.css";
+import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
   <ErrorBoundary>
