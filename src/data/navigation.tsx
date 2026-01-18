@@ -163,10 +163,6 @@ export const navSections: NavSection[] = [
   },
 ];
 
-export const utilityLinks = [
-  { label: "Status", href: "https://status.humaneers.dev/", external: true },
-];
-
 export const ctaLinks = {
   support: { label: "Get Support", to: routePaths.support },
   sales: { label: "Let's Get Started", to: routePaths.talkToSales },
@@ -195,9 +191,21 @@ export const footerSections = [
   },
 ];
 
-export const footerMetaLinks = [
+export interface FooterMetaLink {
+  label: string;
+  to?: string;        // Internal route
+  href?: string;      // External URL
+  external?: boolean; // Open in new tab
+}
+
+export const footerMetaLinks: FooterMetaLink[] = [
   { label: "Privacy Policy", to: routePaths.privacy },
   { label: "Terms of Service", to: routePaths.terms },
   { label: "Ethics Charter", to: routePaths.ethics },
   { label: "Colophon & Transparency", to: routePaths.colophon },
+  {
+    label: "System Status",
+    href: "https://status.humaneers.dev/",
+    external: true,
+  },
 ];

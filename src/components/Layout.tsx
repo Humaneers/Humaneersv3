@@ -7,7 +7,7 @@
 
 import { useState, useEffect, forwardRef } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
-import { Menu, X, ShieldCheck, BookOpen } from "lucide-react";
+import { Menu, X, ShieldCheck, BookOpen, Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -20,9 +20,10 @@ import {
   navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
 import { cn } from "./ui/utils";
+import { redirectToNewsletterBooking, validateNewsletterForm, type NewsletterFormData } from "../lib/cal";
+import { toast } from "sonner";
 import {
   navSections,
-  utilityLinks,
   ctaLinks,
   footerSections,
   footerMetaLinks,
@@ -32,6 +33,8 @@ import {
 export function Layout() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [isNewsletterSubmitting, setIsNewsletterSubmitting] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,6 +45,30 @@ export function Layout() {
   }, []);
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const formData: NewsletterFormData = {
+      email: newsletterEmail,
+      source: 'footer',
+    };
+
+    const validation = validateNewsletterForm(formData);
+    if (!validation.valid) {
+      toast.error(validation.errors[0]);
+      return;
+    }
+
+    setIsNewsletterSubmitting(true);
+
+    try {
+      redirectToNewsletterBooking(formData);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to subscribe. Please try again.");
+      setIsNewsletterSubmitting(false);
+    }
+  };
 
   const renderNavItem = (item: NavItem, className?: string) => {
     const content = (
@@ -277,22 +304,6 @@ export function Layout() {
                     </NavigationMenuContent>
                   </NavigationMenuItem>
                 ) : null}
-
-                {utilityLinks.map((link) => (
-                  <NavigationMenuItem key={link.label}>
-                    <a
-                      href={link.href}
-                      target={link.external ? "_blank" : undefined}
-                      rel={link.external ? "noopener noreferrer" : undefined}
-                      className={cn(
-                        navigationMenuTriggerStyle(),
-                        "bg-transparent text-gray-300 hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white cursor-pointer"
-                      )}
-                    >
-                      {link.label}
-                    </a>
-                  </NavigationMenuItem>
-                ))}
               </NavigationMenuList>
             </NavigationMenu>
           </div>
@@ -418,7 +429,7 @@ export function Layout() {
             <div>
               <h4 className="text-white font-semibold mb-4">Newsletter</h4>
               <p className="text-sm mb-4">Get the latest on IT security and strategy.</p>
-              <form className="flex flex-col gap-2" onSubmit={(e) => e.preventDefault()}>
+              <form className="flex flex-col gap-2" onSubmit={handleNewsletterSubmit}>
                 <label htmlFor="footer-email" className="sr-only">
                   Email address
                 </label>
@@ -426,10 +437,25 @@ export function Layout() {
                   id="footer-email"
                   type="email"
                   placeholder="Email address"
-                  className="bg-brand-slate/20 text-white placeholder-gray-500 text-sm px-3 py-2 rounded border border-gray-700 focus:border-brand-copper outline-none"
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  required
+                  disabled={isNewsletterSubmitting}
+                  className="bg-brand-slate/20 text-white placeholder-gray-500 text-sm px-3 py-2 rounded border border-gray-700 focus:border-brand-copper outline-none disabled:opacity-50 disabled:cursor-not-allowed"
                 />
-                <Button className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xs py-2 h-auto w-full">
-                  Subscribe
+                <Button
+                  type="submit"
+                  disabled={isNewsletterSubmitting}
+                  className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xs py-2 h-auto w-full"
+                >
+                  {isNewsletterSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-3 w-3 animate-spin" />
+                      Subscribing...
+                    </>
+                  ) : (
+                    'Subscribe'
+                  )}
                 </Button>
               </form>
             </div>
@@ -437,7 +463,10 @@ export function Layout() {
 
           <div className="pt-8 border-t border-gray-800 flex flex-col lg:flex-row justify-between items-center gap-6 text-xs">
             <div className="flex flex-col md:flex-row items-center gap-6 text-gray-500">
-              <p>
+              <p className="text-gray-400 text-center md:text-left">
+                Built by humans with ❤️+☕️ in Arizona & Texas.
+              </p>
+              <p className="text-center md:text-left leading-tight">
                 &copy; {new Date().getFullYear()} Humaneers Limited Company. All rights reserved.
                 "Humaneers" is a trademark of Human IP LP and is used under license. All other
                 trademarks are the property of their respective owner.
@@ -449,9 +478,21 @@ export function Layout() {
             </div>
             <div className="flex flex-wrap justify-center items-center gap-6">
               {footerMetaLinks.map((item) => (
-                <Link key={item.label} to={item.to} className="hover:text-brand-copper transition-colors">
-                  {item.label}
-                </Link>
+                item.href ? (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target={item.external ? "_blank" : undefined}
+                    rel={item.external ? "noopener noreferrer" : undefined}
+                    className="hover:text-brand-copper transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link key={item.label} to={item.to!} className="hover:text-brand-copper transition-colors">
+                    {item.label}
+                  </Link>
+                )
               ))}
               <span className="text-brand-copper">Supporting 501(c)(3) Organizations</span>
             </div>

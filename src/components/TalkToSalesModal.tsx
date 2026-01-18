@@ -43,7 +43,8 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
         interests: initialData.interest ? [initialData.interest] : prev.interests
       }));
     }
-  }, [open, initialData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, initialData?.email, initialData?.interest]);
 
   useEffect(() => {
     if (open) {
@@ -180,15 +181,18 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
                         </div>
 
                         <div className="space-y-2">
-                          <Label htmlFor="company">Company</Label>
+                          <Label htmlFor="company">Company or Family Name</Label>
                           <Input
                             id="company"
                             name="company"
-                            placeholder="Acme Inc."
+                            placeholder="Acme Inc. or The Smith Family"
                             required
                             value={formData.company}
                             onChange={handleChange}
                           />
+                          <p className="text-xs text-gray-500">
+                            If you're a household, enter your family name (e.g., "The Johnson Family")
+                          </p>
                         </div>
 
                         <Button

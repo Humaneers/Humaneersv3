@@ -498,6 +498,24 @@ From plan.md, the brand moved away from "Talk to Sales" to:
 
 This reflects a more human, partnership-oriented approach.
 
+### Footer Messaging
+
+**Copyright Banner** (Layout.tsx:465-490):
+- Primary line: "Built by humans with ❤️+☕️ in Arizona & Texas."
+- Legal text: Standard copyright and trademark attribution
+- SOC 2 compliance badge: "SOC 2 Type II Compliant"
+- Supporting nonprofits badge: "Supporting 501(c)(3) Organizations"
+
+**Purpose**: Reinforces "Modern Craftsman" brand personality with warm, human touch while maintaining professional legal compliance.
+
+**Tone**: Approachable yet professional, specific geographic anchoring (Arizona & Texas reinforces local presence mentioned elsewhere in footer).
+
+**Design Pattern**:
+- `text-gray-400` for "Built by humans" text (lighter, friendlier)
+- `text-gray-500` for legal copyright (slightly darker, more formal)
+- Responsive layout: stacks vertically on mobile, horizontal on desktop
+- Emojis (❤️☕️) add warmth without compromising professionalism
+
 ---
 
 ## File References
@@ -510,6 +528,11 @@ Key files implementing these guidelines:
 - **Component Library**: `src/components/ui/*`
 - **Button System**: `src/components/ui/button.tsx`
 - **Brand Documentation**: `src/plan.md`
+
+### Footer Implementation
+- **Copyright Banner**: `src/components/Layout.tsx:465-490`
+- **Meta Links**: `src/data/navigation.tsx:198-209`
+- **System Status**: Moved from header utility links to footer meta links (Jan 2026)
 
 ---
 

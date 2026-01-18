@@ -37,6 +37,9 @@ Development tasks and outstanding items for the Humaneers website.
   - Code review verified responsive breakpoints
   - Touch targets meet 44px minimum
   - Created MOBILE_RESPONSIVENESS_CHECKLIST.md
+- [x] Update forms to distinguish Company vs Family name ✅ (Jan 18, 2026)
+  - Added adaptive labeling and helper text in TalkToSalesModal
+  - Single field with context-aware placeholder and instructions
 - [ ] Accessibility audit (keyboard navigation, screen readers, ARIA labels)
 
 ### Technical Improvements
@@ -129,6 +132,13 @@ Development tasks and outstanding items for the Humaneers website.
 - [x] Create SEO_RECOMMENDATIONS.md
 - [x] Expand CLAUDE.md with development guidelines
 
+### UI/UX Improvements (January 18, 2026)
+- [x] Enhanced footer copyright banner with "Built by humans" messaging
+- [x] Migrated System Status link from header to footer meta links
+- [x] Updated sales form to support Company or Family Name
+- [x] Improved footer text layout and hierarchy
+- [x] Updated CLAUDE.md with footer messaging patterns
+
 ---
 
 ## Notes
@@ -151,6 +161,14 @@ Completed comprehensive development improvements:
 - **Mobile**: Verified responsive design, created QA checklist
 - **Git**: Committed all improvements (e136f55)
 
+### January 18, 2026 - UI/UX Refinements
+Completed footer, navigation, and form improvements:
+- **Footer**: Added "Built by humans with ❤️+☕️ in Arizona & Texas" to copyright banner
+- **Navigation**: Migrated System Status link from header to footer meta links
+- **Forms**: Updated TalkToSalesModal to support Company or Family Name distinction
+- **Documentation**: Updated CLAUDE.md with footer messaging patterns and file references
+- **Layout**: Improved footer text hierarchy and responsive behavior
+
 ---
 
-**Last Updated**: January 17, 2026
+**Last Updated**: January 18, 2026

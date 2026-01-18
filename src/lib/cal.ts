@@ -33,10 +33,16 @@ export interface SupportFormData {
   description: string;
 }
 
+export interface NewsletterFormData {
+  email: string;
+  source?: string;
+}
+
 interface CalConfig {
   orgUrl: string;
   salesFormId: string;
   supportFormId: string;
+  newsletterFormId: string;
 }
 
 /**
@@ -47,12 +53,13 @@ function getCalConfig(): CalConfig {
   const orgUrl = import.meta.env.VITE_CAL_ORG_URL || '';
   const salesFormId = import.meta.env.VITE_CAL_SALES_FORM_ID || '';
   const supportFormId = import.meta.env.VITE_CAL_SUPPORT_FORM_ID || '';
+  const newsletterFormId = import.meta.env.VITE_CAL_NEWSLETTER_FORM_ID || '';
 
   if (!orgUrl || !salesFormId || !supportFormId) {
     throw new Error('Booking system is not configured. Please contact support at support@humaneers.dev');
   }
 
-  return { orgUrl, salesFormId, supportFormId };
+  return { orgUrl, salesFormId, supportFormId, newsletterFormId };
 }
 
 /**
@@ -188,6 +195,51 @@ export function validateSupportForm(data: Partial<SupportFormData>): { valid: bo
   if (!data.category?.trim()) errors.push('Category is required');
   if (!data.subject?.trim()) errors.push('Subject is required');
   if (!data.description?.trim()) errors.push('Description is required');
+
+  // Email validation - more robust pattern
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  if (data.email && !emailRegex.test(data.email)) {
+    errors.push('Invalid email format');
+  }
+
+  return {
+    valid: errors.length === 0,
+    errors,
+  };
+}
+
+/**
+ * Redirect to Cal.com newsletter routing form
+ *
+ * @param data - Newsletter form data to pass to Cal.com
+ */
+export function redirectToNewsletterBooking(data: NewsletterFormData): void {
+  const { newsletterFormId } = getCalConfig();
+
+  if (!newsletterFormId) {
+    throw new Error('Newsletter form ID is not configured');
+  }
+
+  const params: Record<string, string> = {
+    email: data.email,
+  };
+
+  // Add optional source tracking
+  if (data.source) params.source = data.source;
+
+  const calUrl = buildCalUrl(newsletterFormId, params);
+
+  // Redirect to Cal.com
+  window.location.href = calUrl;
+}
+
+/**
+ * Validate newsletter form data before submission
+ */
+export function validateNewsletterForm(data: Partial<NewsletterFormData>): { valid: boolean; errors: string[] } {
+  const errors: string[] = [];
+
+  if (!data.email?.trim()) errors.push('Email is required');
 
   // Email validation - more robust pattern
   const emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
