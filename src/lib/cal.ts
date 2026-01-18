@@ -39,35 +39,20 @@ export interface NewsletterFormData {
 }
 
 interface CalConfig {
-  orgUrl: string;
-  salesFormId: string;
-  supportFormId: string;
-  newsletterFormId: string;
+  orgUrl?: string;
+  salesFormId?: string;
+  supportFormId?: string;
+  newsletterFormId?: string;
 }
 
 /**
  * Get Cal.com configuration from environment variables
- * @throws Error if required environment variables are missing
  */
-function getCalConfig(): CalConfig {
-  const orgUrl = import.meta.env.VITE_CAL_ORG_URL?.trim() || "";
-  const salesFormId = import.meta.env.VITE_CAL_SALES_FORM_ID?.trim() || "";
-  const supportFormId = import.meta.env.VITE_CAL_SUPPORT_FORM_ID?.trim() || "";
-  const newsletterFormId = import.meta.env.VITE_CAL_NEWSLETTER_FORM_ID?.trim() || "";
-
-  const missing: string[] = [];
-  if (!orgUrl) missing.push("VITE_CAL_ORG_URL");
-  if (!salesFormId) missing.push("VITE_CAL_SALES_FORM_ID");
-  if (!supportFormId) missing.push("VITE_CAL_SUPPORT_FORM_ID");
-
-  if (missing.length > 0) {
-    if (import.meta.env.DEV) {
-      console.error("Missing Cal.com configuration:", missing);
-    }
-    throw new Error(
-      "Booking system is not configured. Please contact support at support@humaneers.dev"
-    );
-  }
+function getCalConfig(): Partial<CalConfig> {
+  const orgUrl = import.meta.env.VITE_CAL_ORG_URL?.trim();
+  const salesFormId = import.meta.env.VITE_CAL_SALES_FORM_ID?.trim();
+  const supportFormId = import.meta.env.VITE_CAL_SUPPORT_FORM_ID?.trim();
+  const newsletterFormId = import.meta.env.VITE_CAL_NEWSLETTER_FORM_ID?.trim();
 
   return { orgUrl, salesFormId, supportFormId, newsletterFormId };
 }
@@ -294,6 +279,7 @@ export function getCalPreviewUrl(
     if (salesData.interests.length > 0) params.interests = salesData.interests.join(", ");
     if (salesData.message) params.message = salesData.message;
 
+    if (!salesFormId) throw new Error("Sales form ID is not configured");
     return buildCalUrl(salesFormId, params);
   } else {
     const supportData = data as SupportFormData;
@@ -309,6 +295,7 @@ export function getCalPreviewUrl(
     if (supportData.phone) params.phone = supportData.phone;
     if (supportData.company) params.company = supportData.company;
 
+    if (!supportFormId) throw new Error("Support form ID is not configured");
     return buildCalUrl(supportFormId, params);
   }
 }

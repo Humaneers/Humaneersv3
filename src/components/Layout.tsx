@@ -1,14 +1,8 @@
 import { APP_VERSION } from "../version";
-/**
- * Layout Component
- *
- * Main application layout providing persistent header, navigation, and footer.
- * Handles responsive mobile menu and scroll-based header styling.
- */
-
-import { useState, useEffect, forwardRef } from "react";
+import { Suspense, useState, useEffect, forwardRef } from "react";
+import { PageLoader } from "./PageLoader";
 import { Link, NavLink, Outlet } from "react-router-dom";
-import { Menu, X, ShieldCheck, BookOpen, Loader2 } from "lucide-react";
+import { Menu, X, BookOpen, Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -389,8 +383,12 @@ export function Layout() {
         </AnimatePresence>
       </header>
 
+
+
       <main className="flex-grow pt-20">
-        <Outlet />
+        <Suspense fallback={<PageLoader />}>
+          <Outlet />
+        </Suspense>
       </main>
 
       <footer className="bg-brand-oxford text-gray-400 py-12 border-t border-brand-copper">
@@ -477,14 +475,11 @@ export function Layout() {
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-1">
               <span>&copy; {new Date().getFullYear()} Humaneers Limited Company.</span>
+              <span className="text-white/20">v{APP_VERSION}</span>
             </div>
             <p className="leading-tight opacity-60 max-w-lg">
               "Humaneers" is a trademark of Human IP LP and is used under license.
             </p>
-            <div className="flex items-center gap-2 mt-1 text-brand-copper">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span className="font-medium">SOC 2 Type II Compliant</span>
-            </div>
           </div>
 
           <div className="flex flex-wrap justify-center md:justify-end items-center gap-x-6 gap-y-3">
@@ -511,9 +506,6 @@ export function Layout() {
             )}
             <span className="text-brand-copper font-medium px-3 py-1 bg-brand-copper/10 rounded-full">
               Supporting 501(c)(3) Organizations
-            </span>
-            <span className="text-white/10 text-[10px] hover:text-white/30 transition-colors cursor-default">
-              v{APP_VERSION}
             </span>
           </div>
         </div>
