@@ -21,31 +21,37 @@ export function FamilyProtection() {
       icon: <Lock className="w-8 h-8" />,
       title: "Enterprise Endpoint Protection",
       desc: "The same CrowdStrike/SentinelOne agents used by Fortune 500s, deployed on your family Macs and PCs.",
+      moreInfo: "Zero-day threat prevention.",
     },
     {
       icon: <Wifi className="w-8 h-8" />,
       title: "Secure Home Network",
       desc: "We configure your Wi-Fi with VLANs to separate work devices from smart fridges and gaming consoles.",
+      moreInfo: "IoT isolation included.",
     },
     {
       icon: <Eye className="w-8 h-8" />,
       title: "Dark Web Monitoring",
       desc: "We scan the dark web for your family's passwords and social security numbers 24/7.",
+      moreInfo: "Real-time breach alerts.",
     },
     {
       icon: <Smartphone className="w-8 h-8" />,
       title: "Parental Controls",
       desc: "Content filtering that actually works. Block adult content, gambling, and manage screen time.",
+      moreInfo: "Granular app management.",
     },
     {
       icon: <Fingerprint className="w-8 h-8" />,
       title: "Identity Theft Restoration",
       desc: "$1M in insurance and a dedicated case manager to restore your identity if it's stolen.",
+      moreInfo: "White-glove recovery service.",
     },
     {
       icon: <Home className="w-8 h-8" />,
       title: "Smart Home Security",
       desc: "IoT hardening for cameras, locks, and microphones to prevent digital eavesdropping.",
+      moreInfo: "Firmware hardening.",
     },
   ];
 
@@ -174,13 +180,16 @@ export function FamilyProtection() {
               {features.map((f, i) => (
                 <div
                   key={i}
-                  className="bg-gray-50 p-8 rounded-2xl hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-brand-copper group"
+                  className="bg-gray-50 p-8 rounded-2xl hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-brand-copper group cursor-default"
                 >
                   <div className="mb-6 bg-white w-14 h-14 rounded-xl shadow-sm flex items-center justify-center group-hover:bg-brand-copper transition-colors text-brand-copper group-hover:text-white">
                     {f.icon}
                   </div>
                   <h3 className="text-xl font-bold text-brand-oxford mb-3">{f.title}</h3>
                   <p className="text-brand-slate text-sm leading-relaxed">{f.desc}</p>
+                  <div className="mt-0 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-4 transition-all duration-300 overflow-hidden">
+                    <p className="text-sm text-brand-copper font-medium">{f.moreInfo}</p>
+                  </div>
                 </div>
               ))}
             </div>

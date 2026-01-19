@@ -31,7 +31,9 @@ export function DefinitionTooltip({ term, definition, className = "" }: Definiti
     <Tooltip>
       <TooltipTrigger asChild>
         <span
-          className={`cursor-help border-b border-dotted border-brand-copper hover:text-brand-copper transition-colors inline-flex items-center gap-0.5 ${className}`}
+          tabIndex={0}
+          onClick={(e) => e.preventDefault()}
+          className={`cursor-help border-b border-dotted border-brand-copper hover:text-brand-copper focus:text-brand-copper focus:border-solid focus:outline-none transition-colors inline-flex items-center gap-0.5 ${className}`}
         >
           {term}
         </span>

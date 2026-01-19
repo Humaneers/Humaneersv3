@@ -24,11 +24,13 @@ export function ManagedIT() {
       icon: <Headphones className="w-6 h-6 text-brand-copper" />,
       title: "100% US-Based Helpdesk",
       desc: "No offshore call centers. Talk to a US-based engineer who knows your business by name.",
+      moreInfo: "US-based engineering team.",
     },
     {
       icon: <Server className="w-6 h-6 text-brand-copper" />,
       title: "Hybrid & Cloud Infrastructure",
       desc: "We secure on-prem servers or migrate you to the cloud (AWS/Azure) depending on your needs.",
+      moreInfo: "AWS/Azure certified architects.",
     },
     {
       icon: <Smartphone className="w-6 h-6 text-brand-copper" />,
@@ -43,21 +45,25 @@ export function ManagedIT() {
         </span>
       ),
       desc: "Secure company data on personal phones without spying on your employees.",
+      moreInfo: "Automated patch management.",
     },
     {
       icon: <Shield className="w-6 h-6 text-brand-copper" />,
       title: "SOC 2 Type II Security",
       desc: "Enterprise-grade endpoint protection, DNS filtering, and 24/7 SOC monitoring included.",
+      moreInfo: "Behavioral AI analysis.",
     },
     {
       icon: <Wifi className="w-6 h-6 text-brand-copper" />,
       title: "Remote & On-Site Support",
       desc: "99% of issues fixed remotely. For the other 1%, we dispatch engineers to any US zip code.",
+      moreInfo: "Next-business-day dispatch.",
     },
     {
       icon: <Zap className="w-6 h-6 text-brand-copper" />,
       title: "Zero-Touch Onboarding",
       desc: "We ship laptops pre-configured. New hires open the box and start working immediately.",
+      moreInfo: "Okta/Azure AD integration.",
     },
   ];
 
@@ -186,12 +192,15 @@ export function ManagedIT() {
                   {features.map((f, i) => (
                     <div
                       key={i}
-                      className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-brand-copper/10 flex gap-4"
+                      className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 border border-brand-copper/10 flex gap-4 group cursor-default"
                     >
                       <div className="shrink-0 mt-1">{f.icon}</div>
-                      <div>
+                      <div className="flex-1">
                         <h4 className="font-bold text-brand-oxford text-lg mb-2">{f.title}</h4>
                         <p className="text-brand-slate text-sm leading-relaxed">{f.desc}</p>
+                        <div className="mt-0 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-2 transition-all duration-300 overflow-hidden">
+                          <p className="text-sm text-brand-copper font-medium">{f.moreInfo}</p>
+                        </div>
                       </div>
                     </div>
                   ))}

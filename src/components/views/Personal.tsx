@@ -50,37 +50,53 @@ export function Personal() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              <div className="p-6 bg-brand-cream rounded-xl hover:-translate-y-1 transition-transform">
+              <div className="p-6 bg-brand-cream rounded-xl hover:-translate-y-1 transition-transform group cursor-default">
                 <Mail className="w-10 h-10 text-brand-copper mb-4" />
                 <h3 className="font-bold text-brand-oxford text-lg mb-2">Custom Email</h3>
                 <p className="text-sm text-brand-slate">
                   We migrate you to Microsoft 365 or Google Workspace with a custom domain
                   (@yourname.com).
                 </p>
+                <div className="mt-0 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-2 transition-all duration-300 overflow-hidden">
+                  <p className="text-sm text-brand-copper font-medium">
+                    Professional identity aligned.
+                  </p>
+                </div>
               </div>
-              <div className="p-6 bg-brand-cream rounded-xl hover:-translate-y-1 transition-transform">
+              <div className="p-6 bg-brand-cream rounded-xl hover:-translate-y-1 transition-transform group cursor-default">
                 <Laptop className="w-10 h-10 text-brand-copper mb-4" />
                 <h3 className="font-bold text-brand-oxford text-lg mb-2">Device Setup</h3>
                 <p className="text-sm text-brand-slate">
                   We configure your Mac or PC remotely with encryption, backups, and essential
                   software.
                 </p>
+                <div className="mt-0 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-2 transition-all duration-300 overflow-hidden">
+                  <p className="text-sm text-brand-copper font-medium">Zero-touch configuration.</p>
+                </div>
               </div>
-              <div className="p-6 bg-brand-cream rounded-xl hover:-translate-y-1 transition-transform">
+              <div className="p-6 bg-brand-cream rounded-xl hover:-translate-y-1 transition-transform group cursor-default">
                 <Shield className="w-10 h-10 text-brand-copper mb-4" />
                 <h3 className="font-bold text-brand-oxford text-lg mb-2">Endpoint Security</h3>
                 <p className="text-sm text-brand-slate">
                   Enterprise-grade antivirus + 24/7 monitoring. No annoying pop-ups, just silent
                   protection.
                 </p>
+                <div className="mt-0 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-2 transition-all duration-300 overflow-hidden">
+                  <p className="text-sm text-brand-copper font-medium">
+                    CrowdStrike/SentinelOne agents.
+                  </p>
+                </div>
               </div>
-              <div className="p-6 bg-brand-cream rounded-xl hover:-translate-y-1 transition-transform">
+              <div className="p-6 bg-brand-cream rounded-xl hover:-translate-y-1 transition-transform group cursor-default">
                 <User className="w-10 h-10 text-brand-copper mb-4" />
                 <h3 className="font-bold text-brand-oxford text-lg mb-2">Tech Support</h3>
                 <p className="text-sm text-brand-slate">
                   Text or email us when things break. We fix printer issues, wifi glitches, and
                   weird errors.
                 </p>
+                <div className="mt-0 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-2 transition-all duration-300 overflow-hidden">
+                  <p className="text-sm text-brand-copper font-medium">15-minute response SLA.</p>
+                </div>
               </div>
             </div>
           </div>

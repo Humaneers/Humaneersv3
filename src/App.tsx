@@ -71,9 +71,10 @@ const Support = lazy(() =>
 const ClientCare = lazy(() =>
   import("./components/views/ClientCare").then((m) => ({ default: m.ClientCare }))
 );
-const Changelog = lazy(() =>
-  import("./components/views/Changelog").then((m) => ({ default: m.Changelog }))
-);
+// Changelog hidden from public
+// const Changelog = lazy(() =>
+//   import("./components/views/Changelog").then((m) => ({ default: m.Changelog }))
+// );
 const Status = lazy(() => import("./components/views/Status").then((m) => ({ default: m.Status })));
 
 import { TooltipProvider } from "./components/ui/tooltip";
@@ -346,7 +347,8 @@ export default function App() {
                 </Seo>
               }
             />
-            <Route
+            {/* Changelog hidden from public */}
+            {/* <Route
               path={routePaths.changelog}
               element={
                 <Seo
@@ -357,7 +359,7 @@ export default function App() {
                   <Changelog />
                 </Seo>
               }
-            />
+            /> */}
             <Route
               path={routePaths.support}
               element={

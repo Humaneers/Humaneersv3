@@ -109,29 +109,44 @@ export function SeniorCare() {
               Peace of Mind for the Whole Family
             </h2>
             <div className="grid md:grid-cols-3 gap-8 text-left">
-              <div className="p-8 border rounded-2xl hover:shadow-xl transition-all">
+              <div className="p-8 border rounded-2xl hover:shadow-xl transition-all hover:-translate-y-1 group bg-white cursor-default">
                 <UserPlus className="w-10 h-10 text-brand-copper mb-4" />
                 <h3 className="font-bold text-xl mb-2">Proxy Access</h3>
                 <p className="text-gray-600">
                   We give you (the adult child) "God Mode" access to oversee their device security
                   status remotely.
                 </p>
+                <div className="mt-0 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-4 transition-all duration-300 overflow-hidden">
+                  <p className="text-sm text-brand-copper font-medium">
+                    Includes real-time dashboard.
+                  </p>
+                </div>
               </div>
-              <div className="p-8 border rounded-2xl hover:shadow-xl transition-all">
+              <div className="p-8 border rounded-2xl hover:shadow-xl transition-all hover:-translate-y-1 group bg-white cursor-default">
                 <Phone className="w-10 h-10 text-brand-copper mb-4" />
                 <h3 className="font-bold text-xl mb-2">The "Red Button"</h3>
                 <p className="text-gray-600">
                   They can press one button to get help. No navigating complex support numbers or
                   automated menus.
                 </p>
+                <div className="mt-0 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-4 transition-all duration-300 overflow-hidden">
+                  <p className="text-sm text-brand-copper font-medium">
+                    Direct line to US-based humans.
+                  </p>
+                </div>
               </div>
-              <div className="p-8 border rounded-2xl hover:shadow-xl transition-all">
+              <div className="p-8 border rounded-2xl hover:shadow-xl transition-all hover:-translate-y-1 group bg-white cursor-default">
                 <FileHeart className="w-10 h-10 text-brand-copper mb-4" />
                 <h3 className="font-bold text-xl mb-2">Digital Estate Planning</h3>
                 <p className="text-gray-600">
                   We help organize passwords and accounts so that their digital legacy is secure and
                   accessible to executors.
                 </p>
+                <div className="mt-0 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-4 transition-all duration-300 overflow-hidden">
+                  <p className="text-sm text-brand-copper font-medium">
+                    Bank-grade security vault.
+                  </p>
+                </div>
               </div>
             </div>
             <div className="mt-16">
