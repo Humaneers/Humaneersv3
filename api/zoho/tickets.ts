@@ -26,6 +26,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         }
 
         const accessToken = await getZohoAccessToken();
+        let apiDomain = process.env.ZOHO_API_DOMAIN || "desk.zoho.com";
+        // Fix common misconfiguration
+        if (apiDomain.includes("accounts.zoho")) {
+            console.warn("Fixing misconfigured ZOHO_API_DOMAIN for Desk");
+            apiDomain = "desk.zoho.com";
+        }
         const orgId = process.env.ZOHO_DESK_ORG_ID;
 
         if (!orgId) {

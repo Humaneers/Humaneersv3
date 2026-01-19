@@ -29,7 +29,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         }
 
         const accessToken = await getZohoAccessToken();
-        const apiDomain = process.env.ZOHO_API_DOMAIN || "www.zohoapis.com";
+        let apiDomain = process.env.ZOHO_API_DOMAIN || "www.zohoapis.com";
+        // Fix common misconfiguration where users set API domain to accounts domain
+        if (apiDomain.includes("accounts.zoho")) {
+            console.warn("Fixing misconfigured ZOHO_API_DOMAIN (should not be accounts.*)");
+            apiDomain = "www.zohoapis.com";
+        }
 
         // Map form data to Zoho CRM Lead fields
         const leadPayload = {
