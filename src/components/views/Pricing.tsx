@@ -88,7 +88,7 @@ export function Pricing() {
       name: "Solo / Personal",
       price: 25,
       unit: "/user/mo",
-      description: "DNS, Domains & Email management only. No protection.",
+      description: "DNS, domains & email management only. Limited protection.",
       features: [
         "Domain Registrar Management",
         "DNS Record Configuration",
