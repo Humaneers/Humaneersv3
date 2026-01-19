@@ -16,6 +16,7 @@
     "release": "node scripts/bump-version.js && git add package.json src/version.ts && git commit -m \"chore: bump version to $(node -p 'require(\"./package.json\").version')\" && git push"
   },
   "dependencies": {
+    "@vercel/speed-insights": "^1.2.0",
     "@radix-ui/react-accordion": "^1.2.3",
     "@radix-ui/react-alert-dialog": "^1.1.6",
     "@radix-ui/react-aspect-ratio": "^1.1.2",
