@@ -1,6 +1,7 @@
 import { APP_VERSION } from "../version";
 import { Suspense, useState, useEffect, forwardRef } from "react";
 import { PageLoader } from "./PageLoader";
+import { routePaths } from "../routes";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { Menu, X, BookOpen, Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
