@@ -11,10 +11,10 @@ export function Pricing() {
   const [searchParams] = useSearchParams();
 
   // Get mode from URL params, default to business
-  const initialMode =
+  const modeParam =
     (searchParams.get("mode") as "business" | "nonprofit" | "household") || "business";
   const [pricingMode, setPricingMode] =
-    useState<"business" | "nonprofit" | "household">(initialMode);
+    useState<"business" | "nonprofit" | "household">(modeParam);
 
   const businessTiers = [
     {
@@ -187,7 +187,6 @@ export function Pricing() {
         ? nonprofitTiers
         : businessTiers;
 
-  const highlightParam = searchParams.get("highlight");
 
   return (
     <div className="bg-brand-cream min-h-screen py-24">

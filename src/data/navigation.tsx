@@ -19,10 +19,10 @@ export interface NavSection {
 
 export const navSections: NavSection[] = [
   {
-    id: "solutions",
-    label: "Solutions",
+    id: "who-we-help",
+    label: "Who We Help",
     featured: {
-      title: "Solutions by Industry",
+      title: "Find Your Path",
       description: "Tailored technology strategies for every stage of growth.",
       to: routePaths.services,
     },

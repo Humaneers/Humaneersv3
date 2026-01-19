@@ -169,7 +169,7 @@ export function Layout() {
   };
 
   const resourcesSection = navSections.find((section) => section.id === "resources");
-  const solutionsSection = navSections.find((section) => section.id === "solutions");
+  const whoWeHelpSection = navSections.find((section) => section.id === "who-we-help");
   const platformSection = navSections.find((section) => section.id === "platform");
   const companySection = navSections.find((section) => section.id === "company");
 
@@ -197,32 +197,32 @@ export function Layout() {
           <div className="hidden md:flex flex-1 justify-center">
             <NavigationMenu>
               <NavigationMenuList>
-                {solutionsSection ? (
+                {whoWeHelpSection ? (
                   <NavigationMenuItem>
                     <NavigationMenuTrigger className="bg-transparent text-gray-300 hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-white">
-                      {solutionsSection.label}
+                      {whoWeHelpSection.label}
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <ul className="grid w-[400px] gap-3 p-4 md:w-[600px] md:grid-cols-2 lg:w-[800px] lg:grid-cols-3">
-                        {solutionsSection.featured ? (
+                        {whoWeHelpSection.featured ? (
                           <li className="row-span-3">
                             <NavigationMenuLink asChild>
                               <NavLink
-                                to={solutionsSection.featured.to ?? "/"}
+                                to={whoWeHelpSection.featured.to ?? "/"}
                                 className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-brand-copper/50 to-brand-oxford p-6 no-underline outline-none focus:shadow-md cursor-pointer"
                               >
                                 <div className="mb-2 mt-4 text-lg font-medium text-white">
-                                  {solutionsSection.featured.title}
+                                  {whoWeHelpSection.featured.title}
                                 </div>
                                 <p className="text-sm leading-tight text-white/90">
-                                  {solutionsSection.featured.description}
+                                  {whoWeHelpSection.featured.description}
                                 </p>
                               </NavLink>
                             </NavigationMenuLink>
                           </li>
                         ) : null}
                         <div className="col-span-2 grid grid-cols-2 gap-3">
-                          {solutionsSection.items.map((item) => (
+                          {whoWeHelpSection.items.map((item) => (
                             <ListItem key={item.title} item={item} />
                           ))}
                         </div>
