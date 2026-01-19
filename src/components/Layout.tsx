@@ -14,11 +14,7 @@ import {
   NavigationMenuTrigger,
 } from "./ui/navigation-menu";
 import { cn } from "./ui/utils";
-import {
-  redirectToNewsletterBooking,
-  validateNewsletterForm,
-  type NewsletterFormData,
-} from "../lib/cal";
+import { submitNewsletter } from "../lib/zoho";
 import { toast } from "sonner";
 import {
   navSections,
@@ -33,6 +29,7 @@ export function Layout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [isNewsletterSubmitting, setIsNewsletterSubmitting] = useState(false);
+  const [newsletterSuccess, setNewsletterSuccess] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,25 +44,29 @@ export function Layout() {
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const formData: NewsletterFormData = {
-      email: newsletterEmail,
-      source: "footer",
-    };
+    if (!newsletterEmail.trim()) {
+      toast.error("Please enter your email address");
+      return;
+    }
 
-    const validation = validateNewsletterForm(formData);
-    if (!validation.valid) {
-      toast.error(validation.errors[0]);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(newsletterEmail)) {
+      toast.error("Please enter a valid email address");
       return;
     }
 
     setIsNewsletterSubmitting(true);
 
     try {
-      redirectToNewsletterBooking(formData);
+      await submitNewsletter({ email: newsletterEmail, source: "footer" });
+      setNewsletterSuccess(true);
+      toast.success("Successfully subscribed!");
+      setNewsletterEmail("");
     } catch (error) {
       toast.error(
         error instanceof Error ? error.message : "Failed to subscribe. Please try again."
       );
+    } finally {
       setIsNewsletterSubmitting(false);
     }
   };

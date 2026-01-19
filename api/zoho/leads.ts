@@ -92,6 +92,7 @@ function mapEmployeeRange(employees: string): number | null {
         "1-10": 5,
         "11-50": 30,
         "51-200": 100,
+        "201+": 350,
         "201-500": 350,
         "501-1000": 750,
         "1001-5000": 3000,

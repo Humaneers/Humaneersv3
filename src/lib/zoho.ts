@@ -29,6 +29,11 @@ export interface SupportFormData {
   description: string;
 }
 
+export interface NewsletterFormData {
+  email: string;
+  source?: string;
+}
+
 export interface ApiResponse {
   success: boolean;
   error?: string;
@@ -82,6 +87,25 @@ export async function submitSupportTicket(data: SupportFormData): Promise<ApiRes
 
   if (!response.ok) {
     throw new Error(result.error || "Failed to submit ticket");
+  }
+
+  return result;
+}
+
+/**
+ * Submit newsletter subscription to Zoho CRM
+ */
+export async function submitNewsletter(data: NewsletterFormData): Promise<ApiResponse> {
+  const response = await fetch("/api/zoho/newsletter", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.error || "Failed to subscribe");
   }
 
   return result;
