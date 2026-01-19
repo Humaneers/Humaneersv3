@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
-import { Heart, Shield, Users, CheckCircle2, ArrowRight, FileCheck } from "lucide-react";
+import { Heart, Shield, Users, CheckCircle2, ArrowRight } from "lucide-react";
 import { routePaths } from "../../routes";
 import { Seo } from "../Seo";
 
@@ -30,8 +30,7 @@ export function NonProfits() {
               <span className="text-brand-copper">We'll Handle the Machines.</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">
-              Enterprise-grade IT and security for organizations that change the world. We know
-              every dollar counts, so our nonprofit plans are designed to stretch your budget.
+              Most nonprofits lose federal grants because they lack cybersecurity policies. We provide the enterprise-grade compliance you need to unlock funding—at a fraction of the cost.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -93,9 +92,8 @@ export function NonProfits() {
                     desc: "Secure your donor lists and financial data to meet compliance standards.",
                   },
                   {
-                    icon: <FileCheck className="w-6 h-6 text-brand-copper" />,
                     title: "Grant-Ready Policies",
-                    desc: "We provide the cybersecurity documentation you need to apply for federal grants.",
+                    desc: "We write the cybersecurity & data privacy sections for your grant applications (NIST/SOC2 aligned).",
                   },
                   {
                     icon: <Users className="w-6 h-6 text-brand-copper" />,
@@ -128,11 +126,11 @@ export function NonProfits() {
             </p>
             <Button
               onClick={() =>
-                navigate(routePaths.talkToSales, { state: { interest: "Nonprofit IT" } })
+                navigate(routePaths.talkToSales, { state: { interest: "Nonprofit Grant Readiness" } })
               }
               className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-12 py-8 h-auto rounded-full shadow-lg"
             >
-              Get a Quote <ArrowRight className="ml-2" />
+              Get Grant-Ready <ArrowRight className="ml-2" />
             </Button>
           </div>
         </section>

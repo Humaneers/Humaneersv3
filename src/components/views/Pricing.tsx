@@ -397,7 +397,10 @@ export function Pricing() {
                 <Button
                   onClick={() =>
                     navigate(routePaths.talkToSales, {
-                      state: { interest: "Hourly Support" },
+                      state: {
+                        interest: "Hourly Support",
+                        segment: pricingMode === "household" ? "family" : pricingMode === "nonprofit" ? "nonprofit" : "business"
+                      }
                     })
                   }
                   className="bg-white text-brand-oxford hover:bg-gray-100 px-8 py-3 font-bold"

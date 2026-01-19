@@ -7,16 +7,19 @@ import { Textarea } from "../ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Checkbox } from "../ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { ShieldCheck, ArrowRight, Globe, Loader2 } from "lucide-react";
+import { ShieldCheck, ArrowRight, Globe, Loader2, Building2, Home, Heart } from "lucide-react";
 import { submitSalesLead, validateSalesForm, type SalesFormData } from "../../lib/zoho";
 import { toast } from "sonner";
 import { Seo } from "../Seo";
 
-type TalkToSalesState = { email?: string; interest?: string; source?: string } | null;
+type TalkToSalesState = { email?: string; interest?: string; source?: string; segment?: CustomerSegment } | null;
+type CustomerSegment = "business" | "family" | "nonprofit" | null;
 
 export function TalkToSales() {
   const location = useLocation();
   const initialData = (location.state as TalkToSalesState) ?? {};
+
+  const [segment, setSegment] = useState<CustomerSegment>(null);
   const [formData, setFormData] = useState<SalesFormData>({
     firstName: "",
     lastName: "",
@@ -35,8 +38,19 @@ export function TalkToSales() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    if (!initialData?.email && !initialData?.interest) {
+    if (!initialData?.email && !initialData?.interest && !initialData?.segment) {
       return;
+    }
+
+    // Use explicit segment if provided, otherwise auto-detect
+    if (initialData?.segment) {
+      setSegment(initialData.segment);
+    } else if (initialData?.interest?.toLowerCase().includes("family") || initialData?.interest?.toLowerCase().includes("home")) {
+      setSegment("family");
+    } else if (initialData?.interest?.toLowerCase().includes("nonprofit")) {
+      setSegment("nonprofit");
+    } else if (initialData?.interest) {
+      setSegment("business");
     }
 
     setFormData((prev) => ({
@@ -44,7 +58,7 @@ export function TalkToSales() {
       email: initialData?.email || prev.email,
       interests: initialData?.interest ? [initialData.interest] : prev.interests,
     }));
-  }, [initialData?.email, initialData?.interest]);
+  }, [initialData?.email, initialData?.interest, initialData?.segment]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,20 +82,21 @@ export function TalkToSales() {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
-        company: formData.company,
+        company: segment === "family" ? `${formData.lastName} Household` : formData.company,
         website: formData.website,
-        role: formData.role,
-        employees: formData.employees,
+        role: segment === "family" ? "Head of Household" : formData.role,
+        employees: segment === "family" ? "1-10" : formData.employees,
         phone: formData.phone,
         budget: formData.budget,
         interests: formData.interests,
-        message: formData.message,
+        message: `[Segment: ${segment?.toUpperCase()}] ${formData.message}`,
       } as SalesFormData);
 
       toast.success("Thanks! We've received your request and will be in touch shortly.");
 
-      // Reset form or redirect to a thank you page if desired
+      // Reset form
       setStep(1);
+      setSegment(null);
       setFormData({
         firstName: "",
         lastName: "",
@@ -127,7 +142,7 @@ export function TalkToSales() {
     if (!formData.firstName.trim()) errors.push("First name is required");
     if (!formData.lastName.trim()) errors.push("Last name is required");
     if (!formData.email.trim()) errors.push("Email is required");
-    if (!formData.company.trim()) errors.push("Company name is required");
+    if (segment !== "family" && !formData.company.trim()) errors.push("Company name is required");
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (formData.email && !emailRegex.test(formData.email)) {
@@ -195,14 +210,6 @@ export function TalkToSales() {
                 </p>
                 <div className="mt-4 text-sm font-bold text-brand-oxford">— Managing Partner, Accounting Firm</div>
               </div>
-
-              <div className="bg-white p-6 rounded-lg shadow text-brand-slate">
-                <p className="italic font-medium">
-                  "We needed help protecting our kids online and securing our home network. Humaneers
-                  made it easy and explained everything in plain English."
-                </p>
-                <div className="mt-4 text-sm font-bold text-brand-oxford">— Parent, Scottsdale Family</div>
-              </div>
             </div>
 
             {/* Form */}
@@ -210,235 +217,290 @@ export function TalkToSales() {
               <CardHeader>
                 <CardTitle className="text-2xl text-brand-oxford">Request a Consultation</CardTitle>
                 <CardDescription>
-                  Fill out the form below and we'll get back to you shortly.
+                  First, tell us who you are so we can route your request to the right team.
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-gray-400">
-                    <span>Step {step} of 2</span>
-                    <span>{step === 1 ? "Contact details" : "Project details"}</span>
-                  </div>
-
-                  {step === 1 ? (
-                    <>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="firstName">First Name *</Label>
-                          <Input
-                            id="firstName"
-                            name="firstName"
-                            placeholder="Jane"
-                            required
-                            value={formData.firstName}
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="lastName">Last Name *</Label>
-                          <Input
-                            id="lastName"
-                            name="lastName"
-                            placeholder="Doe"
-                            required
-                            value={formData.lastName}
-                            onChange={handleChange}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email *</Label>
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          placeholder="jane@example.com"
-                          required
-                          value={formData.email}
-                          onChange={handleChange}
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="company">Company or Household Name *</Label>
-                        <Input
-                          id="company"
-                          name="company"
-                          placeholder="Acme Inc. or The Smith Family"
-                          required
-                          value={formData.company}
-                          onChange={handleChange}
-                        />
-                      </div>
-
-                      <Button
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Segment Selection */}
+                  {!segment && (
+                    <div className="grid grid-cols-1 gap-4 mb-6">
+                      <button
                         type="button"
-                        onClick={handleNext}
-                        className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white text-lg py-6 h-auto"
+                        onClick={() => setSegment("business")}
+                        className="flex items-center gap-4 p-4 border-2 border-gray-100 rounded-xl hover:border-brand-copper hover:bg-brand-cream/50 transition-all text-left group"
                       >
-                        Continue
-                      </Button>
-                    </>
-                  ) : (
+                        <div className="bg-blue-100 p-3 rounded-lg group-hover:bg-brand-copper group-hover:text-white transition-colors text-blue-600">
+                          <Building2 className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <div className="font-bold text-brand-oxford">For My Business</div>
+                          <div className="text-sm text-gray-500">I need IT/Security for my company.</div>
+                        </div>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setSegment("family")}
+                        className="flex items-center gap-4 p-4 border-2 border-gray-100 rounded-xl hover:border-brand-copper hover:bg-brand-cream/50 transition-all text-left group"
+                      >
+                        <div className="bg-green-100 p-3 rounded-lg group-hover:bg-brand-copper group-hover:text-white transition-colors text-green-600">
+                          <Home className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <div className="font-bold text-brand-oxford">For My Family</div>
+                          <div className="text-sm text-gray-500">I need protection for my home & kids.</div>
+                        </div>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setSegment("nonprofit")}
+                        className="flex items-center gap-4 p-4 border-2 border-gray-100 rounded-xl hover:border-brand-copper hover:bg-brand-cream/50 transition-all text-left group"
+                      >
+                        <div className="bg-purple-100 p-3 rounded-lg group-hover:bg-brand-copper group-hover:text-white transition-colors text-purple-600">
+                          <Heart className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <div className="font-bold text-brand-oxford">For a Nonprofit</div>
+                          <div className="text-sm text-gray-500">I need to maximize impact & funding.</div>
+                        </div>
+                      </button>
+                    </div>
+                  )}
+
+                  {segment && (
                     <>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="website">Website URL</Label>
-                          <div className="relative">
-                            <Globe className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                      <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-gray-400 border-b pb-4 mb-4">
+                        <div className="flex items-center gap-2">
+                          <span className={`px-2 py-1 rounded-full text-[10px] ${segment === "business" ? "bg-blue-100 text-blue-800" :
+                            segment === "family" ? "bg-green-100 text-green-800" : "bg-purple-100 text-purple-800"
+                            }`}>
+                            {segment.toUpperCase()}
+                          </span>
+                          <button type="button" onClick={() => setSegment(null)} className="underline hover:text-brand-copper lowercase">change</button>
+                        </div>
+                        <span>Step {step} of 2</span>
+                      </div>
+
+                      {step === 1 ? (
+                        <div className="space-y-4">
+                          <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                              <Label htmlFor="firstName">First Name *</Label>
+                              <Input
+                                id="firstName"
+                                name="firstName"
+                                placeholder="Jane"
+                                required
+                                value={formData.firstName}
+                                onChange={handleChange}
+                              />
+                            </div>
+                            <div className="space-y-2">
+                              <Label htmlFor="lastName">Last Name *</Label>
+                              <Input
+                                id="lastName"
+                                name="lastName"
+                                placeholder="Doe"
+                                required
+                                value={formData.lastName}
+                                onChange={handleChange}
+                              />
+                            </div>
+                          </div>
+
+                          <div className="space-y-2">
+                            <Label htmlFor="email">Email *</Label>
                             <Input
-                              id="website"
-                              name="website"
-                              type="url"
-                              placeholder="https://acme.com"
-                              className="pl-9"
-                              value={formData.website}
+                              id="email"
+                              name="email"
+                              type="email"
+                              placeholder="jane@example.com"
+                              required
+                              value={formData.email}
                               onChange={handleChange}
                             />
                           </div>
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="role">Your Role *</Label>
-                          <Input
-                            id="role"
-                            name="role"
-                            placeholder="Owner, Parent, Office Manager, etc."
-                            required
-                            value={formData.role}
-                            onChange={handleChange}
-                          />
-                        </div>
-                      </div>
 
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="phone">Phone Number</Label>
-                          <Input
-                            id="phone"
-                            name="phone"
-                            type="tel"
-                            placeholder="(555) 123-4567"
-                            value={formData.phone}
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="employees">Size *</Label>
-                          <Select
-                            value={formData.employees}
-                            onValueChange={(val) => handleSelectChange("employees", val)}
-                            required
-                          >
-                            <SelectTrigger id="employees">
-                              <SelectValue placeholder="Select size" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="individual">Just me / Family</SelectItem>
-                              <SelectItem value="solo">Solo / Freelancer</SelectItem>
-                              <SelectItem value="1-10">1-10 People</SelectItem>
-                              <SelectItem value="11-50">11-50 People</SelectItem>
-                              <SelectItem value="51-200">51-200 People</SelectItem>
-                              <SelectItem value="201+">201+ People</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="budget">Monthly IT Budget</Label>
-                        <Select
-                          value={formData.budget}
-                          onValueChange={(val) => handleSelectChange("budget", val)}
-                        >
-                          <SelectTrigger id="budget">
-                            <SelectValue placeholder="Select range" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="<1k">Less than $1,000</SelectItem>
-                            <SelectItem value="1k-3k">$1,000 to $3,000</SelectItem>
-                            <SelectItem value="3k-7k">$3,000 to $7,000</SelectItem>
-                            <SelectItem value="7k+">$7,000+</SelectItem>
-                            <SelectItem value="unsure">Let's figure it out together</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-3 pt-2">
-                        <Label>What are you looking for?</Label>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                          {[
-                            "Managed IT Services",
-                            "Brand & Growth Strategy",
-                            "Family Protection",
-                            "Fractional CIO/CMO",
-                            "Cybersecurity Audit",
-                            "Cybersecurity Audit",
-                            "Emergency IT Support",
-                            "Hourly Support",
-                          ].map((item) => (
-                            <div
-                              key={item}
-                              className="flex items-center space-x-2 border rounded-md p-3 hover:bg-gray-50 transition-colors cursor-pointer"
-                            >
-                              <Checkbox
-                                id={`interest-${item}`}
-                                checked={formData.interests.includes(item)}
-                                onCheckedChange={() => handleInterestChange(item)}
+                          {segment !== "family" && (
+                            <div className="space-y-2">
+                              <Label htmlFor="company">Organization Name *</Label>
+                              <Input
+                                id="company"
+                                name="company"
+                                placeholder="Acme Inc."
+                                required
+                                value={formData.company}
+                                onChange={handleChange}
                               />
-                              <label
-                                htmlFor={`interest-${item}`}
-                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer w-full"
-                              >
-                                {item}
-                              </label>
                             </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="message">Anything specific you'd like to discuss?</Label>
-                        <Textarea
-                          id="message"
-                          name="message"
-                          placeholder="Tell us about your current infrastructure or goals..."
-                          className="min-h-[100px]"
-                          value={formData.message}
-                          onChange={handleChange}
-                        />
-                      </div>
-
-                      <div className="flex flex-col sm:flex-row gap-3">
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={() => setStep(1)}
-                          className="w-full"
-                        >
-                          Back
-                        </Button>
-                        <Button
-                          type="submit"
-                          className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white text-lg py-6 h-auto"
-                          disabled={isSubmitting}
-                        >
-                          {isSubmitting ? (
-                            <>
-                              Submitting Request...{" "}
-                              <Loader2 className="ml-2 w-5 h-5 animate-spin" />
-                            </>
-                          ) : (
-                            <>
-                              Send Request <ArrowRight className="ml-2 w-5 h-5" />
-                            </>
                           )}
-                        </Button>
-                      </div>
-                      <p className="text-xs text-center text-gray-500 mt-4">
-                        By submitting this form, you agree to our Privacy Policy. Your data is
-                        secure and will never be sold.
-                      </p>
+
+                          <Button
+                            type="button"
+                            onClick={handleNext}
+                            className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white text-lg py-6 h-auto"
+                          >
+                            Continue
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="space-y-4">
+                          {segment !== "family" && (
+                            <div className="grid grid-cols-2 gap-4">
+                              <div className="space-y-2">
+                                <Label htmlFor="website">Website URL</Label>
+                                <div className="relative">
+                                  <Globe className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                                  <Input
+                                    id="website"
+                                    name="website"
+                                    type="url"
+                                    placeholder="https://acme.com"
+                                    className="pl-9"
+                                    value={formData.website}
+                                    onChange={handleChange}
+                                  />
+                                </div>
+                              </div>
+                              <div className="space-y-2">
+                                <Label htmlFor="role">Your Role *</Label>
+                                <Input
+                                  id="role"
+                                  name="role"
+                                  placeholder="Executive Director, Owner, etc."
+                                  required
+                                  value={formData.role}
+                                  onChange={handleChange}
+                                />
+                              </div>
+                            </div>
+                          )}
+
+                          <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                              <Label htmlFor="phone">Phone Number</Label>
+                              <Input
+                                id="phone"
+                                name="phone"
+                                type="tel"
+                                placeholder="(555) 123-4567"
+                                value={formData.phone}
+                                onChange={handleChange}
+                              />
+                            </div>
+
+                            {segment !== "family" && (
+                              <div className="space-y-2">
+                                <Label htmlFor="employees">Team Size *</Label>
+                                <Select
+                                  value={formData.employees}
+                                  onValueChange={(val) => handleSelectChange("employees", val)}
+                                  required
+                                >
+                                  <SelectTrigger id="employees">
+                                    <SelectValue placeholder="Select size" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    <SelectItem value="solo">Solo / Freelancer</SelectItem>
+                                    <SelectItem value="1-10">1-10 People</SelectItem>
+                                    <SelectItem value="11-50">11-50 People</SelectItem>
+                                    <SelectItem value="51-200">51-200 People</SelectItem>
+                                    <SelectItem value="201+">201+ People</SelectItem>
+                                  </SelectContent>
+                                </Select>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Segment-Specific Interests */}
+                          <div className="space-y-3 pt-2">
+                            <Label>What do you need help with?</Label>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                              {(segment === "family" ? [
+                                "Home Network Security",
+                                "Grandparent Protection",
+                                "Identity Theft Restoration",
+                                "Parental Controls",
+                                "General Tech Support"
+                              ] : segment === "nonprofit" ? [
+                                "Grant Readiness / Compliance",
+                                "Donor Data Protection",
+                                "Managed IT Services",
+                                "Volunteer Access Management",
+                                "Board Reporting"
+                              ] : [
+                                "Managed IT Services",
+                                "Fractional CIO/CMO",
+                                "Compliance (SOC2/HIPAA)",
+                                "Growth Strategy",
+                                "Emergency Support"
+                              ]).map((item) => (
+                                <div
+                                  key={item}
+                                  className="flex items-center space-x-2 border rounded-md p-3 hover:bg-gray-50 transition-colors cursor-pointer"
+                                >
+                                  <Checkbox
+                                    id={`interest-${item}`}
+                                    checked={formData.interests.includes(item)}
+                                    onCheckedChange={() => handleInterestChange(item)}
+                                  />
+                                  <label
+                                    htmlFor={`interest-${item}`}
+                                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer w-full"
+                                  >
+                                    {item}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="space-y-2">
+                            <Label htmlFor="message">Anything specific you'd like to discuss?</Label>
+                            <Textarea
+                              id="message"
+                              name="message"
+                              placeholder={segment === "family" ? "e.g., My kids keep bypassing the filters..." : "Tell us about your current infrastructure or goals..."}
+                              className="min-h-[100px]"
+                              value={formData.message}
+                              onChange={handleChange}
+                            />
+                          </div>
+
+                          <div className="flex flex-col sm:flex-row gap-3">
+                            <Button
+                              type="button"
+                              variant="outline"
+                              onClick={() => setStep(1)}
+                              className="w-full"
+                            >
+                              Back
+                            </Button>
+                            <Button
+                              type="submit"
+                              className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white text-lg py-6 h-auto"
+                              disabled={isSubmitting}
+                            >
+                              {isSubmitting ? (
+                                <>
+                                  Submitting Request...{" "}
+                                  <Loader2 className="ml-2 w-5 h-5 animate-spin" />
+                                </>
+                              ) : (
+                                <>
+                                  Send Request <ArrowRight className="ml-2 w-5 h-5" />
+                                </>
+                              )}
+                            </Button>
+                          </div>
+                          <p className="text-xs text-center text-gray-500 mt-4">
+                            By submitting this form, you agree to our Privacy Policy. Your data is
+                            secure and will never be sold.
+                          </p>
+                        </div>
+                      )}
                     </>
                   )}
                 </form>

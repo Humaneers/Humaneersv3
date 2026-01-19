@@ -138,7 +138,7 @@ export function Growth() {
               <p className="text-brand-slate text-lg leading-relaxed">
                 Hiring a full-time Chief Marketing Officer costs $250k+. Hiring an agency gets you a
                 junior team juggling 20 other clients. We provide a third option:
-                <strong> Senior Fractional Leadership </strong> integrated directly into your org.
+                <strong> Senior Fractional Leadership </strong> for <span className="text-brand-copper font-bold">1/10th the cost</span>.
               </p>
             </div>
 
@@ -242,10 +242,12 @@ export function Growth() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
-                onClick={() => navigate(routePaths.talkToSales, { state: { interest: "Growth" } })}
+                onClick={() =>
+                  navigate(routePaths.talkToSales, { state: { interest: "Fractional Growth" } })
+                }
                 className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-10 py-8 h-auto rounded-full shadow-xl hover:shadow-2xl transition-all"
               >
-                Schedule Introduction
+                Calculate Your Savings
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </div>

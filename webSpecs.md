@@ -148,7 +148,21 @@
 - **Nonprofit**: "Grant Readiness" (NOT just "IT Support"). Focus on compliance unlocking funding.
 - **Business**: "Fractional Savings". Highlight the 10x ROI vs hiring full-time.
 
-### 6.3 Family Inclusion
+### 6.3 Ideal Customer Profiles (ICPs)
+1. **The Sophisticated Family ("Chief Household Officer")**:
+   - **Trigger**: Identity theft news or kids' internet safety.
+   - **Desire**: "Set it and forget it" peace of mind.
+   - **Blocker**: Complexity.
+2. **The SMB Owner ("Growth Leader")**:
+   - **Trigger**: Security scare or SOC 2 compliance.
+   - **Desire**: Speed, ROI, and Trust.
+   - **Blocker**: Trust ("Will they understand my business?").
+3. **The Nonprofit Director ("Steward")**:
+   - **Trigger**: Grant compliance or donor data fears.
+   - **Desire**: Stewardship and Efficiency.
+   - **Blocker**: Cost.
+
+### 6.4 Family Inclusion
 - **Shift**: Moved from business-only to "Business + Family" dual focus.
 - **Updates**:
   - Homepage Hero: "Enterprise strategy for businesses and families..." implies scope.
