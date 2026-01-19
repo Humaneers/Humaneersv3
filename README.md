@@ -27,6 +27,9 @@ The official website for Humaneers, built with modern web technologies to delive
 - **Forms/CRM**: [Zoho CRM](https://www.zoho.com/crm/) + Zoho Forms
 - **Analytics**: Zoho PageSense + SalesIQ, Contentsquare, Datadog RUM
 - **Deployment**: [Vercel](https://vercel.com/)
+- **Infrastructure**: AWS (S3, EC2), CloudFlare DNS, Plesk
+- **Payments**: [Stripe](https://stripe.com/)
+- **Communication**: [Slack](https://slack.com/)
 
 ## Getting Started
 

@@ -102,6 +102,9 @@
   - *Context-Aware Routing*: Pass `mode` and `highlight` params (e.g., `?mode=household&highlight=senior`).
 - **CRM**: Zoho CRM (via custom API integration).
 - **Analytics**: Vercel Analytics, Zoho PageSense, Contentsquare, Datadog RUM.
+- **Infrastructure**: AWS (S3, EC2), CloudFlare DNS, Plesk.
+- **Payments**: Stripe.
+- **Communication**: Slack.
 
 ### 4.2 Code Standards
 - **File Structure**: Feature-based organization in `src/components/views`.

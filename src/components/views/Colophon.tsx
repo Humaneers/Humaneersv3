@@ -509,6 +509,80 @@ export function Colophon() {
                         Version control & code repository
                       </span>
                     </li>
+                    <li className="flex flex-col gap-1">
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium text-gray-700">Slack</span>
+                        <a
+                          href="https://slack.com"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-brand-copper hover:underline text-xs"
+                        >
+                          ↗
+                        </a>
+                      </div>
+                      <span className="text-xs text-gray-500">Team communication & collaboration</span>
+                    </li>
+                    <li className="flex flex-col gap-1">
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium text-gray-700">AWS (S3, EC2)</span>
+                        <a
+                          href="https://aws.amazon.com"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-brand-copper hover:underline text-xs"
+                        >
+                          ↗
+                        </a>
+                      </div>
+                      <span className="text-xs text-gray-500">
+                        Cloud storage & compute infrastructure
+                      </span>
+                    </li>
+                    <li className="flex flex-col gap-1">
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium text-gray-700">CloudFlare DNS</span>
+                        <a
+                          href="https://cloudflare.com"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-brand-copper hover:underline text-xs"
+                        >
+                          ↗
+                        </a>
+                      </div>
+                      <span className="text-xs text-gray-500">
+                        DNS management & security
+                      </span>
+                    </li>
+                    <li className="flex flex-col gap-1">
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium text-gray-700">Plesk</span>
+                        <a
+                          href="https://plesk.com"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-brand-copper hover:underline text-xs"
+                        >
+                          ↗
+                        </a>
+                      </div>
+                      <span className="text-xs text-gray-500">Server management platform</span>
+                    </li>
+                    <li className="flex flex-col gap-1">
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium text-gray-700">Stripe</span>
+                        <a
+                          href="https://stripe.com"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-brand-copper hover:underline text-xs"
+                        >
+                          ↗
+                        </a>
+                      </div>
+                      <span className="text-xs text-gray-500">Payment processing & billing</span>
+                    </li>
                   </ul>
                 </div>
 
