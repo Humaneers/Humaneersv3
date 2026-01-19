@@ -51,6 +51,11 @@ export function Home() {
       title="Humaneers | Enterprise Strategy, Small Business Soul"
       description="Enterprise-grade IT, security, and brand growth for small businesses. SOC 2 compliant, 100% US-based managed IT services, family protection, and fractional leadership."
     >
+      <link
+        rel="preload"
+        as="image"
+        href="https://images.unsplash.com/photo-1673563978245-b5d4adb056fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxUZW1wZSUyMEFyaXpvbmElMjBzdW5yaXNlJTIwd2FybSUyMGxpZ2h0fGVufDF8fHx8MTc2NjQ0ODcyOXww&ixlib=rb-4.1.0&q=80&w=1080"
+      />
       <div className="w-full">
         <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
