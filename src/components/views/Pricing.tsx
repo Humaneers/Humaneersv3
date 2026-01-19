@@ -88,7 +88,7 @@ export function Pricing() {
       name: "Solo / Personal",
       price: 25,
       unit: "/user/mo",
-      description: "DNS, domains & email management only. Limited protection.",
+      description: "DNS, domain & email management. Limited protection.",
       features: [
         "Domain Registrar Management",
         "DNS Record Configuration",
@@ -104,7 +104,7 @@ export function Pricing() {
       name: "Personal Foundation",
       price: 50,
       unit: "/household/mo",
-      description: "Essential protection for up to 4 members and their devices.",
+      description: "Essential protection for up to four humans and their devices.",
       features: [
         "Enterprise Endpoint Protection (Mac/PC)",
         <span key="mdm-personal">
