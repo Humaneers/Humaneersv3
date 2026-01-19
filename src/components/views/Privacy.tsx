@@ -315,13 +315,43 @@ export function Privacy() {
               13. Children's Privacy
             </h2>
             <p>
-              Our services are not directed to individuals under 18 years of age. We do not
-              knowingly collect personal data from children. If you believe we have inadvertently
-              collected data from a child, please contact us immediately.
+              Generally, our services are not directed to individuals under 18 years of age. However,
+              as part of our <strong>Family Protection</strong> services, we may secure devices used
+              by children. In these specific cases:
+            </p>
+            <ul className="list-disc pl-6 mb-4 space-y-2">
+              <li>
+                Data collection regarding children is performed solely pursuant to a signed Service
+                Agreement with the parent or legal guardian.
+              </li>
+              <li>
+                We strictly limit data collection to what is necessary for security monitoring (e.g.,
+                content filtering, threat detection) and do not use this data for marketing.
+              </li>
+              <li>
+                We comply with all applicable laws, including the Children's Online Privacy
+                Protection Act (COPPA).
+              </li>
+            </ul>
+            <p>
+              If we discover that we have collected personal data from a child outside of a
+              contractual Family Protection agreement, we will take steps to delete that information
+              immediately.
             </p>
 
             <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">
-              14. Changes to This Policy
+              14. Data Ownership
+            </h2>
+            <p>
+              <strong>In all cases, client data remains client data.</strong> We act solely as
+              custodians and data processors. We do not claim ownership of your personal information,
+              business data, or intellectual property. You retain full rights to your data at all
+              times, and we will return or delete your data upon termination of service in accordance
+              with our retention policy.
+            </p>
+
+            <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">
+              15. Changes to This Policy
             </h2>
             <p>
               We may update this privacy policy from time to time to reflect changes in our
@@ -330,7 +360,7 @@ export function Privacy() {
               changes, we may provide additional notice via email.
             </p>
 
-            <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">15. Contact Us</h2>
+            <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">16. Contact Us</h2>
             <p>
               For questions about this privacy policy, to exercise your rights, or to report privacy
               concerns, please contact:
