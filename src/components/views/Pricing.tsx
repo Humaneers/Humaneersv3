@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Check, Shield, BarChart3, Users, Lock, Clock, Heart } from "lucide-react";
 import { Button } from "../ui/button";
@@ -10,8 +11,10 @@ export function Pricing() {
   const [searchParams] = useSearchParams();
 
   // Get mode from URL params, default to business
-  const initialMode = (searchParams.get("mode") as "business" | "nonprofit" | "household") || "business";
-  const [pricingMode, setPricingMode] = useState<"business" | "nonprofit" | "household">(initialMode);
+  const initialMode =
+    (searchParams.get("mode") as "business" | "nonprofit" | "household") || "business";
+  const [pricingMode, setPricingMode] =
+    useState<"business" | "nonprofit" | "household">(initialMode);
 
   const businessTiers = [
     {
@@ -134,7 +137,9 @@ export function Pricing() {
       ],
       cta: "Protect My Parents",
       highlighted: true,
-      links: [{ label: "Senior Care Details", icon: <Heart size={12} />, to: routePaths.seniorCare }],
+      links: [
+        { label: "Senior Care Details", icon: <Heart size={12} />, to: routePaths.seniorCare },
+      ],
     },
     {
       name: "Personal Estate",
@@ -186,10 +191,8 @@ export function Pricing() {
 
   return (
     <div className="bg-brand-cream min-h-screen py-24">
-      {/* ... header ... */}
       <div className="container mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          {/* ... existing header code ... */}
           <h1 className="text-4xl md:text-5xl font-bold text-brand-oxford mb-6">
             Transparent Pricing. No Hidden Fees.
           </h1>
@@ -200,19 +203,28 @@ export function Pricing() {
           <div className="flex flex-wrap items-center justify-center gap-2 bg-white/50 backdrop-blur-sm p-2 rounded-2xl sm:rounded-full w-full sm:w-auto mx-auto mb-8 shadow-sm">
             <button
               onClick={() => setPricingMode("business")}
-              className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${pricingMode === "business" ? "bg-brand-oxford text-white shadow-md" : "text-gray-500 hover:text-brand-oxford"}`}
+              className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${pricingMode === "business"
+                ? "bg-brand-oxford text-white shadow-md"
+                : "text-gray-500 hover:text-brand-oxford"
+                }`}
             >
               Business
             </button>
             <button
               onClick={() => setPricingMode("household")}
-              className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${pricingMode === "household" ? "bg-brand-copper text-white shadow-md" : "text-gray-500 hover:text-brand-copper"}`}
+              className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${pricingMode === "household"
+                ? "bg-brand-copper text-white shadow-md"
+                : "text-gray-500 hover:text-brand-copper"
+                }`}
             >
               Personal
             </button>
             <button
               onClick={() => setPricingMode("nonprofit")}
-              className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 whitespace-nowrap ${pricingMode === "nonprofit" ? "bg-brand-oxford text-white shadow-md" : "text-gray-500 hover:text-brand-oxford"}`}
+              className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 whitespace-nowrap ${pricingMode === "nonprofit"
+                ? "bg-brand-oxford text-white shadow-md"
+                : "text-gray-500 hover:text-brand-oxford"
+                }`}
             >
               Nonprofit
             </button>
@@ -230,18 +242,19 @@ export function Pricing() {
 
         <div
           className={`grid gap-8 mx-auto ${currentTiers.length === 1
-              ? "max-w-md"
-              : currentTiers.length === 2
-                ? "max-w-4xl md:grid-cols-2"
-                : currentTiers.length === 3
-                  ? "max-w-6xl md:grid-cols-3"
-                  : "max-w-7xl lg:grid-cols-4"
+            ? "max-w-md"
+            : currentTiers.length === 2
+              ? "max-w-4xl md:grid-cols-2"
+              : currentTiers.length === 3
+                ? "max-w-6xl md:grid-cols-3"
+                : "max-w-7xl lg:grid-cols-4"
             }`}
         >
           {currentTiers.map((tier, index) => {
             // Check if this tier matches the highlight param
             const isHighlightedByParam =
-              highlightParam && tier.name.toLowerCase().includes(highlightParam.toLowerCase());
+              highlightParam &&
+              tier.name.toLowerCase().includes(highlightParam.toLowerCase());
 
             return (
               <motion.div
@@ -250,10 +263,10 @@ export function Pricing() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className={`relative bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col ${isHighlightedByParam
-                    ? "border-4 border-brand-copper transform scale-105 z-10 shadow-2xl ring-4 ring-brand-copper/20"
-                    : tier.highlighted
-                      ? "border-2 border-brand-copper transform md:-translate-y-4"
-                      : "border border-gray-100"
+                  ? "border-4 border-brand-copper transform scale-105 z-10 shadow-2xl ring-4 ring-brand-copper/20"
+                  : tier.highlighted
+                    ? "border-2 border-brand-copper transform md:-translate-y-4"
+                    : "border border-gray-100"
                   }`}
               >
                 {tier.highlighted && (
@@ -309,7 +322,8 @@ export function Pricing() {
                       if (
                         tier.name.includes("Personal") ||
                         tier.name.includes("Family") ||
-                        tier.name.includes("Solo")
+                        tier.name.includes("Solo") ||
+                        tier.name.includes("Senior")
                       ) {
                         interest = "Personal/Family IT";
                       } else if (tier.name === "Scale") {
@@ -326,7 +340,8 @@ export function Pricing() {
                   </Button>
                 </div>
               </motion.div>
-            ))}
+            );
+          })}
         </div>
 
         <div className="mt-20 max-w-4xl mx-auto">

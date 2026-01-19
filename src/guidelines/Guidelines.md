@@ -1,4 +1,5 @@
-1. Review these guidelines each time.
-2. Review the TODO.md file.
-3. Follow Brand Guidelines always.
-4. Notify and clarify if uncertain or if there is a conflict.
+# Guidelines
+
+**DEPRECATED**
+
+Please refer to `README.md` in the root directory. It serves as the entry point and contains the link to `webSpecs.md`, which is the single source of truth for all design and technical guidelines.

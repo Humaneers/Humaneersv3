@@ -68,7 +68,7 @@ This project follows the **Modern Craftsman** design aesthetic:
 - **Typography**: System sans-serif stack for clarity and performance
 - **Principles**: Clarity over cleverness, warmth in professionalism
 
-See `STYLEGUIDE.md` for design guidelines and `CLAUDE.md` for technical patterns.
+See `webSpecs.md` for all design guidelines, technical patterns, and the single source of truth for AI agents.
 
 **AI Usage Policy**: Humaneers follows a "Human-first, AI-second" approach. Details in our [Colophon](https://humaneers.dev/colophon).
 

@@ -1,0 +1,11 @@
+# Cursor Rules
+
+ALWAYS review and comply with `README.md` in the root directory. 
+
+`README.md` is the single source of truth and entry point for:
+- Project overview and structure
+- Development standards
+- Design guidelines (linked via `webSpecs.md`)
+- AI usage policies
+
+Do not make assumptions. Start by reading `README.md`.

@@ -85,7 +85,7 @@ Development tasks and outstanding items for the Humaneers website.
 
 ### Documentation
 - [x] Document component library usage ✅ (Jan 17, 2026)
-  - Expanded CLAUDE.md with Development Workflow section
+  - Expanded webSpecs.md with Development Workflow section
   - Added Technical Standards section
   - Created component documentation examples
 - [x] Add JSDoc comments to utility functions ✅ (Jan 17, 2026)
@@ -100,7 +100,7 @@ Development tasks and outstanding items for the Humaneers website.
 ## Completed ✅
 
 ### Cal.com Integration (December 2025 - January 2026)
-- [x] Create CLAUDE.md brand guidelines
+- [x] Create webSpecs.md brand guidelines
 - [x] Migrate TalkToSalesModal to Cal.com
 - [x] Migrate TalkToSales full page to Cal.com
 - [x] Migrate Support form to Cal.com
@@ -130,14 +130,14 @@ Development tasks and outstanding items for the Humaneers website.
 - [x] Update TODO.md with completed items
 - [x] Create MOBILE_RESPONSIVENESS_CHECKLIST.md
 - [x] Create SEO_RECOMMENDATIONS.md
-- [x] Expand CLAUDE.md with development guidelines
+- [x] Expand webSpecs.md with development guidelines
 
 ### UI/UX Improvements (January 18, 2026)
 - [x] Enhanced footer copyright banner with "Built by humans" messaging
 - [x] Migrated System Status link from header to footer meta links
 - [x] Updated sales form to support Company or Family Name
 - [x] Improved footer text layout and hierarchy
-- [x] Updated CLAUDE.md with footer messaging patterns
+- [x] Updated webSpecs.md with footer messaging patterns
 - [x] Fixed crash when selecting interests in sales form (onCheckedChange handler)
 
 ---
@@ -157,7 +157,7 @@ Development tasks and outstanding items for the Humaneers website.
 Completed comprehensive development improvements:
 - **Performance**: 28% bundle size reduction (656KB → 473KB)
 - **Quality**: Error boundaries, loading states, code splitting
-- **Documentation**: Expanded CLAUDE.md, added JSDoc comments
+- **Documentation**: Expanded webSpecs.md, added JSDoc comments
 - **SEO**: Added meta tags, OG/Twitter cards, SEO recommendations
 - **Mobile**: Verified responsive design, created QA checklist
 - **Git**: Committed all improvements (e136f55)
@@ -168,7 +168,7 @@ Completed footer, navigation, and form improvements:
 - **Navigation**: Migrated System Status link from header to footer meta links
 - **Forms**: Updated TalkToSalesModal to support Company or Family Name distinction
 - **Bug Fix**: Fixed crash when selecting interests (onCheckedChange handler issue)
-- **Documentation**: Updated CLAUDE.md with footer messaging patterns and file references
+- **Documentation**: Updated webSpecs.md with footer messaging patterns and file references
 - **Layout**: Improved footer text hierarchy and responsive behavior
 
 ---

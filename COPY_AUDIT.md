@@ -4,7 +4,7 @@
 **Date:** January 17, 2026  
 **Standard:** "Clear over clever, warm professionalism"
 
-## Brand Voice Principles (from CLAUDE.md)
+## Brand Voice Principles (from webSpecs.md)
 1. **Clear over clever** - Information should be immediately accessible
 2. **Warm professionalism** - Technical expertise delivered with humanity  
 3. **Specific and concrete** - No vague promises

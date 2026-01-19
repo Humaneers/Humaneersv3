@@ -70,7 +70,7 @@ Individual route chunks created:
 
 ## Documentation
 
-### CLAUDE.md Expansion
+### webSpecs.md Expansion
 Added 400+ lines of development guidelines:
 
 **New Sections**:
@@ -152,7 +152,7 @@ Files documented:
 - Text Gray `#4E596F`: Body copy (105 instances)
 
 **Components Reviewed**: 21 view files
-**Consistency Score**: 100% aligned with CLAUDE.md
+**Consistency Score**: 100% aligned with webSpecs.md
 
 ---
 
@@ -237,7 +237,7 @@ Update TODO.md with completed development improvements
 ```
 
 ### Files Modified
-- `Claude.md` (expanded 400+ lines)
+- `webSpecs.md` (expanded 400+ lines)
 - `index.html` (added SEO meta tags)
 - `src/App.tsx` (code splitting + error boundaries)
 - `src/components/DefinitionTooltip.tsx` (JSDoc)
@@ -343,7 +343,7 @@ Update TODO.md with completed development improvements
 ## Resources
 
 **Documentation Created**:
-- [CLAUDE.md](./CLAUDE.md) - Brand guidelines + development standards
+- [webSpecs.md](./webSpecs.md) - Brand guidelines + development standards
 - [TODO.md](./TODO.md) - Task tracking
 - [MOBILE_RESPONSIVENESS_CHECKLIST.md](./MOBILE_RESPONSIVENESS_CHECKLIST.md) - QA guide
 - [SEO_RECOMMENDATIONS.md](./SEO_RECOMMENDATIONS.md) - SEO roadmap
