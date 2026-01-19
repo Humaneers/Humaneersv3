@@ -102,13 +102,25 @@ export async function submitNewsletter(data: NewsletterFormData): Promise<ApiRes
     body: JSON.stringify(data),
   });
 
-  const result = await response.json();
+  const contentType = response.headers.get("content-type");
 
-  if (!response.ok) {
-    throw new Error(result.error || "Failed to subscribe");
+  if (contentType && contentType.indexOf("application/json") !== -1) {
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.error || "Failed to subscribe");
+    }
+    return result;
+  } else {
+    // If not JSON, read as text and error out
+    const text = await response.text();
+    // If we land here with a 200, it's weird, but handle it.
+    // Usually this is a 500 HTML or text error.
+    if (!response.ok) {
+      throw new Error(`Server error (${response.status}): ${text.substring(0, 100)}`);
+    }
+    // Fallback success if text returned (unlikely for API)
+    return { success: true };
   }
-
-  return result;
 }
 
 /**

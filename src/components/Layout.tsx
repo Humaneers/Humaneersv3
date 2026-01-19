@@ -59,10 +59,10 @@ export function Layout() {
 
     try {
       await submitNewsletter({ email: newsletterEmail, source: "footer" });
-      // setNewsletterSuccess(true);
       toast.success("Thanks for subscribing!");
       setNewsletterEmail("");
     } catch (error) {
+      console.error("Newsletter submission error:", error);
       toast.error(
         error instanceof Error ? error.message : "Failed to subscribe. Please try again."
       );
