@@ -58,6 +58,9 @@ const Personal = lazy(() =>
   import("./components/views/Personal").then((m) => ({ default: m.Personal }))
 );
 const Estate = lazy(() => import("./components/views/Estate").then((m) => ({ default: m.Estate })));
+const ThankYou = lazy(() =>
+  import("./components/views/ThankYou").then((m) => ({ default: m.ThankYou }))
+);
 const Colophon = lazy(() =>
   import("./components/views/Colophon").then((m) => ({ default: m.Colophon }))
 );
@@ -227,6 +230,7 @@ export default function App() {
                 </Seo>
               }
             />
+            <Route path="/thank-you" element={<ThankYou />} />
             <Route
               path={routePaths.talkToSales}
               element={

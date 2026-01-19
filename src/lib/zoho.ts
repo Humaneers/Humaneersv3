@@ -10,11 +10,11 @@ export interface SalesFormData {
   firstName: string;
   lastName: string;
   email: string;
-  company: string;
+  company?: string;
   website?: string;
-  role: string;
+  role?: string;
   phone?: string;
-  employees: string;
+  employees?: string;
   budget?: string;
   interests: string[];
   message?: string;
@@ -178,9 +178,10 @@ export function validateSalesForm(data: Partial<SalesFormData>): {
   // Ideally we inspect segment here, but we don't pass segment.
   // We'll leave as is, assuming UI manages the 'Company' field population (e.g. "Smith Household") before calling.
   // Looking at TalkToSales.tsx, it populates it. So this is fine.
-  if (!data.company?.trim()) errors.push("Company name is required");
-  if (!data.role?.trim()) errors.push("Role is required");
-  if (!data.employees?.trim()) errors.push("Company size is required");
+  // Optional fields for certain segments (personal, nonprofit)
+  // if (!data.company?.trim()) errors.push("Company name is required");
+  // if (!data.role?.trim()) errors.push("Role is required");
+  // if (!data.employees?.trim()) errors.push("Company size is required");
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (data.email && !emailRegex.test(data.email)) {

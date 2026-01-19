@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -62,7 +63,7 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
     if (!formData.firstName.trim()) errors.push("First name is required");
     if (!formData.lastName.trim()) errors.push("Last name is required");
     if (!formData.email.trim()) errors.push("Email is required");
-    if (!formData.company.trim()) errors.push("Company name is required");
+    // if (!formData.company.trim()) errors.push("Company name is required");
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (formData.email && !emailRegex.test(formData.email)) {
@@ -80,6 +81,8 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
     }
     setStep(2);
   };
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -99,9 +102,22 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
     setIsSubmitting(true);
 
     try {
-      await submitSalesLead(formData);
-      setIsSuccess(true);
-      toast.success("Your inquiry has been submitted!");
+      await submitSalesLead({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        company: formData.company,
+        website: formData.website,
+        role: formData.role,
+        employees: formData.employees,
+        phone: formData.phone,
+        budget: formData.budget,
+        interests: formData.interests,
+        message: formData.message,
+      } as SalesFormData);
+
+      onOpenChange(false);
+      navigate("/thank-you");
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Failed to submit. Please try again.");
     } finally {
@@ -200,13 +216,12 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="company">Company or Family Name</Label>
+                        <Label htmlFor="company">Company or Family Name (Optional)</Label>
                         <Input
                           id="company"
                           name="company"
                           placeholder="Acme Inc. or The Smith Family"
-                          required
-                          value={formData.company}
+                          value={formData.company || ""}
                           onChange={handleChange}
                         />
                         <p className="text-xs text-gray-500">

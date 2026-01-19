@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -70,6 +70,8 @@ export function TalkToSales() {
     }));
   }, [initialData?.email, initialData?.interest, initialData?.segment, initialData?.source]);
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -109,25 +111,8 @@ export function TalkToSales() {
         source: formData.source,
       } as SalesFormData);
 
-      toast.success("Thanks! We've received your request and will be in touch shortly.");
-
-      // Reset form
-      setStep(1);
-      setSegment(null);
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        company: "",
-        website: "",
-        role: "",
-        employees: "",
-        phone: "",
-        budget: "",
-        interests: [],
-        message: "",
-        source: "",
-      });
+      // Navigate to Thank You page
+      navigate("/thank-you");
     } catch (error) {
       toast.error(
         error instanceof Error ? error.message : "Failed to submit request. Please try again."
@@ -160,7 +145,7 @@ export function TalkToSales() {
     if (!formData.firstName.trim()) errors.push("First name is required");
     if (!formData.lastName.trim()) errors.push("Last name is required");
     if (!formData.email.trim()) errors.push("Email is required");
-    if (segment !== "personal" && !formData.company.trim()) errors.push("Company name is required");
+    // if (segment !== "personal" && !formData.company.trim()) errors.push("Company name is required");
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (formData.email && !emailRegex.test(formData.email)) {
@@ -364,13 +349,12 @@ export function TalkToSales() {
 
                           {segment !== "personal" && (
                             <div className="space-y-2">
-                              <Label htmlFor="company">Organization Name *</Label>
+                              <Label htmlFor="company">Organization Name</Label>
                               <Input
                                 id="company"
                                 name="company"
                                 placeholder="Acme Inc."
-                                required
-                                value={formData.company}
+                                value={formData.company || ""}
                                 onChange={handleChange}
                               />
                             </div>
@@ -404,12 +388,11 @@ export function TalkToSales() {
                                 </div>
                               </div>
                               <div className="space-y-2">
-                                <Label htmlFor="role">Your Role *</Label>
+                                <Label htmlFor="role">Your Role</Label>
                                 <Input
                                   id="role"
                                   name="role"
                                   placeholder="Executive Director, Owner, etc."
-                                  required
                                   value={formData.role}
                                   onChange={handleChange}
                                 />
@@ -432,11 +415,10 @@ export function TalkToSales() {
 
                             {segment !== "personal" && (
                               <div className="space-y-2">
-                                <Label htmlFor="employees">Team Size *</Label>
+                                <Label htmlFor="employees">Team Size</Label>
                                 <Select
                                   value={formData.employees}
                                   onValueChange={(val) => handleSelectChange("employees", val)}
-                                  required
                                 >
                                   <SelectTrigger id="employees">
                                     <SelectValue placeholder="Select size" />

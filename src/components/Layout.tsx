@@ -188,7 +188,10 @@ export function Layout() {
         }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
-          <Link className="flex items-center cursor-pointer shrink-0 mr-8" to={routePaths.home}>
+          <Link
+            className="flex items-center cursor-pointer shrink-0 mr-8 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-brand-copper"
+            to={routePaths.home}
+          >
             <img
               src="/WordMarkV-2.svg"
               alt="Humaneers"
@@ -201,7 +204,7 @@ export function Layout() {
               <NavigationMenuList>
                 {whoWeHelpSection ? (
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="bg-transparent text-gray-300 hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-white">
+                    <NavigationMenuTrigger className="bg-transparent text-gray-300 hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-white focus-visible:ring-2 focus-visible:ring-brand-copper">
                       {whoWeHelpSection.label}
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
@@ -235,7 +238,7 @@ export function Layout() {
 
                 {platformSection ? (
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="bg-transparent text-gray-300 hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-white">
+                    <NavigationMenuTrigger className="bg-transparent text-gray-300 hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-white focus-visible:ring-2 focus-visible:ring-brand-copper">
                       {platformSection.label}
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
@@ -250,7 +253,7 @@ export function Layout() {
 
                 {resourcesSection ? (
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="bg-transparent text-gray-300 hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-white">
+                    <NavigationMenuTrigger className="bg-transparent text-gray-300 hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-white focus-visible:ring-2 focus-visible:ring-brand-copper">
                       {resourcesSection.label}
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
@@ -284,7 +287,7 @@ export function Layout() {
 
                 {companySection ? (
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="bg-transparent text-gray-300 hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-white">
+                    <NavigationMenuTrigger className="bg-transparent text-gray-300 hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-white focus-visible:ring-2 focus-visible:ring-brand-copper">
                       {companySection.label}
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
@@ -320,13 +323,13 @@ export function Layout() {
           <div className="hidden md:flex items-center gap-3 shrink-0 ml-4">
             <Button
               variant="ghost"
-              className="text-gray-300 hover:text-white hover:bg-white/10 font-medium hidden lg:inline-flex"
+              className="text-gray-300 hover:text-white hover:bg-white/10 font-medium hidden lg:inline-flex focus-visible:ring-2 focus-visible:ring-brand-copper"
               asChild
             >
               <Link to={ctaLinks.support.to}>{ctaLinks.support.label}</Link>
             </Button>
             <Button
-              className="bg-brand-copper hover:bg-brand-copper-dark text-white font-medium rounded-md transition-all shadow-md hover:shadow-lg"
+              className="bg-brand-copper hover:bg-brand-copper-dark text-white font-medium rounded-md transition-all shadow-md hover:shadow-lg focus-visible:ring-2 focus-visible:ring-white"
               asChild
             >
               <Link to={ctaLinks.sales.to}>{ctaLinks.sales.label}</Link>
@@ -334,7 +337,7 @@ export function Layout() {
           </div>
 
           <button
-            className="md:hidden text-white ml-auto"
+            className="md:hidden text-white ml-auto rounded-md focus-visible:ring-2 focus-visible:ring-brand-copper outline-none"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
