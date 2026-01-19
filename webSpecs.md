@@ -141,12 +141,23 @@
 - **New Finding**: Senior Care helps adult children protect aging parents from fraud.
 - **New Tier**: "Senior Care" ($75/household/mo).
 - **Features**: Fraud Air-Gapping, "Red Button" support, Family Proxy.
-- **Routing**: `/senior-care` -> `/pricing?highlight=senior`.
+- **Routing**:
+  - `/senior-care` -> `/pricing?highlight=senior`.
+  - **Support**: `/support` (Emergency contacts, FAQ, SLA)
+  - **Client Care**: `/client-care` (Concierge info, Portal login simulation)
+  - **Partners**: `/partners` (Vendor ecosystem)
 
 ### 6.2 Marketing Messaging Pillars (Q1 2026)
 - **Family**: "Health Check" (NOT "Audit"). Focus on simplicity and "Grandparent Protection".
 - **Nonprofit**: "Grant Readiness" (NOT just "IT Support"). Focus on compliance unlocking funding.
 - **Business**: "Fractional Savings". Highlight the 10x ROI vs hiring full-time.
+
+### 6.3 Client Care (Retention Asset)
+- **Goal**: Showcase premium "Concierge" experience to build trust pre-sale and reassure post-sale.
+- **Key Features**:
+  - "Client Care Partner": Direct text/call access (no tickets).
+  - "Client Portal": Simulated login button (Lightbox -> Access Denied).
+  - Messaging: "White Glove", "No Waiting", "Personalized".
 
 ### 6.3 Ideal Customer Profiles (ICPs)
 1. **The Sophisticated Family ("Chief Household Officer")**:

@@ -199,6 +199,7 @@ export const footerSections = [
       { label: "About Us", to: routePaths.about },
       { label: "Pricing", to: routePaths.pricing },
       { label: "Resources", to: routePaths.resources },
+      { label: "Client Care", to: routePaths.clientCare },
       { label: "Contact", to: routePaths.contact },
     ],
   },

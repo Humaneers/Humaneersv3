@@ -66,6 +66,9 @@ const Resources = lazy(() =>
 const Support = lazy(() =>
   import("./components/views/Support").then((m) => ({ default: m.Support }))
 );
+const ClientCare = lazy(() =>
+  import("./components/views/ClientCare").then((m) => ({ default: m.ClientCare }))
+);
 const Status = lazy(() => import("./components/views/Status").then((m) => ({ default: m.Status })));
 
 export default function App() {
@@ -298,6 +301,18 @@ export default function App() {
                 canonicalPath={routePaths.status}
               >
                 <Status />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.clientCare}
+            element={
+              <Seo
+                title="Humaneers | Client Care"
+                description="Concierge support and client portal access."
+                canonicalPath={routePaths.clientCare}
+              >
+                <ClientCare />
               </Seo>
             }
           />

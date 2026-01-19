@@ -21,6 +21,7 @@ export const routePaths = {
   resources: "/resources",
   status: "/status",
   support: "/support",
+  clientCare: "/client-care",
 } as const;
 
 export type RoutePath = (typeof routePaths)[keyof typeof routePaths];
