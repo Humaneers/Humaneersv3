@@ -229,6 +229,36 @@ export function Colophon() {
                       </li>
                     </ul>
                   </div>
+
+                  {/* 8. AI Usage Policy */}
+                  <div className="border-l-4 border-brand-copper pl-6 py-1">
+                    <h3 className="text-xl font-bold text-brand-oxford mb-3 flex items-center gap-2">
+                      <Users className="w-5 h-5 text-brand-copper" /> 8. Human-First, AI-Second
+                    </h3>
+                    <p className="text-brand-slate mb-4">
+                      We believe technology should amplify human expertise, not replace it.
+                    </p>
+                    <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
+                      <li>
+                        <strong>Human Decision-Making:</strong> All strategic decisions, client
+                        communications, and critical recommendations are made by experienced
+                        professionals—never automated.
+                      </li>
+                      <li>
+                        <strong>AI as a Tool:</strong> We use machine learning tools to enhance code
+                        quality, catch errors, optimize configurations, and accelerate research. These
+                        tools help us deliver higher quality work, faster.
+                      </li>
+                      <li>
+                        <strong>Quality Over Speed:</strong> AI helps us produce better deliverables,
+                        but we review, validate, and take full accountability for everything we ship.
+                      </li>
+                      <li>
+                        <strong>Transparency:</strong> If we use AI-assisted tools on your project, we
+                        disclose it. You always know how your work is being produced.
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </section>
             </div>
