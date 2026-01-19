@@ -69,6 +69,9 @@ const Support = lazy(() =>
 const ClientCare = lazy(() =>
   import("./components/views/ClientCare").then((m) => ({ default: m.ClientCare }))
 );
+const Changelog = lazy(() =>
+  import("./components/views/Changelog").then((m) => ({ default: m.Changelog }))
+);
 const Status = lazy(() => import("./components/views/Status").then((m) => ({ default: m.Status })));
 
 export default function App() {
@@ -313,6 +316,18 @@ export default function App() {
                 canonicalPath={routePaths.clientCare}
               >
                 <ClientCare />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.changelog}
+            element={
+              <Seo
+                title="Humaneers | Changelog"
+                description="Platform updates and version history."
+                canonicalPath={routePaths.changelog}
+              >
+                <Changelog />
               </Seo>
             }
           />

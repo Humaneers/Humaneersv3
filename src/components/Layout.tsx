@@ -481,7 +481,9 @@ export function Layout() {
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-1">
               <span>&copy; {new Date().getFullYear()} Humaneers Limited Company.</span>
-              <span className="text-white/20">v{APP_VERSION}</span>
+              <Link to={routePaths.changelog} className="text-white/20 hover:text-brand-copper transition-colors">
+                v{APP_VERSION}
+              </Link>
             </div>
             <p className="leading-tight opacity-60 max-w-lg">
               "Humaneers" is a trademark of Human IP LP and is used under license.
