@@ -484,19 +484,18 @@ think big — even if they're super-small.
 
 **Footer Tag** (Layout.tsx):
 ```
-Enterprise Strategy. Small Business Soul.
-We bring high-end IT and brand growth to businesses
-across the United States.
+Enterprise strategy for businesses and families.
+Built with precision, delivered with soul.
 ```
 
-### Button Copy Evolution
+### Button Copy Strategy
 
-From plan.md, the brand moved away from "Talk to Sales" to:
-- ✅ "Let's Get Started" (primary CTA)
-- ✅ "Start a Conversation" (modal title)
-- ✅ "Get Support" (support actions)
+**Routing Logic**:
+- When mentioning **pricing/plans**: Link to `/pricing` page → "View Pricing"
+- For **consultation/custom solutions**: Link to `/talk-to-sales` → "Let's Get Started"
+- Support-related: → "Get Support"
 
-This reflects a more human, partnership-oriented approach.
+**Rationale**: Users expecting to see plans should see pricing first, not a sales form. Sales form is for custom/consultation requests.
 
 ### Footer Messaging
 
@@ -560,6 +559,58 @@ This ensures the version number is bumped and captured in the deployment.
 - **Component Library**: Radix UI + shadcn/ui
 - **Animation**: Framer Motion
 - **Color System**: CSS Custom Properties + OKLCH
+
+---
+
+## AI Usage Policy
+
+### Human-First, AI-Second Approach
+
+Humaneers follows a strict principle: **Technology should amplify human expertise, not replace it.**
+
+#### Core Principles
+
+1. **Human Decision-Making**
+   - All strategic decisions, client communications, and critical recommendations are made by experienced professionals
+   - AI never makes decisions autonomously
+   - Final review and accountability always rest with humans
+
+2. **AI as Quality Enhancement**
+   - We use machine learning tools to:
+     - Catch errors and improve code quality
+     - Optimize configurations and performance
+     - Accelerate research and documentation
+     - Generate design variations for review
+   - These tools help us deliver higher quality work faster
+
+3. **Transparency**
+   - If AI-assisted tools are used on your project, we disclose it
+   - Clients always know how their work is being produced
+   - We maintain clear records of tool usage
+
+4. **Accountability**
+   - We review, validate, and take full responsibility for all deliverables
+   - Quality over speed: AI helps produce better work, not just faster work
+   - Human judgment validates every output
+
+#### Implementation in Practice
+
+**Code Development**:
+- AI-assisted code completion and suggestions (GitHub Copilot, Cursor)
+- Human review and testing of all code before deployment
+- Architecture decisions made by senior developers
+
+**Client Communication**:
+- No AI-generated emails or responses to clients
+- All proposals and strategic recommendations written by humans
+- Documentation may use AI for grammar/clarity, with human editing
+
+**Design Work**:
+- AI may generate design variations or suggestions
+- Final design decisions made by human designers
+- Client presentations always human-crafted
+
+See our public [Colophon](https://humaneers.dev/colophon) for the full AI usage policy.
 
 ---
 

@@ -11,8 +11,9 @@ The official website for Humaneers, built with modern web technologies to delive
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
 - **UI Architecture**: [Radix UI](https://www.radix-ui.com/) + Shadcn/UI patterns
 - **Animation**: [Framer Motion](https://www.framer.com/motion/)
-- **Forms/Routing**: [Cal.com](https://cal.com/) Headless API
+- **Forms/CRM**: [Zoho CRM](https://www.zoho.com/crm/) + Zoho Forms
 - **Analytics**: Zoho PageSense + SalesIQ
+- **Deployment**: [Vercel](https://vercel.com/)
 
 ## 🚀 Getting Started
 
@@ -57,9 +58,8 @@ cp .env.example .env.local
 
 | Variable | Description |
 |----------|-------------|
-| `VITE_CAL_ORG_URL` | Your Cal.com organization URL (e.g., https://app.cal.com/org/humaneers) |
-| `VITE_CAL_SALES_FORM_ID` | UUID for the Sales Routing Form |
-| `VITE_CAL_SUPPORT_FORM_ID` | UUID for the Support Routing Form |
+| `VITE_ZOHO_FORMS_BASE_URL` | Zoho Forms API endpoint |
+| `VITE_ZOHO_CRM_ACCESS_TOKEN` | Zoho CRM API access token |
 
 ## 🎨 Design System
 
@@ -68,7 +68,9 @@ This project follows the **Modern Craftsman** design aesthetic:
 - **Typography**: System sans-serif stack for clarity and performance
 - **Principles**: Clarity over cleverness, warmth in professionalism
 
-See `CLAUDE.md` for detailed brand guidelines and component patterns.
+See `STYLEGUIDE.md` for design guidelines and `CLAUDE.md` for technical patterns.
+
+**AI Usage Policy**: Humaneers follows a "Human-first, AI-second" approach. Details in our [Colophon](https://humaneers.dev/colophon).
 
 ## 📦 Project Structure
 
@@ -79,7 +81,7 @@ src/
 │   ├── views/       # Page components (Home, Services, etc.)
 │   └── Layout.tsx   # Main application shell
 ├── lib/
-│   ├── cal.ts       # Cal.com integration logic
+│   ├── zoho.ts      # Zoho CRM/Forms integration
 │   └── utils.ts     # Helper functions
 ├── guidelines/      # Project documentation
 └── styles/
