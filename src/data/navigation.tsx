@@ -58,6 +58,12 @@ export const navSections: NavSection[] = [
         to: routePaths.personal,
       },
       {
+        title: "For Senior Citizens",
+        mobileLabel: "Senior Care",
+        description: "Dignified, secure technology support and fraud protection.",
+        to: routePaths.seniorCare,
+      },
+      {
         title: "Regulated Industries",
         mobileLabel: "Regulated Industries",
         description: "Compliance-first solutions for healthcare and finance.",
@@ -84,6 +90,11 @@ export const navSections: NavSection[] = [
         title: "Strategic Consulting",
         description: "vCIO and vCMO services for roadmap planning.",
         to: routePaths.fractionalLeadership,
+      },
+      {
+        title: "Reputation & Crisis",
+        description: "Digital cleanup and PR crisis management.",
+        to: routePaths.crisisManagement,
       },
       {
         title: "Compliance Engine",
@@ -178,6 +189,8 @@ export const footerSections = [
       { label: "Family Protection", to: routePaths.familyProtection },
       { label: "Fractional Leadership", to: routePaths.fractionalLeadership },
       { label: "Nonprofits", to: routePaths.nonProfits },
+      { label: "Senior Care", to: routePaths.seniorCare },
+      { label: "Crisis Management", to: routePaths.crisisManagement },
     ],
   },
   {

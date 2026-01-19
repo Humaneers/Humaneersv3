@@ -12,6 +12,14 @@ import { NotFound } from "./components/views/NotFound";
 const Pricing = lazy(() =>
   import("./components/views/Pricing").then((m) => ({ default: m.Pricing }))
 );
+// New Products
+const SeniorCare = lazy(() =>
+  import("./components/views/SeniorCare").then((m) => ({ default: m.SeniorCare }))
+);
+const CrisisManagement = lazy(() =>
+  import("./components/views/CrisisManagement").then((m) => ({ default: m.CrisisManagement }))
+);
+
 const Growth = lazy(() => import("./components/views/Growth").then((m) => ({ default: m.Growth })));
 const About = lazy(() => import("./components/views/About").then((m) => ({ default: m.About })));
 const Terms = lazy(() => import("./components/views/Terms").then((m) => ({ default: m.Terms })));
@@ -217,6 +225,30 @@ export default function App() {
                 canonicalPath={routePaths.personal}
               >
                 <Personal />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.seniorCare}
+            element={
+              <Seo
+                title="Humaneers | Senior Care"
+                description="Respectful, secure technology support for seniors. Fraud protection and simplified setup."
+                canonicalPath={routePaths.seniorCare}
+              >
+                <SeniorCare />
+              </Seo>
+            }
+          />
+          <Route
+            path={routePaths.crisisManagement}
+            element={
+              <Seo
+                title="Humaneers | Crisis Management"
+                description="Digital scrubbing and reputation defense for individuals and brands."
+                canonicalPath={routePaths.crisisManagement}
+              >
+                <CrisisManagement />
               </Seo>
             }
           />
