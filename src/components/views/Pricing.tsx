@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Check, Shield, BarChart3, Users, Lock, Clock } from "lucide-react";
+import { Check, Shield, BarChart3, Users, Lock, Clock, Heart } from "lucide-react";
 import { Button } from "../ui/button";
 import { motion } from "motion/react";
 import { DefinitionTooltip } from "../DefinitionTooltip";
@@ -122,6 +121,22 @@ export function Pricing() {
       ],
     },
     {
+      name: "Senior Care",
+      price: 75,
+      unit: "/household/mo",
+      description: "Dignified, patient support with aggressive fraud protection.",
+      features: [
+        "Everything in Foundation",
+        "Fraud & Scam Air-Gapping",
+        "Unlimited 'Red Button' Phone Support",
+        "Family Proxy Access (God Mode)",
+        "Digital Legacy Planning",
+      ],
+      cta: "Protect My Parents",
+      highlighted: true,
+      links: [{ label: "Senior Care Details", icon: <Heart size={12} />, to: routePaths.seniorCare }],
+    },
+    {
       name: "Personal Estate",
       price: 149,
       unit: "/household/mo",
@@ -167,10 +182,14 @@ export function Pricing() {
         ? nonprofitTiers
         : businessTiers;
 
+  const highlightParam = searchParams.get("highlight");
+
   return (
     <div className="bg-brand-cream min-h-screen py-24">
+      {/* ... header ... */}
       <div className="container mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
+          {/* ... existing header code ... */}
           <h1 className="text-4xl md:text-5xl font-bold text-brand-oxford mb-6">
             Transparent Pricing. No Hidden Fees.
           </h1>
@@ -211,94 +230,103 @@ export function Pricing() {
 
         <div
           className={`grid gap-8 mx-auto ${currentTiers.length === 1
-            ? "max-w-md"
-            : currentTiers.length === 2
-              ? "max-w-4xl md:grid-cols-2"
-              : "max-w-6xl md:grid-cols-3"
+              ? "max-w-md"
+              : currentTiers.length === 2
+                ? "max-w-4xl md:grid-cols-2"
+                : currentTiers.length === 3
+                  ? "max-w-6xl md:grid-cols-3"
+                  : "max-w-7xl lg:grid-cols-4"
             }`}
         >
-          {currentTiers.map((tier, index) => (
-            <motion.div
-              key={tier.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className={`relative bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col ${tier.highlighted
-                ? "border-2 border-brand-copper transform md:-translate-y-4"
-                : "border border-gray-100"
-                }`}
-            >
-              {tier.highlighted && (
-                <div className="bg-brand-copper text-white text-center text-sm font-bold py-2 uppercase tracking-wide">
-                  Most Popular
-                </div>
-              )}
-              <div className="p-8 flex-grow">
-                <h3 className="text-2xl font-bold text-brand-oxford mb-2">{tier.name}</h3>
-                <div className="flex items-baseline mb-4">
-                  <span className="text-4xl font-bold text-brand-oxford">${tier.price}</span>
-                  <span className="text-gray-500 ml-2">{tier.unit}</span>
-                  <span className="ml-1 relative -top-3">
-                    <DefinitionTooltip
-                      term="*"
-                      definition="Subject to Terms of Service. Taxes may apply."
-                      className="text-xs text-gray-400 no-underline border-none"
-                    />
-                  </span>
-                </div>
-                <p className="text-sm text-gray-500 mb-8 h-10">{tier.description}</p>
+          {currentTiers.map((tier, index) => {
+            // Check if this tier matches the highlight param
+            const isHighlightedByParam =
+              highlightParam && tier.name.toLowerCase().includes(highlightParam.toLowerCase());
 
-                <ul className="space-y-4 mb-8">
-                  {tier.features.map((feature, featureIndex) => (
-                    <li
-                      key={`${tier.name}-feature-${featureIndex}`}
-                      className="flex items-start gap-3 text-sm text-brand-slate"
-                    >
-                      <Check className="w-5 h-5 text-brand-copper shrink-0" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+            return (
+              <motion.div
+                key={tier.name}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className={`relative bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col ${isHighlightedByParam
+                    ? "border-4 border-brand-copper transform scale-105 z-10 shadow-2xl ring-4 ring-brand-copper/20"
+                    : tier.highlighted
+                      ? "border-2 border-brand-copper transform md:-translate-y-4"
+                      : "border border-gray-100"
+                  }`}
+              >
+                {tier.highlighted && (
+                  <div className="bg-brand-copper text-white text-center text-sm font-bold py-2 uppercase tracking-wide">
+                    Most Popular
+                  </div>
+                )}
+                <div className="p-8 flex-grow">
+                  <h3 className="text-2xl font-bold text-brand-oxford mb-2">{tier.name}</h3>
+                  <div className="flex items-baseline mb-4">
+                    <span className="text-4xl font-bold text-brand-oxford">${tier.price}</span>
+                    <span className="text-gray-500 ml-2">{tier.unit}</span>
+                    <span className="ml-1 relative -top-3">
+                      <DefinitionTooltip
+                        term="*"
+                        definition="Subject to Terms of Service. Taxes may apply."
+                        className="text-xs text-gray-400 no-underline border-none"
+                      />
+                    </span>
+                  </div>
+                  <p className="text-sm text-gray-500 mb-8 h-10">{tier.description}</p>
 
-                {/* Links to feature pages */}
-                <div className="mb-6 flex flex-wrap gap-2">
-                  {tier.links?.map((link) => (
-                    <button
-                      key={link.label}
-                      onClick={() => navigate(link.to)}
-                      className="text-xs flex items-center gap-1 bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded text-brand-oxford font-medium transition-colors"
-                    >
-                      {link.icon} {link.label}
-                    </button>
-                  ))}
+                  <ul className="space-y-4 mb-8">
+                    {tier.features.map((feature, featureIndex) => (
+                      <li
+                        key={`${tier.name}-feature-${featureIndex}`}
+                        className="flex items-start gap-3 text-sm text-brand-slate"
+                      >
+                        <Check className="w-5 h-5 text-brand-copper shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Links to feature pages */}
+                  <div className="mb-6 flex flex-wrap gap-2">
+                    {tier.links?.map((link) => (
+                      <button
+                        key={link.label}
+                        onClick={() => navigate(link.to)}
+                        className="text-xs flex items-center gap-1 bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded text-brand-oxford font-medium transition-colors"
+                      >
+                        {link.icon} {link.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              <div className="p-8 bg-gray-50 pt-0 mt-auto">
-                <Button
-                  onClick={() => {
-                    let interest = "Managed IT Services";
-                    if (
-                      tier.name.includes("Personal") ||
-                      tier.name.includes("Family") ||
-                      tier.name.includes("Solo")
-                    ) {
-                      interest = "Personal/Family IT";
-                    } else if (tier.name === "Scale") {
-                      interest = "Fractional Leadership";
-                    }
-                    navigate(routePaths.talkToSales, { state: { interest } });
-                  }}
-                  className={`w-full py-6 text-lg font-medium shadow-md transition-all ${tier.highlighted
-                    ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-lg"
-                    : "bg-brand-copper hover:bg-brand-copper-dark text-white"
-                    }`}
-                >
-                  {tier.cta}
-                </Button>
-              </div>
-            </motion.div>
-          ))}
+                <div className="p-8 bg-gray-50 pt-0 mt-auto">
+                  <Button
+                    onClick={() => {
+                      let interest = "Managed IT Services";
+                      if (
+                        tier.name.includes("Personal") ||
+                        tier.name.includes("Family") ||
+                        tier.name.includes("Solo")
+                      ) {
+                        interest = "Personal/Family IT";
+                      } else if (tier.name === "Scale") {
+                        interest = "Fractional Leadership";
+                      }
+                      navigate(routePaths.talkToSales, { state: { interest } });
+                    }}
+                    className={`w-full py-6 text-lg font-medium shadow-md transition-all ${tier.highlighted
+                      ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-lg"
+                      : "bg-brand-copper hover:bg-brand-copper-dark text-white"
+                      }`}
+                  >
+                    {tier.cta}
+                  </Button>
+                </div>
+              </motion.div>
+            ))}
         </div>
 
         <div className="mt-20 max-w-4xl mx-auto">

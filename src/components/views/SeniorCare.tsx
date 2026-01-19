@@ -29,7 +29,7 @@ export function SeniorCare() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
-                onClick={() => navigate(`${routePaths.pricing}?mode=household`)}
+                onClick={() => navigate(`${routePaths.pricing}?mode=household&highlight=senior`)}
                 className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg"
               >
                 View Pricing
@@ -137,11 +137,11 @@ export function SeniorCare() {
             <div className="mt-16">
               <Button
                 onClick={() =>
-                  navigate(routePaths.talkToSales, { state: { interest: "Senior Care Plan" } })
+                  navigate(`${routePaths.pricing}?mode=household&highlight=senior`)
                 }
                 className="bg-brand-oxford hover:bg-brand-oxford-muted text-white text-xl px-12 py-6 h-auto rounded-full"
               >
-                Schedule a Family Call
+                View Plans
               </Button>
             </div>
           </div>
