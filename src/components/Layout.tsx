@@ -182,9 +182,8 @@ export function Layout() {
         Skip to content
       </a>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? "bg-brand-oxford shadow-lg py-3" : "bg-brand-oxford/95 backdrop-blur-sm py-5"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-brand-oxford shadow-lg py-3" : "bg-brand-oxford/95 backdrop-blur-sm py-5"
+          }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
           <Link className="flex items-center cursor-pointer shrink-0 mr-8" to="/">
@@ -411,8 +410,8 @@ export function Layout() {
                 />
               </div>
               <p className="max-w-xs mb-6 text-sm">
-                Enterprise Strategy. Small Business Soul. We bring high-end IT and brand growth to
-                businesses across the United States.
+                Enterprise strategy for businesses and families. Built with precision, delivered
+                with soul.
               </p>
               <div className="inline-flex items-center gap-2 bg-brand-slate/30 px-3 py-1 rounded-full text-xs font-medium text-brand-copper">
                 <span className="w-2 h-2 rounded-full bg-brand-copper"></span>

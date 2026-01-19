@@ -50,7 +50,7 @@ export function Home() {
   return (
     <Seo
       title="Humaneers | Enterprise Strategy, Small Business Soul"
-      description="Enterprise-grade IT, security, and brand growth for small businesses. SOC 2 compliant, 100% US-based managed IT services, family protection, and fractional leadership."
+      description="Enterprise-grade IT, security, and brand growth for small businesses and families. SOC 2 compliant, 100% US-based managed IT services, family protection, and fractional leadership."
     >
       <link
         rel="preload"

@@ -157,8 +157,8 @@ export function TalkToSales() {
           <div className="container mx-auto px-6 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Let's Build Your Strategy</h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Tell us about your organization and we'll design a custom roadmap for your IT and
-              security needs. In a crisis? We love to help now and discuss the rest later.
+              Tell us about your situation—whether you're protecting a growing business or your
+              family at home. In a crisis? We love to help now and discuss the rest later.
             </p>
           </div>
         </div>
@@ -170,7 +170,7 @@ export function TalkToSales() {
               <div className="bg-brand-copper text-white p-6 rounded-lg shadow-lg">
                 <h3 className="font-bold text-xl mb-2">Why Humaneers?</h3>
                 <p className="text-white/90 mb-4">
-                  We don't just fix computers. We align technology with your business goals.
+                  We don't just fix computers. We align technology with your goals—at work or at home.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-2">
@@ -190,10 +190,18 @@ export function TalkToSales() {
 
               <div className="bg-white p-6 rounded-lg shadow text-brand-slate">
                 <p className="italic font-medium">
-                  "Humaneers helped us scale from 15 to 50 employees without a single hiccup in our
-                  operations. They are true partners."
+                  "They fixed our immediate crisis in hours, then built a roadmap that actually made
+                  sense. Finally, IT that feels like a partner, not a vendor."
                 </p>
-                <div className="mt-4 text-sm font-bold text-brand-oxford">— CEO, Legal Firm</div>
+                <div className="mt-4 text-sm font-bold text-brand-oxford">— Managing Partner, Accounting Firm</div>
+              </div>
+
+              <div className="bg-white p-6 rounded-lg shadow text-brand-slate">
+                <p className="italic font-medium">
+                  "We needed help protecting our kids online and securing our home network. Humaneers
+                  made it easy and explained everything in plain English."
+                </p>
+                <div className="mt-4 text-sm font-bold text-brand-oxford">— Parent, Scottsdale Family</div>
               </div>
             </div>
 
@@ -240,12 +248,12 @@ export function TalkToSales() {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="email">Work Email *</Label>
+                        <Label htmlFor="email">Email *</Label>
                         <Input
                           id="email"
                           name="email"
                           type="email"
-                          placeholder="jane@company.com"
+                          placeholder="jane@example.com"
                           required
                           value={formData.email}
                           onChange={handleChange}
@@ -253,11 +261,11 @@ export function TalkToSales() {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="company">Company Name *</Label>
+                        <Label htmlFor="company">Company or Household Name *</Label>
                         <Input
                           id="company"
                           name="company"
-                          placeholder="Acme Inc."
+                          placeholder="Acme Inc. or The Smith Family"
                           required
                           value={formData.company}
                           onChange={handleChange}
@@ -291,11 +299,11 @@ export function TalkToSales() {
                           </div>
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="role">Job Title *</Label>
+                          <Label htmlFor="role">Your Role *</Label>
                           <Input
                             id="role"
                             name="role"
-                            placeholder="CEO, CTO, etc."
+                            placeholder="Owner, Parent, Office Manager, etc."
                             required
                             value={formData.role}
                             onChange={handleChange}
@@ -316,7 +324,7 @@ export function TalkToSales() {
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="employees">Company Size *</Label>
+                          <Label htmlFor="employees">Size *</Label>
                           <Select
                             value={formData.employees}
                             onValueChange={(val) => handleSelectChange("employees", val)}
@@ -326,10 +334,12 @@ export function TalkToSales() {
                               <SelectValue placeholder="Select size" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="1-10">1-10 Employees</SelectItem>
-                              <SelectItem value="11-50">11-50 Employees</SelectItem>
-                              <SelectItem value="51-200">51-200 Employees</SelectItem>
-                              <SelectItem value="201+">201+ Employees</SelectItem>
+                              <SelectItem value="individual">Just me / Family</SelectItem>
+                              <SelectItem value="solo">Solo / Freelancer</SelectItem>
+                              <SelectItem value="1-10">1-10 People</SelectItem>
+                              <SelectItem value="11-50">11-50 People</SelectItem>
+                              <SelectItem value="51-200">51-200 People</SelectItem>
+                              <SelectItem value="201+">201+ People</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
@@ -345,11 +355,11 @@ export function TalkToSales() {
                             <SelectValue placeholder="Select range" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="<2k">Less than $2,000</SelectItem>
-                            <SelectItem value="2k-5k">$2,000 - $5,000</SelectItem>
-                            <SelectItem value="5k-10k">$5,000 - $10,000</SelectItem>
-                            <SelectItem value="10k+">$10,000+</SelectItem>
-                            <SelectItem value="unsure">Unsure / Not set</SelectItem>
+                            <SelectItem value="<1k">Less than $1,000</SelectItem>
+                            <SelectItem value="1k-3k">$1,000 - $3,000</SelectItem>
+                            <SelectItem value="3k-7k">$3,000 - $7,000</SelectItem>
+                            <SelectItem value="7k+">$7,000+</SelectItem>
+                            <SelectItem value="unsure">Let's figure it out together</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
@@ -359,11 +369,11 @@ export function TalkToSales() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                           {[
                             "Managed IT Services",
+                            "Brand & Growth Strategy",
+                            "Family Protection",
+                            "Fractional CIO/CMO",
                             "Cybersecurity Audit",
-                            "Compliance (SOC2/HIPAA)",
-                            "Fractional Leadership",
-                            "Cloud Migration",
-                            "Personal/Family IT",
+                            "Emergency IT Support",
                           ].map((item) => (
                             <div
                               key={item}

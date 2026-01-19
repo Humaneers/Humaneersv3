@@ -235,7 +235,7 @@ export function Colophon() {
 
             {/* Sidebar: Colophon Credits */}
             <div className="md:col-span-4 space-y-12">
-              <div className="bg-brand-oxford/5 p-6 rounded-xl border border-brand-copper/20 sticky top-24">
+              <div className="bg-brand-oxford/5 p-6 rounded-xl border border-brand-copper/20">
                 <h3 className="font-bold text-brand-oxford mb-4 flex items-center gap-2">
                   <ShieldCheck className="w-5 h-5 text-brand-copper" /> Security
                 </h3>
@@ -266,7 +266,29 @@ export function Colophon() {
                       rel="noreferrer"
                       className="text-brand-copper hover:underline"
                     >
-                      React
+                      React 18
+                    </a>
+                  </li>
+                  <li className="flex items-center justify-between">
+                    <span className="font-medium text-gray-700">Build Tool</span>
+                    <a
+                      href="https://vite.dev"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-brand-copper hover:underline"
+                    >
+                      Vite 6
+                    </a>
+                  </li>
+                  <li className="flex items-center justify-between">
+                    <span className="font-medium text-gray-700">Routing</span>
+                    <a
+                      href="https://reactrouter.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-brand-copper hover:underline"
+                    >
+                      React Router
                     </a>
                   </li>
                   <li className="flex items-center justify-between">
@@ -277,7 +299,29 @@ export function Colophon() {
                       rel="noreferrer"
                       className="text-brand-copper hover:underline"
                     >
-                      Tailwind CSS
+                      Tailwind CSS 4
+                    </a>
+                  </li>
+                  <li className="flex items-center justify-between">
+                    <span className="font-medium text-gray-700">TypeScript</span>
+                    <a
+                      href="https://typescriptlang.org"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-brand-copper hover:underline"
+                    >
+                      TypeScript 5
+                    </a>
+                  </li>
+                  <li className="flex items-center justify-between">
+                    <span className="font-medium text-gray-700">Components</span>
+                    <a
+                      href="https://ui.shadcn.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-brand-copper hover:underline"
+                    >
+                      shadcn/ui
                     </a>
                   </li>
                   <li className="flex items-center justify-between">
@@ -303,17 +347,109 @@ export function Colophon() {
                     </a>
                   </li>
                   <li className="flex items-center justify-between">
-                    <span className="font-medium text-gray-700">Components</span>
+                    <span className="font-medium text-gray-700">Analytics</span>
                     <a
-                      href="https://ui.shadcn.com"
+                      href="https://vercel.com/analytics"
                       target="_blank"
                       rel="noreferrer"
                       className="text-brand-copper hover:underline"
                     >
-                      shadcn/ui
+                      Vercel Analytics
+                    </a>
+                  </li>
+                  <li className="flex items-center justify-between">
+                    <span className="font-medium text-gray-700">Deployment</span>
+                    <a
+                      href="https://vercel.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-brand-copper hover:underline"
+                    >
+                      Vercel
                     </a>
                   </li>
                 </ul>
+
+                <div className="mt-8 pt-8 border-t border-gray-200">
+                  <h3 className="font-bold text-brand-oxford mb-4 flex items-center gap-2">
+                    <Users className="w-5 h-5 text-brand-copper" /> Business Operations
+                  </h3>
+                  <p className="text-xs text-gray-500 mb-4">
+                    The tools we use to run our business and serve our clients.
+                  </p>
+                  <ul className="space-y-3 text-sm">
+                    <li className="flex flex-col gap-1">
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium text-gray-700">Zoho CRM & Desk</span>
+                        <a
+                          href="https://zoho.com"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-brand-copper hover:underline text-xs"
+                        >
+                          ↗
+                        </a>
+                      </div>
+                      <span className="text-xs text-gray-500">Customer relationship & support ticketing</span>
+                    </li>
+                    <li className="flex flex-col gap-1">
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium text-gray-700">Google Workspace</span>
+                        <a
+                          href="https://workspace.google.com"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-brand-copper hover:underline text-xs"
+                        >
+                          ↗
+                        </a>
+                      </div>
+                      <span className="text-xs text-gray-500">Email, calendar & team collaboration</span>
+                    </li>
+                    <li className="flex flex-col gap-1">
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium text-gray-700">Microsoft 365</span>
+                        <a
+                          href="https://microsoft.com/microsoft-365"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-brand-copper hover:underline text-xs"
+                        >
+                          ↗
+                        </a>
+                      </div>
+                      <span className="text-xs text-gray-500">Document management & productivity</span>
+                    </li>
+                    <li className="flex flex-col gap-1">
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium text-gray-700">Figma</span>
+                        <a
+                          href="https://figma.com"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-brand-copper hover:underline text-xs"
+                        >
+                          ↗
+                        </a>
+                      </div>
+                      <span className="text-xs text-gray-500">Design & prototyping</span>
+                    </li>
+                    <li className="flex flex-col gap-1">
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium text-gray-700">GitHub</span>
+                        <a
+                          href="https://github.com"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-brand-copper hover:underline text-xs"
+                        >
+                          ↗
+                        </a>
+                      </div>
+                      <span className="text-xs text-gray-500">Version control & code repository</span>
+                    </li>
+                  </ul>
+                </div>
 
                 <div className="mt-8 pt-8 border-t border-gray-200">
                   <h3 className="font-bold text-brand-oxford mb-4 flex items-center gap-2">

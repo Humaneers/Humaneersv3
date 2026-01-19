@@ -4,8 +4,8 @@ import { Helmet } from "react-helmet-async";
 const SITE_URL = "https://humaneers.dev";
 const DEFAULT_TITLE = "Humaneers | Enterprise Strategy, Small Business Soul";
 const DEFAULT_DESCRIPTION =
-  "Enterprise-grade IT, security, and brand growth for small businesses. SOC 2 compliant, 100% US-based managed IT services, family protection, and fractional leadership.";
-const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`;
+  "Enterprise-grade IT, security, and brand growth for small businesses and families. SOC 2 compliant, 100% US-based managed IT services, family protection, and fractional leadership.";
+const DEFAULT_IMAGE = `${SITE_URL}/og-image.svg`;
 
 interface SeoProps {
   title?: string;
