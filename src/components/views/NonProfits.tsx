@@ -11,7 +11,7 @@ export function NonProfits() {
     <Seo
       title="Humaneers | IT for Nonprofits | 501(c)(3) Tech Support"
       description="Mission-focused IT for nonprofits. Discounted pricing, grant-ready security policies, and donor data protection."
-      canonicalPath="/for-non-profits"
+      canonicalPath="/nonprofits"
     >
       <div className="bg-white">
         {/* Hero */}

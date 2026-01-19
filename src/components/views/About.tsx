@@ -269,7 +269,7 @@ export function About() {
                       </li>
                       <li>
                         <strong>Secondary Market:</strong> Retired functional equipment is wiped and
-                        donated to non-profits or resold.
+                        donated to nonprofits or resold.
                       </li>
                       <li>
                         <strong>Certified Recycling:</strong> End-of-life hardware is processed

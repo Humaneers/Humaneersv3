@@ -8,7 +8,7 @@ export const routePaths = {
   managedIt: "/managed-it",
   familyProtection: "/family-protection",
   fractionalLeadership: "/fractional-leadership",
-  nonProfits: "/non-profits",
+  nonProfits: "/nonprofits",
   contact: "/contact",
   industries: "/industries",
   services: "/services",
