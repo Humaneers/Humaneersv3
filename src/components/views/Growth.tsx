@@ -195,6 +195,7 @@ export function Growth() {
                     src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80"
                     alt="Strategic Planning"
                     className="w-full h-auto"
+                    loading="lazy"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-brand-oxford/90 backdrop-blur-sm p-6 text-white border-t border-brand-copper">
                     <div className="text-sm uppercase tracking-widest text-brand-copper font-bold mb-1">

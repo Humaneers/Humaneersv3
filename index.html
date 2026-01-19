@@ -53,11 +53,30 @@
       color: #4E596F;
       /* default text color */
       font-family: ui-sans-serif, system-ui, sans-serif;
+      /* Prevent font flash */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Prevent layout shift during font loading */
+    * {
+      font-display: swap;
     }
 
     #root {
       min-height: 100vh;
       opacity: 1;
+    }
+
+    /* Smooth fade-in for content */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
     /* Minimal loading state */
@@ -83,6 +102,12 @@
       to {
         transform: rotate(360deg);
       }
+    }
+
+    /* Prevent flash of blank images */
+    img {
+      background-color: rgba(184, 115, 51, 0.05);
+      /* brand-copper with opacity */
     }
   </style>
 </head>

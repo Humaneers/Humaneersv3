@@ -65,6 +65,7 @@ export function Home() {
               src="https://images.unsplash.com/photo-1673563978245-b5d4adb056fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxUZW1wZSUyMEFyaXpvbmElMjBzdW5yaXNlJTIwd2FybSUyMGxpZ2h0fGVufDF8fHx8MTc2NjQ0ODcyOXww&ixlib=rb-4.1.0&q=80&w=1080"
               alt="Tempe Arizona Morning"
               className="w-full h-full object-cover"
+              fetchPriority="high"
             />
             <div className="absolute inset-0 bg-brand-oxford/70 mix-blend-multiply" />
             <div className="absolute inset-0 bg-gradient-to-t from-brand-oxford via-transparent to-transparent opacity-90" />
@@ -192,6 +193,7 @@ export function Home() {
                   src="https://images.unsplash.com/photo-1643292710805-0c32e5ca2a2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxtb2Rlcm4lMjBzbWFsbCUyMGJ1c2luZXNzJTIwb2ZmaWNlJTIwdGVhbSUyMHdhcm0lMjB0b25lc3xlbnwxfHx8fDE3NjY0NDg3Mjl8MA&ixlib=rb-4.1.0&q=80&w=1080"
                   alt="Office Team"
                   className="rounded-lg shadow-2xl w-full aspect-[4/3] object-cover"
+                  loading="lazy"
                 />
                 <div className="absolute -bottom-6 -left-6 bg-brand-copper p-6 rounded-lg text-white shadow-lg hidden md:block">
                   <p className="text-2xl font-bold">100+</p>
