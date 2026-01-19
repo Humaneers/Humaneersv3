@@ -43,7 +43,7 @@ export function Support() {
   const faqItems = [
     {
       question: "Do I need to be an existing client to get help?",
-      answer: "No! We welcome new clients who need immediate help. We'll fix what's broken first and discuss ongoing partnership afterward. Crisis clients are always welcome."
+      answer: "No! We welcome new clients who need immediate help. If you are in the middle of a security incident, we will help you now. We can establish a partnership once the fire is out."
     },
     {
       question: "What's the fastest way to get help for a critical issue?",
@@ -119,8 +119,8 @@ export function Support() {
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">Support Center</h1>
             <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-2xl mx-auto">
-              Submit a support ticket and our engineering team will respond promptly. We welcome new
-              clients in crisis — we'll fix what's wrong now and discuss the rest later.
+              Submit a support ticket and our engineering team will respond promptly. We support new
+              clients in crisis. We'll stabilize your systems first and handle the paperwork later.
             </p>
           </div>
         </section>
@@ -216,8 +216,8 @@ export function Support() {
                     <h3 className="font-bold">New to Humaneers?</h3>
                   </div>
                   <p className="text-sm text-gray-300 mt-2">
-                    We love to help now and can discuss what's next after fixing what's wrong. New
-                    crisis clients are always welcome.
+                    Crisis response is in our DNA. We prioritize immediate remediation for active
+                    threats, regardless of your contract status.
                   </p>
                 </div>
               </div>
