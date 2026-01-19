@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Loader2, CheckCircle2 } from "lucide-react";
 import { submitSalesLead, validateSalesForm, type SalesFormData } from "../lib/zoho";
 import { toast } from "sonner";
+import { trackInteraction } from "../lib/session";
 
 interface TalkToSalesModalProps {
   open: boolean;
@@ -52,6 +53,7 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
       setStep(1);
       setIsSubmitting(false);
       setIsSuccess(false);
+      trackInteraction("Started: Talk to Sales (Modal)");
     }
   }, [open]);
 

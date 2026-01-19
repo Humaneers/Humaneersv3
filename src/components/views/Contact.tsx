@@ -5,6 +5,7 @@ import { Mail, MapPin } from "lucide-react";
 import { Label } from "../ui/label";
 import { routePaths } from "../../routes";
 import { Seo } from "../Seo";
+import { trackInteraction } from "../../lib/session";
 
 export function Contact() {
   const [category, setCategory] = useState("");
@@ -12,6 +13,7 @@ export function Contact() {
 
   const handleCategoryChange = (value: string) => {
     setCategory(value);
+    trackInteraction(`Contact: Selected ${value}`);
 
     // Redirect to appropriate page based on category
     if (value === "sales") {

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
-import { Heart, Shield, Users, CheckCircle2, ArrowRight } from "lucide-react";
+import { Heart, Shield, Users, CheckCircle2, ArrowRight, FileText } from "lucide-react";
 import { routePaths } from "../../routes";
 import { Seo } from "../Seo";
 
@@ -92,6 +92,7 @@ export function NonProfits() {
                     desc: "Secure your donor lists and financial data to meet compliance standards.",
                   },
                   {
+                    icon: <FileText className="w-6 h-6 text-brand-copper" />,
                     title: "Grant-Ready Policies",
                     desc: "We write the cybersecurity & data privacy sections for your grant applications (NIST/SOC2 aligned).",
                   },

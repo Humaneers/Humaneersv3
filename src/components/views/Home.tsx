@@ -6,6 +6,7 @@ import { Input } from "../ui/input";
 import { motion } from "motion/react";
 import { routePaths } from "../../routes";
 import { ObjectionsSection } from "./ObjectionsSection";
+import { setSessionContext } from "../../lib/session";
 
 import { Seo } from "../Seo";
 
@@ -105,6 +106,7 @@ export function Home() {
                   </div>
                   <Button
                     type="submit"
+                    onClick={() => setSessionContext({ entrySource: "Homepage Hero Input" })}
                     className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 h-14 rounded-md shadow-lg hover:shadow-xl transition-all whitespace-nowrap"
                   >
                     Get Started
@@ -144,7 +146,10 @@ export function Home() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ y: -5 }}
-                  onClick={() => navigate(pillar.link)}
+                  onClick={() => {
+                    setSessionContext({ lastViewedService: pillar.title });
+                    navigate(pillar.link);
+                  }}
                   className="bg-white p-8 rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 border-b-4 border-transparent hover:border-brand-copper group cursor-pointer"
                 >
                   <div className="mb-6 bg-brand-cream w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -213,7 +218,10 @@ export function Home() {
               Get the enterprise-grade support you deserve with the personal touch you need.
             </p>
             <Button
-              onClick={() => navigate(routePaths.talkToSales, { state: { source: "Homepage Bottom CTA" } })}
+              onClick={() => {
+                setSessionContext({ entrySource: "Homepage Bottom CTA" });
+                navigate(routePaths.talkToSales, { state: { source: "Homepage Bottom CTA" } });
+              }}
               className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-10 py-7 h-auto rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
             >
               Let's get to work

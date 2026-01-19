@@ -19,6 +19,7 @@ import {
 import { submitSupportTicket, validateSupportForm, type SupportFormData } from "../../lib/zoho";
 import { toast } from "sonner";
 import { Seo } from "../Seo";
+import { trackInteraction } from "../../lib/session";
 
 export function Support() {
   const location = useLocation();
@@ -77,6 +78,7 @@ export function Support() {
     try {
       await submitSupportTicket(formData);
       setIsSuccess(true);
+      trackInteraction(`Submitted Support Ticket: ${formData.category}`);
       toast.success("Your support ticket has been submitted!");
     } catch (error) {
       toast.error(
@@ -94,6 +96,13 @@ export function Support() {
 
   const handleSelectChange = (name: string) => (value: string) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const toggleFaq = (index: number) => {
+    if (openFaq !== index) {
+      trackInteraction(`Expanded FAQ: ${faqItems[index].question}`);
+    }
+    setOpenFaq(openFaq === index ? null : index);
   };
 
   return (
@@ -381,7 +390,7 @@ export function Support() {
                   className="bg-brand-cream rounded-lg overflow-hidden"
                 >
                   <button
-                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                    onClick={() => toggleFaq(index)}
                     className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-brand-cream/80 transition-colors"
                   >
                     <span className="font-semibold text-brand-oxford">{item.question}</span>

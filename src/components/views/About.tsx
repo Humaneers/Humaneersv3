@@ -85,7 +85,7 @@ export function About() {
                     <p>
                       For decades, the most powerful technology, the tightest security, and the
                       smartest growth strategies were reserved for the Fortune 500. Small
-                      businesses, families, solo entrepreneurs, and non-profits were left to fend for
+                      businesses, families, solo entrepreneurs, and nonprofits were left to fend for
                       themselves with off-the-shelf software and "geek squad" support.
                     </p>
                     <p>
@@ -197,7 +197,7 @@ export function About() {
                     </li>
                     <li className="bg-white p-4 rounded-lg border border-gray-100 flex items-center justify-between">
                       <span className="font-medium text-brand-oxford">
-                        Non-Profit Organizations
+                        Nonprofit Organizations
                       </span>
                       <span className="text-sm text-gray-500">501(c)(3) Certified</span>
                     </li>

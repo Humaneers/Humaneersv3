@@ -1,3 +1,5 @@
+import { getContextString } from "./session";
+
 /**
  * Zoho API Client
  *
@@ -46,6 +48,11 @@ export interface ApiResponse {
  * Submit sales lead to Zoho CRM
  */
 export async function submitSalesLead(data: SalesFormData): Promise<ApiResponse> {
+  const context = getContextString();
+  const enhancedSource = data.source
+    ? `${data.source} ${context}`
+    : context || "Web Form";
+
   const payload = {
     firstName: data.firstName,
     lastName: data.lastName,
@@ -58,7 +65,7 @@ export async function submitSalesLead(data: SalesFormData): Promise<ApiResponse>
     budget: data.budget,
     interests: data.interests.join(", "),
     message: data.message,
-    source: data.source,
+    source: enhancedSource,
   };
 
   const response = await fetch("/api/zoho/leads", {
@@ -80,10 +87,20 @@ export async function submitSalesLead(data: SalesFormData): Promise<ApiResponse>
  * Submit support ticket to Zoho Desk
  */
 export async function submitSupportTicket(data: SupportFormData): Promise<ApiResponse> {
+  const context = getContextString();
+  const enhancedDescription = context
+    ? `${data.description}\n\n${context}`
+    : data.description;
+
+  const payload = {
+    ...data,
+    description: enhancedDescription
+  };
+
   const response = await fetch("/api/zoho/tickets", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
+    body: JSON.stringify(payload),
   });
 
   const result = await response.json();
@@ -99,10 +116,20 @@ export async function submitSupportTicket(data: SupportFormData): Promise<ApiRes
  * Submit newsletter subscription to Zoho CRM
  */
 export async function submitNewsletter(data: NewsletterFormData): Promise<ApiResponse> {
+  const context = getContextString();
+  const enhancedSource = data.source
+    ? `${data.source} ${context}`
+    : context || "Newsletter Signup";
+
+  const payload = {
+    ...data,
+    source: enhancedSource
+  };
+
   const response = await fetch("/api/zoho/newsletter", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
+    body: JSON.stringify(payload),
   });
 
   const contentType = response.headers.get("content-type");
@@ -138,6 +165,16 @@ export function validateSalesForm(data: Partial<SalesFormData>): {
   if (!data.firstName?.trim()) errors.push("First name is required");
   if (!data.lastName?.trim()) errors.push("Last name is required");
   if (!data.email?.trim()) errors.push("Email is required");
+  // Company is conditional in UI, but if present in typical B2B flow it is checked. 
+  // We relax this here since 'family' segment might reuse this validator or UI handles it.
+  // But strict B2B validation requires it. UI calls this. 
+  // Let's keep logic simple: if data object has the field, check it? 
+  // Or just rely on what's passed.
+  // For now, we keep existing logic but allow empty company if it's explicitly handled in UI (which it is).
+  // Actually, UI calls this... and UI checks segment != family before calling.
+  // Ideally we inspect segment here, but we don't pass segment.
+  // We'll leave as is, assuming UI manages the 'Company' field population (e.g. "Smith Household") before calling.
+  // Looking at TalkToSales.tsx, it populates it. So this is fine.
   if (!data.company?.trim()) errors.push("Company name is required");
   if (!data.role?.trim()) errors.push("Role is required");
   if (!data.employees?.trim()) errors.push("Company size is required");

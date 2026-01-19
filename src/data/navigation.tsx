@@ -46,8 +46,8 @@ export const navSections: NavSection[] = [
         to: routePaths.familyProtection,
       },
       {
-        title: "For Non-profits",
-        mobileLabel: "Non-profits",
+        title: "For Nonprofits",
+        mobileLabel: "Nonprofits",
         description: "Discounted pricing and specialized support for 501(c)(3)s.",
         to: routePaths.nonProfits,
       },

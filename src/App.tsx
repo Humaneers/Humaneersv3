@@ -1,5 +1,5 @@
-import { lazy } from "react";
-import { Routes, Route } from "react-router-dom";
+import { lazy, useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 // import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Layout } from "./components/Layout";
@@ -9,6 +9,7 @@ import { ScrollToTop } from "./components/ScrollToTop";
 import { routePaths } from "./routes";
 import { Home } from "./components/views/Home";
 import { NotFound } from "./components/views/NotFound";
+import { initSession, trackPageView } from "./lib/session";
 
 const Pricing = lazy(() =>
   import("./components/views/Pricing").then((m) => ({ default: m.Pricing }))
@@ -75,6 +76,16 @@ const Changelog = lazy(() =>
 const Status = lazy(() => import("./components/views/Status").then((m) => ({ default: m.Status })));
 
 export default function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    initSession();
+  }, []);
+
+  useEffect(() => {
+    trackPageView(location.pathname);
+  }, [location]);
+
   return (
     <ErrorBoundary>
       <Routes>

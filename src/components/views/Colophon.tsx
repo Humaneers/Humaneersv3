@@ -225,7 +225,7 @@ export function Colophon() {
                       </li>
                       <li>
                         <strong>Community Training:</strong> We are launching free cybersecurity
-                        workshops for local non-profits to give back to our community.
+                        workshops for local nonprofits to give back to our community.
                       </li>
                     </ul>
                   </div>
