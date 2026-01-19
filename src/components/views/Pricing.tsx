@@ -250,7 +250,25 @@ export function Pricing() {
             }`}
         >
           {currentTiers.map((tier, index) => {
+            const handleTierClick = () => {
+              let interest = "Managed IT Services";
+              if (
+                tier.name.includes("Personal") ||
+                tier.name.includes("Family") ||
+                tier.name.includes("Solo") ||
+                tier.name.includes("Senior")
+              ) {
+                interest = "Personal/Family IT";
+              } else if (tier.name === "Scale") {
+                interest = "Fractional Leadership";
+              }
+              navigate(routePaths.talkToSales, { state: { interest } });
+            };
 
+            const buttonClasses = `w-full py-6 text-lg font-medium shadow-md transition-all ${tier.highlighted
+                ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-lg"
+                : "bg-brand-copper hover:bg-brand-copper-dark text-white"
+              }`;
 
             return (
               <motion.div
@@ -311,24 +329,8 @@ export function Pricing() {
 
                 <div className="p-8 bg-gray-50 pt-0 mt-auto">
                   <Button
-                    onClick={() => {
-                      let interest = "Managed IT Services";
-                      if (
-                        tier.name.includes("Personal") ||
-                        tier.name.includes("Family") ||
-                        tier.name.includes("Solo") ||
-                        tier.name.includes("Senior")
-                      ) {
-                        interest = "Personal/Family IT";
-                      } else if (tier.name === "Scale") {
-                        interest = "Fractional Leadership";
-                      }
-                      navigate(routePaths.talkToSales, { state: { interest } });
-                    }}
-                    className={`w-full py-6 text-lg font-medium shadow-md transition-all ${tier.highlighted
-                      ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-lg"
-                      : "bg-brand-copper hover:bg-brand-copper-dark text-white"
-                      }`}
+                    onClick={handleTierClick}
+                    className={buttonClasses}
                   >
                     {tier.cta}
                   </Button>
