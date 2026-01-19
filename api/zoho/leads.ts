@@ -13,6 +13,7 @@ interface LeadData {
     budget?: string;
     interests?: string;
     message?: string;
+    context?: string;
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -117,6 +118,9 @@ function formatDescription(data: LeadData): string {
     }
     if (data.message) {
         parts.push(`Message: ${data.message}`);
+    }
+    if (data.context) {
+        parts.push(data.context);
     }
 
     return parts.join("\n\n") || "No additional details provided.";

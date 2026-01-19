@@ -121,7 +121,6 @@ export function ClientCare() {
                           value={domain}
                           onChange={(e) => setDomain(e.target.value)}
                           className={`pl-10 ${error ? "border-red-500 bg-red-50 focus-visible:ring-red-500" : ""}`}
-                          autoFocus
                         />
                         <Globe className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
                       </div>

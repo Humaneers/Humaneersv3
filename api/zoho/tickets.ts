@@ -10,6 +10,7 @@ interface TicketData {
     category: string;
     subject: string;
     description: string;
+    context?: string;
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -51,7 +52,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
         const ticketPayload = {
             subject: data.subject,
-            description: data.description,
+            description: data.context ? `${data.description}\n\n${data.context}` : data.description,
             priority: priorityMap[data.priority] || "Medium",
             classification: data.category,
             contact: {

@@ -21,7 +21,7 @@ export function Personal() {
             <h1 className="text-4xl md:text-7xl font-bold mb-6 leading-tight">
               Powerful Tools for the
               <br />
-              <span className="text-brand-copper">Company of One.</span>
+              <span className="text-brand-cream font-extrabold">Company of One.</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">
               Just because you're solo doesn't mean you should look small. Get the enterprise email,
@@ -110,8 +110,8 @@ export function Personal() {
                 <h2 className="text-3xl font-bold text-white mb-6">Who is this for?</h2>
                 <ul className="space-y-6">
                   <li className="flex gap-4">
-                    <div className="bg-brand-copper/10 p-2 rounded-lg h-fit">
-                      <Fingerprint className="w-6 h-6 text-brand-copper" />
+                    <div className="bg-brand-copper/20 p-2 rounded-lg h-fit">
+                      <Fingerprint className="w-6 h-6 text-brand-cream" />
                     </div>
                     <div>
                       <h4 className="font-bold text-white">Consultants & Agencies</h4>
@@ -122,8 +122,8 @@ export function Personal() {
                     </div>
                   </li>
                   <li className="flex gap-4">
-                    <div className="bg-brand-copper/10 p-2 rounded-lg h-fit">
-                      <ArrowRight className="w-6 h-6 text-brand-copper" />
+                    <div className="bg-brand-copper/20 p-2 rounded-lg h-fit">
+                      <ArrowRight className="w-6 h-6 text-brand-cream" />
                     </div>
                     <div>
                       <h4 className="font-bold text-white">Angel Investors</h4>
@@ -134,8 +134,8 @@ export function Personal() {
                     </div>
                   </li>
                   <li className="flex gap-4">
-                    <div className="bg-brand-copper/10 p-2 rounded-lg h-fit">
-                      <Smartphone className="w-6 h-6 text-brand-copper" />
+                    <div className="bg-brand-copper/20 p-2 rounded-lg h-fit">
+                      <Smartphone className="w-6 h-6 text-brand-cream" />
                     </div>
                     <div>
                       <h4 className="font-bold text-white">Digital Nomads</h4>
@@ -152,7 +152,7 @@ export function Personal() {
                   <div className="w-12 h-12 bg-gray-200 rounded-full"></div>
                   <div>
                     <div className="font-bold text-brand-oxford">Support Ticket #2941</div>
-                    <div className="text-xs text-green-600 font-bold uppercase">
+                    <div className="text-xs text-green-700 font-bold uppercase">
                       Resolved in 12 mins
                     </div>
                   </div>
