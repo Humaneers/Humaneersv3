@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -70,6 +70,29 @@ export function TalkToSales() {
       source: initialData?.source || prev.source,
     }));
   }, [initialData?.email, initialData?.interest, initialData?.segment, initialData?.source]);
+
+  // Focus Management
+  const firstNameRef = useRef<HTMLInputElement>(null);
+  const stepTwoRef = useRef<HTMLInputElement>(null);
+
+  // Focus first input when segment is selected (Step 1) or step 1 is revisited
+  useEffect(() => {
+    if (segment && step === 1) {
+      // Small timeout to allow render
+      setTimeout(() => {
+        firstNameRef.current?.focus();
+      }, 50);
+    }
+  }, [segment, step]);
+
+  // Focus Step 2 input when advancing
+  useEffect(() => {
+    if (step === 2) {
+      setTimeout(() => {
+        stepTwoRef.current?.focus();
+      }, 50);
+    }
+  }, [step]);
 
   const navigate = useNavigate();
 
@@ -330,6 +353,7 @@ export function TalkToSales() {
                                 name="firstName"
                                 placeholder="Jane"
                                 required
+                                ref={firstNameRef}
                                 value={formData.firstName}
                                 onChange={handleChange}
                               />
@@ -421,6 +445,7 @@ export function TalkToSales() {
                                 name="phone"
                                 type="tel"
                                 placeholder="(555) 123-4567"
+                                ref={segment === "personal" ? stepTwoRef : undefined}
                                 value={formData.phone}
                                 onChange={handleChange}
                               />

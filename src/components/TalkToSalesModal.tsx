@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -58,6 +58,26 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
       trackInteraction("Started: Talk to Sales (Modal)");
     }
   }, [open]);
+
+  // Focus Management
+  const firstNameRef = useRef<HTMLInputElement>(null);
+  const websiteRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (open && step === 1) {
+      setTimeout(() => {
+        firstNameRef.current?.focus();
+      }, 100); // Slightly longer delay for modal animation
+    }
+  }, [open, step]);
+
+  useEffect(() => {
+    if (open && step === 2) {
+      setTimeout(() => {
+        websiteRef.current?.focus();
+      }, 50);
+    }
+  }, [open, step]);
 
   const validateStepOne = () => {
     const errors: string[] = [];
@@ -200,6 +220,7 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
                             name="firstName"
                             placeholder="Jane"
                             required
+                            ref={firstNameRef}
                             value={formData.firstName}
                             onChange={handleChange}
                           />
@@ -261,6 +282,7 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
                             id="website"
                             name="website"
                             type="url"
+                            ref={websiteRef}
                             placeholder="acme.com"
                             value={formData.website}
                             onChange={handleChange}
