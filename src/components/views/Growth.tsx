@@ -98,7 +98,7 @@ export function Growth() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
-                onClick={() => navigate(routePaths.talkToSales, { state: { interest: "Growth" } })}
+                onClick={() => navigate(`${routePaths.pricing}?mode=business`)}
                 className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
               >
                 Book a Strategy Call

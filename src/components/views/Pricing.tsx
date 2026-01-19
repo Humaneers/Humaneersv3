@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Check, Shield, BarChart3, Users, Lock, Clock } from "lucide-react";
 import { Button } from "../ui/button";
 import { motion } from "motion/react";
@@ -8,9 +8,11 @@ import { routePaths } from "../../routes";
 
 export function Pricing() {
   const navigate = useNavigate();
-  const [pricingMode, setPricingMode] = useState<"business" | "nonprofit" | "household">(
-    "business"
-  );
+  const [searchParams] = useSearchParams();
+
+  // Get mode from URL params, default to business
+  const initialMode = (searchParams.get("mode") as "business" | "nonprofit" | "household") || "business";
+  const [pricingMode, setPricingMode] = useState<"business" | "nonprofit" | "household">(initialMode);
 
   const businessTiers = [
     {
@@ -208,13 +210,12 @@ export function Pricing() {
         </div>
 
         <div
-          className={`grid gap-8 mx-auto ${
-            currentTiers.length === 1
-              ? "max-w-md"
-              : currentTiers.length === 2
-                ? "max-w-4xl md:grid-cols-2"
-                : "max-w-6xl md:grid-cols-3"
-          }`}
+          className={`grid gap-8 mx-auto ${currentTiers.length === 1
+            ? "max-w-md"
+            : currentTiers.length === 2
+              ? "max-w-4xl md:grid-cols-2"
+              : "max-w-6xl md:grid-cols-3"
+            }`}
         >
           {currentTiers.map((tier, index) => (
             <motion.div
@@ -222,11 +223,10 @@ export function Pricing() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className={`relative bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col ${
-                tier.highlighted
-                  ? "border-2 border-brand-copper transform md:-translate-y-4"
-                  : "border border-gray-100"
-              }`}
+              className={`relative bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col ${tier.highlighted
+                ? "border-2 border-brand-copper transform md:-translate-y-4"
+                : "border border-gray-100"
+                }`}
             >
               {tier.highlighted && (
                 <div className="bg-brand-copper text-white text-center text-sm font-bold py-2 uppercase tracking-wide">
@@ -289,11 +289,10 @@ export function Pricing() {
                     }
                     navigate(routePaths.talkToSales, { state: { interest } });
                   }}
-                  className={`w-full py-6 text-lg font-medium shadow-md transition-all ${
-                    tier.highlighted
-                      ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-lg"
-                      : "bg-brand-copper hover:bg-brand-copper-dark text-white"
-                  }`}
+                  className={`w-full py-6 text-lg font-medium shadow-md transition-all ${tier.highlighted
+                    ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-lg"
+                    : "bg-brand-copper hover:bg-brand-copper-dark text-white"
+                    }`}
                 >
                   {tier.cta}
                 </Button>
@@ -359,8 +358,8 @@ export function Pricing() {
               <div className="flex justify-center md:justify-start">
                 <Button
                   onClick={() =>
-                    (window.location.href =
-                      "mailto:hello@humaneers.dev?subject=Hourly Pack Inquiry")
+                  (window.location.href =
+                    "mailto:hello@humaneers.dev?subject=Hourly Pack Inquiry")
                   }
                   className="bg-white text-brand-oxford hover:bg-gray-100 px-8 py-3 font-bold"
                 >

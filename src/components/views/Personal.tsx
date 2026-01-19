@@ -161,7 +161,7 @@ export function Personal() {
         <section className="py-20 bg-brand-cream text-center">
           <h2 className="text-3xl font-bold text-brand-oxford mb-8">Plans start at $25/month.</h2>
           <Button
-            onClick={() => navigate(routePaths.pricing)}
+            onClick={() => navigate(`${routePaths.pricing}?mode=household`)}
             className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-12 py-6 h-auto rounded-full shadow-lg"
           >
             View Pricing

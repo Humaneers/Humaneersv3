@@ -29,7 +29,7 @@ export function SeniorCare() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
-                onClick={() => navigate(routePaths.pricing)}
+                onClick={() => navigate(`${routePaths.pricing}?mode=household`)}
                 className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg"
               >
                 View Pricing
