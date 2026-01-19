@@ -136,7 +136,7 @@ export function Pricing() {
         "Digital Legacy Planning",
       ],
       cta: "Protect My Parents",
-      highlighted: true,
+      highlighted: false,
       links: [
         { label: "Senior Care Details", icon: <Heart size={12} />, to: routePaths.seniorCare },
       ],
@@ -155,7 +155,9 @@ export function Pricing() {
       ],
       cta: "Get Concierge",
       highlighted: false,
-      links: [],
+      links: [
+        { label: "Estate Support", icon: <Shield size={12} />, to: routePaths.personal },
+      ],
     },
   ];
 
@@ -266,8 +268,8 @@ export function Pricing() {
             };
 
             const buttonClasses = `w-full py-6 text-lg font-medium shadow-md transition-all ${tier.highlighted
-                ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-lg"
-                : "bg-brand-copper hover:bg-brand-copper-dark text-white"
+              ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-lg"
+              : "bg-brand-copper hover:bg-brand-copper-dark text-white"
               }`;
 
             return (
@@ -286,7 +288,7 @@ export function Pricing() {
                     Most Popular
                   </div>
                 )}
-                <div className="p-8 flex-grow">
+                <div className="p-8 flex-grow flex flex-col">
                   <h3 className="text-2xl font-bold text-brand-oxford mb-2">{tier.name}</h3>
                   <div className="flex items-baseline mb-4">
                     <span className="text-4xl font-bold text-brand-oxford">${tier.price}</span>
@@ -314,7 +316,7 @@ export function Pricing() {
                   </ul>
 
                   {/* Links to feature pages */}
-                  <div className="mb-6 flex flex-wrap gap-2">
+                  <div className="mb-6 flex flex-wrap gap-2 mt-auto">
                     {tier.links?.map((link) => (
                       <button
                         key={link.label}
