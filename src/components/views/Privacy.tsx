@@ -51,8 +51,7 @@ export function Privacy() {
             <p>We collect data through:</p>
             <ul className="list-disc pl-6 mb-4 space-y-2">
               <li>
-                <strong>Direct interactions</strong>: Forms on our website, email correspondence,
-                phone calls, or scheduling bookings through Cal.com.
+                <strong>Direct interactions</strong>: Forms on our website, email correspondence, or phone calls.
               </li>
               <li>
                 <strong>Automated technologies</strong>: As you interact with our website, we may
@@ -60,8 +59,7 @@ export function Privacy() {
                 technologies.
               </li>
               <li>
-                <strong>Third parties</strong>: Analytics providers (Zoho PageSense), support chat
-                services (Zoho SalesIQ), and scheduling services (Cal.com).
+                <strong>Third parties</strong>: Analytics providers (Zoho PageSense) and support chat services (Zoho SalesIQ).
               </li>
             </ul>
 
@@ -116,12 +114,7 @@ export function Privacy() {
               We use the following third-party service providers who may process your personal data:
             </p>
             <ul className="list-disc pl-6 mb-4 space-y-2">
-              <li>
-                <strong>Cal.com</strong>: Appointment scheduling and booking management. Data shared
-                includes name, email, phone, company details, and appointment preferences. When you
-                submit a form, your information is passed securely via URL parameters to Cal.com's
-                booking system over an encrypted HTTPS connection.
-              </li>
+
               <li>
                 <strong>Zoho PageSense</strong>: Website analytics and user behavior tracking to
                 improve user experience.
@@ -138,14 +131,7 @@ export function Privacy() {
               purposes we specify. We ensure all third parties maintain appropriate security
               standards.
             </p>
-            <p className="mt-4">
-              <strong>Note on URL Parameters:</strong> When you submit our contact or support forms,
-              non-sensitive information (name, email, company, inquiry details) is passed to our
-              booking system via URL parameters. This data is transmitted over secure HTTPS
-              connections and is not logged in server access logs or exposed to third parties.
-              Sensitive information (such as passwords, financial data, or health information) is
-              never transmitted via URL parameters.
-            </p>
+
 
             <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">
               7. International Data Transfers

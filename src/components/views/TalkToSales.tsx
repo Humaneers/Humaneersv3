@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Checkbox } from "../ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { ShieldCheck, ArrowRight, Globe, Loader2 } from "lucide-react";
-import { redirectToSalesBooking, validateSalesForm, type SalesFormData } from "../../lib/cal";
+import { submitSalesLead, validateSalesForm, type SalesFormData } from "../../lib/zoho";
 import { toast } from "sonner";
 import { Seo } from "../Seo";
 
@@ -64,12 +64,43 @@ export function TalkToSales() {
     setIsSubmitting(true);
 
     try {
-      // Redirect to Cal.com booking with form data
-      redirectToSalesBooking(formData);
+      await submitSalesLead({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        company: formData.company,
+        website: formData.website,
+        role: formData.role,
+        employees: formData.employees,
+        phone: formData.phone,
+        budget: formData.budget,
+        interests: formData.interests,
+        message: formData.message
+      } as SalesFormData);
+
+      toast.success("Thanks! We've received your request and will be in touch shortly.");
+
+      // Reset form or redirect to a thank you page if desired
+      setStep(1);
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        company: "",
+        website: "",
+        role: "",
+        employees: "",
+        phone: "",
+        budget: "",
+        interests: [],
+        message: "",
+      });
+
     } catch (error) {
       toast.error(
-        error instanceof Error ? error.message : "Failed to redirect to booking. Please try again."
+        error instanceof Error ? error.message : "Failed to submit request. Please try again."
       );
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -288,6 +319,7 @@ export function TalkToSales() {
                         <div className="space-y-2">
                           <Label htmlFor="employees">Company Size *</Label>
                           <Select
+                            value={formData.employees}
                             onValueChange={(val) => handleSelectChange("employees", val)}
                             required
                           >
@@ -306,7 +338,10 @@ export function TalkToSales() {
 
                       <div className="space-y-2">
                         <Label htmlFor="budget">Monthly IT Budget</Label>
-                        <Select onValueChange={(val) => handleSelectChange("budget", val)}>
+                        <Select
+                          value={formData.budget}
+                          onValueChange={(val) => handleSelectChange("budget", val)}
+                        >
                           <SelectTrigger id="budget">
                             <SelectValue placeholder="Select range" />
                           </SelectTrigger>
@@ -334,7 +369,6 @@ export function TalkToSales() {
                             <div
                               key={item}
                               className="flex items-center space-x-2 border rounded-md p-3 hover:bg-gray-50 transition-colors cursor-pointer"
-                              onClick={() => handleInterestChange(item)}
                             >
                               <Checkbox
                                 id={`interest-${item}`}
@@ -380,12 +414,12 @@ export function TalkToSales() {
                         >
                           {isSubmitting ? (
                             <>
-                              Redirecting to Booking...{" "}
+                              Submitting Request...{" "}
                               <Loader2 className="ml-2 w-5 h-5 animate-spin" />
                             </>
                           ) : (
                             <>
-                              Continue to Schedule Meeting <ArrowRight className="ml-2 w-5 h-5" />
+                              Submit Request <ArrowRight className="ml-2 w-5 h-5" />
                             </>
                           )}
                         </Button>
