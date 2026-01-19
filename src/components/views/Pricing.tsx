@@ -202,42 +202,44 @@ export function Pricing() {
             Choose the plan that fits your stage of business or life.
           </p>
 
-          <button
-            onClick={() => {
-              setPricingMode("business");
-              setSessionContext({ segment: "business" });
-            }}
-            className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${pricingMode === "business"
-              ? "bg-brand-oxford text-white shadow-md"
-              : "text-gray-500 hover:text-brand-oxford"
-              }`}
-          >
-            Business
-          </button>
-          <button
-            onClick={() => {
-              setPricingMode("household");
-              setSessionContext({ segment: "family" });
-            }}
-            className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${pricingMode === "household"
-              ? "bg-brand-copper text-white shadow-md"
-              : "text-gray-500 hover:text-brand-copper"
-              }`}
-          >
-            Personal
-          </button>
-          <button
-            onClick={() => {
-              setPricingMode("nonprofit");
-              setSessionContext({ segment: "nonprofit" });
-            }}
-            className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 whitespace-nowrap ${pricingMode === "nonprofit"
-              ? "bg-brand-oxford text-white shadow-md"
-              : "text-gray-500 hover:text-brand-oxford"
-              }`}
-          >
-            Nonprofit
-          </button>
+          <div className="inline-flex bg-white p-1.5 rounded-full shadow-sm border border-gray-100 mb-8">
+            <button
+              onClick={() => {
+                setPricingMode("business");
+                setSessionContext({ segment: "business" });
+              }}
+              className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${pricingMode === "business"
+                ? "bg-brand-oxford text-white shadow-md"
+                : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
+                }`}
+            >
+              Business
+            </button>
+            <button
+              onClick={() => {
+                setPricingMode("household");
+                setSessionContext({ segment: "family" });
+              }}
+              className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${pricingMode === "household"
+                ? "bg-brand-copper text-white shadow-md"
+                : "text-gray-500 hover:text-brand-copper hover:bg-gray-50"
+                }`}
+            >
+              Personal
+            </button>
+            <button
+              onClick={() => {
+                setPricingMode("nonprofit");
+                setSessionContext({ segment: "nonprofit" });
+              }}
+              className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${pricingMode === "nonprofit"
+                ? "bg-brand-oxford text-white shadow-md"
+                : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
+                }`}
+            >
+              Nonprofit
+            </button>
+          </div>
         </div>
 
         {pricingMode === "nonprofit" && (

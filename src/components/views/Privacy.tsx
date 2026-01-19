@@ -54,13 +54,17 @@ export function Privacy() {
             <p>We collect data through:</p>
             <ul className="list-disc pl-6 mb-4 space-y-2">
               <li>
-                <strong>Direct interactions</strong>: Forms on our website, email correspondence, or
-                phone calls.
+                <strong>Direct interactions (Explicit Consent)</strong>: We only collect personal
+                information when you explicitly provide it by submitting a form (e.g., "Talk to
+                Sales", "Support Ticket", "Newsletter"). Your session history (pages visited) is
+                stored locally on your device and is only transmitted to us when you actively click a
+                submission button.
               </li>
               <li>
                 <strong>Automated technologies</strong>: As you interact with our website, we may
                 automatically collect Technical Data using cookies, server logs, and similar
-                technologies.
+                technologies. We prioritize ephemeral local storage over persistent cookies where
+                possible.
               </li>
               <li>
                 <strong>Third parties</strong>: Analytics providers (Zoho PageSense) and support
