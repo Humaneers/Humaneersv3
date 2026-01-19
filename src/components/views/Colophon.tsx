@@ -400,6 +400,17 @@ export function Colophon() {
                     </a>
                   </li>
                   <li className="flex items-center justify-between">
+                    <span className="font-medium text-gray-700">Performance Monitoring</span>
+                    <a
+                      href="https://datadoghq.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-brand-copper hover:underline"
+                    >
+                      Datadog RUM
+                    </a>
+                  </li>
+                  <li className="flex items-center justify-between">
                     <span className="font-medium text-gray-700">Deployment</span>
                     <a
                       href="https://vercel.com"

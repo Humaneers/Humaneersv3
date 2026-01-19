@@ -25,7 +25,7 @@ The official website for Humaneers, built with modern web technologies to delive
 - **UI Architecture**: [Radix UI](https://www.radix-ui.com/) + Shadcn/UI patterns
 - **Animation**: [Framer Motion](https://www.framer.com/motion/)
 - **Forms/CRM**: [Zoho CRM](https://www.zoho.com/crm/) + Zoho Forms
-- **Analytics**: Zoho PageSense + SalesIQ
+- **Analytics**: Zoho PageSense + SalesIQ, Contentsquare, Datadog RUM
 - **Deployment**: [Vercel](https://vercel.com/)
 
 ## Getting Started
