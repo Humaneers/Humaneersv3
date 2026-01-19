@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { getZohoAccessToken } from "../_lib/zoho.js";
+import { deriveLeadSource } from "../_lib/leadSource.ts";
 
 interface NewsletterData {
     email: string;
@@ -27,6 +28,27 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             apiDomain = "www.zohoapis.com";
         }
 
+        // Capture geographic data from headers
+        const ipCountry = req.headers["x-vercel-ip-country"] as string | undefined;
+        const ipCity = req.headers["x-vercel-ip-city"] as string | undefined;
+
+        // Extract referrer from context if available
+        const referrerMatch = data.context?.match(/Ref:\s*([^|]+)/);
+        const referrer = referrerMatch ? referrerMatch[1].trim() : undefined;
+
+        // Derive dynamic lead source for newsletters
+        const leadSource = deriveLeadSource(data.context, referrer) || `Newsletter - ${data.source || "Website"}`;
+
+        // Enhanced description with geographic and context data
+        let description = "";
+        if (ipCountry || ipCity) {
+            const location = [ipCity, ipCountry].filter(Boolean).join(", ");
+            description += `Location: ${location}\n\n`;
+        }
+        if (data.context) {
+            description += data.context;
+        }
+
         // Create a lead in Zoho CRM with newsletter source
         const leadPayload = {
             data: [
@@ -34,9 +56,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                     Email: data.email,
                     Last_Name: data.email.split("@")[0], // Use email prefix as placeholder
                     Company: "Newsletter Subscriber",
-                    Lead_Source: `Newsletter - ${data.source || "Website"}`,
+                    Lead_Source: leadSource,
                     Lead_Status: "Newsletter Subscriber",
-                    Description: data.context || undefined,
+                    Description: description || undefined,
                 },
             ],
             trigger: ["workflow"],

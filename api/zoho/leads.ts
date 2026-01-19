@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { getZohoAccessToken } from "../_lib/zoho.js";
+import { deriveLeadSource } from "../_lib/leadSource.ts";
 
 interface LeadData {
     firstName: string;
@@ -37,6 +38,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             apiDomain = "www.zohoapis.com";
         }
 
+        // Capture geographic data from headers
+        const ipCountry = req.headers["x-vercel-ip-country"] as string | undefined;
+        const ipCity = req.headers["x-vercel-ip-city"] as string | undefined;
+
+        // Extract referrer from context if available
+        const referrerMatch = data.context?.match(/Ref:\s*([^|]+)/);
+        const referrer = referrerMatch ? referrerMatch[1].trim() : undefined;
+
+        // Derive dynamic lead source
+        const leadSource = deriveLeadSource(data.context, referrer);
+
         // Map form data to Zoho CRM Lead fields
         const leadPayload = {
             data: [
@@ -49,8 +61,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                     Designation: data.role,
                     Phone: data.phone || null,
                     No_of_Employees: mapEmployeeRange(data.employees),
-                    Lead_Source: "Website - Talk to Sales",
-                    Description: formatDescription(data),
+                    Lead_Source: leadSource,
+                    Description: formatDescription(data, ipCountry, ipCity),
                 },
             ],
             trigger: ["workflow"],
@@ -107,7 +119,7 @@ function mapEmployeeRange(employees: string): number | null {
     return ranges[employees] || null;
 }
 
-function formatDescription(data: LeadData): string {
+function formatDescription(data: LeadData, ipCountry?: string, ipCity?: string): string {
     const parts: string[] = [];
 
     if (data.budget) {
@@ -118,6 +130,10 @@ function formatDescription(data: LeadData): string {
     }
     if (data.message) {
         parts.push(`Message: ${data.message}`);
+    }
+    if (ipCountry || ipCity) {
+        const location = [ipCity, ipCountry].filter(Boolean).join(", ");
+        parts.push(`Location: ${location}`);
     }
     if (data.context) {
         parts.push(data.context);

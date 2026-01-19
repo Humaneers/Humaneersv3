@@ -13,6 +13,13 @@ export interface SessionContext {
   entrySource?: string;
   pageHistory?: string[]; // Last 10 pages visited
   interactions?: string[]; // Significant actions taken
+  utm?: {
+    source?: string;
+    medium?: string;
+    campaign?: string;
+    term?: string;
+    content?: string;
+  };
 }
 
 const STORAGE_KEY = "humaneers_session_v1";
@@ -48,12 +55,20 @@ export function initSession() {
 
   const ctx = getSessionContext();
   if (!ctx.landingPage) {
+    const params = new URLSearchParams(window.location.search);
     setSessionContext({
       landingPage: window.location.pathname,
       referrer: document.referrer || "direct",
-      entrySource: new URLSearchParams(window.location.search).get("source") || undefined,
+      entrySource: params.get("source") || undefined,
       pageHistory: [window.location.pathname],
       interactions: [],
+      utm: {
+        source: params.get("utm_source") || undefined,
+        medium: params.get("utm_medium") || undefined,
+        campaign: params.get("utm_campaign") || undefined,
+        term: params.get("utm_term") || undefined,
+        content: params.get("utm_content") || undefined,
+      },
     });
   }
 }
@@ -89,6 +104,19 @@ export function getContextString(): string {
 
   if (ctx.segment) parts.push(`Segment: ${ctx.segment}`);
   if (ctx.entrySource) parts.push(`Source: ${ctx.entrySource}`);
+
+  // Format UTM parameters
+  if (ctx.utm) {
+    const utmParts = [];
+    if (ctx.utm.source) utmParts.push(`source=${ctx.utm.source}`);
+    if (ctx.utm.medium) utmParts.push(`medium=${ctx.utm.medium}`);
+    if (ctx.utm.campaign) utmParts.push(`campaign=${ctx.utm.campaign}`);
+    if (ctx.utm.term) utmParts.push(`term=${ctx.utm.term}`);
+    if (ctx.utm.content) utmParts.push(`content=${ctx.utm.content}`);
+    if (utmParts.length > 0) {
+      parts.push(`UTM: ${utmParts.join(", ")}`);
+    }
+  }
 
   // Format Journey
   if (ctx.pageHistory && ctx.pageHistory.length > 0) {
