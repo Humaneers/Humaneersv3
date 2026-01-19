@@ -76,13 +76,18 @@ export function Home() {
               transition={{ duration: 0.8 }}
               className="max-w-3xl"
             >
-              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                Enterprise strategy for businesses and families. <br />
-                <span className="text-brand-copper">Built with precision, delivered with soul.</span>
-              </h1>
-              <h2 className="text-xl md:text-2xl text-gray-200 mb-10 leading-relaxed font-light">
-                IT, security, and brand growth for those who demand excellence.
-              </h2>
+              <div className="mb-8">
+                <p className="text-brand-copper font-bold tracking-widest uppercase text-sm md:text-base mb-4">
+                  Enterprise Strategy for Businesses & Families
+                </p>
+                <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight mb-6">
+                  Built with precision. <br />
+                  <span className="text-white/80">Delivered with soul.</span>
+                </h1>
+                <p className="text-xl md:text-2xl text-gray-200 leading-relaxed font-light max-w-2xl">
+                  IT, security, and brand growth for those who demand excellence.
+                </p>
+              </div>
               <div className="flex flex-col gap-4 max-w-lg">
                 <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-3">
                   <div className="flex-grow">
