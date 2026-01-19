@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { getZohoAccessToken } from "../_lib/zoho";
+import { getZohoAccessToken } from "../_lib/zoho.js";
 
 interface LeadData {
     firstName: string;
