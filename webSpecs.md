@@ -101,7 +101,7 @@
 - **Routing**: React Router DOM (v6).
   - *Context-Aware Routing*: Pass `mode` and `highlight` params (e.g., `?mode=household&highlight=senior`).
 - **CRM**: Zoho CRM (via custom API integration).
-- **Analytics**: Vercel Analytics, Zoho PageSense, Hotjar, Contentsquare.
+- **Analytics**: Vercel Analytics, Zoho PageSense, Contentsquare.
 
 ### 4.2 Code Standards
 - **File Structure**: Feature-based organization in `src/components/views`.

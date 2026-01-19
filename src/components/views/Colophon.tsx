@@ -389,14 +389,14 @@ export function Colophon() {
                     </a>
                   </li>
                   <li className="flex items-center justify-between">
-                    <span className="font-medium text-gray-700">Heatmaps</span>
+                    <span className="font-medium text-gray-700">Experience Analytics</span>
                     <a
-                      href="https://hotjar.com"
+                      href="https://contentsquare.com"
                       target="_blank"
                       rel="noreferrer"
                       className="text-brand-copper hover:underline"
                     >
-                      Hotjar
+                      Contentsquare
                     </a>
                   </li>
                   <li className="flex items-center justify-between">

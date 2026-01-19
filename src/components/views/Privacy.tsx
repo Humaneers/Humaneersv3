@@ -144,8 +144,7 @@ export function Privacy() {
                 <strong>Vercel</strong>: Website hosting and content delivery.
               </li>
               <li>
-                <strong>Hotjar</strong>: User behavior analytics and heatmaps to improve site
-                usability.
+                <strong>Contentsquare</strong>: Digital experience analytics and session replay.
               </li>
             </ul>
             <p>
