@@ -36,8 +36,8 @@ export function About() {
           <div className="container mx-auto px-6 relative z-10 text-center">
             <h1 className="text-5xl font-bold mb-6">About Humaneers</h1>
             <p className="text-xl max-w-2xl mx-auto text-gray-300 font-light leading-relaxed">
-              We are the bridge between enterprise-grade technology and the businesses that power
-              our local communities.
+              We bring enterprise-grade technology to the businesses and families that power our
+              communities.
             </p>
           </div>
         </section>
@@ -85,7 +85,7 @@ export function About() {
                     <p>
                       For decades, the most powerful technology, the tightest security, and the
                       smartest growth strategies were reserved for the Fortune 500. Small
-                      businesses, solo entrepreneurs, and non-profits were left to fend for
+                      businesses, families, solo entrepreneurs, and non-profits were left to fend for
                       themselves with off-the-shelf software and "geek squad" support.
                     </p>
                     <p>
@@ -96,9 +96,9 @@ export function About() {
                     <p>
                       <strong>Humaneers was founded to close that gap.</strong> We stripped away the
                       overhead of big consulting firms but kept the methodology. We took the same
-                      security protocols used by global banks and scaled them for family offices. We
-                      took the brand strategies used by multinational CPG companies and applied them
-                      to local startups.
+                      security protocols used by global banks and scaled them for families and
+                      high-net-worth households. We took the brand strategies used by multinational
+                      CPG companies and applied them to local startups.
                     </p>
                   </div>
                 </div>
@@ -190,6 +190,10 @@ export function About() {
                         Family Offices & Estates
                       </span>
                       <span className="text-sm text-gray-500">High Net Worth Individuals</span>
+                    </li>
+                    <li className="bg-white p-4 rounded-lg border border-gray-100 flex items-center justify-between">
+                      <span className="font-medium text-brand-oxford">Families & Individuals</span>
+                      <span className="text-sm text-gray-500">Home networks & digital safety</span>
                     </li>
                     <li className="bg-white p-4 rounded-lg border border-gray-100 flex items-center justify-between">
                       <span className="font-medium text-brand-oxford">

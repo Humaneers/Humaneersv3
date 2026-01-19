@@ -39,10 +39,10 @@ export function Colophon() {
                   <Scale className="text-brand-copper" /> The Humaneers Digital Constitution
                 </h2>
                 <p className="text-brand-slate mb-8 leading-relaxed">
-                  Managing a successful IT consultancy requires more than technical expertise; it
-                  demands transparent communication, ethical operations, and a user‑centric digital
+                  Serving businesses and families requires more than technical expertise—it demands
+                  transparent communication, ethical operations, and a user-centric digital
                   experience. We have adopted this framework to design our policies and processes,
-                  ensuring we build trust and foster long‑term relationships with our clients.
+                  ensuring we build trust and foster long-term relationships with our clients.
                 </p>
 
                 <div className="space-y-12">
@@ -109,9 +109,9 @@ export function Colophon() {
                       Information
                     </h3>
                     <p className="text-brand-slate mb-4">
-                      <strong>Mission and Story:</strong> We explain the "why"—bringing big-firm
-                      discipline to small businesses. We share our metrics and our origins to
-                      demonstrate stability.
+                      <strong>Mission and Story:</strong> We explain the "why"—bringing
+                      enterprise-grade discipline to businesses and families, without the enterprise
+                      price tag. We share our metrics and our origins to demonstrate stability.
                     </p>
                     <p className="text-brand-slate mb-4">
                       <strong>Values and Ethics:</strong>

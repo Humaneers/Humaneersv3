@@ -89,19 +89,19 @@ export function Personal() {
         </section>
 
         {/* Use Cases */}
-        <section className="py-24 bg-brand-oxford-deep border-t border-brand-oxford/10">
+        <section className="py-24 bg-brand-oxford text-white border-t border-brand-oxford/10">
           <div className="container mx-auto px-6">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-3xl font-bold text-brand-oxford mb-6">Who is this for?</h2>
+                <h2 className="text-3xl font-bold text-white mb-6">Who is this for?</h2>
                 <ul className="space-y-6">
                   <li className="flex gap-4">
                     <div className="bg-brand-copper/10 p-2 rounded-lg h-fit">
                       <Fingerprint className="w-6 h-6 text-brand-copper" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-brand-oxford">Consultants & Agencies</h4>
-                      <p className="text-sm text-brand-slate">
+                      <h4 className="font-bold text-white">Consultants & Agencies</h4>
+                      <p className="text-sm text-gray-300">
                         You handle sensitive client data and need to prove you are secure (SOC 2
                         ready).
                       </p>
@@ -112,8 +112,8 @@ export function Personal() {
                       <ArrowRight className="w-6 h-6 text-brand-copper" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-brand-oxford">Angel Investors</h4>
-                      <p className="text-sm text-brand-slate">
+                      <h4 className="font-bold text-white">Angel Investors</h4>
+                      <p className="text-sm text-gray-300">
                         You need a secure, separate environment for deal flow and board
                         communications.
                       </p>
@@ -124,8 +124,8 @@ export function Personal() {
                       <Smartphone className="w-6 h-6 text-brand-copper" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-brand-oxford">Digital Nomads</h4>
-                      <p className="text-sm text-brand-slate">
+                      <h4 className="font-bold text-white">Digital Nomads</h4>
+                      <p className="text-sm text-gray-300">
                         You work from coffee shops and Airbnbs and need a bulletproof VPN and device
                         tracking.
                       </p>
@@ -161,12 +161,10 @@ export function Personal() {
         <section className="py-20 bg-brand-cream text-center">
           <h2 className="text-3xl font-bold text-brand-oxford mb-8">Plans start at $25/month.</h2>
           <Button
-            onClick={() =>
-              navigate(routePaths.talkToSales, { state: { interest: "Solo Entrepreneur IT" } })
-            }
+            onClick={() => navigate(routePaths.pricing)}
             className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-12 py-6 h-auto rounded-full shadow-lg"
           >
-            Get Started
+            View Pricing
           </Button>
         </section>
       </div>
