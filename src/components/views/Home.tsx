@@ -191,7 +191,7 @@ export function Home() {
                 <img
                   src="https://images.unsplash.com/photo-1643292710805-0c32e5ca2a2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxtb2Rlcm4lMjBzbWFsbCUyMGJ1c2luZXNzJTIwb2ZmaWNlJTIwdGVhbSUyMHdhcm0lMjB0b25lc3xlbnwxfHx8fDE3NjY0NDg3Mjl8MA&ixlib=rb-4.1.0&q=80&w=1080"
                   alt="Office Team"
-                  className="rounded-lg shadow-2xl"
+                  className="rounded-lg shadow-2xl w-full aspect-[4/3] object-cover"
                 />
                 <div className="absolute -bottom-6 -left-6 bg-brand-copper p-6 rounded-lg text-white shadow-lg hidden md:block">
                   <p className="text-2xl font-bold">100+</p>

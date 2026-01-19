@@ -132,7 +132,7 @@ export function FamilyProtection() {
                 <img
                   src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80"
                   alt="Family using devices"
-                  className="rounded-2xl shadow-xl rotate-1 hover:rotate-0 transition-transform duration-500"
+                  className="rounded-2xl shadow-xl rotate-1 hover:rotate-0 transition-transform duration-500 w-full aspect-video object-cover"
                 />
               </div>
               <div className="md:w-1/2">
