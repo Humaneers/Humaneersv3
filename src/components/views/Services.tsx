@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
-import { Shield, BarChart3, Users, Server, ArrowRight, CheckCircle2, Layers } from "lucide-react";
+import { Shield, BarChart3, Users, Server, ArrowRight, CheckCircle2, Layers, AlertTriangle, Heart, Building2 } from "lucide-react";
 import { DefinitionTooltip } from "../DefinitionTooltip";
 import { routePaths } from "../../routes";
 
 export function Services() {
   const navigate = useNavigate();
 
-  const services = [
+  const initialServices = [
     {
       id: "managed-it",
       title: "Managed IT",
@@ -57,6 +57,44 @@ export function Services() {
       color: "bg-brand-oxford",
     },
   ];
+
+  const additionalServices = [
+    {
+      id: "crisis-management",
+      title: "Crisis Management",
+      icon: <AlertTriangle className="w-8 h-8 text-white" />,
+      image:
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80",
+      description: "Digital scrubbing and reputation defense.",
+      features: ["SEO Suppression", "Digital Scrubbing", "Social Media Lockdown"],
+      link: routePaths.crisisManagement,
+      color: "bg-red-900",
+    },
+    {
+      id: "senior-care",
+      title: "Senior Care",
+      icon: <Heart className="w-8 h-8 text-white" />,
+      image:
+        "https://images.unsplash.com/photo-1516307365426-bea591f05011?auto=format&fit=crop&q=80",
+      description: "Dignified tech support and fraud protection for seniors.",
+      features: ["Fraud Air-Gapping", "Simplification", "Red Button Support"],
+      link: routePaths.seniorCare,
+      color: "bg-brand-copper",
+    },
+    {
+      id: "nonprofit-it",
+      title: "Nonprofit IT",
+      icon: <Building2 className="w-8 h-8 text-white" />,
+      image:
+        "https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&q=80",
+      description: "Mission-focused IT at nonprofit rates.",
+      features: ["Grant-Ready Policies", "Donor Data Protection", "At-Cost Licensing"],
+      link: routePaths.nonProfits,
+      color: "bg-brand-oxford",
+    },
+  ];
+
+  const services = [...initialServices, ...additionalServices];
 
   return (
     <div className="bg-white">

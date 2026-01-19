@@ -390,7 +390,7 @@ export function Pricing() {
               <div>
                 <h4 className="font-bold mb-2 text-brand-copper">Flexible Usage</h4>
                 <p className="text-sm text-gray-400">
-                  Use for IT support, strategy, or design work. Hours are deducted as we work.
+                  Use for IT support, strategy, or crisis response. Hours are deducted as we work.
                 </p>
               </div>
               <div>
