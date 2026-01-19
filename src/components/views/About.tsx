@@ -31,7 +31,7 @@ export function About() {
     >
       <div className="bg-brand-cream min-h-screen">
         {/* Header */}
-        <section className="bg-brand-oxford text-white py-24 relative overflow-hidden">
+        <section className="bg-brand-oxford text-white py-12 md:py-24 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-copper/10 skew-x-12 transform translate-x-20"></div>
           <div className="container mx-auto px-6 relative z-10 text-center">
             <h1 className="text-5xl font-bold mb-6">About Humaneers</h1>
@@ -45,28 +45,28 @@ export function About() {
         <div className="container mx-auto px-6 py-12">
           <Tabs defaultValue="story" className="w-full">
             <div className="flex justify-center mb-12">
-              <TabsList className="bg-white p-1 rounded-lg border border-gray-200 shadow-sm inline-flex h-auto">
+              <TabsList className="bg-white p-1 rounded-lg border border-gray-200 shadow-sm flex flex-col md:inline-flex h-auto w-full md:w-auto">
                 <TabsTrigger
                   value="story"
-                  className="px-6 py-3 text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all"
+                  className="px-6 py-3 text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all w-full md:w-auto"
                 >
                   Our Story
                 </TabsTrigger>
                 <TabsTrigger
                   value="values"
-                  className="px-6 py-3 text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all"
+                  className="px-6 py-3 text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all w-full md:w-auto"
                 >
                   Our Values
                 </TabsTrigger>
                 <TabsTrigger
                   value="customers"
-                  className="px-6 py-3 text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all"
+                  className="px-6 py-3 text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all w-full md:w-auto"
                 >
                   Our Customers
                 </TabsTrigger>
                 <TabsTrigger
                   value="impact"
-                  className="px-6 py-3 text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all"
+                  className="px-6 py-3 text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all w-full md:w-auto"
                 >
                   Impact & Responsibility
                 </TabsTrigger>
@@ -181,27 +181,27 @@ export function About() {
                 <div>
                   <h3 className="text-2xl font-bold text-brand-oxford mb-6">Who We Serve</h3>
                   <ul className="space-y-4">
-                    <li className="bg-white p-4 rounded-lg border border-gray-100 flex items-center justify-between">
+                    <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
                       <span className="font-medium text-brand-oxford">High-Growth Startups</span>
                       <span className="text-sm text-gray-500">Seed to Series B</span>
                     </li>
-                    <li className="bg-white p-4 rounded-lg border border-gray-100 flex items-center justify-between">
+                    <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
                       <span className="font-medium text-brand-oxford">
                         Family Offices & Estates
                       </span>
                       <span className="text-sm text-gray-500">High Net Worth Individuals</span>
                     </li>
-                    <li className="bg-white p-4 rounded-lg border border-gray-100 flex items-center justify-between">
+                    <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
                       <span className="font-medium text-brand-oxford">Families & Individuals</span>
                       <span className="text-sm text-gray-500">Home networks & digital safety</span>
                     </li>
-                    <li className="bg-white p-4 rounded-lg border border-gray-100 flex items-center justify-between">
+                    <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
                       <span className="font-medium text-brand-oxford">
                         Nonprofit Organizations
                       </span>
                       <span className="text-sm text-gray-500">501(c)(3) Certified</span>
                     </li>
-                    <li className="bg-white p-4 rounded-lg border border-gray-100 flex items-center justify-between">
+                    <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
                       <span className="font-medium text-brand-oxford">Regulated Industries</span>
                       <span className="text-sm text-gray-500">Healthcare, Finance, Legal</span>
                     </li>

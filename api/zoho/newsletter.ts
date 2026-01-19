@@ -4,6 +4,7 @@ import { getZohoAccessToken } from "../_lib/zoho.js";
 interface NewsletterData {
     email: string;
     source?: string;
+    context?: string;
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -35,6 +36,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                     Company: "Newsletter Subscriber",
                     Lead_Source: `Newsletter - ${data.source || "Website"}`,
                     Lead_Status: "Newsletter Subscriber",
+                    Description: data.context || undefined,
                 },
             ],
             trigger: ["workflow"],

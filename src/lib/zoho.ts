@@ -36,6 +36,7 @@ export interface SupportFormData {
 export interface NewsletterFormData {
   email: string;
   source?: string;
+  context?: string;
 }
 
 export interface ApiResponse {
@@ -44,86 +45,20 @@ export interface ApiResponse {
   id?: string;
 }
 
-/**
- * Submit sales lead to Zoho CRM
- */
-export async function submitSalesLead(data: SalesFormData): Promise<ApiResponse> {
-  const context = getContextString();
-  const enhancedSource = data.source
-    ? `${data.source} ${context}`
-    : context || "Web Form";
-
-  const payload = {
-    firstName: data.firstName,
-    lastName: data.lastName,
-    email: data.email,
-    company: data.company,
-    website: data.website,
-    role: data.role,
-    phone: data.phone,
-    employees: data.employees,
-    budget: data.budget,
-    interests: data.interests.join(", "),
-    message: data.message,
-    source: enhancedSource,
-  };
-
-  const response = await fetch("/api/zoho/leads", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-
-  const result = await response.json();
-
-  if (!response.ok) {
-    throw new Error(result.error || "Failed to submit lead");
-  }
-
-  return result;
-}
-
-/**
- * Submit support ticket to Zoho Desk
- */
-export async function submitSupportTicket(data: SupportFormData): Promise<ApiResponse> {
-  const context = getContextString();
-  const enhancedDescription = context
-    ? `${data.description}\n\n${context}`
-    : data.description;
-
-  const payload = {
-    ...data,
-    description: enhancedDescription
-  };
-
-  const response = await fetch("/api/zoho/tickets", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-
-  const result = await response.json();
-
-  if (!response.ok) {
-    throw new Error(result.error || "Failed to submit ticket");
-  }
-
-  return result;
-}
+// ... existing code ...
 
 /**
  * Submit newsletter subscription to Zoho CRM
  */
 export async function submitNewsletter(data: NewsletterFormData): Promise<ApiResponse> {
   const context = getContextString();
-  const enhancedSource = data.source
-    ? `${data.source} ${context}`
-    : context || "Newsletter Signup";
+  // Keep source short for Lead_Source picklist compatibility
+  // Pass context separately for Description field
 
   const payload = {
     ...data,
-    source: enhancedSource
+    source: data.source || "Newsletter Signup",
+    context: context
   };
 
   const response = await fetch("/api/zoho/newsletter", {

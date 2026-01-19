@@ -14,6 +14,7 @@ export const routePaths = {
   services: "/services",
   talkToSales: "/talk-to-sales",
   personal: "/personal",
+  estate: "/estate",
   seniorCare: "/senior-care",
   crisisManagement: "/crisis-management",
   colophon: "/colophon",

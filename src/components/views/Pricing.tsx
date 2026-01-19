@@ -157,7 +157,7 @@ export function Pricing() {
       cta: "Get Concierge",
       highlighted: false,
       links: [
-        { label: "Estate Support", icon: <Shield size={12} />, to: routePaths.personal },
+        { label: "Estate Support", icon: <Shield size={12} />, to: routePaths.estate },
       ],
     },
   ];
@@ -192,7 +192,7 @@ export function Pricing() {
 
 
   return (
-    <div className="bg-brand-cream min-h-screen py-24">
+    <div className="bg-brand-cream min-h-screen py-12 md:py-24">
       <div className="container mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-brand-oxford mb-6">
@@ -202,13 +202,13 @@ export function Pricing() {
             Choose the plan that fits your stage of business or life.
           </p>
 
-          <div className="inline-flex bg-white p-1.5 rounded-full shadow-sm border border-gray-100 mb-8">
+          <div className="flex flex-col sm:inline-flex bg-white p-1.5 rounded-xl sm:rounded-full shadow-sm border border-gray-100 mb-8 w-full sm:w-auto">
             <button
               onClick={() => {
                 setPricingMode("business");
                 setSessionContext({ segment: "business" });
               }}
-              className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${pricingMode === "business"
+              className={`px-6 py-3 sm:py-2 rounded-lg sm:rounded-full text-sm font-semibold transition-all w-full sm:w-auto ${pricingMode === "business"
                 ? "bg-brand-oxford text-white shadow-md"
                 : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
                 }`}
@@ -220,7 +220,7 @@ export function Pricing() {
                 setPricingMode("household");
                 setSessionContext({ segment: "family" });
               }}
-              className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${pricingMode === "household"
+              className={`px-6 py-3 sm:py-2 rounded-lg sm:rounded-full text-sm font-semibold transition-all w-full sm:w-auto ${pricingMode === "household"
                 ? "bg-brand-copper text-white shadow-md"
                 : "text-gray-500 hover:text-brand-copper hover:bg-gray-50"
                 }`}
@@ -232,7 +232,7 @@ export function Pricing() {
                 setPricingMode("nonprofit");
                 setSessionContext({ segment: "nonprofit" });
               }}
-              className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${pricingMode === "nonprofit"
+              className={`px-6 py-3 sm:py-2 rounded-lg sm:rounded-full text-sm font-semibold transition-all w-full sm:w-auto ${pricingMode === "nonprofit"
                 ? "bg-brand-oxford text-white shadow-md"
                 : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
                 }`}
