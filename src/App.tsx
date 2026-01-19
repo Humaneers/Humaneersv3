@@ -57,9 +57,7 @@ const TalkToSales = lazy(() =>
 const Personal = lazy(() =>
   import("./components/views/Personal").then((m) => ({ default: m.Personal }))
 );
-const Estate = lazy(() =>
-  import("./components/views/Estate").then((m) => ({ default: m.Estate }))
-);
+const Estate = lazy(() => import("./components/views/Estate").then((m) => ({ default: m.Estate })));
 const Colophon = lazy(() =>
   import("./components/views/Colophon").then((m) => ({ default: m.Colophon }))
 );

@@ -43,24 +43,29 @@ export function Support() {
   const faqItems = [
     {
       question: "Do I need to be an existing client to get help?",
-      answer: "No! We welcome new clients who need immediate help. If you are in the middle of a security incident, we will help you now. We can establish a partnership once the fire is out."
+      answer:
+        "No! We welcome new clients who need immediate help. If you are in the middle of a security incident, we will help you now. We can establish a partnership once the fire is out.",
     },
     {
       question: "What's the fastest way to get help for a critical issue?",
-      answer: "For P1 Critical issues (system down, data breach, active security incident), call our emergency hotline directly. For other issues, submit a ticket and select the appropriate priority level."
+      answer:
+        "For P1 Critical issues (system down, data breach, active security incident), call our emergency hotline directly. For other issues, submit a ticket and select the appropriate priority level.",
     },
     {
       question: "What information should I include in my ticket?",
-      answer: "Include: what happened, when it started, what you were trying to do, any error messages, and which systems are affected. The more detail you provide, the faster we can help."
+      answer:
+        "Include: what happened, when it started, what you were trying to do, any error messages, and which systems are affected. The more detail you provide, the faster we can help.",
     },
     {
       question: "How do priority levels work?",
-      answer: "P1 (Critical): System down, 15-min response. P2 (High): Major impact, 1-hr response. P3 (Medium): Minor issue with workaround, 4-hr response. P4 (Low): Questions/requests, 24-hr response."
+      answer:
+        "P1 (Critical): System down, 15-min response. P2 (High): Major impact, 1-hr response. P3 (Medium): Minor issue with workaround, 4-hr response. P4 (Low): Questions/requests, 24-hr response.",
     },
     {
       question: "What are your support hours?",
-      answer: "Our team monitors tickets during business hours (Mon-Fri, 8am-6pm MST). For P1 Critical issues, our emergency hotline provides 24/7 coverage."
-    }
+      answer:
+        "Our team monitors tickets during business hours (Mon-Fri, 8am-6pm MST). For P1 Critical issues, our emergency hotline provides 24/7 coverage.",
+    },
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -157,7 +162,9 @@ export function Support() {
                     <Phone className="w-5 h-5" />
                     (928) 440-1505
                   </a>
-                  <p className="text-xs text-red-600 mt-2">Available 24/7 for critical emergencies</p>
+                  <p className="text-xs text-red-600 mt-2">
+                    Available 24/7 for critical emergencies
+                  </p>
                 </div>
 
                 <div className="space-y-4">
@@ -382,20 +389,19 @@ export function Support() {
         {/* FAQ Section */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-6 max-w-4xl">
-            <h2 className="text-3xl font-bold text-brand-oxford mb-8 text-center">Frequently Asked Questions</h2>
+            <h2 className="text-3xl font-bold text-brand-oxford mb-8 text-center">
+              Frequently Asked Questions
+            </h2>
             <div className="space-y-4">
               {faqItems.map((item, index) => (
-                <div
-                  key={index}
-                  className="bg-brand-cream rounded-lg overflow-hidden"
-                >
+                <div key={index} className="bg-brand-cream rounded-lg overflow-hidden">
                   <button
                     onClick={() => toggleFaq(index)}
                     className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-brand-cream/80 transition-colors"
                   >
                     <span className="font-semibold text-brand-oxford">{item.question}</span>
                     <ChevronDown
-                      className={`w-5 h-5 text-brand-copper transition-transform ${openFaq === index ? 'rotate-180' : ''}`}
+                      className={`w-5 h-5 text-brand-copper transition-transform ${openFaq === index ? "rotate-180" : ""}`}
                     />
                   </button>
                   {openFaq === index && (

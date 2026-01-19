@@ -1,6 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
-import { Lock, Wifi, Eye, Smartphone, Home, AlertTriangle, Fingerprint, CheckCircle2 } from "lucide-react";
+import {
+  Lock,
+  Wifi,
+  Eye,
+  Smartphone,
+  Home,
+  AlertTriangle,
+  Fingerprint,
+  CheckCircle2,
+} from "lucide-react";
 import { routePaths } from "../../routes";
 import { Seo } from "../Seo";
 
@@ -183,15 +192,19 @@ export function FamilyProtection() {
           <div className="container mx-auto px-6">
             <div className="flex flex-col md:flex-row items-center gap-12">
               <div className="md:w-1/2">
-                <h2 className="text-3xl font-bold text-brand-oxford mb-6">The "Grandparent Guarantee"</h2>
+                <h2 className="text-3xl font-bold text-brand-oxford mb-6">
+                  The "Grandparent Guarantee"
+                </h2>
                 <p className="text-brand-slate text-lg mb-6 leading-relaxed">
-                  The #1 target for wire fraud isn't you—it's your parents. We offer a specific protection tier for seniors that locks down their finances and devices without making them hard to use.
+                  The #1 target for wire fraud isn't you—it's your parents. We offer a specific
+                  protection tier for seniors that locks down their finances and devices without
+                  making them hard to use.
                 </p>
                 <ul className="space-y-3">
                   {[
                     "Bank-grade anti-phishing filters",
                     "Remote support for 'how do I print this?' calls",
-                    "Scam call blocking on mobile devices"
+                    "Scam call blocking on mobile devices",
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-3">
                       <CheckCircle2 className="w-5 h-5 text-brand-copper" />
@@ -202,12 +215,23 @@ export function FamilyProtection() {
               </div>
               <div className="md:w-1/2">
                 <div className="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-brand-copper">
-                  <div className="text-lg font-bold text-brand-oxford mb-2">Peace of Mind Add-On</div>
-                  <div className="text-4xl font-bold text-brand-copper mb-4">$75<span className="text-lg text-gray-400 font-normal">/mo</span></div>
+                  <div className="text-lg font-bold text-brand-oxford mb-2">
+                    Peace of Mind Add-On
+                  </div>
+                  <div className="text-4xl font-bold text-brand-copper mb-4">
+                    $75<span className="text-lg text-gray-400 font-normal">/mo</span>
+                  </div>
                   <p className="text-gray-500 text-sm mb-6">
-                    Add any senior household to your plan. We handle the setup, support, and protection. You get the peace of mind.
+                    Add any senior household to your plan. We handle the setup, support, and
+                    protection. You get the peace of mind.
                   </p>
-                  <Button variant="outline" className="w-full" onClick={() => navigate(routePaths.pricing)}>View Senior Plans</Button>
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    onClick={() => navigate(routePaths.pricing)}
+                  >
+                    View Senior Plans
+                  </Button>
                 </div>
               </div>
             </div>
@@ -232,7 +256,8 @@ export function FamilyProtection() {
               Get a Home Network Health Check
             </Button>
             <p className="mt-6 text-sm text-gray-500">
-              Includes privacy review, password strengthening, and grandparent fraud protection check.
+              Includes privacy review, password strengthening, and grandparent fraud protection
+              check.
             </p>
           </div>
         </section>

@@ -246,16 +246,17 @@ export function Colophon() {
                       </li>
                       <li>
                         <strong>AI as a Tool:</strong> We use machine learning tools to enhance code
-                        quality, catch errors, optimize configurations, and accelerate research. These
-                        tools help us deliver higher quality work, faster.
+                        quality, catch errors, optimize configurations, and accelerate research.
+                        These tools help us deliver higher quality work, faster.
                       </li>
                       <li>
-                        <strong>Quality Over Speed:</strong> AI helps us produce better deliverables,
-                        but we review, validate, and take full accountability for everything we ship.
+                        <strong>Quality Over Speed:</strong> AI helps us produce better
+                        deliverables, but we review, validate, and take full accountability for
+                        everything we ship.
                       </li>
                       <li>
-                        <strong>Transparency:</strong> If we use AI-assisted tools on your project, we
-                        disclose it. You always know how your work is being produced.
+                        <strong>Transparency:</strong> If we use AI-assisted tools on your project,
+                        we disclose it. You always know how your work is being produced.
                       </li>
                     </ul>
                   </div>
@@ -420,7 +421,9 @@ export function Colophon() {
                           ↗
                         </a>
                       </div>
-                      <span className="text-xs text-gray-500">Customer relationship & support ticketing</span>
+                      <span className="text-xs text-gray-500">
+                        Customer relationship & support ticketing
+                      </span>
                     </li>
                     <li className="flex flex-col gap-1">
                       <div className="flex items-center justify-between">
@@ -434,7 +437,9 @@ export function Colophon() {
                           ↗
                         </a>
                       </div>
-                      <span className="text-xs text-gray-500">Email, calendar & team collaboration</span>
+                      <span className="text-xs text-gray-500">
+                        Email, calendar & team collaboration
+                      </span>
                     </li>
                     <li className="flex flex-col gap-1">
                       <div className="flex items-center justify-between">
@@ -448,7 +453,9 @@ export function Colophon() {
                           ↗
                         </a>
                       </div>
-                      <span className="text-xs text-gray-500">Document management & productivity</span>
+                      <span className="text-xs text-gray-500">
+                        Document management & productivity
+                      </span>
                     </li>
                     <li className="flex flex-col gap-1">
                       <div className="flex items-center justify-between">
@@ -476,7 +483,9 @@ export function Colophon() {
                           ↗
                         </a>
                       </div>
-                      <span className="text-xs text-gray-500">Version control & code repository</span>
+                      <span className="text-xs text-gray-500">
+                        Version control & code repository
+                      </span>
                     </li>
                   </ul>
                 </div>

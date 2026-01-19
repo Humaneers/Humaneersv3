@@ -1,6 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
-import { Shield, BarChart3, Users, Server, ArrowRight, CheckCircle2, Layers, AlertTriangle, Heart, Building2 } from "lucide-react";
+import {
+  Shield,
+  BarChart3,
+  Users,
+  Server,
+  ArrowRight,
+  CheckCircle2,
+  Layers,
+  AlertTriangle,
+  Heart,
+  Building2,
+} from "lucide-react";
 import { DefinitionTooltip } from "../DefinitionTooltip";
 import { routePaths } from "../../routes";
 
@@ -63,8 +74,7 @@ export function Services() {
       id: "crisis-management",
       title: "Crisis Management",
       icon: <AlertTriangle className="w-8 h-8 text-white" />,
-      image:
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80",
       description: "Digital scrubbing and reputation defense.",
       features: ["SEO Suppression", "Digital Scrubbing", "Social Media Lockdown"],
       link: routePaths.crisisManagement,
@@ -85,8 +95,7 @@ export function Services() {
       id: "nonprofit-it",
       title: "Nonprofit IT",
       icon: <Building2 className="w-8 h-8 text-white" />,
-      image:
-        "https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&q=80",
+      image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&q=80",
       description: "Mission-focused IT at nonprofit rates.",
       features: ["Grant-Ready Policies", "Donor Data Protection", "At-Cost Licensing"],
       link: routePaths.nonProfits,
@@ -221,7 +230,9 @@ export function Services() {
             needs.
           </p>
           <Button
-            onClick={() => navigate(routePaths.talkToSales, { state: { source: "Services Overview Page" } })}
+            onClick={() =>
+              navigate(routePaths.talkToSales, { state: { source: "Services Overview Page" } })
+            }
             className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-10 py-6 h-auto rounded-full"
           >
             Talk to Sales

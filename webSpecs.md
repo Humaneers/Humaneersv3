@@ -76,7 +76,6 @@
   - *Avoid*: "Submit", "Click Here".
 - **Secondary**: `variant="outline" border-brand-oxford text-brand-oxford`.
 - **Destructive**: `bg-red-600 text-white`.
-
 ### 3.2 Cards
 - **Usage**: Feature lists, Pricing tiers, Services.
 - **Style**: `bg-white rounded-2xl shadow-xl p-8`.
@@ -182,3 +181,30 @@
 ### 6.3 Routing Logic
 - **Consultative**: Calls to action -> `/talk-to-sales`.
 - **Transactional**: "View Plans/Pricing" -> `/pricing` (with params).
+
+---
+
+## 7. QA & Verification Standards
+
+### 7.1 Automated Testing
+- **Directive**: All new utility functions, complex logic, and implementations MUST include unit tests (Vitest).
+- **Pre-Commit**: Run `npm run check` (Typecheck + Lint) and `npm run test` before committing.
+- **Mocking**: External APIs (e.g., Zoho, Analytics) MUST be mocked. Do not make real network requests in tests.
+
+### 7.2 Code Coverage Expectations
+- **Core Utilities**: 100% coverage required for `src/lib/utils.ts`, `src/lib/session.ts`.
+- **Integrations**: Payload structure and session context inclusion must be verified for all forms.
+- **UI Components**: Smoke tests for critical views (optional but recommended).
+
+### 7.3 Production Verification
+- **Directive**: Production builds must be verified locally before deployment.
+- **Command**: `npm run build` && `npm run preview`.
+
+### 7.4 Pre-Release Scrutiny (Deep Clean)
+- **Placeholders**: Codebase must be scanned for `TODO`, `FIXME`, `XXX`, and `Lorem Ipsum` before release. Zero tolerance for placeholders in production.
+- **Prohibited Terms**: Final grep check for "Computer Repair", "Antivirus", "Consulting", "SEO Services".
+- **Metadata**: verify `package.json` "private" is true (unless publishing), and version is bumped.
+- **Assets**: 
+  - `robots.txt` must not block indexing (except for specific non-public routes).
+  - `sitemap.xml` must be present and valid.
+  - No `console.log` statements in production code.

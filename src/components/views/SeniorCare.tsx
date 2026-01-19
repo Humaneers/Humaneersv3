@@ -136,9 +136,7 @@ export function SeniorCare() {
             </div>
             <div className="mt-16">
               <Button
-                onClick={() =>
-                  navigate(`${routePaths.pricing}?mode=household&highlight=senior`)
-                }
+                onClick={() => navigate(`${routePaths.pricing}?mode=household&highlight=senior`)}
                 className="bg-brand-oxford hover:bg-brand-oxford-muted text-white text-xl px-12 py-6 h-auto rounded-full"
               >
                 View Plans

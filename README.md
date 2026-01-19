@@ -59,6 +59,35 @@ npm run build
 
 The output will be in the `dist` directory.
 
+### Testing & Quality Checks
+
+**1. Automated Quality Check** (Linting, Formatting, Typecheck):
+```bash
+npm run check
+```
+
+**2. Unit Tests** (Vitest):
+```bash
+# Run in watch mode
+npm run test
+
+# Run once (CI/Pre-commit)
+npm run test:run
+```
+
+**3. Production Build Verification**:
+```bash
+npm run build
+```
+
+**4. Pre-Release Scrutiny (Deep Clean)**:
+Before any public release, perform the following manual checks:
+- Scan for `TODO`, `FIXME`, or placeholder text.
+- Verify `package.json` metadata (version, private status).
+- Verify absence of prohibited terms (e.g., "Computer Repair").
+- Verify SEO assets (`sitemap.xml`, `robots.txt`).
+
+
 ## Configuration
 
 Copy `.env.example` to `.env.local` and configure your environment variables:

@@ -138,7 +138,8 @@ export function Growth() {
               <p className="text-brand-slate text-lg leading-relaxed">
                 Hiring a full-time Chief Marketing Officer costs $250k+. Hiring an agency gets you a
                 junior team juggling 20 other clients. We provide a third option:
-                <strong> Senior Fractional Leadership </strong> for <span className="text-brand-copper font-bold">1/10th the cost</span>.
+                <strong> Senior Fractional Leadership </strong> for{" "}
+                <span className="text-brand-copper font-bold">1/10th the cost</span>.
               </p>
             </div>
 

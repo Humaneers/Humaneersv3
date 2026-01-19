@@ -57,8 +57,8 @@ export function Privacy() {
                 <strong>Direct interactions (Explicit Consent)</strong>: We only collect personal
                 information when you explicitly provide it by submitting a form (e.g., "Talk to
                 Sales", "Support Ticket", "Newsletter"). Your session history (pages visited) is
-                stored locally on your device and is only transmitted to us when you actively click a
-                submission button.
+                stored locally on your device and is only transmitted to us when you actively click
+                a submission button.
               </li>
               <li>
                 <strong>Automated technologies</strong>: As you interact with our website, we may
@@ -315,9 +315,9 @@ export function Privacy() {
               13. Children's Privacy
             </h2>
             <p>
-              Generally, our services are not directed to individuals under 18 years of age. However,
-              as part of our <strong>Family Protection</strong> services, we may secure devices used
-              by children. In these specific cases:
+              Generally, our services are not directed to individuals under 18 years of age.
+              However, as part of our <strong>Family Protection</strong> services, we may secure
+              devices used by children. In these specific cases:
             </p>
             <ul className="list-disc pl-6 mb-4 space-y-2">
               <li>
@@ -325,8 +325,8 @@ export function Privacy() {
                 Agreement with the parent or legal guardian.
               </li>
               <li>
-                We strictly limit data collection to what is necessary for security monitoring (e.g.,
-                content filtering, threat detection) and do not use this data for marketing.
+                We strictly limit data collection to what is necessary for security monitoring
+                (e.g., content filtering, threat detection) and do not use this data for marketing.
               </li>
               <li>
                 We comply with all applicable laws, including the Children's Online Privacy
@@ -339,15 +339,13 @@ export function Privacy() {
               immediately.
             </p>
 
-            <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">
-              14. Data Ownership
-            </h2>
+            <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">14. Data Ownership</h2>
             <p>
               <strong>In all cases, client data remains client data.</strong> We act solely as
-              custodians and data processors. We do not claim ownership of your personal information,
-              business data, or intellectual property. You retain full rights to your data at all
-              times, and we will return or delete your data upon termination of service in accordance
-              with our retention policy.
+              custodians and data processors. We do not claim ownership of your personal
+              information, business data, or intellectual property. You retain full rights to your
+              data at all times, and we will return or delete your data upon termination of service
+              in accordance with our retention policy.
             </p>
 
             <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">
@@ -389,6 +387,6 @@ export function Privacy() {
           </div>
         </div>
       </div>
-    </Seo >
+    </Seo>
   );
 }

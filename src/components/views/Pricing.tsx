@@ -14,8 +14,7 @@ export function Pricing() {
   // Get mode from URL params, default to business
   const modeParam =
     (searchParams.get("mode") as "business" | "nonprofit" | "household") || "business";
-  const [pricingMode, setPricingMode] =
-    useState<"business" | "nonprofit" | "household">(modeParam);
+  const [pricingMode, setPricingMode] = useState<"business" | "nonprofit" | "household">(modeParam);
 
   const businessTiers = [
     {
@@ -156,9 +155,7 @@ export function Pricing() {
       ],
       cta: "Get Concierge",
       highlighted: false,
-      links: [
-        { label: "Estate Support", icon: <Shield size={12} />, to: routePaths.estate },
-      ],
+      links: [{ label: "Estate Support", icon: <Shield size={12} />, to: routePaths.estate }],
     },
   ];
 
@@ -190,7 +187,6 @@ export function Pricing() {
         ? nonprofitTiers
         : businessTiers;
 
-
   return (
     <div className="bg-brand-cream min-h-screen py-12 md:py-24">
       <div className="container mx-auto px-6">
@@ -208,10 +204,11 @@ export function Pricing() {
                 setPricingMode("business");
                 setSessionContext({ segment: "business" });
               }}
-              className={`px-6 py-3 sm:py-2 rounded-lg sm:rounded-full text-sm font-semibold transition-all w-full sm:w-auto ${pricingMode === "business"
-                ? "bg-brand-oxford text-white shadow-md"
-                : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
-                }`}
+              className={`px-6 py-3 sm:py-2 rounded-lg sm:rounded-full text-sm font-semibold transition-all w-full sm:w-auto ${
+                pricingMode === "business"
+                  ? "bg-brand-oxford text-white shadow-md"
+                  : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
+              }`}
             >
               Business
             </button>
@@ -220,10 +217,11 @@ export function Pricing() {
                 setPricingMode("household");
                 setSessionContext({ segment: "family" });
               }}
-              className={`px-6 py-3 sm:py-2 rounded-lg sm:rounded-full text-sm font-semibold transition-all w-full sm:w-auto ${pricingMode === "household"
-                ? "bg-brand-copper text-white shadow-md"
-                : "text-gray-500 hover:text-brand-copper hover:bg-gray-50"
-                }`}
+              className={`px-6 py-3 sm:py-2 rounded-lg sm:rounded-full text-sm font-semibold transition-all w-full sm:w-auto ${
+                pricingMode === "household"
+                  ? "bg-brand-copper text-white shadow-md"
+                  : "text-gray-500 hover:text-brand-copper hover:bg-gray-50"
+              }`}
             >
               Personal
             </button>
@@ -232,10 +230,11 @@ export function Pricing() {
                 setPricingMode("nonprofit");
                 setSessionContext({ segment: "nonprofit" });
               }}
-              className={`px-6 py-3 sm:py-2 rounded-lg sm:rounded-full text-sm font-semibold transition-all w-full sm:w-auto ${pricingMode === "nonprofit"
-                ? "bg-brand-oxford text-white shadow-md"
-                : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
-                }`}
+              className={`px-6 py-3 sm:py-2 rounded-lg sm:rounded-full text-sm font-semibold transition-all w-full sm:w-auto ${
+                pricingMode === "nonprofit"
+                  ? "bg-brand-oxford text-white shadow-md"
+                  : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
+              }`}
             >
               Nonprofit
             </button>
@@ -245,22 +244,23 @@ export function Pricing() {
         {pricingMode === "nonprofit" && (
           <div className="max-w-2xl mx-auto mb-12 bg-blue-50 border border-blue-200 p-4 rounded-lg text-blue-800 text-sm">
             <strong>How Nonprofit Pricing Works:</strong> Unlike our for-profit plans which bundle
-            service and licensing into a per-user fee, we charge a flat monthly service retainer
-            for the entire organization, plus the direct cost of user licenses (Microsoft 365,
-            etc). This saves growing nonprofits thousands per year.
+            service and licensing into a per-user fee, we charge a flat monthly service retainer for
+            the entire organization, plus the direct cost of user licenses (Microsoft 365, etc).
+            This saves growing nonprofits thousands per year.
           </div>
         )}
       </div>
 
       <div
-        className={`grid gap-8 mx-auto ${currentTiers.length === 1
-          ? "max-w-md"
-          : currentTiers.length === 2
-            ? "max-w-4xl md:grid-cols-2"
-            : currentTiers.length === 3
-              ? "max-w-6xl md:grid-cols-3"
-              : "max-w-7xl lg:grid-cols-4"
-          }`}
+        className={`grid gap-8 mx-auto ${
+          currentTiers.length === 1
+            ? "max-w-md"
+            : currentTiers.length === 2
+              ? "max-w-4xl md:grid-cols-2"
+              : currentTiers.length === 3
+                ? "max-w-6xl md:grid-cols-3"
+                : "max-w-7xl lg:grid-cols-4"
+        }`}
       >
         {currentTiers.map((tier, index) => {
           const handleTierClick = () => {
@@ -278,10 +278,11 @@ export function Pricing() {
             navigate(routePaths.talkToSales, { state: { interest } });
           };
 
-          const buttonClasses = `w-full py-6 text-lg font-medium shadow-md transition-all ${tier.highlighted
-            ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-lg"
-            : "bg-brand-copper hover:bg-brand-copper-dark text-white"
-            }`;
+          const buttonClasses = `w-full py-6 text-lg font-medium shadow-md transition-all ${
+            tier.highlighted
+              ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-lg"
+              : "bg-brand-copper hover:bg-brand-copper-dark text-white"
+          }`;
 
           return (
             <motion.div
@@ -289,10 +290,11 @@ export function Pricing() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className={`relative bg-white rounded-2xl transition-all duration-300 flex flex-col h-full ${tier.highlighted
-                ? "shadow-2xl ring-1 ring-brand-copper z-10"
-                : "shadow-lg hover:shadow-xl border border-gray-100"
-                }`}
+              className={`relative bg-white rounded-2xl transition-all duration-300 flex flex-col h-full ${
+                tier.highlighted
+                  ? "shadow-2xl ring-1 ring-brand-copper z-10"
+                  : "shadow-lg hover:shadow-xl border border-gray-100"
+              }`}
             >
               {tier.highlighted && (
                 <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-brand-copper text-white px-4 py-1 rounded-full text-sm font-bold shadow-sm uppercase tracking-wider">
@@ -341,10 +343,7 @@ export function Pricing() {
               </div>
 
               <div className="p-8 bg-gray-50 pt-0 mt-auto">
-                <Button
-                  onClick={handleTierClick}
-                  className={buttonClasses}
-                >
+                <Button onClick={handleTierClick} className={buttonClasses}>
                   {tier.cta}
                 </Button>
               </div>
@@ -367,8 +366,8 @@ export function Pricing() {
                   <h3 className="text-2xl font-bold">Retainer & Hourly Packs</h3>
                 </div>
                 <p className="text-gray-300 max-w-xl">
-                  Need support but not ready for a monthly subscription? Purchase a bucket of
-                  hours that never expires. Perfect for one-off projects or seasonal help.
+                  Need support but not ready for a monthly subscription? Purchase a bucket of hours
+                  that never expires. Perfect for one-off projects or seasonal help.
                 </p>
               </div>
               <div className="text-right shrink-0">
@@ -413,8 +412,13 @@ export function Pricing() {
                   navigate(routePaths.talkToSales, {
                     state: {
                       interest: "Hourly Support",
-                      segment: pricingMode === "household" ? "family" : pricingMode === "nonprofit" ? "nonprofit" : "business"
-                    }
+                      segment:
+                        pricingMode === "household"
+                          ? "family"
+                          : pricingMode === "nonprofit"
+                            ? "nonprofit"
+                            : "business",
+                    },
                   })
                 }
                 className="bg-white text-brand-oxford hover:bg-gray-100 px-8 py-3 font-bold"
@@ -435,7 +439,11 @@ export function Pricing() {
         </p>
         <Button
           variant="outline"
-          onClick={() => navigate(routePaths.talkToSales, { state: { source: "Pricing Page Enterprise CTA", interest: "Enterprise Plan" } })}
+          onClick={() =>
+            navigate(routePaths.talkToSales, {
+              state: { source: "Pricing Page Enterprise CTA", interest: "Enterprise Plan" },
+            })
+          }
           className="border-brand-oxford text-brand-oxford hover:bg-brand-oxford hover:text-white px-8 py-3"
         >
           Contact Sales

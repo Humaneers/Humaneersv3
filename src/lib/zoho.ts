@@ -58,7 +58,7 @@ export async function submitNewsletter(data: NewsletterFormData): Promise<ApiRes
   const payload = {
     ...data,
     source: data.source || "Newsletter Signup",
-    context: context
+    context: context,
   };
 
   const response = await fetch("/api/zoho/newsletter", {
@@ -89,6 +89,74 @@ export async function submitNewsletter(data: NewsletterFormData): Promise<ApiRes
 }
 
 /**
+ * Submit sales lead to Zoho CRM
+ */
+export async function submitSalesLead(data: SalesFormData): Promise<ApiResponse> {
+  const context = getContextString();
+  const payload = {
+    ...data,
+    context,
+    source: data.source || "Website Contact Form",
+  };
+
+  const response = await fetch("/api/zoho/leads", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  const contentType = response.headers.get("content-type");
+
+  if (contentType && contentType.indexOf("application/json") !== -1) {
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.error || "Failed to submit lead");
+    }
+    return result;
+  } else {
+    const text = await response.text();
+    if (!response.ok) {
+      throw new Error(`Server error (${response.status}): ${text.substring(0, 100)}`);
+    }
+    return { success: true };
+  }
+}
+
+/**
+ * Submit support ticket to Zoho Desk
+ */
+export async function submitSupportTicket(data: SupportFormData): Promise<ApiResponse> {
+  const context = getContextString();
+  const payload = {
+    ...data,
+    context,
+    source: data.source || "Website Support Form",
+  };
+
+  const response = await fetch("/api/zoho/tickets", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  const contentType = response.headers.get("content-type");
+
+  if (contentType && contentType.indexOf("application/json") !== -1) {
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.error || "Failed to submit ticket");
+    }
+    return result;
+  } else {
+    const text = await response.text();
+    if (!response.ok) {
+      throw new Error(`Server error (${response.status}): ${text.substring(0, 100)}`);
+    }
+    return { success: true };
+  }
+}
+
+/**
  * Validate sales form data
  */
 export function validateSalesForm(data: Partial<SalesFormData>): {
@@ -100,10 +168,10 @@ export function validateSalesForm(data: Partial<SalesFormData>): {
   if (!data.firstName?.trim()) errors.push("First name is required");
   if (!data.lastName?.trim()) errors.push("Last name is required");
   if (!data.email?.trim()) errors.push("Email is required");
-  // Company is conditional in UI, but if present in typical B2B flow it is checked. 
+  // Company is conditional in UI, but if present in typical B2B flow it is checked.
   // We relax this here since 'family' segment might reuse this validator or UI handles it.
-  // But strict B2B validation requires it. UI calls this. 
-  // Let's keep logic simple: if data object has the field, check it? 
+  // But strict B2B validation requires it. UI calls this.
+  // Let's keep logic simple: if data object has the field, check it?
   // Or just rely on what's passed.
   // For now, we keep existing logic but allow empty company if it's explicitly handled in UI (which it is).
   // Actually, UI calls this... and UI checks segment != family before calling.

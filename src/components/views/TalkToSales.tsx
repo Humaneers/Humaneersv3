@@ -12,7 +12,12 @@ import { submitSalesLead, validateSalesForm, type SalesFormData } from "../../li
 import { toast } from "sonner";
 import { Seo } from "../Seo";
 
-type TalkToSalesState = { email?: string; interest?: string; source?: string; segment?: CustomerSegment } | null;
+type TalkToSalesState = {
+  email?: string;
+  interest?: string;
+  source?: string;
+  segment?: CustomerSegment;
+} | null;
 type CustomerSegment = "business" | "personal" | "nonprofit" | null;
 
 export function TalkToSales() {
@@ -46,7 +51,10 @@ export function TalkToSales() {
     // Use explicit segment if provided, otherwise auto-detect
     if (initialData?.segment) {
       setSegment(initialData.segment);
-    } else if (initialData?.interest?.toLowerCase().includes("family") || initialData?.interest?.toLowerCase().includes("home")) {
+    } else if (
+      initialData?.interest?.toLowerCase().includes("family") ||
+      initialData?.interest?.toLowerCase().includes("home")
+    ) {
       setSegment("personal");
     } else if (initialData?.interest?.toLowerCase().includes("nonprofit")) {
       setSegment("nonprofit");
@@ -189,7 +197,8 @@ export function TalkToSales() {
               <div className="bg-brand-copper text-white p-6 rounded-lg shadow-lg">
                 <h3 className="font-bold text-xl mb-2">Why Humaneers?</h3>
                 <p className="text-white/90 mb-4">
-                  We don't just fix computers. We align technology with your goals—at work or at home.
+                  We don't just fix computers. We align technology with your goals—at work or at
+                  home.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-2">
@@ -212,7 +221,9 @@ export function TalkToSales() {
                   "They fixed our immediate crisis in hours, then built a roadmap that actually made
                   sense. Finally, IT that feels like a partner, not a vendor."
                 </p>
-                <div className="mt-4 text-sm font-bold text-brand-oxford">— Managing Partner, Accounting Firm</div>
+                <div className="mt-4 text-sm font-bold text-brand-oxford">
+                  — Managing Partner, Accounting Firm
+                </div>
               </div>
             </div>
 
@@ -239,7 +250,9 @@ export function TalkToSales() {
                         </div>
                         <div>
                           <div className="font-bold text-brand-oxford">For My Business</div>
-                          <div className="text-sm text-gray-500">I need IT/Security for my company.</div>
+                          <div className="text-sm text-gray-500">
+                            I need IT/Security for my company.
+                          </div>
                         </div>
                       </button>
 
@@ -253,7 +266,9 @@ export function TalkToSales() {
                         </div>
                         <div>
                           <div className="font-bold text-brand-oxford">For Myself / Family</div>
-                          <div className="text-sm text-gray-500">I need protection for my home or myself.</div>
+                          <div className="text-sm text-gray-500">
+                            I need protection for my home or myself.
+                          </div>
                         </div>
                       </button>
 
@@ -267,7 +282,9 @@ export function TalkToSales() {
                         </div>
                         <div>
                           <div className="font-bold text-brand-oxford">For a Nonprofit</div>
-                          <div className="text-sm text-gray-500">I need to maximize impact & funding.</div>
+                          <div className="text-sm text-gray-500">
+                            I need to maximize impact & funding.
+                          </div>
                         </div>
                       </button>
                     </div>
@@ -277,12 +294,24 @@ export function TalkToSales() {
                     <>
                       <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-gray-400 border-b pb-4 mb-4">
                         <div className="flex items-center gap-2">
-                          <span className={`px-2 py-1 rounded-full text-[10px] ${segment === "business" ? "bg-blue-100 text-blue-800" :
-                            segment === "personal" ? "bg-green-100 text-green-800" : "bg-purple-100 text-purple-800"
-                            }`}>
+                          <span
+                            className={`px-2 py-1 rounded-full text-[10px] ${
+                              segment === "business"
+                                ? "bg-blue-100 text-blue-800"
+                                : segment === "personal"
+                                  ? "bg-green-100 text-green-800"
+                                  : "bg-purple-100 text-purple-800"
+                            }`}
+                          >
                             {segment.toUpperCase()}
                           </span>
-                          <button type="button" onClick={() => setSegment(null)} className="underline hover:text-brand-copper lowercase">change</button>
+                          <button
+                            type="button"
+                            onClick={() => setSegment(null)}
+                            className="underline hover:text-brand-copper lowercase"
+                          >
+                            change
+                          </button>
                         </div>
                         <span>Step {step} of 2</span>
                       </div>
@@ -422,25 +451,30 @@ export function TalkToSales() {
                           <div className="space-y-3 pt-2">
                             <Label>What do you need help with?</Label>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                              {(segment === "personal" ? [
-                                "Emergency / Crisis",
-                                "Home Network Security",
-                                "Grandparent Protection",
-                                "Parental Controls",
-                                "General Tech Support"
-                              ] : segment === "nonprofit" ? [
-                                "Grant Readiness / Compliance",
-                                "Donor Data Protection",
-                                "Managed IT Services",
-                                "Volunteer Access Management",
-                                "Board Reporting"
-                              ] : [
-                                "Managed IT Services",
-                                "Fractional CIO/CMO",
-                                "Compliance (SOC2/HIPAA)",
-                                "Growth Strategy",
-                                "Emergency Support"
-                              ]).map((item) => (
+                              {(segment === "personal"
+                                ? [
+                                    "Emergency / Crisis",
+                                    "Home Network Security",
+                                    "Grandparent Protection",
+                                    "Parental Controls",
+                                    "General Tech Support",
+                                  ]
+                                : segment === "nonprofit"
+                                  ? [
+                                      "Grant Readiness / Compliance",
+                                      "Donor Data Protection",
+                                      "Managed IT Services",
+                                      "Volunteer Access Management",
+                                      "Board Reporting",
+                                    ]
+                                  : [
+                                      "Managed IT Services",
+                                      "Fractional CIO/CMO",
+                                      "Compliance (SOC2/HIPAA)",
+                                      "Growth Strategy",
+                                      "Emergency Support",
+                                    ]
+                              ).map((item) => (
                                 <div
                                   key={item}
                                   className="flex items-center space-x-2 border rounded-md p-3 hover:bg-gray-50 transition-colors cursor-pointer"
@@ -462,11 +496,17 @@ export function TalkToSales() {
                           </div>
 
                           <div className="space-y-2">
-                            <Label htmlFor="message">Anything specific you'd like to discuss?</Label>
+                            <Label htmlFor="message">
+                              Anything specific you'd like to discuss?
+                            </Label>
                             <Textarea
                               id="message"
                               name="message"
-                              placeholder={segment === "personal" ? "e.g., I think I've been hacked..." : "Tell us about your current infrastructure or goals..."}
+                              placeholder={
+                                segment === "personal"
+                                  ? "e.g., I think I've been hacked..."
+                                  : "Tell us about your current infrastructure or goals..."
+                              }
                               className="min-h-[100px]"
                               value={formData.message}
                               onChange={handleChange}

@@ -196,9 +196,7 @@ export function About() {
                       <span className="text-sm text-gray-500">Home networks & digital safety</span>
                     </li>
                     <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-                      <span className="font-medium text-brand-oxford">
-                        Nonprofit Organizations
-                      </span>
+                      <span className="font-medium text-brand-oxford">Nonprofit Organizations</span>
                       <span className="text-sm text-gray-500">501(c)(3) Certified</span>
                     </li>
                     <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">

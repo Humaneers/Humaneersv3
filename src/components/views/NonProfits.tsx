@@ -30,7 +30,9 @@ export function NonProfits() {
               <span className="text-brand-copper">We'll Handle the Machines.</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">
-              Most nonprofits lose federal grants because they lack cybersecurity policies. We provide the enterprise-grade compliance you need to unlock funding—at a fraction of the cost.
+              Most nonprofits lose federal grants because they lack cybersecurity policies. We
+              provide the enterprise-grade compliance you need to unlock funding—at a fraction of
+              the cost.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -127,7 +129,9 @@ export function NonProfits() {
             </p>
             <Button
               onClick={() =>
-                navigate(routePaths.talkToSales, { state: { interest: "Nonprofit Grant Readiness" } })
+                navigate(routePaths.talkToSales, {
+                  state: { interest: "Nonprofit Grant Readiness" },
+                })
               }
               className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-12 py-8 h-auto rounded-full shadow-lg"
             >
