@@ -50,7 +50,14 @@ export async function getZohoAccessToken(): Promise<string> {
         throw new Error(`Failed to refresh Zoho access token: ${text}`);
     }
 
-    const data: TokenResponse = await response.json();
+    const text = await response.text();
+    let data: TokenResponse;
+    try {
+        data = JSON.parse(text);
+    } catch (e) {
+        console.error("Invalid JSON from Zoho OAuth:", text);
+        throw new Error(`Invalid JSON from Zoho OAuth: ${text.substring(0, 100)}`);
+    }
 
     if (data.error) {
         throw new Error(`Zoho OAuth error: ${data.error}`);

@@ -44,7 +44,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             body: JSON.stringify(leadPayload),
         });
 
-        const result = await response.json();
+        const text = await response.text();
+        let result;
+        try {
+            result = JSON.parse(text);
+        } catch (e) {
+            console.error("Invalid JSON from Zoho CRM:", text);
+            throw new Error(`Invalid JSON from Zoho CRM: ${text.substring(0, 100)}`);
+        }
 
         if (!response.ok) {
             console.error("Zoho CRM newsletter error:", result);
