@@ -153,8 +153,8 @@ export function ManagedIT() {
                     term="MSPs"
                     definition="Managed Service Providers: Third-party companies that remotely manage customer's IT infrastructure."
                   />{" "}
-                  operate on a broken model: they profit when you have problems. They stick a band-aid
-                  on issues and bill you for the service call.
+                  operate on a broken model: they profit when you have problems. They stick a
+                  band-aid on issues and bill you for the service call.
                 </p>
                 <div className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-red-500 mb-8">
                   <h4 className="font-bold text-red-700 mb-2">The Old Way (Break/Fix)</h4>

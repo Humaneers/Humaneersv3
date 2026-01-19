@@ -36,8 +36,8 @@ export function About() {
           <div className="container mx-auto px-6 relative z-10 text-center">
             <h1 className="text-5xl font-bold mb-6">About Humaneers</h1>
             <p className="text-xl max-w-2xl mx-auto text-gray-300 font-light leading-relaxed">
-              We are the bridge between enterprise-grade technology and the businesses that power our
-              local communities.
+              We are the bridge between enterprise-grade technology and the businesses that power
+              our local communities.
             </p>
           </div>
         </section>
@@ -84,13 +84,14 @@ export function About() {
                   <div className="prose text-brand-slate leading-relaxed space-y-4">
                     <p>
                       For decades, the most powerful technology, the tightest security, and the
-                      smartest growth strategies were reserved for the Fortune 500. Small businesses,
-                      solo entrepreneurs, and non-profits were left to fend for themselves with
-                      off-the-shelf software and "geek squad" support.
+                      smartest growth strategies were reserved for the Fortune 500. Small
+                      businesses, solo entrepreneurs, and non-profits were left to fend for
+                      themselves with off-the-shelf software and "geek squad" support.
                     </p>
                     <p>
-                      We saw this gap widen every year. As cyber threats became more sophisticated and
-                      digital markets more crowded, the "little guy" was being priced out of survival.
+                      We saw this gap widen every year. As cyber threats became more sophisticated
+                      and digital markets more crowded, the "little guy" was being priced out of
+                      survival.
                     </p>
                     <p>
                       <strong>Humaneers was founded to close that gap.</strong> We stripped away the
@@ -129,17 +130,18 @@ export function About() {
                   <Target className="w-10 h-10 text-brand-copper mb-4" />
                   <h3 className="text-xl font-bold text-brand-oxford mb-3">Vendor Neutrality</h3>
                   <p className="text-brand-slate">
-                    We sell solutions, not licenses. If open-source software is better for your budget
-                    than a proprietary subscription, that's what we recommend. We have no "preferred
-                    partners" that pay us kickbacks.
+                    We sell solutions, not licenses. If open-source software is better for your
+                    budget than a proprietary subscription, that's what we recommend. We have no
+                    "preferred partners" that pay us kickbacks.
                   </p>
                 </div>
                 <div className="bg-white p-8 rounded-xl border-t-4 border-brand-copper shadow-sm hover:shadow-md transition-shadow">
                   <Shield className="w-10 h-10 text-brand-copper mb-4" />
                   <h3 className="text-xl font-bold text-brand-oxford mb-3">Security as a Right</h3>
                   <p className="text-brand-slate">
-                    Privacy and digital safety shouldn't be luxury goods. We apply the same zero-trust
-                    architecture to a solo founder's laptop as we do to a 50-person corporate network.
+                    Privacy and digital safety shouldn't be luxury goods. We apply the same
+                    zero-trust architecture to a solo founder's laptop as we do to a 50-person
+                    corporate network.
                   </p>
                 </div>
                 <div className="bg-white p-8 rounded-xl border-t-4 border-brand-copper shadow-sm hover:shadow-md transition-shadow">
@@ -184,11 +186,15 @@ export function About() {
                       <span className="text-sm text-gray-500">Seed to Series B</span>
                     </li>
                     <li className="bg-white p-4 rounded-lg border border-gray-100 flex items-center justify-between">
-                      <span className="font-medium text-brand-oxford">Family Offices & Estates</span>
+                      <span className="font-medium text-brand-oxford">
+                        Family Offices & Estates
+                      </span>
                       <span className="text-sm text-gray-500">High Net Worth Individuals</span>
                     </li>
                     <li className="bg-white p-4 rounded-lg border border-gray-100 flex items-center justify-between">
-                      <span className="font-medium text-brand-oxford">Non-Profit Organizations</span>
+                      <span className="font-medium text-brand-oxford">
+                        Non-Profit Organizations
+                      </span>
                       <span className="text-sm text-gray-500">501(c)(3) Certified</span>
                     </li>
                     <li className="bg-white p-4 rounded-lg border border-gray-100 flex items-center justify-between">
@@ -227,7 +233,8 @@ export function About() {
                   <p className="text-brand-slate text-lg leading-relaxed mb-6">
                     We believe that small actions, consistently applied, compound into significant
                     change. We are not a "green" company by marketing definition, but we are an
-                    operationally conscious one. We acknowledge our footprint and actively manage it.
+                    operationally conscious one. We acknowledge our footprint and actively manage
+                    it.
                   </p>
                   <div className="bg-brand-copper/10 border-l-4 border-brand-copper p-4 rounded-r-md">
                     <p className="text-sm text-brand-oxford font-medium italic">
@@ -250,8 +257,8 @@ export function About() {
                       Hardware Lifecycle Management
                     </h3>
                     <p className="text-brand-slate text-sm leading-relaxed">
-                      E-waste is the tech industry's silent crisis. We reject the industry standard of
-                      3-year refresh cycles.
+                      E-waste is the tech industry's silent crisis. We reject the industry standard
+                      of 3-year refresh cycles.
                     </p>
                     <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
                       <li>
@@ -288,8 +295,8 @@ export function About() {
                         Tempe, reducing energy consumption for heating and cooling.
                       </li>
                       <li>
-                        <strong>Digital Delivery:</strong> We prioritize remote support sessions over
-                        truck rolls whenever physical intervention isn't strictly necessary.
+                        <strong>Digital Delivery:</strong> We prioritize remote support sessions
+                        over truck rolls whenever physical intervention isn't strictly necessary.
                       </li>
                     </ul>
                   </div>
@@ -333,8 +340,9 @@ export function About() {
                     </p>
                     <p className="text-brand-slate text-sm leading-relaxed">
                       Each Q4, we will update this section and our Colophon with our progress,
-                      failures, and adjusted goals for the coming year. We believe that acknowledging
-                      where we fall short is as important as celebrating where we succeed.
+                      failures, and adjusted goals for the coming year. We believe that
+                      acknowledging where we fall short is as important as celebrating where we
+                      succeed.
                     </p>
                   </div>
                 </div>

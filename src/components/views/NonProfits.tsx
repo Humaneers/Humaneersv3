@@ -30,12 +30,14 @@ export function NonProfits() {
               <span className="text-brand-copper">We'll Handle the Machines.</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">
-              Enterprise-grade IT and security for organizations that change the world.
-              We know every dollar counts, so our nonprofit plans are designed to stretch your budget.
+              Enterprise-grade IT and security for organizations that change the world. We know
+              every dollar counts, so our nonprofit plans are designed to stretch your budget.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
-                onClick={() => navigate(routePaths.talkToSales, { state: { interest: "Nonprofit IT" } })}
+                onClick={() =>
+                  navigate(routePaths.talkToSales, { state: { interest: "Nonprofit IT" } })
+                }
                 className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
               >
                 Inquire about NPO Pricing
@@ -56,32 +58,52 @@ export function NonProfits() {
                   Stop overpaying for per-user licenses you don't use.
                 </h3>
                 <p className="text-brand-slate text-lg mb-6 leading-relaxed">
-                  Most IT firms charge nonprofits the same "per-seat" rate as law firms. That's broken.
-                  Volunteers and part-time staff shouldn't cost you $150/mo.
+                  Most IT firms charge nonprofits the same "per-seat" rate as law firms. That's
+                  broken. Volunteers and part-time staff shouldn't cost you $150/mo.
                 </p>
                 <div className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-brand-copper">
                   <h4 className="font-bold text-brand-oxford mb-2">Our Nonprofit Model</h4>
                   <ul className="space-y-3 text-sm text-gray-600">
                     <li className="flex items-center gap-3">
                       <CheckCircle2 className="w-5 h-5 text-brand-copper shrink-0" />
-                      <span><strong>Flat Retainer:</strong> One predictable monthly fee for the org.</span>
+                      <span>
+                        <strong>Flat Retainer:</strong> One predictable monthly fee for the org.
+                      </span>
                     </li>
                     <li className="flex items-center gap-3">
                       <CheckCircle2 className="w-5 h-5 text-brand-copper shrink-0" />
-                      <span><strong>At-Cost Licensing:</strong> We pass through Microsoft/Google nonprofit grants directly to you ($0 margin).</span>
+                      <span>
+                        <strong>At-Cost Licensing:</strong> We pass through Microsoft/Google
+                        nonprofit grants directly to you ($0 margin).
+                      </span>
                     </li>
                     <li className="flex items-center gap-3">
                       <CheckCircle2 className="w-5 h-5 text-brand-copper shrink-0" />
-                      <span><strong>Volunteer Accounts:</strong> Heavily discounted secure access for temporary staff.</span>
+                      <span>
+                        <strong>Volunteer Accounts:</strong> Heavily discounted secure access for
+                        temporary staff.
+                      </span>
                     </li>
                   </ul>
                 </div>
               </div>
               <div className="md:w-1/2 grid gap-6">
                 {[
-                  { icon: <Shield className="w-6 h-6 text-brand-copper" />, title: "Donor Data Protection", desc: "Secure your donor lists and financial data to meet compliance standards." },
-                  { icon: <FileCheck className="w-6 h-6 text-brand-copper" />, title: "Grant-Ready Policies", desc: "We provide the cybersecurity documentation you need to apply for federal grants." },
-                  { icon: <Users className="w-6 h-6 text-brand-copper" />, title: "Board Reporting", desc: "Clear, plain-English reports on risk and budget for your quarterly board meetings." }
+                  {
+                    icon: <Shield className="w-6 h-6 text-brand-copper" />,
+                    title: "Donor Data Protection",
+                    desc: "Secure your donor lists and financial data to meet compliance standards.",
+                  },
+                  {
+                    icon: <FileCheck className="w-6 h-6 text-brand-copper" />,
+                    title: "Grant-Ready Policies",
+                    desc: "We provide the cybersecurity documentation you need to apply for federal grants.",
+                  },
+                  {
+                    icon: <Users className="w-6 h-6 text-brand-copper" />,
+                    title: "Board Reporting",
+                    desc: "Clear, plain-English reports on risk and budget for your quarterly board meetings.",
+                  },
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4 bg-white p-6 rounded-xl shadow-sm">
                     <div className="shrink-0">{item.icon}</div>
@@ -99,12 +121,17 @@ export function NonProfits() {
         {/* CTA */}
         <section className="py-24 bg-brand-oxford text-white text-center">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-5xl font-bold mb-8">Ready to modernize your mission?</h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-8">
+              Ready to modernize your mission?
+            </h2>
             <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-              We currently support organizations ranging from local shelters to national foundations.
+              We currently support organizations ranging from local shelters to national
+              foundations.
             </p>
             <Button
-              onClick={() => navigate(routePaths.talkToSales, { state: { interest: "Nonprofit IT" } })}
+              onClick={() =>
+                navigate(routePaths.talkToSales, { state: { interest: "Nonprofit IT" } })
+              }
               className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-12 py-8 h-auto rounded-full shadow-lg"
             >
               Get a Quote <ArrowRight className="ml-2" />

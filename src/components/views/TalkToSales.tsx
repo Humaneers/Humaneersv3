@@ -75,7 +75,7 @@ export function TalkToSales() {
         phone: formData.phone,
         budget: formData.budget,
         interests: formData.interests,
-        message: formData.message
+        message: formData.message,
       } as SalesFormData);
 
       toast.success("Thanks! We've received your request and will be in touch shortly.");
@@ -95,7 +95,6 @@ export function TalkToSales() {
         interests: [],
         message: "",
       });
-
     } catch (error) {
       toast.error(
         error instanceof Error ? error.message : "Failed to submit request. Please try again."
@@ -425,8 +424,8 @@ export function TalkToSales() {
                         </Button>
                       </div>
                       <p className="text-xs text-center text-gray-500 mt-4">
-                        By submitting this form, you agree to our Privacy Policy. Your data is secure
-                        and will never be sold.
+                        By submitting this form, you agree to our Privacy Policy. Your data is
+                        secure and will never be sold.
                       </p>
                     </>
                   )}

@@ -1,14 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
-import {
-  Lock,
-  Wifi,
-  Eye,
-  Smartphone,
-  Home,
-  AlertTriangle,
-  Fingerprint,
-} from "lucide-react";
+import { Lock, Wifi, Eye, Smartphone, Home, AlertTriangle, Fingerprint } from "lucide-react";
 import { routePaths } from "../../routes";
 import { Seo } from "../Seo";
 
@@ -77,7 +69,8 @@ export function FamilyProtection() {
               <span className="text-brand-copper">Now for Your Living Room.</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">
-              Hackers know your home Wi-Fi is the backdoor to your business and bank accounts. We close that door.
+              Hackers know your home Wi-Fi is the backdoor to your business and bank accounts. We
+              close that door.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -193,7 +186,8 @@ export function FamilyProtection() {
           <div className="container mx-auto px-6 text-center relative z-10">
             <h2 className="text-3xl md:text-5xl font-bold mb-8">Protect What Matters Most</h2>
             <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-              Packages range from simple device protection ($50/mo) to full digital concierge services.
+              Packages range from simple device protection ($50/mo) to full digital concierge
+              services.
             </p>
             <Button
               onClick={() =>

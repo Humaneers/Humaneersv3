@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { motion } from "motion/react";
 import { routePaths } from "../../routes";
+import { ObjectionsSection } from "./ObjectionsSection";
 
 import { Seo } from "../Seo";
 
@@ -80,7 +81,8 @@ export function Home() {
                 <span className="text-brand-copper">Small Business Soul.</span>
               </h1>
               <h2 className="text-xl md:text-2xl text-gray-200 mb-10 leading-relaxed font-light">
-                IT, security, and brand growth for teams that think big — even if they’re super-small.
+                IT, security, and brand growth for teams that think big — even if they’re
+                super-small.
               </h2>
               <div className="flex flex-col gap-4 max-w-lg">
                 <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-3">
@@ -163,9 +165,9 @@ export function Home() {
                   Security & Trust You Can Rely On
                 </h2>
                 <p className="text-brand-slate mb-8 text-lg leading-relaxed">
-                  We take security seriously. All of our services are SOC 2 compliant and we are proud
-                  to be 100% US-based. Your data never leaves domestic soil without your explicit
-                  permission.
+                  We take security seriously. All of our services are SOC 2 compliant and we are
+                  proud to be 100% US-based. Your data never leaves domestic soil without your
+                  explicit permission.
                 </p>
                 <div className="flex gap-4">
                   <div className="bg-brand-cream px-4 py-2 rounded border border-gray-200 flex items-center gap-2 font-semibold text-brand-oxford">
@@ -191,46 +193,7 @@ export function Home() {
           </div>
         </section>
 
-        <section className="py-24 bg-brand-cream">
-          <div className="container mx-auto px-6">
-            <div className="text-center max-w-3xl mx-auto mb-14">
-              <h2 className="text-3xl font-bold text-brand-oxford mb-4">
-                Common Objections, Straight Answers
-              </h2>
-              <p className="text-brand-slate text-lg">
-                We hear these a lot. Here’s how Humaneers makes it easy to say yes.
-              </p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                {
-                  title: "“We already have IT.”",
-                  copy: "We slot in as strategy + escalation, or replace just the gaps.",
-                },
-                {
-                  title: "“We’re too small for this.”",
-                  copy: "No minimums. Enterprise-grade support scaled to your team size.",
-                },
-                {
-                  title: "“We’re not ready.”",
-                  copy: "That’s what we’re here for. We love to help now and can discuss what's next after fixing what's wrong.",
-                },
-                {
-                  title: "“Switching sounds painful.”",
-                  copy: "We migrate in phases with no downtime and clear handoffs.",
-                },
-              ].map((item) => (
-                <div
-                  key={item.title}
-                  className="bg-white p-6 rounded-xl shadow-sm border border-brand-copper/20"
-                >
-                  <h3 className="text-lg font-bold text-brand-oxford mb-2">{item.title}</h3>
-                  <p className="text-brand-slate text-sm">{item.copy}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <ObjectionsSection />
 
         <section className="py-24 bg-brand-oxford relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">

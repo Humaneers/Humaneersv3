@@ -48,8 +48,8 @@ export function Industries() {
               <span className="text-brand-copper">Optional.</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">
-              For regulated industries, "good enough" IT gets you fined. We build infrastructure that
-              survives audits and protects your license to operate.
+              For regulated industries, "good enough" IT gets you fined. We build infrastructure
+              that survives audits and protects your license to operate.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -103,8 +103,9 @@ export function Industries() {
                   We Speak "Auditor"
                 </h2>
                 <p className="text-brand-slate text-lg mb-6 leading-relaxed">
-                  Most MSPs scramble when the auditor arrives. We welcome them. Our systems are built
-                  "audit-ready" from day one, with automated evidence collection and policy enforcement.
+                  Most MSPs scramble when the auditor arrives. We welcome them. Our systems are
+                  built "audit-ready" from day one, with automated evidence collection and policy
+                  enforcement.
                 </p>
                 <div className="space-y-4">
                   <div className="flex gap-4 p-4 bg-gray-50 rounded-lg">
@@ -141,8 +142,16 @@ export function Industries() {
                   <div className="absolute top-0 right-0 -mt-8 -mr-8 w-32 h-32 bg-brand-copper rounded-full opacity-20 blur-2xl"></div>
                   <h3 className="text-xl font-bold mb-4">Compliance Scorecard</h3>
                   <div className="space-y-4">
-                    {["HIPAA Security Rule", "NIST CSF Alignment", "SOC 2 Type II Controls", "GDPR Readiness"].map((item) => (
-                      <div key={item} className="flex items-center justify-between border-b border-white/10 pb-2">
+                    {[
+                      "HIPAA Security Rule",
+                      "NIST CSF Alignment",
+                      "SOC 2 Type II Controls",
+                      "GDPR Readiness",
+                    ].map((item) => (
+                      <div
+                        key={item}
+                        className="flex items-center justify-between border-b border-white/10 pb-2"
+                      >
                         <span>{item}</span>
                         <span className="text-green-400 font-mono text-sm">100%</span>
                       </div>
@@ -150,7 +159,13 @@ export function Industries() {
                   </div>
                   <div className="mt-8 pt-6 border-t border-white/20 text-center">
                     <p className="text-sm text-gray-400 mb-4">Don't know your score?</p>
-                    <Button onClick={() => navigate(routePaths.contact)} variant="outline" className="text-brand-oxford border-white bg-white hover:bg-gray-100 w-full">Get a Free Risk Assessment</Button>
+                    <Button
+                      onClick={() => navigate(routePaths.contact)}
+                      variant="outline"
+                      className="text-brand-oxford border-white bg-white hover:bg-gray-100 w-full"
+                    >
+                      Get a Free Risk Assessment
+                    </Button>
                   </div>
                 </div>
               </div>

@@ -49,9 +49,9 @@ export function Contact() {
                 <div>
                   <h2 className="text-2xl font-bold text-brand-oxford mb-6">Get in Touch</h2>
                   <p className="text-brand-slate mb-8">
-                    Select your inquiry type below and we'll match you with the right team. You'll be
-                    guided to a specialized form where we can understand your needs and schedule time
-                    to talk.
+                    Select your inquiry type below and we'll match you with the right team. You'll
+                    be guided to a specialized form where we can understand your needs and schedule
+                    time to talk.
                   </p>
                 </div>
 
@@ -125,7 +125,9 @@ export function Contact() {
 
                   {!category && (
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mt-8">
-                      <p className="text-brand-oxford font-medium mb-2">Need to reach us directly?</p>
+                      <p className="text-brand-oxford font-medium mb-2">
+                        Need to reach us directly?
+                      </p>
                       <p className="text-brand-slate text-sm mb-4">
                         For general inquiries, partnerships, press, or careers, please email us
                         directly at:

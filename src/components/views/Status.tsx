@@ -67,7 +67,9 @@ export function Status() {
                 </div>
                 <div className="text-right hidden sm:block">
                   <div className="text-2xl font-bold text-green-600">100%</div>
-                  <div className="text-xs text-gray-500 uppercase tracking-wide">Current Uptime</div>
+                  <div className="text-xs text-gray-500 uppercase tracking-wide">
+                    Current Uptime
+                  </div>
                 </div>
               </div>
 

@@ -77,8 +77,8 @@ export function FractionalLeadership() {
               <span className="text-brand-copper">Fractional Cost.</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">
-              Get the playbook of a $300k/yr executive for a fraction of the price.
-              We embed into your leadership team to drive outcomes, not just hours.
+              Get the playbook of a $300k/yr executive for a fraction of the price. We embed into
+              your leadership team to drive outcomes, not just hours.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -128,8 +128,8 @@ export function FractionalLeadership() {
                   We don't just advise. We execute.
                 </h3>
                 <p className="text-brand-slate text-lg mb-8 leading-relaxed">
-                  Consultants give you a binder and leave. Fractional Leaders own the number. We take
-                  accountability for the department's success or failure.
+                  Consultants give you a binder and leave. Fractional Leaders own the number. We
+                  take accountability for the department's success or failure.
                 </p>
                 <div className="grid gap-6">
                   {deliverables.map((d, i) => (

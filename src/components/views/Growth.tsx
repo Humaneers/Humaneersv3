@@ -172,8 +172,8 @@ export function Growth() {
                   The "Americanization" of Enterprise Tech.
                 </h2>
                 <p className="text-brand-slate text-lg mb-6 leading-relaxed">
-                  We borrow the playbook used by Silicon Valley giants—clean design, clear messaging,
-                  and product-led growth—and apply it to service businesses.
+                  We borrow the playbook used by Silicon Valley giants—clean design, clear
+                  messaging, and product-led growth—and apply it to service businesses.
                 </p>
                 <div className="space-y-4">
                   {[
@@ -200,7 +200,9 @@ export function Growth() {
                       Case Study
                     </div>
                     <div className="font-bold text-lg mb-2">Construction Firm Rebrand</div>
-                    <div className="text-sm text-gray-300">Increased lead velocity by 340% in 90 days.</div>
+                    <div className="text-sm text-gray-300">
+                      Increased lead velocity by 340% in 90 days.
+                    </div>
                   </div>
                 </div>
               </div>
@@ -211,9 +213,7 @@ export function Growth() {
         {/* Process */}
         <section className="py-24 bg-brand-oxford text-white">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center">
-              How We Scale You
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center">How We Scale You</h2>
             <div className="grid md:grid-cols-3 gap-12 relative">
               <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-brand-copper to-transparent opacity-30"></div>
 
@@ -237,7 +237,8 @@ export function Growth() {
               Stop guessing. Start growing.
             </h2>
             <p className="text-xl text-brand-slate mb-10">
-              Ready to professionalize your brand? Let's audit your current setup and find the low-hanging fruit.
+              Ready to professionalize your brand? Let's audit your current setup and find the
+              low-hanging fruit.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button

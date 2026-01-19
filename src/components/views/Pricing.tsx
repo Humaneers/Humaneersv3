@@ -208,12 +208,13 @@ export function Pricing() {
         </div>
 
         <div
-          className={`grid gap-8 mx-auto ${currentTiers.length === 1
+          className={`grid gap-8 mx-auto ${
+            currentTiers.length === 1
               ? "max-w-md"
               : currentTiers.length === 2
                 ? "max-w-4xl md:grid-cols-2"
                 : "max-w-6xl md:grid-cols-3"
-            }`}
+          }`}
         >
           {currentTiers.map((tier, index) => (
             <motion.div
@@ -221,10 +222,11 @@ export function Pricing() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className={`relative bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col ${tier.highlighted
+              className={`relative bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col ${
+                tier.highlighted
                   ? "border-2 border-brand-copper transform md:-translate-y-4"
                   : "border border-gray-100"
-                }`}
+              }`}
             >
               {tier.highlighted && (
                 <div className="bg-brand-copper text-white text-center text-sm font-bold py-2 uppercase tracking-wide">
@@ -287,10 +289,11 @@ export function Pricing() {
                     }
                     navigate(routePaths.talkToSales, { state: { interest } });
                   }}
-                  className={`w-full py-6 text-lg font-medium shadow-md transition-all ${tier.highlighted
+                  className={`w-full py-6 text-lg font-medium shadow-md transition-all ${
+                    tier.highlighted
                       ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-lg"
                       : "bg-brand-copper hover:bg-brand-copper-dark text-white"
-                    }`}
+                  }`}
                 >
                   {tier.cta}
                 </Button>
@@ -356,8 +359,8 @@ export function Pricing() {
               <div className="flex justify-center md:justify-start">
                 <Button
                   onClick={() =>
-                  (window.location.href =
-                    "mailto:hello@humaneers.dev?subject=Hourly Pack Inquiry")
+                    (window.location.href =
+                      "mailto:hello@humaneers.dev?subject=Hourly Pack Inquiry")
                   }
                   className="bg-white text-brand-oxford hover:bg-gray-100 px-8 py-3 font-bold"
                 >

@@ -24,8 +24,8 @@ export function Personal() {
               <span className="text-brand-copper">Company of One.</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">
-              Just because you're solo doesn't mean you should look small.
-              Get the enterprise email, security, and support you need to win big clients.
+              Just because you're solo doesn't mean you should look small. Get the enterprise email,
+              security, and support you need to win big clients.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -80,8 +80,8 @@ export function Personal() {
                 <User className="w-10 h-10 text-brand-copper mb-4" />
                 <h3 className="font-bold text-brand-oxford text-lg mb-2">Tech Support</h3>
                 <p className="text-sm text-brand-slate">
-                  Text or email us when things break. We fix printer issues, wifi glitches, and weird
-                  errors.
+                  Text or email us when things break. We fix printer issues, wifi glitches, and
+                  weird errors.
                 </p>
               </div>
             </div>
@@ -101,7 +101,10 @@ export function Personal() {
                     </div>
                     <div>
                       <h4 className="font-bold text-brand-oxford">Consultants & Agencies</h4>
-                      <p className="text-sm text-brand-slate">You handle sensitive client data and need to prove you are secure (SOC 2 ready).</p>
+                      <p className="text-sm text-brand-slate">
+                        You handle sensitive client data and need to prove you are secure (SOC 2
+                        ready).
+                      </p>
                     </div>
                   </li>
                   <li className="flex gap-4">
@@ -110,7 +113,10 @@ export function Personal() {
                     </div>
                     <div>
                       <h4 className="font-bold text-brand-oxford">Angel Investors</h4>
-                      <p className="text-sm text-brand-slate">You need a secure, separate environment for deal flow and board communications.</p>
+                      <p className="text-sm text-brand-slate">
+                        You need a secure, separate environment for deal flow and board
+                        communications.
+                      </p>
                     </div>
                   </li>
                   <li className="flex gap-4">
@@ -119,7 +125,10 @@ export function Personal() {
                     </div>
                     <div>
                       <h4 className="font-bold text-brand-oxford">Digital Nomads</h4>
-                      <p className="text-sm text-brand-slate">You work from coffee shops and Airbnbs and need a bulletproof VPN and device tracking.</p>
+                      <p className="text-sm text-brand-slate">
+                        You work from coffee shops and Airbnbs and need a bulletproof VPN and device
+                        tracking.
+                      </p>
                     </div>
                   </li>
                 </ul>
@@ -129,7 +138,9 @@ export function Personal() {
                   <div className="w-12 h-12 bg-gray-200 rounded-full"></div>
                   <div>
                     <div className="font-bold text-brand-oxford">Support Ticket #2941</div>
-                    <div className="text-xs text-green-600 font-bold uppercase">Resolved in 12 mins</div>
+                    <div className="text-xs text-green-600 font-bold uppercase">
+                      Resolved in 12 mins
+                    </div>
                   </div>
                 </div>
                 <div className="space-y-4 text-sm">
@@ -137,7 +148,8 @@ export function Personal() {
                     Help! My laptop was stolen at the airport. It has all my client contracts on it.
                   </div>
                   <div className="bg-brand-copper text-white p-3 rounded-lg rounded-tr-none self-end max-w-[80%] ml-auto">
-                    Don't panic. We just initiated a remote wipe command. Your data is gone from that machine. We are shipping you a configured replacement to your hotel now.
+                    Don't panic. We just initiated a remote wipe command. Your data is gone from
+                    that machine. We are shipping you a configured replacement to your hotel now.
                   </div>
                 </div>
               </div>
@@ -147,11 +159,11 @@ export function Personal() {
 
         {/* CTA */}
         <section className="py-20 bg-brand-cream text-center">
-          <h2 className="text-3xl font-bold text-brand-oxford mb-8">
-            Plans start at $25/month.
-          </h2>
+          <h2 className="text-3xl font-bold text-brand-oxford mb-8">Plans start at $25/month.</h2>
           <Button
-            onClick={() => navigate(routePaths.talkToSales, { state: { interest: "Solo Entrepreneur IT" } })}
+            onClick={() =>
+              navigate(routePaths.talkToSales, { state: { interest: "Solo Entrepreneur IT" } })
+            }
             className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-12 py-6 h-auto rounded-full shadow-lg"
           >
             Get Started

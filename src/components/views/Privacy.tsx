@@ -15,18 +15,21 @@ export function Privacy() {
 
             <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">1. Introduction</h2>
             <p>
-              Humaneers Limited Company ("we," "our," or "us") respects your privacy and is committed
-              to protecting your personal data. This privacy policy explains how we collect, use, and
-              protect your information when you visit our website or use our services, and informs you
-              about your privacy rights under applicable laws including GDPR and CCPA.
+              Humaneers Limited Company ("we," "our," or "us") respects your privacy and is
+              committed to protecting your personal data. This privacy policy explains how we
+              collect, use, and protect your information when you visit our website or use our
+              services, and informs you about your privacy rights under applicable laws including
+              GDPR and CCPA.
             </p>
 
             <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">2. Data We Collect</h2>
-            <p>We may collect, use, store and transfer different kinds of personal data about you:</p>
+            <p>
+              We may collect, use, store and transfer different kinds of personal data about you:
+            </p>
             <ul className="list-disc pl-6 mb-4 space-y-2">
               <li>
-                <strong>Identity Data</strong>: First name, last name, username or similar identifier,
-                job title, company name.
+                <strong>Identity Data</strong>: First name, last name, username or similar
+                identifier, job title, company name.
               </li>
               <li>
                 <strong>Contact Data</strong>: Email address, telephone numbers, business address.
@@ -51,7 +54,8 @@ export function Privacy() {
             <p>We collect data through:</p>
             <ul className="list-disc pl-6 mb-4 space-y-2">
               <li>
-                <strong>Direct interactions</strong>: Forms on our website, email correspondence, or phone calls.
+                <strong>Direct interactions</strong>: Forms on our website, email correspondence, or
+                phone calls.
               </li>
               <li>
                 <strong>Automated technologies</strong>: As you interact with our website, we may
@@ -59,7 +63,8 @@ export function Privacy() {
                 technologies.
               </li>
               <li>
-                <strong>Third parties</strong>: Analytics providers (Zoho PageSense) and support chat services (Zoho SalesIQ).
+                <strong>Third parties</strong>: Analytics providers (Zoho PageSense) and support
+                chat services (Zoho SalesIQ).
               </li>
             </ul>
 
@@ -85,8 +90,8 @@ export function Privacy() {
                 obligations.
               </li>
               <li>
-                <strong>Consent</strong>: Where you have given explicit consent for specific purposes
-                (e.g., marketing communications).
+                <strong>Consent</strong>: Where you have given explicit consent for specific
+                purposes (e.g., marketing communications).
               </li>
             </ul>
 
@@ -97,6 +102,9 @@ export function Privacy() {
             <ul className="list-disc pl-6 mb-4 space-y-2">
               <li>Provide and deliver our IT, security, and marketing services.</li>
               <li>Process and manage your inquiries, bookings, and support requests.</li>
+              <li>
+                Provide emergency support and crisis response, including callback communications.
+              </li>
               <li>
                 Communicate with you about services, updates, and service-related announcements.
               </li>
@@ -114,7 +122,13 @@ export function Privacy() {
               We use the following third-party service providers who may process your personal data:
             </p>
             <ul className="list-disc pl-6 mb-4 space-y-2">
-
+              <li>
+                <strong>Zoho CRM</strong>: Customer relationship management and sales pipeline
+                tracking.
+              </li>
+              <li>
+                <strong>Zoho Desk</strong>: Support ticket management and customer service.
+              </li>
               <li>
                 <strong>Zoho PageSense</strong>: Website analytics and user behavior tracking to
                 improve user experience.
@@ -127,11 +141,10 @@ export function Privacy() {
               </li>
             </ul>
             <p>
-              These providers are contractually obligated to protect your data and use it only for the
-              purposes we specify. We ensure all third parties maintain appropriate security
+              These providers are contractually obligated to protect your data and use it only for
+              the purposes we specify. We ensure all third parties maintain appropriate security
               standards.
             </p>
-
 
             <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">
               7. International Data Transfers
@@ -151,8 +164,8 @@ export function Privacy() {
 
             <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">8. Data Retention</h2>
             <p>
-              We will only retain your personal data for as long as necessary to fulfill the purposes
-              for which it was collected, including:
+              We will only retain your personal data for as long as necessary to fulfill the
+              purposes for which it was collected, including:
             </p>
             <ul className="list-disc pl-6 mb-4 space-y-2">
               <li>
@@ -160,15 +173,15 @@ export function Privacy() {
                 years for accounting and legal compliance.
               </li>
               <li>
-                <strong>Prospects and inquiries</strong>: Up to 3 years from last interaction, unless
-                you request earlier deletion.
+                <strong>Prospects and inquiries</strong>: Up to 3 years from last interaction,
+                unless you request earlier deletion.
               </li>
               <li>
                 <strong>Marketing communications</strong>: Until you unsubscribe or request removal.
               </li>
               <li>
-                <strong>Legal obligations</strong>: As required by applicable law (e.g., tax records,
-                contracts).
+                <strong>Legal obligations</strong>: As required by applicable law (e.g., tax
+                records, contracts).
               </li>
             </ul>
 
@@ -199,8 +212,8 @@ export function Privacy() {
                 or for marketing purposes.
               </li>
               <li>
-                <strong>Right to Withdraw Consent</strong>: Where processing is based on consent, you
-                may withdraw at any time.
+                <strong>Right to Withdraw Consent</strong>: Where processing is based on consent,
+                you may withdraw at any time.
               </li>
               <li>
                 <strong>Right to Lodge a Complaint</strong>: File a complaint with your local data
@@ -235,8 +248,8 @@ export function Privacy() {
                 <strong>Functional Cookies</strong>: Remember your preferences and settings.
               </li>
               <li>
-                <strong>Chat Cookies</strong>: Zoho SalesIQ uses cookies to maintain chat sessions and
-                preferences.
+                <strong>Chat Cookies</strong>: Zoho SalesIQ uses cookies to maintain chat sessions
+                and preferences.
               </li>
             </ul>
             <p>
@@ -264,8 +277,8 @@ export function Privacy() {
                 practices change, you will have the right to opt out.
               </li>
               <li>
-                <strong>Right to Non-Discrimination</strong>: We will not discriminate against you for
-                exercising your CCPA rights.
+                <strong>Right to Non-Discrimination</strong>: We will not discriminate against you
+                for exercising your CCPA rights.
               </li>
             </ul>
             <p>
@@ -294,21 +307,23 @@ export function Privacy() {
               protections.
             </p>
 
-            <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">13. Children's Privacy</h2>
+            <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">
+              13. Children's Privacy
+            </h2>
             <p>
-              Our services are not directed to individuals under 18 years of age. We do not knowingly
-              collect personal data from children. If you believe we have inadvertently collected data
-              from a child, please contact us immediately.
+              Our services are not directed to individuals under 18 years of age. We do not
+              knowingly collect personal data from children. If you believe we have inadvertently
+              collected data from a child, please contact us immediately.
             </p>
 
             <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">
               14. Changes to This Policy
             </h2>
             <p>
-              We may update this privacy policy from time to time to reflect changes in our practices
-              or legal requirements. We will notify you of significant changes by posting the updated
-              policy on our website and updating the "Last updated" date. For material changes, we may
-              provide additional notice via email.
+              We may update this privacy policy from time to time to reflect changes in our
+              practices or legal requirements. We will notify you of significant changes by posting
+              the updated policy on our website and updating the "Last updated" date. For material
+              changes, we may provide additional notice via email.
             </p>
 
             <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">15. Contact Us</h2>
@@ -340,6 +355,6 @@ export function Privacy() {
           </div>
         </div>
       </div>
-    </Seo>
+    </Seo >
   );
 }

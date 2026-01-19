@@ -83,7 +83,9 @@ export function Ethics() {
 
                 <div className="space-y-8">
                   <div className="bg-brand-cream p-8 rounded-xl border border-brand-copper/20">
-                    <h3 className="text-xl font-bold text-brand-oxford mb-3">1. Mission Statement</h3>
+                    <h3 className="text-xl font-bold text-brand-oxford mb-3">
+                      1. Mission Statement
+                    </h3>
                     <p className="text-brand-slate leading-relaxed">
                       We exist to bring enterprise-grade discipline and security to the small
                       businesses that power our community. We believe that robust technology
@@ -115,8 +117,8 @@ export function Ethics() {
                         <Lock className="w-4 h-4 text-brand-copper" /> Data Ethics
                       </h4>
                       <p className="text-sm text-brand-slate">
-                        We are custodians, not owners, of your data. We never sell client information.
-                        We adhere to SOC 2 Type II standards for all data handling.
+                        We are custodians, not owners, of your data. We never sell client
+                        information. We adhere to SOC 2 Type II standards for all data handling.
                       </p>
                     </div>
                     <div className="border-l-4 border-brand-copper pl-6 py-2">
@@ -138,9 +140,9 @@ export function Ethics() {
                 </h2>
                 <div className="prose prose-gray max-w-none text-brand-slate">
                   <p>
-                    Humaneers fosters a culture of "Speaking Up." We encourage employees, contractors,
-                    suppliers, and clients to report any suspected wrongdoing without fear of
-                    retaliation.
+                    Humaneers fosters a culture of "Speaking Up." We encourage employees,
+                    contractors, suppliers, and clients to report any suspected wrongdoing without
+                    fear of retaliation.
                   </p>
                   <h4 className="font-bold text-brand-oxford mt-4 mb-2">
                     Scope of Reportable Issues
@@ -152,7 +154,9 @@ export function Ethics() {
                     <li>Security breaches or data privacy violations</li>
                     <li>Unethical business practices</li>
                   </ul>
-                  <h4 className="font-bold text-brand-oxford mt-4 mb-2">Non-Retaliation Guarantee</h4>
+                  <h4 className="font-bold text-brand-oxford mt-4 mb-2">
+                    Non-Retaliation Guarantee
+                  </h4>
                   <p>
                     We strictly prohibit retaliation against anyone who raises a concern in good
                     faith. Reports are handled with the utmost confidentiality by our independent

@@ -12,6 +12,8 @@ import {
   Shield,
   Headphones,
   CheckCircle2,
+  Phone,
+  ChevronDown,
 } from "lucide-react";
 import { submitSupportTicket, validateSupportForm, type SupportFormData } from "../../lib/zoho";
 import { toast } from "sonner";
@@ -30,6 +32,30 @@ export function Support() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const faqItems = [
+    {
+      question: "Do I need to be an existing client to get help?",
+      answer: "No! We welcome new clients who need immediate help. We'll fix what's broken first and discuss ongoing partnership afterward. Crisis clients are always welcome."
+    },
+    {
+      question: "What's the fastest way to get help for a critical issue?",
+      answer: "For P1 Critical issues (system down, data breach, active security incident), call our emergency hotline directly. For other issues, submit a ticket and select the appropriate priority level."
+    },
+    {
+      question: "What information should I include in my ticket?",
+      answer: "Include: what happened, when it started, what you were trying to do, any error messages, and which systems are affected. The more detail you provide, the faster we can help."
+    },
+    {
+      question: "How do priority levels work?",
+      answer: "P1 (Critical): System down, 15-min response. P2 (High): Major impact, 1-hr response. P3 (Medium): Minor issue with workaround, 4-hr response. P4 (Low): Questions/requests, 24-hr response."
+    },
+    {
+      question: "What are your support hours?",
+      answer: "Our team monitors tickets during business hours (Mon-Fri, 8am-6pm MST). For P1 Critical issues, our emergency hotline provides 24/7 coverage."
+    }
+  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,8 +105,8 @@ export function Support() {
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">Support Center</h1>
             <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-2xl mx-auto">
-              Submit a support ticket and our engineering team will respond promptly. We welcome
-              new clients in crisis — we'll fix what's wrong now and discuss the rest later.
+              Submit a support ticket and our engineering team will respond promptly. We welcome new
+              clients in crisis — we'll fix what's wrong now and discuss the rest later.
             </p>
           </div>
         </section>
@@ -97,6 +123,27 @@ export function Support() {
                     immediate help. Our team monitors tickets during business hours and will respond
                     based on priority level.
                   </p>
+                </div>
+
+                {/* Emergency Hotline */}
+                <div className="bg-red-50 border-2 border-red-500 rounded-lg p-5 mb-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="bg-red-500 p-2 rounded-full">
+                      <Phone className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="font-bold text-red-700 text-lg">Emergency Hotline</h3>
+                  </div>
+                  <p className="text-sm text-red-700 mb-3">
+                    For critical P1 issues (system down, active breach, data loss) call us directly:
+                  </p>
+                  <a
+                    href="tel:+19284401505"
+                    className="inline-flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-5 rounded-lg transition-colors text-lg"
+                  >
+                    <Phone className="w-5 h-5" />
+                    (928) 440-1505
+                  </a>
+                  <p className="text-xs text-red-600 mt-2">Available 24/7 for critical emergencies</p>
                 </div>
 
                 <div className="space-y-4">
@@ -235,7 +282,10 @@ export function Support() {
                         <div className="space-y-2">
                           <Label htmlFor="priority">Priority Level</Label>
                           <Select onValueChange={handleSelectChange("priority")} required>
-                            <SelectTrigger id="priority" className="h-12 bg-gray-50 border-gray-200">
+                            <SelectTrigger
+                              id="priority"
+                              className="h-12 bg-gray-50 border-gray-200"
+                            >
                               <SelectValue placeholder="Select priority" />
                             </SelectTrigger>
                             <SelectContent>
@@ -249,7 +299,10 @@ export function Support() {
                         <div className="space-y-2">
                           <Label htmlFor="category">Category</Label>
                           <Select onValueChange={handleSelectChange("category")} required>
-                            <SelectTrigger id="category" className="h-12 bg-gray-50 border-gray-200">
+                            <SelectTrigger
+                              id="category"
+                              className="h-12 bg-gray-50 border-gray-200"
+                            >
                               <SelectValue placeholder="Select category" />
                             </SelectTrigger>
                             <SelectContent>
@@ -308,6 +361,36 @@ export function Support() {
                   )}
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-6 max-w-4xl">
+            <h2 className="text-3xl font-bold text-brand-oxford mb-8 text-center">Frequently Asked Questions</h2>
+            <div className="space-y-4">
+              {faqItems.map((item, index) => (
+                <div
+                  key={index}
+                  className="bg-brand-cream rounded-lg overflow-hidden"
+                >
+                  <button
+                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                    className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-brand-cream/80 transition-colors"
+                  >
+                    <span className="font-semibold text-brand-oxford">{item.question}</span>
+                    <ChevronDown
+                      className={`w-5 h-5 text-brand-copper transition-transform ${openFaq === index ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+                  {openFaq === index && (
+                    <div className="px-6 pb-4">
+                      <p className="text-brand-slate">{item.answer}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </section>

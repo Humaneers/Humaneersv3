@@ -24,8 +24,8 @@ export function Colophon() {
           <div className="container mx-auto px-6 text-center">
             <h1 className="text-3xl md:text-5xl font-bold mb-4">Colophon & Transparency</h1>
             <p className="text-gray-300 max-w-2xl mx-auto">
-              How we built this site, and how we build our company. We believe in radical openness in
-              our code, our pricing, and our values.
+              How we built this site, and how we build our company. We believe in radical openness
+              in our code, our pricing, and our values.
             </p>
           </div>
         </section>
@@ -53,8 +53,8 @@ export function Colophon() {
                       Navigation
                     </h3>
                     <p className="text-brand-slate mb-4">
-                      A well‑structured navigation is essential for users to understand our offerings
-                      and values.
+                      A well‑structured navigation is essential for users to understand our
+                      offerings and values.
                     </p>
                     <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
                       <li>
@@ -88,8 +88,8 @@ export function Colophon() {
                     </p>
                     <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
                       <li>
-                        <strong>Customer Service:</strong> We provide support availability and contact
-                        channels directly at the bottom of every page.
+                        <strong>Customer Service:</strong> We provide support availability and
+                        contact channels directly at the bottom of every page.
                       </li>
                       <li>
                         <strong>Service Index:</strong> A complete list of our specialized services,
@@ -118,13 +118,13 @@ export function Colophon() {
                     </p>
                     <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
                       <li>
-                        <strong>Ethics Charter:</strong> We do not sell client data. We openly declare
-                        that our charter is a moral imperative guiding all decision-making, not just a
-                        compliance checklist.
+                        <strong>Ethics Charter:</strong> We do not sell client data. We openly
+                        declare that our charter is a moral imperative guiding all decision-making,
+                        not just a compliance checklist.
                       </li>
                       <li>
-                        <strong>Whistleblower Policy:</strong> We empower employees, contractors, and
-                        suppliers to report wrongdoing without fear of retaliation.
+                        <strong>Whistleblower Policy:</strong> We empower employees, contractors,
+                        and suppliers to report wrongdoing without fear of retaliation.
                       </li>
                       <li>
                         <strong>"No-BS" Promise:</strong> We will always tell you when a cheaper
@@ -136,12 +136,13 @@ export function Colophon() {
                   {/* 4. Sustainability */}
                   <div className="border-l-4 border-brand-copper pl-6 py-1">
                     <h3 className="text-xl font-bold text-brand-oxford mb-3 flex items-center gap-2">
-                      <Globe className="w-5 h-5 text-brand-copper" /> 4. Commitment to Sustainability
+                      <Globe className="w-5 h-5 text-brand-copper" /> 4. Commitment to
+                      Sustainability
                     </h3>
                     <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
                       <li>
-                        <strong>GHG Assessments:</strong> We measure Scope 1, 2 and 3 emissions. As a
-                        remote-first company, we drastically reduce commuting emissions.
+                        <strong>GHG Assessments:</strong> We measure Scope 1, 2 and 3 emissions. As
+                        a remote-first company, we drastically reduce commuting emissions.
                       </li>
                       <li>
                         <strong>Hardware Lifecycle:</strong> We partner with certified recyclers to
@@ -159,8 +160,8 @@ export function Colophon() {
                   {/* 5. DEI */}
                   <div className="border-l-4 border-brand-copper pl-6 py-1">
                     <h3 className="text-xl font-bold text-brand-oxford mb-3 flex items-center gap-2">
-                      <Users className="w-5 h-5 text-brand-copper" /> 5. Diversity, Equity & Inclusion
-                      (DEI)
+                      <Users className="w-5 h-5 text-brand-copper" /> 5. Diversity, Equity &
+                      Inclusion (DEI)
                     </h3>
                     <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
                       <li>
@@ -168,12 +169,14 @@ export function Colophon() {
                         adopted flexible working policies that support parents and caregivers.
                       </li>
                       <li>
-                        <strong>Bias‑free Recruitment:</strong> We recruit based on skills, utilizing
-                        interview panels with diverse backgrounds to reduce unconscious bias.
+                        <strong>Bias‑free Recruitment:</strong> We recruit based on skills,
+                        utilizing interview panels with diverse backgrounds to reduce unconscious
+                        bias.
                       </li>
                       <li>
-                        <strong>Advocacy:</strong> We believe that a team with varied life experiences
-                        identifies security blind spots that a homogenous team would miss.
+                        <strong>Advocacy:</strong> We believe that a team with varied life
+                        experiences identifies security blind spots that a homogenous team would
+                        miss.
                       </li>
                     </ul>
                   </div>
@@ -181,8 +184,8 @@ export function Colophon() {
                   {/* 6. Operational Transparency */}
                   <div className="border-l-4 border-brand-copper pl-6 py-1">
                     <h3 className="text-xl font-bold text-brand-oxford mb-3 flex items-center gap-2">
-                      <Shield className="w-5 h-5 text-brand-copper" /> 6. Operational Transparency and
-                      Reliability
+                      <Shield className="w-5 h-5 text-brand-copper" /> 6. Operational Transparency
+                      and Reliability
                     </h3>
                     <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
                       <li>
@@ -190,13 +193,13 @@ export function Colophon() {
                         provide transparency on system status and maintenance windows.
                       </li>
                       <li>
-                        <strong>Support Availability:</strong> We are available via multiple channels
-                        (chat, email, phone) to address issues quickly, with clear SLAs for our
-                        retainer clients.
+                        <strong>Support Availability:</strong> We are available via multiple
+                        channels (chat, email, phone) to address issues quickly, with clear SLAs for
+                        our retainer clients.
                       </li>
                       <li>
-                        <strong>Policy Access:</strong> Our privacy, security, and AI usage guidelines
-                        are always just one click away in our footer.
+                        <strong>Policy Access:</strong> Our privacy, security, and AI usage
+                        guidelines are always just one click away in our footer.
                       </li>
                     </ul>
                   </div>
