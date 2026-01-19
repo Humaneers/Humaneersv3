@@ -137,7 +137,8 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-brand-oxford text-foreground;
+    /* Prevent white flash during hydration */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
