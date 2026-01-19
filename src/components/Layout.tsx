@@ -62,7 +62,9 @@ export function Layout() {
       toast.success("Thanks for subscribing!");
       setNewsletterEmail("");
     } catch (error) {
-      console.error("Newsletter submission error:", error);
+      if (import.meta.env.DEV) {
+        console.error("Newsletter submission error:", error);
+      }
       toast.error(
         error instanceof Error ? error.message : "Failed to subscribe. Please try again."
       );
@@ -475,7 +477,7 @@ export function Layout() {
 
           <div className="flex flex-col gap-2 items-center md:items-start text-center md:text-left">
             <p className="text-gray-400 font-medium">
-              Built by humans with ❤️ + ☕️ in Arizona & Texas.
+              Built in Arizona & Texas by humans with ❤️ + ☕️.
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-1">
               <span>&copy; {new Date().getFullYear()} Humaneers Limited Company.</span>

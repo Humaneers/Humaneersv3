@@ -13,7 +13,6 @@ import {
   LineChart,
   Users,
 } from "lucide-react";
-import { DefinitionTooltip } from "../DefinitionTooltip";
 import { routePaths } from "../../routes";
 import { Seo } from "../Seo";
 

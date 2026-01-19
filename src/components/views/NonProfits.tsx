@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
-import { Heart, Shield, Users, DollarSign, CheckCircle2, ArrowRight, FileCheck } from "lucide-react";
+import { Heart, Shield, Users, CheckCircle2, ArrowRight, FileCheck } from "lucide-react";
 import { routePaths } from "../../routes";
 import { Seo } from "../Seo";
 

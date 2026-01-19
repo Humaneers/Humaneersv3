@@ -10,7 +10,6 @@ import {
   ArrowRight,
   TrendingUp,
 } from "lucide-react";
-import { DefinitionTooltip } from "../DefinitionTooltip";
 import { routePaths } from "../../routes";
 import { Seo } from "../Seo";
 
@@ -201,7 +200,7 @@ export function FractionalLeadership() {
   );
 }
 
-function LockIcon(props: any) {
+function LockIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}

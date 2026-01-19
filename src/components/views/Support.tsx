@@ -288,7 +288,7 @@ export function Support() {
 
                       <Button
                         type="submit"
-                        className="w-full bg-brand-oxford hover:bg-brand-oxford-muted text-white text-lg py-6 h-auto"
+                        className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white text-lg py-6 h-auto"
                         disabled={isSubmitting}
                       >
                         {isSubmitting ? (

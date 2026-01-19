@@ -28,8 +28,11 @@
     }
   },
   "include": [
-    "src",
-    "api"
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "api/**/*.d.ts"
   ],
   "references": [
     {

@@ -1,17 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import {
-  Shield,
   Lock,
   Wifi,
   Eye,
   Smartphone,
-  CheckCircle2,
   Home,
   AlertTriangle,
   Fingerprint,
 } from "lucide-react";
-import { DefinitionTooltip } from "../DefinitionTooltip";
 import { routePaths } from "../../routes";
 import { Seo } from "../Seo";
 
@@ -20,32 +17,32 @@ export function FamilyProtection() {
 
   const features = [
     {
-      icon: <Lock className="w-8 h-8 text-brand-copper" />,
+      icon: <Lock className="w-8 h-8" />,
       title: "Enterprise Endpoint Protection",
       desc: "The same CrowdStrike/SentinelOne agents used by Fortune 500s, deployed on your family Macs and PCs.",
     },
     {
-      icon: <Wifi className="w-8 h-8 text-brand-copper" />,
+      icon: <Wifi className="w-8 h-8" />,
       title: "Secure Home Network",
       desc: "We configure your Wi-Fi with VLANs to separate work devices from smart fridges and gaming consoles.",
     },
     {
-      icon: <Eye className="w-8 h-8 text-brand-copper" />,
+      icon: <Eye className="w-8 h-8" />,
       title: "Dark Web Monitoring",
       desc: "We scan the dark web for your family's passwords and social security numbers 24/7.",
     },
     {
-      icon: <Smartphone className="w-8 h-8 text-brand-copper" />,
+      icon: <Smartphone className="w-8 h-8" />,
       title: "Parental Controls",
       desc: "Content filtering that actually works. Block adult content, gambling, and manage screen time.",
     },
     {
-      icon: <Fingerprint className="w-8 h-8 text-brand-copper" />,
+      icon: <Fingerprint className="w-8 h-8" />,
       title: "Identity Theft Restoration",
       desc: "$1M in insurance and a dedicated case manager to restore your identity if it's stolen.",
     },
     {
-      icon: <Home className="w-8 h-8 text-brand-copper" />,
+      icon: <Home className="w-8 h-8" />,
       title: "Smart Home Security",
       desc: "IoT hardening for cameras, locks, and microphones to prevent digital eavesdropping.",
     },
@@ -179,7 +176,7 @@ export function FamilyProtection() {
                   key={i}
                   className="bg-gray-50 p-8 rounded-2xl hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-brand-copper group"
                 >
-                  <div className="mb-6 bg-white w-14 h-14 rounded-xl shadow-sm flex items-center justify-center group-hover:bg-brand-copper group-hover:text-white transition-colors">
+                  <div className="mb-6 bg-white w-14 h-14 rounded-xl shadow-sm flex items-center justify-center group-hover:bg-brand-copper transition-colors text-brand-copper group-hover:text-white">
                     {f.icon}
                   </div>
                   <h3 className="text-xl font-bold text-brand-oxford mb-3">{f.title}</h3>
