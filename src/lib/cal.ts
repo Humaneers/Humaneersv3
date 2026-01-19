@@ -105,7 +105,9 @@ export function redirectToSalesBooking(data: SalesFormData): void {
   if (data.website) params.website = data.website;
   if (data.phone) params.phone = data.phone;
   if (data.budget) params.budget = data.budget;
-  if (data.interests.length > 0) params.interests = data.interests.join(", ");
+  if (data.interests && Array.isArray(data.interests) && data.interests.length > 0) {
+    params.interests = data.interests.join(", ");
+  }
   if (data.message) params.message = data.message;
 
   const calUrl = buildCalUrl(salesFormId, params);
@@ -276,7 +278,13 @@ export function getCalPreviewUrl(
     if (salesData.website) params.website = salesData.website;
     if (salesData.phone) params.phone = salesData.phone;
     if (salesData.budget) params.budget = salesData.budget;
-    if (salesData.interests.length > 0) params.interests = salesData.interests.join(", ");
+    if (
+      salesData.interests &&
+      Array.isArray(salesData.interests) &&
+      salesData.interests.length > 0
+    ) {
+      params.interests = salesData.interests.join(", ");
+    }
     if (salesData.message) params.message = salesData.message;
 
     if (!salesFormId) throw new Error("Sales form ID is not configured");
