@@ -173,8 +173,9 @@ export function Layout() {
   return (
     <div className="font-sans antialiased text-brand-slate bg-brand-cream min-h-screen flex flex-col">
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-brand-oxford shadow-lg py-3" : "bg-brand-oxford/95 backdrop-blur-sm py-5"
-          }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled ? "bg-brand-oxford shadow-lg py-3" : "bg-brand-oxford/95 backdrop-blur-sm py-5"
+        }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
           <Link className="flex items-center cursor-pointer shrink-0 mr-8" to="/">
@@ -383,8 +384,6 @@ export function Layout() {
         </AnimatePresence>
       </header>
 
-
-
       <main className="flex-grow pt-20">
         <Suspense fallback={<PageLoader />}>
           <Outlet />
@@ -467,7 +466,6 @@ export function Layout() {
               </form>
             </div>
           </div>
-
 
           <div className="flex flex-col gap-2 items-center md:items-start text-center md:text-left">
             <p className="text-gray-400 font-medium">

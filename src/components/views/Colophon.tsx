@@ -1,4 +1,15 @@
-import { Code, Image, Scale, Heart, Shield, ShieldCheck, Users, Globe, Layout, ArrowRight } from "lucide-react";
+import {
+  Code,
+  Image,
+  Scale,
+  Heart,
+  Shield,
+  ShieldCheck,
+  Users,
+  Globe,
+  Layout,
+  ArrowRight,
+} from "lucide-react";
 export function Colophon() {
   return (
     <div className="bg-white min-h-screen">
@@ -224,7 +235,8 @@ export function Colophon() {
                 <span className="font-bold text-brand-oxford">SOC 2 Type II Compliant</span>
               </div>
               <p className="text-xs text-brand-slate">
-                We independently audit our controls to ensure client data security, availability, and confidentiality.
+                We independently audit our controls to ensure client data security, availability,
+                and confidentiality.
               </p>
             </div>
 

@@ -4,8 +4,16 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { LifeBuoy, ArrowRight, Loader2, Clock, Shield, Headphones } from "lucide-react";
-import { redirectToSupportBooking, validateSupportForm, type SupportFormData } from "../../lib/cal";
+import {
+  LifeBuoy,
+  ArrowRight,
+  Loader2,
+  Clock,
+  Shield,
+  Headphones,
+  CheckCircle2,
+} from "lucide-react";
+import { submitSupportTicket, validateSupportForm, type SupportFormData } from "../../lib/zoho";
 import { toast } from "sonner";
 
 export function Support() {
@@ -20,6 +28,7 @@ export function Support() {
     description: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,12 +43,14 @@ export function Support() {
     setIsSubmitting(true);
 
     try {
-      // Redirect to Cal.com booking with support ticket data
-      redirectToSupportBooking(formData);
+      await submitSupportTicket(formData);
+      setIsSuccess(true);
+      toast.success("Your support ticket has been submitted!");
     } catch (error) {
       toast.error(
-        error instanceof Error ? error.message : "Failed to redirect to booking. Please try again."
+        error instanceof Error ? error.message : "Failed to submit ticket. Please try again."
       );
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -144,135 +155,148 @@ export function Support() {
             {/* Form Side */}
             <div className="lg:w-2/3">
               <div className="bg-white p-8 rounded-xl shadow-lg">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {isSuccess ? (
+                  <div className="py-10 text-center space-y-4">
+                    <div className="mx-auto w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
+                      <CheckCircle2 className="w-10 h-10" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900">Ticket Submitted!</h3>
+                    <p className="text-gray-600 max-w-sm mx-auto">
+                      We've received your support request and will respond based on the priority
+                      level.
+                    </p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="name">Full Name</Label>
+                        <Input
+                          id="name"
+                          name="name"
+                          placeholder="Jane Doe"
+                          required
+                          className="h-12 bg-gray-50 border-gray-200"
+                          value={formData.name}
+                          onChange={handleChange}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email Address</Label>
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          placeholder="jane@company.com"
+                          required
+                          className="h-12 bg-gray-50 border-gray-200"
+                          value={formData.email}
+                          onChange={handleChange}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="phone">Phone (Optional)</Label>
+                        <Input
+                          id="phone"
+                          name="phone"
+                          type="tel"
+                          placeholder="(555) 123-4567"
+                          className="h-12 bg-gray-50 border-gray-200"
+                          value={formData.phone}
+                          onChange={handleChange}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="company">Company (Optional)</Label>
+                        <Input
+                          id="company"
+                          name="company"
+                          placeholder="Acme Inc."
+                          className="h-12 bg-gray-50 border-gray-200"
+                          value={formData.company}
+                          onChange={handleChange}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="priority">Priority Level</Label>
+                        <Select onValueChange={handleSelectChange("priority")} required>
+                          <SelectTrigger id="priority" className="h-12 bg-gray-50 border-gray-200">
+                            <SelectValue placeholder="Select priority" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="critical">Critical (P1) - System Down</SelectItem>
+                            <SelectItem value="high">High (P2) - Major Impact</SelectItem>
+                            <SelectItem value="medium">Medium (P3) - Minor Issue</SelectItem>
+                            <SelectItem value="low">Low (P4) - General Question</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="category">Category</Label>
+                        <Select onValueChange={handleSelectChange("category")} required>
+                          <SelectTrigger id="category" className="h-12 bg-gray-50 border-gray-200">
+                            <SelectValue placeholder="Select category" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="technical">Technical Issue</SelectItem>
+                            <SelectItem value="account">Account / Billing</SelectItem>
+                            <SelectItem value="security">Security Concern</SelectItem>
+                            <SelectItem value="feature">Feature Request</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
                     <div className="space-y-2">
-                      <Label htmlFor="name">Full Name</Label>
+                      <Label htmlFor="subject">Subject</Label>
                       <Input
-                        id="name"
-                        name="name"
-                        placeholder="Jane Doe"
+                        id="subject"
+                        name="subject"
+                        placeholder="Brief description of the issue"
                         required
                         className="h-12 bg-gray-50 border-gray-200"
-                        value={formData.name}
+                        value={formData.subject}
                         onChange={handleChange}
                       />
                     </div>
+
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email Address</Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="jane@company.com"
+                      <Label htmlFor="description">Description</Label>
+                      <Textarea
+                        id="description"
+                        name="description"
+                        placeholder="Please provide as much detail as possible: What happened? What were you trying to do? Any error messages?"
+                        className="min-h-[150px] bg-gray-50 border-gray-200"
                         required
-                        className="h-12 bg-gray-50 border-gray-200"
-                        value={formData.email}
+                        value={formData.description}
                         onChange={handleChange}
                       />
                     </div>
-                  </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Phone (Optional)</Label>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        placeholder="(555) 123-4567"
-                        className="h-12 bg-gray-50 border-gray-200"
-                        value={formData.phone}
-                        onChange={handleChange}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="company">Company (Optional)</Label>
-                      <Input
-                        id="company"
-                        name="company"
-                        placeholder="Acme Inc."
-                        className="h-12 bg-gray-50 border-gray-200"
-                        value={formData.company}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="priority">Priority Level</Label>
-                      <Select onValueChange={handleSelectChange("priority")} required>
-                        <SelectTrigger id="priority" className="h-12 bg-gray-50 border-gray-200">
-                          <SelectValue placeholder="Select priority" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="critical">Critical (P1) - System Down</SelectItem>
-                          <SelectItem value="high">High (P2) - Major Impact</SelectItem>
-                          <SelectItem value="medium">Medium (P3) - Minor Issue</SelectItem>
-                          <SelectItem value="low">Low (P4) - General Question</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="category">Category</Label>
-                      <Select onValueChange={handleSelectChange("category")} required>
-                        <SelectTrigger id="category" className="h-12 bg-gray-50 border-gray-200">
-                          <SelectValue placeholder="Select category" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="technical">Technical Issue</SelectItem>
-                          <SelectItem value="account">Account / Billing</SelectItem>
-                          <SelectItem value="security">Security Concern</SelectItem>
-                          <SelectItem value="feature">Feature Request</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="subject">Subject</Label>
-                    <Input
-                      id="subject"
-                      name="subject"
-                      placeholder="Brief description of the issue"
-                      required
-                      className="h-12 bg-gray-50 border-gray-200"
-                      value={formData.subject}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="description">Description</Label>
-                    <Textarea
-                      id="description"
-                      name="description"
-                      placeholder="Please provide as much detail as possible: What happened? What were you trying to do? Any error messages?"
-                      className="min-h-[150px] bg-gray-50 border-gray-200"
-                      required
-                      value={formData.description}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    className="w-full bg-brand-oxford hover:bg-brand-oxford-muted text-white text-lg py-6 h-auto"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        Redirecting to Booking... <Loader2 className="ml-2 w-5 h-5 animate-spin" />
-                      </>
-                    ) : (
-                      <>
-                        Continue to Schedule Support Call <ArrowRight className="ml-2 w-5 h-5" />
-                      </>
-                    )}
-                  </Button>
-                </form>
+                    <Button
+                      type="submit"
+                      className="w-full bg-brand-oxford hover:bg-brand-oxford-muted text-white text-lg py-6 h-auto"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          Submitting... <Loader2 className="ml-2 w-5 h-5 animate-spin" />
+                        </>
+                      ) : (
+                        <>
+                          Submit Support Ticket <ArrowRight className="ml-2 w-5 h-5" />
+                        </>
+                      )}
+                    </Button>
+                  </form>
+                )}
               </div>
             </div>
           </div>
