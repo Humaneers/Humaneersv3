@@ -27,7 +27,6 @@ export interface SupportFormData {
   priority: string;
   category: string;
   subject: string;
-  subject: string;
   description: string;
   source?: string;
 }
