@@ -3,6 +3,7 @@ import { Suspense, useState, useEffect, forwardRef } from "react";
 import { PageLoader } from "./PageLoader";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { Menu, X, BookOpen, Loader2 } from "lucide-react";
+import { routePaths } from "../routes";
 import { Button } from "./ui/button";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -187,7 +188,7 @@ export function Layout() {
         }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
-          <Link className="flex items-center cursor-pointer shrink-0 mr-8" to="/">
+          <Link className="flex items-center cursor-pointer shrink-0 mr-8" to={routePaths.home}>
             <img
               src="/WordMarkV-2.svg"
               alt="Humaneers"
