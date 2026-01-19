@@ -45,7 +45,7 @@ export function About() {
         <div className="container mx-auto px-6 py-12">
           <Tabs defaultValue="story" className="w-full">
             <div className="flex justify-center mb-12">
-              <TabsList className="bg-white p-1 rounded-lg border border-gray-200 shadow-sm inline-flex overflow-x-auto w-full md:w-auto">
+              <TabsList className="bg-white p-1 rounded-lg border border-gray-200 shadow-sm inline-flex overflow-x-auto max-w-full">
                 <TabsTrigger
                   value="story"
                   className="px-6 py-3 text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all whitespace-nowrap"

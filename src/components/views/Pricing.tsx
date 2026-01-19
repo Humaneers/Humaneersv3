@@ -26,13 +26,7 @@ export function Pricing() {
         "Hybrid/Cloud Infrastructure",
         "Unlimited remote support",
         "Basic Security Suite (Endpoint Security)",
-        <span key="mdm-business">
-          <DefinitionTooltip
-            term="MDM"
-            definition="Mobile Device Management: Software that allows IT to secure, monitor, and manage mobile devices."
-          />{" "}
-          (Mobile Device Management)
-        </span>,
+        "MDM (Mobile Device Management)",
         "Microsoft 365 Management",
       ],
       cta: "Get Started",
@@ -106,13 +100,7 @@ export function Pricing() {
       description: "Essential protection for up to four humans and their devices.",
       features: [
         "Enterprise Endpoint Protection (Mac/PC)",
-        <span key="mdm-personal">
-          <DefinitionTooltip
-            term="MDM"
-            definition="Mobile Device Management: Software that allows IT to secure, monitor, and manage mobile devices."
-          />{" "}
-          (Mobile Device Management)
-        </span>,
+        "MDM (Mobile Device Management)",
         "Content Filtering & Parental Controls",
         "Identity Theft Monitoring",
         "Remote Helpdesk Support",

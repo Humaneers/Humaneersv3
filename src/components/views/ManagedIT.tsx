@@ -34,16 +34,7 @@ export function ManagedIT() {
     },
     {
       icon: <Smartphone className="w-6 h-6 text-brand-copper" />,
-      title: (
-        <span>
-          Mobile Device Management (
-          <DefinitionTooltip
-            term="MDM"
-            definition="Software that allows IT to secure, monitor, and manage mobile devices like smartphones and tablets."
-          />
-          )
-        </span>
-      ),
+      title: "Mobile Device Management (MDM)",
       desc: "Secure company data on personal phones without spying on your employees.",
       moreInfo: "Automated patch management.",
     },
@@ -146,7 +137,7 @@ export function ManagedIT() {
         <section className="py-24 bg-brand-cream">
           <div className="container mx-auto px-6">
             <div className="flex flex-col md:flex-row gap-16 items-start">
-              <div className="md:w-1/2 sticky top-24">
+              <div className="md:w-1/2 md:sticky md:top-24">
                 <h2 className="text-brand-copper font-bold tracking-widest uppercase mb-4 text-sm">
                   The Problem
                 </h2>
