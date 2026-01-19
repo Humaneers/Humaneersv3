@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { DefinitionTooltip } from "../DefinitionTooltip";
 import { routePaths } from "../../routes";
+import { Seo } from "../Seo";
 
 export function Industries() {
   const navigate = useNavigate();
@@ -151,106 +152,112 @@ export function Industries() {
   ];
 
   return (
-    <div className="bg-white">
-      {/* Hero */}
-      <section className="bg-brand-oxford text-white py-20 relative overflow-hidden">
-        <div className="container mx-auto px-6 relative z-10 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Built for the Backbone
-            <br />
-            of the Economy.
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-8">
-            Whether you run a single dry cleaner or a multi-location clinic, we bring
-            enterprise-grade reliability to your specific context.
-          </p>
-          <Button
-            onClick={() => navigate(routePaths.talkToSales)}
-            className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-4 h-auto rounded-full"
-          >
-            Talk to Sales
-          </Button>
-        </div>
-      </section>
-
-      {/* Industries Grid */}
-      <section className="py-24 bg-brand-cream">
-        <div className="container mx-auto px-6">
-          <div className="space-y-24">
-            {industries.map((industry, index) => (
-              <div
-                key={industry.id}
-                className={`flex flex-col md:flex-row gap-12 items-center ${index % 2 === 1 ? "md:flex-row-reverse" : ""}`}
-              >
-                <div className="md:w-1/2">
-                  <div className="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-brand-copper">
-                    <div className="mb-6">{industry.icon}</div>
-                    <h2 className="text-3xl font-bold text-brand-oxford mb-2">{industry.title}</h2>
-                    <p className="text-brand-copper font-medium mb-6 uppercase tracking-wider text-sm">
-                      {industry.subtitle}
-                    </p>
-                    <p className="text-brand-slate text-lg mb-8 leading-relaxed">
-                      {industry.description}
-                    </p>
-                    <ul className="space-y-3">
-                      {industry.features.map((feature, featureIndex) => (
-                        <li
-                          key={`${industry.id}-feature-${featureIndex}`}
-                          className="flex items-center gap-3 text-brand-oxford font-medium"
-                        >
-                          <ShieldCheck className="w-5 h-5 text-brand-copper" /> {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                <div className="md:w-1/2 flex justify-center">
-                  {/* Industry-specific imagery */}
-                  <div className="relative w-full aspect-square md:aspect-video bg-gray-200 rounded-xl overflow-hidden shadow-xl">
-                    <img
-                      src={
-                        industry.id === "retail"
-                          ? "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80"
-                          : industry.id === "healthcare"
-                            ? "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80"
-                            : industry.id === "hospitality"
-                              ? "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80"
-                              : industry.id === "field"
-                                ? "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80"
-                                : industry.id === "enterprise"
-                                  ? "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80"
-                                  : industry.id === "agriculture"
-                                    ? "https://images.unsplash.com/photo-1744230673231-865d54a0aba4?auto=format&fit=crop&q=80"
-                                    : "https://images.unsplash.com/photo-1589113367450-9a7b2a2177bc?auto=format&fit=crop&q=80"
-                      }
-                      alt={industry.title}
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-brand-oxford opacity-20 mix-blend-multiply"></div>
-                  </div>
-                </div>
-              </div>
-            ))}
+    <Seo
+      title="Humaneers | Industries We Serve | Retail, Healthcare & More"
+      description="Specialized IT and security solutions for Retail, Healthcare, Hospitality, Field Services, and more. Creating enterprise-grade reliability for every industry."
+      canonicalPath="/industries"
+    >
+      <div className="bg-white">
+        {/* Hero */}
+        <section className="bg-brand-oxford text-white py-20 relative overflow-hidden">
+          <div className="container mx-auto px-6 relative z-10 text-center">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              Built for the Backbone
+              <br />
+              of the Economy.
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-8">
+              Whether you run a single dry cleaner or a multi-location clinic, we bring
+              enterprise-grade reliability to your specific context.
+            </p>
+            <Button
+              onClick={() => navigate(routePaths.talkToSales)}
+              className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-4 h-auto rounded-full"
+            >
+              Talk to Sales
+            </Button>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA */}
-      <section className="py-20 bg-white text-center">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-brand-oxford mb-6">Don't See Your Industry?</h2>
-          <p className="text-brand-slate max-w-2xl mx-auto mb-10">
-            We've worked with everyone from architects to zoos. Technology is universal, even if
-            your business is unique.
-          </p>
-          <Button
-            onClick={() => navigate(routePaths.talkToSales)}
-            className="bg-brand-oxford hover:bg-brand-oxford-muted text-white text-xl px-10 py-6 h-auto rounded-full"
-          >
-            Talk to Sales <ArrowRight className="ml-2" />
-          </Button>
-        </div>
-      </section>
-    </div>
+        {/* Industries Grid */}
+        <section className="py-24 bg-brand-cream">
+          <div className="container mx-auto px-6">
+            <div className="space-y-24">
+              {industries.map((industry, index) => (
+                <div
+                  key={industry.id}
+                  className={`flex flex-col md:flex-row gap-12 items-center ${index % 2 === 1 ? "md:flex-row-reverse" : ""}`}
+                >
+                  <div className="md:w-1/2">
+                    <div className="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-brand-copper">
+                      <div className="mb-6">{industry.icon}</div>
+                      <h2 className="text-3xl font-bold text-brand-oxford mb-2">{industry.title}</h2>
+                      <p className="text-brand-copper font-medium mb-6 uppercase tracking-wider text-sm">
+                        {industry.subtitle}
+                      </p>
+                      <p className="text-brand-slate text-lg mb-8 leading-relaxed">
+                        {industry.description}
+                      </p>
+                      <ul className="space-y-3">
+                        {industry.features.map((feature, featureIndex) => (
+                          <li
+                            key={`${industry.id}-feature-${featureIndex}`}
+                            className="flex items-center gap-3 text-brand-oxford font-medium"
+                          >
+                            <ShieldCheck className="w-5 h-5 text-brand-copper" /> {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="md:w-1/2 flex justify-center">
+                    {/* Industry-specific imagery */}
+                    <div className="relative w-full aspect-square md:aspect-video bg-gray-200 rounded-xl overflow-hidden shadow-xl">
+                      <img
+                        src={
+                          industry.id === "retail"
+                            ? "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80"
+                            : industry.id === "healthcare"
+                              ? "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80"
+                              : industry.id === "hospitality"
+                                ? "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80"
+                                : industry.id === "field"
+                                  ? "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80"
+                                  : industry.id === "enterprise"
+                                    ? "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80"
+                                    : industry.id === "agriculture"
+                                      ? "https://images.unsplash.com/photo-1744230673231-865d54a0aba4?auto=format&fit=crop&q=80"
+                                      : "https://images.unsplash.com/photo-1589113367450-9a7b2a2177bc?auto=format&fit=crop&q=80"
+                        }
+                        alt={industry.title}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-brand-oxford opacity-20 mix-blend-multiply"></div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="py-20 bg-white text-center">
+          <div className="container mx-auto px-6">
+            <h2 className="text-3xl font-bold text-brand-oxford mb-6">Don't See Your Industry?</h2>
+            <p className="text-brand-slate max-w-2xl mx-auto mb-10">
+              We've worked with everyone from architects to zoos. Technology is universal, even if
+              your business is unique.
+            </p>
+            <Button
+              onClick={() => navigate(routePaths.talkToSales)}
+              className="bg-brand-oxford hover:bg-brand-oxford-muted text-white text-xl px-10 py-6 h-auto rounded-full"
+            >
+              Talk to Sales <ArrowRight className="ml-2" />
+            </Button>
+          </div>
+        </section>
+      </div>
+    </Seo>
   );
 }

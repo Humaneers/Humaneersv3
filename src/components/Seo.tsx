@@ -12,7 +12,7 @@ interface SeoProps {
   description?: string;
   canonicalPath?: string;
   noIndex?: boolean;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export function Seo({ title, description, canonicalPath, noIndex, children }: SeoProps) {

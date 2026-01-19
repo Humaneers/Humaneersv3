@@ -29,7 +29,7 @@ export function Layout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [isNewsletterSubmitting, setIsNewsletterSubmitting] = useState(false);
-  const [newsletterSuccess, setNewsletterSuccess] = useState(false);
+  // const [newsletterSuccess, setNewsletterSuccess] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,8 +59,8 @@ export function Layout() {
 
     try {
       await submitNewsletter({ email: newsletterEmail, source: "footer" });
-      setNewsletterSuccess(true);
-      toast.success("Successfully subscribed!");
+      // setNewsletterSuccess(true);
+      toast.success("Thanks for subscribing!");
       setNewsletterEmail("");
     } catch (error) {
       toast.error(
@@ -173,10 +173,15 @@ export function Layout() {
 
   return (
     <div className="font-sans antialiased text-brand-slate bg-brand-cream min-h-screen flex flex-col">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-[60] bg-brand-copper text-white px-4 py-2 rounded-md font-medium shadow-lg transition-transform"
+      >
+        Skip to content
+      </a>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? "bg-brand-oxford shadow-lg py-3" : "bg-brand-oxford/95 backdrop-blur-sm py-5"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-brand-oxford shadow-lg py-3" : "bg-brand-oxford/95 backdrop-blur-sm py-5"
+          }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
           <Link className="flex items-center cursor-pointer shrink-0 mr-8" to="/">
@@ -385,7 +390,7 @@ export function Layout() {
         </AnimatePresence>
       </header>
 
-      <main className="flex-grow pt-20">
+      <main id="main-content" className="flex-grow pt-20">
         <Suspense fallback={<PageLoader />}>
           <Outlet />
         </Suspense>
