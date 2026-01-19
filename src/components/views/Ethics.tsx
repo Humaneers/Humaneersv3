@@ -274,7 +274,7 @@ export function Ethics() {
                           </span>
                         ) : (
                           <span className="flex items-center gap-2">
-                            Submit Secure Report <Send size={16} />
+                            Send Secure Report <Send size={16} />
                           </span>
                         )}
                       </Button>
@@ -302,7 +302,7 @@ export function Ethics() {
                         setIsAnonymous(false);
                       }}
                     >
-                      Submit Another Report
+                      File Another Report
                     </Button>
                   </div>
                 )}

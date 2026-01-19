@@ -356,8 +356,8 @@ export function TalkToSales() {
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="<1k">Less than $1,000</SelectItem>
-                            <SelectItem value="1k-3k">$1,000 - $3,000</SelectItem>
-                            <SelectItem value="3k-7k">$3,000 - $7,000</SelectItem>
+                            <SelectItem value="1k-3k">$1,000 to $3,000</SelectItem>
+                            <SelectItem value="3k-7k">$3,000 to $7,000</SelectItem>
                             <SelectItem value="7k+">$7,000+</SelectItem>
                             <SelectItem value="unsure">Let's figure it out together</SelectItem>
                           </SelectContent>
@@ -373,7 +373,9 @@ export function TalkToSales() {
                             "Family Protection",
                             "Fractional CIO/CMO",
                             "Cybersecurity Audit",
+                            "Cybersecurity Audit",
                             "Emergency IT Support",
+                            "Hourly Support",
                           ].map((item) => (
                             <div
                               key={item}
@@ -428,7 +430,7 @@ export function TalkToSales() {
                             </>
                           ) : (
                             <>
-                              Submit Request <ArrowRight className="ml-2 w-5 h-5" />
+                              Send Request <ArrowRight className="ml-2 w-5 h-5" />
                             </>
                           )}
                         </Button>

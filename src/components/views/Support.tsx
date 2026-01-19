@@ -289,10 +289,10 @@ export function Support() {
                               <SelectValue placeholder="Select priority" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="critical">Critical (P1) - System Down</SelectItem>
-                              <SelectItem value="high">High (P2) - Major Impact</SelectItem>
-                              <SelectItem value="medium">Medium (P3) - Minor Issue</SelectItem>
-                              <SelectItem value="low">Low (P4) - General Question</SelectItem>
+                              <SelectItem value="critical">Critical (P1) | System Down</SelectItem>
+                              <SelectItem value="high">High (P2) | Major Impact</SelectItem>
+                              <SelectItem value="medium">Medium (P3) | Minor Issue</SelectItem>
+                              <SelectItem value="low">Low (P4) | General Question</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
@@ -353,7 +353,7 @@ export function Support() {
                           </>
                         ) : (
                           <>
-                            Submit Support Ticket <ArrowRight className="ml-2 w-5 h-5" />
+                            Send Support Ticket <ArrowRight className="ml-2 w-5 h-5" />
                           </>
                         )}
                       </Button>

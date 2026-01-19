@@ -15,6 +15,7 @@
   - **Disclosure**: Usage of AI tools is transparently disclosed (see Colophon).
   - **Quality over Speed**: AI is for refinement and error-checking, not mass production.
   - **Review**: All AI-generated code/content must be verified by a human.
+  - **Documentation**: It is imperative to keep reference documents up to date with every change. No exceptions.
 
 ### 1.2 "Modern Craftsman" Philosophy
 - **Aesthetic**: Precision tooling meets artisan workshop. Professional polish + approachable warmth.
@@ -22,7 +23,9 @@
 - **Tone**: "Enterprise strategy for businesses and families. Built with precision, delivered with soul."
   - **Do**: "We fix critical vulnerabilities." (Active, specific)
   - **Don't**: "We optimize security protocols." (Corporate jargon)
-  - **Do**: "Built with ❤️ + ☕️ in AZ." (Human touch)
+  - **Do**: "Built with heart and grit in AZ." (Human touch, no emojis)
+  - **Style Rule**: **No Hyphens or Dashes.** Use commas, periods, or other literary devices.
+  - **Visuals**: No emojis in official documentation.
 
 ---
 
@@ -113,6 +116,7 @@
 ## 5. Content & Messaging Guidelines
 
 ### 5.1 Voice
+- **Distinction**: Clearly distinguish between B2B (Business) and B2C (Family) contexts while maintaining a unified "Modern Craftsman" brand.
 - **Business**: Confidence, Competence, Strategic Partnership.
 - **Family**: Protection, Peace of Mind, Inclusion.
 - **Nonprofit**: Mission-focus, Stewardship, Value.
@@ -122,6 +126,7 @@
 - **"Brand Growth"** (NOT "SEO Services").
 - **"Family Protection"** (NOT "Antivirus").
 - **"Fractional Leadership"** (NOT "Consulting").
+- **"Hourly Support"** (For ad-hoc engineering needs).
 
 ### 5.3 Copy Patterns
 - **Price Transparency**: Always show unit pricing (e.g., "$90/user/mo").
@@ -138,7 +143,12 @@
 - **Features**: Fraud Air-Gapping, "Red Button" support, Family Proxy.
 - **Routing**: `/senior-care` -> `/pricing?highlight=senior`.
 
-### 6.2 Family Inclusion
+### 6.2 Marketing Messaging Pillars (Q1 2026)
+- **Family**: "Health Check" (NOT "Audit"). Focus on simplicity and "Grandparent Protection".
+- **Nonprofit**: "Grant Readiness" (NOT just "IT Support"). Focus on compliance unlocking funding.
+- **Business**: "Fractional Savings". Highlight the 10x ROI vs hiring full-time.
+
+### 6.3 Family Inclusion
 - **Shift**: Moved from business-only to "Business + Family" dual focus.
 - **Updates**:
   - Homepage Hero: "Enterprise strategy for businesses and families..." implies scope.

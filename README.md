@@ -4,7 +4,20 @@
 
 The official website for Humaneers, built with modern web technologies to deliver a "Modern Craftsman" digital experience.
 
-## 🛠 Tech Stack
+## AI Directives
+
+**For all AI agents working on this codebase:**
+
+1.  **Reference this README first.** This file is the mandatory entry point for every session.
+2.  **Comply with `webSpecs.md`.** It is the single source of truth for design, code standards, and brand voice.
+3.  **Resolve Conflicts.** If you encounter conflicting instructions between files or user prompts, **FAIL SAFE** and ask the user for clarification. Do not guess.
+4.  **Writing Style.**
+    -   **No Hyphens or Dashes.** Do not use dashes or hyphens in text or copy. Use commas, periods, or other literary devices to connect thoughts.
+    -   **Human Tone.** Write like a marketing professional, not a robot. Warm, specific, and professional.
+    -   **No Emojis.** Do not use emojis in official documentation or technical files. Use them sparingly in marketing copy only if explicitly requested.
+5.  **Maintain Documentation.** It is imperative that reference documents (`webSpecs.md`, `README.md`, etc) are kept up to date with every change. This is not optional. If code changes, documentation must change immediately.
+
+## Tech Stack
 
 - **Framework**: [React](https://react.dev/) + [Vite](https://vitejs.dev/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
@@ -15,7 +28,7 @@ The official website for Humaneers, built with modern web technologies to delive
 - **Analytics**: Zoho PageSense + SalesIQ
 - **Deployment**: [Vercel](https://vercel.com/)
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -46,7 +59,7 @@ npm run build
 
 The output will be in the `dist` directory.
 
-## ⚙️ Configuration
+## Configuration
 
 Copy `.env.example` to `.env.local` and configure your environment variables:
 
@@ -61,7 +74,7 @@ cp .env.example .env.local
 | `VITE_ZOHO_FORMS_BASE_URL` | Zoho Forms API endpoint |
 | `VITE_ZOHO_CRM_ACCESS_TOKEN` | Zoho CRM API access token |
 
-## 🎨 Design System
+## Design System
 
 This project follows the **Modern Craftsman** design aesthetic:
 - **Colors**: Oxford Blue (`#1B263B`), Copper (`#B87333`), Cream (`#F5F1E9`)
@@ -72,7 +85,7 @@ See `webSpecs.md` for all design guidelines, technical patterns, and the single 
 
 **AI Usage Policy**: Humaneers follows a "Human-first, AI-second" approach. Details in our [Colophon](https://humaneers.dev/colophon).
 
-## 📦 Project Structure
+## Project Structure
 
 ```
 src/
@@ -88,7 +101,7 @@ src/
     └── globals.css  # Global styles and Tailwind directives
 ```
 
-## 🚢 Deployment
+## Deployment
 
 This project is optimized for deployment on **Vercel**.
 
@@ -96,6 +109,6 @@ This project is optimized for deployment on **Vercel**.
 2. Configure the Environment Variables in the project settings
 3. Deploy
 
-## 📄 License
+## License
 
 Copyright © 2026 Humaneers. All rights reserved.

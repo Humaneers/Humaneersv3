@@ -25,7 +25,7 @@ export function Pricing() {
       features: [
         "Hybrid/Cloud Infrastructure",
         "Unlimited remote support",
-        "Basic Security Suite (Antivirus/Malware)",
+        "Basic Security Suite (Endpoint Security)",
         <span key="mdm-business">
           <DefinitionTooltip
             term="MDM"
@@ -65,7 +65,7 @@ export function Pricing() {
       description: "Full enterprise power with strategic leadership.",
       features: [
         "Everything in Growth",
-        "Americanization Consulting",
+        "Americanization Strategy",
         "Fractional CIO Access",
         "Dedicated Success Manager",
         "Annual Strategy Retreat",
@@ -251,10 +251,7 @@ export function Pricing() {
             }`}
         >
           {currentTiers.map((tier, index) => {
-            // Check if this tier matches the highlight param
-            const isHighlightedByParam =
-              highlightParam &&
-              tier.name.toLowerCase().includes(highlightParam.toLowerCase());
+
 
             return (
               <motion.div
@@ -262,15 +259,13 @@ export function Pricing() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`relative bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col ${isHighlightedByParam
-                  ? "border-4 border-brand-copper transform scale-105 z-10 shadow-2xl ring-4 ring-brand-copper/20"
-                  : tier.highlighted
-                    ? "border-2 border-brand-copper transform md:-translate-y-4"
-                    : "border border-gray-100"
+                className={`relative bg-white rounded-2xl transition-all duration-300 flex flex-col h-full ${tier.highlighted
+                  ? "shadow-2xl ring-1 ring-brand-copper z-10"
+                  : "shadow-lg hover:shadow-xl border border-gray-100"
                   }`}
               >
                 {tier.highlighted && (
-                  <div className="bg-brand-copper text-white text-center text-sm font-bold py-2 uppercase tracking-wide">
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-brand-copper text-white px-4 py-1 rounded-full text-sm font-bold shadow-sm uppercase tracking-wider">
                     Most Popular
                   </div>
                 )}
@@ -401,8 +396,9 @@ export function Pricing() {
               <div className="flex justify-center md:justify-start">
                 <Button
                   onClick={() =>
-                  (window.location.href =
-                    "mailto:hello@humaneers.dev?subject=Hourly Pack Inquiry")
+                    navigate(routePaths.talkToSales, {
+                      state: { interest: "Hourly Support" },
+                    })
                   }
                   className="bg-white text-brand-oxford hover:bg-gray-100 px-8 py-3 font-bold"
                 >
@@ -428,7 +424,7 @@ export function Pricing() {
             Contact Sales
           </Button>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }

@@ -202,7 +202,7 @@ export function Home() {
           </div>
           <div className="container mx-auto px-6 relative z-10 text-center">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Ready to upgrade your business?
+              Ready to upgrade your business or protect your home?
             </h2>
             <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
               Get the enterprise-grade support you deserve with the personal touch you need.
