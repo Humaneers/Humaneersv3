@@ -26,7 +26,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const data: LeadData = req.body;
 
         // Validate required fields
-        if (!data.firstName || !data.lastName || !data.email || !data.company) {
+        if (!data.firstName || !data.lastName || !data.email) {
             return res.status(400).json({ error: "Missing required fields" });
         }
 
@@ -56,7 +56,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                     First_Name: data.firstName,
                     Last_Name: data.lastName,
                     Email: data.email,
-                    Company: data.company,
+                    Company: data.company || `${data.lastName} Household`,
                     Website: data.website || null,
                     Designation: data.role,
                     Phone: data.phone || null,
