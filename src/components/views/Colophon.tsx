@@ -389,6 +389,17 @@ export function Colophon() {
                     </a>
                   </li>
                   <li className="flex items-center justify-between">
+                    <span className="font-medium text-gray-700">Heatmaps</span>
+                    <a
+                      href="https://hotjar.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-brand-copper hover:underline"
+                    >
+                      Hotjar
+                    </a>
+                  </li>
+                  <li className="flex items-center justify-between">
                     <span className="font-medium text-gray-700">Deployment</span>
                     <a
                       href="https://vercel.com"

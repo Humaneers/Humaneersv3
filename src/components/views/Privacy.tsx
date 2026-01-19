@@ -143,6 +143,10 @@ export function Privacy() {
               <li>
                 <strong>Vercel</strong>: Website hosting and content delivery.
               </li>
+              <li>
+                <strong>Hotjar</strong>: User behavior analytics and heatmaps to improve site
+                usability.
+              </li>
             </ul>
             <p>
               These providers are contractually obligated to protect your data and use it only for
