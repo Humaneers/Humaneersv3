@@ -195,8 +195,8 @@ export function Pricing() {
                   setSessionContext({ segment: "business" });
                 }}
                 className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "business"
-                    ? "text-white"
-                    : "text-brand-slate hover:text-brand-oxford"
+                  ? "text-white"
+                  : "text-brand-slate hover:text-brand-oxford"
                   }`}
               >
                 {pricingMode === "business" && (
@@ -217,8 +217,8 @@ export function Pricing() {
                   setSessionContext({ segment: "family" });
                 }}
                 className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "household"
-                    ? "text-white"
-                    : "text-brand-slate hover:text-brand-copper"
+                  ? "text-white"
+                  : "text-brand-slate hover:text-brand-copper"
                   }`}
               >
                 {pricingMode === "household" && (
@@ -239,8 +239,8 @@ export function Pricing() {
                   setSessionContext({ segment: "nonprofit" });
                 }}
                 className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "nonprofit"
-                    ? "text-white"
-                    : "text-brand-slate hover:text-brand-oxford"
+                  ? "text-white"
+                  : "text-brand-slate hover:text-brand-oxford"
                   }`}
               >
                 {pricingMode === "nonprofit" && (
@@ -270,12 +270,12 @@ export function Pricing() {
 
       <div
         className={`grid gap-8 mx-auto ${currentTiers.length === 1
-            ? "max-w-md"
-            : currentTiers.length === 2
-              ? "max-w-4xl md:grid-cols-2"
-              : currentTiers.length === 3
-                ? "max-w-6xl md:grid-cols-3"
-                : "max-w-7xl lg:grid-cols-4"
+          ? "max-w-md"
+          : currentTiers.length === 2
+            ? "max-w-4xl md:grid-cols-2"
+            : currentTiers.length === 3
+              ? "max-w-6xl md:grid-cols-3"
+              : "max-w-7xl lg:grid-cols-4"
           }`}
       >
         {currentTiers.map((tier, index) => {
@@ -295,8 +295,8 @@ export function Pricing() {
           };
 
           const buttonClasses = `w-full py-6 text-lg font-medium shadow-md transition-all ${tier.highlighted
-              ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-lg"
-              : "bg-brand-copper hover:bg-brand-copper-dark text-white"
+            ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-lg"
+            : "bg-brand-copper hover:bg-brand-copper-dark text-white"
             }`;
 
           return (
@@ -306,8 +306,8 @@ export function Pricing() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               className={`relative bg-white rounded-2xl transition-all duration-300 flex flex-col h-full ${tier.highlighted
-                  ? "shadow-2xl ring-1 ring-brand-copper z-10"
-                  : "shadow-lg hover:shadow-xl border border-gray-100"
+                ? "shadow-2xl ring-1 ring-brand-copper z-10"
+                : "shadow-lg hover:shadow-xl border border-gray-100"
                 }`}
             >
               {tier.highlighted && (
@@ -422,19 +422,14 @@ export function Pricing() {
 
             <div className="flex justify-center md:justify-start">
               <Button
-                onClick={() =>
+                onClick={() => {
+                  setSessionContext({ entrySource: "Pricing Page - Hourly Pack" });
                   navigate(routePaths.talkToSales, {
                     state: {
                       interest: "Hourly Support",
-                      segment:
-                        pricingMode === "household"
-                          ? "family"
-                          : pricingMode === "nonprofit"
-                            ? "nonprofit"
-                            : "business",
                     },
-                  })
-                }
+                  });
+                }}
                 className="bg-white text-brand-oxford hover:bg-gray-100 px-8 py-3 font-bold"
               >
                 Purchase Hours
