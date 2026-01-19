@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import { Seo } from "../Seo";
 
 type TalkToSalesState = { email?: string; interest?: string; source?: string; segment?: CustomerSegment } | null;
-type CustomerSegment = "business" | "family" | "nonprofit" | null;
+type CustomerSegment = "business" | "personal" | "nonprofit" | null;
 
 export function TalkToSales() {
   const location = useLocation();
@@ -47,7 +47,7 @@ export function TalkToSales() {
     if (initialData?.segment) {
       setSegment(initialData.segment);
     } else if (initialData?.interest?.toLowerCase().includes("family") || initialData?.interest?.toLowerCase().includes("home")) {
-      setSegment("family");
+      setSegment("personal");
     } else if (initialData?.interest?.toLowerCase().includes("nonprofit")) {
       setSegment("nonprofit");
     } else if (initialData?.interest) {
@@ -84,10 +84,10 @@ export function TalkToSales() {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
-        company: segment === "family" ? `${formData.lastName} Household` : formData.company,
+        company: segment === "personal" ? `${formData.lastName} Household` : formData.company,
         website: formData.website,
-        role: segment === "family" ? "Head of Household" : formData.role,
-        employees: segment === "family" ? "1-10" : formData.employees,
+        role: segment === "personal" ? "Head of Household" : formData.role,
+        employees: segment === "personal" ? "1-10" : formData.employees,
         phone: formData.phone,
         budget: formData.budget,
         interests: formData.interests,
@@ -146,7 +146,7 @@ export function TalkToSales() {
     if (!formData.firstName.trim()) errors.push("First name is required");
     if (!formData.lastName.trim()) errors.push("Last name is required");
     if (!formData.email.trim()) errors.push("Email is required");
-    if (segment !== "family" && !formData.company.trim()) errors.push("Company name is required");
+    if (segment !== "personal" && !formData.company.trim()) errors.push("Company name is required");
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (formData.email && !emailRegex.test(formData.email)) {
@@ -245,15 +245,15 @@ export function TalkToSales() {
 
                       <button
                         type="button"
-                        onClick={() => setSegment("family")}
+                        onClick={() => setSegment("personal")}
                         className="flex items-center gap-4 p-4 border-2 border-gray-100 rounded-xl hover:border-brand-copper hover:bg-brand-cream/50 transition-all text-left group"
                       >
                         <div className="bg-green-100 p-3 rounded-lg group-hover:bg-brand-copper group-hover:text-white transition-colors text-green-600">
                           <Home className="w-6 h-6" />
                         </div>
                         <div>
-                          <div className="font-bold text-brand-oxford">For My Family</div>
-                          <div className="text-sm text-gray-500">I need protection for my home & kids.</div>
+                          <div className="font-bold text-brand-oxford">For Myself / Family</div>
+                          <div className="text-sm text-gray-500">I need protection for my home or myself.</div>
                         </div>
                       </button>
 
@@ -278,7 +278,7 @@ export function TalkToSales() {
                       <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-gray-400 border-b pb-4 mb-4">
                         <div className="flex items-center gap-2">
                           <span className={`px-2 py-1 rounded-full text-[10px] ${segment === "business" ? "bg-blue-100 text-blue-800" :
-                            segment === "family" ? "bg-green-100 text-green-800" : "bg-purple-100 text-purple-800"
+                            segment === "personal" ? "bg-green-100 text-green-800" : "bg-purple-100 text-purple-800"
                             }`}>
                             {segment.toUpperCase()}
                           </span>
@@ -327,7 +327,7 @@ export function TalkToSales() {
                             />
                           </div>
 
-                          {segment !== "family" && (
+                          {segment !== "personal" && (
                             <div className="space-y-2">
                               <Label htmlFor="company">Organization Name *</Label>
                               <Input
@@ -395,7 +395,7 @@ export function TalkToSales() {
                               />
                             </div>
 
-                            {segment !== "family" && (
+                            {segment !== "personal" && (
                               <div className="space-y-2">
                                 <Label htmlFor="employees">Team Size *</Label>
                                 <Select
@@ -422,10 +422,10 @@ export function TalkToSales() {
                           <div className="space-y-3 pt-2">
                             <Label>What do you need help with?</Label>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                              {(segment === "family" ? [
+                              {(segment === "personal" ? [
+                                "Emergency / Crisis",
                                 "Home Network Security",
                                 "Grandparent Protection",
-                                "Identity Theft Restoration",
                                 "Parental Controls",
                                 "General Tech Support"
                               ] : segment === "nonprofit" ? [
@@ -466,7 +466,7 @@ export function TalkToSales() {
                             <Textarea
                               id="message"
                               name="message"
-                              placeholder={segment === "family" ? "e.g., My kids keep bypassing the filters..." : "Tell us about your current infrastructure or goals..."}
+                              placeholder={segment === "personal" ? "e.g., I think I've been hacked..." : "Tell us about your current infrastructure or goals..."}
                               className="min-h-[100px]"
                               value={formData.message}
                               onChange={handleChange}
