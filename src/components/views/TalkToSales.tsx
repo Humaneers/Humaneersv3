@@ -88,6 +88,12 @@ export function TalkToSales() {
     setIsSubmitting(true);
 
     try {
+      // Add special notation for hourly pack purchases
+      const isHourlyPack = formData.interests.includes("Hourly Support");
+      const messagePrefix = isHourlyPack
+        ? `[HOURLY PACK REQUEST] [Segment: ${segment?.toUpperCase()}]`
+        : `[Segment: ${segment?.toUpperCase()}]`;
+
       await submitSalesLead({
         firstName: formData.firstName,
         lastName: formData.lastName,
@@ -99,7 +105,7 @@ export function TalkToSales() {
         phone: formData.phone,
         budget: formData.budget,
         interests: formData.interests,
-        message: `[Segment: ${segment?.toUpperCase()}] ${formData.message}`,
+        message: `${messagePrefix} ${formData.message}`,
         source: formData.source,
       } as SalesFormData);
 
@@ -295,13 +301,12 @@ export function TalkToSales() {
                       <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-gray-400 border-b pb-4 mb-4">
                         <div className="flex items-center gap-2">
                           <span
-                            className={`px-2 py-1 rounded-full text-[10px] ${
-                              segment === "business"
+                            className={`px-2 py-1 rounded-full text-[10px] ${segment === "business"
                                 ? "bg-blue-100 text-blue-800"
                                 : segment === "personal"
                                   ? "bg-green-100 text-green-800"
                                   : "bg-purple-100 text-purple-800"
-                            }`}
+                              }`}
                           >
                             {segment.toUpperCase()}
                           </span>
@@ -453,27 +458,27 @@ export function TalkToSales() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                               {(segment === "personal"
                                 ? [
-                                    "Emergency / Crisis",
-                                    "Home Network Security",
-                                    "Grandparent Protection",
-                                    "Parental Controls",
-                                    "General Tech Support",
-                                  ]
+                                  "Emergency / Crisis",
+                                  "Home Network Security",
+                                  "Grandparent Protection",
+                                  "Parental Controls",
+                                  "General Tech Support",
+                                ]
                                 : segment === "nonprofit"
                                   ? [
-                                      "Grant Readiness / Compliance",
-                                      "Donor Data Protection",
-                                      "Managed IT Services",
-                                      "Volunteer Access Management",
-                                      "Board Reporting",
-                                    ]
+                                    "Grant Readiness / Compliance",
+                                    "Donor Data Protection",
+                                    "Managed IT Services",
+                                    "Volunteer Access Management",
+                                    "Board Reporting",
+                                  ]
                                   : [
-                                      "Managed IT Services",
-                                      "Fractional CIO/CMO",
-                                      "Compliance (SOC2/HIPAA)",
-                                      "Growth Strategy",
-                                      "Emergency Support",
-                                    ]
+                                    "Managed IT Services",
+                                    "Fractional CIO/CMO",
+                                    "Compliance (SOC2/HIPAA)",
+                                    "Growth Strategy",
+                                    "Emergency Support",
+                                  ]
                               ).map((item) => (
                                 <div
                                   key={item}
