@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-import { getZohoAccessToken } from "../_lib/zoho.js";
+import { getZohoAccessToken } from "./_lib/zoho.js";
 
 // Optional: Expose as endpoint for testing (can be removed in production)
 export default async function handler(req: VercelRequest, res: VercelResponse) {
