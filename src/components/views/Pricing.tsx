@@ -198,46 +198,78 @@ export function Pricing() {
             Choose the plan that fits your stage of business or life.
           </p>
 
-          <div className="flex flex-col sm:inline-flex bg-white p-1.5 rounded-xl sm:rounded-full shadow-sm border border-gray-100 mb-8 w-full sm:w-auto">
-            <button
-              onClick={() => {
-                setPricingMode("business");
-                setSessionContext({ segment: "business" });
-              }}
-              className={`px-6 py-3 sm:py-2 rounded-lg sm:rounded-full text-sm font-semibold transition-all w-full sm:w-auto ${
-                pricingMode === "business"
-                  ? "bg-brand-oxford text-white shadow-md"
-                  : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
-              }`}
-            >
-              Business
-            </button>
-            <button
-              onClick={() => {
-                setPricingMode("household");
-                setSessionContext({ segment: "family" });
-              }}
-              className={`px-6 py-3 sm:py-2 rounded-lg sm:rounded-full text-sm font-semibold transition-all w-full sm:w-auto ${
-                pricingMode === "household"
-                  ? "bg-brand-copper text-white shadow-md"
-                  : "text-gray-500 hover:text-brand-copper hover:bg-gray-50"
-              }`}
-            >
-              Personal
-            </button>
-            <button
-              onClick={() => {
-                setPricingMode("nonprofit");
-                setSessionContext({ segment: "nonprofit" });
-              }}
-              className={`px-6 py-3 sm:py-2 rounded-lg sm:rounded-full text-sm font-semibold transition-all w-full sm:w-auto ${
-                pricingMode === "nonprofit"
-                  ? "bg-brand-oxford text-white shadow-md"
-                  : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
-              }`}
-            >
-              Nonprofit
-            </button>
+          {/* Dynamic Toggle Control */}
+          <div className="inline-flex bg-gray-100/50 p-1.5 rounded-xl shadow-inner border border-gray-200/50 mb-10 relative overflow-hidden w-full max-w-xl mx-auto">
+            <div className="grid grid-cols-3 w-full gap-2 relative z-10">
+              <button
+                onClick={() => {
+                  setPricingMode("business");
+                  setSessionContext({ segment: "business" });
+                }}
+                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
+                  pricingMode === "business"
+                    ? "text-white"
+                    : "text-brand-slate hover:text-brand-oxford"
+                }`}
+              >
+                {pricingMode === "business" && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute inset-0 bg-brand-oxford rounded-lg shadow-md"
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  Business
+                </span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setPricingMode("household");
+                  setSessionContext({ segment: "family" });
+                }}
+                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
+                  pricingMode === "household"
+                    ? "text-white"
+                    : "text-brand-slate hover:text-brand-copper"
+                }`}
+              >
+                {pricingMode === "household" && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute inset-0 bg-brand-copper rounded-lg shadow-md"
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  Personal
+                </span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setPricingMode("nonprofit");
+                  setSessionContext({ segment: "nonprofit" });
+                }}
+                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
+                  pricingMode === "nonprofit"
+                    ? "text-white"
+                    : "text-brand-slate hover:text-brand-oxford"
+                }`}
+              >
+                {pricingMode === "nonprofit" && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute inset-0 bg-brand-oxford rounded-lg shadow-md"
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  Nonprofit
+                </span>
+              </button>
+            </div>
           </div>
         </div>
 
