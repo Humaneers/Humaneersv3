@@ -15,6 +15,7 @@ import {
   NavigationMenuTrigger,
 } from "./ui/navigation-menu";
 import { cn } from "./ui/utils";
+import { createErrorReportLink } from "../lib/utils";
 import { submitNewsletter } from "../lib/zoho";
 import { toast } from "sonner";
 import {
@@ -66,8 +67,20 @@ export function Layout() {
       if (import.meta.env.DEV) {
         console.error("Newsletter submission error:", error);
       }
+      const errorMsg = error instanceof Error ? error.message : "Failed to subscribe.";
+      const link = createErrorReportLink(error, "Newsletter Subscription (Footer)");
       toast.error(
-        error instanceof Error ? error.message : "Failed to subscribe. Please try again."
+        <div className="flex flex-col gap-2">
+          <span>{errorMsg}</span>
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white underline font-bold hover:text-gray-200"
+          >
+            Report to Support
+          </a>
+        </div>
       );
     } finally {
       setIsNewsletterSubmitting(false);

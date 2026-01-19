@@ -23,3 +23,27 @@ import { twMerge } from "tailwind-merge";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+/**
+ * Creates a mailto link for reporting errors to support
+ */
+export function createErrorReportLink(error: unknown, context: string): string {
+  const errorMessage = error instanceof Error ? error.message : String(error);
+  const timestamp = new Date().toISOString();
+  // Safe user agent access
+  const userAgent = typeof navigator !== "undefined" ? navigator.userAgent : "Server/Unknown";
+  const location = typeof window !== "undefined" ? window.location.href : "Unknown";
+
+  const subject = encodeURIComponent(`Issue Report: ${context}`);
+  const body = encodeURIComponent(
+    `I encountered an error while using the Humaneers website.\n\n` +
+      `Context: ${context}\n` +
+      `Error: ${errorMessage}\n` +
+      `Time: ${timestamp}\n` +
+      `Location: ${location}\n` +
+      `User Agent: ${userAgent}\n\n` +
+      `-- Please add any additional details below --\n`
+  );
+
+  return `mailto:support@humaneers.dev?subject=${subject}&body=${body}`;
+}

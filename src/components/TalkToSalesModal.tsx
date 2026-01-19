@@ -11,6 +11,7 @@ import { Loader2, CheckCircle2 } from "lucide-react";
 import { submitSalesLead, validateSalesForm, type SalesFormData } from "../lib/zoho";
 import { toast } from "sonner";
 import { trackInteraction } from "../lib/session";
+import { createErrorReportLink } from "../lib/utils";
 
 interface TalkToSalesModalProps {
   open: boolean;
@@ -119,7 +120,21 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
       onOpenChange(false);
       navigate("/thank-you");
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Failed to submit. Please try again.");
+      const errorMsg = error instanceof Error ? error.message : "Failed to submit.";
+      const link = createErrorReportLink(error, "Sales Form (Modal)");
+      toast.error(
+        <div className="flex flex-col gap-2">
+          <span>{errorMsg}</span>
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white underline font-bold hover:text-gray-200"
+          >
+            Report to Support
+          </a>
+        </div>
+      );
     } finally {
       setIsSubmitting(false);
     }

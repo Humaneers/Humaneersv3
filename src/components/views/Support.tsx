@@ -20,6 +20,7 @@ import { submitSupportTicket, validateSupportForm, type SupportFormData } from "
 import { toast } from "sonner";
 import { Seo } from "../Seo";
 import { trackInteraction } from "../../lib/session";
+import { createErrorReportLink } from "../../lib/utils";
 
 export function Support() {
   const location = useLocation();
@@ -86,8 +87,20 @@ export function Support() {
       trackInteraction(`Submitted Support Ticket: ${formData.category}`);
       toast.success("Your support ticket has been submitted!");
     } catch (error) {
+      const errorMsg = error instanceof Error ? error.message : "Failed to submit ticket.";
+      const link = createErrorReportLink(error, `Support Form - Category: ${formData.category}`);
       toast.error(
-        error instanceof Error ? error.message : "Failed to submit ticket. Please try again."
+        <div className="flex flex-col gap-2">
+          <span>{errorMsg}</span>
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white underline font-bold hover:text-gray-200"
+          >
+            Report to Support
+          </a>
+        </div>
       );
     } finally {
       setIsSubmitting(false);

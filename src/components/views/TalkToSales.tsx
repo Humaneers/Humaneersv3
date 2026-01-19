@@ -11,6 +11,7 @@ import { ShieldCheck, ArrowRight, Globe, Loader2, Building2, Home, Heart } from 
 import { submitSalesLead, validateSalesForm, type SalesFormData } from "../../lib/zoho";
 import { toast } from "sonner";
 import { Seo } from "../Seo";
+import { createErrorReportLink } from "../../lib/utils";
 
 type TalkToSalesState = {
   email?: string;
@@ -114,8 +115,20 @@ export function TalkToSales() {
       // Navigate to Thank You page
       navigate("/thank-you");
     } catch (error) {
+      const errorMsg = error instanceof Error ? error.message : "Failed to submit request.";
+      const link = createErrorReportLink(error, `Sales Form (Full Page) - Segment: ${segment}`);
       toast.error(
-        error instanceof Error ? error.message : "Failed to submit request. Please try again."
+        <div className="flex flex-col gap-2">
+          <span>{errorMsg}</span>
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white underline font-bold hover:text-gray-200"
+          >
+            Report to Support
+          </a>
+        </div>
       );
     } finally {
       setIsSubmitting(false);
