@@ -521,7 +521,9 @@ export function Colophon() {
                           ↗
                         </a>
                       </div>
-                      <span className="text-xs text-gray-500">Team communication & collaboration</span>
+                      <span className="text-xs text-gray-500">
+                        Team communication & collaboration
+                      </span>
                     </li>
                     <li className="flex flex-col gap-1">
                       <div className="flex items-center justify-between">
@@ -551,9 +553,7 @@ export function Colophon() {
                           ↗
                         </a>
                       </div>
-                      <span className="text-xs text-gray-500">
-                        DNS management & security
-                      </span>
+                      <span className="text-xs text-gray-500">DNS management & security</span>
                     </li>
                     <li className="flex flex-col gap-1">
                       <div className="flex items-center justify-between">

@@ -5,59 +5,68 @@
 **Standard:** "Clear over clever, warm professionalism"
 
 ## Brand Voice Principles (from webSpecs.md)
+
 1. **Clear over clever** - Information should be immediately accessible
-2. **Warm professionalism** - Technical expertise delivered with humanity  
+2. **Warm professionalism** - Technical expertise delivered with humanity
 3. **Specific and concrete** - No vague promises
 4. **Active and direct** - Avoid passive voice
 
 ## Page-by-Page Analysis
 
 ### ✅ Homepage (Home.tsx)
+
 - **Hero:** "Enterprise strategy for businesses and families..." - ✅ Perfect brand voice
 - **Tagline:** "IT, security, and brand growth for teams that think big" - ✅ Clear and direct
 - **Service descriptions:** All follow "clear over clever" (e.g., "No downtime, just uptime")
 - **Verdict:** Excellent consistency
 
 ### ✅ Managed IT (ManagedIT.tsx)
+
 - Uses concrete language: "99.9% uptime", "24/7 monitoring"
 - Avoids jargon without explanation
 - **Verdict:** On-brand
 
 ### ✅ Brand Growth (Growth.tsx)
+
 - Page title updated to "Brand Growth" (was "Americanization & Growth")
 - Maintains warm professionalism
 - **Verdict:** Consistent after naming fix
 
 ### ✅ Support (Support.tsx)
+
 - Priority levels clearly explained (P1-P4 with response times)
 - Warm tone: "Our team monitors tickets during business hours"
 - **Verdict:** Professional but approachable
 
 ### ✅ Contact (Contact.tsx)
+
 - Updated: "Select your inquiry type below and we'll match you with the right team"
 - Removed overly formal "route your inquiry" language
 - **Verdict:** Improved, now more conversational
 
 ### ⚠️ About (About.tsx) - NOT REVIEWED
+
 - Recommendation: Verify uses "Built by engineers for businesses" tone
 - Should avoid corporate speak
 
 ### ⚠️ Pricing (Pricing.tsx) - NOT REVIEWED
+
 - Recommendation: Ensure pricing tiers use clear, concrete language
 - Avoid "synergy" or marketing buzzwords
 
 ## Terminology Consistency Check
 
-| Concept | ✅ Preferred | ❌ Avoid |
-|---------|------------|----------|
-| Service offering | "Managed IT" | "IT Support" |
-| Marketing service | "Brand Growth" | "Brand & Marketing" |
-| Client relationship | "Partnership" | "Vendor relationship" |
-| Service quality | "Enterprise-grade" | "Industry-leading" |
-| Response | "15-minute response" | "Rapid response" |
-| Pricing | "$1,500/mo" | "Competitive pricing" |
+| Concept             | ✅ Preferred         | ❌ Avoid              |
+| ------------------- | -------------------- | --------------------- |
+| Service offering    | "Managed IT"         | "IT Support"          |
+| Marketing service   | "Brand Growth"       | "Brand & Marketing"   |
+| Client relationship | "Partnership"        | "Vendor relationship" |
+| Service quality     | "Enterprise-grade"   | "Industry-leading"    |
+| Response            | "15-minute response" | "Rapid response"      |
+| Pricing             | "$1,500/mo"          | "Competitive pricing" |
 
 ## Common Issues AVOIDED ✅
+
 - No "synergizing paradigms" corporate speak
 - No "world-class" empty superlatives
 - No passive voice ("is provided by" → "we provide")

@@ -27,12 +27,14 @@ All critical and high-priority issues have been fixed. The codebase now has:
 ### 1. ~~Critical: Missing Linting Infrastructure~~ FIXED
 
 **What was done:**
+
 - Installed ESLint, Prettier, and related plugins
 - Created `eslint.config.js` with TypeScript and React rules
 - Created `.prettierrc` with formatting configuration
 - Created `.prettierignore` for build artifacts
 
 **Files created:**
+
 - `eslint.config.js`
 - `.prettierrc`
 - `.prettierignore`
@@ -44,12 +46,12 @@ All critical and high-priority issues have been fixed. The codebase now has:
 **What was done:**
 Updated `tsconfig.json`:
 
-| Setting | Before | After |
-|---------|--------|-------|
-| `strict` | `false` | `true` |
-| `noUnusedLocals` | `false` | `true` |
+| Setting              | Before  | After  |
+| -------------------- | ------- | ------ |
+| `strict`             | `false` | `true` |
+| `noUnusedLocals`     | `false` | `true` |
 | `noUnusedParameters` | `false` | `true` |
-| `noImplicitAny` | `false` | `true` |
+| `noImplicitAny`      | `false` | `true` |
 
 ---
 
@@ -58,16 +60,16 @@ Updated `tsconfig.json`:
 **What was done:**
 Fixed all 12 instances of index-based React keys:
 
-| File | Fix Applied |
-|------|-------------|
-| `Pricing.tsx` | Added `key` attributes with tier name prefix |
-| `ManagedIT.tsx` | Used `f.desc` and structured items with IDs |
-| `Status.tsx` | Used `sys.name` as key |
-| `Home.tsx` | Already had proper keys (verified) |
-| `Services.tsx` | Used feature string as key |
+| File             | Fix Applied                                                |
+| ---------------- | ---------------------------------------------------------- |
+| `Pricing.tsx`    | Added `key` attributes with tier name prefix               |
+| `ManagedIT.tsx`  | Used `f.desc` and structured items with IDs                |
+| `Status.tsx`     | Used `sys.name` as key                                     |
+| `Home.tsx`       | Already had proper keys (verified)                         |
+| `Services.tsx`   | Used feature string as key                                 |
 | `Industries.tsx` | Used `industry.id`-prefixed keys + added keys to JSX spans |
-| `Growth.tsx` | Used `step.title` and item strings as keys |
-| `Resources.tsx` | Used `item.term` as key |
+| `Growth.tsx`     | Used `step.title` and item strings as keys                 |
+| `Resources.tsx`  | Used `item.term` as key                                    |
 
 ---
 
@@ -77,6 +79,7 @@ Fixed all 12 instances of index-based React keys:
 Added environment guards to both instances:
 
 **`src/components/ErrorBoundary.tsx`:**
+
 ```tsx
 if (import.meta.env.DEV) {
   console.error("Error caught by boundary:", error, errorInfo);
@@ -84,9 +87,10 @@ if (import.meta.env.DEV) {
 ```
 
 **`src/lib/cal.ts`:**
+
 ```tsx
 if (import.meta.env.DEV) {
-  console.error('Missing Cal.com configuration:', missing);
+  console.error("Missing Cal.com configuration:", missing);
 }
 ```
 
@@ -115,6 +119,7 @@ Added scripts to `package.json`:
 
 **What was done:**
 Fixed invalid CSS in `index.html:54`:
+
 - Before: `justify-center;` (invalid)
 - After: `justify-content: center;` (valid)
 
@@ -127,6 +132,7 @@ This was causing build failures with Tailwind CSS v4.
 ### 7. ~~Unused Imports~~ FIXED
 
 All unused imports have been removed from:
+
 - `DefinitionTooltip.tsx` - Removed `HelpCircle`
 - `Layout.tsx` - Removed `navigationMenuTriggerStyle`, fixed ref type
 - `About.tsx` - Removed `TrendingUp`, `motion`
@@ -150,6 +156,7 @@ Created `src/vite-env.d.ts` to properly type `import.meta.env` for TypeScript st
 ### Potentially Unused Dependencies
 
 Run `npx depcheck` to identify:
+
 - `@radix-ui/react-context-menu`
 - `@radix-ui/react-hover-card`
 - `@radix-ui/react-menubar`
@@ -167,12 +174,14 @@ Run `npx depcheck` to identify:
 ## Verification
 
 ### Build Status
+
 ```bash
 npm run build  # ✓ Passes
 npm run typecheck  # ✓ Passes
 ```
 
 ### New Commands Available
+
 ```bash
 npm run lint         # Check for lint issues
 npm run lint:fix     # Auto-fix lint issues
