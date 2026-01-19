@@ -351,7 +351,7 @@ export function TalkToSales() {
                         </div>
                       ) : (
                         <div className="space-y-4">
-                          {segment !== "family" && (
+                          {segment !== "personal" && (
                             <div className="grid grid-cols-2 gap-4">
                               <div className="space-y-2">
                                 <Label htmlFor="website">Website URL</Label>

@@ -7,7 +7,6 @@ import {
     ArrowRight,
     Shield,
     Clock,
-    CheckCircle2,
     Lock,
     AlertTriangle,
     Loader2,
