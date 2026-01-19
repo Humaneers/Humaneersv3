@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { getZohoAccessToken } from "../_lib/zoho.js";
-import { deriveLeadSource } from "./_lib/leadSource.ts";
+import { deriveLeadSource } from "./_lib/leadSource";
 
 interface NewsletterData {
   email: string;
