@@ -420,7 +420,7 @@ export function Pricing() {
           </p>
           <Button
             variant="outline"
-            onClick={() => navigate(routePaths.talkToSales)}
+            onClick={() => navigate(routePaths.talkToSales, { state: { source: "Pricing Page Enterprise CTA", interest: "Enterprise Plan" } })}
             className="border-brand-oxford text-brand-oxford hover:bg-brand-oxford hover:text-white px-8 py-3"
           >
             Contact Sales

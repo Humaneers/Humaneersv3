@@ -15,9 +15,9 @@ export function Contact() {
 
     // Redirect to appropriate page based on category
     if (value === "sales") {
-      navigate(routePaths.talkToSales);
+      navigate(routePaths.talkToSales, { state: { source: "Contact Page Redirect" } });
     } else if (value === "support") {
-      navigate(routePaths.support);
+      navigate(routePaths.support, { state: { source: "Contact Page Redirect" } });
     }
   };
 

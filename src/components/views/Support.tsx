@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -20,6 +21,9 @@ import { toast } from "sonner";
 import { Seo } from "../Seo";
 
 export function Support() {
+  const location = useLocation();
+  const initialSource = (location.state as { source?: string })?.source;
+
   const [formData, setFormData] = useState<SupportFormData>({
     name: "",
     email: "",
@@ -29,6 +33,7 @@ export function Support() {
     category: "",
     subject: "",
     description: "",
+    source: initialSource || "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);

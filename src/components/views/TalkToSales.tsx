@@ -32,6 +32,7 @@ export function TalkToSales() {
     budget: "",
     interests: initialData?.interest ? [initialData.interest] : ([] as string[]),
     message: "",
+    source: initialData?.source || "",
   });
 
   const [step, setStep] = useState(1);
@@ -57,8 +58,9 @@ export function TalkToSales() {
       ...prev,
       email: initialData?.email || prev.email,
       interests: initialData?.interest ? [initialData.interest] : prev.interests,
+      source: initialData?.source || prev.source,
     }));
-  }, [initialData?.email, initialData?.interest, initialData?.segment]);
+  }, [initialData?.email, initialData?.interest, initialData?.segment, initialData?.source]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -90,6 +92,7 @@ export function TalkToSales() {
         budget: formData.budget,
         interests: formData.interests,
         message: `[Segment: ${segment?.toUpperCase()}] ${formData.message}`,
+        source: formData.source,
       } as SalesFormData);
 
       toast.success("Thanks! We've received your request and will be in touch shortly.");
@@ -109,6 +112,7 @@ export function TalkToSales() {
         budget: "",
         interests: [],
         message: "",
+        source: "",
       });
     } catch (error) {
       toast.error(

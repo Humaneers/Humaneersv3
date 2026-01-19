@@ -16,6 +16,7 @@ export interface SalesFormData {
   budget?: string;
   interests: string[];
   message?: string;
+  source?: string;
 }
 
 export interface SupportFormData {
@@ -26,7 +27,9 @@ export interface SupportFormData {
   priority: string;
   category: string;
   subject: string;
+  subject: string;
   description: string;
+  source?: string;
 }
 
 export interface NewsletterFormData {
@@ -56,6 +59,7 @@ export async function submitSalesLead(data: SalesFormData): Promise<ApiResponse>
     budget: data.budget,
     interests: data.interests.join(", "),
     message: data.message,
+    source: data.source,
   };
 
   const response = await fetch("/api/zoho/leads", {

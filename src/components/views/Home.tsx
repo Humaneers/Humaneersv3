@@ -16,7 +16,7 @@ export function Home() {
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      navigate(routePaths.talkToSales, { state: { email } });
+      navigate(routePaths.talkToSales, { state: { email, source: "Homepage Hero" } });
     }
   };
 
@@ -213,7 +213,7 @@ export function Home() {
               Get the enterprise-grade support you deserve with the personal touch you need.
             </p>
             <Button
-              onClick={() => navigate(routePaths.talkToSales)}
+              onClick={() => navigate(routePaths.talkToSales, { state: { source: "Homepage Bottom CTA" } })}
               className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-10 py-7 h-auto rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
             >
               Let's get to work
