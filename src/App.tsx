@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Layout } from "./components/Layout";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { Seo } from "./components/Seo";
@@ -348,6 +349,7 @@ export default function App() {
       </Routes>
       <ScrollToTop />
       <Analytics />
+      <SpeedInsights />
     </ErrorBoundary>
   );
 }
