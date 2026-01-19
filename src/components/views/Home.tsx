@@ -213,7 +213,7 @@ export function Home() {
                 },
                 {
                   title: "“We’re not ready.”",
-                  copy: "That’s what we’re here for. We build the readiness with you.",
+                  copy: "That’s what we’re here for. We love to help now and can discuss what's next after fixing what's wrong.",
                 },
                 {
                   title: "“Switching sounds painful.”",

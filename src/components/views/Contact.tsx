@@ -115,7 +115,7 @@ export function Contact() {
                           <div className="py-2">
                             <div className="font-semibold">Technical Support</div>
                             <div className="text-sm text-gray-500">
-                              Get help with existing services
+                              For existing clients or new clients needing immediate help
                             </div>
                           </div>
                         </SelectItem>

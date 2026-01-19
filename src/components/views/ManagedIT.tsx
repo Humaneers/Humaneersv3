@@ -117,7 +117,7 @@ export function ManagedIT() {
               <Button
                 variant="outline"
                 onClick={() => navigate(routePaths.pricing)}
-                className="border-white/30 text-white hover:bg-white/10 text-lg px-8 py-6 h-auto rounded-full backdrop-blur-sm"
+                className="border-white/30 text-white bg-transparent hover:bg-white/10 text-lg px-8 py-6 h-auto rounded-full backdrop-blur-sm"
               >
                 View Pricing
               </Button>

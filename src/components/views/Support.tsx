@@ -79,7 +79,8 @@ export function Support() {
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">Support Center</h1>
             <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-2xl mx-auto">
-              Submit a support ticket and our engineering team will respond promptly.
+              Submit a support ticket and our engineering team will respond promptly. We welcome
+              new clients in crisis — we'll fix what's wrong now and discuss the rest later.
             </p>
           </div>
         </section>
@@ -92,8 +93,9 @@ export function Support() {
                 <div>
                   <h2 className="text-2xl font-bold text-brand-oxford mb-6">Need Help?</h2>
                   <p className="text-brand-slate mb-8">
-                    Fill out the form to submit a support ticket. Our team monitors tickets during
-                    business hours and will respond based on priority level.
+                    Fill out the form to submit a support ticket. We welcome new clients who need
+                    immediate help. Our team monitors tickets during business hours and will respond
+                    based on priority level.
                   </p>
                 </div>
 
@@ -150,10 +152,11 @@ export function Support() {
                   </p>
                   <div className="flex items-center gap-3">
                     <Headphones className="w-5 h-5 text-brand-copper" />
-                    <h3 className="font-bold">Existing Client?</h3>
+                    <h3 className="font-bold">New to Humaneers?</h3>
                   </div>
                   <p className="text-sm text-gray-300 mt-2">
-                    Retainer clients can also reach us directly via your dedicated support channel.
+                    We love to help now and can discuss what's next after fixing what's wrong. New
+                    crisis clients are always welcome.
                   </p>
                 </div>
               </div>

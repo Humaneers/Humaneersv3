@@ -159,7 +159,7 @@ export function TalkToSales() {
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Let's Build Your Strategy</h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Tell us about your organization and we'll design a custom roadmap for your IT and
-              security needs.
+              security needs. In a crisis? We love to help now and discuss the rest later.
             </p>
           </div>
         </div>
