@@ -49,7 +49,7 @@ export function Home() {
 
   return (
     <Seo
-      title="Humaneers | Enterprise Strategy, Small Business Soul"
+      title="Humaneers | Enterprise Strategy. Built with Precision."
       description="Enterprise-grade IT, security, and brand growth for small businesses and families. SOC 2 compliant, 100% US-based managed IT services, family protection, and fractional leadership."
     >
       <link
@@ -77,12 +77,11 @@ export function Home() {
               className="max-w-3xl"
             >
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                Enterprise Strategy. <br />
-                <span className="text-brand-copper">Small Business Soul.</span>
+                Enterprise strategy for businesses and families. <br />
+                <span className="text-brand-copper">Built with precision, delivered with soul.</span>
               </h1>
               <h2 className="text-xl md:text-2xl text-gray-200 mb-10 leading-relaxed font-light">
-                IT, security, and brand growth for teams that think big — even if they’re
-                super-small.
+                IT, security, and brand growth for those who demand excellence.
               </h2>
               <div className="flex flex-col gap-4 max-w-lg">
                 <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-3">

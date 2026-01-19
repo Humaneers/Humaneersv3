@@ -1,6 +1,6 @@
 # Humaneers Website
 
-> **Enterprise Strategy. Small Business Soul.**
+> **Enterprise strategy for businesses and families. Built with precision, delivered with soul.**
 
 The official website for Humaneers, built with modern web technologies to deliver a "Modern Craftsman" digital experience.
 

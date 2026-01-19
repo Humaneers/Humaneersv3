@@ -13,7 +13,7 @@
 ## Page-by-Page Analysis
 
 ### ✅ Homepage (Home.tsx)
-- **Hero:** "Enterprise Strategy. Small Business Soul." - ✅ Perfect brand voice
+- **Hero:** "Enterprise strategy for businesses and families..." - ✅ Perfect brand voice
 - **Tagline:** "IT, security, and brand growth for teams that think big" - ✅ Clear and direct
 - **Service descriptions:** All follow "clear over clever" (e.g., "No downtime, just uptime")
 - **Verdict:** Excellent consistency

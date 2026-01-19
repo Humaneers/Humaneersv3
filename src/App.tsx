@@ -77,7 +77,7 @@ export default function App() {
             path={routePaths.home}
             element={
               <Seo
-                title="Humaneers | Enterprise Strategy, Small Business Soul"
+                title="Humaneers | Enterprise Strategy. Built with Precision."
                 canonicalPath={routePaths.home}
               >
                 <Home />

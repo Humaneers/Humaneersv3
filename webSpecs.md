@@ -19,7 +19,7 @@
 ### 1.2 "Modern Craftsman" Philosophy
 - **Aesthetic**: Precision tooling meets artisan workshop. Professional polish + approachable warmth.
 - **Values**: Specificity, Transparency, Reliability, Stewardship.
-- **Tone**: "Enterprise Strategy. Small Business Soul."
+- **Tone**: "Enterprise strategy for businesses and families. Built with precision, delivered with soul."
   - **Do**: "We fix critical vulnerabilities." (Active, specific)
   - **Don't**: "We optimize security protocols." (Corporate jargon)
   - **Do**: "Built with ❤️ + ☕️ in AZ." (Human touch)
@@ -141,7 +141,7 @@
 ### 6.2 Family Inclusion
 - **Shift**: Moved from business-only to "Business + Family" dual focus.
 - **Updates**:
-  - Homepage Hero: "Enterprise Strategy. Small Business Soul." implies scope.
+  - Homepage Hero: "Enterprise strategy for businesses and families..." implies scope.
   - Pricing: Split into "Business", "Personal", "Nonprofit" tabs.
 
 ### 6.3 Routing Logic
