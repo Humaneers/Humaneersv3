@@ -283,12 +283,10 @@ export function ManagedIT() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
-                onClick={() =>
-                  navigate(routePaths.talkToSales, { state: { interest: "Managed IT" } })
-                }
+                onClick={() => navigate(routePaths.pricing)}
                 className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-10 py-8 h-auto rounded-full shadow-xl hover:shadow-2xl transition-all"
               >
-                Start Your Assessment
+                View Pricing
               </Button>
             </div>
             <p className="mt-6 text-sm text-gray-500">
