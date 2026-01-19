@@ -1,7 +1,7 @@
 import { lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/react";
+// import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Layout } from "./components/Layout";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { Seo } from "./components/Seo";
@@ -90,7 +90,7 @@ export default function App() {
             element={
               <Seo
                 title="Humaneers | Pricing"
-                description="Enterprise IT, brand strategy, and family cybersecurity starting at $1,500/mo. SOC 2 Type II compliant."
+                description="Transparent pricing for businesses and families. Managed IT from $90/user, Family Protection from $25/mo. SOC 2 Type II compliant."
                 canonicalPath={routePaths.pricing}
               >
                 <Pricing />
@@ -114,7 +114,7 @@ export default function App() {
             element={
               <Seo
                 title="Humaneers | About"
-                description="Built by engineers for businesses. SOC 2 certified. Tempe-based, serving clients nationwide."
+                description="Built by engineers for businesses and families. SOC 2 certified. Tempe-based, serving clients nationwide."
                 canonicalPath={routePaths.about}
               >
                 <About />
@@ -210,7 +210,7 @@ export default function App() {
             element={
               <Seo
                 title="Humaneers | Start a Conversation"
-                description="Tell us about your organization and we'll design a custom roadmap."
+                description="Tell us about your goals and we'll design a custom roadmap. For businesses, families, and individuals."
                 canonicalPath={routePaths.talkToSales}
               >
                 <TalkToSales />
@@ -349,7 +349,7 @@ export default function App() {
       </Routes>
       <ScrollToTop />
       <Analytics />
-      <SpeedInsights />
+      {/* <SpeedInsights /> */}
     </ErrorBoundary>
   );
 }
