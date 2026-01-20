@@ -80,25 +80,19 @@ export function About() {
             >
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
-                  <h2 className="text-3xl font-bold text-brand-oxford mb-6">The Enterprise Gap</h2>
+                  <h2 className="text-3xl font-bold text-brand-oxford mb-6">From Stealth to Service</h2>
                   <div className="prose text-brand-slate leading-relaxed space-y-4">
                     <p>
-                      For decades, the most powerful technology, the tightest security, and the
-                      smartest growth strategies were reserved for the Fortune 500. Small
-                      businesses, families, solo entrepreneurs, and nonprofits were left to fend for
-                      themselves with off-the-shelf software and "geek squad" support.
+                      Humaneers began in stealth mode, serving a select roster of referral-only clients who needed enterprise-grade solutions without enterprise bureaucracy. We built our reputation one bespoke engagement at a time, delivering the same caliber of strategy, security, and infrastructure used by Fortune 500 companies to businesses, families, and nonprofits who had been systematically underserved.
                     </p>
                     <p>
-                      We saw this gap widen every year. As cyber threats became more sophisticated
-                      and digital markets more crowded, the "little guy" was being priced out of
-                      survival.
+                      Word travels fast when you fix what others cannot. Our clients, many of whom came to us after exhausting traditional options, began asking a consistent question: <em>"Why aren't you available to everyone?"</em>
                     </p>
                     <p>
-                      <strong>Humaneers was founded to close that gap.</strong> We stripped away the
-                      overhead of big consulting firms but kept the methodology. We took the same
-                      security protocols used by global banks and scaled them for families and
-                      high-net-worth households. We took the brand strategies used by multinational
-                      CPG companies and applied them to local startups.
+                      The answer, for years, was capacity. We believed that maintaining boutique quality required staying small. But as our team matured and our processes crystallized, we realized we had built something scalable without sacrificing soul. Our clients encouraged us to go public, not because they wanted to share us, but because they believed others deserved access to what we had proven we could deliver.
+                    </p>
+                    <p>
+                      <strong>So here we are.</strong> No longer invitation-only, but still uncompromisingly focused on precision, transparency, and results. We bring the same rigor, the same vendor neutrality, and the same refusal to cut corners that our earliest clients relied on. The only difference is that now, you do not need a referral to work with us. You just need a problem worth solving.
                     </p>
                   </div>
                 </div>

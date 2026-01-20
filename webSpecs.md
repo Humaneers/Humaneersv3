@@ -21,6 +21,7 @@
 ### 1.2 "Modern Craftsman" Philosophy
 
 - **Aesthetic**: Precision tooling meets artisan workshop. Professional polish + approachable warmth.
+- **Heritage**: Founded in stealth mode serving referral-only clients. Proven track record delivering bespoke, enterprise-grade solutions without enterprise bureaucracy.
 - **Values**: Specificity, Transparency, Reliability, Stewardship.
 - **Tone**: "Enterprise strategy for businesses and families. Built with precision, delivered with soul."
   - **Do**: "We fix critical vulnerabilities." (Active, specific)
@@ -133,14 +134,25 @@
 
 ## 5. Content & Messaging Guidelines
 
-### 5.1 Voice
+### 5.1 Brand Heritage & Positioning
+
+- **Stealth Origins**: Humaneers began as an invitation-only service, serving select clients through referrals. This heritage reinforces credibility and premium positioning.
+- **Proven Track Record**: Built reputation through bespoke engagements delivering enterprise-grade solutions to businesses, families, and nonprofits systematically underserved by traditional providers.
+- **Client-Driven Public Launch**: Went public not through marketing push, but through client encouragement. "You do not need a referral to work with us. You just need a problem worth solving."
+- **Exceptional USP**: Enterprise methodology without enterprise overhead. Boutique quality, now scalable.
+- **Messaging Pillars**:
+  - **Exclusivity Heritage**: Reference past selectivity to reinforce premium quality.
+  - **Proven Results**: Emphasize track record with existing clients.
+  - **Maintained Standards**: "No longer invitation-only, but still uncompromisingly focused on precision, transparency, and results."
+
+### 5.2 Voice
 
 - **Distinction**: Clearly distinguish between B2B (Business) and B2C (Family) contexts while maintaining a unified "Modern Craftsman" brand.
 - **Business**: Confidence, Competence, Strategic Partnership.
 - **Family**: Protection, Peace of Mind, Inclusion.
 - **Nonprofit**: Mission-focus, Stewardship, Value.
 
-### 5.2 Key Terminology
+### 5.3 Key Terminology
 
 - **"Managed IT"** (NOT "Computer Repair").
 - **"Brand Growth"** (NOT "SEO Services").
@@ -148,7 +160,7 @@
 - **"Fractional Leadership"** (NOT "Consulting").
 - **"Hourly Support"** (For ad-hoc engineering needs).
 
-### 5.3 Copy Patterns
+### 5.4 Copy Patterns
 
 - **Price Transparency**: Always show unit pricing (e.g., "$90/user/mo").
 - **Local Roots**: "Based in Tempe, AZ. Serving clients nationwide."
