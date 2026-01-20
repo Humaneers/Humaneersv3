@@ -4,6 +4,153 @@ import { getContextString } from "./session";
  * Zoho API Client
  *
  * Handles form submissions to Zoho CRM and Zoho Desk via backend API routes.
+ * Also provides OAuth token management utilities.
+ */
+
+/**
+ * OAuth Token Management
+ */
+
+interface ZohoTokenResponse {
+  access_token: string;
+  expires_in: number;
+  api_domain: string;
+  token_type: string;
+}
+
+interface ZohoConfig {
+  clientId: string;
+  clientSecret: string;
+  refreshToken: string;
+  accountsUrl: string;
+}
+
+/**
+ * Get Zoho configuration from environment variables
+ */
+function getZohoConfig(): ZohoConfig {
+  const clientId = process.env.ZOHO_CLIENT_ID;
+  const clientSecret = process.env.ZOHO_CLIENT_SECRET;
+  const refreshToken = process.env.ZOHO_REFRESH_TOKEN;
+  const accountsUrl = process.env.ZOHO_ACCOUNTS_URL || 'https://accounts.zoho.com';
+
+  if (!clientId || !clientSecret || !refreshToken) {
+    throw new Error('Missing required Zoho environment variables');
+  }
+
+  return { clientId, clientSecret, refreshToken, accountsUrl };
+}
+
+/**
+ * Get a fresh access token using the refresh token
+ * Access tokens expire after 1 hour
+ */
+export async function getZohoAccessToken(): Promise<string> {
+  const config = getZohoConfig();
+
+  const params = new URLSearchParams({
+    refresh_token: config.refreshToken,
+    client_id: config.clientId,
+    client_secret: config.clientSecret,
+    grant_type: 'refresh_token',
+  });
+
+  const response = await fetch(`${config.accountsUrl}/oauth/v2/token?${params.toString()}`, {
+    method: 'POST',
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`Failed to get Zoho access token: ${error}`);
+  }
+
+  const data: ZohoTokenResponse = await response.json();
+  return data.access_token;
+}
+
+/**
+ * Make an authenticated request to Zoho CRM API
+ */
+export async function zohoApiRequest<T = any>(
+  endpoint: string,
+  options: RequestInit = {}
+): Promise<T> {
+  const accessToken = await getZohoAccessToken();
+  const apiDomain = process.env.ZOHO_API_DOMAIN || 'https://www.zohoapis.com';
+
+  const response = await fetch(`${apiDomain}${endpoint}`, {
+    ...options,
+    headers: {
+      'Authorization': `Zoho-oauthtoken ${accessToken}`,
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`Zoho API request failed: ${error}`);
+  }
+
+  return response.json();
+}
+
+/**
+ * Make an authenticated request to Zoho Desk API
+ */
+export async function zohoDeskApiRequest<T = any>(
+  endpoint: string,
+  orgId: string,
+  options: RequestInit = {}
+): Promise<T> {
+  const accessToken = await getZohoAccessToken();
+
+  const response = await fetch(`https://desk.zoho.com/api/v1${endpoint}`, {
+    ...options,
+    headers: {
+      'Authorization': `Zoho-oauthtoken ${accessToken}`,
+      'orgId': orgId,
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`Zoho Desk API request failed: ${error}`);
+  }
+
+  return response.json();
+}
+
+/**
+ * Make an authenticated request to Zoho Bookings API
+ */
+export async function zohoBookingsApiRequest<T = any>(
+  endpoint: string,
+  options: RequestInit = {}
+): Promise<T> {
+  const accessToken = await getZohoAccessToken();
+
+  const response = await fetch(`https://bookings.zoho.com/api/v1${endpoint}`, {
+    ...options,
+    headers: {
+      'Authorization': `Zoho-oauthtoken ${accessToken}`,
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`Zoho Bookings API request failed: ${error}`);
+  }
+
+  return response.json();
+}
+
+/**
+ * Form Submission Types and Functions
  */
 
 export interface SalesFormData {
