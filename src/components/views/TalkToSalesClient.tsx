@@ -23,10 +23,12 @@ function TalkToSalesContent() {
   const searchParams = useSearchParams();
 
   const [segment, setSegment] = useState<CustomerSegment>(null);
-  const [mode, setMode] = useState<"request" | "book">("request");
-  void setMode; // Temporarily disabled
-  void CalendarIcon; // Temporarily disabled
 
+  // Disabled state: always "request"
+  const [mode] = useState<"request" | "book">("request");
+
+  // Disabled booking selection: always false
+  const [wantToBook] = useState(false);
 
   const [formData, setFormData] = useState<SalesFormData>({
     firstName: "",
@@ -51,20 +53,11 @@ function TalkToSalesContent() {
     formData.interests.some(i => /crisis|emergency|reputation/i.test(i)) ||
     /crisis|emergency|reputation/i.test(formData.source || "");
 
-  const [wantToBook, setWantToBook] = useState(false); // Default to false for hydration safety
-  void setWantToBook; // Temporarily disabled
 
-
-  // Update wantToBook if crisis situation changes (e.g. user selects "Emergency")
+  // Update wantToBook if crisis situation changes - DISABLED
   useEffect(() => {
-    // Disabled booking logic
-    /*
-    if (isCrisis) {
-      setWantToBook(true);
-    }
-    */
+    // Logic disabled to prevent booking access
   }, [isCrisis]);
-
 
   useEffect(() => {
     const interest = searchParams.get("interest");
@@ -142,7 +135,7 @@ function TalkToSalesContent() {
         source: formData.source,
       } as SalesFormData);
 
-      // If user wants to book, move to next step instead of redirecting
+      // If user wants to book (disabled, so always false)
       if (wantToBook) {
         setStep(3);
         toast.success("Request sent! Please select a time for your call.");
@@ -216,6 +209,10 @@ function TalkToSalesContent() {
     setStep(2);
   };
 
+  const sanitizeId = (text: string) => {
+    return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+  };
+
   return (
     <div className="bg-brand-cream min-h-screen">
       <div className="bg-brand-oxford text-white py-16">
@@ -272,11 +269,9 @@ function TalkToSalesContent() {
                   {mode === 'request' ? "Request a Consultation" : "Book a Live Call"}
                 </CardTitle>
 
-                {/* Mode Toggle */}
-                {/* Mode Toggle - Temporarily Disabled
-                <div className="flex items-center p-1 bg-gray-100 rounded-lg self-start md:self-auto">
+                {/* Mode Toggle - Hidden but structure preserved */}
+                <div className="hidden flex items-center p-1 bg-gray-100 rounded-lg self-start md:self-auto">
                   <button
-                    onClick={() => setMode('request')}
                     className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${mode === 'request'
                       ? "bg-white text-brand-oxford shadow-sm"
                       : "text-gray-500 hover:text-gray-700"
@@ -285,7 +280,6 @@ function TalkToSalesContent() {
                     Request Info
                   </button>
                   <button
-                    onClick={() => setMode('book')}
                     className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all flex items-center gap-2 ${mode === 'book'
                       ? "bg-white text-brand-copper shadow-sm"
                       : "text-gray-500 hover:text-gray-700"
@@ -295,8 +289,6 @@ function TalkToSalesContent() {
                     Book Now
                   </button>
                 </div>
-                */}
-
               </div>
               <CardDescription>
                 {mode === 'request'
@@ -550,32 +542,37 @@ function TalkToSalesContent() {
                                     "Growth Strategy",
                                     "Emergency Support",
                                   ]
-                              ).map((item) => (
-                                <div
-                                  key={item}
-                                  role="button"
-                                  tabIndex={0}
-                                  onClick={() => handleInterestChange(item)}
-                                  onKeyDown={(e) => {
-                                    if (e.key === "Enter" || e.key === " ") {
-                                      e.preventDefault();
-                                      handleInterestChange(item);
-                                    }
-                                  }}
-                                  className="flex items-center space-x-2 border rounded-md p-3 hover:bg-gray-50 transition-colors cursor-pointer"
-                                >
-                                  <Checkbox
-                                    id={`interest-${item}`}
-                                    checked={formData.interests.includes(item)}
-                                  // onClick handled by parent div for better target
-                                  />
-                                  <span
-                                    className="text-sm font-medium leading-none cursor-pointer w-full"
+                              ).map((item) => {
+                                const itemId = `interest-${sanitizeId(item)}`;
+                                return (
+                                  <div
+                                    key={item}
+                                    role="button"
+                                    tabIndex={0}
+                                    onClick={() => handleInterestChange(item)}
+                                    onKeyDown={(e) => {
+                                      if (e.key === "Enter" || e.key === " ") {
+                                        e.preventDefault();
+                                        handleInterestChange(item);
+                                      }
+                                    }}
+                                    className="flex items-center space-x-2 border rounded-md p-3 hover:bg-gray-50 transition-colors cursor-pointer"
                                   >
-                                    {item}
-                                  </span>
-                                </div>
-                              ))}
+                                    <Checkbox
+                                      id={itemId}
+                                      checked={formData.interests.includes(item)}
+                                      onCheckedChange={() => handleInterestChange(item)}
+                                      className="pointer-events-none" // Let parent div handle interactions to avoid double-toggles
+                                    />
+                                    <Label
+                                      htmlFor={itemId}
+                                      className="text-sm font-medium leading-none cursor-pointer w-full pointer-events-none"
+                                    >
+                                      {item}
+                                    </Label>
+                                  </div>
+                                );
+                              })}
                             </div>
                           </div>
 
@@ -604,19 +601,19 @@ function TalkToSalesContent() {
                                   </div>
                                   <div className="ml-3">
                                     <p className="text-sm text-red-700 font-bold">
-                                      For crisis or reputation emergencies, we prioritize speed. We strongly recommend scheduling a call immediately to begin mitigation.
+                                      For crisis or reputation emergencies, we prioritize speed. Please submit this form and we will contact you immediately.
                                     </p>
                                   </div>
                                 </div>
                               </div>
                             )}
 
-                            {/* Booking Checkbox - Temporarily Disabled
-                            <div className="flex items-center gap-2 mb-2">
+                            {/* Booking Checkbox - Hidden */}
+                            <div className="hidden flex items-center gap-2 mb-2">
                               <Checkbox
                                 id="wantToBook"
                                 checked={wantToBook}
-                                onCheckedChange={(c) => setWantToBook(!!c)}
+                                // onCheckedChange={(c) => setWantToBook(!!c)}
                                 className={isCrisis ? "data-[state=checked]:bg-red-600 border-red-200" : ""}
                               />
                               <Label htmlFor="wantToBook" className={`font-semibold cursor-pointer ${isCrisis ? "text-red-700 font-bold" : "text-brand-oxford"}`}>
@@ -626,8 +623,6 @@ function TalkToSalesContent() {
                                 }
                               </Label>
                             </div>
-                            */}
-
 
                             <div className="flex flex-col sm:flex-row gap-3">
                               <Button
@@ -641,7 +636,6 @@ function TalkToSalesContent() {
                               <Button
                                 type="submit"
                                 className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white text-lg py-6 h-auto"
-                                disabled={isSubmitting}
                               >
                                 {isSubmitting ? (
                                   <><Loader2 className="mr-2 w-5 h-5 animate-spin" /> Processing...</>
