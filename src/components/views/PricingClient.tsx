@@ -195,10 +195,11 @@ export function PricingClient() {
                   setPricingMode("business");
                   setSessionContext({ segment: "business" });
                 }}
-                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "business"
+                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
+                  pricingMode === "business"
                     ? "text-white"
                     : "text-brand-slate hover:text-brand-oxford"
-                  }`}
+                }`}
               >
                 {pricingMode === "business" && (
                   <motion.div
@@ -217,10 +218,11 @@ export function PricingClient() {
                   setPricingMode("household");
                   setSessionContext({ segment: "family" });
                 }}
-                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "household"
+                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
+                  pricingMode === "household"
                     ? "text-white"
                     : "text-brand-slate hover:text-brand-copper"
-                  }`}
+                }`}
               >
                 {pricingMode === "household" && (
                   <motion.div
@@ -239,10 +241,11 @@ export function PricingClient() {
                   setPricingMode("nonprofit");
                   setSessionContext({ segment: "nonprofit" });
                 }}
-                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "nonprofit"
+                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
+                  pricingMode === "nonprofit"
                     ? "text-white"
                     : "text-brand-slate hover:text-brand-oxford"
-                  }`}
+                }`}
               >
                 {pricingMode === "nonprofit" && (
                   <motion.div
@@ -269,14 +272,15 @@ export function PricingClient() {
         )}
 
         <div
-          className={`grid gap-8 mx-auto ${currentTiers.length === 1
+          className={`grid gap-8 mx-auto ${
+            currentTiers.length === 1
               ? "max-w-md grid-cols-1"
               : currentTiers.length === 2
                 ? "max-w-4xl grid-cols-1 md:grid-cols-2"
                 : currentTiers.length === 3
                   ? "max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
                   : "max-w-7xl grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
-            }`}
+          }`}
         >
           {currentTiers.map((tier, index) => {
             const handleTierClick = () => {
@@ -295,10 +299,11 @@ export function PricingClient() {
               router.push(`${routePaths.talkToSales}?interest=${encodeURIComponent(interest)}`);
             };
 
-            const buttonClasses = `w-full py-6 text-lg font-medium shadow-md transition-all ${tier.highlighted
+            const buttonClasses = `w-full py-6 text-lg font-medium shadow-md transition-all ${
+              tier.highlighted
                 ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-lg"
                 : "bg-brand-copper hover:bg-brand-copper-dark text-white"
-              }`;
+            }`;
 
             return (
               <motion.div
@@ -306,10 +311,11 @@ export function PricingClient() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`relative bg-white rounded-2xl transition-all duration-300 flex flex-col h-full ${tier.highlighted
+                className={`relative bg-white rounded-2xl transition-all duration-300 flex flex-col h-full ${
+                  tier.highlighted
                     ? "shadow-2xl ring-1 ring-brand-copper z-10"
                     : "shadow-lg hover:shadow-xl border border-gray-100"
-                  }`}
+                }`}
               >
                 {tier.highlighted && (
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-brand-copper text-white px-4 py-1 rounded-full text-sm font-bold shadow-sm uppercase tracking-wider">

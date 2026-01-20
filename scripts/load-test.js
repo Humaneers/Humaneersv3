@@ -3,7 +3,7 @@ import autocannon from "autocannon";
 async function runLoadTest() {
   console.log("🚀 Starting load test...");
 
-  const url = "http://localhost:4173";
+  const url = "http://localhost:3001";
 
   const instance = autocannon(
     {

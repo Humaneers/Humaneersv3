@@ -9,7 +9,7 @@ export function CrisisManagementClient() {
   const router = useRouter();
 
   return (
-    <div className="bg-white">
+    <div className="bg-brand-cream">
       {/* Hero */}
       <section className="bg-stone-900 text-white py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80')] opacity-20 bg-cover bg-center mix-blend-overlay"></div>
@@ -38,7 +38,7 @@ export function CrisisManagementClient() {
       </section>
 
       {/* Services */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-brand-cream">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16">
             <div>

@@ -109,7 +109,7 @@ export function ServicesClient() {
   const services = [...initialServices, ...additionalServices];
 
   return (
-    <div className="bg-white">
+    <div className="bg-brand-cream">
       {/* Hero */}
       <section className="bg-brand-oxford text-white py-20 relative overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -199,7 +199,7 @@ export function ServicesClient() {
       </section>
 
       {/* The Humaneers Difference */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-brand-cream">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold text-brand-oxford mb-12">Why Clients Choose Us</h2>
           <div className="grid md:grid-cols-3 gap-8">

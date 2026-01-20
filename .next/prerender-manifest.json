@@ -2,8 +2,6 @@
   "version": 4,
   "routes": {
     "/_global-error": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -13,11 +11,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -34,8 +27,6 @@
     },
     "/_not-found": {
       "initialStatus": 404,
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -45,11 +36,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -65,8 +51,6 @@
       ]
     },
     "/about": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -76,11 +60,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -96,8 +75,6 @@
       ]
     },
     "/client-care": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -107,11 +84,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -127,8 +99,6 @@
       ]
     },
     "/colophon": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -138,11 +108,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -158,8 +123,6 @@
       ]
     },
     "/contact": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -169,11 +132,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -189,8 +147,6 @@
       ]
     },
     "/crisis-management": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -200,11 +156,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -220,8 +171,6 @@
       ]
     },
     "/estate": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -231,11 +180,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -251,8 +195,6 @@
       ]
     },
     "/ethics": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -262,11 +204,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -282,8 +219,6 @@
       ]
     },
     "/family-protection": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -293,11 +228,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -313,8 +243,6 @@
       ]
     },
     "/fractional-leadership": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -324,11 +252,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -344,8 +267,6 @@
       ]
     },
     "/growth": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -355,11 +276,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -375,8 +291,6 @@
       ]
     },
     "/industries": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -386,11 +300,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -406,8 +315,6 @@
       ]
     },
     "/managed-it": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -417,11 +324,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -437,8 +339,6 @@
       ]
     },
     "/nonprofits": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -448,11 +348,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -468,8 +363,6 @@
       ]
     },
     "/": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -479,11 +372,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -499,8 +387,6 @@
       ]
     },
     "/personal-it": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -510,11 +396,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -530,8 +411,6 @@
       ]
     },
     "/pricing": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -541,11 +420,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -561,8 +435,6 @@
       ]
     },
     "/privacy": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -572,11 +444,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -592,8 +459,6 @@
       ]
     },
     "/resources": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -603,11 +468,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -623,8 +483,6 @@
       ]
     },
     "/senior-care": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -634,11 +492,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -654,8 +507,6 @@
       ]
     },
     "/services": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -665,11 +516,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -685,8 +531,6 @@
       ]
     },
     "/status": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -696,11 +540,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -716,8 +555,6 @@
       ]
     },
     "/support": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -727,11 +564,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -747,8 +579,6 @@
       ]
     },
     "/talk-to-sales": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -758,11 +588,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -778,8 +603,6 @@
       ]
     },
     "/terms": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -789,11 +612,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -809,8 +627,6 @@
       ]
     },
     "/thank-you": {
-      "renderingMode": "PARTIALLY_STATIC",
-      "experimentalPPR": true,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -820,11 +636,6 @@
           "type": "header",
           "key": "content-type",
           "value": "multipart/form-data;.*"
-        },
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight"
         }
       ],
       "initialRevalidateSeconds": false,
@@ -843,8 +654,8 @@
   "dynamicRoutes": {},
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "9a2dbcae013756f3eb7287a66d0bfce8",
-    "previewModeSigningKey": "25c9db6c3d87b66a282b4f25b63b52f6a116d4df1129ee49be7ac066907251cb",
-    "previewModeEncryptionKey": "4a9d2d605497dd958563a456314f7ea95bfaebcff6b821c49393d2c5aee4f359"
+    "previewModeId": "dc21f38f638e76257c9d6661d392370d",
+    "previewModeSigningKey": "463f18ae49972c11545b4a73bcbf150d4935152c64b469ad34859980684868e5",
+    "previewModeEncryptionKey": "4ecdd20f74540f4cb8624dc33d864e06c914badc0dc0763944ae39a0cf1aaa86"
   }
 }

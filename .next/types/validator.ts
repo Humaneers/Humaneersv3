@@ -272,6 +272,24 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../src/app/api/diagnostics/route.ts
+{
+  type __IsExpected<Specific extends RouteHandlerConfig<"/api/diagnostics">> = Specific
+  const handler = {} as typeof import("../../src/app/api/diagnostics/route.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/api/submit-ethics/route.ts
+{
+  type __IsExpected<Specific extends RouteHandlerConfig<"/api/submit-ethics">> = Specific
+  const handler = {} as typeof import("../../src/app/api/submit-ethics/route.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/api/zoho/leads/route.ts
 {
   type __IsExpected<Specific extends RouteHandlerConfig<"/api/zoho/leads">> = Specific

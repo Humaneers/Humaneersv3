@@ -12,6 +12,8 @@ export const metadata: Metadata = {
     "Enterprise strategy for businesses and families. Built with precision, delivered with soul.",
 };
 
+import { Analytics } from "../components/Analytics";
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -25,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Footer />
           </Suspense>
         </TooltipProvider>
+        <Analytics />
       </body>
     </html>
   );

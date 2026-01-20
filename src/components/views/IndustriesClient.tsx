@@ -33,7 +33,7 @@ export function IndustriesClient() {
   ];
 
   return (
-    <div className="bg-white">
+    <div className="bg-brand-cream">
       {/* Hero */}
       <section className="bg-brand-oxford text-white py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80')] opacity-10 bg-cover bg-center mix-blend-overlay"></div>
@@ -91,7 +91,7 @@ export function IndustriesClient() {
       </section>
 
       {/* The Humaneers Difference */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-brand-cream">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row gap-16 items-center">
             <div className="md:w-1/2">

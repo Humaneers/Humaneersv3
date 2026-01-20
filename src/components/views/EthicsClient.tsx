@@ -53,7 +53,7 @@ export function EthicsClient() {
   };
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-brand-cream min-h-screen">
       {/* Header */}
       <section className="bg-brand-oxford text-white py-20 relative overflow-hidden">
         <div className="container mx-auto px-6 text-center relative z-10">

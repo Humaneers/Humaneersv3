@@ -6,7 +6,7 @@ export function TermsClient() {
   const currentDate = useMemo(() => new Date().toLocaleDateString(), []);
 
   return (
-    <div className="bg-white py-24 min-h-screen">
+    <div className="bg-brand-cream py-24 min-h-screen">
       <div className="container mx-auto px-6 max-w-4xl">
         <h1 className="text-4xl font-bold text-brand-oxford mb-8">Terms of Service</h1>
         <div className="prose prose-lg text-brand-slate">

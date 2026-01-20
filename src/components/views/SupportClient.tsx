@@ -399,7 +399,7 @@ export function SupportClient() {
         </div>
       </section>
 
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-brand-cream">
         <div className="container mx-auto px-6 max-w-4xl">
           <h2 className="text-3xl font-bold text-brand-oxford mb-8 text-center">
             Frequently Asked Questions

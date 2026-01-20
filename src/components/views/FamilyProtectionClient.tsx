@@ -64,7 +64,7 @@ export function FamilyProtectionClient() {
   ];
 
   return (
-    <div className="bg-white">
+    <div className="bg-brand-cream">
       {/* Hero */}
       <section className="bg-brand-oxford text-white py-24 relative overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -170,7 +170,7 @@ export function FamilyProtectionClient() {
       </section>
 
       {/* Features / Solution */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-brand-cream">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-brand-oxford mb-6">

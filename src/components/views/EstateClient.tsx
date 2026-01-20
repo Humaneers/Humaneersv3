@@ -9,7 +9,7 @@ export function EstateClient() {
   const router = useRouter();
 
   return (
-    <div className="bg-white">
+    <div className="bg-brand-cream">
       {/* Hero */}
       <section className="bg-brand-oxford text-white py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558222218-b7b54eede3f3?auto=format&fit=crop&q=80')] opacity-10 bg-cover bg-center mix-blend-overlay"></div>

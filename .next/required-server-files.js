@@ -109,8 +109,7 @@ self.__SERVER_FILES_MANIFEST={
       }
     },
     "outputFileTracingRoot": "/Users/arron/Library/Mobile Documents/com~apple~CloudDocs/Repositories/Humaneersv3",
-    "enablePrerenderSourceMaps": true,
-    "cacheComponents": true,
+    "cacheComponents": false,
     "cacheLife": {
       "default": {
         "stale": 300,
@@ -190,7 +189,7 @@ self.__SERVER_FILES_MANIFEST={
       "typedEnv": false,
       "parallelServerCompiles": false,
       "parallelServerBuildTraces": false,
-      "ppr": true,
+      "ppr": false,
       "authInterrupts": false,
       "webpackMemoryOptimizations": false,
       "optimizeServerReact": true,
@@ -207,7 +206,7 @@ self.__SERVER_FILES_MANIFEST={
       "staticGenerationMinPagesPerWorker": 25,
       "transitionIndicator": false,
       "inlineCss": false,
-      "useCache": true,
+      "useCache": false,
       "globalNotFound": false,
       "browserDebugInfoInTerminal": false,
       "lockDistDir": true,
@@ -218,7 +217,6 @@ self.__SERVER_FILES_MANIFEST={
       "turbopackFileSystemCacheForDev": true,
       "turbopackFileSystemCacheForBuild": false,
       "turbopackInferModuleSideEffects": false,
-      "cacheComponents": true,
       "optimizePackageImports": [
         "lucide-react",
         "date-fns",

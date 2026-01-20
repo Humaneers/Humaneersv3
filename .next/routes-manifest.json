@@ -47,6 +47,18 @@
       "namedRegex": "^/about(?:/)?$"
     },
     {
+      "page": "/api/diagnostics",
+      "regex": "^/api/diagnostics(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/diagnostics(?:/)?$"
+    },
+    {
+      "page": "/api/submit-ethics",
+      "regex": "^/api/submit\\-ethics(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/submit\\-ethics(?:/)?$"
+    },
+    {
       "page": "/api/zoho/leads",
       "regex": "^/api/zoho/leads(?:/)?$",
       "routeKeys": {},
@@ -214,18 +226,11 @@
     "prefetchSegmentHeader": "next-router-segment-prefetch",
     "prefetchSegmentSuffix": ".segment.rsc",
     "prefetchSegmentDirSuffix": ".segments",
-    "clientParamParsing": true,
-    "dynamicRSCPrerender": true
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
   },
   "rewriteHeaders": {
     "pathHeader": "x-nextjs-rewritten-path",
     "queryHeader": "x-nextjs-rewritten-query"
-  },
-  "ppr": {
-    "chain": {
-      "headers": {
-        "next-resume": "1"
-      }
-    }
   }
 }

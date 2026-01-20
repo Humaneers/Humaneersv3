@@ -166,7 +166,7 @@ export function HomeClient() {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-brand-cream">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="md:w-1/2">

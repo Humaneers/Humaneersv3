@@ -1,11 +1,11 @@
-import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { getZohoAccessToken } from "./zoho/_lib/zoho.js";
+import { NextRequest, NextResponse } from "next/server";
+import { getZohoAccessToken } from "@/lib/zoho/client";
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export async function GET(_req: NextRequest) {
   const checks = {
-    ZOHO_CLIENT_ID: !!process.env.ZOHO_CLIENT_ID ? "Set" : "MISSING",
-    ZOHO_CLIENT_SECRET: !!process.env.ZOHO_CLIENT_SECRET ? "Set" : "MISSING",
-    ZOHO_REFRESH_TOKEN: !!process.env.ZOHO_REFRESH_TOKEN ? "Set" : "MISSING",
+    ZOHO_CLIENT_ID: process.env.ZOHO_CLIENT_ID ? "Set" : "MISSING",
+    ZOHO_CLIENT_SECRET: process.env.ZOHO_CLIENT_SECRET ? "Set" : "MISSING",
+    ZOHO_REFRESH_TOKEN: process.env.ZOHO_REFRESH_TOKEN ? "Set" : "MISSING",
     ZOHO_ACCOUNTS_DOMAIN: process.env.ZOHO_ACCOUNTS_DOMAIN || "accounts.zoho.com (default)",
     ZOHO_API_DOMAIN: process.env.ZOHO_API_DOMAIN || "www.zohoapis.com (default)",
     NODE_ENV: process.env.NODE_ENV,
@@ -15,7 +15,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   let tokenError = null;
 
   try {
-    console.log("Diagnostics: Attempting to fetch Zoho token...");
     await getZohoAccessToken();
     tokenStatus = "Success - Connection Established";
   } catch (e) {
@@ -24,7 +23,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     tokenError = e instanceof Error ? e.message : String(e);
   }
 
-  res.status(200).json({
+  return NextResponse.json({
     config: checks,
     connectivity: {
       status: tokenStatus,
