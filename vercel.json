@@ -1,0 +1,29 @@
+{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.pagesense.io https://salesiq.zohopublic.com https://*.zohopublic.com https://js.zohocdn.com https://*.zohocdn.com https://*.zoho.com https://*.cloudfront.net; style-src 'self' 'unsafe-inline' https://css.zohocdn.com https://*.zohocdn.com https://*.zoho.com; img-src 'self' data: blob: https: https://*.zohocdn.com https://*.zoho.com https://*.zohopublic.com https://*.cloudfront.net; font-src 'self' data: https://*.zohocdn.com; connect-src 'self' https://cdn.pagesense.io https://salesiq.zohopublic.com https://*.zoho.com https://*.zohopublic.com https://*.zohocdn.com wss://salesiq.zohopublic.com wss://*.zohopublic.com https://_vercel/speed-insights; frame-src https://salesiq.zohopublic.com https://*.zohopublic.com https://*.zoho.com; worker-src 'self' blob:;"
+        }
+      ]
+    }
+  ]
+}
