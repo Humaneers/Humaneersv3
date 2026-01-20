@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { getZohoAccessToken } from "./_lib/zoho.js";
+import { getZohoAccessToken } from "./zoho/_lib/zoho.js";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const checks = {
