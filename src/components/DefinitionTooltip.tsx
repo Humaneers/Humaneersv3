@@ -32,7 +32,13 @@ export function DefinitionTooltip({ term, definition, className = "" }: Definiti
       <TooltipTrigger asChild>
         <span
           tabIndex={0}
+          role="button"
           onClick={(e) => e.preventDefault()}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+            }
+          }}
           className={`cursor-help border-b border-dotted border-brand-copper hover:text-brand-copper focus:text-brand-copper focus:border-solid focus:outline-none transition-colors inline-flex items-center gap-0.5 ${className}`}
         >
           {term}

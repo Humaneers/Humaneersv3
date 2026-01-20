@@ -58,6 +58,21 @@ export default defineConfig({
   build: {
     target: "esnext",
     outDir: "build",
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom", "react-router-dom", "framer-motion"],
+          ui: [
+            "@radix-ui/react-slot",
+            "@radix-ui/react-label",
+            "@radix-ui/react-dialog",
+            "@radix-ui/react-dropdown-menu",
+            "class-variance-authority",
+            "lucide-react",
+          ],
+        },
+      },
+    },
   },
   server: {
     port: 3000,

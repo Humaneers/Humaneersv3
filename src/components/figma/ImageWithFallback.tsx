@@ -13,6 +13,7 @@ export function ImageWithFallback(props: React.ImgHTMLAttributes<HTMLImageElemen
   const { src, alt, style, className, ...rest } = props;
 
   return didError ? (
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
       className={`inline-block bg-gray-100 text-center align-middle ${className ?? ""}`}
       style={style}

@@ -208,6 +208,8 @@ export function Layout() {
             <img
               src="/WordMarkV-2.svg"
               alt="Humaneers"
+              width={200}
+              height={44}
               className="h-6 sm:h-7 md:h-8 w-auto max-w-[160px] sm:max-w-[200px]"
             />
           </Link>

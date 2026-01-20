@@ -27,7 +27,6 @@
 - [x] **H4.2** - ✅ FIXED - Analytics disclosure added:
   - PageSense (analytics)
   - Zoho SalesIQ (chat)
-  - Cal.com (scheduling)
   - Vercel (hosting)
   - Cookie policy section added
   - Located in `/src/components/views/Privacy.tsx` Section 6
@@ -151,12 +150,16 @@ All blocker and high-priority items have been resolved. The site is now producti
 - [x] Service naming consistent across all pages
 
 ### Environment Variables Required
-
-Ensure these are set in production (Vercel):
-
-- `VITE_CAL_ORG_URL` - Cal.com organization URL
-- `VITE_CAL_SALES_FORM_ID` - Sales routing form ID
-- `VITE_CAL_SUPPORT_FORM_ID` - Support routing form ID
+ 
+ Ensure these are set in production (Vercel):
+ 
+ - `MOXIE_API_KEY`
+ - `MOXIE_BASE_URL`
+ - `ZOHO_CLIENT_ID`
+ - `ZOHO_CLIENT_SECRET`
+ - `ZOHO_REFRESH_TOKEN`
+ - `ZOHO_DESK_ORG_ID`
+ - `ZOHO_API_DOMAIN`
 
 ### Post-Deploy Verification
 
@@ -176,7 +179,6 @@ Ensure these are set in production (Vercel):
 
 - Fixed security email misconfiguration (blocker)
 - Removed production debug code (blocker)
-- Added Cal.com environment validation (blocker)
 - Expanded Privacy Policy with GDPR compliance (high)
 - Added analytics disclosure to Privacy Policy (high)
 - Expanded Terms of Service with SLAs and SOC 2 (high)
