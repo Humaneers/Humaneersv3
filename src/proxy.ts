@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from "next/server";
 // Simple in-memory rate limiting map (for demonstration - use Redis/KV in prod for scale)
 const rateLimitMap = new Map();
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const response = NextResponse.next();
 
   // 1. Security Headers (CTO Requirement)
