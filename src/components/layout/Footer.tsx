@@ -77,6 +77,14 @@ export function Footer() {
               Enterprise strategy for businesses and families. Built with precision, delivered with
               soul.
             </p>
+            <div className="flex gap-2 mb-6">
+              <span className="inline-flex items-center px-2 py-1 border border-brand-copper/30 rounded text-[10px] font-bold text-brand-copper uppercase tracking-wider bg-brand-copper/5">
+                SOC 2 Type II
+              </span>
+              <span className="inline-flex items-center px-2 py-1 border border-brand-copper/30 rounded text-[10px] font-bold text-brand-copper uppercase tracking-wider bg-brand-copper/5">
+                HIPAA Compliant
+              </span>
+            </div>
             <div className="inline-flex items-center gap-2 bg-brand-slate/30 px-3 py-1 rounded-full text-xs font-medium text-brand-copper">
               <span className="w-2 h-2 rounded-full bg-brand-copper"></span>
               Based in Tempe, AZ | Serving Clients Nationwide

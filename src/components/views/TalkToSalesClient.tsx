@@ -235,6 +235,28 @@ function TalkToSalesContent() {
               </CardDescription>
             </CardHeader>
             <CardContent>
+              <div className="mb-8 p-4 bg-brand-copper/10 rounded-lg border border-brand-copper/20">
+                <h4 className="font-bold text-brand-oxford mb-2 flex items-center gap-2">
+                  <span className="relative flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-copper opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-copper"></span>
+                  </span>
+                  Want to skip the form?
+                </h4>
+                <p className="text-sm text-gray-600 mb-3">
+                  If you have an urgent need or prefer to speak directly, book a time with our
+                  solutions architect right now.
+                </p>
+                <a
+                  href="https://humaneers.zohobookings.com/#/customer/consultation"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-2 bg-white border border-gray-200 rounded-md text-sm font-medium text-brand-oxford hover:bg-gray-50 hover:text-brand-copper transition-colors shadow-sm"
+                >
+                  Book 15-Min Intro Call <ArrowRight className="ml-2 w-4 h-4" />
+                </a>
+              </div>
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 {!segment && (
                   <div className="grid grid-cols-1 gap-4 mb-6">

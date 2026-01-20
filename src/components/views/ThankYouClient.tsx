@@ -3,6 +3,38 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { CheckCircle2, ArrowRight } from "lucide-react";
+import { useEffect } from "react";
+
+// Define window extension for analytics
+declare global {
+  interface Window {
+    gtag?: (command: string, action: string, params?: Record<string, string>) => void;
+    $zoho?: {
+      salesiq?: {
+        ready?: () => void;
+        track?: (event: string) => void;
+      };
+    };
+  }
+}
+
+function ConversionTracker() {
+  useEffect(() => {
+    // 1. Google Ads / Analytics
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "generate_lead", {
+        event_category: "form",
+        event_label: "success",
+      });
+    }
+
+    // 2. Zoho PageSense / SalesIQ
+    if (typeof window !== "undefined" && window.$zoho?.salesiq?.track) {
+      window.$zoho.salesiq.track("Lead Generated");
+    }
+  }, []);
+  return null;
+}
 
 export function ThankYouClient() {
   return (
@@ -20,6 +52,7 @@ export function ThankYouClient() {
               it shortly.
             </p>
           </div>
+          <ConversionTracker />
 
           <div className="pt-4 border-t border-gray-100">
             <p className="text-sm text-gray-500 mb-6">
