@@ -81,7 +81,7 @@ export function HomeClient() {
               <p className="text-brand-copper font-bold tracking-widest uppercase text-sm md:text-base mb-4">
                 Enterprise Strategy for Businesses & Families
               </p>
-              <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight mb-6">
+              <h1 className="text-4xl md:text-7xl font-bold text-white leading-tight mb-6">
                 Built with precision. <br />
                 <span className="text-white/80">Delivered with soul.</span>
               </h1>
@@ -137,7 +137,7 @@ export function HomeClient() {
             <h2 className="text-4xl font-bold text-brand-oxford">Everything You Need to Grow</h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {servicePillars.map((pillar, index) => (
               <motion.div
                 key={pillar.title}

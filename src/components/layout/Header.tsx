@@ -4,10 +4,9 @@ import { useState, useEffect, forwardRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { Menu, X, BookOpen } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { routePaths } from "../../routes";
 import { Button } from "../ui/button";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -18,13 +17,11 @@ import {
 } from "../ui/navigation-menu";
 import { cn } from "../ui/utils";
 import { navSections, ctaLinks, type NavItem } from "../../data/navigation";
+import { MobileNav } from "./MobileNav";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-
-  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,9 +31,7 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    closeMobileMenu();
-  }, [pathname]);
+
 
   const renderNavItem = (item: NavItem, className?: string) => {
     const content = (
@@ -95,48 +90,7 @@ export function Header() {
     );
   };
 
-  const renderMobileItem = (item: NavItem) => {
-    const label = item.mobileLabel || item.title;
 
-    if (item.disabled) {
-      return (
-        <span
-          className="text-left text-brand-slate/60 font-medium cursor-not-allowed"
-          aria-disabled="true"
-        >
-          {label}
-        </span>
-      );
-    }
-
-    const href = item.to || item.href || "/";
-    const isExternal = item.external || !!item.href;
-
-    if (isExternal) {
-      return (
-        <a
-          href={href}
-          target={item.external ? "_blank" : undefined}
-          rel={item.external ? "noopener noreferrer" : undefined}
-          className="text-left text-gray-300 hover:text-brand-copper transition-colors font-medium"
-        >
-          {label}
-        </a>
-      );
-    }
-
-    return (
-      <Link
-        href={href}
-        className={cn(
-          "text-left transition-colors font-medium",
-          pathname === href ? "text-brand-copper" : "text-gray-300 hover:text-brand-copper"
-        )}
-      >
-        {label}
-      </Link>
-    );
-  };
 
   const resourcesSection = navSections.find((section) => section.id === "resources");
   const whoWeHelpSection = navSections.find((section) => section.id === "who-we-help");
@@ -145,9 +99,8 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-brand-oxford shadow-lg py-3" : "bg-brand-oxford/95 backdrop-blur-sm py-5"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-brand-oxford shadow-lg py-3" : "bg-brand-oxford/95 backdrop-blur-sm py-5"
+        }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         <Link
@@ -301,61 +254,10 @@ export function Header() {
           </Button>
         </div>
 
-        <button
-          className="md:hidden text-white ml-auto rounded-md focus-visible:ring-2 focus-visible:ring-brand-copper outline-none"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="md:hidden ml-auto">
+          <MobileNav />
+        </div>
       </div>
-
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-brand-oxford border-t border-gray-700 overflow-hidden"
-          >
-            <div className="flex flex-col p-6 gap-6 max-h-[80vh] overflow-y-auto">
-              {navSections.map((section) => {
-                const mobileItems = section.featured
-                  ? [section.featured, ...section.items]
-                  : section.items;
-                return (
-                  <div key={section.id}>
-                    <h4 className="text-brand-copper font-bold uppercase text-xs tracking-wider mb-3">
-                      {section.label}
-                    </h4>
-                    <div className="flex flex-col gap-3 pl-2 border-l border-gray-700">
-                      {mobileItems.map((item) => (
-                        <div key={item.title}>{renderMobileItem(item)}</div>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
-
-              <div className="flex flex-col gap-3 mt-4">
-                <Button
-                  variant="outline"
-                  className="border-gray-600 text-gray-300 hover:text-white hover:bg-white/10 w-full"
-                  asChild
-                >
-                  <Link href={ctaLinks.support.to}>{ctaLinks.support.label}</Link>
-                </Button>
-                <Button
-                  className="bg-brand-copper hover:bg-brand-copper-dark text-white w-full"
-                  asChild
-                >
-                  <Link href={ctaLinks.sales.to}>{ctaLinks.sales.label}</Link>
-                </Button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </header>
   );
 }
