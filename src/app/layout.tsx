@@ -29,6 +29,7 @@ export const metadata: Metadata = {
 };
 
 import { Analytics } from "../components/Analytics";
+import { SessionTracker } from "../components/SessionTracker";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Footer />
           </Suspense>
         </TooltipProvider>
+        <SessionTracker />
         <Analytics />
       </body>
     </html>
