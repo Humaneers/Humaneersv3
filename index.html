@@ -1,141 +1,116 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- PageSense -->
-    <script src="https://cdn.pagesense.io/js/911811328/0172b61c43a2473c98eef23da6d865af.js" defer></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- ContentSquare -->
-    <script src="https://t.contentsquare.net/uxa/741b931013a01.js" defer></script>
+  <!-- PageSense -->
+  <script src="https://cdn.pagesense.io/js/911811328/0172b61c43a2473c98eef23da6d865af.js" defer></script>
 
-    <!-- SEO Meta Tags -->
-    <title>Humaneers | Enterprise Strategy for Businesses and Families</title>
-    <meta
-      name="description"
-      content="Enterprise-grade IT, security, and brand growth for small businesses. SOC 2 compliant, 100% US-based managed IT services, family protection, and fractional leadership."
-    />
-    <meta
-      name="keywords"
-      content="managed IT, small business IT, cybersecurity, brand growth, fractional CIO, CMO, SOC 2 compliance, US-based IT support"
-    />
-    <meta name="author" content="Humaneers" />
+  <!-- ContentSquare (loaded after page interactive for performance) -->
+  <script>
+    window.addEventListener('load', function () {
+      var script = document.createElement('script');
+      script.src = "https://t.contentsquare.net/uxa/741b931013a01.js";
+      script.defer = true;
+      document.head.appendChild(script);
+    });
+  </script>
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://humaneers.dev/" />
-    <meta
-      property="og:title"
-      content="Humaneers | Enterprise Strategy for Businesses and Families"
-    />
-    <meta
-      property="og:description"
-      content="Enterprise-grade IT, security, and brand growth for small businesses. SOC 2 compliant, 100% US-based services."
-    />
-    <meta property="og:image" content="https://humaneers.dev/og-image.svg" />
+  <!-- Assets -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="canonical" href="https://humaneers.dev/" />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://humaneers.dev/" />
-    <meta
-      property="twitter:title"
-      content="Humaneers | Enterprise Strategy for Businesses and Families"
-    />
-    <meta
-      property="twitter:description"
-      content="Enterprise-grade IT, security, and brand growth for small businesses. SOC 2 compliant, 100% US-based services."
-    />
-    <meta property="twitter:image" content="https://humaneers.dev/og-image.svg" />
+  <!-- Critical CSS to prevent FOUC -->
+  <style>
+    /* Prevent flash of unstyled content */
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #13294b;
+      /* brand-oxford */
+      color: #4e596f;
+      /* default text color */
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      /* Prevent font flash */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    /* Prevent layout shift during font loading */
+    * {
+      font-display: swap;
+    }
 
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://humaneers.dev/" />
+    #root {
+      min-height: 100vh;
+      opacity: 1;
+    }
 
-    <!-- Critical CSS to prevent FOUC -->
-    <style>
-      /* Prevent flash of unstyled content */
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        background-color: #13294b;
-        /* brand-oxford */
-        color: #4e596f;
-        /* default text color */
-        font-family: ui-sans-serif, system-ui, sans-serif;
-        /* Prevent font flash */
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+    /* Smooth fade-in for content */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
       }
 
-      /* Prevent layout shift during font loading */
-      * {
-        font-display: swap;
-      }
-
-      #root {
-        min-height: 100vh;
+      to {
         opacity: 1;
       }
+    }
 
-      /* Smooth fade-in for content */
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
+    /* Minimal loading state */
+    #root:empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
 
-        to {
-          opacity: 1;
-        }
+    #root:empty::after {
+      content: "";
+      width: 40px;
+      height: 40px;
+      border: 3px solid #b87333;
+      /* brand-copper */
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
       }
+    }
 
-      /* Minimal loading state */
-      #root:empty {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-      }
+    /* Prevent flash of blank images */
+    img {
+      background-color: rgba(184, 115, 51, 0.05);
+      /* brand-copper with opacity */
+    }
+  </style>
+</head>
 
-      #root:empty::after {
-        content: "";
-        width: 40px;
-        height: 40px;
-        border: 3px solid #b87333;
-        /* brand-copper */
-        border-top-color: transparent;
-        border-radius: 50%;
-        animation: spin 0.8s linear infinite;
-      }
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+  <script>
+    window.$zoho = window.$zoho || {};
+    $zoho.salesiq = $zoho.salesiq || { ready: function () { } };
+  </script>
+  <script>
+    window.addEventListener('load', function () {
+      var script = document.createElement('script');
+      script.id = "zsiqscript";
+      script.src = "https://salesiq.zohopublic.com/widget?wc=siq5af82cc1e8970552a081c3ee50f7191d30ebfca6797a53e74bd40b6d10c3dbee";
+      script.defer = true;
+      document.body.appendChild(script);
+    });
+  </script>
+</body>
 
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      /* Prevent flash of blank images */
-      img {
-        background-color: rgba(184, 115, 51, 0.05);
-        /* brand-copper with opacity */
-      }
-    </style>
-  </head>
-
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-    <script>
-      window.$zoho = window.$zoho || {};
-      $zoho.salesiq = $zoho.salesiq || { ready: function () {} };
-    </script>
-    <script
-      id="zsiqscript"
-      src="https://salesiq.zohopublic.com/widget?wc=siq5af82cc1e8970552a081c3ee50f7191d30ebfca6797a53e74bd40b6d10c3dbee"
-      defer
-    ></script>
-  </body>
 </html>

@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Shield, BarChart3, Users, Lock, MapPin } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { motion } from "motion/react";
 import { routePaths } from "../../routes";
-import { ObjectionsSection } from "./ObjectionsSection";
 import { setSessionContext } from "../../lib/session";
+
+const ObjectionsSection = lazy(() =>
+  import("./ObjectionsSection").then((m) => ({ default: m.ObjectionsSection }))
+);
 
 import { Seo } from "../Seo";
 
@@ -208,7 +211,9 @@ export function Home() {
           </div>
         </section>
 
-        <ObjectionsSection />
+        <Suspense fallback={<div className="h-96 bg-brand-cream" />}>
+          <ObjectionsSection />
+        </Suspense>
 
         <section className="py-24 bg-brand-oxford relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">

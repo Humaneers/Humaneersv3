@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { Label } from "../ui/label";
 import { routePaths } from "../../routes";
 import { Seo } from "../Seo";
@@ -70,14 +70,28 @@ export function Contact() {
 
                   <div className="flex items-start gap-4">
                     <div className="bg-white p-3 rounded-full shadow-sm text-brand-copper">
+                      <Phone className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-brand-oxford">Phone</h3>
+                      <p className="text-brand-slate">
+                        <a href="tel:+19284401505" className="hover:text-brand-copper transition-colors">
+                          (928) 440-1505
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="bg-white p-3 rounded-full shadow-sm text-brand-copper">
                       <MapPin className="w-6 h-6" />
                     </div>
                     <div>
                       <h3 className="font-bold text-brand-oxford">Headquarters</h3>
-                      <p className="text-brand-slate">
-                        Tempe, AZ
+                      <p className="text-brand-slate text-sm">
+                        60 East Rio Salado Parkway, Suite 900
                         <br />
-                        Serving Clients Nationwide
+                        Tempe, AZ 85281
                       </p>
                     </div>
                   </div>

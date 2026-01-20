@@ -1,0 +1,15 @@
+{
+    "short_name": "Humaneers",
+    "name": "Humaneers | Enterprise Strategy",
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "type": "image/svg+xml",
+            "sizes": "any"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#13294b",
+    "background_color": "#13294b"
+}

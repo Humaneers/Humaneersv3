@@ -2,8 +2,12 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 import { getZohoAccessToken } from "./_lib/zoho.js";
 
-// Optional: Expose as endpoint for testing (can be removed in production)
+// Optional: Expose as endpoint for testing (Only available in development)
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (process.env.NODE_ENV === "production") {
+    return res.status(404).end();
+  }
+
   if (req.method !== "GET") {
     return res.status(405).json({ error: "Method not allowed" });
   }

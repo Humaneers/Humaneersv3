@@ -14,6 +14,7 @@ import {
   Headphones,
   CheckCircle2,
   Phone,
+  MapPin,
   ChevronDown,
 } from "lucide-react";
 import { submitSupportTicket, validateSupportForm, type SupportFormData } from "../../lib/zoho";
@@ -177,6 +178,20 @@ export function Support() {
                   </a>
                   <p className="text-xs text-red-600 mt-2">
                     Available 24/7 for critical emergencies
+                  </p>
+                </div>
+
+                <div className="bg-white p-5 rounded-lg shadow-sm border-l-4 border-brand-copper">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="bg-brand-copper/10 p-2 rounded-full text-brand-copper">
+                      <MapPin className="w-5 h-5" />
+                    </div>
+                    <h3 className="font-bold text-brand-oxford">Headquarters</h3>
+                  </div>
+                  <p className="text-sm text-brand-slate">
+                    60 East Rio Salado Parkway, Suite 900
+                    <br />
+                    Tempe, AZ 85281
                   </p>
                 </div>
 

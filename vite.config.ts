@@ -61,15 +61,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ["react", "react-dom", "react-router-dom", "framer-motion"],
-          ui: [
-            "@radix-ui/react-slot",
-            "@radix-ui/react-label",
-            "@radix-ui/react-dialog",
-            "@radix-ui/react-dropdown-menu",
-            "class-variance-authority",
-            "lucide-react",
-          ],
+          vendor: ["react", "react-dom", "react-router-dom", "framer-motion", "lucide-react"],
         },
       },
     },

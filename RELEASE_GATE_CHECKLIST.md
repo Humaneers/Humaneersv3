@@ -78,7 +78,7 @@
 - [ ] **M4.2** - Verify external domains: Confirm status.humaneers.dev and support.humaneers.dev have valid SSL
 - [ ] **M3.1** - Keyboard navigation testing: Complete manual test of all forms and navigation
 - [ ] **M5.1** - Rewrite SEO descriptions: Make meta descriptions more compelling and keyword-rich
-- [ ] **M5.2** - Enhance sitemap: Add priority, lastmod, changefreq to sitemap.xml
+- [x] **M5.2** - ✅ FIXED - Enhance sitemap: Added priority, lastmod, changefreq to sitemap.xml. Added missing service routes. <!-- id: 81 -->
 - [ ] **M1.1** - Copy audit: Review all pages for consistent "Modern Craftsman" tone
 - [ ] **M2.1** - Consider Contact page UX: Add explanation text for navigation behavior
 - [ ] **M2.2** - Fix LoadingSpinner: Replace dynamic Tailwind classes with static class names
@@ -95,10 +95,10 @@
 
 - [ ] **L3.2** - Add skip link: Implement "Skip to main content" for keyboard users
 - [ ] **L5.1** - Structured data: Add Schema.org markup for Organization, LocalBusiness
-- [ ] **L5.2** - Mobile meta tags: Add theme-color and iOS-specific tags
+- [x] **L5.2** - ✅ FIXED - Mobile meta tags: Added manifest.json with theme-color and apple-touch-icon in index.html. <!-- id: 98 -->
 - [ ] **L2.1** - Focus indicators: Enhance visibility of keyboard focus states
 - [ ] **L1.1** - Image alt text: Make Unsplash image descriptions more descriptive
-- [ ] **L4.1** - Content Security Policy: Add CSP headers in Vercel config
+- [x] **L4.1** - ✅ FIXED - Content Security Policy: Added strict CSP headers in vercel.json. <!-- id: 101 -->
 - [ ] **L2.2** - Heading hierarchy: Ensure one h1 per page across all views
 - [ ] **L5.3** - Defer analytics: Move PageSense to async/defer loading
 
