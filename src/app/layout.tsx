@@ -10,6 +10,22 @@ export const metadata: Metadata = {
   title: "Humaneers | Enterprise Strategy. Built with Precision.",
   description:
     "Enterprise strategy for businesses and families. Built with precision, delivered with soul.",
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/logomark_white.svg', type: 'image/svg+xml', media: '(prefers-color-scheme: dark)' },
+      { url: '/WordMarkV-2.svg', type: 'image/svg+xml', media: '(prefers-color-scheme: light)' }
+    ],
+    apple: '/favicon.svg', // Fallback or generate a PNG if needed
+    other: [
+      {
+        rel: 'manifest',
+        url: '/manifest.json',
+      },
+    ],
+  },
+  manifest: "/manifest.json",
+
 };
 
 import { Analytics } from "../components/Analytics";
