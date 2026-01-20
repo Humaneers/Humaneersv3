@@ -32,7 +32,7 @@ export async function getAvailability(
     date: string // YYYY-MM-DD
 ): Promise<TimeSlot[]> {
     if (MOCK_ZO_BOOKINGS) {
-        console.log(`[MOCK] Fetching availability for ${date} (Service: ${serviceId}, Staff: ${staffId})`);
+        // console.log(`[MOCK] Fetching availability for ${date} (Service: ${serviceId}, Staff: ${staffId})`);
         return generateMockSlots(date);
     }
 
@@ -72,7 +72,7 @@ export async function getAvailability(
  */
 export async function createBooking(bookingData: BookingRequest) {
     if (MOCK_ZO_BOOKINGS) {
-        console.log(`[MOCK] Creating booking:`, JSON.stringify(bookingData, null, 2));
+        // console.log(`[MOCK] Creating booking:`, JSON.stringify(bookingData, null, 2));
         await new Promise(r => setTimeout(r, 1000)); // Simulate latency
         return { status: "success", bookingId: "mock-booking-id-123" };
     }

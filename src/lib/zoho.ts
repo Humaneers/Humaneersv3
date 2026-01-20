@@ -71,7 +71,7 @@ export async function getZohoAccessToken(): Promise<string> {
 /**
  * Make an authenticated request to Zoho CRM API
  */
-export async function zohoApiRequest<T = any>(
+export async function zohoApiRequest<T = unknown>(
   endpoint: string,
   options: RequestInit = {}
 ): Promise<T> {
@@ -98,7 +98,7 @@ export async function zohoApiRequest<T = any>(
 /**
  * Make an authenticated request to Zoho Desk API
  */
-export async function zohoDeskApiRequest<T = any>(
+export async function zohoDeskApiRequest<T = unknown>(
   endpoint: string,
   orgId: string,
   options: RequestInit = {}
@@ -126,7 +126,7 @@ export async function zohoDeskApiRequest<T = any>(
 /**
  * Make an authenticated request to Zoho Bookings API
  */
-export async function zohoBookingsApiRequest<T = any>(
+export async function zohoBookingsApiRequest<T = unknown>(
   endpoint: string,
   options: RequestInit = {}
 ): Promise<T> {

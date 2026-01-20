@@ -9,13 +9,12 @@ import { Textarea } from "../ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Checkbox } from "../ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { ShieldCheck, ArrowRight, Globe, Loader2, Building2, Home, Heart } from "lucide-react";
+import { ShieldCheck, ArrowRight, Globe, Loader2, Building2, Home, Heart, Calendar as CalendarIcon } from "lucide-react";
 import { submitSalesLead, validateSalesForm, type SalesFormData } from "../../lib/zoho";
 import { toast } from "sonner";
 import { createErrorReportLink } from "../../lib/utils";
 import BookingsWidget from "../bookings/BookingsWidget";
 import { BookingCalendar } from "../zoho/BookingCalendar";
-import { Calendar as CalendarIcon } from "lucide-react";
 
 type CustomerSegment = "business" | "personal" | "nonprofit" | null;
 
@@ -25,6 +24,10 @@ function TalkToSalesContent() {
 
   const [segment, setSegment] = useState<CustomerSegment>(null);
   const [mode, setMode] = useState<"request" | "book">("request");
+  void setMode; // Temporarily disabled
+  void CalendarIcon; // Temporarily disabled
+
+
   const [formData, setFormData] = useState<SalesFormData>({
     firstName: "",
     lastName: "",
@@ -49,13 +52,19 @@ function TalkToSalesContent() {
     /crisis|emergency|reputation/i.test(formData.source || "");
 
   const [wantToBook, setWantToBook] = useState(false); // Default to false for hydration safety
+  void setWantToBook; // Temporarily disabled
+
 
   // Update wantToBook if crisis situation changes (e.g. user selects "Emergency")
   useEffect(() => {
+    // Disabled booking logic
+    /*
     if (isCrisis) {
       setWantToBook(true);
     }
+    */
   }, [isCrisis]);
+
 
   useEffect(() => {
     const interest = searchParams.get("interest");
@@ -161,7 +170,7 @@ function TalkToSalesContent() {
     }
   };
 
-  const handleBookingCompletion = async (_bookingData: any) => {
+  const handleBookingCompletion = async (_bookingData: unknown) => {
     // Booking is done, redirect to thank you
     router.push("/thank-you");
   };
@@ -264,6 +273,7 @@ function TalkToSalesContent() {
                 </CardTitle>
 
                 {/* Mode Toggle */}
+                {/* Mode Toggle - Temporarily Disabled
                 <div className="flex items-center p-1 bg-gray-100 rounded-lg self-start md:self-auto">
                   <button
                     onClick={() => setMode('request')}
@@ -285,6 +295,8 @@ function TalkToSalesContent() {
                     Book Now
                   </button>
                 </div>
+                */}
+
               </div>
               <CardDescription>
                 {mode === 'request'
@@ -541,7 +553,15 @@ function TalkToSalesContent() {
                               ).map((item) => (
                                 <div
                                   key={item}
+                                  role="button"
+                                  tabIndex={0}
                                   onClick={() => handleInterestChange(item)}
+                                  onKeyDown={(e) => {
+                                    if (e.key === "Enter" || e.key === " ") {
+                                      e.preventDefault();
+                                      handleInterestChange(item);
+                                    }
+                                  }}
                                   className="flex items-center space-x-2 border rounded-md p-3 hover:bg-gray-50 transition-colors cursor-pointer"
                                 >
                                   <Checkbox
@@ -549,13 +569,11 @@ function TalkToSalesContent() {
                                     checked={formData.interests.includes(item)}
                                   // onClick handled by parent div for better target
                                   />
-                                  <label
-                                    htmlFor={`interest-${item}`}
-                                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer w-full"
-                                    onClick={(e) => e.stopPropagation()} // Prevent double toggle if label is clicked directly
+                                  <span
+                                    className="text-sm font-medium leading-none cursor-pointer w-full"
                                   >
                                     {item}
-                                  </label>
+                                  </span>
                                 </div>
                               ))}
                             </div>
@@ -593,6 +611,7 @@ function TalkToSalesContent() {
                               </div>
                             )}
 
+                            {/* Booking Checkbox - Temporarily Disabled
                             <div className="flex items-center gap-2 mb-2">
                               <Checkbox
                                 id="wantToBook"
@@ -607,6 +626,8 @@ function TalkToSalesContent() {
                                 }
                               </Label>
                             </div>
+                            */}
+
 
                             <div className="flex flex-col sm:flex-row gap-3">
                               <Button

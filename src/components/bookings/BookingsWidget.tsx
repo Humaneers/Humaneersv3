@@ -4,8 +4,8 @@ import React from 'react';
 import { BookingCalendar } from "@/components/zoho/BookingCalendar";
 
 interface BookingsWidgetProps {
-    onSubmit?: (data: any) => void;
-    context?: any;
+    onSubmit?: (data: unknown) => void;
+    context?: Record<string, unknown>;
 }
 
 const BookingsWidget: React.FC<BookingsWidgetProps> = ({ onSubmit: _onSubmit, context: _context }) => {

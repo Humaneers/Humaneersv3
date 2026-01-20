@@ -24,7 +24,8 @@ The official website for Humaneers, built with modern web technologies to delive
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
 - **UI Architecture**: [Radix UI](https://www.radix-ui.com/) + Shadcn/UI patterns
 - **Animation**: [Motion](https://motion.dev/)
-- **Forms/CRM**: [Zoho CRM](https://www.zoho.com/crm/) + Zoho Forms
+- **Forms/CRM**: [Zoho CRM](https://www.zoho.com/crm/) + Zoho Forms (Booking UI temporarily disabled)
+
 - **Analytics**: Zoho PageSense + SalesIQ, Contentsquare, Datadog RUM
 - **Deployment**: [Vercel](https://vercel.com/)
 - **Infrastructure**: AWS (S3, EC2), CloudFlare DNS, Plesk
