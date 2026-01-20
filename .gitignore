@@ -22,7 +22,11 @@ node_modules
 .vercel
 .env*.local
 
-# Build artifacts
+# Next.js build artifacts
+.next/
+out/
+
+# Legacy build artifacts (for Vitest compatibility)
 build/
 dist/
 
