@@ -18,12 +18,10 @@ import {
 import { cn } from "../ui/utils";
 import { navSections, ctaLinks, type NavItem } from "../../data/navigation";
 import { MobileNav } from "./MobileNav";
-import { useContactModal } from "../providers/ContactModalProvider";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
-  const { openModal } = useContactModal();
 
   useEffect(() => {
     const handleScroll = () => {
