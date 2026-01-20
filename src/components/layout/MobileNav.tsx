@@ -27,18 +27,11 @@ export function MobileNav() {
   };
 
   const renderMobileItem = (item: NavItem) => {
-    const label = item.mobileLabel || item.title;
-
     if (item.disabled) {
-      return (
-        <span
-          className="text-left text-brand-slate/60 font-medium cursor-not-allowed text-sm"
-          aria-disabled="true"
-        >
-          {label}
-        </span>
-      );
+      return null; // Don't render disabled items
     }
+
+    const label = item.mobileLabel || item.title;
 
     const href = item.to || item.href || "/";
     const isExternal = item.external || !!item.href;
@@ -78,8 +71,9 @@ export function MobileNav() {
           variant="ghost"
           size="icon"
           className="md:hidden text-white hover:text-brand-copper hover:bg-white/10"
+          aria-label="Toggle navigation menu"
         >
-          <Menu className="h-6 w-6" />
+          <Menu className="h-6 w-6" aria-hidden="true" />
           <span className="sr-only">Toggle menu</span>
         </Button>
       </SheetTrigger>

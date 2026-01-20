@@ -8,6 +8,7 @@ import { motion } from "motion/react";
 import { routePaths } from "../../routes";
 import { setSessionContext } from "../../lib/session";
 import Image from "next/image";
+import { useContactModal } from "../providers/ContactModalProvider";
 
 // Porting ObjectionsSection later or keeping as lazy for now
 const ObjectionsSection = lazy(() =>
@@ -16,28 +17,29 @@ const ObjectionsSection = lazy(() =>
 
 export function HomeClient() {
   const router = useRouter();
+  const { openModal } = useContactModal();
 
   const servicePillars = [
     {
-      icon: <Shield className="w-8 h-8 text-brand-copper" />,
+      icon: <Shield className="w-8 h-8 text-brand-copper" aria-hidden="true" />,
       title: "Managed IT",
       desc: "Cloud-native infrastructure that just works. No downtime, just uptime.",
       link: routePaths.managedIt,
     },
     {
-      icon: <BarChart3 className="w-8 h-8 text-brand-copper" />,
+      icon: <BarChart3 className="w-8 h-8 text-brand-copper" aria-hidden="true" />,
       title: "Brand Growth",
       desc: "Making your products billboard-ready with enterprise-grade strategy.",
       link: routePaths.growth,
     },
     {
-      icon: <Lock className="w-8 h-8 text-brand-copper" />,
+      icon: <Lock className="w-8 h-8 text-brand-copper" aria-hidden="true" />,
       title: "Family Protection",
       desc: "Closing the home-office security gap to keep your family safe.",
       link: routePaths.familyProtection,
     },
     {
-      icon: <Users className="w-8 h-8 text-brand-copper" />,
+      icon: <Users className="w-8 h-8 text-brand-copper" aria-hidden="true" />,
       title: "Fractional Leadership",
       desc: "Your own CIO/CMO at an SMB price. Strategy without the salary cap.",
       link: routePaths.fractionalLeadership,
@@ -83,7 +85,7 @@ export function HomeClient() {
               <Button
                 onClick={() => {
                   setSessionContext({ entrySource: "Homepage Hero CTA" });
-                  router.push(routePaths.talkToSales);
+                  openModal("sales");
                 }}
                 className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 h-14 rounded-md shadow-lg hover:shadow-xl transition-all w-fit"
               >
@@ -135,7 +137,7 @@ export function HomeClient() {
                 <h3 className="text-xl font-bold text-brand-oxford mb-3">{pillar.title}</h3>
                 <p className="text-brand-slate leading-relaxed text-sm">{pillar.desc}</p>
                 <div className="mt-6 flex items-center text-brand-copper font-medium text-sm group-hover:gap-2 transition-all cursor-pointer">
-                  Learn more <ArrowRight size={16} className="ml-1" />
+                  Learn more <ArrowRight size={16} className="ml-1" aria-hidden="true" />
                 </div>
               </motion.div>
             ))}
@@ -157,10 +159,10 @@ export function HomeClient() {
               </p>
               <div className="flex gap-4">
                 <div className="bg-brand-cream px-4 py-2 rounded border border-gray-200 flex items-center gap-2 font-semibold text-brand-oxford">
-                  <Shield size={18} className="text-brand-copper" /> SOC 2 Compliant
+                  <Shield size={18} className="text-brand-copper" aria-hidden="true" /> SOC 2 Compliant
                 </div>
                 <div className="bg-brand-cream px-4 py-2 rounded border border-gray-200 flex items-center gap-2 font-semibold text-brand-oxford">
-                  <MapPin size={18} className="text-brand-copper" /> 100% US-based
+                  <MapPin size={18} className="text-brand-copper" aria-hidden="true" /> 100% US-based
                 </div>
               </div>
             </div>
@@ -202,7 +204,7 @@ export function HomeClient() {
           <Button
             onClick={() => {
               setSessionContext({ entrySource: "Homepage Bottom CTA" });
-              router.push(routePaths.talkToSales);
+              openModal("sales");
             }}
             className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-10 py-7 h-auto rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
           >

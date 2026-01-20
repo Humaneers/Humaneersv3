@@ -1,16 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { Phone, MapPin } from "lucide-react";
+import { Phone, MapPin, Mail } from "lucide-react";
 import { cn } from "../ui/utils";
 import Image from "next/image";
-import { EmailActionButton } from "../ui/email-action-button";
+import { Button } from "../ui/button";
+import { useContactModal } from "../providers/ContactModalProvider";
 // import { APP_VERSION } from "../../version"; // Temporarily disabled if not easily resolved
 const APP_VERSION = "0.2.0";
 
 import { footerSections, footerMetaLinks } from "../../data/navigation";
 
 export function Footer() {
+  const { openModal } = useContactModal();
   return (
     <footer className="bg-brand-oxford text-gray-400 py-12 border-t border-brand-copper">
       <div className="container mx-auto px-6">
@@ -68,13 +70,13 @@ export function Footer() {
             <h4 className="text-white font-semibold mb-4">Newsletter</h4>
             <p className="text-sm mb-4">Get the latest on IT security and strategy.</p>
             <div className="w-full max-w-sm md:max-w-none">
-              <EmailActionButton
-                label="Subscribe via Email"
-                email="hello@humaneers.dev"
-                subject="Newsletter Subscription Request"
-                className="w-full bg-brand-copper hover:bg-brand-copper-dark justify-center h-auto py-3 text-sm"
-                size="default"
-              />
+              <Button
+                onClick={() => openModal("newsletter")}
+                className="w-full bg-brand-copper hover:bg-brand-copper-dark justify-center h-auto py-3 text-sm gap-2"
+              >
+                <Mail className="w-4 h-4" aria-hidden="true" />
+                Subscribe via Email
+              </Button>
             </div>
           </div>
         </div>
@@ -92,15 +94,19 @@ export function Footer() {
           <div className="flex flex-col gap-4 w-full md:w-auto items-center md:items-start">
             <div className="flex items-center gap-3 text-sm text-gray-400">
               <div className="bg-gray-800 p-2 rounded-full text-brand-copper">
-                <Phone size={16} />
+                <Phone size={16} aria-hidden="true" />
               </div>
-              <a href="tel:+19284401505" className="hover:text-brand-copper transition-colors">
+              <a
+                href="tel:+19284401505"
+                className="hover:text-brand-copper transition-colors"
+                aria-label="Call us at (928) 440-1505"
+              >
                 (928) 440-1505
               </a>
             </div>
             <div className="flex items-center gap-3 text-sm text-gray-400 max-w-xs md:max-w-none">
               <div className="bg-gray-800 p-2 rounded-full text-brand-copper flex-shrink-0">
-                <MapPin size={16} />
+                <MapPin size={16} aria-hidden="true" />
               </div>
               <a
                 href="https://www.google.com/maps/search/?api=1&query=60+East+Rio+Salado+Parkway+Suite+900+Tempe+AZ+85281"

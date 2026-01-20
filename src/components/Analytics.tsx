@@ -4,14 +4,14 @@
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
+import { useConsent } from "./providers/ConsentProvider";
 
 export function Analytics() {
+  const { consent } = useConsent();
+
   return (
     <>
-      <VercelAnalytics />
-      <SpeedInsights />
-
-      {/* Zoho SalesIQ */}
+      {/* Zoho SalesIQ - ALWAYS LOADS (Business Critical Support) */}
       <Script
         id="zoho-salesiq-init"
         strategy="lazyOnload"
@@ -28,19 +28,27 @@ export function Analytics() {
         strategy="lazyOnload"
       />
 
-      {/* Zoho PageSense */}
-      <Script
-        id="zoho-pagesense"
-        src="https://cdn.pagesense.io/js/911811328/0172b61c43a2473c98eef23da6d865af.js"
-        strategy="lazyOnload"
-      />
+      {/* Analytics & Tracking - ONLY WITH CONSENT */}
+      {consent === true && (
+        <>
+          <VercelAnalytics />
+          <SpeedInsights />
 
-      {/* ContentSquare */}
-      <Script
-        id="contentsquare"
-        src="https://t.contentsquare.net/uxa/741b931013a01.js"
-        strategy="lazyOnload"
-      />
+          {/* Zoho PageSense */}
+          <Script
+            id="zoho-pagesense"
+            src="https://cdn.pagesense.io/js/911811328/0172b61c43a2473c98eef23da6d865af.js"
+            strategy="lazyOnload"
+          />
+
+          {/* ContentSquare */}
+          <Script
+            id="contentsquare"
+            src="https://t.contentsquare.net/uxa/741b931013a01.js"
+            strategy="lazyOnload"
+          />
+        </>
+      )}
     </>
   );
 }

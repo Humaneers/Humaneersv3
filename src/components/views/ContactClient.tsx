@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Mail, MapPin, Phone } from "lucide-react"; // Check if still used? Yes I used "sr-only Label". 
+import { Mail, MapPin, Phone } from "lucide-react"; // Check if still used? Yes I used "sr-only Label".
 // Actually I can use a div or p instead of Label if I want to delete Label.
 // Let's replace Label with a span class sr-only in the previous edit?
 // No, I'll update previous edit to not use Label, then remove import.
@@ -115,12 +115,15 @@ export function ContactClient() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <button
                       onClick={() => handleCategoryChange("sales")}
-                      className={`p-6 text-left rounded-xl border-2 transition-all ${category === "sales"
-                        ? "border-brand-copper bg-brand-copper/5"
-                        : "border-gray-200 hover:border-brand-copper/50"
-                        }`}
+                      className={`p-6 text-left rounded-xl border-2 transition-all ${
+                        category === "sales"
+                          ? "border-brand-copper bg-brand-copper/5"
+                          : "border-gray-200 hover:border-brand-copper/50"
+                      }`}
                     >
-                      <div className="font-bold text-lg text-brand-oxford mb-2">Sales & Strategy</div>
+                      <div className="font-bold text-lg text-brand-oxford mb-2">
+                        Sales & Strategy
+                      </div>
                       <div className="text-sm text-brand-slate">
                         Schedule a consultation about our services
                       </div>
@@ -128,12 +131,15 @@ export function ContactClient() {
 
                     <button
                       onClick={() => handleCategoryChange("support")}
-                      className={`p-6 text-left rounded-xl border-2 transition-all ${category === "support"
-                        ? "border-brand-copper bg-brand-copper/5"
-                        : "border-gray-200 hover:border-brand-copper/50"
-                        }`}
+                      className={`p-6 text-left rounded-xl border-2 transition-all ${
+                        category === "support"
+                          ? "border-brand-copper bg-brand-copper/5"
+                          : "border-gray-200 hover:border-brand-copper/50"
+                      }`}
                     >
-                      <div className="font-bold text-lg text-brand-oxford mb-2">Technical Support</div>
+                      <div className="font-bold text-lg text-brand-oxford mb-2">
+                        Technical Support
+                      </div>
                       <div className="text-sm text-brand-slate">
                         For existing clients or new clients in crisis
                       </div>

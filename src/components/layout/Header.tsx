@@ -18,10 +18,12 @@ import {
 import { cn } from "../ui/utils";
 import { navSections, ctaLinks, type NavItem } from "../../data/navigation";
 import { MobileNav } from "./MobileNav";
+import { useContactModal } from "../providers/ContactModalProvider";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const { openModal } = useContactModal();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +34,10 @@ export function Header() {
   }, []);
 
   const renderNavItem = (item: NavItem, className?: string) => {
+    if (item.disabled) {
+      return null; // Don't render disabled items
+    }
+
     const content = (
       <>
         <div className="text-sm font-medium leading-none text-brand-oxford">{item.title}</div>
@@ -95,10 +101,15 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-brand-oxford shadow-lg py-3" : "bg-brand-oxford/95 backdrop-blur-sm py-5"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-brand-oxford shadow-lg py-3" : "bg-brand-oxford/95 backdrop-blur-sm py-5"
+        }`}
     >
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-brand-copper focus:text-white focus:px-4 focus:py-2 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-white"
+      >
+        Skip to main content
+      </a>
       <div className="container mx-auto px-6 flex items-center justify-between">
         <Link
           className="flex items-center cursor-pointer shrink-0 mr-8 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-brand-copper"
@@ -264,26 +275,7 @@ const ListItem = forwardRef<
   React.ComponentPropsWithoutRef<"a"> & { item: NavItem; pathname: string }
 >(({ className, item, pathname }, ref) => {
   if (item.disabled) {
-    return (
-      <li>
-        <NavigationMenuLink asChild>
-          <div
-            className={cn(
-              "block select-none space-y-1 rounded-md p-3 leading-none text-brand-oxford/60 cursor-not-allowed",
-              className
-            )}
-            aria-disabled="true"
-          >
-            <div className="text-sm font-medium leading-none">{item.title}</div>
-            {item.description && (
-              <p className="line-clamp-2 text-sm leading-snug text-brand-slate">
-                {item.description}
-              </p>
-            )}
-          </div>
-        </NavigationMenuLink>
-      </li>
-    );
+    return null; // Don't render disabled items
   }
 
   const href = item.to || item.href || "/";

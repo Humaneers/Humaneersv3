@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Scale,
-  Shield,
-  FileText,
-  AlertTriangle,
-  Lock,
-  HeartHandshake,
-} from "lucide-react";
+import { Scale, Shield, FileText, AlertTriangle, Lock, HeartHandshake } from "lucide-react";
 import { EmailActionButton } from "../ui/email-action-button";
 
 export function EthicsClient() {
@@ -122,7 +115,8 @@ export function EthicsClient() {
             <div className="bg-gray-50 p-8 rounded-2xl border border-gray-200 sticky top-24 shadow-sm text-center flex flex-col items-center">
               <h3 className="text-2xl font-bold text-brand-oxford mb-2">Submit a Report</h3>
               <p className="text-sm text-gray-500 mb-8">
-                Use the secure link below to email our Compliance Officer directly. You may choose to use an anonymous email address if you prefer.
+                Use the secure link below to email our Compliance Officer directly. You may choose
+                to use an anonymous email address if you prefer.
               </p>
 
               <EmailActionButton

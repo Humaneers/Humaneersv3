@@ -1,16 +1,9 @@
 "use client";
 
-
 import { EmailActionButton } from "../ui/email-action-button";
-import {
-  Shield,
-  Clock,
-  Smartphone,
-} from "lucide-react";
+import { Shield, Clock, Smartphone } from "lucide-react";
 
 export function ClientCareClient() {
-
-
   return (
     <div className="bg-brand-cream min-h-screen">
       {/* Hero section */}

@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 
 import {
-
   BookOpen,
   Shield,
   FileText,
@@ -114,8 +113,6 @@ export function ResourcesClient() {
             Detailed documentation, strategic guides, and security explainers to help you manage
             your digital infrastructure.
           </p>
-
-
         </div>
       </section>
 
@@ -127,10 +124,11 @@ export function ResourcesClient() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${activeTab === tab
-                  ? "bg-brand-oxford text-white shadow-sm"
-                  : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
-                  }`}
+                className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
+                  activeTab === tab
+                    ? "bg-brand-oxford text-white shadow-sm"
+                    : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
+                }`}
               >
                 {tab}
               </button>

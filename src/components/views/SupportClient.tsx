@@ -10,15 +10,17 @@ import {
   Headphones,
   ChevronDown,
   ArrowRight,
+  MessageSquare,
 } from "lucide-react";
-import { EmailActionButton } from "../ui/email-action-button";
+import { Button } from "../ui/button";
+import { useContactModal } from "../providers/ContactModalProvider";
 import { trackInteraction } from "../../lib/session";
-
 
 // Kept trackInteraction for FAQ if needed, though mostly used for form.
 // Faq toggle uses it.
 
 export function SupportClient() {
+  const { openModal } = useContactModal();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const faqItems = [
@@ -50,6 +52,12 @@ export function SupportClient() {
   ];
 
   const toggleFaq = (index: number) => {
+    // HIGH PRIORITY FIX: Validate array bounds
+    if (index < 0 || index >= faqItems.length) {
+      console.warn(`Invalid FAQ index: ${index}`);
+      return;
+    }
+
     if (openFaq !== index) {
       trackInteraction(`Expanded FAQ: ${faqItems[index].question}`);
     }
@@ -61,7 +69,7 @@ export function SupportClient() {
       <section className="bg-brand-oxford text-white py-20">
         <div className="container mx-auto px-6 text-center">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-copper/20 rounded-full mb-6">
-            <LifeBuoy className="w-8 h-8 text-brand-copper" />
+            <LifeBuoy className="w-8 h-8 text-brand-copper" aria-hidden="true" />
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6">Support Center</h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-2xl mx-auto">
@@ -79,9 +87,9 @@ export function SupportClient() {
               <div>
                 <h2 className="text-2xl font-bold text-brand-oxford mb-6">Need Help?</h2>
                 <p className="text-brand-slate mb-8">
-                  Email us to submit a support ticket. We welcome new clients who need
-                  immediate help. Our team monitors tickets during business hours and will respond
-                  based on priority level.
+                  Email us to submit a support ticket. We welcome new clients who need immediate
+                  help. Our team monitors tickets during business hours and will respond based on
+                  priority level.
                 </p>
               </div>
 
@@ -98,8 +106,9 @@ export function SupportClient() {
                 <a
                   href="tel:+19284401505"
                   className="inline-flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-5 rounded-lg transition-colors text-lg"
+                  aria-label="Call emergency hotline at (928) 440-1505"
                 >
-                  <Phone className="w-5 h-5" />
+                  <Phone className="w-5 h-5" aria-hidden="true" />
                   (928) 440-1505
                 </a>
                 <p className="text-xs text-red-600 mt-2">Available 24/7 for critical emergencies</p>
@@ -184,18 +193,20 @@ export function SupportClient() {
             <div className="lg:w-2/3">
               <div className="bg-white p-8 rounded-xl shadow-lg text-center flex flex-col items-center justify-center min-h-[400px]">
                 <div className="bg-brand-cream/50 p-6 rounded-full mb-6">
-                  <ArrowRight className="w-12 h-12 text-brand-copper" />
+                  <ArrowRight className="w-12 h-12 text-brand-copper" aria-hidden="true" />
                 </div>
                 <h3 className="text-2xl font-bold text-brand-oxford mb-2">Open a Ticket</h3>
                 <p className="text-gray-600 mb-8 max-w-md">
-                  Click below to email our support team directly. Please include "Urgent" in the subject line for critical issues.
+                  Click below to email our support team directly. Please include "Urgent" in the
+                  subject line for critical issues.
                 </p>
-                <EmailActionButton
-                  label="Email Support"
-                  email="support@humaneers.dev"
-                  subject="Support Request: [Issue Summary]"
-                  className="w-full sm:w-auto bg-brand-copper hover:bg-brand-copper-dark"
-                />
+                <Button
+                  onClick={() => openModal("support")}
+                  className="w-full sm:w-auto bg-brand-copper hover:bg-brand-copper-dark h-auto py-4 px-8 text-lg gap-2"
+                >
+                  <MessageSquare className="w-5 h-5" aria-hidden="true" />
+                  Open Support Ticket
+                </Button>
               </div>
             </div>
           </div>
@@ -212,15 +223,24 @@ export function SupportClient() {
               <div key={index} className="bg-brand-cream rounded-lg overflow-hidden">
                 <button
                   onClick={() => toggleFaq(index)}
+                  aria-expanded={openFaq === index}
+                  aria-controls={`faq-panel-${index}`}
+                  id={`faq-button-${index}`}
                   className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-brand-cream/80 transition-colors"
                 >
                   <span className="font-semibold text-brand-oxford">{item.question}</span>
                   <ChevronDown
                     className={`w-5 h-5 text-brand-copper transition-transform ${openFaq === index ? "rotate-180" : ""}`}
+                    aria-hidden="true"
                   />
                 </button>
                 {openFaq === index && (
-                  <div className="px-6 pb-4">
+                  <div
+                    id={`faq-panel-${index}`}
+                    role="region"
+                    aria-labelledby={`faq-button-${index}`}
+                    className="px-6 pb-4"
+                  >
                     <p className="text-brand-slate">{item.answer}</p>
                   </div>
                 )}
