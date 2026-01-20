@@ -19,11 +19,11 @@ The official website for Humaneers, built with modern web technologies to delive
 
 ## Tech Stack
 
-- **Framework**: [React](https://react.dev/) + [Vite](https://vitejs.dev/)
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router, PPR) + [React 19](https://react.dev/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
 - **UI Architecture**: [Radix UI](https://www.radix-ui.com/) + Shadcn/UI patterns
-- **Animation**: [Framer Motion](https://www.framer.com/motion/)
+- **Animation**: [Motion](https://motion.dev/)
 - **Forms/CRM**: [Zoho CRM](https://www.zoho.com/crm/) + Zoho Forms
 - **Analytics**: Zoho PageSense + SalesIQ, Contentsquare, Datadog RUM
 - **Deployment**: [Vercel](https://vercel.com/)

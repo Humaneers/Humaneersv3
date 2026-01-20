@@ -5,16 +5,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- PageSense -->
-  <script src="https://cdn.pagesense.io/js/911811328/0172b61c43a2473c98eef23da6d865af.js" defer></script>
-
-  <!-- ContentSquare (loaded after page interactive for performance) -->
+  <!-- Third-Party Scripts (Staggered for Performance) -->
   <script>
     window.addEventListener('load', function () {
-      var script = document.createElement('script');
-      script.src = "https://t.contentsquare.net/uxa/741b931013a01.js";
-      script.defer = true;
-      document.head.appendChild(script);
+      // Staggered loading to prioritize LCP and Hydration
+      setTimeout(function () {
+        // PageSense
+        var ps = document.createElement('script');
+        ps.src = "https://cdn.pagesense.io/js/911811328/0172b61c43a2473c98eef23da6d865af.js";
+        ps.defer = true;
+        document.head.appendChild(ps);
+
+        // ContentSquare
+        var cs = document.createElement('script');
+        cs.src = "https://t.contentsquare.net/uxa/741b931013a01.js";
+        cs.defer = true;
+        document.head.appendChild(cs);
+      }, 3500);
     });
   </script>
 
@@ -104,11 +111,13 @@
   </script>
   <script>
     window.addEventListener('load', function () {
-      var script = document.createElement('script');
-      script.id = "zsiqscript";
-      script.src = "https://salesiq.zohopublic.com/widget?wc=siq5af82cc1e8970552a081c3ee50f7191d30ebfca6797a53e74bd40b6d10c3dbee";
-      script.defer = true;
-      document.body.appendChild(script);
+      setTimeout(function () {
+        var script = document.createElement('script');
+        script.id = "zsiqscript";
+        script.src = "https://salesiq.zohopublic.com/widget?wc=siq5af82cc1e8970552a081c3ee50f7191d30ebfca6797a53e74bd40b6d10c3dbee";
+        script.defer = true;
+        document.body.appendChild(script);
+      }, 4000); // Slightly more delay for chat widget
     });
   </script>
 </body>

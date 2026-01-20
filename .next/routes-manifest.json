@@ -1,0 +1,231 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/about",
+      "regex": "^/about(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/about(?:/)?$"
+    },
+    {
+      "page": "/api/zoho/leads",
+      "regex": "^/api/zoho/leads(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/zoho/leads(?:/)?$"
+    },
+    {
+      "page": "/api/zoho/newsletter",
+      "regex": "^/api/zoho/newsletter(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/zoho/newsletter(?:/)?$"
+    },
+    {
+      "page": "/api/zoho/tickets",
+      "regex": "^/api/zoho/tickets(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/zoho/tickets(?:/)?$"
+    },
+    {
+      "page": "/client-care",
+      "regex": "^/client\\-care(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/client\\-care(?:/)?$"
+    },
+    {
+      "page": "/colophon",
+      "regex": "^/colophon(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/colophon(?:/)?$"
+    },
+    {
+      "page": "/contact",
+      "regex": "^/contact(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/contact(?:/)?$"
+    },
+    {
+      "page": "/crisis-management",
+      "regex": "^/crisis\\-management(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/crisis\\-management(?:/)?$"
+    },
+    {
+      "page": "/estate",
+      "regex": "^/estate(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/estate(?:/)?$"
+    },
+    {
+      "page": "/ethics",
+      "regex": "^/ethics(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/ethics(?:/)?$"
+    },
+    {
+      "page": "/family-protection",
+      "regex": "^/family\\-protection(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/family\\-protection(?:/)?$"
+    },
+    {
+      "page": "/fractional-leadership",
+      "regex": "^/fractional\\-leadership(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/fractional\\-leadership(?:/)?$"
+    },
+    {
+      "page": "/growth",
+      "regex": "^/growth(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/growth(?:/)?$"
+    },
+    {
+      "page": "/industries",
+      "regex": "^/industries(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/industries(?:/)?$"
+    },
+    {
+      "page": "/managed-it",
+      "regex": "^/managed\\-it(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/managed\\-it(?:/)?$"
+    },
+    {
+      "page": "/nonprofits",
+      "regex": "^/nonprofits(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/nonprofits(?:/)?$"
+    },
+    {
+      "page": "/personal-it",
+      "regex": "^/personal\\-it(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/personal\\-it(?:/)?$"
+    },
+    {
+      "page": "/pricing",
+      "regex": "^/pricing(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/pricing(?:/)?$"
+    },
+    {
+      "page": "/privacy",
+      "regex": "^/privacy(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/privacy(?:/)?$"
+    },
+    {
+      "page": "/resources",
+      "regex": "^/resources(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/resources(?:/)?$"
+    },
+    {
+      "page": "/senior-care",
+      "regex": "^/senior\\-care(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/senior\\-care(?:/)?$"
+    },
+    {
+      "page": "/services",
+      "regex": "^/services(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/services(?:/)?$"
+    },
+    {
+      "page": "/status",
+      "regex": "^/status(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/status(?:/)?$"
+    },
+    {
+      "page": "/support",
+      "regex": "^/support(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/support(?:/)?$"
+    },
+    {
+      "page": "/talk-to-sales",
+      "regex": "^/talk\\-to\\-sales(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/talk\\-to\\-sales(?:/)?$"
+    },
+    {
+      "page": "/terms",
+      "regex": "^/terms(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/terms(?:/)?$"
+    },
+    {
+      "page": "/thank-you",
+      "regex": "^/thank\\-you(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/thank\\-you(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": true,
+    "dynamicRSCPrerender": true
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  },
+  "ppr": {
+    "chain": {
+      "headers": {
+        "next-resume": "1"
+      }
+    }
+  }
+}

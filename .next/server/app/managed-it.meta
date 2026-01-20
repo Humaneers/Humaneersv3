@@ -1,0 +1,17 @@
+{
+  "status": 200,
+  "headers": {
+    "link": "</WordMarkV-2.svg>; rel=preload; as=\"image\"",
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/managed-it/layout,_N_T_/managed-it/page,_N_T_/managed-it"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/managed-it/__PAGE__",
+    "/managed-it",
+    "/_index",
+    "/_head"
+  ]
+}
