@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Shield, BarChart3, Users, Lock, MapPin } from "lucide-react";
 import { Button } from "../ui/button";
-import { Input } from "../ui/input";
 import { motion } from "motion/react";
 import { routePaths } from "../../routes";
 import { setSessionContext } from "../../lib/session";
@@ -16,16 +15,7 @@ const ObjectionsSection = lazy(() =>
 );
 
 export function HomeClient() {
-  const [email, setEmail] = useState("");
   const router = useRouter();
-
-  const handleEmailSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      setSessionContext({ entrySource: "Homepage Hero" });
-      router.push(`${routePaths.talkToSales}?email=${encodeURIComponent(email)}`);
-    }
-  };
 
   const servicePillars = [
     {
@@ -90,28 +80,15 @@ export function HomeClient() {
               </p>
             </div>
             <div className="flex flex-col gap-4 max-w-lg">
-              <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-3">
-                <div className="flex-grow">
-                  <label htmlFor="hero-email" className="sr-only">
-                    Work Email
-                  </label>
-                  <Input
-                    id="hero-email"
-                    type="email"
-                    placeholder="Enter your email..."
-                    className="bg-white text-gray-900 h-14 text-lg border-0 focus-visible:ring-2 focus-visible:ring-brand-copper"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  onClick={() => setSessionContext({ entrySource: "Homepage Hero Input" })}
-                  className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 h-14 rounded-md shadow-lg hover:shadow-xl transition-all whitespace-nowrap"
-                >
-                  Get Started
-                </Button>
-              </form>
+              <Button
+                onClick={() => {
+                  setSessionContext({ entrySource: "Homepage Hero CTA" });
+                  router.push(routePaths.talkToSales);
+                }}
+                className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 h-14 rounded-md shadow-lg hover:shadow-xl transition-all w-fit"
+              >
+                Get Started
+              </Button>
               <p className="text-sm text-gray-400">
                 Join 200+ businesses secured by Humaneers. No credit card required.
               </p>

@@ -1,64 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { Loader2, Phone, MapPin } from "lucide-react";
-import { Button } from "../ui/button";
+import { Phone, MapPin } from "lucide-react";
 import { cn } from "../ui/utils";
-import { createErrorReportLink } from "../../lib/utils";
-import { submitNewsletter } from "../../lib/zoho";
-import { toast } from "sonner";
-import { useState } from "react";
 import Image from "next/image";
+import { EmailActionButton } from "../ui/email-action-button";
 // import { APP_VERSION } from "../../version"; // Temporarily disabled if not easily resolved
 const APP_VERSION = "0.2.0";
 
 import { footerSections, footerMetaLinks } from "../../data/navigation";
 
 export function Footer() {
-  const [newsletterEmail, setNewsletterEmail] = useState("");
-  const [isNewsletterSubmitting, setIsNewsletterSubmitting] = useState(false);
-
-  const handleNewsletterSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!newsletterEmail.trim()) {
-      toast.error("Please enter your email address");
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(newsletterEmail)) {
-      toast.error("Please enter a valid email address");
-      return;
-    }
-
-    setIsNewsletterSubmitting(true);
-
-    try {
-      await submitNewsletter({ email: newsletterEmail, source: "footer" });
-      toast.success("Thanks for subscribing!");
-      setNewsletterEmail("");
-    } catch (error) {
-      const errorMsg = error instanceof Error ? error.message : "Failed to subscribe.";
-      const link = createErrorReportLink(error, "Newsletter Subscription (Footer)");
-      toast.error(
-        <div className="flex flex-col gap-2">
-          <span>{errorMsg}</span>
-          <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white underline font-bold hover:text-gray-200"
-          >
-            Report to Support
-          </a>
-        </div>
-      );
-    } finally {
-      setIsNewsletterSubmitting(false);
-    }
-  };
-
   return (
     <footer className="bg-brand-oxford text-gray-400 py-12 border-t border-brand-copper">
       <div className="container mx-auto px-6">
@@ -115,38 +67,15 @@ export function Footer() {
           <div className="flex flex-col items-center md:items-start w-full mt-8 md:mt-0">
             <h4 className="text-white font-semibold mb-4">Newsletter</h4>
             <p className="text-sm mb-4">Get the latest on IT security and strategy.</p>
-            <form
-              className="flex flex-col gap-3 w-full max-w-sm md:max-w-none"
-              onSubmit={handleNewsletterSubmit}
-            >
-              <label htmlFor="footer-email" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="footer-email"
-                type="email"
-                placeholder="Email address"
-                value={newsletterEmail}
-                onChange={(e) => setNewsletterEmail(e.target.value)}
-                required
-                disabled={isNewsletterSubmitting}
-                className="bg-brand-slate/20 text-white placeholder-gray-500 text-sm px-4 py-3 rounded border border-gray-700 focus:border-brand-copper outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+            <div className="w-full max-w-sm md:max-w-none">
+              <EmailActionButton
+                label="Subscribe via Email"
+                email="hello@humaneers.dev"
+                subject="Newsletter Subscription Request"
+                className="w-full bg-brand-copper hover:bg-brand-copper-dark justify-center h-auto py-3 text-sm"
+                size="default"
               />
-              <Button
-                type="submit"
-                disabled={isNewsletterSubmitting}
-                className="bg-brand-copper hover:bg-brand-copper-dark text-white font-medium text-sm py-3 h-auto w-full"
-              >
-                {isNewsletterSubmitting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Subscribing...
-                  </>
-                ) : (
-                  "Subscribe"
-                )}
-              </Button>
-            </form>
+            </div>
           </div>
         </div>
 

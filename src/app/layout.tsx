@@ -34,7 +34,7 @@ import { SessionTracker } from "../components/SessionTracker";
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased text-brand-slate bg-brand-cream min-h-screen flex flex-col">
+      <body className="font-sans antialiased text-brand-slate bg-brand-cream min-h-screen flex flex-col" suppressHydrationWarning>
         <TooltipProvider>
           <Header />
           <main id="main-content" className="flex-grow pt-20">

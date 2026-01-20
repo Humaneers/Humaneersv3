@@ -1,46 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { Textarea } from "../ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import {
   LifeBuoy,
-  ArrowRight,
-  Loader2,
+  Phone,
+  MapPin,
   Clock,
   Shield,
   Headphones,
-  CheckCircle2,
-  Phone,
-  MapPin,
   ChevronDown,
+  ArrowRight,
 } from "lucide-react";
-import { submitSupportTicket, validateSupportForm, type SupportFormData } from "../../lib/zoho";
-import { toast } from "sonner";
+import { EmailActionButton } from "../ui/email-action-button";
 import { trackInteraction } from "../../lib/session";
-import { createErrorReportLink } from "../../lib/utils";
+
+
+// Kept trackInteraction for FAQ if needed, though mostly used for form.
+// Faq toggle uses it.
 
 export function SupportClient() {
-  const searchParams = useSearchParams();
-  const initialSource = searchParams.get("source");
-
-  const [formData, setFormData] = useState<SupportFormData>({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    priority: "",
-    category: "",
-    subject: "",
-    description: "",
-    source: initialSource || "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const faqItems = [
@@ -52,10 +30,10 @@ export function SupportClient() {
     {
       question: "What's the fastest way to get help for a critical issue?",
       answer:
-        "For P1 Critical issues (system down, data breach, active security incident), call our emergency hotline directly. For other issues, submit a ticket and select the appropriate priority level.",
+        "For P1 Critical issues (system down, data breach, active security incident), call our emergency hotline directly. For other issues, send us an email.",
     },
     {
-      question: "What information should I include in my ticket?",
+      question: "What information should I include in my request?",
       answer:
         "Include: what happened, when it started, what you were trying to do, any error messages, and which systems are affected. The more detail you provide, the faster we can help.",
     },
@@ -70,52 +48,6 @@ export function SupportClient() {
         "Our team monitors tickets during business hours (Mon-Fri, 8am-6pm MST). For P1 Critical issues, our emergency hotline provides 24/7 coverage.",
     },
   ];
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const validation = validateSupportForm(formData);
-    if (!validation.valid) {
-      toast.error(validation.errors[0]);
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      await submitSupportTicket(formData);
-      setIsSuccess(true);
-      trackInteraction(`Submitted Support Ticket: ${formData.category}`);
-      toast.success("Your support ticket has been submitted!");
-    } catch (error) {
-      const errorMsg = error instanceof Error ? error.message : "Failed to submit ticket.";
-      const link = createErrorReportLink(error, `Support Form - Category: ${formData.category}`);
-      toast.error(
-        <div className="flex flex-col gap-2">
-          <span>{errorMsg}</span>
-          <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white underline font-bold hover:text-gray-200"
-          >
-            Report to Support
-          </a>
-        </div>
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSelectChange = (name: string) => (value: string) => {
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
 
   const toggleFaq = (index: number) => {
     if (openFaq !== index) {
@@ -147,7 +79,7 @@ export function SupportClient() {
               <div>
                 <h2 className="text-2xl font-bold text-brand-oxford mb-6">Need Help?</h2>
                 <p className="text-brand-slate mb-8">
-                  Fill out the form to submit a support ticket. We welcome new clients who need
+                  Email us to submit a support ticket. We welcome new clients who need
                   immediate help. Our team monitors tickets during business hours and will respond
                   based on priority level.
                 </p>
@@ -250,149 +182,20 @@ export function SupportClient() {
             </div>
 
             <div className="lg:w-2/3">
-              <div className="bg-white p-8 rounded-xl shadow-lg">
-                {isSuccess ? (
-                  <div className="py-10 text-center space-y-4">
-                    <div className="mx-auto w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
-                      <CheckCircle2 className="w-10 h-10" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900">Ticket Submitted!</h3>
-                    <p className="text-gray-600 max-w-sm mx-auto">
-                      We've received your support request and will respond based on the priority
-                      level.
-                    </p>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <Label htmlFor="name">Full Name</Label>
-                        <Input
-                          id="name"
-                          name="name"
-                          placeholder="Jane Doe"
-                          required
-                          className="h-12 bg-gray-50 border-gray-200"
-                          value={formData.name}
-                          onChange={handleChange}
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email Address</Label>
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          placeholder="jane@company.com"
-                          required
-                          className="h-12 bg-gray-50 border-gray-200"
-                          value={formData.email}
-                          onChange={handleChange}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <Label htmlFor="phone">Phone (Optional)</Label>
-                        <Input
-                          id="phone"
-                          name="phone"
-                          type="tel"
-                          placeholder="(555) 123-4567"
-                          className="h-12 bg-gray-50 border-gray-200"
-                          value={formData.phone}
-                          onChange={handleChange}
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="company">Company (Optional)</Label>
-                        <Input
-                          id="company"
-                          name="company"
-                          placeholder="Acme Inc."
-                          className="h-12 bg-gray-50 border-gray-200"
-                          value={formData.company}
-                          onChange={handleChange}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <Label htmlFor="priority">Priority Level</Label>
-                        <Select onValueChange={handleSelectChange("priority")} required>
-                          <SelectTrigger id="priority" className="h-12 bg-gray-50 border-gray-200">
-                            <SelectValue placeholder="Select priority" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="critical">Critical (P1) | System Down</SelectItem>
-                            <SelectItem value="high">High (P2) | Major Impact</SelectItem>
-                            <SelectItem value="medium">Medium (P3) | Minor Issue</SelectItem>
-                            <SelectItem value="low">Low (P4) | General Question</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="category">Category</Label>
-                        <Select onValueChange={handleSelectChange("category")} required>
-                          <SelectTrigger id="category" className="h-12 bg-gray-50 border-gray-200">
-                            <SelectValue placeholder="Select category" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="technical">Technical Issue</SelectItem>
-                            <SelectItem value="account">Account / Billing</SelectItem>
-                            <SelectItem value="security">Security Concern</SelectItem>
-                            <SelectItem value="feature">Feature Request</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="subject">Subject</Label>
-                      <Input
-                        id="subject"
-                        name="subject"
-                        placeholder="Brief description of the issue"
-                        required
-                        className="h-12 bg-gray-50 border-gray-200"
-                        value={formData.subject}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="description">Description</Label>
-                      <Textarea
-                        id="description"
-                        name="description"
-                        placeholder="Please provide as much detail as possible: What happened? What were you trying to do? Any error messages?"
-                        className="min-h-[150px] bg-gray-50 border-gray-200"
-                        required
-                        value={formData.description}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    <Button
-                      type="submit"
-                      className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white text-lg py-6 h-auto"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? (
-                        <>
-                          Submitting... <Loader2 className="ml-2 w-5 h-5 animate-spin" />
-                        </>
-                      ) : (
-                        <>
-                          Send Support Ticket <ArrowRight className="ml-2 w-5 h-5" />
-                        </>
-                      )}
-                    </Button>
-                  </form>
-                )}
+              <div className="bg-white p-8 rounded-xl shadow-lg text-center flex flex-col items-center justify-center min-h-[400px]">
+                <div className="bg-brand-cream/50 p-6 rounded-full mb-6">
+                  <ArrowRight className="w-12 h-12 text-brand-copper" />
+                </div>
+                <h3 className="text-2xl font-bold text-brand-oxford mb-2">Open a Ticket</h3>
+                <p className="text-gray-600 mb-8 max-w-md">
+                  Click below to email our support team directly. Please include "Urgent" in the subject line for critical issues.
+                </p>
+                <EmailActionButton
+                  label="Email Support"
+                  email="support@humaneers.dev"
+                  subject="Support Request: [Issue Summary]"
+                  className="w-full sm:w-auto bg-brand-copper hover:bg-brand-copper-dark"
+                />
               </div>
             </div>
           </div>

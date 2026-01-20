@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+
 import {
-  Search,
+
   BookOpen,
   Shield,
   FileText,
@@ -115,15 +115,7 @@ export function ResourcesClient() {
             your digital infrastructure.
           </p>
 
-          <div className="max-w-xl mx-auto relative">
-            <Search className="absolute left-3 top-3.5 text-gray-400" size={20} />
-            <Input
-              aria-label="Search resources"
-              type="text"
-              placeholder="Search guides, terms, or error codes..."
-              className="pl-10 h-12 bg-white/10 border-white/20 text-white placeholder-gray-400 focus:bg-white/20 transition-all rounded-lg"
-            />
-          </div>
+
         </div>
       </section>
 
@@ -135,11 +127,10 @@ export function ResourcesClient() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
-                  activeTab === tab
-                    ? "bg-brand-oxford text-white shadow-sm"
-                    : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
-                }`}
+                className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${activeTab === tab
+                  ? "bg-brand-oxford text-white shadow-sm"
+                  : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
+                  }`}
               >
                 {tab}
               </button>

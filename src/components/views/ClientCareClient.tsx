@@ -1,55 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
+
+import { EmailActionButton } from "../ui/email-action-button";
 import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "../ui/dialog";
-import {
-  ArrowRight,
   Shield,
   Clock,
-  Lock,
-  AlertTriangle,
-  Loader2,
-  Globe,
   Smartphone,
 } from "lucide-react";
 
 export function ClientCareClient() {
-  const [isPortalOpen, setIsPortalOpen] = useState(false);
-  const [domain, setDomain] = useState("");
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError("");
-
-    // Simulate network check delay
-    setTimeout(() => {
-      setIsLoading(false);
-      const errors = [
-        "Please login from within your network or approved device.",
-        "Access unavailable.",
-      ];
-      setError(errors[Math.floor(Math.random() * errors.length)]);
-    }, 1500);
-  };
-
-  const handleClose = () => {
-    setIsPortalOpen(false);
-    setDomain("");
-    setError("");
-  };
 
   return (
     <div className="bg-brand-cream min-h-screen">
@@ -90,79 +50,18 @@ export function ClientCareClient() {
           </div>
 
           <div className="max-w-md mx-auto text-center">
-            <Dialog open={isPortalOpen} onOpenChange={setIsPortalOpen}>
-              <DialogTrigger asChild>
-                <Button className="bg-brand-oxford text-white hover:bg-brand-oxford/90 px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all">
-                  <Lock className="w-5 h-5 mr-2" /> Login to Portal
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-md">
-                <DialogHeader>
-                  <DialogTitle className="text-2xl font-bold text-center text-brand-oxford">
-                    Client Portal Access
-                  </DialogTitle>
-                  <DialogDescription className="text-center text-brand-slate">
-                    Enter your authorized account domain to access your organization's dashboard.
-                  </DialogDescription>
-                </DialogHeader>
-
-                <form onSubmit={handleLogin} className="space-y-4 py-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="domain">Account Domain</Label>
-                    <div className="relative">
-                      <Input
-                        id="domain"
-                        type="text"
-                        placeholder="company.com"
-                        value={domain}
-                        onChange={(e) => setDomain(e.target.value)}
-                        className={`pl-10 ${error ? "border-red-500 bg-red-50 focus-visible:ring-red-500" : ""}`}
-                      />
-                      <Globe className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-                    </div>
-                  </div>
-
-                  <div className="bg-blue-50 p-3 rounded text-xs text-blue-800 flex gap-2">
-                    <Shield className="w-4 h-4 shrink-0" />
-                    <span>
-                      This connection is end-to-end encrypted. Access is restricted to authorized IP
-                      ranges.
-                    </span>
-                  </div>
-
-                  {error && (
-                    <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-md text-sm flex items-start gap-2 animate-shake">
-                      <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5" />
-                      <span className="font-semibold">{error}</span>
-                    </div>
-                  )}
-
-                  <div className="flex justify-end gap-3 pt-2">
-                    <Button type="button" variant="ghost" onClick={handleClose}>
-                      Cancel
-                    </Button>
-                    <Button
-                      type="submit"
-                      className="bg-brand-oxford hover:bg-brand-oxford/90 text-white min-w-[140px]"
-                      disabled={isLoading || !domain}
-                    >
-                      {isLoading ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Verifying...
-                        </>
-                      ) : (
-                        <>
-                          Connect <ArrowRight className="ml-2 w-4 h-4" />
-                        </>
-                      )}
-                    </Button>
-                  </div>
-                </form>
-              </DialogContent>
-            </Dialog>
-            <p className="mt-4 text-sm text-brand-slate">
-              Existing clients only. Please use your provided credentials.
-            </p>
+            <div className="bg-white p-8 rounded-xl shadow-lg inline-block border border-gray-100">
+              <h3 className="text-xl font-bold text-brand-oxford mb-2">Client Portal Access</h3>
+              <p className="text-brand-slate mb-6">
+                Our portal is currently invite-only. Please contact your account manager for access.
+              </p>
+              <EmailActionButton
+                label="Request Portal Access"
+                email="support@humaneers.dev"
+                subject="Portal Access Request"
+                className="w-full bg-brand-oxford hover:bg-brand-oxford/90 text-white"
+              />
+            </div>
           </div>
         </div>
       </section>

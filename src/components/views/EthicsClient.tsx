@@ -1,57 +1,16 @@
 "use client";
 
-import { useState } from "react";
 import {
   Scale,
   Shield,
   FileText,
   AlertTriangle,
   Lock,
-  CheckCircle2,
-  Send,
   HeartHandshake,
-  Loader2,
 } from "lucide-react";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
-import { Label } from "../ui/label";
-import { Switch } from "../ui/switch";
-import { toast } from "sonner";
-import { submitEthicsReport } from "../../lib/api"; // Note: This might need to be a server action later, but for now using existing lib pattern if valid.
+import { EmailActionButton } from "../ui/email-action-button";
 
 export function EthicsClient() {
-  const [isAnonymous, setIsAnonymous] = useState(false);
-  const [reportType, setReportType] = useState("general");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [details, setDetails] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      await submitEthicsReport({
-        isAnonymous,
-        name: isAnonymous ? undefined : name,
-        email: isAnonymous ? undefined : email,
-        reportType,
-        details,
-      });
-      setIsSuccess(true);
-      toast.success("Report submitted successfully. Thank you for speaking up.");
-    } catch (error) {
-      toast.error(
-        error instanceof Error ? error.message : "Failed to submit report. Please try again."
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <div className="bg-brand-cream min-h-screen">
       {/* Header */}
@@ -160,144 +119,22 @@ export function EthicsClient() {
 
           {/* Right Column: Reporting Form */}
           <div className="lg:col-span-5">
-            <div className="bg-gray-50 p-8 rounded-2xl border border-gray-200 sticky top-24 shadow-sm">
-              {!isSuccess ? (
-                <div key="form">
-                  <h3 className="text-2xl font-bold text-brand-oxford mb-2">Submit a Report</h3>
-                  <p className="text-sm text-gray-500 mb-6">
-                    Use this secure form to report ethical concerns. You may choose to remain
-                    anonymous.
-                  </p>
+            <div className="bg-gray-50 p-8 rounded-2xl border border-gray-200 sticky top-24 shadow-sm text-center flex flex-col items-center">
+              <h3 className="text-2xl font-bold text-brand-oxford mb-2">Submit a Report</h3>
+              <p className="text-sm text-gray-500 mb-8">
+                Use the secure link below to email our Compliance Officer directly. You may choose to use an anonymous email address if you prefer.
+              </p>
 
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="flex items-center justify-between bg-white p-3 rounded-lg border border-gray-200">
-                      <div className="flex items-center gap-2">
-                        <Lock
-                          size={16}
-                          className={isAnonymous ? "text-brand-copper" : "text-gray-400"}
-                        />
-                        <Label htmlFor="anonymous-mode" className="cursor-pointer">
-                          Submit Anonymously
-                        </Label>
-                      </div>
-                      <Switch
-                        id="anonymous-mode"
-                        checked={isAnonymous}
-                        onCheckedChange={setIsAnonymous}
-                      />
-                    </div>
+              <EmailActionButton
+                label="Submit Ethics Report"
+                email="compliance@humaneers.dev"
+                subject="CONFIDENTIAL: Ethics Report"
+                className="w-full bg-brand-copper hover:bg-brand-copper-dark"
+              />
 
-                    {!isAnonymous && (
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="name">Name</Label>
-                          <Input
-                            id="name"
-                            placeholder="Your name"
-                            required
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="email">Email</Label>
-                          <Input
-                            id="email"
-                            type="email"
-                            placeholder="work@email.com"
-                            required
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                          />
-                        </div>
-                      </div>
-                    )}
-
-                    <div className="space-y-2">
-                      <Label htmlFor="type">Concern Type</Label>
-                      <select
-                        id="type"
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        value={reportType}
-                        onChange={(e) => setReportType(e.target.value)}
-                      >
-                        <option value="general">General Ethics Concern</option>
-                        <option value="fraud">Fraud / Corruption</option>
-                        <option value="harassment">Harassment / Discrimination</option>
-                        <option value="security">Security / Data Breach</option>
-                        <option value="other">Other</option>
-                      </select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="details">Incident Details</Label>
-                      <Textarea
-                        id="details"
-                        placeholder="Please provide as much detail as possible (dates, people involved, description of events)..."
-                        className="min-h-[150px]"
-                        required
-                        value={details}
-                        onChange={(e) => setDetails(e.target.value)}
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <div className="flex items-start gap-2">
-                        <input type="checkbox" id="consent" className="mt-1" required />
-                        <Label
-                          htmlFor="consent"
-                          className="text-xs text-gray-500 font-normal leading-tight"
-                        >
-                          I certify that the information provided is true to the best of my
-                          knowledge. I understand that knowingly making a false report is a
-                          violation of the Ethics Charter.
-                        </Label>
-                      </div>
-                    </div>
-
-                    <Button
-                      type="submit"
-                      className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? (
-                        <span className="flex items-center gap-2">
-                          <Loader2 size={16} className="animate-spin" /> Encrypting & Sending...
-                        </span>
-                      ) : (
-                        <span className="flex items-center gap-2">
-                          Send Secure Report <Send size={16} />
-                        </span>
-                      )}
-                    </Button>
-
-                    <p className="text-[10px] text-center text-gray-400">
-                      This form is encrypted end-to-end. Reports are routed directly to the Chief
-                      Compliance Officer.
-                    </p>
-                  </form>
-                </div>
-              ) : (
-                <div key="success" className="text-center py-12">
-                  <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <CheckCircle2 size={32} />
-                  </div>
-                  <h3 className="text-2xl font-bold text-brand-oxford mb-4">Report Received</h3>
-                  <p className="text-gray-600 mb-8">
-                    Thank you for speaking up. Your report has been securely transmitted. A case
-                    number has been generated for our internal records.
-                  </p>
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      setIsSuccess(false);
-                      setIsAnonymous(false);
-                    }}
-                  >
-                    File Another Report
-                  </Button>
-                </div>
-              )}
+              <p className="text-[10px] text-center text-gray-400 mt-6">
+                Reports are routed directly to the Chief Compliance Officer.
+              </p>
             </div>
           </div>
         </div>

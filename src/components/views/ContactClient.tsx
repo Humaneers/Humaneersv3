@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { Mail, MapPin, Phone } from "lucide-react";
-import { Label } from "../ui/label";
+import { Mail, MapPin, Phone } from "lucide-react"; // Check if still used? Yes I used "sr-only Label". 
+// Actually I can use a div or p instead of Label if I want to delete Label.
+// Let's replace Label with a span class sr-only in the previous edit?
+// No, I'll update previous edit to not use Label, then remove import.
+// For now, I'll remove Select imports.
 import { routePaths } from "../../routes";
 import { trackInteraction } from "../../lib/session";
 
@@ -109,33 +111,34 @@ export function ContactClient() {
                 <h3 className="text-2xl font-bold text-brand-oxford mb-6">How can we help?</h3>
 
                 <div className="space-y-4 mb-8">
-                  <Label htmlFor="category">Select your inquiry type:</Label>
-                  <Select onValueChange={handleCategoryChange} value={category}>
-                    <SelectTrigger
-                      id="category"
-                      className="h-14 bg-gray-50 border-gray-200 text-lg"
+                  <p className="sr-only">Select your inquiry type:</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <button
+                      onClick={() => handleCategoryChange("sales")}
+                      className={`p-6 text-left rounded-xl border-2 transition-all ${category === "sales"
+                        ? "border-brand-copper bg-brand-copper/5"
+                        : "border-gray-200 hover:border-brand-copper/50"
+                        }`}
                     >
-                      <SelectValue placeholder="Choose an option..." />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="sales">
-                        <div className="py-2">
-                          <div className="font-semibold">Sales & Strategy</div>
-                          <div className="text-sm text-gray-500">
-                            Schedule a consultation about our services
-                          </div>
-                        </div>
-                      </SelectItem>
-                      <SelectItem value="support">
-                        <div className="py-2">
-                          <div className="font-semibold">Technical Support</div>
-                          <div className="text-sm text-gray-500">
-                            For existing clients or new clients needing immediate help
-                          </div>
-                        </div>
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
+                      <div className="font-bold text-lg text-brand-oxford mb-2">Sales & Strategy</div>
+                      <div className="text-sm text-brand-slate">
+                        Schedule a consultation about our services
+                      </div>
+                    </button>
+
+                    <button
+                      onClick={() => handleCategoryChange("support")}
+                      className={`p-6 text-left rounded-xl border-2 transition-all ${category === "support"
+                        ? "border-brand-copper bg-brand-copper/5"
+                        : "border-gray-200 hover:border-brand-copper/50"
+                        }`}
+                    >
+                      <div className="font-bold text-lg text-brand-oxford mb-2">Technical Support</div>
+                      <div className="text-sm text-brand-slate">
+                        For existing clients or new clients in crisis
+                      </div>
+                    </button>
+                  </div>
                 </div>
 
                 {!category && (
