@@ -184,9 +184,13 @@ export function PricingClient() {
           <h1 className="text-4xl md:text-5xl font-bold text-brand-oxford mb-6">
             Transparent Pricing. No Hidden Fees.
           </h1>
-          <p className="text-lg text-brand-slate mb-10">
+          <p className="text-lg text-brand-slate mb-6">
             Choose the plan that fits your stage of business or life.
           </p>
+          <div className="text-sm text-gray-500 mb-10 max-w-2xl mx-auto italic">
+            Note: "Users" are humans that have user accounts. In certain circumstances, the per-user
+            seat cost of additional devices or services may be added to your plan.
+          </div>
 
           <div className="inline-flex bg-gray-100/50 p-1.5 rounded-xl shadow-inner border border-gray-200/50 mb-10 relative overflow-hidden w-full max-w-xl mx-auto">
             <div className="grid grid-cols-3 w-full gap-2 relative z-10">

@@ -60,10 +60,7 @@ export async function POST(request: NextRequest) {
     // 5. Resilience & Fallback Logging (CTO Requirement)
     if (error instanceof z.ZodError) {
       // HIGH PRIORITY FIX: Don't expose internal Zod error structure
-      return NextResponse.json(
-        { error: "Please check your form and try again." },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Please check your form and try again." }, { status: 400 });
     }
 
     // Log full context for recovery (Datadog/Sentry would pick this up)

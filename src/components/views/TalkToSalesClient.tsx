@@ -7,6 +7,7 @@ import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import { ShieldCheck, Loader2, Check, AlertCircle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { useSearchParams } from "next/navigation";
 
 type FormStatus =
   | { state: "idle" }
@@ -16,6 +17,28 @@ type FormStatus =
 
 export function TalkToSalesClient() {
   const [status, setStatus] = useState<FormStatus>({ state: "idle" });
+  const searchParams = useSearchParams();
+
+  const interest = searchParams.get("interest");
+
+  const getPrefilledMessage = () => {
+    if (interest === "Crisis Management" || interest === "Crisis") {
+      return "I am experiencing a digital crisis and need immediate assistance.";
+    }
+    if (interest === "Hourly Support") {
+      return "I would like to inquire about purchasing an hourly support pack.";
+    }
+    if (interest === "Personal IT" || interest === "Personal/Family IT") {
+      return "I am interested in Personal IT support for my household.";
+    }
+    if (interest === "Managed IT") {
+      return "I would like to request a network assessment for my business.";
+    }
+    if (interest) {
+      return `I am interested in learning more about ${interest}.`;
+    }
+    return "";
+  };
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -44,7 +67,7 @@ export function TalkToSalesClient() {
     if (!data.firstName || !data.lastName || !data.email || !data.description) {
       setStatus({
         state: "error",
-        message: "Please fill in all required fields."
+        message: "Please fill in all required fields.",
       });
       return;
     }
@@ -59,10 +82,10 @@ export function TalkToSalesClient() {
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}));
 
-        console.error('[Sales Form Submission Error]', {
+        console.error("[Sales Form Submission Error]", {
           status: res.status,
           error: errorData,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
 
         if (res.status === 400) {
@@ -70,15 +93,18 @@ export function TalkToSalesClient() {
         } else if (res.status === 429) {
           throw new Error("Too many requests. Please wait a moment and try again.");
         } else {
-          throw new Error("Our systems are temporarily unavailable. Please email hello@humaneers.dev.");
+          throw new Error(
+            "Our systems are temporarily unavailable. Please email hello@humaneers.dev."
+          );
         }
       }
 
       setStatus({ state: "success" });
     } catch (error) {
-      const message = error instanceof Error
-        ? error.message
-        : "We encountered an issue. Please try again or email us directly at hello@humaneers.dev.";
+      const message =
+        error instanceof Error
+          ? error.message
+          : "We encountered an issue. Please try again or email us directly at hello@humaneers.dev.";
 
       setStatus({
         state: "error",
@@ -98,13 +124,18 @@ export function TalkToSalesClient() {
 
         <div className="container mx-auto px-6 py-12 -mt-10 max-w-2xl">
           <Card className="shadow-xl border-t-4 border-brand-copper">
-            <CardContent className="flex flex-col items-center justify-center py-16 text-center" role="status" aria-live="polite">
+            <CardContent
+              className="flex flex-col items-center justify-center py-16 text-center"
+              role="status"
+              aria-live="polite"
+            >
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
                 <Check className="w-8 h-8 text-green-600" aria-hidden="true" />
               </div>
               <h3 className="text-2xl font-bold text-brand-oxford mb-2">Message Received!</h3>
               <p className="text-brand-slate mb-6">
-                Thanks for reaching out. We'll review your inquiry and get back to you within 1 business day.
+                Thanks for reaching out. We'll review your inquiry and get back to you within 1
+                business day.
               </p>
               <p className="text-sm text-brand-slate">
                 If your request is urgent, please call us at{" "}
@@ -188,7 +219,10 @@ export function TalkToSalesClient() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label htmlFor="firstName" className="text-sm font-medium text-brand-oxford">
-                      First Name <span className="text-red-600" aria-label="required">*</span>
+                      First Name{" "}
+                      <span className="text-red-600" aria-label="required">
+                        *
+                      </span>
                     </label>
                     <Input
                       id="firstName"
@@ -204,7 +238,10 @@ export function TalkToSalesClient() {
 
                   <div className="space-y-2">
                     <label htmlFor="lastName" className="text-sm font-medium text-brand-oxford">
-                      Last Name <span className="text-red-600" aria-label="required">*</span>
+                      Last Name{" "}
+                      <span className="text-red-600" aria-label="required">
+                        *
+                      </span>
                     </label>
                     <Input
                       id="lastName"
@@ -221,7 +258,10 @@ export function TalkToSalesClient() {
 
                 <div className="space-y-2">
                   <label htmlFor="sales-email" className="text-sm font-medium text-brand-oxford">
-                    Work Email <span className="text-red-600" aria-label="required">*</span>
+                    Work Email{" "}
+                    <span className="text-red-600" aria-label="required">
+                      *
+                    </span>
                   </label>
                   <Input
                     id="sales-email"
@@ -263,7 +303,10 @@ export function TalkToSalesClient() {
 
                 <div className="space-y-2">
                   <label htmlFor="description" className="text-sm font-medium text-brand-oxford">
-                    How can we help? <span className="text-red-600" aria-label="required">*</span>
+                    How can we help?{" "}
+                    <span className="text-red-600" aria-label="required">
+                      *
+                    </span>
                   </label>
                   <Textarea
                     id="description"
@@ -276,6 +319,7 @@ export function TalkToSalesClient() {
                     placeholder="Tell us about your project, goals, or current challenges..."
                     className="bg-gray-50"
                     disabled={status.state === "submitting"}
+                    defaultValue={getPrefilledMessage()}
                   />
                 </div>
 
@@ -297,7 +341,9 @@ export function TalkToSalesClient() {
                   {status.state === "submitting" ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />
-                      <span role="status" aria-live="polite">Sending...</span>
+                      <span role="status" aria-live="polite">
+                        Sending...
+                      </span>
                     </>
                   ) : (
                     "Start Conversation"

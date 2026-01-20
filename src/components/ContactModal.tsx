@@ -17,6 +17,7 @@ interface FormStatus {
 
 // --- Sales Form ---
 function SalesForm() {
+  const { prefillMessage } = useContactModal();
   const [status, setStatus] = useState<FormStatus>({ state: "idle" });
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -45,7 +46,7 @@ function SalesForm() {
     if (!data.firstName || !data.lastName || !data.email || !data.description) {
       setStatus({
         state: "error",
-        message: "Please fill in all required fields."
+        message: "Please fill in all required fields.",
       });
       return;
     }
@@ -61,10 +62,10 @@ function SalesForm() {
         const errorData = await res.json().catch(() => ({}));
 
         // Log error for debugging (will be sent to error tracking in production)
-        console.error('[Sales Form Submission Error]', {
+        console.error("[Sales Form Submission Error]", {
           status: res.status,
           error: errorData,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
 
         // Show user-appropriate message based on status
@@ -73,15 +74,18 @@ function SalesForm() {
         } else if (res.status === 429) {
           throw new Error("Too many requests. Please wait a moment and try again.");
         } else {
-          throw new Error("Our systems are temporarily unavailable. Please email hello@humaneers.dev.");
+          throw new Error(
+            "Our systems are temporarily unavailable. Please email hello@humaneers.dev."
+          );
         }
       }
 
       setStatus({ state: "success" });
     } catch (error) {
-      const message = error instanceof Error
-        ? error.message
-        : "We encountered an issue. Please try again or email us directly at hello@humaneers.dev.";
+      const message =
+        error instanceof Error
+          ? error.message
+          : "We encountered an issue. Please try again or email us directly at hello@humaneers.dev.";
 
       setStatus({
         state: "error",
@@ -122,7 +126,10 @@ function SalesForm() {
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <label htmlFor="firstName" className="text-sm font-medium text-brand-oxford">
-            First Name <span className="text-red-600" aria-label="required">*</span>
+            First Name{" "}
+            <span className="text-red-600" aria-label="required">
+              *
+            </span>
           </label>
           <Input
             id="firstName"
@@ -136,7 +143,10 @@ function SalesForm() {
         </div>
         <div className="space-y-2">
           <label htmlFor="lastName" className="text-sm font-medium text-brand-oxford">
-            Last Name <span className="text-red-600" aria-label="required">*</span>
+            Last Name{" "}
+            <span className="text-red-600" aria-label="required">
+              *
+            </span>
           </label>
           <Input
             id="lastName"
@@ -152,7 +162,10 @@ function SalesForm() {
 
       <div className="space-y-2">
         <label htmlFor="sales-email" className="text-sm font-medium text-brand-oxford">
-          Work Email <span className="text-red-600" aria-label="required">*</span>
+          Work Email{" "}
+          <span className="text-red-600" aria-label="required">
+            *
+          </span>
         </label>
         <Input
           id="sales-email"
@@ -180,7 +193,10 @@ function SalesForm() {
 
       <div className="space-y-2">
         <label htmlFor="description" className="text-sm font-medium text-brand-oxford">
-          How can we help? <span className="text-red-600" aria-label="required">*</span>
+          How can we help?{" "}
+          <span className="text-red-600" aria-label="required">
+            *
+          </span>
         </label>
         <textarea
           id="description"
@@ -192,6 +208,7 @@ function SalesForm() {
           rows={4}
           className="flex w-full rounded-md border border-input bg-gray-50 px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
           placeholder="Tell us about your project or challenge..."
+          defaultValue={prefillMessage}
         />
       </div>
 
@@ -213,7 +230,9 @@ function SalesForm() {
         {status.state === "submitting" ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />
-            <span role="status" aria-live="polite">Sending...</span>
+            <span role="status" aria-live="polite">
+              Sending...
+            </span>
           </>
         ) : (
           "Start Conversation"
@@ -254,7 +273,7 @@ function SupportForm() {
     if (!data.contactName || !data.email || !data.subject || !data.description) {
       setStatus({
         state: "error",
-        message: "Please fill in all required fields."
+        message: "Please fill in all required fields.",
       });
       return;
     }
@@ -269,10 +288,10 @@ function SupportForm() {
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}));
 
-        console.error('[Support Form Submission Error]', {
+        console.error("[Support Form Submission Error]", {
           status: res.status,
           error: errorData,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
 
         if (res.status === 400) {
@@ -286,9 +305,10 @@ function SupportForm() {
 
       setStatus({ state: "success" });
     } catch (error) {
-      const message = error instanceof Error
-        ? error.message
-        : "Failed to create ticket. Please email support@humaneers.dev.";
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Failed to create ticket. Please email support@humaneers.dev.";
 
       setStatus({
         state: "error",
@@ -327,7 +347,10 @@ function SupportForm() {
 
       <div className="space-y-2">
         <label htmlFor="contactName" className="text-sm font-medium text-brand-oxford">
-          Your Name <span className="text-red-600" aria-label="required">*</span>
+          Your Name{" "}
+          <span className="text-red-600" aria-label="required">
+            *
+          </span>
         </label>
         <Input
           id="contactName"
@@ -342,7 +365,10 @@ function SupportForm() {
 
       <div className="space-y-2">
         <label htmlFor="support-email" className="text-sm font-medium text-brand-oxford">
-          Email Address <span className="text-red-600" aria-label="required">*</span>
+          Email Address{" "}
+          <span className="text-red-600" aria-label="required">
+            *
+          </span>
         </label>
         <Input
           id="support-email"
@@ -367,16 +393,17 @@ function SupportForm() {
           className="flex h-10 w-full rounded-md border border-input bg-gray-50 px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
         >
           <option value="Low">Low - General Question</option>
-          <option value="Medium">
-            Medium - Issue with Service
-          </option>
+          <option value="Medium">Medium - Issue with Service</option>
           <option value="High">High - Critical / Outage</option>
         </select>
       </div>
 
       <div className="space-y-2">
         <label htmlFor="subject" className="text-sm font-medium text-brand-oxford">
-          Subject <span className="text-red-600" aria-label="required">*</span>
+          Subject{" "}
+          <span className="text-red-600" aria-label="required">
+            *
+          </span>
         </label>
         <Input
           id="subject"
@@ -392,7 +419,10 @@ function SupportForm() {
 
       <div className="space-y-2">
         <label htmlFor="s-description" className="text-sm font-medium text-brand-oxford">
-          Description <span className="text-red-600" aria-label="required">*</span>
+          Description{" "}
+          <span className="text-red-600" aria-label="required">
+            *
+          </span>
         </label>
         <textarea
           id="s-description"
@@ -424,7 +454,9 @@ function SupportForm() {
         {status.state === "submitting" ? (
           <>
             <Loader2 className="animate-spin" aria-hidden="true" />
-            <span role="status" aria-live="polite">Submitting...</span>
+            <span role="status" aria-live="polite">
+              Submitting...
+            </span>
           </>
         ) : (
           "Submit Ticket"
@@ -459,7 +491,7 @@ function NewsletterForm() {
     if (!data.email || !data.consent) {
       setStatus({
         state: "error",
-        message: "Please provide your email and confirm consent."
+        message: "Please provide your email and confirm consent.",
       });
       return;
     }
@@ -474,10 +506,10 @@ function NewsletterForm() {
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}));
 
-        console.error('[Newsletter Form Submission Error]', {
+        console.error("[Newsletter Form Submission Error]", {
           status: res.status,
           error: errorData,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
 
         if (res.status === 400) {
@@ -491,9 +523,8 @@ function NewsletterForm() {
 
       setStatus({ state: "success" });
     } catch (error) {
-      const message = error instanceof Error
-        ? error.message
-        : "Subscription failed. Please try again.";
+      const message =
+        error instanceof Error ? error.message : "Subscription failed. Please try again.";
 
       setStatus({ state: "error", message });
     }
@@ -529,7 +560,10 @@ function NewsletterForm() {
 
       <div className="space-y-2">
         <label htmlFor="nl-email" className="text-sm font-medium text-brand-oxford">
-          Email Address <span className="text-red-600" aria-label="required">*</span>
+          Email Address{" "}
+          <span className="text-red-600" aria-label="required">
+            *
+          </span>
         </label>
         <Input
           id="nl-email"
@@ -574,7 +608,9 @@ function NewsletterForm() {
         {status.state === "submitting" ? (
           <>
             <Loader2 className="animate-spin" aria-hidden="true" />
-            <span role="status" aria-live="polite">Subscribing...</span>
+            <span role="status" aria-live="polite">
+              Subscribing...
+            </span>
           </>
         ) : (
           "Subscribe"

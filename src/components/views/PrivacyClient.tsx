@@ -60,14 +60,20 @@ export function PrivacyClient() {
               <strong>Automated technologies</strong>: As you interact with our website, we may
               automatically collect Technical Data using cookies, server logs, and similar
               technologies. We prioritize ephemeral local storage over persistent cookies where
-              possible. <strong>Analytics cookies (Zoho PageSense, ContentSquare, Vercel Analytics) are only loaded after you provide explicit consent via our cookie banner.</strong>
+              possible.{" "}
+              <strong>
+                Analytics cookies (Zoho PageSense, ContentSquare, Vercel Analytics) are only loaded
+                after you provide explicit consent via our cookie banner.
+              </strong>
             </li>
             <li>
-              <strong>Support Chat (Essential Functionality)</strong>: Zoho SalesIQ is loaded for all users to provide immediate support access. This is considered an essential service function.
+              <strong>Support Chat (Essential Functionality)</strong>: Zoho SalesIQ is loaded for
+              all users to provide immediate support access. This is considered an essential service
+              function.
             </li>
             <li>
-              <strong>Third parties</strong>: Analytics providers (Zoho PageSense, ContentSquare) and support chat
-              services (Zoho SalesIQ) as detailed above.
+              <strong>Third parties</strong>: Analytics providers (Zoho PageSense, ContentSquare)
+              and support chat services (Zoho SalesIQ) as detailed above.
             </li>
           </ul>
 
@@ -247,16 +253,17 @@ export function PrivacyClient() {
               management, security, support chat via Zoho SalesIQ).
             </li>
             <li>
-              <strong>Analytics Cookies</strong>: Zoho PageSense, ContentSquare, and Vercel Analytics track usage patterns to improve
-              our services. <strong>These are only loaded after you provide explicit consent.</strong>
+              <strong>Analytics Cookies</strong>: Zoho PageSense, ContentSquare, and Vercel
+              Analytics track usage patterns to improve our services.{" "}
+              <strong>These are only loaded after you provide explicit consent.</strong>
             </li>
             <li>
               <strong>Functional Cookies</strong>: Remember your preferences and settings.
             </li>
           </ul>
           <p>
-            You can control cookies through your browser settings and our cookie consent banner. Note that disabling certain
-            cookies may affect website functionality.
+            You can control cookies through your browser settings and our cookie consent banner.
+            Note that disabling certain cookies may affect website functionality.
           </p>
 
           <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">
@@ -302,7 +309,10 @@ export function PrivacyClient() {
             <li>Regular security assessments and SOC 2 Type II compliance.</li>
             <li>Secure data backup and disaster recovery procedures.</li>
             <li>Employee training on data protection and confidentiality.</li>
-            <li><strong>IP address hashing</strong>: Server logs anonymize IP addresses using SHA-256 hashing to protect user privacy while maintaining security and debugging capabilities.</li>
+            <li>
+              <strong>IP address hashing</strong>: Server logs anonymize IP addresses using SHA-256
+              hashing to protect user privacy while maintaining security and debugging capabilities.
+            </li>
           </ul>
           <p>
             While we strive to protect your data, no method of transmission over the internet is

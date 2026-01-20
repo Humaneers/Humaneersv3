@@ -45,10 +45,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     if (error instanceof z.ZodError) {
       // HIGH PRIORITY FIX: Don't expose internal Zod error structure
-      return NextResponse.json(
-        { error: "Please check your form and try again." },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Please check your form and try again." }, { status: 400 });
     }
 
     const hashedIp = await hashIp(ip);

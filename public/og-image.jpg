@@ -1,0 +1,28 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#1B263B"/>
+  
+  <!-- Copper accent bar -->
+  <rect x="0" y="0" width="1200" height="8" fill="#B87333"/>
+  
+  <!-- Logo area (placeholder text) -->
+  <text x="100" y="200" font-family="system-ui, -apple-system, sans-serif" font-size="80" font-weight="700" fill="#FFFFFF">
+    Humaneers
+  </text>
+  
+  <!-- Tagline -->
+  <text x="100" y="300" font-family="system-ui, -apple-system, sans-serif" font-size="42" font-weight="300" fill="#E5E7EB">
+    Enterprise Strategy.
+  </text>
+  <text x="100" y="360" font-family="system-ui, -apple-system, sans-serif" font-size="42" font-weight="300" fill="#E5E7EB">
+    Small Business Soul.
+  </text>
+  
+  <!-- Services -->
+  <text x="100" y="480" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="400" fill="#B87333">
+    Managed IT • Brand Growth • Family Protection
+  </text>
+  
+  <!-- Bottom accent -->
+  <rect x="0" y="622" width="1200" height="8" fill="#B87333"/>
+</svg>

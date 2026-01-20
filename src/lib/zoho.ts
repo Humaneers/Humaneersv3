@@ -115,8 +115,8 @@ async function getZohoAccessToken(): Promise<string> {
     } catch (error) {
       clearTimeout(timeoutId);
 
-      if (error instanceof Error && error.name === 'AbortError') {
-        throw new Error('Zoho API request timed out after 10 seconds');
+      if (error instanceof Error && error.name === "AbortError") {
+        throw new Error("Zoho API request timed out after 10 seconds");
       }
       throw error;
     }

@@ -13,7 +13,10 @@ export const metadata: Metadata = {
   description:
     "Enterprise strategy for businesses and families. Built with precision, delivered with soul.",
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
     apple: "/favicon.svg",
   },
   manifest: "/manifest.json",

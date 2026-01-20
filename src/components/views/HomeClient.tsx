@@ -159,10 +159,12 @@ export function HomeClient() {
               </p>
               <div className="flex gap-4">
                 <div className="bg-brand-cream px-4 py-2 rounded border border-gray-200 flex items-center gap-2 font-semibold text-brand-oxford">
-                  <Shield size={18} className="text-brand-copper" aria-hidden="true" /> SOC 2 Compliant
+                  <Shield size={18} className="text-brand-copper" aria-hidden="true" /> SOC 2
+                  Compliant
                 </div>
                 <div className="bg-brand-cream px-4 py-2 rounded border border-gray-200 flex items-center gap-2 font-semibold text-brand-oxford">
-                  <MapPin size={18} className="text-brand-copper" aria-hidden="true" /> 100% US-based
+                  <MapPin size={18} className="text-brand-copper" aria-hidden="true" /> 100%
+                  US-based
                 </div>
               </div>
             </div>
