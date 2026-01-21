@@ -138,7 +138,11 @@ The official website for Humaneers, built with modern web technologies to delive
 - **Imports**: Specific imports preferred (`import { Button }` vs `import *`).
 - **Types**: No `any`. Define interfaces for all props and data.
 - **Error Boundaries**: Wrap critical page sections.
-- **SEO**: Use `<Seo />` component on every page view.
+- **SEO**: 
+  - Export `metadata` object on every page using Next.js Metadata API
+  - Include `title`, `description`, `canonical`, `openGraph`, and `twitter` properties
+  - Use `<StructuredData />` component for JSON-LD schemas (Organization, Service, FAQPage, etc.)
+  - Ensure all images have descriptive alt text
 - **Performance**: Lazy load heavy routes. Optimize images (WebP/SVG).
 
 ## 5. Content & Messaging Guidelines
@@ -167,7 +171,7 @@ The official website for Humaneers, built with modern web technologies to delive
 
 ### 5.4 Copy Patterns
 - **Price Transparency**: Always show unit pricing (e.g., "$90/user/mo").
-- **Local Roots**: "Based in Tempe, AZ. Serving clients nationwide."
+- **Local Roots**: "Offices in Tempe AZ, El Paso TX, and Flint MI. Serving clients nationwide."
 - **Inclusivity**: "For businesses and families."
 
 ## 6. Recent Project Context (Q1 2026)
