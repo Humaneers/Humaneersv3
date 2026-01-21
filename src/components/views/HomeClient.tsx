@@ -7,6 +7,7 @@ import { Button } from "../ui/button";
 import { motion } from "motion/react";
 import { routePaths } from "../../routes";
 import { setSessionContext } from "../../lib/session";
+import { datadog } from "../../lib/datadog";
 import Image from "next/image";
 import { useContactModal } from "../providers/ContactModalProvider";
 
@@ -85,6 +86,10 @@ export function HomeClient() {
               <Button
                 onClick={() => {
                   setSessionContext({ entrySource: "Homepage Hero CTA" });
+                  datadog.trackAction("cta_click", {
+                    location: "home_hero",
+                    label: "Get Started",
+                  });
                   openModal("sales");
                 }}
                 className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 h-14 rounded-md shadow-lg hover:shadow-xl transition-all w-fit"
@@ -206,6 +211,10 @@ export function HomeClient() {
           <Button
             onClick={() => {
               setSessionContext({ entrySource: "Homepage Bottom CTA" });
+              datadog.trackAction("cta_click", {
+                location: "home_bottom",
+                label: "Lets get to work",
+              });
               openModal("sales");
             }}
             className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-10 py-7 h-auto rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all"

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { setSessionContext } from "../../lib/session";
+import { datadog } from "../../lib/datadog";
 import { Check, Shield, BarChart3, Users, Lock, Clock, Heart, Award, Zap, ChevronDown, MessageSquare } from "lucide-react";
 import Image from "next/image";
 import { Button } from "../ui/button";
@@ -322,6 +323,13 @@ export function PricingClient() {
               } else if (tierName === "Nonprofit Foundation") {
                 message += "We are a nonprofit looking for flat-rate service and donor data protection.";
               }
+
+              datadog.trackAction("select_tier", {
+                tier: tierName,
+                mode: pricingMode,
+                price: tier.price,
+                source: "pricing_card_cta",
+              });
 
               openModal("sales", message, source);
             };
