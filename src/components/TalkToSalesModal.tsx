@@ -166,7 +166,7 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    size="lg"
+
                   />
                 </div>
 
@@ -181,7 +181,7 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
                     required
                     value={formData.company}
                     onChange={handleChange}
-                    size="lg"
+
                   />
                 </div>
 
