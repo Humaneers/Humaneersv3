@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PricingClient } from "../../components/views/PricingClient";
 import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
+import { StructuredData, schemas } from "../../components/StructuredData";
 
 export const metadata: Metadata = {
   title: "Humaneers | Transparent Managed IT Pricing | No Hidden Fees",
@@ -34,10 +35,31 @@ export const metadata: Metadata = {
   },
 };
 
+const faqs = [
+  {
+    question: "What counts as a 'User'?",
+    answer:
+      "A user is a human being with a unique account. We don't charge for service accounts (like 'info@') or inactive shared mailboxes.",
+  },
+  {
+    question: "Can I upgrade or downgrade my plan?",
+    answer:
+      "Yes, you can change your plan at the beginning of any billing cycle. There are no long-term lock-ins for our standard tiers.",
+  },
+  {
+    question: "Do you offer emergency support?",
+    answer:
+      "Absolutely. Growth and Scale tiers include priority support, while our Hourly Packs can be used for urgent crisis response if we have capacity.",
+  },
+];
+
 export default function PricingPage() {
   return (
-    <Suspense fallback={<PageLoader />}>
-      <PricingClient />
-    </Suspense>
+    <>
+      <StructuredData data={schemas.faqPage(faqs)} />
+      <Suspense fallback={<PageLoader />}>
+        <PricingClient />
+      </Suspense>
+    </>
   );
 }

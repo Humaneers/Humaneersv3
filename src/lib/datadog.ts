@@ -108,7 +108,7 @@ export function initDatadog(userConsent: boolean): void {
       defaultPrivacyLevel: config.defaultPrivacyLevel,
 
       // Enhanced error tracking
-      trackFrustrations: true,
+
 
       // Allow tracing across domains (for Zoho integrations)
       allowedTracingUrls: [
@@ -124,8 +124,8 @@ export function initDatadog(userConsent: boolean): void {
           const phoneRegex = /\b\d{3}[-.]?\d{3}[-.]?\d{4}\b/g;
           const ssnRegex = /\b\d{3}-\d{2}-\d{4}\b/g;
 
-          if (event.error?.message) {
-            event.error.message = event.error.message
+          if ((event.error as any)?.message) {
+            (event.error as any).message = (event.error as any).message
               .replace(emailRegex, "[EMAIL_REDACTED]")
               .replace(phoneRegex, "[PHONE_REDACTED]")
               .replace(ssnRegex, "[SSN_REDACTED]");

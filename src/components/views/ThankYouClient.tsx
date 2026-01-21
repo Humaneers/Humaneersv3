@@ -6,17 +6,7 @@ import { CheckCircle2, ArrowRight } from "lucide-react";
 import { useEffect } from "react";
 
 // Define window extension for analytics
-declare global {
-  interface Window {
-    gtag?: (command: string, action: string, params?: Record<string, string>) => void;
-    $zoho?: {
-      salesiq?: {
-        ready?: () => void;
-        track?: (event: string) => void;
-      };
-    };
-  }
-}
+
 
 function ConversionTracker() {
   useEffect(() => {

@@ -136,3 +136,21 @@ export function getContextString(): string {
 
   return parts.length > 0 ? `[Context: ${parts.join(" | ")}]` : "";
 }
+
+export function getSessionId(): string | undefined {
+  if (typeof window === "undefined") return undefined;
+  const SESSION_ID_KEY = "humaneers_session_id";
+  try {
+    let id = sessionStorage.getItem(SESSION_ID_KEY);
+    if (!id) {
+      // Generate a UUID if possible, otherwise fallback to random string
+      id = (typeof crypto !== "undefined" && crypto.randomUUID) ? crypto.randomUUID() : Math.random().toString(36).substring(2);
+      sessionStorage.setItem(SESSION_ID_KEY, id);
+    }
+    return id;
+  } catch (e) {
+    console.warn("Failed to get session id", e);
+    return undefined;
+  }
+}
+

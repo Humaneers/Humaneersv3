@@ -5,6 +5,7 @@ import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import { useConsent } from "./providers/ConsentProvider";
+import { DatadogRUM } from "./DatadogRUM";
 
 export function Analytics() {
   const { consent } = useConsent();
@@ -33,6 +34,9 @@ export function Analytics() {
         <>
           <VercelAnalytics />
           <SpeedInsights />
+
+          {/* Datadog Real User Monitoring */}
+          <DatadogRUM />
 
           {/* Zoho PageSense */}
           <Script

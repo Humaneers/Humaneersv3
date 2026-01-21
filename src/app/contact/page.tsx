@@ -10,6 +10,28 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/contact",
   },
+  openGraph: {
+    title: "Humaneers | Contact Us | Sales & Support",
+    description:
+      "Get in touch with Humaneers. Sales inquiries, technical support, and general questions. We're here to help build something that lasts.",
+    url: "https://humaneers.dev/contact",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Contact Humaneers",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Humaneers | Contact Us | Sales & Support",
+    description:
+      "Get in touch with Humaneers. Sales inquiries, technical support, and general questions.",
+    images: ["/og-image.jpg"],
+  },
 };
 
 export default function ContactPage() {
