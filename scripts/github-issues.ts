@@ -81,6 +81,55 @@ async function createIssue(title: string, body: string, labels: string[] = []) {
     }
 }
 
+async function closeIssue(issueNumber: string) {
+    try {
+        const response = await fetch(
+            `${GITHUB_API_URL}/repos/${REPO_OWNER}/${REPO_NAME}/issues/${issueNumber}`,
+            {
+                method: "PATCH",
+                headers,
+                body: JSON.stringify({
+                    state: "closed",
+                }),
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error(`Failed to close issue: ${response.statusText}`);
+        }
+
+        const issue = (await response.json()) as any;
+        console.log(`\n✅ Issue #${issue.number} closed successfully!`);
+    } catch (error) {
+        console.error("❌ Error closing issue:", error);
+    }
+}
+
+async function commentOnIssue(issueNumber: string, body: string) {
+    try {
+        const response = await fetch(
+            `${GITHUB_API_URL}/repos/${REPO_OWNER}/${REPO_NAME}/issues/${issueNumber}/comments`,
+            {
+                method: "POST",
+                headers,
+                body: JSON.stringify({
+                    body,
+                }),
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error(`Failed to comment on issue: ${response.statusText}`);
+        }
+
+        const comment = (await response.json()) as any;
+        console.log(`\n✅ Comment added to issue #${issueNumber}!`);
+        console.log(`🔗 ${comment.html_url}`);
+    } catch (error) {
+        console.error("❌ Error commenting on issue:", error);
+    }
+}
+
 async function main() {
     const args = process.argv.slice(2);
     const command = args[0];
@@ -89,7 +138,7 @@ async function main() {
         case "list":
             await listIssues();
             break;
-        case "create":
+        case "create": {
             const title = args[1];
             const body = args[2] || "";
             // usage: create "Title" "Body" "label1,label2"
@@ -101,10 +150,32 @@ async function main() {
             }
             await createIssue(title, body, labels);
             break;
+        }
+        case "close": {
+            const issueNumber = args[1];
+            if (!issueNumber) {
+                console.error("❌ Usage: close <issue_number>");
+                process.exit(1);
+            }
+            await closeIssue(issueNumber);
+            break;
+        }
+        case "comment": {
+            const issueNumber = args[1];
+            const body = args[2];
+            if (!issueNumber || !body) {
+                console.error('❌ Usage: comment <issue_number> "Comment body"');
+                process.exit(1);
+            }
+            await commentOnIssue(issueNumber, body);
+            break;
+        }
         default:
             console.log("Usage:");
             console.log("  npm run issues list");
             console.log('  npm run issues create "Title" "Description" "label1,label2"');
+            console.log("  npm run issues close <issue_number>");
+            console.log('  npm run issues comment <issue_number> "Comment body"');
     }
 }
 

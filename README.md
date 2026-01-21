@@ -140,6 +140,16 @@ npm run issues list
 npm run issues create "Fix Login Bug" "Login fails on Safari" "bug,high-priority"
 ```
 
+**Close an Issue:**
+```bash
+npm run issues close 123
+```
+
+**Comment on an Issue:**
+```bash
+npm run issues comment 123 "Fixed in commit abc1234"
+```
+
 ## 🛠 Tech Stack
 - **Framework**: [Next.js 15](https://nextjs.org/) (App Router, PPR) + [React 19](https://react.dev/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/) (Strict mode)
