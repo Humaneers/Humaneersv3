@@ -144,7 +144,10 @@ export function getSessionId(): string | undefined {
     let id = sessionStorage.getItem(SESSION_ID_KEY);
     if (!id) {
       // Generate a UUID if possible, otherwise fallback to random string
-      id = (typeof crypto !== "undefined" && crypto.randomUUID) ? crypto.randomUUID() : Math.random().toString(36).substring(2);
+      id =
+        typeof crypto !== "undefined" && crypto.randomUUID
+          ? crypto.randomUUID()
+          : Math.random().toString(36).substring(2);
       sessionStorage.setItem(SESSION_ID_KEY, id);
     }
     return id;
@@ -153,4 +156,3 @@ export function getSessionId(): string | undefined {
     return undefined;
   }
 }
-

@@ -109,7 +109,6 @@ export function initDatadog(userConsent: boolean): void {
 
       // Enhanced error tracking
 
-
       // Allow tracing across domains (for Zoho integrations)
       allowedTracingUrls: [
         { match: "https://humaneers.dev", propagatorTypes: ["datadog"] },
@@ -160,7 +159,10 @@ export function initDatadog(userConsent: boolean): void {
  * @param userId - Anonymous user identifier (e.g., session hash)
  * @param attributes - Additional non-PII user attributes
  */
-export function setDatadogUser(userId: string, attributes?: Record<string, string | number | boolean>): void {
+export function setDatadogUser(
+  userId: string,
+  attributes?: Record<string, string | number | boolean>
+): void {
   try {
     datadogRum.setUser({
       id: userId,

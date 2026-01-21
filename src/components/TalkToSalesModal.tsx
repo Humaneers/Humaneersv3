@@ -30,7 +30,7 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
     phone: "",
     budget: "",
     interests: [] as string[],
-    message: ""
+    message: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -38,10 +38,10 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
   // Update form data when initialData changes
   useEffect(() => {
     if (open && initialData) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
         email: initialData.email || prev.email,
-        interests: initialData.interest ? [initialData.interest] : prev.interests
+        interests: initialData.interest ? [initialData.interest] : prev.interests,
       }));
     }
   }, [open, initialData]);
@@ -81,20 +81,22 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
       // Redirect to Cal.com booking with form data
       redirectToSalesBooking(formData);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Failed to redirect to booking. Please try again.");
+      toast.error(
+        error instanceof Error ? error.message : "Failed to redirect to booking. Please try again."
+      );
       setIsSubmitting(false);
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleInterestChange = (interest: string) => {
-    setFormData(prev => {
+    setFormData((prev) => {
       const interests = prev.interests.includes(interest)
-        ? prev.interests.filter(i => i !== interest)
+        ? prev.interests.filter((i) => i !== interest)
         : [...prev.interests, interest];
       return { ...prev, interests };
     });
@@ -106,18 +108,22 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
         <div className="flex flex-col h-full">
           <div className="px-6 py-6 border-b border-gray-100 bg-gray-50/50">
             <DialogHeader>
-              <DialogTitle className="text-xl font-bold text-brand-oxford">Start a Conversation</DialogTitle>
+              <DialogTitle className="text-xl font-bold text-brand-oxford">
+                Start a Conversation
+              </DialogTitle>
               <DialogDescription>
-                {step === 1
-                  ? "Let's start with the basics"
-                  : "Tell us about your needs"}
+                {step === 1 ? "Let's start with the basics" : "Tell us about your needs"}
               </DialogDescription>
             </DialogHeader>
 
             {/* Progress Indicator */}
             <div className="flex gap-2 mt-4">
-              <div className={`h-1 flex-1 rounded transition-colors ${step === 1 ? 'bg-brand-copper' : 'bg-gray-200'}`} />
-              <div className={`h-1 flex-1 rounded transition-colors ${step === 2 ? 'bg-brand-copper' : 'bg-gray-200'}`} />
+              <div
+                className={`h-1 flex-1 rounded transition-colors ${step === 1 ? "bg-brand-copper" : "bg-gray-200"}`}
+              />
+              <div
+                className={`h-1 flex-1 rounded transition-colors ${step === 2 ? "bg-brand-copper" : "bg-gray-200"}`}
+              />
             </div>
           </div>
 
@@ -166,7 +172,6 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
                     required
                     value={formData.email}
                     onChange={handleChange}
-
                   />
                 </div>
 
@@ -181,11 +186,13 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
                     required
                     value={formData.company}
                     onChange={handleChange}
-
                   />
                 </div>
 
-                <Button type="submit" className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white h-14 mt-6">
+                <Button
+                  type="submit"
+                  className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white h-14 mt-6"
+                >
                   Continue <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </form>
@@ -217,7 +224,15 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
                 <div className="space-y-3 pt-2">
                   <Label>What are you interested in?</Label>
                   <div className="grid grid-cols-2 gap-3">
-                    {["Managed IT", "Brand & Growth", "Cybersecurity", "Compliance", "Leadership", "Cloud", "Family IT"].map((item) => (
+                    {[
+                      "Managed IT",
+                      "Brand & Growth",
+                      "Cybersecurity",
+                      "Compliance",
+                      "Leadership",
+                      "Cloud",
+                      "Family IT",
+                    ].map((item) => (
                       <div key={item} className="flex items-center space-x-2">
                         <Checkbox
                           id={`modal-interest-${item}`}
@@ -262,7 +277,9 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
-                      <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Redirecting...</>
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Redirecting...
+                      </>
                     ) : (
                       "Schedule Meeting"
                     )}

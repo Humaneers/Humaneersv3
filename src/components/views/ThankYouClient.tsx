@@ -7,7 +7,6 @@ import { useEffect } from "react";
 
 // Define window extension for analytics
 
-
 function ConversionTracker() {
   useEffect(() => {
     // 1. Google Ads / Analytics

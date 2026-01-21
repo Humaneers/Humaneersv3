@@ -22,7 +22,11 @@ export function ContactModalProvider({ children }: { children: ReactNode }) {
   const [prefillMessage, setPrefillMessage] = useState("");
   const [source, setSource] = useState("ContactModal");
 
-  const openModal = (tab: ModalTab = "sales", message: string = "", source: string = "ContactModal") => {
+  const openModal = (
+    tab: ModalTab = "sales",
+    message: string = "",
+    source: string = "ContactModal"
+  ) => {
     setActiveTab(tab);
     setPrefillMessage(message);
     setSource(source);

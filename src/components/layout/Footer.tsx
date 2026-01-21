@@ -95,10 +95,7 @@ export function Footer() {
               <div className="bg-white/5 p-2.5 rounded-xl text-brand-copper group-hover:bg-brand-copper/10 transition-colors">
                 <Phone size={18} />
               </div>
-              <a
-                href="tel:+19284401505"
-                className="text-sm hover:text-white transition-colors"
-              >
+              <a href="tel:+19284401505" className="text-sm hover:text-white transition-colors">
                 (928) 440-1505
               </a>
             </div>
@@ -137,7 +134,9 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <span className="text-xs text-gray-500 italic">"Built by humans with ❤️ + ☕️"</span>
               <span className="w-[1px] h-4 bg-white/10 hidden sm:block"></span>
-              <span className="text-[10px] text-gray-600 font-mono py-1 px-2 bg-white/5 rounded">v{APP_VERSION}</span>
+              <span className="text-[10px] text-gray-600 font-mono py-1 px-2 bg-white/5 rounded">
+                v{APP_VERSION}
+              </span>
             </div>
             <p className="text-[10px] text-gray-600 text-left md:text-right max-w-xs leading-relaxed">
               &copy; {new Date().getFullYear()} Humaneers LLC. <br />

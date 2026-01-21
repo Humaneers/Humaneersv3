@@ -3,7 +3,19 @@
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import { Users, Server, Clock, Calendar, Heart, Shield, Target, Award, Quote, CheckCircle2, ArrowRight } from "lucide-react";
+import {
+  Users,
+  Server,
+  Clock,
+  Calendar,
+  Heart,
+  Shield,
+  Target,
+  Award,
+  Quote,
+  CheckCircle2,
+  ArrowRight,
+} from "lucide-react";
 import { routePaths } from "../../routes";
 import { useContactModal } from "../providers/ContactModalProvider";
 
@@ -38,12 +50,19 @@ export function AboutClient() {
               Crafting Digital Resilience.
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mb-10">
-              Enterprise strategy for businesses and families. Built with precision, delivered with soul.
+              Enterprise strategy for businesses and families. Built with precision, delivered with
+              soul.
             </p>
             <div className="flex flex-wrap gap-6 items-center text-sm font-medium text-brand-copper uppercase tracking-widest">
-              <span className="flex items-center gap-2"><CheckCircle2 size={16} /> 8 Year Track Record</span>
-              <span className="flex items-center gap-2"><CheckCircle2 size={16} /> Stealth Heritage</span>
-              <span className="flex items-center gap-2"><CheckCircle2 size={16} /> Human Expert Led</span>
+              <span className="flex items-center gap-2">
+                <CheckCircle2 size={16} /> 8 Year Track Record
+              </span>
+              <span className="flex items-center gap-2">
+                <CheckCircle2 size={16} /> Stealth Heritage
+              </span>
+              <span className="flex items-center gap-2">
+                <CheckCircle2 size={16} /> Human Expert Led
+              </span>
             </div>
           </div>
         </div>
@@ -104,19 +123,35 @@ export function AboutClient() {
                 </h2>
                 <div className="prose text-brand-slate leading-relaxed space-y-6 text-lg">
                   <p>
-                    Humaneers began in stealth mode, serving a select roster of clients by referral only. These individuals and organizations required enterprise grade solutions without the burden of enterprise bureaucracy. We built our reputation one bespoke engagement at a time, delivering the same caliber of strategy, security, and infrastructure typically reserved for global enterprise companies to businesses, families, and nonprofits who had been too often underserved.
+                    Humaneers began in stealth mode, serving a select roster of clients by referral
+                    only. These individuals and organizations required enterprise grade solutions
+                    without the burden of enterprise bureaucracy. We built our reputation one
+                    bespoke engagement at a time, delivering the same caliber of strategy, security,
+                    and infrastructure typically reserved for global enterprise companies to
+                    businesses, families, and nonprofits who had been too often underserved.
                   </p>
                   <p>
-                    Word travels fast when you solve problems that others cannot. Our clients, many of whom came to us after exhausting traditional options, began to ask a consistent question: Why aren't you available to everyone?
+                    Word travels fast when you solve problems that others cannot. Our clients, many
+                    of whom came to us after exhausting traditional options, began to ask a
+                    consistent question: Why aren't you available to everyone?
                   </p>
                   <p>
-                    The answer, for many years, was capacity. We believed that maintaining boutique quality required staying small. But as our team matured and our internal processes crystallized, we realized we had built something scalable without ever sacrificing soul. Our clients encouraged our public transition, not because they wanted to share us, but because they believed others deserved access to what we had proven we could deliver.
+                    The answer, for many years, was capacity. We believed that maintaining boutique
+                    quality required staying small. But as our team matured and our internal
+                    processes crystallized, we realized we had built something scalable without ever
+                    sacrificing soul. Our clients encouraged our public transition, not because they
+                    wanted to share us, but because they believed others deserved access to what we
+                    had proven we could deliver.
                   </p>
                   <p className="text-brand-oxford font-bold">
-                    So here we are. No longer invitation only, but still uncompromisingly focused on precision, transparency, and results.
+                    So here we are. No longer invitation only, but still uncompromisingly focused on
+                    precision, transparency, and results.
                   </p>
                   <p>
-                    We bring the same rigor, the same vendor neutrality, and the same refusal to cut corners that our earliest clients relied on. The only difference is that now, you do not need a referral to work with us. You just need a problem worth solving.
+                    We bring the same rigor, the same vendor neutrality, and the same refusal to cut
+                    corners that our earliest clients relied on. The only difference is that now,
+                    you do not need a referral to work with us. You just need a problem worth
+                    solving.
                   </p>
                 </div>
               </div>
@@ -148,21 +183,26 @@ export function AboutClient() {
                 <Target className="w-12 h-12 text-brand-copper mb-6" />
                 <h3 className="text-2xl font-bold text-brand-oxford mb-4">Vendor Neutrality</h3>
                 <p className="text-brand-slate leading-relaxed">
-                  We sell solutions, not licenses. If open source software is better for your budget than a proprietary subscription, that is what we recommend. We have no preferred partners that pay us kickbacks.
+                  We sell solutions, not licenses. If open source software is better for your budget
+                  than a proprietary subscription, that is what we recommend. We have no preferred
+                  partners that pay us kickbacks.
                 </p>
               </div>
               <div className="bg-white p-10 rounded-2xl border-t-4 border-brand-copper shadow-xl hover:-translate-y-1 transition-all duration-300">
                 <Shield className="w-12 h-12 text-brand-copper mb-6" />
                 <h3 className="text-2xl font-bold text-brand-oxford mb-4">Security as a Right</h3>
                 <p className="text-brand-slate leading-relaxed">
-                  Privacy and digital safety should not be luxury goods. We apply the same zero trust architecture to a solo founder's laptop as we do to a fifty person corporate network.
+                  Privacy and digital safety should not be luxury goods. We apply the same zero
+                  trust architecture to a solo founder's laptop as we do to a fifty person corporate
+                  network.
                 </p>
               </div>
               <div className="bg-white p-10 rounded-2xl border-t-4 border-brand-copper shadow-xl hover:-translate-y-1 transition-all duration-300">
                 <Heart className="w-12 h-12 text-brand-copper mb-6" />
                 <h3 className="text-2xl font-bold text-brand-oxford mb-4">Radical Transparency</h3>
                 <p className="text-brand-slate leading-relaxed">
-                  You own your data. You own your code. You own your strategy. We document everything we do so you never feel tied to our services by obscurity.
+                  You own your data. You own your code. You own your strategy. We document
+                  everything we do so you never feel tied to our services by obscurity.
                 </p>
               </div>
             </div>
@@ -269,7 +309,8 @@ export function AboutClient() {
                     Hardware Lifecycle Management
                   </h3>
                   <p className="text-brand-slate text-sm leading-relaxed">
-                    E-waste is the tech industry's silent crisis. We reject the industry standard of three year refresh cycles.
+                    E-waste is the tech industry's silent crisis. We reject the industry standard of
+                    three year refresh cycles.
                   </p>
                   <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
                     <li>
@@ -363,16 +404,27 @@ export function AboutClient() {
         <div className="mt-20 p-12 bg-white rounded-3xl shadow-2xl border border-gray-100 relative overflow-hidden text-center group">
           <div className="absolute top-0 left-0 w-2 h-full bg-brand-copper group-hover:w-4 transition-all"></div>
           <Quote className="w-16 h-16 text-brand-copper/10 absolute top-8 right-8" />
-          <h3 className="text-3xl font-bold text-brand-oxford mb-6 relative z-10"> Ready to Secure Your Growth?</h3>
+          <h3 className="text-3xl font-bold text-brand-oxford mb-6 relative z-10">
+            {" "}
+            Ready to Secure Your Growth?
+          </h3>
           <p className="text-brand-slate text-lg mb-10 max-w-2xl mx-auto relative z-10">
-            Whether you are protecting a fifty person team or your own family estate, we bring the same precision and soul to every engagement.
+            Whether you are protecting a fifty person team or your own family estate, we bring the
+            same precision and soul to every engagement.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6 relative z-10">
             <Button
-              onClick={() => openModal("sales", "I would like to discuss a strategy for my organization.", "About Page Strategy CTA")}
+              onClick={() =>
+                openModal(
+                  "sales",
+                  "I would like to discuss a strategy for my organization.",
+                  "About Page Strategy CTA"
+                )
+              }
               className="bg-brand-copper hover:bg-brand-copper-dark text-white px-10 py-7 text-lg font-bold rounded-full group shadow-lg hover:shadow-brand-copper/20"
             >
-              Book a Strategy Session <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+              Book a Strategy Session{" "}
+              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
             <Button
               onClick={() => router.push(routePaths.pricing)}
@@ -384,8 +436,18 @@ export function AboutClient() {
           </div>
 
           <div className="mt-12 pt-8 border-t border-gray-100 flex justify-center gap-8">
-            <button onClick={() => router.push(routePaths.ethics)} className="text-sm font-medium text-gray-400 hover:text-brand-oxford transition-colors">Ethics Charter</button>
-            <button onClick={() => router.push(routePaths.colophon)} className="text-sm font-medium text-gray-400 hover:text-brand-oxford transition-colors">Operating Framework</button>
+            <button
+              onClick={() => router.push(routePaths.ethics)}
+              className="text-sm font-medium text-gray-400 hover:text-brand-oxford transition-colors"
+            >
+              Ethics Charter
+            </button>
+            <button
+              onClick={() => router.push(routePaths.colophon)}
+              className="text-sm font-medium text-gray-400 hover:text-brand-oxford transition-colors"
+            >
+              Operating Framework
+            </button>
           </div>
         </div>
       </div>

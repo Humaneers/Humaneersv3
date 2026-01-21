@@ -13,7 +13,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Humaneers | Enterprise Strategy. Built with Precision.",
-    description: "Enterprise strategy for businesses and families. Built with precision, delivered with soul.",
+    description:
+      "Enterprise strategy for businesses and families. Built with precision, delivered with soul.",
     url: "https://humaneers.dev",
     type: "website",
     images: [
@@ -28,7 +29,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Humaneers | Enterprise Strategy. Built with Precision.",
-    description: "Enterprise strategy for businesses and families. Built with precision, delivered with soul.",
+    description:
+      "Enterprise strategy for businesses and families. Built with precision, delivered with soul.",
     images: ["/og-image.jpg"],
   },
 };

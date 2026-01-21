@@ -4,7 +4,19 @@ import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { setSessionContext } from "../../lib/session";
 import { datadog } from "../../lib/datadog";
-import { Check, Shield, BarChart3, Users, Lock, Clock, Heart, Award, Zap, ChevronDown, MessageSquare } from "lucide-react";
+import {
+  Check,
+  Shield,
+  BarChart3,
+  Users,
+  Lock,
+  Clock,
+  Heart,
+  Award,
+  Zap,
+  ChevronDown,
+  MessageSquare,
+} from "lucide-react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
@@ -184,15 +196,18 @@ export function PricingClient() {
   const faqs = [
     {
       question: "What counts as a 'User'?",
-      answer: "A user is a human being with a unique account. We don't charge for service accounts (like 'info@') or inactive shared mailboxes.",
+      answer:
+        "A user is a human being with a unique account. We don't charge for service accounts (like 'info@') or inactive shared mailboxes.",
     },
     {
       question: "Can I upgrade or downgrade my plan?",
-      answer: "Yes, you can change your plan at the beginning of any billing cycle. There are no long-term lock-ins for our standard tiers.",
+      answer:
+        "Yes, you can change your plan at the beginning of any billing cycle. There are no long-term lock-ins for our standard tiers.",
     },
     {
       question: "Do you offer emergency support?",
-      answer: "Absolutely. Growth and Scale tiers include priority support, while our Hourly Packs can be used for urgent crisis response if we have capacity.",
+      answer:
+        "Absolutely. Growth and Scale tiers include priority support, while our Hourly Packs can be used for urgent crisis response if we have capacity.",
     },
   ];
 
@@ -209,7 +224,6 @@ export function PricingClient() {
             Choose the plan that fits your stage of business or life.
           </p>
 
-
           <div className="inline-flex bg-gray-100/50 p-1.5 rounded-xl shadow-inner border border-gray-200/50 mb-10 relative overflow-hidden w-full max-w-xl mx-auto">
             <div className="grid grid-cols-3 w-full gap-2 relative z-10">
               <button
@@ -217,10 +231,11 @@ export function PricingClient() {
                   setPricingMode("business");
                   setSessionContext({ segment: "business" });
                 }}
-                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "business"
-                  ? "text-white"
-                  : "text-brand-slate hover:text-brand-oxford"
-                  }`}
+                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
+                  pricingMode === "business"
+                    ? "text-white"
+                    : "text-brand-slate hover:text-brand-oxford"
+                }`}
               >
                 {pricingMode === "business" && (
                   <motion.div
@@ -239,10 +254,11 @@ export function PricingClient() {
                   setPricingMode("household");
                   setSessionContext({ segment: "family" });
                 }}
-                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "household"
-                  ? "text-white"
-                  : "text-brand-slate hover:text-brand-copper"
-                  }`}
+                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
+                  pricingMode === "household"
+                    ? "text-white"
+                    : "text-brand-slate hover:text-brand-copper"
+                }`}
               >
                 {pricingMode === "household" && (
                   <motion.div
@@ -261,10 +277,11 @@ export function PricingClient() {
                   setPricingMode("nonprofit");
                   setSessionContext({ segment: "nonprofit" });
                 }}
-                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "nonprofit"
-                  ? "text-white"
-                  : "text-brand-slate hover:text-brand-oxford"
-                  }`}
+                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
+                  pricingMode === "nonprofit"
+                    ? "text-white"
+                    : "text-brand-slate hover:text-brand-oxford"
+                }`}
               >
                 {pricingMode === "nonprofit" && (
                   <motion.div
@@ -291,14 +308,15 @@ export function PricingClient() {
         )}
 
         <div
-          className={`grid gap-8 mx-auto ${currentTiers.length === 1
-            ? "max-w-md grid-cols-1"
-            : currentTiers.length === 2
-              ? "max-w-4xl grid-cols-1 md:grid-cols-2"
-              : currentTiers.length === 3
-                ? "max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-                : "max-w-7xl grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
-            }`}
+          className={`grid gap-8 mx-auto ${
+            currentTiers.length === 1
+              ? "max-w-md grid-cols-1"
+              : currentTiers.length === 2
+                ? "max-w-4xl grid-cols-1 md:grid-cols-2"
+                : currentTiers.length === 3
+                  ? "max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                  : "max-w-7xl grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+          }`}
         >
           {currentTiers.map((tier, index) => {
             const handleTierClick = () => {
@@ -317,11 +335,13 @@ export function PricingClient() {
               } else if (tierName === "Personal Foundation") {
                 message += "I want to secure my household and devices.";
               } else if (tierName === "Senior Care") {
-                message += "I am looking for dignified support and fraud protection for my family members.";
+                message +=
+                  "I am looking for dignified support and fraud protection for my family members.";
               } else if (tierName === "Personal Estate") {
                 message += "I need a digital concierge for my smart home.";
               } else if (tierName === "Nonprofit Foundation") {
-                message += "We are a nonprofit looking for flat-rate service and donor data protection.";
+                message +=
+                  "We are a nonprofit looking for flat-rate service and donor data protection.";
               }
 
               datadog.trackAction("select_tier", {
@@ -334,10 +354,11 @@ export function PricingClient() {
               openModal("sales", message, source);
             };
 
-            const buttonClasses = `w-full py-6 text-lg font-bold shadow-md transition-all rounded-xl ${tier.highlighted
-              ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-xl hover:-translate-y-1"
-              : "bg-white border-2 border-brand-oxford text-brand-oxford hover:bg-brand-oxford hover:text-white"
-              }`;
+            const buttonClasses = `w-full py-6 text-lg font-bold shadow-md transition-all rounded-xl ${
+              tier.highlighted
+                ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-xl hover:-translate-y-1"
+                : "bg-white border-2 border-brand-oxford text-brand-oxford hover:bg-brand-oxford hover:text-white"
+            }`;
 
             return (
               <motion.div
@@ -345,10 +366,11 @@ export function PricingClient() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`relative bg-white rounded-2xl transition-all duration-300 flex flex-col h-full ${tier.highlighted
-                  ? "shadow-2xl ring-1 ring-brand-copper z-10"
-                  : "shadow-lg hover:shadow-xl border border-gray-100"
-                  }`}
+                className={`relative bg-white rounded-2xl transition-all duration-300 flex flex-col h-full ${
+                  tier.highlighted
+                    ? "shadow-2xl ring-1 ring-brand-copper z-10"
+                    : "shadow-lg hover:shadow-xl border border-gray-100"
+                }`}
               >
                 {tier.highlighted && (
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-brand-copper text-white px-6 py-1.5 rounded-full text-xs font-black shadow-lg uppercase tracking-widest flex items-center gap-2">
@@ -397,11 +419,15 @@ export function PricingClient() {
 
                 <div className="p-8 bg-gray-50/50 pt-0 mt-auto rounded-b-2xl">
                   <Button onClick={handleTierClick} className={buttonClasses}>
-                    {tier.name === "Foundation" ? "Secure My Team" :
-                      tier.name === "Scale" ? "Book Strategy Session" :
-                        tier.name === "Senior Care" ? "Protect My Parents" :
-                          tier.name === "Personal Estate" ? "Get Concierge" :
-                            tier.cta}
+                    {tier.name === "Foundation"
+                      ? "Secure My Team"
+                      : tier.name === "Scale"
+                        ? "Book Strategy Session"
+                        : tier.name === "Senior Care"
+                          ? "Protect My Parents"
+                          : tier.name === "Personal Estate"
+                            ? "Get Concierge"
+                            : tier.cta}
                   </Button>
                 </div>
               </motion.div>
@@ -411,8 +437,8 @@ export function PricingClient() {
 
         <div className="mt-8 text-center text-xs text-gray-400 italic max-w-2xl mx-auto">
           Definitions & Precision: We define a "User" as a unique human with an active account.
-          While our pricing is built for simplicity, specialized third-party licensing or
-          complex multi-device deployments may occasionally require adjustments to per-seat costs.
+          While our pricing is built for simplicity, specialized third-party licensing or complex
+          multi-device deployments may occasionally require adjustments to per-seat costs.
         </div>
 
         {/* --- Trust Strip --- */}
@@ -511,13 +537,18 @@ export function PricingClient() {
           </div>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <div key={i} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+              <div
+                key={i}
+                className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
+              >
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   className="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
                 >
                   <span className="font-bold text-brand-oxford">{faq.question}</span>
-                  <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${openFaq === i ? "rotate-180" : ""}`} />
+                  <ChevronDown
+                    className={`w-5 h-5 text-gray-400 transition-transform ${openFaq === i ? "rotate-180" : ""}`}
+                  />
                 </button>
                 {openFaq === i && (
                   <div className="px-6 pb-6 text-brand-slate animate-in fade-in slide-in-from-top-2 duration-200">
@@ -549,7 +580,8 @@ export function PricingClient() {
             <div className="p-10 md:p-12 text-left flex-grow">
               <MessageSquare className="w-10 h-10 text-brand-copper/20 mb-6" />
               <blockquote className="text-xl italic text-brand-oxford mb-8">
-                "We don't just manage servers; we protect the people running them. Let's build a plan that fits your culture."
+                "We don't just manage servers; we protect the people running them. Let's build a
+                plan that fits your culture."
               </blockquote>
               <div className="flex items-center justify-between">
                 <div>
