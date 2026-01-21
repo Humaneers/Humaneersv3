@@ -15,7 +15,8 @@
     "check": "npm run typecheck && npm run lint && npm run format:check",
     "test": "vitest",
     "test:run": "vitest run",
-    "release": "node scripts/bump-version.js && git add package.json src/version.ts && git commit -m \"chore: bump version to $(node -p 'require(\"./package.json\").version')\" && git push"
+    "release": "node scripts/bump-version.js && git add package.json src/version.ts && git commit -m \"chore: bump version to $(node -p 'require(\"./package.json\").version')\" && git push",
+    "issues": "npx tsx scripts/github-issues.ts"
   },
   "dependencies": {
     "@datadog/browser-rum": "^6.25.4",

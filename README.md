@@ -118,9 +118,29 @@ The official website for Humaneers, built with modern web technologies to delive
 - **Sizing**: `w-5 h-5` (inline), `w-12 h-12` (hero features).
 - **Color**: Inherit from parent text color. **Review hover states** to ensure visibility.
 
-## 4. Technical Architecture
+## 🐛 Issue Tracking
 
-### 4.1 Tech Stack
+We use the GitHub API to manage issues directly from the command line.
+
+### Prerequisites
+You must have a `GITHUB_TOKEN` environment variable set with `repo` scope.
+```bash
+export GITHUB_TOKEN=your_personal_access_token
+```
+
+### Usage
+**List Open Issues:**
+```bash
+npm run issues list
+```
+
+**Create a New Issue:**
+```bash
+# Usage: npm run issues create "Title" "Body" "Label1,Label2"
+npm run issues create "Fix Login Bug" "Login fails on Safari" "bug,high-priority"
+```
+
+## 🛠 Tech Stack
 - **Framework**: [Next.js 15](https://nextjs.org/) (App Router, PPR) + [React 19](https://react.dev/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/) (Strict mode)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
