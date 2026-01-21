@@ -96,6 +96,7 @@ export function FamilyProtectionClient() {
             <Button
               onClick={() => router.push(`${routePaths.pricing}?mode=household`)}
               className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
+              withArrow
             >
               Secure My Family
             </Button>
@@ -269,6 +270,7 @@ export function FamilyProtectionClient() {
           <Button
             onClick={() => router.push(`${routePaths.talkToSales}?interest=Family%20Protection`)}
             className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-12 py-8 h-auto rounded-full shadow-lg"
+            withArrow
           >
             Get a Home Network Health Check
           </Button>

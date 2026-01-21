@@ -111,6 +111,7 @@ export function ManagedITClient() {
             <Button
               onClick={() => router.push(`${routePaths.talkToSales}?interest=Managed%20IT`)}
               className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
+              withArrow
             >
               Get a Network Assessment
             </Button>
@@ -288,6 +289,7 @@ export function ManagedITClient() {
             <Button
               onClick={() => router.push(`${routePaths.pricing}?mode=business`)}
               className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg hover:shadow-xl transition-all"
+              withArrow
             >
               View Pricing
             </Button>

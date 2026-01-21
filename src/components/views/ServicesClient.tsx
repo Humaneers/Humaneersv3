@@ -7,7 +7,6 @@ import {
   BarChart3,
   Users,
   Server,
-  ArrowRight,
   CheckCircle2,
   Layers,
   AlertTriangle,
@@ -188,8 +187,9 @@ export function ServicesClient() {
                   <Button
                     onClick={() => router.push(service.link)}
                     className="w-full bg-gray-100 text-brand-oxford hover:bg-gray-200 justify-between group-hover:bg-brand-copper group-hover:text-white transition-colors"
+                    withArrow
                   >
-                    Learn More <ArrowRight className="w-4 h-4 ml-2" />
+                    Learn More
                   </Button>
                 </div>
               </div>
@@ -246,6 +246,7 @@ export function ServicesClient() {
               router.push(`${routePaths.talkToSales}?source=Services%20Overview%20Page`)
             }
             className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-10 py-6 h-auto rounded-full"
+            withArrow
           >
             Talk to Sales
           </Button>

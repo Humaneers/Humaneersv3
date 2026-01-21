@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { useContactModal } from "../providers/ContactModalProvider";
 // import { APP_VERSION } from "../../version"; // Temporarily disabled if not easily resolved
-const APP_VERSION = "0.2.0";
+const APP_VERSION = "0.3.0";
 
 import { footerSections, footerMetaLinks } from "../../data/navigation";
 
@@ -43,7 +43,7 @@ export function Footer() {
 
             <div className="inline-flex items-center gap-2 bg-brand-slate/40 px-4 py-2 rounded-full text-xs font-medium text-brand-copper border border-white/5">
               <span className="w-1.5 h-1.5 rounded-full bg-brand-copper animate-pulse"></span>
-              Tempe, AZ &middot; Austin, TX &middot; Serving Nationwide
+              Tempe, AZ &middot; El Paso, TX &middot; Flint, MI
             </div>
           </div>
 
@@ -110,7 +110,7 @@ export function Footer() {
                 className="text-sm leading-relaxed hover:text-white transition-colors text-center md:text-left"
               >
                 60 E Rio Salado Pkwy <br />
-                Suite 900, Tempe, AZ
+                Suite 900, Tempe, AZ 85281
               </a>
             </div>
           </div>

@@ -203,6 +203,7 @@ export function SupportClient() {
                 <Button
                   onClick={() => openModal("support")}
                   className="w-full sm:w-auto bg-brand-copper hover:bg-brand-copper-dark h-auto py-4 px-8 text-lg gap-2"
+                  withArrow
                 >
                   <MessageSquare className="w-5 h-5" aria-hidden="true" />
                   Open Support Ticket

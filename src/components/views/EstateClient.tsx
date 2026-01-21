@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
-import { Shield, Home, Wifi, Server, CheckCircle2, ArrowRight, Key } from "lucide-react";
+import { Shield, Home, Wifi, Server, CheckCircle2, Key } from "lucide-react";
 import { routePaths } from "../../routes";
 
 export function EstateClient() {
@@ -33,6 +33,7 @@ export function EstateClient() {
             <Button
               onClick={() => router.push(`${routePaths.pricing}?mode=household&tier=estate`)}
               className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg"
+              withArrow
             >
               View Concierge Plans
             </Button>
@@ -130,8 +131,9 @@ export function EstateClient() {
               )
             }
             className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-12 py-8 h-auto rounded-full shadow-lg"
+            withArrow
           >
-            Get a Private Consultation <ArrowRight className="ml-2" />
+            Get a Private Consultation
           </Button>
         </div>
       </section>

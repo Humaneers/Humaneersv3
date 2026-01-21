@@ -69,28 +69,28 @@ export function SolutionSwitcher() {
     return (
         <div className="w-full max-w-5xl mx-auto">
             {/* Navigation Icons */}
-            <div className="flex flex-wrap justify-center gap-6 md:gap-12 mb-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-12 w-full">
                 {services.map((service) => {
                     const isActive = activeId === service.id;
                     return (
                         <button
                             key={service.id}
                             onClick={() => setActiveId(service.id)}
-                            className="group flex flex-col items-center gap-3 focus:outline-none"
+                            className="group flex flex-col items-center gap-4 focus:outline-none p-4 rounded-xl transition-all duration-300 hover:bg-white/50"
                         >
                             <div
                                 className={cn(
                                     "w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg border-2",
                                     isActive
                                         ? "bg-brand-copper border-brand-copper text-white scale-110 shadow-xl"
-                                        : "bg-white border-gray-100 text-gray-400 hover:border-brand-copper/50 hover:text-brand-copper hover:scale-105"
+                                        : "bg-white border-gray-100 text-gray-400 group-hover:border-brand-copper/50 group-hover:text-brand-copper group-hover:scale-105"
                                 )}
                             >
                                 <service.icon className={cn("w-8 h-8 md:w-10 md:h-10", isActive ? "text-white" : "")} />
                             </div>
                             <span
                                 className={cn(
-                                    "text-sm font-medium transition-colors duration-300",
+                                    "text-sm md:text-base font-bold text-center leading-tight transition-colors duration-300 max-w-[120px]",
                                     isActive ? "text-brand-copper" : "text-gray-400 group-hover:text-brand-oxford"
                                 )}
                             >

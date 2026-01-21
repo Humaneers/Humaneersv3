@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "../components/ui/button";
-import { Home, Search, MessageSquare, ArrowRight } from "lucide-react";
+import { Home, Search, MessageSquare } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -31,9 +31,11 @@ export default function NotFound() {
             </Button>
           </Link>
           <Link href="/contact" className="w-full">
-            <Button className="w-full py-6 text-lg bg-brand-copper hover:bg-brand-copper/90 text-white shadow-lg transition-all">
-              <MessageSquare className="mr-2 h-5 w-5" /> Get Support{" "}
-              <ArrowRight className="ml-2 h-4 w-4" />
+            <Button
+              className="w-full py-6 text-lg bg-brand-copper hover:bg-brand-copper/90 text-white shadow-lg transition-all"
+              withArrow
+            >
+              <MessageSquare className="mr-2 h-5 w-5" /> Get Support
             </Button>
           </Link>
         </div>

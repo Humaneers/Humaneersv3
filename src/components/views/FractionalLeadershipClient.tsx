@@ -9,7 +9,6 @@ import {
   Lightbulb,
   Briefcase,
   FileText,
-  ArrowRight,
   TrendingUp,
 } from "lucide-react";
 import { routePaths } from "../../routes";
@@ -102,6 +101,7 @@ export function FractionalLeadershipClient() {
                 router.push(`${routePaths.talkToSales}?interest=Fractional%20Leadership`)
               }
               className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg"
+              withArrow
             >
               Match with a Leader
             </Button>
@@ -207,8 +207,9 @@ export function FractionalLeadershipClient() {
                 router.push(`${routePaths.talkToSales}?interest=Fractional%20Leadership`)
               }
               className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-12 py-8 h-auto rounded-full shadow-lg"
+              withArrow
             >
-              Contact Us <ArrowRight className="ml-2" />
+              Contact Us
             </Button>
           </div>
         </div>

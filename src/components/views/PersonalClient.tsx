@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
-import { User, Mail, Shield, Smartphone, ArrowRight, Laptop, Fingerprint } from "lucide-react";
+import { User, Mail, Shield, Smartphone, Laptop, Fingerprint, ArrowRight } from "lucide-react";
 import { routePaths } from "../../routes";
 
 export function PersonalClient() {
@@ -27,6 +27,7 @@ export function PersonalClient() {
             <Button
               onClick={() => router.push(`${routePaths.pricing}?mode=household`)}
               className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg"
+              withArrow
             >
               View Pricing
             </Button>
@@ -173,6 +174,7 @@ export function PersonalClient() {
         <Button
           onClick={() => router.push(`${routePaths.pricing}?mode=household`)}
           className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-12 py-6 h-auto rounded-full shadow-lg"
+          withArrow
         >
           View Pricing
         </Button>

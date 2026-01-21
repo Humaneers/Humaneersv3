@@ -14,7 +14,6 @@ import {
   Award,
   Quote,
   CheckCircle2,
-  ArrowRight,
 } from "lucide-react";
 import { routePaths } from "../../routes";
 import { useContactModal } from "../providers/ContactModalProvider";
@@ -422,9 +421,9 @@ export function AboutClient() {
                 )
               }
               className="bg-brand-copper hover:bg-brand-copper-dark text-white px-10 py-7 text-lg font-bold rounded-full group shadow-lg hover:shadow-brand-copper/20"
+              withArrow
             >
-              Book a Strategy Session{" "}
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+              Book a Strategy Session
             </Button>
             <Button
               onClick={() => router.push(routePaths.pricing)}

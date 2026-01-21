@@ -11,7 +11,6 @@ import {
   LayoutTemplate,
   CheckCircle2,
   Rocket,
-  ArrowRight,
   LineChart,
   Users,
 } from "lucide-react";
@@ -105,6 +104,7 @@ export function GrowthClient() {
             <Button
               onClick={() => router.push(`${routePaths.pricing}?mode=business`)}
               className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
+              withArrow
             >
               Book a Strategy Call
             </Button>
@@ -252,9 +252,9 @@ export function GrowthClient() {
             <Button
               onClick={() => router.push(`${routePaths.talkToSales}?interest=Fractional%20Growth`)}
               className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-10 py-8 h-auto rounded-full shadow-xl hover:shadow-2xl transition-all"
+              withArrow
             >
               Calculate Your Savings
-              <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </div>
         </div>

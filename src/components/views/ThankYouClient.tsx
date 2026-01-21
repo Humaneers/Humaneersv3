@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { CheckCircle2, ArrowRight } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { useEffect } from "react";
 
 // Define window extension for analytics
@@ -49,8 +49,11 @@ export function ThankYouClient() {
             </p>
 
             <Link href="/">
-              <Button className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white py-6">
-                Return Home <ArrowRight className="ml-2 w-4 h-4" />
+              <Button
+                className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white py-6"
+                withArrow
+              >
+                Return Home
               </Button>
             </Link>
           </div>

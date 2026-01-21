@@ -9,7 +9,6 @@ import { setSessionContext } from "../../lib/session";
 import { datadog } from "../../lib/datadog";
 import Image from "next/image";
 import { useContactModal } from "../providers/ContactModalProvider";
-
 import { SolutionSwitcher } from "./SolutionSwitcher";
 
 // Porting ObjectionsSection later or keeping as lazy for now
@@ -20,11 +19,16 @@ const ObjectionsSection = lazy(() =>
 export function HomeClient() {
   const { openModal } = useContactModal();
 
-
-
   return (
-    <div className="w-full">
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+    <div className="w-full relative">
+      <div
+        className="fixed inset-0 pointer-events-none z-50 mix-blend-overlay opacity-[0.03] select-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+        }}
+      />
+
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1673563978245-b5d4adb056fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxUZW1wZSUyMEFyaXpvbmElMjBzdW5yaXNlJTIwd2FybSUyMGxpZ2h0fGVufDF8fHx8MTc2NjQ0ODcyOXww&ixlib=rb-4.1.0&q=80&w=1080"
@@ -91,7 +95,7 @@ export function HomeClient() {
         </div>
       </section>
 
-      <div className="bg-brand-copper text-white py-4 relative z-20 shadow-md">
+      <div className="bg-brand-copper text-white py-6 relative z-20 shadow-md">
         <div className="container mx-auto px-6 text-center font-medium text-lg tracking-wide">
           No user minimums. No offshore NOCs. 100% US-based engineering.
         </div>
@@ -114,7 +118,7 @@ export function HomeClient() {
         </div>
       </section>
 
-      <section className="py-20 bg-brand-cream">
+      <section className="py-24 bg-brand-cream">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="md:w-1/2">
@@ -146,7 +150,7 @@ export function HomeClient() {
                   className="object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 bg-brand-copper p-6 rounded-lg text-white shadow-lg hidden md:block">
+              <div className="absolute -bottom-6 -left-4 bg-brand-copper p-6 rounded-lg text-white shadow-lg hidden md:block">
                 <p className="text-2xl font-bold">100+</p>
                 <p className="text-sm opacity-90">Families Protected Nationwide</p>
               </div>

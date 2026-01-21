@@ -27,6 +27,7 @@ export function CrisisManagementClient() {
             <Button
               onClick={() => router.push(`${routePaths.talkToSales}?interest=Crisis%20Management`)}
               className="bg-red-600 hover:bg-red-700 text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg border-2 border-red-500"
+              withArrow
             >
               Confidential Consultation
             </Button>
@@ -125,6 +126,7 @@ export function CrisisManagementClient() {
             <Button
               onClick={() => router.push(`${routePaths.talkToSales}?interest=Crisis%20Management`)}
               className="bg-white text-stone-900 hover:bg-gray-200 text-lg px-10 py-4 h-auto rounded-full font-bold"
+              withArrow
             >
               Get Help Now
             </Button>

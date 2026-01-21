@@ -27,6 +27,7 @@ export function SeniorCareClient() {
             <Button
               onClick={() => router.push(`${routePaths.pricing}?mode=household&highlight=senior`)}
               className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg"
+              withArrow
             >
               View Pricing
             </Button>
@@ -147,6 +148,7 @@ export function SeniorCareClient() {
             <Button
               onClick={() => router.push(`${routePaths.pricing}?mode=household&highlight=senior`)}
               className="bg-brand-oxford hover:bg-brand-oxford-muted text-white text-xl px-12 py-6 h-auto rounded-full"
+              withArrow
             >
               View Plans
             </Button>

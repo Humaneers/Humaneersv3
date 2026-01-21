@@ -34,11 +34,15 @@ export function PricingClient() {
     (searchParams.get("mode") as "business" | "nonprofit" | "household") || "business";
   const [pricingMode, setPricingMode] = useState<"business" | "nonprofit" | "household">(modeParam);
 
+  /* 
+    Updated Pricing Model: Base Price (Infrastructure/Support) + Per User (Seats/Licenses)
+  */
+
   const businessTiers = [
     {
       name: "Foundation",
-      price: 90,
-      unit: "/user/mo",
+      basePrice: 99,
+      perUserPrice: 15,
       description: "Essential IT & Security for small teams.",
       features: [
         "Hybrid/Cloud Infrastructure",
@@ -56,8 +60,8 @@ export function PricingClient() {
     },
     {
       name: "Growth",
-      price: 119,
-      unit: "/user/mo",
+      basePrice: 249,
+      perUserPrice: 29,
       description: "For businesses ready to scale their brand and ops.",
       features: [
         "Everything in Foundation",
@@ -72,8 +76,8 @@ export function PricingClient() {
     },
     {
       name: "Scale",
-      price: 149,
-      unit: "/user/mo",
+      basePrice: 499,
+      perUserPrice: 49,
       description: "Full enterprise power with strategic leadership.",
       features: [
         "Everything in Growth",
@@ -97,8 +101,8 @@ export function PricingClient() {
   const householdTiers = [
     {
       name: "Solo / Personal",
-      price: 25,
-      unit: "/user/mo",
+      basePrice: 19,
+      perUserPrice: 4,
       description: "DNS, domain & email management. Limited protection.",
       features: [
         "Domain Registrar Management",
@@ -113,8 +117,8 @@ export function PricingClient() {
     },
     {
       name: "Personal Foundation",
-      price: 80,
-      unit: "/household/mo",
+      basePrice: 49,
+      perUserPrice: 9,
       description: "Essential protection for up to four humans and their devices.",
       features: [
         "Enterprise Endpoint Protection (Mac/PC)",
@@ -131,8 +135,8 @@ export function PricingClient() {
     },
     {
       name: "Senior Care",
-      price: 75,
-      unit: "/household/mo",
+      basePrice: 49,
+      perUserPrice: 9,
       description: "Dignified, patient support with aggressive fraud protection.",
       features: [
         "Everything in Foundation",
@@ -149,8 +153,8 @@ export function PricingClient() {
     },
     {
       name: "Personal Estate",
-      price: 195,
-      unit: "/household/mo",
+      basePrice: 149,
+      perUserPrice: 15,
       description: "Full digital concierge for the modern smart home.",
       features: [
         "Everything in Foundation",
@@ -168,8 +172,8 @@ export function PricingClient() {
   const nonprofitTiers = [
     {
       name: "Nonprofit Foundation",
-      price: 299,
-      unit: "/org/mo + licenses",
+      basePrice: 299,
+      perUserPrice: "Cost",
       description: "Flat-rate service fee plus at-cost licensing.",
       features: [
         "Flat Organization Service Fee",
@@ -194,6 +198,11 @@ export function PricingClient() {
         : businessTiers;
 
   const faqs = [
+    {
+      question: "Why is there a Base Price + Per User price?",
+      answer:
+        "The Base Price covers the core infrastructure, monitoring systems, and support team availability that benefits the entire organization. The Per User price covers the specific licenses, security agents, and helpdesk volume for each individual person.",
+    },
     {
       question: "What counts as a 'User'?",
       answer:
@@ -231,11 +240,10 @@ export function PricingClient() {
                   setPricingMode("business");
                   setSessionContext({ segment: "business" });
                 }}
-                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
-                  pricingMode === "business"
-                    ? "text-white"
-                    : "text-brand-slate hover:text-brand-oxford"
-                }`}
+                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "business"
+                  ? "text-white"
+                  : "text-brand-slate hover:text-brand-oxford"
+                  }`}
               >
                 {pricingMode === "business" && (
                   <motion.div
@@ -254,11 +262,10 @@ export function PricingClient() {
                   setPricingMode("household");
                   setSessionContext({ segment: "family" });
                 }}
-                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
-                  pricingMode === "household"
-                    ? "text-white"
-                    : "text-brand-slate hover:text-brand-copper"
-                }`}
+                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "household"
+                  ? "text-white"
+                  : "text-brand-slate hover:text-brand-copper"
+                  }`}
               >
                 {pricingMode === "household" && (
                   <motion.div
@@ -277,11 +284,10 @@ export function PricingClient() {
                   setPricingMode("nonprofit");
                   setSessionContext({ segment: "nonprofit" });
                 }}
-                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
-                  pricingMode === "nonprofit"
-                    ? "text-white"
-                    : "text-brand-slate hover:text-brand-oxford"
-                }`}
+                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "nonprofit"
+                  ? "text-white"
+                  : "text-brand-slate hover:text-brand-oxford"
+                  }`}
               >
                 {pricingMode === "nonprofit" && (
                   <motion.div
@@ -308,15 +314,14 @@ export function PricingClient() {
         )}
 
         <div
-          className={`grid gap-8 mx-auto ${
-            currentTiers.length === 1
-              ? "max-w-md grid-cols-1"
-              : currentTiers.length === 2
-                ? "max-w-4xl grid-cols-1 md:grid-cols-2"
-                : currentTiers.length === 3
-                  ? "max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-                  : "max-w-7xl grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
-          }`}
+          className={`grid gap-8 mx-auto ${currentTiers.length === 1
+            ? "max-w-md grid-cols-1"
+            : currentTiers.length === 2
+              ? "max-w-4xl grid-cols-1 md:grid-cols-2"
+              : currentTiers.length === 3
+                ? "max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                : "max-w-7xl grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+            }`}
         >
           {currentTiers.map((tier, index) => {
             const handleTierClick = () => {
@@ -324,7 +329,7 @@ export function PricingClient() {
               const source = `Pricing Page - ${tierName} Tier`;
               let message = `I am interested in the ${tierName} plan. `;
 
-              if (tierName === "Foundation") {
+              if (tierName === "Foundation" && pricingMode === "business") {
                 message += "We need essential IT and security for our small team.";
               } else if (tierName === "Growth") {
                 message += "We are ready to scale our brand and operations.";
@@ -347,18 +352,17 @@ export function PricingClient() {
               datadog.trackAction("select_tier", {
                 tier: tierName,
                 mode: pricingMode,
-                price: tier.price,
+                basePrice: tier.basePrice,
                 source: "pricing_card_cta",
               });
 
               openModal("sales", message, source);
             };
 
-            const buttonClasses = `w-full py-6 text-lg font-bold shadow-md transition-all rounded-xl ${
-              tier.highlighted
-                ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-xl hover:-translate-y-1"
-                : "bg-white border-2 border-brand-oxford text-brand-oxford hover:bg-brand-oxford hover:text-white"
-            }`;
+            const buttonClasses = `w-full py-6 text-lg font-bold shadow-md transition-all rounded-xl ${tier.highlighted
+              ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-xl hover:-translate-y-1"
+              : "bg-white border-2 border-brand-oxford text-brand-oxford hover:bg-brand-oxford hover:text-white"
+              }`;
 
             return (
               <motion.div
@@ -366,11 +370,10 @@ export function PricingClient() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`relative bg-white rounded-2xl transition-all duration-300 flex flex-col h-full ${
-                  tier.highlighted
-                    ? "shadow-2xl ring-1 ring-brand-copper z-10"
-                    : "shadow-lg hover:shadow-xl border border-gray-100"
-                }`}
+                className={`relative bg-white rounded-2xl transition-all duration-300 flex flex-col h-full ${tier.highlighted
+                  ? "shadow-2xl ring-1 ring-brand-copper z-10"
+                  : "shadow-lg hover:shadow-xl border border-gray-100"
+                  }`}
               >
                 {tier.highlighted && (
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-brand-copper text-white px-6 py-1.5 rounded-full text-xs font-black shadow-lg uppercase tracking-widest flex items-center gap-2">
@@ -379,16 +382,22 @@ export function PricingClient() {
                 )}
                 <div className="p-8 flex-grow flex flex-col">
                   <h3 className="text-2xl font-bold text-brand-oxford mb-2">{tier.name}</h3>
-                  <div className="flex items-baseline mb-4">
-                    <span className="text-4xl font-bold text-brand-oxford">${tier.price}</span>
-                    <span className="text-gray-500 ml-2">{tier.unit}</span>
-                    <span className="ml-1 relative -top-3">
-                      <DefinitionTooltip
-                        term="*"
-                        definition="Subject to Terms of Service. Taxes may apply."
-                        className="text-xs text-gray-400 no-underline border-none"
-                      />
-                    </span>
+                  <div className="mb-6 space-y-1">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-4xl font-bold text-brand-oxford">${tier.basePrice}</span>
+                      <span className="text-gray-500 text-sm font-medium">base / mo</span>
+                    </div>
+                    <div className="flex items-baseline gap-2 text-brand-copper">
+                      <span className="text-xl font-bold">+ {typeof tier.perUserPrice === 'number' ? `$${tier.perUserPrice}` : tier.perUserPrice}</span>
+                      <span className="text-sm font-medium opacity-80">/ user / mo</span>
+                      <span className="ml-1 relative -top-1">
+                        <DefinitionTooltip
+                          term="*"
+                          definition="Base price covers infrastructure & support. Per-user price covers seats & licenses."
+                          className="text-xs text-brand-copper/60 no-underline border-none"
+                        />
+                      </span>
+                    </div>
                   </div>
                   <p className="text-sm text-gray-500 mb-8 h-10">{tier.description}</p>
 
@@ -418,8 +427,8 @@ export function PricingClient() {
                 </div>
 
                 <div className="p-8 bg-gray-50/50 pt-0 mt-auto rounded-b-2xl">
-                  <Button onClick={handleTierClick} className={buttonClasses}>
-                    {tier.name === "Foundation"
+                  <Button onClick={handleTierClick} className={buttonClasses} withArrow>
+                    {tier.name === "Foundation" && pricingMode === "business"
                       ? "Secure My Team"
                       : tier.name === "Scale"
                         ? "Book Strategy Session"
@@ -435,10 +444,8 @@ export function PricingClient() {
           })}
         </div>
 
-        <div className="mt-8 text-center text-xs text-gray-400 italic max-w-2xl mx-auto">
-          Definitions & Precision: We define a "User" as a unique human with an active account.
-          While our pricing is built for simplicity, specialized third-party licensing or complex
-          multi-device deployments may occasionally require adjustments to per-seat costs.
+        <div className="mt-8 text-center text-xs text-brand-slate/60 text-balance max-w-2xl mx-auto">
+          <strong>Fair Pricing Philosophy:</strong> We separate infrastructure costs (Base) from seat costs (Per User) so you don't overpay as you scale. "Users" are unique humans with active accounts; we don't charge for service accounts (e.g. info@, admin@).
         </div>
 
         {/* --- Trust Strip --- */}
@@ -521,6 +528,7 @@ export function PricingClient() {
                     );
                   }}
                   className="bg-white text-brand-oxford hover:bg-gray-100 px-8 py-3 font-bold"
+                  withArrow
                 >
                   Purchase Hours
                 </Button>
@@ -598,6 +606,7 @@ export function PricingClient() {
                     )
                   }
                   className="border-brand-oxford text-brand-oxford hover:bg-brand-oxford hover:text-white px-8 py-6 font-bold"
+                  withArrow
                 >
                   Contact Strategic Sales
                 </Button>

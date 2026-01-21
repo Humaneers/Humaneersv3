@@ -124,11 +124,10 @@ export function ResourcesClient() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
-                  activeTab === tab
-                    ? "bg-brand-oxford text-white shadow-sm"
-                    : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
-                }`}
+                className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${activeTab === tab
+                  ? "bg-brand-oxford text-white shadow-sm"
+                  : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
+                  }`}
               >
                 {tab}
               </button>
@@ -252,6 +251,7 @@ export function ResourcesClient() {
             <Button
               variant="outline"
               className="w-full mt-8 border-gray-600 text-gray-300 bg-transparent hover:text-white hover:bg-white/10"
+              withArrow
             >
               View Full Glossary
             </Button>

@@ -21,19 +21,19 @@ export function middleware(request: NextRequest) {
   // In a strict environment, these should be removed and replaced with nonces/hashes.
   const csp = `
     default-src 'self';
-    script-src 'self' 'unsafe-inline' 'unsafe-eval' 
-      *.zoho.com *.zoho.eu *.zohopublic.com *.zohopublic.eu 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:
+      *.zoho.com *.zoho.eu *.zohopublic.com *.zohopublic.eu *.zohocdn.com
       *.pagesense.io *.contentsquare.net 
       *.googletagmanager.com *.vercel-scripts.com 
       vercel.live;
     style-src 'self' 'unsafe-inline' 
       fonts.googleapis.com 
-      *.zoho.com *.zohopublic.com;
-    img-src 'self' data: https:;
+      *.zoho.com *.zohopublic.com *.zohocdn.com;
+    img-src 'self' data: https: *.zohocdn.com;
     font-src 'self' data: 
-      fonts.gstatic.com;
-    connect-src 'self' 
-      *.zoho.com *.zoho.eu *.zohopublic.com *.zohopublic.eu 
+      fonts.gstatic.com *.zohocdn.com;
+    connect-src 'self' wss: blob:
+      *.zoho.com *.zoho.eu *.zohopublic.com *.zohopublic.eu *.zohocdn.com
       *.pagesense.io *.contentsquare.net 
       *.google-analytics.com
       vercel.live;

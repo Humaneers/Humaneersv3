@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
-import { Heart, Shield, Users, CheckCircle2, ArrowRight, FileText } from "lucide-react";
+import { Heart, Shield, Users, CheckCircle2, FileText } from "lucide-react";
 import { routePaths } from "../../routes";
 
 export function NonProfitsClient() {
@@ -33,6 +33,7 @@ export function NonProfitsClient() {
             <Button
               onClick={() => router.push(`${routePaths.pricing}?mode=nonprofit`)}
               className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
+              withArrow
             >
               View Nonprofit Plans
             </Button>
@@ -124,8 +125,9 @@ export function NonProfitsClient() {
               router.push(`${routePaths.talkToSales}?interest=Nonprofit%20Grant%20Readiness`)
             }
             className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-12 py-8 h-auto rounded-full shadow-lg"
+            withArrow
           >
-            Get Grant-Ready <ArrowRight className="ml-2" />
+            Get Grant-Ready
           </Button>
         </div>
       </section>

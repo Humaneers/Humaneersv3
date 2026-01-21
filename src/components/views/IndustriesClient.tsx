@@ -53,6 +53,7 @@ export function IndustriesClient() {
                 router.push(`${routePaths.talkToSales}?interest=Regulated%20Industries`)
               }
               className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg"
+              withArrow
             >
               Schedule Compliance Review
             </Button>
@@ -159,6 +160,7 @@ export function IndustriesClient() {
                     onClick={() => router.push(routePaths.contact)}
                     variant="outline"
                     className="text-brand-oxford border-white bg-white hover:bg-gray-100 w-full"
+                    withArrow
                   >
                     Get a Free Risk Assessment
                   </Button>
