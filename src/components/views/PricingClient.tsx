@@ -45,6 +45,7 @@ export function PricingClient() {
       perUserPrice: 15,
       description: "Essential IT & Security for small teams.",
       features: [
+        "Includes 2 Free Users",
         "Hybrid/Cloud Infrastructure",
         "Unlimited remote support",
         "Basic Security Suite (Endpoint Security)",
@@ -64,6 +65,7 @@ export function PricingClient() {
       perUserPrice: 29,
       description: "For businesses ready to scale their brand and ops.",
       features: [
+        "Includes 2 Free Users",
         "Everything in Foundation",
         "Quarterly Marketing Health Checks",
         "Priority On-site Support",
@@ -80,6 +82,7 @@ export function PricingClient() {
       perUserPrice: 49,
       description: "Full enterprise power with strategic leadership.",
       features: [
+        "Includes 2 Free Users",
         "Everything in Growth",
         "Americanization Strategy",
         "Fractional CIO Access",
@@ -105,6 +108,7 @@ export function PricingClient() {
       perUserPrice: 4,
       description: "DNS, domain & email management. Limited protection.",
       features: [
+        "Includes 2 Free Users",
         "Domain Registrar Management",
         "DNS Record Configuration",
         "Email (G-Suite/O365) Admin",
@@ -121,6 +125,7 @@ export function PricingClient() {
       perUserPrice: 9,
       description: "Essential protection for up to four humans and their devices.",
       features: [
+        "Includes 2 Free Users",
         "Enterprise Endpoint Protection (Mac/PC)",
         "MDM (Mobile Device Management)",
         "Content Filtering & Parental Controls",
@@ -139,6 +144,7 @@ export function PricingClient() {
       perUserPrice: 9,
       description: "Dignified, patient support with aggressive fraud protection.",
       features: [
+        "Includes 2 Free Users",
         "Everything in Foundation",
         "Fraud & Scam Air-Gapping",
         "Unlimited 'Red Button' Phone Support",
@@ -157,6 +163,7 @@ export function PricingClient() {
       perUserPrice: 15,
       description: "Full digital concierge for the modern smart home.",
       features: [
+        "Includes 2 Free Users",
         "Everything in Foundation",
         "Custom Personal Email (@surname.com)",
         "Enterprise Wi-Fi Management",
@@ -176,6 +183,7 @@ export function PricingClient() {
       perUserPrice: "Cost",
       description: "Flat-rate service fee plus at-cost licensing.",
       features: [
+        "Includes 2 Free Users",
         "Flat Organization Service Fee",
         "Per-User Licensing Cost Only",
         "Unlimited Remote Support",
@@ -201,7 +209,7 @@ export function PricingClient() {
     {
       question: "Why is there a Base Price + Per User price?",
       answer:
-        "The Base Price covers the core infrastructure, monitoring systems, and support team availability that benefits the entire organization. The Per User price covers the specific licenses, security agents, and helpdesk volume for each individual person.",
+        "The Base Price covers core infrastructure, monitoring systems, and includes your first 2 users. The Per User price applies only to the 3rd user onwards, covering specific licenses and support volume.",
     },
     {
       question: "What counts as a 'User'?",
@@ -389,11 +397,11 @@ export function PricingClient() {
                     </div>
                     <div className="flex items-baseline gap-2 text-brand-copper">
                       <span className="text-xl font-bold">+ {typeof tier.perUserPrice === 'number' ? `$${tier.perUserPrice}` : tier.perUserPrice}</span>
-                      <span className="text-sm font-medium opacity-80">/ user / mo</span>
+                      <span className="text-sm font-medium opacity-80">/ additional user / mo</span>
                       <span className="ml-1 relative -top-1">
                         <DefinitionTooltip
                           term="*"
-                          definition="Base price covers infrastructure & support. Per-user price covers seats & licenses."
+                          definition="Base price covers infrastructure & support and includes your first 2 users. Per-user price applies for 3+ users."
                           className="text-xs text-brand-copper/60 no-underline border-none"
                         />
                       </span>
