@@ -1,15 +1,16 @@
 "use client";
 
 import { lazy, Suspense } from "react";
-import { useRouter } from "next/navigation";
-import { ArrowRight, Shield, BarChart3, Users, Lock, MapPin } from "lucide-react";
+
+import { Shield, MapPin } from "lucide-react";
 import { Button } from "../ui/button";
 import { motion } from "motion/react";
-import { routePaths } from "../../routes";
 import { setSessionContext } from "../../lib/session";
 import { datadog } from "../../lib/datadog";
 import Image from "next/image";
 import { useContactModal } from "../providers/ContactModalProvider";
+
+import { SolutionSwitcher } from "./SolutionSwitcher";
 
 // Porting ObjectionsSection later or keeping as lazy for now
 const ObjectionsSection = lazy(() =>
@@ -17,35 +18,9 @@ const ObjectionsSection = lazy(() =>
 );
 
 export function HomeClient() {
-  const router = useRouter();
   const { openModal } = useContactModal();
 
-  const servicePillars = [
-    {
-      icon: <Shield className="w-8 h-8 text-brand-copper" aria-hidden="true" />,
-      title: "Managed IT",
-      desc: "Cloud-native infrastructure that just works. No downtime, just uptime.",
-      link: routePaths.managedIt,
-    },
-    {
-      icon: <BarChart3 className="w-8 h-8 text-brand-copper" aria-hidden="true" />,
-      title: "Brand Growth",
-      desc: "Making your products billboard-ready with enterprise-grade strategy.",
-      link: routePaths.growth,
-    },
-    {
-      icon: <Lock className="w-8 h-8 text-brand-copper" aria-hidden="true" />,
-      title: "Family Protection",
-      desc: "Closing the home-office security gap to keep your family safe.",
-      link: routePaths.familyProtection,
-    },
-    {
-      icon: <Users className="w-8 h-8 text-brand-copper" aria-hidden="true" />,
-      title: "Fractional Leadership",
-      desc: "Your own CIO/CMO at an SMB price. Strategy without the salary cap.",
-      link: routePaths.fractionalLeadership,
-    },
-  ];
+
 
   return (
     <div className="w-full">
@@ -93,12 +68,24 @@ export function HomeClient() {
                   openModal("sales");
                 }}
                 className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 h-14 rounded-md shadow-lg hover:shadow-xl transition-all w-fit"
+                withArrow
               >
                 Get Started
               </Button>
-              <p className="text-sm text-gray-400">
-                Join 200+ businesses secured by Humaneers. No credit card required.
-              </p>
+
+              <div className="mt-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 flex items-center gap-4 max-w-md shadow-2xl">
+                <div className="bg-brand-copper/20 p-2 rounded-full border border-brand-copper/30">
+                  <Shield className="text-brand-copper w-6 h-6" aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="text-white font-bold text-base leading-tight shadow-black drop-shadow-sm">
+                    Trusted by 200+ businesses
+                  </p>
+                  <p className="text-white/70 text-xs font-medium">
+                    Invitation-only heritage. Now open to all.
+                  </p>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -121,32 +108,9 @@ export function HomeClient() {
             <h2 className="text-4xl font-bold text-brand-oxford">Everything You Need to Grow</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {servicePillars.map((pillar, index) => (
-              <motion.div
-                key={pillar.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                onClick={() => {
-                  setSessionContext({ lastViewedService: pillar.title });
-                  router.push(pillar.link);
-                }}
-                className="bg-white p-8 rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 border-b-4 border-transparent hover:border-brand-copper group cursor-pointer"
-              >
-                <div className="mb-6 bg-brand-cream w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  {pillar.icon}
-                </div>
-                <h3 className="text-xl font-bold text-brand-oxford mb-3">{pillar.title}</h3>
-                <p className="text-brand-slate leading-relaxed text-sm">{pillar.desc}</p>
-                <div className="mt-6 flex items-center text-brand-copper font-medium text-sm group-hover:gap-2 transition-all cursor-pointer">
-                  Learn more <ArrowRight size={16} className="ml-1" aria-hidden="true" />
-                </div>
-              </motion.div>
-            ))}
-          </div>
+
+          <SolutionSwitcher />
+
         </div>
       </section>
 
