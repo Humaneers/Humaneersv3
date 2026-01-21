@@ -145,7 +145,7 @@ export async function createLead(data: SalesContact) {
     Company: data.company || "Household",
     Phone: data.phone,
     Description: `[Web Inquiry] ${data.description}\n\nContext: ${JSON.stringify(data.utm || {})}`,
-    Lead_Source: "Web Site",
+    Lead_Source: data.source || "Web Site",
     // Custom Fields for Attribution
     Referrer: data.referrer,
     GCLID: data.utm?.gclid,

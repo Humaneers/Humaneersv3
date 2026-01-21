@@ -35,7 +35,7 @@ export function EthicsClient() {
                   <p className="text-brand-slate leading-relaxed">
                     We exist to bring enterprise-grade discipline and security to the small
                     businesses that power our community. We believe that robust technology
-                    infrastructure is a right, not a luxury reserved for the Fortune 500.
+                    infrastructure is a right, not a luxury reserved for the global enterprise.
                   </p>
                 </div>
 

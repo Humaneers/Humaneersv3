@@ -3,15 +3,18 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { setSessionContext } from "../../lib/session";
-import { Check, Shield, BarChart3, Users, Lock, Clock, Heart } from "lucide-react";
+import { Check, Shield, BarChart3, Users, Lock, Clock, Heart, Award, Zap, ChevronDown, MessageSquare } from "lucide-react";
+import Image from "next/image";
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
 import { DefinitionTooltip } from "../DefinitionTooltip";
 import { routePaths } from "../../routes";
+import { useContactModal } from "../providers/ContactModalProvider";
 
 export function PricingClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { openModal } = useContactModal();
 
   // Get mode from URL params, default to business
   const modeParam =
@@ -177,6 +180,23 @@ export function PricingClient() {
         ? nonprofitTiers
         : businessTiers;
 
+  const faqs = [
+    {
+      question: "What counts as a 'User'?",
+      answer: "A user is a human being with a unique account. We don't charge for service accounts (like 'info@') or inactive shared mailboxes.",
+    },
+    {
+      question: "Can I upgrade or downgrade my plan?",
+      answer: "Yes, you can change your plan at the beginning of any billing cycle. There are no long-term lock-ins for our standard tiers.",
+    },
+    {
+      question: "Do you offer emergency support?",
+      answer: "Absolutely. Growth and Scale tiers include priority support, while our Hourly Packs can be used for urgent crisis response if we have capacity.",
+    },
+  ];
+
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
   return (
     <div className="bg-brand-cream min-h-screen py-12 md:py-24">
       <div className="container mx-auto px-6">
@@ -187,10 +207,7 @@ export function PricingClient() {
           <p className="text-lg text-brand-slate mb-6">
             Choose the plan that fits your stage of business or life.
           </p>
-          <div className="text-sm text-gray-500 mb-10 max-w-2xl mx-auto italic">
-            Note: "Users" are humans that have user accounts. In certain circumstances, the per-user
-            seat cost of additional devices or services may be added to your plan.
-          </div>
+
 
           <div className="inline-flex bg-gray-100/50 p-1.5 rounded-xl shadow-inner border border-gray-200/50 mb-10 relative overflow-hidden w-full max-w-xl mx-auto">
             <div className="grid grid-cols-3 w-full gap-2 relative z-10">
@@ -199,11 +216,10 @@ export function PricingClient() {
                   setPricingMode("business");
                   setSessionContext({ segment: "business" });
                 }}
-                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
-                  pricingMode === "business"
-                    ? "text-white"
-                    : "text-brand-slate hover:text-brand-oxford"
-                }`}
+                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "business"
+                  ? "text-white"
+                  : "text-brand-slate hover:text-brand-oxford"
+                  }`}
               >
                 {pricingMode === "business" && (
                   <motion.div
@@ -222,11 +238,10 @@ export function PricingClient() {
                   setPricingMode("household");
                   setSessionContext({ segment: "family" });
                 }}
-                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
-                  pricingMode === "household"
-                    ? "text-white"
-                    : "text-brand-slate hover:text-brand-copper"
-                }`}
+                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "household"
+                  ? "text-white"
+                  : "text-brand-slate hover:text-brand-copper"
+                  }`}
               >
                 {pricingMode === "household" && (
                   <motion.div
@@ -245,11 +260,10 @@ export function PricingClient() {
                   setPricingMode("nonprofit");
                   setSessionContext({ segment: "nonprofit" });
                 }}
-                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
-                  pricingMode === "nonprofit"
-                    ? "text-white"
-                    : "text-brand-slate hover:text-brand-oxford"
-                }`}
+                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "nonprofit"
+                  ? "text-white"
+                  : "text-brand-slate hover:text-brand-oxford"
+                  }`}
               >
                 {pricingMode === "nonprofit" && (
                   <motion.div
@@ -276,38 +290,46 @@ export function PricingClient() {
         )}
 
         <div
-          className={`grid gap-8 mx-auto ${
-            currentTiers.length === 1
-              ? "max-w-md grid-cols-1"
-              : currentTiers.length === 2
-                ? "max-w-4xl grid-cols-1 md:grid-cols-2"
-                : currentTiers.length === 3
-                  ? "max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-                  : "max-w-7xl grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
-          }`}
+          className={`grid gap-8 mx-auto ${currentTiers.length === 1
+            ? "max-w-md grid-cols-1"
+            : currentTiers.length === 2
+              ? "max-w-4xl grid-cols-1 md:grid-cols-2"
+              : currentTiers.length === 3
+                ? "max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                : "max-w-7xl grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+            }`}
         >
           {currentTiers.map((tier, index) => {
             const handleTierClick = () => {
-              let interest = "Managed IT Services";
-              if (
-                tier.name.includes("Personal") ||
-                tier.name.includes("Family") ||
-                tier.name.includes("Solo") ||
-                tier.name.includes("Senior")
-              ) {
-                interest = "Personal/Family IT";
-              } else if (tier.name === "Scale") {
-                interest = "Fractional Leadership";
+              const tierName = tier.name;
+              const source = `Pricing Page - ${tierName} Tier`;
+              let message = `I am interested in the ${tierName} plan. `;
+
+              if (tierName === "Foundation") {
+                message += "We need essential IT and security for our small team.";
+              } else if (tierName === "Growth") {
+                message += "We are ready to scale our brand and operations.";
+              } else if (tierName === "Scale") {
+                message += "We need full enterprise power and strategic leadership.";
+              } else if (tierName === "Solo / Personal") {
+                message += "I need help with domain and email management.";
+              } else if (tierName === "Personal Foundation") {
+                message += "I want to secure my household and devices.";
+              } else if (tierName === "Senior Care") {
+                message += "I am looking for dignified support and fraud protection for my family members.";
+              } else if (tierName === "Personal Estate") {
+                message += "I need a digital concierge for my smart home.";
+              } else if (tierName === "Nonprofit Foundation") {
+                message += "We are a nonprofit looking for flat-rate service and donor data protection.";
               }
-              // use query param for interest in Next.js for better DX or context
-              router.push(`${routePaths.talkToSales}?interest=${encodeURIComponent(interest)}`);
+
+              openModal("sales", message, source);
             };
 
-            const buttonClasses = `w-full py-6 text-lg font-medium shadow-md transition-all ${
-              tier.highlighted
-                ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-lg"
-                : "bg-brand-copper hover:bg-brand-copper-dark text-white"
-            }`;
+            const buttonClasses = `w-full py-6 text-lg font-bold shadow-md transition-all rounded-xl ${tier.highlighted
+              ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-xl hover:-translate-y-1"
+              : "bg-white border-2 border-brand-oxford text-brand-oxford hover:bg-brand-oxford hover:text-white"
+              }`;
 
             return (
               <motion.div
@@ -315,15 +337,14 @@ export function PricingClient() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`relative bg-white rounded-2xl transition-all duration-300 flex flex-col h-full ${
-                  tier.highlighted
-                    ? "shadow-2xl ring-1 ring-brand-copper z-10"
-                    : "shadow-lg hover:shadow-xl border border-gray-100"
-                }`}
+                className={`relative bg-white rounded-2xl transition-all duration-300 flex flex-col h-full ${tier.highlighted
+                  ? "shadow-2xl ring-1 ring-brand-copper z-10"
+                  : "shadow-lg hover:shadow-xl border border-gray-100"
+                  }`}
               >
                 {tier.highlighted && (
-                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-brand-copper text-white px-4 py-1 rounded-full text-sm font-bold shadow-sm uppercase tracking-wider">
-                    Most Popular
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-brand-copper text-white px-6 py-1.5 rounded-full text-xs font-black shadow-lg uppercase tracking-widest flex items-center gap-2">
+                    <Award size={14} /> Most Popular
                   </div>
                 )}
                 <div className="p-8 flex-grow flex flex-col">
@@ -366,14 +387,39 @@ export function PricingClient() {
                   </div>
                 </div>
 
-                <div className="p-8 bg-gray-50 pt-0 mt-auto">
+                <div className="p-8 bg-gray-50/50 pt-0 mt-auto rounded-b-2xl">
                   <Button onClick={handleTierClick} className={buttonClasses}>
-                    {tier.cta}
+                    {tier.name === "Foundation" ? "Secure My Team" :
+                      tier.name === "Scale" ? "Book Strategy Session" :
+                        tier.name === "Senior Care" ? "Protect My Parents" :
+                          tier.name === "Personal Estate" ? "Get Concierge" :
+                            tier.cta}
                   </Button>
                 </div>
               </motion.div>
             );
           })}
+        </div>
+
+        <div className="mt-8 text-center text-xs text-gray-400 italic max-w-2xl mx-auto">
+          Definitions & Precision: We define a "User" as a unique human with an active account.
+          While our pricing is built for simplicity, specialized third-party licensing or
+          complex multi-device deployments may occasionally require adjustments to per-seat costs.
+        </div>
+
+        {/* --- Trust Strip --- */}
+        <div className="mt-24 border-y border-gray-200 py-12">
+          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-50 grayscale transition-all hover:grayscale-0">
+            <div className="flex items-center gap-2 text-brand-oxford font-serif text-xl border-r pr-12 border-gray-200">
+              <Shield className="text-brand-copper" /> Security First
+            </div>
+            <div className="flex items-center gap-2 text-brand-oxford font-serif text-xl border-r pr-12 border-gray-200">
+              <Zap className="text-brand-copper" /> Rapid Response
+            </div>
+            <div className="flex items-center gap-2 text-brand-oxford font-serif text-xl">
+              <Users className="text-brand-copper" /> Human Experts
+            </div>
+          </div>
         </div>
 
         <div className="mt-20 max-w-4xl mx-auto">
@@ -434,7 +480,11 @@ export function PricingClient() {
                 <Button
                   onClick={() => {
                     setSessionContext({ entrySource: "Pricing Page - Hourly Pack" });
-                    router.push(`${routePaths.talkToSales}?interest=Hourly%20Support`);
+                    openModal(
+                      "sales",
+                      "I'm interested in purchasing a 10-hour pack of support/strategy hours.",
+                      "Pricing Page - Hourly Pack"
+                    );
                   }}
                   className="bg-white text-brand-oxford hover:bg-gray-100 px-8 py-3 font-bold"
                 >
@@ -445,24 +495,75 @@ export function PricingClient() {
           </div>
         </div>
 
-        <div className="mt-20 text-center">
-          <h3 className="text-2xl font-bold text-brand-oxford mb-6">
+        {/* --- FAQ Section --- */}
+        <div className="mt-24 max-w-3xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-brand-oxford mb-4">Pricing FAQ</h2>
+            <p className="text-brand-slate">Common questions about our plans and services.</p>
+          </div>
+          <div className="space-y-4">
+            {faqs.map((faq, i) => (
+              <div key={i} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+                >
+                  <span className="font-bold text-brand-oxford">{faq.question}</span>
+                  <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${openFaq === i ? "rotate-180" : ""}`} />
+                </button>
+                {openFaq === i && (
+                  <div className="px-6 pb-6 text-brand-slate animate-in fade-in slide-in-from-top-2 duration-200">
+                    {faq.answer}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-24 text-center">
+          <h3 className="text-3xl font-bold text-brand-oxford mb-6">
             Need a custom enterprise solution?
           </h3>
-          <p className="text-brand-slate mb-8 max-w-2xl mx-auto">
+          <p className="text-brand-slate mb-12 max-w-2xl mx-auto text-lg">
             We work with larger organizations to build custom infrastructure and growth plans.
           </p>
-          <Button
-            variant="outline"
-            onClick={() =>
-              router.push(
-                `${routePaths.talkToSales}?source=Pricing%20Page%20Enterprise%20CTA&interest=Enterprise%20Plan`
-              )
-            }
-            className="border-brand-oxford text-brand-oxford hover:bg-brand-oxford hover:text-white px-8 py-3"
-          >
-            Contact Sales
-          </Button>
+
+          <div className="bg-white rounded-3xl shadow-xl overflow-hidden max-w-4xl mx-auto flex flex-col md:flex-row items-center border border-gray-100">
+            <div className="w-full md:w-1/3 relative h-64 md:h-auto self-stretch">
+              <Image
+                src="/team/lead_strategist.png"
+                alt="Lead Strategist"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="p-10 md:p-12 text-left flex-grow">
+              <MessageSquare className="w-10 h-10 text-brand-copper/20 mb-6" />
+              <blockquote className="text-xl italic text-brand-oxford mb-8">
+                "We don't just manage servers; we protect the people running them. Let's build a plan that fits your culture."
+              </blockquote>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-bold text-brand-oxford">Sarah Chen</p>
+                  <p className="text-sm text-gray-500">Lead Technology Strategist</p>
+                </div>
+                <Button
+                  variant="outline"
+                  onClick={() =>
+                    openModal(
+                      "sales",
+                      "I'm interested in a custom enterprise solution or a strategic partnership.",
+                      "Pricing Page Enterprise CTA"
+                    )
+                  }
+                  className="border-brand-oxford text-brand-oxford hover:bg-brand-oxford hover:text-white px-8 py-6 font-bold"
+                >
+                  Contact Strategic Sales
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

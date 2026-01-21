@@ -181,16 +181,23 @@ export const ctaLinks = {
 
 export const footerSections = [
   {
-    title: "Services",
+    title: "Expertise",
     items: [
-      { label: "View All Services", to: routePaths.services },
       { label: "Managed IT", to: routePaths.managedIt },
-      { label: "Brand Growth", to: routePaths.growth },
-      { label: "Family Protection", to: routePaths.familyProtection },
+      { label: "Infrastructure", to: routePaths.managedIt },
+      { label: "Cybersecurity", to: routePaths.familyProtection },
       { label: "Fractional Leadership", to: routePaths.fractionalLeadership },
-      { label: "Nonprofits", to: routePaths.nonProfits },
-      { label: "Senior Care", to: routePaths.seniorCare },
       { label: "Crisis Management", to: routePaths.crisisManagement },
+    ],
+  },
+  {
+    title: "Solutions",
+    items: [
+      { label: "Startups & Growth", to: routePaths.growth },
+      { label: "Family Protection", to: routePaths.familyProtection },
+      { label: "Nonprofit Support", to: routePaths.nonProfits },
+      { label: "Senior Care", to: routePaths.seniorCare },
+      { label: "Regulated Industries", to: routePaths.industries },
     ],
   },
   {
@@ -198,9 +205,9 @@ export const footerSections = [
     items: [
       { label: "About Us", to: routePaths.about },
       { label: "Pricing", to: routePaths.pricing },
-      { label: "Resources", to: routePaths.resources },
-      { label: "Client Care", to: routePaths.clientCare },
-      { label: "Contact", to: routePaths.contact },
+      { label: "Ethics Charter", to: routePaths.ethics },
+      { label: "Colophon", to: routePaths.colophon },
+      { label: "Contact Us", to: routePaths.contact },
     ],
   },
 ];

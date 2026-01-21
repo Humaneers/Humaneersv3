@@ -8,7 +8,8 @@ interface ContactModalContextType {
   isOpen: boolean;
   activeTab: ModalTab;
   prefillMessage: string;
-  openModal: (tab?: ModalTab, message?: string) => void;
+  source: string;
+  openModal: (tab?: ModalTab, message?: string, source?: string) => void;
   closeModal: () => void;
 }
 
@@ -18,21 +19,24 @@ export function ContactModalProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<ModalTab>("sales");
   const [prefillMessage, setPrefillMessage] = useState("");
+  const [source, setSource] = useState("ContactModal");
 
-  const openModal = (tab: ModalTab = "sales", message: string = "") => {
+  const openModal = (tab: ModalTab = "sales", message: string = "", source: string = "ContactModal") => {
     setActiveTab(tab);
     setPrefillMessage(message);
+    setSource(source);
     setIsOpen(true);
   };
 
   const closeModal = () => {
     setIsOpen(false);
     setPrefillMessage("");
+    setSource("ContactModal");
   };
 
   return (
     <ContactModalContext.Provider
-      value={{ isOpen, activeTab, prefillMessage, openModal, closeModal }}
+      value={{ isOpen, activeTab, prefillMessage, source, openModal, closeModal }}
     >
       {children}
     </ContactModalContext.Provider>
