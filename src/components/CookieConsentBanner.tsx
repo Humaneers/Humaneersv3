@@ -32,8 +32,8 @@ export function CookieConsentBanner() {
         <div className="flex gap-3 items-center">
           <Button
             onClick={declineConsent}
-            variant="outline"
-            className="border-gray-500 text-gray-300 hover:bg-gray-800 hover:text-white"
+            variant="ghost"
+            className="text-gray-300 hover:text-white hover:bg-white/10 border border-white/20"
           >
             Decline
           </Button>

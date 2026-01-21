@@ -17,7 +17,7 @@ interface FormStatus {
 
 // --- Sales Form ---
 function SalesForm() {
-  const { prefillMessage } = useContactModal();
+  const { prefillMessage, source } = useContactModal();
   const [status, setStatus] = useState<FormStatus>({ state: "idle" });
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -38,7 +38,7 @@ function SalesForm() {
       company: formData.get("company")?.toString() || "",
       description: formData.get("description")?.toString() || "",
       honeypot: formData.get("website_url_hp")?.toString() || "",
-      source: "ContactModal",
+      source: source || "ContactModal",
       path: window.location.pathname,
     };
 

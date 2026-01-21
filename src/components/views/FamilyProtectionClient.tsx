@@ -22,7 +22,7 @@ export function FamilyProtectionClient() {
     {
       icon: <Lock className="w-8 h-8" />,
       title: "Enterprise Endpoint Protection",
-      desc: "The same CrowdStrike/SentinelOne agents used by Fortune 500s, deployed on your family Macs and PCs.",
+      desc: "The same CrowdStrike/SentinelOne agents used by global enterprise teams, deployed on your family Macs and PCs.",
       moreInfo: "Zero-day threat prevention.",
     },
     {

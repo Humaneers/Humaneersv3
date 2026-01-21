@@ -41,7 +41,7 @@ export function PersonalClient() {
             <h2 className="text-3xl font-bold text-brand-oxford mb-6">The "Pro" Stack</h2>
             <p className="text-brand-slate text-lg">
               Stop using @gmail.com and hoping your hard drive doesn't crash. We set you up with the
-              same tools Fortune 500 CEOs use, scaled down to a single user price.
+              same tools global enterprise executives use, scaled down to a single user price.
             </p>
           </div>
 
