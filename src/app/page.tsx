@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { Suspense } from "react";
 import { PageLoader } from "../components/PageLoader";
-import { HomeClient } from "../components/views/HomeClient";
+import { HomeClient } from "@/features/home/HomeClient";
 import { StructuredData, schemas } from "../components/StructuredData";
 
 export const metadata: Metadata = {

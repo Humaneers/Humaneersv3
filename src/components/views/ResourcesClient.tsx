@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Button } from "../ui/button";
 
 import {
@@ -124,10 +125,11 @@ export function ResourcesClient() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${activeTab === tab
-                  ? "bg-brand-oxford text-white shadow-sm"
-                  : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
-                  }`}
+                className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
+                  activeTab === tab
+                    ? "bg-brand-oxford text-white shadow-sm"
+                    : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
+                }`}
               >
                 {tab}
               </button>
@@ -193,14 +195,12 @@ export function ResourcesClient() {
                   <div className="w-2 h-2 rounded-full bg-green-500"></div>
                   <span className="font-medium text-brand-oxford">System Status</span>
                 </div>
-                <a
-                  href="https://status.humaneers.dev/"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/status"
                   className="text-sm font-medium text-brand-copper hover:text-brand-copper-dark"
                 >
                   Check Status →
-                </a>
+                </Link>
               </div>
               <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100">
                 <div className="flex items-center gap-3">

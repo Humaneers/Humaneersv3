@@ -15,8 +15,7 @@ export function PersonalClient() {
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80')] opacity-10 bg-cover bg-center mix-blend-overlay"></div>
         <div className="container mx-auto px-6 relative z-10 text-center">
           <h1 className="text-4xl md:text-7xl font-bold mb-6 leading-tight">
-            Powerful Tools for the
-            <br />
+            Powerful Tools for the <br />
             <span className="text-brand-cream font-extrabold">Company of One.</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">
@@ -146,7 +145,9 @@ export function PersonalClient() {
             </div>
             <div className="bg-white p-8 rounded-2xl shadow-xl transform rotate-2">
               <div className="flex items-center gap-4 mb-6 border-b border-gray-100 pb-4">
-                <div className="w-12 h-12 bg-gray-200 rounded-full"></div>
+                <div className="w-12 h-12 bg-brand-copper rounded-full flex items-center justify-center">
+                  <User className="w-6 h-6 text-white" />
+                </div>
                 <div>
                   <div className="font-bold text-brand-oxford">Support Ticket #2941</div>
                   <div className="text-xs text-green-700 font-bold uppercase">
@@ -154,8 +155,8 @@ export function PersonalClient() {
                   </div>
                 </div>
               </div>
-              <div className="space-y-4 text-sm">
-                <div className="bg-gray-100 p-3 rounded-lg rounded-tl-none self-start max-w-[80%]">
+              <div className="space-y-4 text-sm text-brand-oxford">
+                <div className="bg-gray-100 p-3 rounded-lg rounded-tl-none self-start max-w-[80%] text-brand-oxford">
                   Help! My laptop was stolen at the airport. It has all my client contracts on it.
                 </div>
                 <div className="bg-brand-copper text-white p-3 rounded-lg rounded-tr-none self-end max-w-[80%] ml-auto text-right">

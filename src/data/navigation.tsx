@@ -130,8 +130,7 @@ export const navSections: NavSection[] = [
       {
         title: "Service Status",
         description: "Real-time system performance and uptime.",
-        href: "https://status.humaneers.dev/",
-        external: true,
+        to: routePaths.status,
       },
       {
         title: "Support Portal",
@@ -226,7 +225,6 @@ export const footerMetaLinks: FooterMetaLink[] = [
   { label: "Colophon & Transparency", to: routePaths.colophon },
   {
     label: "System Status",
-    href: "https://status.humaneers.dev/",
-    external: true,
+    to: routePaths.status,
   },
 ];

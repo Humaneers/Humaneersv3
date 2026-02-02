@@ -15,18 +15,20 @@ export function CrisisManagementClient() {
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80')] opacity-20 bg-cover bg-center mix-blend-overlay"></div>
         <div className="container mx-auto px-6 relative z-10 text-center">
           <h1 className="text-4xl md:text-7xl font-bold mb-6 leading-tight">
-            Control the Narrative.
-            <br />
-            <span className="text-red-500">Erase the Noise.</span>
+            Reputation Assurance. <br />
+            <span className="text-brand-copper">Control the Narrative.</span>
           </h1>
           <p className="text-xl md:text-2xl text-stone-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">
             When the internet turns against you, we turn it off. Digital scrubbing, search
-            suppression, and counter-narrative strategy for high-profile individuals and brands.
+            suppression, and strategic communications. Historically, these capabilities were
+            reserved for Fortune 500s. We bring them to you.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
-              onClick={() => router.push(`${routePaths.talkToSales}?interest=Crisis%20Management`)}
-              className="bg-red-600 hover:bg-red-700 text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg border-2 border-red-500"
+              onClick={() =>
+                router.push(`${routePaths.talkToSales}?interest=Reputation%20Management`)
+              }
+              className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg border-2 border-brand-copper"
               withArrow
             >
               Confidential Consultation
@@ -44,12 +46,12 @@ export function CrisisManagementClient() {
           <div className="grid md:grid-cols-2 gap-16">
             <div>
               <h2 className="text-3xl font-bold text-brand-oxford mb-6">
-                "It Will Blow Over" is a Lie.
+                Your Reputation is an Asset.
               </h2>
               <p className="text-brand-slate text-lg mb-6">
                 The internet doesn't forget unless you make it. Negative press, mugshots, and
-                doxxing attacks stick to search results like glue, affecting investors, partners,
-                and family members.
+                doxxing attacks stick to search results like glue. Most small operators don't have
+                access to these tools—until now.
               </p>
               <p className="text-brand-slate text-lg">
                 We don't rely on "requesting removal" nicely. We use technical SEO suppression,
@@ -98,15 +100,15 @@ export function CrisisManagementClient() {
           <h2 className="text-3xl font-bold text-white mb-12 text-center">Who We Protect</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-stone-800 p-8 rounded-xl border border-stone-700">
-              <AlertTriangle className="w-10 h-10 text-red-500 mb-6" />
-              <h3 className="text-xl font-bold text-white mb-2">Actionable Threats</h3>
+              <AlertTriangle className="w-10 h-10 text-brand-copper mb-6" />
+              <h3 className="text-xl font-bold text-white mb-2">Active Threats</h3>
               <p className="text-stone-400">
                 Executives facing blackmail, active doxxing events, or physical security threats
                 originating online.
               </p>
             </div>
             <div className="bg-stone-800 p-8 rounded-xl border border-stone-700">
-              <History className="w-10 h-10 text-red-500 mb-6" />
+              <History className="w-10 h-10 text-brand-copper mb-6" />
               <h3 className="text-xl font-bold text-white mb-2">Legacy Issues</h3>
               <p className="text-stone-400">
                 Founders with old lawsuits, bankruptcy filings, or embarrassing college press that
@@ -114,7 +116,7 @@ export function CrisisManagementClient() {
               </p>
             </div>
             <div className="bg-stone-800 p-8 rounded-xl border border-stone-700">
-              <Fingerprint className="w-10 h-10 text-red-500 mb-6" />
+              <Fingerprint className="w-10 h-10 text-brand-copper mb-6" />
               <h3 className="text-xl font-bold text-white mb-2">Brand Attacks</h3>
               <p className="text-stone-400">
                 Companies facing coordinated "review bombing" or viral disinformation campaigns on
@@ -124,7 +126,9 @@ export function CrisisManagementClient() {
           </div>
           <div className="mt-16 text-center">
             <Button
-              onClick={() => router.push(`${routePaths.talkToSales}?interest=Crisis%20Management`)}
+              onClick={() =>
+                router.push(`${routePaths.talkToSales}?interest=Reputation%20Management`)
+              }
               className="bg-white text-stone-900 hover:bg-gray-200 text-lg px-10 py-4 h-auto rounded-full font-bold"
               withArrow
             >

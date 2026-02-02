@@ -15,8 +15,7 @@ export function SeniorCareClient() {
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1516307365426-bea591f05011?auto=format&fit=crop&q=80')] opacity-10 bg-cover bg-center mix-blend-overlay"></div>
         <div className="container mx-auto px-6 relative z-10 text-center">
           <h1 className="text-4xl md:text-7xl font-bold mb-6 leading-tight">
-            Technology with
-            <br />
+            Technology with <br />
             <span className="text-brand-copper">Dignity.</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">

@@ -248,6 +248,8 @@ function SalesForm() {
 
 // --- Support Form ---
 function SupportForm() {
+  const { source } = useContactModal();
+  const isRapidResponse = source?.includes("New Client") || source?.includes("Rapid Response");
   const [status, setStatus] = useState<FormStatus>({ state: "idle" });
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -263,14 +265,22 @@ function SupportForm() {
     const data = {
       contactName: formData.get("contactName")?.toString() || "",
       email: formData.get("email")?.toString() || "",
+      phone: formData.get("phone")?.toString() || "",
       subject: formData.get("subject")?.toString() || "",
       description: formData.get("description")?.toString() || "",
-      priority: formData.get("priority")?.toString() || "Medium",
+      priority: isRapidResponse ? "High" : formData.get("priority")?.toString() || "Medium",
+      context: isRapidResponse ? "new_client_critical" : "existing_client",
       honeypot: formData.get("website_url_hp")?.toString() || "",
     };
 
     // HIGH PRIORITY FIX: Validate required fields before API call
-    if (!data.contactName || !data.email || !data.subject || !data.description) {
+    if (
+      !data.contactName ||
+      !data.email ||
+      !data.subject ||
+      !data.description ||
+      (isRapidResponse && !data.phone)
+    ) {
       setStatus({
         state: "error",
         message: "Please fill in all required fields.",
@@ -383,19 +393,47 @@ function SupportForm() {
       </div>
 
       <div className="space-y-2">
+        <label htmlFor="support-phone" className="text-sm font-medium text-brand-oxford">
+          Phone Number{" "}
+          {isRapidResponse && (
+            <span className="text-red-600" aria-label="required">
+              *
+            </span>
+          )}
+        </label>
+        <Input
+          id="support-phone"
+          type="tel"
+          name="phone"
+          required={isRapidResponse}
+          aria-required={isRapidResponse}
+          aria-invalid={status.state === "error"}
+          className="bg-gray-50"
+          placeholder={isRapidResponse ? "Required for dispatch" : "Optional"}
+        />
+      </div>
+
+      <div className="space-y-2">
         <label htmlFor="priority" className="text-sm font-medium text-brand-oxford">
           Priority
         </label>
-        <select
-          id="priority"
-          name="priority"
-          defaultValue="Medium"
-          className="flex h-10 w-full rounded-md border border-input bg-gray-50 px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          <option value="Low">Low - General Question</option>
-          <option value="Medium">Medium - Issue with Service</option>
-          <option value="High">High - Critical / Outage</option>
-        </select>
+        {isRapidResponse ? (
+          <div className="flex h-10 w-full items-center rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-900 font-bold">
+            CRITICAL / HIGH - IMMEDIATE DEPLOYMENT
+            <input type="hidden" name="priority" value="High" />
+          </div>
+        ) : (
+          <select
+            id="priority"
+            name="priority"
+            defaultValue="Medium"
+            className="flex h-10 w-full rounded-md border border-input bg-gray-50 px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <option value="Low">Low - General Question</option>
+            <option value="Medium">Medium - Issue with Service</option>
+            <option value="High">High - Critical / Outage</option>
+          </select>
+        )}
       </div>
 
       <div className="space-y-2">
@@ -433,7 +471,11 @@ function SupportForm() {
           aria-describedby={status.state === "error" ? "support-form-error" : undefined}
           rows={4}
           className="flex w-full rounded-md border border-input bg-gray-50 px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-          placeholder="Please provide details..."
+          placeholder={
+            isRapidResponse
+              ? "Describe the active threat or outage..."
+              : "Please provide details..."
+          }
         />
       </div>
 
@@ -622,7 +664,9 @@ function NewsletterForm() {
 
 // --- Main Modal ---
 export function ContactModal() {
-  const { isOpen, activeTab, closeModal, openModal } = useContactModal();
+  const { isOpen, activeTab, closeModal, openModal, source } = useContactModal();
+
+  const isRapidResponse = source?.includes("New Client") || source?.includes("Rapid Response");
 
   // CIO Requirement: Security - Lock scrolling when open (Dialog handles this automatically)
   // CMO Requirement: Lazy load handled by Parent.
@@ -637,35 +681,52 @@ export function ContactModal() {
                 ? "Let's Build Your Strategy"
                 : activeTab === "newsletter"
                   ? "Stay Informed"
-                  : "How can we help?"}
+                  : isRapidResponse
+                    ? "Critical Incident Response"
+                    : "How can we help?"}
             </DialogTitle>
             <DialogDescription className="text-brand-cream/80">
               {activeTab === "sales"
                 ? "Tell us about your needs. We'll outline a plan."
                 : activeTab === "newsletter"
                   ? "Get the latest on IT security and strategy."
-                  : "Our support team is ready to assist you."}
+                  : isRapidResponse
+                    ? "Immediate deployment for mission-critical issues."
+                    : "Our support team is ready to assist you."}
             </DialogDescription>
           </DialogHeader>
         </div>
 
         <div className="p-6 bg-white">
-          <Tabs value={activeTab} onValueChange={(v) => openModal(v as any)} className="w-full">
+          <Tabs
+            value={activeTab}
+            onValueChange={(v) => openModal(v as "sales" | "support" | "newsletter")}
+            className="w-full"
+          >
             <TabsList className="grid w-full grid-cols-3 mb-6">
               <TabsTrigger value="sales">Sales</TabsTrigger>
               <TabsTrigger value="support">Support</TabsTrigger>
               <TabsTrigger value="newsletter">News</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="sales" className="mt-0 outline-none">
+            <TabsContent
+              value="sales"
+              className="mt-0 outline-none focus-visible:ring-2 focus-visible:ring-brand-copper rounded-md"
+            >
               <SalesForm />
             </TabsContent>
 
-            <TabsContent value="support" className="mt-0 outline-none">
+            <TabsContent
+              value="support"
+              className="mt-0 outline-none focus-visible:ring-2 focus-visible:ring-brand-copper rounded-md"
+            >
               <SupportForm />
             </TabsContent>
 
-            <TabsContent value="newsletter" className="mt-0 outline-none">
+            <TabsContent
+              value="newsletter"
+              className="mt-0 outline-none focus-visible:ring-2 focus-visible:ring-brand-copper rounded-md"
+            >
               <NewsletterForm />
             </TabsContent>
           </Tabs>

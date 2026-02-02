@@ -8,7 +8,7 @@ import { Textarea } from "./ui/textarea";
 import { Checkbox } from "./ui/checkbox";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "./ui/dialog";
 import { Loader2, ArrowRight, ArrowLeft } from "lucide-react";
-import { redirectToSalesBooking, validateSalesForm, type SalesFormData } from "../lib/cal";
+import { redirectToSalesBooking, validateSalesForm, type SalesFormData } from "@/lib/cal";
 import { toast } from "sonner";
 
 interface TalkToSalesModalProps {
@@ -29,7 +29,7 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
     employees: "",
     phone: "",
     budget: "",
-    interests: [] as string[],
+    interests: [],
     message: "",
   });
 
@@ -38,10 +38,10 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
   // Update form data when initialData changes
   useEffect(() => {
     if (open && initialData) {
-      setFormData((prev) => ({
+      setFormData((prev: SalesFormData) => ({
         ...prev,
         email: initialData.email || prev.email,
-        interests: initialData.interest ? [initialData.interest] : prev.interests,
+        interests: initialData.interest ? [initialData.interest] : prev.interests || [],
       }));
     }
   }, [open, initialData]);
@@ -90,14 +90,15 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev: SalesFormData) => ({ ...prev, [name]: value }));
   };
 
   const handleInterestChange = (interest: string) => {
-    setFormData((prev) => {
-      const interests = prev.interests.includes(interest)
-        ? prev.interests.filter((i) => i !== interest)
-        : [...prev.interests, interest];
+    setFormData((prev: SalesFormData) => {
+      const currentInterests = prev.interests || [];
+      const interests = currentInterests.includes(interest)
+        ? currentInterests.filter((i: string) => i !== interest)
+        : [...currentInterests, interest];
       return { ...prev, interests };
     });
   };
@@ -199,13 +200,14 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
             ) : (
               /* STEP 2: Details + Interests */
               <form onSubmit={handleFinalSubmit} className="space-y-5">
-                {initialData?.interest && formData.interests.includes(initialData.interest) && (
-                  <div className="bg-brand-cream border-2 border-brand-copper rounded-lg p-4 mb-4">
-                    <p className="text-sm text-brand-oxford">
-                      <strong>You're interested in:</strong> {initialData.interest}
-                    </p>
-                  </div>
-                )}
+                {initialData?.interest &&
+                  (formData.interests || []).includes(initialData.interest) && (
+                    <div className="bg-brand-cream border-2 border-brand-copper rounded-lg p-4 mb-4">
+                      <p className="text-sm text-brand-oxford">
+                        <strong>You're interested in:</strong> {initialData.interest}
+                      </p>
+                    </div>
+                  )}
 
                 <div className="space-y-2">
                   <Label htmlFor="role">
@@ -236,7 +238,7 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
                       <div key={item} className="flex items-center space-x-2">
                         <Checkbox
                           id={`modal-interest-${item}`}
-                          checked={formData.interests.includes(item)}
+                          checked={(formData.interests || []).includes(item)}
                           onCheckedChange={() => handleInterestChange(item)}
                         />
                         <label

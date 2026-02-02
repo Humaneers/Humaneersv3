@@ -209,3 +209,124 @@ html {
     scroll-behavior: auto !important;
   }
 }
+
+/* CRITICAL: Force navigation menu text visibility and override all presets */
+[data-slot="navigation-menu-content"] * {
+  color: inherit !important;
+}
+
+[data-slot="navigation-menu-link"] > div:first-child,
+[data-slot="navigation-menu-link"] .text-base {
+  color: #1e3a5f !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+[data-slot="navigation-menu-link"] > p,
+[data-slot="navigation-menu-link"] .text-sm {
+  color: #64748b !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+[data-slot="navigation-menu-viewport"] {
+  background-color: white !important;
+}
+
+/* OVERRIDE ALL NAVIGATION PRESETS - Maximum specificity */
+.navigation-menu-override [data-radix-navigation-menu-content],
+.navigation-menu-override [data-radix-navigation-menu-viewport],
+nav[data-radix-navigation-menu-root] [data-radix-navigation-menu-content],
+nav[data-radix-navigation-menu-root] [data-radix-navigation-menu-viewport],
+header nav [data-radix-navigation-menu-content],
+header nav [data-radix-navigation-menu-viewport] {
+  background-color: white !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  border-radius: 0.625rem !important;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Force brand cream color for featured navigation text - HIGHEST PRIORITY */
+.navigation-menu-override .text-brand-cream,
+nav[data-radix-navigation-menu-root] .text-brand-cream,
+header nav .text-brand-cream,
+.featured-nav-text,
+header .featured-nav-text,
+nav .featured-nav-text {
+  color: #f5f1e9 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Force brand oxford color for regular navigation text - HIGHEST PRIORITY */
+.navigation-menu-override .text-brand-oxford,
+nav[data-radix-navigation-menu-root] .text-brand-oxford,
+header nav .text-brand-oxford,
+.nav-item-title,
+header .nav-item-title,
+nav .nav-item-title {
+  color: #1b263b !important;
+  font-weight: 500 !important;
+}
+
+/* Force brand slate color for descriptions - HIGHEST PRIORITY */
+.navigation-menu-override .text-brand-slate,
+nav[data-radix-navigation-menu-root] .text-brand-slate,
+header nav .text-brand-slate,
+.nav-item-description,
+header .nav-item-description,
+nav .nav-item-description {
+  color: #4e596f !important;
+}
+
+/* Override any preset hover states */
+.navigation-menu-override a:hover,
+nav[data-radix-navigation-menu-root] a:hover,
+header nav a:hover {
+  background-color: #f3f4f6 !important;
+  transition: background-color 0.2s ease !important;
+}
+
+/* Force navigation trigger styles */
+.navigation-menu-override [data-radix-navigation-menu-trigger],
+nav[data-radix-navigation-menu-root] [data-radix-navigation-menu-trigger],
+header nav [data-radix-navigation-menu-trigger] {
+  background-color: transparent !important;
+  color: #d1d5db !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.navigation-menu-override [data-radix-navigation-menu-trigger]:hover,
+nav[data-radix-navigation-menu-root] [data-radix-navigation-menu-trigger]:hover,
+header nav [data-radix-navigation-menu-trigger]:hover {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.navigation-menu-override [data-radix-navigation-menu-trigger][data-state="open"],
+nav[data-radix-navigation-menu-root] [data-radix-navigation-menu-trigger][data-state="open"],
+header nav [data-radix-navigation-menu-trigger][data-state="open"] {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Ultimate override for any stubborn preset styles */
+html body header nav * {
+  font-family: inherit !important;
+}
+
+html body header nav .featured-nav-text {
+  color: #f5f1e9 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+html body header nav .nav-item-title {
+  color: #1b263b !important;
+  font-weight: 500 !important;
+}
+
+html body header nav .nav-item-description {
+  color: #4e596f !important;
+}

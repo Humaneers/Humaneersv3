@@ -74,13 +74,13 @@ export function ServicesClient() {
   const additionalServices = [
     {
       id: "crisis-management",
-      title: "Crisis Management",
+      title: "Reputation Management",
       icon: <AlertTriangle className="w-8 h-8 text-white" />,
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80",
       description: "Digital scrubbing and reputation defense.",
       features: ["SEO Suppression", "Digital Scrubbing", "Social Media Lockdown"],
       link: routePaths.crisisManagement,
-      color: "bg-red-900",
+      color: "bg-brand-oxford",
     },
     {
       id: "senior-care",
@@ -128,8 +128,7 @@ export function ServicesClient() {
             </span>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Comprehensive Services
-            <br />
+            Comprehensive Services <br />
             for Modern Growth.
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-8">

@@ -39,8 +39,7 @@ export function IndustriesClient() {
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80')] opacity-10 bg-cover bg-center mix-blend-overlay"></div>
         <div className="container mx-auto px-6 relative z-10 text-center">
           <h1 className="text-4xl md:text-7xl font-bold mb-6 leading-tight">
-            Compliance is Not
-            <br />
+            Compliance is Not <br />
             <span className="text-brand-copper">Optional.</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">

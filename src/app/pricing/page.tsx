@@ -56,7 +56,19 @@ const faqs = [
 export default function PricingPage() {
   return (
     <>
-      <StructuredData data={schemas.faqPage(faqs)} />
+      <StructuredData
+        data={[
+          schemas.faqPage(faqs),
+          schemas.service(
+            "IT Support Pricing",
+            "Transparent pricing for managed IT, family protection, and fractional leadership."
+          ),
+          schemas.breadcrumb([
+            { name: "Home", url: "https://humaneers.dev" },
+            { name: "Pricing", url: "https://humaneers.dev/pricing" },
+          ]),
+        ]}
+      />
       <Suspense fallback={<PageLoader />}>
         <PricingClient />
       </Suspense>

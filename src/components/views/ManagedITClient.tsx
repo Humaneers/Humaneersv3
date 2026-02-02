@@ -99,8 +99,7 @@ export function ManagedITClient() {
             </span>
           </div>
           <h1 className="text-4xl md:text-7xl font-bold mb-6 leading-tight">
-            Managed IT that Sleeps
-            <br />
+            Managed IT that Sleeps <br />
             <span className="text-brand-copper">So You Don't Have To.</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">

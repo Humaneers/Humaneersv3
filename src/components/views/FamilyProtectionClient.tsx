@@ -84,8 +84,7 @@ export function FamilyProtectionClient() {
             </span>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-            Enterprise Security,
-            <br />
+            Enterprise Security, <br />
             <span className="text-brand-copper">Now for Your Living Room.</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">

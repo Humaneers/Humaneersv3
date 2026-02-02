@@ -38,9 +38,13 @@ export function Header() {
 
     const content = (
       <>
-        <div className="text-sm font-medium leading-none text-brand-oxford">{item.title}</div>
+        <div className="text-sm font-medium leading-none text-brand-oxford nav-item-title">
+          {item.title}
+        </div>
         {item.description ? (
-          <p className="line-clamp-2 text-sm leading-snug text-brand-slate">{item.description}</p>
+          <p className="line-clamp-2 text-sm leading-snug text-brand-slate nav-item-description">
+            {item.description}
+          </p>
         ) : null}
       </>
     );
@@ -125,7 +129,7 @@ export function Header() {
         </Link>
 
         <div className="hidden md:flex flex-1 justify-center">
-          <NavigationMenu>
+          <NavigationMenu className="navigation-menu-override">
             <NavigationMenuList>
               {whoWeHelpSection && (
                 <NavigationMenuItem>
@@ -139,14 +143,18 @@ export function Header() {
                           <NavigationMenuLink asChild>
                             <Link
                               href={whoWeHelpSection.featured.to || "/"}
-                              className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-brand-copper/50 to-brand-oxford p-6 no-underline outline-none focus:shadow-md cursor-pointer"
+                              className="relative flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-brand-copper/50 to-brand-oxford p-6 no-underline outline-none focus:shadow-md cursor-pointer overflow-hidden"
                             >
-                              <div className="mb-2 mt-4 text-lg font-medium text-white">
-                                {whoWeHelpSection.featured.title}
+                              {/* Strong dark overlay for maximum text contrast */}
+                              <div className="absolute inset-0 bg-black/60 rounded-md"></div>
+                              <div className="relative z-10">
+                                <div className="mb-2 mt-4 text-lg font-bold text-brand-cream featured-nav-text drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] shadow-black">
+                                  {whoWeHelpSection.featured.title}
+                                </div>
+                                <p className="text-sm leading-tight text-brand-cream featured-nav-text drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] shadow-black font-medium">
+                                  {whoWeHelpSection.featured.description}
+                                </p>
                               </div>
-                              <p className="text-sm leading-tight text-white/90">
-                                {whoWeHelpSection.featured.description}
-                              </p>
                             </Link>
                           </NavigationMenuLink>
                         </li>
@@ -222,14 +230,18 @@ export function Header() {
                           <NavigationMenuLink asChild>
                             <Link
                               href={companySection.featured.to || "/"}
-                              className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-br from-brand-oxford to-brand-oxford-deep p-6 no-underline outline-none focus:shadow-md cursor-pointer border border-brand-copper/20"
+                              className="relative flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-br from-brand-oxford to-brand-oxford-deep p-6 no-underline outline-none focus:shadow-md cursor-pointer border border-brand-copper/20 overflow-hidden"
                             >
-                              <div className="mb-2 mt-4 text-lg font-medium text-white">
-                                {companySection.featured.title}
+                              {/* Strong dark overlay for maximum text contrast */}
+                              <div className="absolute inset-0 bg-black/50 rounded-md"></div>
+                              <div className="relative z-10">
+                                <div className="mb-2 mt-4 text-lg font-bold text-brand-cream featured-nav-text drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] shadow-black">
+                                  {companySection.featured.title}
+                                </div>
+                                <p className="text-sm leading-tight text-brand-cream featured-nav-text drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] shadow-black font-medium">
+                                  {companySection.featured.description}
+                                </p>
                               </div>
-                              <p className="text-sm leading-tight text-gray-400">
-                                {companySection.featured.description}
-                              </p>
                             </Link>
                           </NavigationMenuLink>
                         </li>
@@ -294,9 +306,11 @@ const ListItem = forwardRef<
               className
             )}
           >
-            <div className="text-sm font-medium leading-none text-brand-oxford">{item.title}</div>
+            <div className="text-sm font-medium leading-none text-brand-oxford nav-item-title">
+              {item.title}
+            </div>
             {item.description && (
-              <p className="line-clamp-2 text-sm leading-snug text-brand-slate">
+              <p className="line-clamp-2 text-sm leading-snug text-brand-slate nav-item-description">
                 {item.description}
               </p>
             )}
@@ -310,9 +324,11 @@ const ListItem = forwardRef<
               className
             )}
           >
-            <div className="text-sm font-medium leading-none text-brand-oxford">{item.title}</div>
+            <div className="text-sm font-medium leading-none text-brand-oxford nav-item-title">
+              {item.title}
+            </div>
             {item.description && (
-              <p className="line-clamp-2 text-sm leading-snug text-brand-slate">
+              <p className="line-clamp-2 text-sm leading-snug text-brand-slate nav-item-description">
                 {item.description}
               </p>
             )}

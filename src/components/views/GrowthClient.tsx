@@ -92,8 +92,7 @@ export function GrowthClient() {
             </span>
           </div>
           <h1 className="text-4xl md:text-7xl font-bold mb-6 leading-tight">
-            Make Your Brand
-            <br />
+            Make Your Brand <br />
             <span className="text-brand-copper">Impossible to Ignore.</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">

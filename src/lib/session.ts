@@ -6,7 +6,7 @@
  */
 
 export interface SessionContext {
-  segment?: "business" | "family" | "nonprofit";
+  segment?: "business" | "family" | "nonprofit" | "venture";
   landingPage?: string;
   referrer?: string;
   lastViewedService?: string;

@@ -24,7 +24,7 @@ export function HomeClient() {
       <div
         className="fixed inset-0 pointer-events-none z-50 mix-blend-overlay opacity-[0.03] select-none"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
         }}
       />
 
@@ -97,7 +97,7 @@ export function HomeClient() {
 
       <div className="bg-brand-copper text-white py-6 relative z-20 shadow-md">
         <div className="container mx-auto px-6 text-center font-medium text-lg tracking-wide">
-          No user minimums. No offshore NOCs. 100% US-based engineering.
+          No user minimums. No offshore NOCs. 100% US-Based engineering.
         </div>
       </div>
 
@@ -112,9 +112,7 @@ export function HomeClient() {
             <h2 className="text-4xl font-bold text-brand-oxford">Everything You Need to Grow</h2>
           </div>
 
-
           <SolutionSwitcher />
-
         </div>
       </section>
 
@@ -130,14 +128,14 @@ export function HomeClient() {
                 to be 100% US-based. Your data never leaves domestic soil without your explicit
                 permission.
               </p>
-              <div className="flex gap-4">
-                <div className="bg-brand-cream px-4 py-2 rounded border border-gray-200 flex items-center gap-2 font-semibold text-brand-oxford">
+              <div className="flex flex-wrap gap-4">
+                <div className="bg-white/60 backdrop-blur-md px-4 py-3 rounded-xl border border-white/40 flex items-center gap-2 font-bold text-brand-oxford shadow-sm transition-all hover:bg-white/80">
                   <Shield size={18} className="text-brand-copper" aria-hidden="true" /> SOC 2
                   Compliant
                 </div>
-                <div className="bg-brand-cream px-4 py-2 rounded border border-gray-200 flex items-center gap-2 font-semibold text-brand-oxford">
+                <div className="bg-white/60 backdrop-blur-md px-4 py-3 rounded-xl border border-white/40 flex items-center gap-2 font-bold text-brand-oxford shadow-sm transition-all hover:bg-white/80">
                   <MapPin size={18} className="text-brand-copper" aria-hidden="true" /> 100%
-                  US-based
+                  US-Based
                 </div>
               </div>
             </div>

@@ -40,7 +40,7 @@ function getDatadogConfig(): DatadogConfig | null {
   // Datadog is optional - gracefully degrade if not configured
   if (!applicationId || !clientToken) {
     if (process.env.NODE_ENV === "development") {
-      console.info(
+      console.warn(
         "[Datadog] RUM not configured. Set NEXT_PUBLIC_DATADOG_APPLICATION_ID and NEXT_PUBLIC_DATADOG_CLIENT_TOKEN to enable monitoring."
       );
     }
@@ -81,7 +81,7 @@ export function initDatadog(userConsent: boolean): void {
 
   if (!userConsent) {
     if (process.env.NODE_ENV === "development") {
-      console.info("[Datadog] User has not consented to tracking. RUM disabled.");
+      console.warn("[Datadog] User has not consented to tracking. RUM disabled.");
     }
     return;
   }
@@ -123,8 +123,9 @@ export function initDatadog(userConsent: boolean): void {
           const phoneRegex = /\b\d{3}[-.]?\d{3}[-.]?\d{4}\b/g;
           const ssnRegex = /\b\d{3}-\d{2}-\d{4}\b/g;
 
-          if ((event.error as any)?.message) {
-            (event.error as any).message = (event.error as any).message
+          if (event.error && typeof event.error === "object" && "message" in event.error) {
+            const errorObj = event.error as { message: string };
+            errorObj.message = errorObj.message
               .replace(emailRegex, "[EMAIL_REDACTED]")
               .replace(phoneRegex, "[PHONE_REDACTED]")
               .replace(ssnRegex, "[SSN_REDACTED]");
@@ -139,7 +140,7 @@ export function initDatadog(userConsent: boolean): void {
     datadogRum.startSessionReplayRecording();
 
     if (process.env.NODE_ENV === "development") {
-      console.info("[Datadog] RUM initialized successfully", {
+      console.warn("[Datadog] RUM initialized successfully", {
         service: config.service,
         env: config.env,
         version: config.version,

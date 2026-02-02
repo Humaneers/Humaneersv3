@@ -87,8 +87,7 @@ export function FractionalLeadershipClient() {
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80')] opacity-10 bg-cover bg-center mix-blend-overlay"></div>
         <div className="container mx-auto px-6 relative z-10 text-center">
           <h1 className="text-4xl md:text-7xl font-bold mb-6 leading-tight">
-            Executive Strategy.
-            <br />
+            Executive Strategy. <br />
             <span className="text-brand-copper">Fractional Cost.</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">
@@ -147,7 +146,7 @@ export function FractionalLeadershipClient() {
                 Consultants give you a binder and leave. Fractional Leaders own the number. We take
                 accountability for the department's success or failure.
               </p>
-              <div className="grid gap-6">
+              <div className="grid gap-6 px-4 sm:px-0">
                 {deliverables.map((d, i) => (
                   <div key={i} className="flex gap-4">
                     <div className="shrink-0 mt-1 bg-brand-cream p-2 rounded-lg">{d.icon}</div>

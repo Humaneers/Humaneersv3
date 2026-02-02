@@ -31,8 +31,7 @@ export function ContactClient() {
       <section className="bg-brand-oxford text-white py-20">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Let's Build Something
-            <br />
+            Let's Build Something <br />
             That Lasts.
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-2xl mx-auto">
@@ -90,7 +89,7 @@ export function ContactClient() {
                   <div>
                     <h3 className="font-bold text-brand-oxford">Headquarters</h3>
                     <p className="text-brand-slate text-sm">
-                      60 East Rio Salado Parkway, Suite 900
+                      60 East Rio Salado Parkway, Suite 900,
                       <br />
                       Tempe, AZ 85281
                     </p>
@@ -100,7 +99,7 @@ export function ContactClient() {
 
               <div className="bg-white p-6 rounded-lg shadow-sm border-t-4 border-brand-copper mt-8">
                 <p className="text-brand-oxford font-medium italic">
-                  The best time to plant a tree was 20 years ago. The second best time is now.
+                  Proactive strategy builds resilient enterprises. Let's start building yours.
                 </p>
               </div>
             </div>

@@ -11,6 +11,7 @@ export const routePaths = {
   nonProfits: "/nonprofits",
   contact: "/contact",
   industries: "/industries",
+  venture: "/venture-portfolio",
   services: "/services",
   talkToSales: "/talk-to-sales",
   personal: "/personal",

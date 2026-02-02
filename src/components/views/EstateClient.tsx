@@ -21,8 +21,7 @@ export function EstateClient() {
             </span>
           </div>
           <h1 className="text-4xl md:text-7xl font-bold mb-6 leading-tight">
-            The Smart Home.
-            <br />
+            The Smart Home. <br />
             <span className="text-brand-copper">Managed.</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">

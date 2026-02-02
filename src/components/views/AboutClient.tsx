@@ -68,42 +68,50 @@ export function AboutClient() {
       </section>
 
       {/* Trust Strip */}
-      <div className="bg-white border-b border-gray-100 py-10">
+      <div className="bg-white/40 backdrop-blur-md border-b border-white/20 py-10 relative z-20">
         <div className="container mx-auto px-6">
-          <div className="flex flex-wrap justify-between items-center gap-8 opacity-60">
-            <span className="text-brand-oxford font-bold text-lg">Global Enterprise Standards</span>
-            <span className="text-brand-oxford font-bold text-lg">Family Office Security</span>
-            <span className="text-brand-oxford font-bold text-lg">Nonprofit Stewardship</span>
-            <span className="text-brand-oxford font-bold text-lg">Stealth to Service</span>
+          <div className="flex flex-wrap justify-between items-center gap-8 opacity-70">
+            <span className="text-brand-oxford font-bold text-sm md:text-lg tracking-tight">
+              Global Enterprise Standards
+            </span>
+            <span className="text-brand-oxford font-bold text-sm md:text-lg tracking-tight">
+              Family Office Security
+            </span>
+            <span className="text-brand-oxford font-bold text-sm md:text-lg tracking-tight">
+              Nonprofit Stewardship
+            </span>
+            <span className="text-brand-oxford font-bold text-sm md:text-lg tracking-tight">
+              Stealth to Service
+            </span>
           </div>
         </div>
       </div>
 
       <div className="container mx-auto px-6 py-12">
         <Tabs defaultValue="story" className="w-full">
-          <div className="flex justify-center mb-12">
-            <TabsList className="bg-white p-1 rounded-lg border border-gray-200 shadow-sm inline-flex overflow-x-auto max-w-full">
+          <div className="flex justify-center mb-12 px-4">
+            <TabsList className="bg-white p-1 rounded-lg border border-gray-200 shadow-sm inline-flex overflow-x-auto max-w-full snap-x snap-mandatory">
               <TabsTrigger
                 value="story"
-                className="px-6 py-3 text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all whitespace-nowrap"
+                className="px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all whitespace-nowrap snap-start"
               >
                 Our Story
               </TabsTrigger>
               <TabsTrigger
                 value="values"
-                className="px-6 py-3 text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all whitespace-nowrap"
+                className="px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all whitespace-nowrap snap-start"
               >
                 Our Values
               </TabsTrigger>
               <TabsTrigger
                 value="customers"
-                className="px-6 py-3 text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all whitespace-nowrap"
+                className="px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all whitespace-nowrap snap-start"
               >
                 Our Customers
               </TabsTrigger>
               <TabsTrigger
                 value="impact"
-                className="px-6 py-3 text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all whitespace-nowrap"
+                className="px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all whitespace-nowrap snap-start"
               >
                 Impact & Responsibility
               </TabsTrigger>
@@ -123,7 +131,7 @@ export function AboutClient() {
                 <div className="prose text-brand-slate leading-relaxed space-y-6 text-lg">
                   <p>
                     Humaneers began in stealth mode, serving a select roster of clients by referral
-                    only. These individuals and organizations required enterprise grade solutions
+                    only. These individuals and organizations required enterprise-grade solutions
                     without the burden of enterprise bureaucracy. We built our reputation one
                     bespoke engagement at a time, delivering the same caliber of strategy, security,
                     and infrastructure typically reserved for global enterprise companies to
@@ -154,15 +162,18 @@ export function AboutClient() {
                   </p>
                 </div>
               </div>
-              <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+              <div className="bg-white p-6 sm:p-8 rounded-xl shadow-sm border border-gray-100">
                 <h3 className="text-xl font-bold text-brand-oxford mb-6 border-b border-gray-100 pb-4">
                   Leadership & Structure
                 </h3>
                 <ul className="space-y-4">
                   {leadership.map((leader, i) => (
-                    <li key={i} className="flex justify-between items-center group">
+                    <li
+                      key={i}
+                      className="flex flex-col sm:flex-row sm:justify-between sm:items-center group gap-2 px-2"
+                    >
                       <span className="font-bold text-brand-oxford">{leader.title}</span>
-                      <span className="text-sm text-brand-copper font-medium bg-brand-copper/10 px-3 py-1 rounded-full group-hover:bg-brand-copper group-hover:text-white transition-colors">
+                      <span className="text-sm text-brand-copper font-medium bg-brand-copper/10 px-3 py-1 rounded-full group-hover:bg-brand-copper group-hover:text-white transition-colors self-start sm:self-auto">
                         {leader.role}
                       </span>
                     </li>
@@ -402,7 +413,7 @@ export function AboutClient() {
 
         <div className="mt-20 p-12 bg-white rounded-3xl shadow-2xl border border-gray-100 relative overflow-hidden text-center group">
           <div className="absolute top-0 left-0 w-2 h-full bg-brand-copper group-hover:w-4 transition-all"></div>
-          <Quote className="w-16 h-16 text-brand-copper/10 absolute top-8 right-8" />
+          <Quote className="w-16 h-16 text-brand-copper/10 absolute top-8 right-8 hidden sm:block" />
           <h3 className="text-3xl font-bold text-brand-oxford mb-6 relative z-10">
             {" "}
             Ready to Secure Your Growth?

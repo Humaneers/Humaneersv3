@@ -39,10 +39,13 @@ export default function AboutPage() {
   return (
     <>
       <StructuredData
-        data={schemas.breadcrumb([
-          { name: "Home", url: "https://humaneers.dev" },
-          { name: "About Us", url: "https://humaneers.dev/about" },
-        ])}
+        data={[
+          schemas.organization(),
+          schemas.breadcrumb([
+            { name: "Home", url: "https://humaneers.dev" },
+            { name: "About Us", url: "https://humaneers.dev/about" },
+          ]),
+        ]}
       />
       <Suspense fallback={<PageLoader />}>
         <AboutClient />

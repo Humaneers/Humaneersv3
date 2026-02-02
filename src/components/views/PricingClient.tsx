@@ -23,6 +23,7 @@ import { motion } from "framer-motion";
 import { DefinitionTooltip } from "../DefinitionTooltip";
 import { routePaths } from "../../routes";
 import { useContactModal } from "../providers/ContactModalProvider";
+import { PricingComparisonTable } from "./PricingComparisonTable";
 
 export function PricingClient() {
   const router = useRouter();
@@ -31,8 +32,11 @@ export function PricingClient() {
 
   // Get mode from URL params, default to business
   const modeParam =
-    (searchParams.get("mode") as "business" | "nonprofit" | "household") || "business";
-  const [pricingMode, setPricingMode] = useState<"business" | "nonprofit" | "household">(modeParam);
+    (searchParams.get("mode") as "business" | "nonprofit" | "household" | "incubation") ||
+    "business";
+  const [pricingMode, setPricingMode] = useState<
+    "business" | "nonprofit" | "household" | "incubation"
+  >(modeParam);
 
   /* 
     Updated Pricing Model: Base Price (Infrastructure/Support) + Per User (Seats/Licenses)
@@ -40,19 +44,19 @@ export function PricingClient() {
 
   const businessTiers = [
     {
-      name: "Foundation",
+      name: "Core",
       basePrice: 99,
       perUserPrice: 15,
-      description: "Essential IT & Security for small teams.",
+      description: "Defense-grade security hygiene for lean teams.",
       features: [
         "Includes 2 Free Users",
-        "Hybrid/Cloud Infrastructure",
-        "Unlimited remote support",
-        "Basic Security Suite (Endpoint Security)",
-        "MDM (Mobile Device Management)",
+        "Unified Hybrid & Cloud Infrastructure",
+        "Unlimited Premier Support",
+        "Enterprise Endpoint Security",
+        "Fleet Command (MDM)",
         "Microsoft 365 Management",
       ],
-      cta: "Get Started",
+      cta: "Secure My Team",
       highlighted: false,
       links: [
         { label: "Managed IT Info", icon: <Shield size={12} />, to: routePaths.managedIt },
@@ -63,24 +67,24 @@ export function PricingClient() {
       name: "Growth",
       basePrice: 249,
       perUserPrice: 29,
-      description: "For businesses ready to scale their brand and ops.",
+      description: "Operational velocity and scalability for expanding brands.",
       features: [
         "Includes 2 Free Users",
-        "Everything in Foundation",
-        "Quarterly Marketing Health Checks",
+        "Everything in Core",
+        "Strategic Growth Roadmap",
         "Priority On-site Support",
         "Advanced Threat Protection",
-        "Vendor Management",
+        "Vendor Diplomacy",
       ],
       cta: "Choose Growth",
       highlighted: true,
       links: [{ label: "Americanization", icon: <BarChart3 size={12} />, to: routePaths.growth }],
     },
     {
-      name: "Scale",
+      name: "Enterprise",
       basePrice: 499,
       perUserPrice: 49,
-      description: "Full enterprise power with strategic leadership.",
+      description: "Strategic leadership and sovereignty for market leaders.",
       features: [
         "Includes 2 Free Users",
         "Everything in Growth",
@@ -89,7 +93,7 @@ export function PricingClient() {
         "Dedicated Success Manager",
         "Annual Strategy Retreat",
       ],
-      cta: "Go Enterprise",
+      cta: "Talk to Strategy",
       highlighted: false,
       links: [
         {
@@ -103,34 +107,34 @@ export function PricingClient() {
 
   const householdTiers = [
     {
-      name: "Solo / Personal",
+      name: "Solo",
       basePrice: 19,
       perUserPrice: 4,
-      description: "DNS, domain & email management. Limited protection.",
+      description: "Digital identity protection for high-profile individuals.",
       features: [
         "Includes 2 Free Users",
-        "Domain Registrar Management",
+        "Concierge Domain Management",
         "DNS Record Configuration",
         "Email (G-Suite/O365) Admin",
-        "Remote Tech Support",
-        "No Active Security Software",
+        "Premier Tech Support",
+        "Basic Account Monitoring",
       ],
       cta: "Get Admin Help",
       highlighted: false,
       links: [{ label: "Personal Details", icon: <Users size={12} />, to: routePaths.personal }],
     },
     {
-      name: "Personal Foundation",
+      name: "Household",
       basePrice: 49,
       perUserPrice: 9,
-      description: "Essential protection for up to four humans and their devices.",
+      description: "Cyber-physical security for the modern connected family.",
       features: [
-        "Includes 2 Free Users",
+        "Includes 4 Free Users",
         "Enterprise Endpoint Protection (Mac/PC)",
-        "MDM (Mobile Device Management)",
+        "Fleet Command (MDM)",
         "Content Filtering & Parental Controls",
         "Identity Theft Monitoring",
-        "Remote Helpdesk Support",
+        "Concierge Helpdesk Access",
       ],
       cta: "Secure My Home",
       highlighted: true,
@@ -139,13 +143,15 @@ export function PricingClient() {
       ],
     },
     {
-      name: "Senior Care",
+      name: "Legacy",
       basePrice: 49,
       perUserPrice: 9,
-      description: "Dignified, patient support with aggressive fraud protection.",
+      description: "Dignity, privacy, and fraud insulation for elders.",
       features: [
-        "Includes 2 Free Users",
-        "Everything in Foundation",
+        "Includes 4 Free Users",
+        "Home WiFi Management",
+        "Enterprise Endpoint Protection",
+        "Content Filtering & Parental Controls",
         "Fraud & Scam Air-Gapping",
         "Unlimited 'Red Button' Phone Support",
         "Family Proxy Access (God Mode)",
@@ -158,16 +164,16 @@ export function PricingClient() {
       ],
     },
     {
-      name: "Personal Estate",
+      name: "Estate",
       basePrice: 149,
       perUserPrice: 15,
-      description: "Full digital concierge for the modern smart home.",
+      description: "Concierge technology management for multi-property estates.",
       features: [
         "Includes 2 Free Users",
-        "Everything in Foundation",
+        "Everything in Household",
         "Custom Personal Email (@surname.com)",
         "Enterprise Wi-Fi Management",
-        "ISP & Vendor Management",
+        "ISP & Vendor Diplomacy",
         "Priority 24/7 Support",
       ],
       cta: "Get Concierge",
@@ -198,12 +204,57 @@ export function PricingClient() {
     },
   ];
 
+  const incubationTiers = [
+    {
+      name: "Incubator",
+      basePrice: 5,
+      perUserPrice: "Asset",
+      description: "Digital Asset Sovereignty for domains and IP.",
+      features: [
+        "Enterprise Registry Locks",
+        "DNSSEC & SPF/DKIM Management",
+        "Compliance Watchtower (BOI)",
+        "Smart Monetization (Ad Parking)",
+        "Brokerage Representation",
+        "At-Cost Renewals",
+      ],
+      cta: "Secure Assets",
+      highlighted: true,
+      links: [{ label: "Venture Details", icon: <Shield size={12} />, to: routePaths.venture }],
+    },
+    {
+      name: "Hold Co",
+      basePrice: 499,
+      perUserPrice: "Entity",
+      description: "Fractional Ops for multi-entity portfolios.",
+      features: [
+        "Consolidated Billing",
+        "Inter-Company Transfers",
+        "Unified IAM / SSO Strategy",
+        "Dedicated Account Manager",
+        "Quarterly Asset Review",
+        "Rapid Entity Genesis",
+      ],
+      cta: "Contact Strategy",
+      highlighted: false,
+      links: [
+        {
+          label: "Fractional Leadership",
+          icon: <Users size={12} />,
+          to: routePaths.fractionalLeadership,
+        },
+      ],
+    },
+  ];
+
   const currentTiers =
     pricingMode === "household"
       ? householdTiers
       : pricingMode === "nonprofit"
         ? nonprofitTiers
-        : businessTiers;
+        : pricingMode === "incubation"
+          ? incubationTiers
+          : businessTiers;
 
   const faqs = [
     {
@@ -234,24 +285,26 @@ export function PricingClient() {
     <div className="bg-brand-cream min-h-screen py-12 md:py-24">
       <div className="container mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-brand-oxford mb-6">
-            Transparent Pricing. No Hidden Fees.
+          <h1 className="text-4xl md:text-5xl font-bold text-brand-oxford mb-6 tracking-tight">
+            Infrastructure as <span className="text-brand-copper">Strategy.</span>
           </h1>
-          <p className="text-lg text-brand-slate mb-6">
-            Choose the plan that fits your stage of business or life.
+          <p className="text-lg text-brand-slate mb-6 leading-relaxed">
+            We don't just "fix computers." We architect sovereignty, resilience, and operational
+            velocity for industry leaders and private families.
           </p>
 
           <div className="inline-flex bg-gray-100/50 p-1.5 rounded-xl shadow-inner border border-gray-200/50 mb-10 relative overflow-hidden w-full max-w-xl mx-auto">
-            <div className="grid grid-cols-3 w-full gap-2 relative z-10">
+            <div className="grid grid-cols-4 w-full gap-2 relative z-10">
               <button
                 onClick={() => {
                   setPricingMode("business");
                   setSessionContext({ segment: "business" });
                 }}
-                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "business"
-                  ? "text-white"
-                  : "text-brand-slate hover:text-brand-oxford"
-                  }`}
+                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
+                  pricingMode === "business"
+                    ? "text-white"
+                    : "text-brand-slate hover:text-brand-oxford"
+                }`}
               >
                 {pricingMode === "business" && (
                   <motion.div
@@ -270,10 +323,11 @@ export function PricingClient() {
                   setPricingMode("household");
                   setSessionContext({ segment: "family" });
                 }}
-                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "household"
-                  ? "text-white"
-                  : "text-brand-slate hover:text-brand-copper"
-                  }`}
+                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
+                  pricingMode === "household"
+                    ? "text-white"
+                    : "text-brand-slate hover:text-brand-copper"
+                }`}
               >
                 {pricingMode === "household" && (
                   <motion.div
@@ -292,10 +346,11 @@ export function PricingClient() {
                   setPricingMode("nonprofit");
                   setSessionContext({ segment: "nonprofit" });
                 }}
-                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "nonprofit"
-                  ? "text-white"
-                  : "text-brand-slate hover:text-brand-oxford"
-                  }`}
+                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
+                  pricingMode === "nonprofit"
+                    ? "text-white"
+                    : "text-brand-slate hover:text-brand-oxford"
+                }`}
               >
                 {pricingMode === "nonprofit" && (
                   <motion.div
@@ -308,7 +363,33 @@ export function PricingClient() {
                   Nonprofit
                 </span>
               </button>
+
+              <button
+                onClick={() => {
+                  setPricingMode("incubation");
+                  setSessionContext({ segment: "venture" });
+                }}
+                className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
+                  pricingMode === "incubation"
+                    ? "text-white"
+                    : "text-brand-slate hover:text-brand-copper"
+                }`}
+              >
+                {pricingMode === "incubation" && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute inset-0 bg-brand-copper rounded-lg shadow-md"
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  Incubation
+                </span>
+              </button>
             </div>
+
+            {/* Mobile-friendly overflow hint if needed, or adjust grid cols */}
+            {/* Note: The grid above is grid-cols-3, we need grid-cols-4 now or scrollable */}
           </div>
         </div>
 
@@ -321,15 +402,24 @@ export function PricingClient() {
           </div>
         )}
 
+        {pricingMode === "incubation" && (
+          <div className="max-w-2xl mx-auto mb-12 bg-orange-50 border border-brand-copper/30 p-4 rounded-lg text-brand-copper-dark text-sm">
+            <strong>Asset Holding Fees:</strong> We structure our fees to scale with your portfolio.
+            Stop paying retail for domains you aren't using yet. Monetize your "parking" status to
+            offset costs.
+          </div>
+        )}
+
         <div
-          className={`grid gap-8 mx-auto ${currentTiers.length === 1
-            ? "max-w-md grid-cols-1"
-            : currentTiers.length === 2
-              ? "max-w-4xl grid-cols-1 md:grid-cols-2"
-              : currentTiers.length === 3
-                ? "max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-                : "max-w-7xl grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
-            }`}
+          className={`grid gap-8 mx-auto mb-16 ${
+            currentTiers.length === 1
+              ? "max-w-md grid-cols-1"
+              : currentTiers.length === 2
+                ? "max-w-4xl grid-cols-1 md:grid-cols-2"
+                : currentTiers.length === 3
+                  ? "max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                  : "max-w-7xl grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+          }`}
         >
           {currentTiers.map((tier, index) => {
             const handleTierClick = () => {
@@ -337,24 +427,29 @@ export function PricingClient() {
               const source = `Pricing Page - ${tierName} Tier`;
               let message = `I am interested in the ${tierName} plan. `;
 
-              if (tierName === "Foundation" && pricingMode === "business") {
+              if (tierName === "Core" && pricingMode === "business") {
                 message += "We need essential IT and security for our small team.";
               } else if (tierName === "Growth") {
                 message += "We are ready to scale our brand and operations.";
-              } else if (tierName === "Scale") {
+              } else if (tierName === "Enterprise") {
                 message += "We need full enterprise power and strategic leadership.";
-              } else if (tierName === "Solo / Personal") {
+              } else if (tierName === "Solo") {
                 message += "I need help with domain and email management.";
-              } else if (tierName === "Personal Foundation") {
+              } else if (tierName === "Household") {
                 message += "I want to secure my household and devices.";
-              } else if (tierName === "Senior Care") {
+              } else if (tierName === "Legacy") {
                 message +=
                   "I am looking for dignified support and fraud protection for my family members.";
-              } else if (tierName === "Personal Estate") {
+              } else if (tierName === "Estate") {
                 message += "I need a digital concierge for my smart home.";
               } else if (tierName === "Nonprofit Foundation") {
                 message +=
                   "We are a nonprofit looking for flat-rate service and donor data protection.";
+              } else if (tierName === "Incubator") {
+                message += "I have a portfolio of domains I need to secure and manage.";
+              } else if (tierName === "Hold Co") {
+                message +=
+                  "I manage multiple operating entities and need centralized infrastructure.";
               }
 
               datadog.trackAction("select_tier", {
@@ -367,10 +462,11 @@ export function PricingClient() {
               openModal("sales", message, source);
             };
 
-            const buttonClasses = `w-full py-6 text-lg font-bold shadow-md transition-all rounded-xl ${tier.highlighted
-              ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-xl hover:-translate-y-1"
-              : "bg-white border-2 border-brand-oxford text-brand-oxford hover:bg-brand-oxford hover:text-white"
-              }`;
+            const buttonClasses = `w-full py-6 text-lg font-bold shadow-md transition-all rounded-xl ${
+              tier.highlighted
+                ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-xl hover:-translate-y-1"
+                : "bg-white border-2 border-brand-oxford text-brand-oxford hover:bg-brand-oxford hover:text-white"
+            }`;
 
             return (
               <motion.div
@@ -378,10 +474,11 @@ export function PricingClient() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`relative bg-white rounded-2xl transition-all duration-300 flex flex-col h-full ${tier.highlighted
-                  ? "shadow-2xl ring-1 ring-brand-copper z-10"
-                  : "shadow-lg hover:shadow-xl border border-gray-100"
-                  }`}
+                className={`relative bg-white rounded-2xl transition-all duration-300 flex flex-col h-full ${
+                  tier.highlighted
+                    ? "shadow-2xl ring-1 ring-brand-copper z-10"
+                    : "shadow-lg hover:shadow-xl border border-gray-100"
+                }`}
               >
                 {tier.highlighted && (
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-brand-copper text-white px-6 py-1.5 rounded-full text-xs font-black shadow-lg uppercase tracking-widest flex items-center gap-2">
@@ -392,11 +489,18 @@ export function PricingClient() {
                   <h3 className="text-2xl font-bold text-brand-oxford mb-2">{tier.name}</h3>
                   <div className="mb-6 space-y-1">
                     <div className="flex items-baseline gap-2">
-                      <span className="text-4xl font-bold text-brand-oxford">${tier.basePrice}</span>
+                      <span className="text-4xl font-bold text-brand-oxford">
+                        ${tier.basePrice}
+                      </span>
                       <span className="text-gray-500 text-sm font-medium">base / mo</span>
                     </div>
                     <div className="flex items-baseline gap-2 text-brand-copper">
-                      <span className="text-xl font-bold">+ {typeof tier.perUserPrice === 'number' ? `$${tier.perUserPrice}` : tier.perUserPrice}</span>
+                      <span className="text-xl font-bold">
+                        +{" "}
+                        {typeof tier.perUserPrice === "number"
+                          ? `$${tier.perUserPrice}`
+                          : tier.perUserPrice}
+                      </span>
                       <span className="text-sm font-medium opacity-80">/ additional user / mo</span>
                       <span className="ml-1 relative -top-1">
                         <DefinitionTooltip
@@ -436,13 +540,13 @@ export function PricingClient() {
 
                 <div className="p-8 bg-gray-50/50 pt-0 mt-auto rounded-b-2xl">
                   <Button onClick={handleTierClick} className={buttonClasses} withArrow>
-                    {tier.name === "Foundation" && pricingMode === "business"
+                    {tier.name === "Core" && pricingMode === "business"
                       ? "Secure My Team"
-                      : tier.name === "Scale"
-                        ? "Book Strategy Session"
-                        : tier.name === "Senior Care"
+                      : tier.name === "Enterprise"
+                        ? "Talk to Strategy"
+                        : tier.name === "Legacy"
                           ? "Protect My Parents"
-                          : tier.name === "Personal Estate"
+                          : tier.name === "Estate"
                             ? "Get Concierge"
                             : tier.cta}
                   </Button>
@@ -452,9 +556,15 @@ export function PricingClient() {
           })}
         </div>
 
-        <div className="mt-8 text-center text-xs text-brand-slate/60 text-balance max-w-2xl mx-auto">
-          <strong>Fair Pricing Philosophy:</strong> We separate infrastructure costs (Base) from seat costs (Per User) so you don't overpay as you scale. "Users" are unique humans with active accounts; we don't charge for service accounts (e.g. info@, admin@).
+        <div className="mt-8 text-center text-xs text-brand-slate/60 text-balance max-w-2xl mx-auto mb-16">
+          <strong>Transparent Structure. Predictable Growth.</strong> We distinguish between
+          infrastructure (Base) and seat costs (Per User) to ensure efficiency at scale.
+          &quot;Users&quot; are active human accounts; we never charge for service accounts or
+          administrative aliases.
         </div>
+
+        {/* Comparison Table */}
+        <PricingComparisonTable mode={pricingMode} />
 
         {/* --- Trust Strip --- */}
         <div className="mt-24 border-y border-gray-200 py-12">
@@ -467,6 +577,79 @@ export function PricingClient() {
             </div>
             <div className="flex items-center gap-2 text-brand-oxford font-serif text-xl">
               <Users className="text-brand-copper" /> Human Experts
+            </div>
+          </div>
+        </div>
+
+        {/* --- Digital Asset Sovereignty --- */}
+        <div className="mt-12 max-w-4xl mx-auto">
+          <div className="bg-gradient-to-br from-brand-slate to-brand-oxford rounded-2xl p-8 md:p-12 text-white relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid.svg')] opacity-10"></div>
+
+            <div className="relative z-10">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="bg-brand-cream/10 p-2 rounded-lg backdrop-blur-sm border border-white/10">
+                      <Zap className="w-6 h-6 text-brand-cream" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white">Digital Asset Sovereignty</h3>
+                  </div>
+                  <p className="text-gray-300 max-w-xl">
+                    Your digital portfolio is your modern reputation. We secure it—managing domains,
+                    DNS, and email hosting so you're never held hostage by a provider.
+                  </p>
+                </div>
+                <div className="text-right shrink-0">
+                  <div className="text-4xl font-bold text-white mb-1">
+                    $15<span className="text-lg font-normal text-gray-400">/mo</span>
+                  </div>
+                  <div className="text-sm text-brand-cream font-medium">
+                    + pass-through domain fees
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-6 mb-8 border-t border-white/10 pt-8">
+                <div>
+                  <h4 className="font-bold mb-2 text-brand-cream">At-Cost Renewals</h4>
+                  <p className="text-sm text-gray-400">
+                    We pass through the direct cost of domain registration. No markup on the asset
+                    itself.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-bold mb-2 text-brand-cream">DNS Management</h4>
+                  <p className="text-sm text-gray-400">
+                    We configure SPF, DKIM, and DMARC records to ensure your emails actually land in
+                    inbexes.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-bold mb-2 text-brand-cream">Portfolio Security</h4>
+                  <p className="text-sm text-gray-400">
+                    Enterprise-grade locking and privacy protection to prevent unauthorized
+                    transfers.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex justify-center md:justify-start">
+                <Button
+                  onClick={() => {
+                    setSessionContext({ entrySource: "Pricing Page - Digital Concierge" });
+                    openModal(
+                      "sales",
+                      "I'm interested in the Digital Concierge service for domain and email management.",
+                      "Pricing Page - Digital Concierge"
+                    );
+                  }}
+                  className="bg-white text-brand-oxford hover:bg-gray-100 px-8 py-3 font-bold"
+                  withArrow
+                >
+                  Manage My Portfolio
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -545,11 +728,10 @@ export function PricingClient() {
           </div>
         </div>
 
-        {/* --- FAQ Section --- */}
         <div className="mt-24 max-w-3xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-brand-oxford mb-4">Pricing FAQ</h2>
-            <p className="text-brand-slate">Common questions about our plans and services.</p>
+            <h2 className="text-3xl font-bold text-brand-oxford mb-4">Executive Briefing</h2>
+            <p className="text-brand-slate">Anticipating your questions before you ask them.</p>
           </div>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
@@ -567,7 +749,7 @@ export function PricingClient() {
                   />
                 </button>
                 {openFaq === i && (
-                  <div className="px-6 pb-6 text-brand-slate animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="px-6 pb-6 text-brand-slate animate-in fade-in slide-in-from-top-2 duration-200 text-sm leading-relaxed">
                     {faq.answer}
                   </div>
                 )}
@@ -604,6 +786,7 @@ export function PricingClient() {
                   <p className="font-bold text-brand-oxford">Sarah Chen</p>
                   <p className="text-sm text-gray-500">Lead Technology Strategist</p>
                 </div>
+
                 <Button
                   variant="outline"
                   onClick={() =>
