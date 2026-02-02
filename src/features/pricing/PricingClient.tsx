@@ -504,7 +504,7 @@ export function PricingClient() {
                           </span>
                         </>
                       ) : (
-                        <span className="text-lg font-bold mt-1">Two users included</span>
+                        <span className="text-lg mt-1">Two users included</span>
                       )}
                     </div>
                   </div>
