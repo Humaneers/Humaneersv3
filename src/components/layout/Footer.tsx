@@ -5,8 +5,7 @@ import { Phone, MapPin, Mail } from "lucide-react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { useContactModal } from "../providers/ContactModalProvider";
-// import { APP_VERSION } from "../../version"; // Temporarily disabled if not easily resolved
-const APP_VERSION = "0.3.0";
+import { APP_VERSION } from "../../version";
 
 import { footerSections, footerMetaLinks } from "../../data/navigation";
 
@@ -132,16 +131,19 @@ export function Footer() {
           {/* Rights & Identity */}
           <div className="flex flex-col items-start md:items-end gap-4 w-full">
             <div className="flex items-center gap-3">
-              <span className="text-xs text-gray-500 italic">"Built by humans with ❤️ + ☕️"</span>
+              <span className="text-xs text-gray-500 italic">Built by humans in Arizona & Texas with ❤️ + ☕️</span>
               <span className="w-[1px] h-4 bg-white/10 hidden sm:block"></span>
               <span className="text-[10px] text-gray-600 font-mono py-1 px-2 bg-white/5 rounded">
                 v{APP_VERSION}
               </span>
             </div>
             <p className="text-[10px] text-gray-600 text-left md:text-right max-w-xs leading-relaxed">
-              &copy; {new Date().getFullYear()} Humaneers LLC. <br />
-              "Humaneers" is a trademark of Human IP LP and is used under license.
+              &copy; {new Date().getFullYear()} Humaneers Limited Company. <br />
+              Humaneers is a trademark of Human IP LP; used under license. All non-Humaneers trademarks, trade names, product names, service marks and other marks are the property of their respective owners.
             </p>
+            <p className="text-[10px] text-gray-600 text-left md:text-right max-w-xs leading-relaxed">
+              Read our <Link href="/colophon">Intellectual Property Policy</Link>
+            </p>  
           </div>
         </div>
       </div>

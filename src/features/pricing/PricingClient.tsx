@@ -131,6 +131,7 @@ export function PricingClient() {
       features: [
         "Includes 4 Free Users",
         "Enterprise Endpoint Protection (Mac/PC)",
+        "Home Network Management",
         "Fleet Command (MDM)",
         "Content Filtering & Parental Controls",
         "Identity Theft Monitoring",
@@ -301,8 +302,8 @@ export function PricingClient() {
                   setSessionContext({ segment: "business" });
                 }}
                 className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "business"
-                    ? "text-white"
-                    : "text-brand-slate hover:text-brand-oxford"
+                  ? "text-white"
+                  : "text-brand-slate hover:text-brand-oxford"
                   }`}
               >
                 {pricingMode === "business" && (
@@ -323,8 +324,8 @@ export function PricingClient() {
                   setSessionContext({ segment: "family" });
                 }}
                 className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "household"
-                    ? "text-white"
-                    : "text-brand-slate hover:text-brand-copper"
+                  ? "text-white"
+                  : "text-brand-slate hover:text-brand-copper"
                   }`}
               >
                 {pricingMode === "household" && (
@@ -345,8 +346,8 @@ export function PricingClient() {
                   setSessionContext({ segment: "nonprofit" });
                 }}
                 className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "nonprofit"
-                    ? "text-white"
-                    : "text-brand-slate hover:text-brand-oxford"
+                  ? "text-white"
+                  : "text-brand-slate hover:text-brand-oxford"
                   }`}
               >
                 {pricingMode === "nonprofit" && (
@@ -367,8 +368,8 @@ export function PricingClient() {
                   setSessionContext({ segment: "venture" });
                 }}
                 className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${pricingMode === "incubation"
-                    ? "text-white"
-                    : "text-brand-slate hover:text-brand-copper"
+                  ? "text-white"
+                  : "text-brand-slate hover:text-brand-copper"
                   }`}
               >
                 {pricingMode === "incubation" && (
@@ -408,12 +409,12 @@ export function PricingClient() {
 
         <div
           className={`grid gap-8 mx-auto mb-16 ${currentTiers.length === 1
-              ? "max-w-md grid-cols-1"
-              : currentTiers.length === 2
-                ? "max-w-4xl grid-cols-1 md:grid-cols-2"
-                : currentTiers.length === 3
-                  ? "max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-                  : "max-w-7xl grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+            ? "max-w-md grid-cols-1"
+            : currentTiers.length === 2
+              ? "max-w-4xl grid-cols-1 md:grid-cols-2"
+              : currentTiers.length === 3
+                ? "max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                : "max-w-7xl grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
             }`}
         >
           {currentTiers.map((tier, index) => {
@@ -458,8 +459,8 @@ export function PricingClient() {
             };
 
             const buttonClasses = `w-full py-6 text-lg font-bold shadow-md transition-all rounded-xl ${tier.highlighted
-                ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-xl hover:-translate-y-1"
-                : "bg-white border-2 border-brand-oxford text-brand-oxford hover:bg-brand-oxford hover:text-white"
+              ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-xl hover:-translate-y-1"
+              : "bg-white border-2 border-brand-oxford text-brand-oxford hover:bg-brand-oxford hover:text-white"
               }`;
 
             return (
@@ -469,8 +470,8 @@ export function PricingClient() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className={`relative bg-white rounded-2xl transition-all duration-300 flex flex-col h-full ${tier.highlighted
-                    ? "shadow-2xl ring-1 ring-brand-copper z-10"
-                    : "shadow-lg hover:shadow-xl border border-gray-100"
+                  ? "shadow-2xl ring-1 ring-brand-copper z-10"
+                  : "shadow-lg hover:shadow-xl border border-gray-100"
                   }`}
               >
                 {tier.highlighted && (

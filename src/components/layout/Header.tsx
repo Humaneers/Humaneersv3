@@ -147,10 +147,10 @@ export function Header() {
                               {/* Strong dark overlay for maximum text contrast */}
                               <div className="absolute inset-0 bg-black/20 rounded-md"></div>
                               <div className="relative z-10">
-                                <div className="mb-2 mt-4 text-lg font-bold text-brand-cream featured-nav-text drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] shadow-black">
+                                <div className="mb-2 mt-4 text-lg font-bold text-brand-cream featured-nav-text">
                                   {whoWeHelpSection.featured.title}
                                 </div>
-                                <p className="text-sm leading-tight text-brand-cream featured-nav-text drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] shadow-black font-medium">
+                                <p className="text-sm leading-tight text-brand-cream featured-nav-text font-medium">
                                   {whoWeHelpSection.featured.description}
                                 </p>
                               </div>

@@ -216,7 +216,7 @@ export function PricingComparisonTable({ mode }: PricingComparisonTableProps) {
         {
           name: "Home Network Management",
           tooltip: "Enterprise-grade Wi-Fi setup and ongoing optimization",
-          tiers: { Solo: false, Household: false, Legacy: false, Estate: true },
+          tiers: { Solo: false, Household: true, Legacy: true, Estate: true },
         },
         {
           name: "ISP & Vendor Diplomacy",
@@ -260,7 +260,7 @@ export function PricingComparisonTable({ mode }: PricingComparisonTableProps) {
         },
         {
           name: "Content Filtering",
-          tooltip: "Parental controls and safe browsing",
+          tooltip: "Parental controls and granular device supervision",
           tiers: { Solo: false, Household: true, Legacy: true, Estate: true },
         },
         {

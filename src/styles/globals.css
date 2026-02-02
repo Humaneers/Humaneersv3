@@ -256,7 +256,6 @@ header nav .text-brand-cream,
 header .featured-nav-text,
 nav .featured-nav-text {
   color: #f5f1e9 !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
 }
 
 /* Force brand oxford color for regular navigation text - HIGHEST PRIORITY */
@@ -319,7 +318,6 @@ html body header nav * {
 
 html body header nav .featured-nav-text {
   color: #f5f1e9 !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
 }
 
 html body header nav .nav-item-title {
