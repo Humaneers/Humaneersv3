@@ -39,17 +39,17 @@ export function PricingComparisonTable({ mode }: PricingComparisonTableProps) {
             <div className="p-4 bg-gray-50 rounded-lg">
               <h4 className="font-bold text-brand-oxford mb-2">What You Pay Us</h4>
               <p className="text-3xl font-bold text-brand-copper mb-1">
-                $299<span className="text-sm text-gray-500 font-normal">/mo</span>
+                $199<span className="text-sm text-gray-500 font-normal">/mo</span>
               </p>
               <p className="text-sm text-gray-500">
-                Flat organization retainer for support & management.
+                Flat organization retainer for support, management, and strategic guidance.
               </p>
             </div>
             <div className="p-4 bg-gray-50 rounded-lg">
               <h4 className="font-bold text-brand-oxford mb-2">User Licenses</h4>
               <p className="text-3xl font-bold text-brand-oxford mb-1">At Cost</p>
               <p className="text-sm text-gray-500">
-                We pass through Microsoft 365 / Google Workspace Nonprofit pricing directly.
+                We pass through Microsoft 365 / Google Workspace nonprofit pricing directly.
               </p>
             </div>
           </div>
