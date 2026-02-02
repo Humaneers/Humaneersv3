@@ -87,7 +87,38 @@ async function main() {
     packageJson.version = newVersion;
     fs.writeFileSync(PACKAGE_JSON_PATH, JSON.stringify(packageJson, null, 2) + "\n");
 
-    const versionFileContent = `export const APP_VERSION = "${newVersion}";\n`;
+    // NEW: Parse Changelog to JSON for frontend
+    const changelogLines = newChangelogContent.split("\n");
+    const changelogJson: { version: string; date: string; changes: string[] }[] = [];
+    let currentEntry: { version: string; date: string; changes: string[] } | null = null;
+
+    const versionRegex = /^## \[(.+)\] - (.+)$/;
+    const changeRegex = /^- (.+)$/;
+
+    for (const line of changelogLines) {
+        const vMatch = line.match(versionRegex);
+        if (vMatch) {
+            if (currentEntry) {
+                changelogJson.push(currentEntry);
+            }
+            currentEntry = {
+                version: vMatch[1],
+                date: vMatch[2],
+                changes: [],
+            };
+            continue;
+        }
+
+        const cMatch = line.match(changeRegex);
+        if (cMatch && currentEntry) {
+            currentEntry.changes.push(cMatch[1]);
+        }
+    }
+    if (currentEntry) {
+        changelogJson.push(currentEntry);
+    }
+
+    const versionFileContent = `export const APP_VERSION = "${newVersion}";\n\nexport const CHANGELOG = ${JSON.stringify(changelogJson, null, 2)};\n`;
     fs.writeFileSync(VERSION_TS_PATH, versionFileContent);
 
     // 4. Git Commit & Push
