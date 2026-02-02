@@ -504,7 +504,7 @@ export function PricingClient() {
                           </span>
                         </>
                       ) : (
-                        <span className="text-sm font-medium opacity-80 mt-1">
+                        <span className="text-sm font-medium opacity-80 mt-1 text-brand-copper">
                           Two users included
                         </span>
                       )}
