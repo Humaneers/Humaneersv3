@@ -103,9 +103,8 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-brand-oxford shadow-lg py-3" : "bg-brand-oxford/95 backdrop-blur-sm py-5"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-brand-oxford shadow-lg py-3" : "bg-brand-oxford/95 backdrop-blur-sm py-5"
+        }`}
     >
       <a
         href="#main-content"
@@ -143,10 +142,10 @@ export function Header() {
                           <NavigationMenuLink asChild>
                             <Link
                               href={whoWeHelpSection.featured.to || "/"}
-                              className="relative flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-brand-copper/50 to-brand-oxford p-6 no-underline outline-none focus:shadow-md cursor-pointer overflow-hidden"
+                              className="relative flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-brand-copper to-brand-oxford/80 p-6 no-underline outline-none focus:shadow-md cursor-pointer overflow-hidden"
                             >
                               {/* Strong dark overlay for maximum text contrast */}
-                              <div className="absolute inset-0 bg-black/60 rounded-md"></div>
+                              <div className="absolute inset-0 bg-black/20 rounded-md"></div>
                               <div className="relative z-10">
                                 <div className="mb-2 mt-4 text-lg font-bold text-brand-cream featured-nav-text drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] shadow-black">
                                   {whoWeHelpSection.featured.title}
