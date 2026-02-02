@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PersonalClient } from "../../components/views/PersonalClient";
+import { PersonalClient } from "../../features/services/PersonalClient";
 import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
 

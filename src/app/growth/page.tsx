@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { GrowthClient } from "../../components/views/GrowthClient";
+import { GrowthClient } from "../../features/services/GrowthClient";
 import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
 import { StructuredData, schemas } from "../../components/StructuredData";

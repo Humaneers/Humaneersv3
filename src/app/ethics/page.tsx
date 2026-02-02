@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { EthicsClient } from "../../components/views/EthicsClient";
+import { EthicsClient } from "../../features/legal/EthicsClient";
 import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { TermsClient } from "../../components/views/TermsClient";
+import { TermsClient } from "../../features/legal/TermsClient";
 import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
 

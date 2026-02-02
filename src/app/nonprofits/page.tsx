@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { NonProfitsClient } from "../../components/views/NonProfitsClient";
+import { NonProfitsClient } from "../../features/industries/NonProfitsClient";
 import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
 

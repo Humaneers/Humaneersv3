@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { StatusClient } from "../../components/views/StatusClient";
+import { StatusClient } from "../../features/resources/StatusClient";
 import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
 

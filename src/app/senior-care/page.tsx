@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SeniorCareClient } from "../../components/views/SeniorCareClient";
+import { SeniorCareClient } from "../../features/industries/SeniorCareClient";
 import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
 import { StructuredData, schemas } from "../../components/StructuredData";

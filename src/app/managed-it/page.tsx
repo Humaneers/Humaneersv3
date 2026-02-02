@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ManagedITClient } from "../../components/views/ManagedITClient";
+import { ManagedITClient } from "../../features/services/ManagedITClient";
 import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
 import { StructuredData, schemas } from "../../components/StructuredData";

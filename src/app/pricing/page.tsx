@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PricingClient } from "../../components/views/PricingClient";
+import { PricingClient } from "../../features/pricing/PricingClient";
 import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
 import { StructuredData, schemas } from "../../components/StructuredData";

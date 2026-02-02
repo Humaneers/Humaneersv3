@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ColophonClient } from "../../components/views/ColophonClient";
+import { ColophonClient } from "../../features/about/ColophonClient";
 import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
 

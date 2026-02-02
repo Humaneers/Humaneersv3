@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ContactClient } from "../../components/views/ContactClient";
+import { ContactClient } from "../../features/contact/ContactClient";
 import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
 

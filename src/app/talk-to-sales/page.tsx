@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { TalkToSalesClient } from "../../components/views/TalkToSalesClient";
+import { TalkToSalesClient } from "../../features/contact/TalkToSalesClient";
 
 export const metadata: Metadata = {
   title: "Contact Sales | Humaneers | Schedule a Consultation",

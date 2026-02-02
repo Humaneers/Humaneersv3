@@ -1,4 +1,4 @@
-import { VenturePortfolioClient } from "@/components/views/VenturePortfolioClient";
+import { VenturePortfolioClient } from "@/features/services/VenturePortfolioClient";
 
 export const metadata = {
   title: "Venture Portfolio Management | Humaneers",

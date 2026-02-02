@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { FractionalLeadershipClient } from "../../components/views/FractionalLeadershipClient";
+import { FractionalLeadershipClient } from "../../features/services/FractionalLeadershipClient";
 import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
 import { StructuredData, schemas } from "../../components/StructuredData";

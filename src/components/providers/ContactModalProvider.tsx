@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode } from "react";
-import { datadog } from "../../lib/datadog";
+
 
 type ModalTab = "sales" | "support" | "newsletter" | "general";
 
@@ -32,14 +32,7 @@ export function ContactModalProvider({ children }: { children: ReactNode }) {
     setSource(source);
     setIsOpen(true);
 
-    try {
-      datadog.trackAction("open_modal", {
-        tab,
-        source,
-      });
-    } catch (e) {
-      console.error(e);
-    }
+
   };
 
   const closeModal = () => {

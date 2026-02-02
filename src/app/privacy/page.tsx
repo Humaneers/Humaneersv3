@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PrivacyClient } from "../../components/views/PrivacyClient";
+import { PrivacyClient } from "../../features/legal/PrivacyClient";
 import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
 

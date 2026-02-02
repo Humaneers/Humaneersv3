@@ -5,7 +5,8 @@ import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import { useConsent } from "./providers/ConsentProvider";
-import { DatadogRUM } from "./DatadogRUM";
+
+import { ZohoTracking } from "./ZohoTracking";
 
 export function Analytics() {
   const { consent } = useConsent();
@@ -35,8 +36,9 @@ export function Analytics() {
           <VercelAnalytics />
           <SpeedInsights />
 
-          {/* Datadog Real User Monitoring */}
-          <DatadogRUM />
+
+          {/* Zoho SPA Tracking */}
+          <ZohoTracking />
 
           {/* Zoho PageSense */}
           <Script
@@ -45,12 +47,7 @@ export function Analytics() {
             strategy="lazyOnload"
           />
 
-          {/* ContentSquare */}
-          <Script
-            id="contentsquare"
-            src="https://t.contentsquare.net/uxa/741b931013a01.js"
-            strategy="lazyOnload"
-          />
+
         </>
       )}
     </>

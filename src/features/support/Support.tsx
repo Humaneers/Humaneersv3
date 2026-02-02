@@ -1,49 +1,16 @@
+"use client";
+
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { LifeBuoy, Phone, Clock, Shield, ChevronDown, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  LifeBuoy,
-  ArrowRight,
-  Loader2,
-  Clock,
-  Shield,
-  Headphones,
-  CheckCircle2,
-  Phone,
-  ChevronDown,
-} from "lucide-react";
-import { submitSupportTicket, validateSupportForm, type SupportFormData } from "@/lib/zoho";
-import { toast } from "sonner";
-import { Seo } from "@/components/Seo";
+import { useContactModal } from "@/components/providers/ContactModalProvider";
 import { trackInteraction } from "@/lib/session";
 
-export function Support() {
-  const location = useLocation();
-  const initialSource = (location.state as { source?: string })?.source;
+// Kept trackInteraction for FAQ if needed, though mostly used for form.
+// Faq toggle uses it.
 
-  const [formData, setFormData] = useState<SupportFormData>({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    priority: "",
-    category: "",
-    subject: "",
-    description: "",
-    source: initialSource || "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+export function Support() {
+  const { openModal } = useContactModal();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const faqItems = [
@@ -55,10 +22,10 @@ export function Support() {
     {
       question: "What's the fastest way to get help for a critical issue?",
       answer:
-        "For P1 Critical issues (system down, data breach, active security incident), call our emergency hotline directly. For other issues, submit a ticket and select the appropriate priority level.",
+        "For P1 Critical issues (system down, data breach, active security incident), call our emergency hotline directly. For other issues, send us an email.",
     },
     {
-      question: "What information should I include in my ticket?",
+      question: "What information should I include in my request?",
       answer:
         "Include: what happened, when it started, what you were trying to do, any error messages, and which systems are affected. The more detail you provide, the faster we can help.",
     },
@@ -74,42 +41,13 @@ export function Support() {
     },
   ];
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Validate form data
-    const validation = validateSupportForm(formData);
-    if (!validation.valid) {
-      toast.error(validation.errors[0]);
+  const toggleFaq = (index: number) => {
+    // HIGH PRIORITY FIX: Validate array bounds
+    if (index < 0 || index >= faqItems.length) {
+      console.warn(`Invalid FAQ index: ${index}`);
       return;
     }
 
-    setIsSubmitting(true);
-
-    try {
-      await submitSupportTicket(formData);
-      setIsSuccess(true);
-      trackInteraction(`Submitted Support Ticket: ${formData.category}`);
-      toast.success("Your support ticket has been submitted!");
-    } catch (error) {
-      toast.error(
-        error instanceof Error ? error.message : "Failed to submit ticket. Please try again."
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSelectChange = (name: string) => (value: string) => {
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const toggleFaq = (index: number) => {
     if (openFaq !== index) {
       trackInteraction(`Expanded FAQ: ${faqItems[index].question}`);
     }
@@ -117,310 +55,195 @@ export function Support() {
   };
 
   return (
-    <Seo
-      title="Humaneers | Support Center | Submit a Ticket"
-      description="Submit a support ticket to our US-based engineering team. Priority support for critical issues, system outages, and security concerns."
-      canonicalPath="/support"
-    >
-      <div className="bg-brand-cream min-h-screen">
-        <section className="bg-brand-oxford text-white py-20">
-          <div className="container mx-auto px-6 text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-copper/20 rounded-full mb-6">
-              <LifeBuoy className="w-8 h-8 text-brand-copper" />
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">Support Center</h1>
-            <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-2xl mx-auto">
-              Submit a support ticket and our engineering team will respond promptly. We support new
-              clients in crisis. We'll stabilize your systems first and handle the paperwork later.
-            </p>
-          </div>
-        </section>
+    <div className="bg-brand-cream min-h-screen">
+      <section className="bg-brand-oxford text-white py-20 relative overflow-hidden">
+        {/* Subtle Grid Overlay */}
+        <div className="absolute inset-0 opacity-10 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
 
-        <section className="py-16 md:py-24">
-          <div className="container mx-auto px-6">
-            <div className="flex flex-col lg:flex-row gap-16 max-w-6xl mx-auto">
-              {/* Support Info Side */}
-              <div className="lg:w-1/3 space-y-8">
+        <div className="container mx-auto px-6 text-center relative z-10">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-copper/20 rounded-full mb-6 backdrop-blur-sm border border-brand-copper/20">
+            <LifeBuoy className="w-8 h-8 text-brand-copper" aria-hidden="true" />
+          </div>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Support Center</h1>
+          <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-2xl mx-auto">
+            Submit a support ticket and our engineering team will respond promptly. We support new
+            clients in crisis. We'll stabilize your systems first and handle the paperwork later.
+          </p>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-6">
+          <div className="max-w-5xl mx-auto">
+            {/* Primary Action Grid - Centered */}
+            <div className="grid md:grid-cols-2 gap-8 mb-16">
+              {/* Existing Clients */}
+              <div className="bg-white p-8 md:p-10 rounded-xl shadow-lg border border-gray-100 flex flex-col justify-between group hover:shadow-xl transition-shadow min-h-[400px]">
                 <div>
-                  <h2 className="text-2xl font-bold text-brand-oxford mb-6">Need Help?</h2>
-                  <p className="text-brand-slate mb-8">
-                    Fill out the form to submit a support ticket. We welcome new clients who need
-                    immediate help. Our team monitors tickets during business hours and will respond
-                    based on priority level.
+                  <div className="bg-brand-oxford/10 p-5 rounded-full w-20 h-20 flex items-center justify-center mb-8 group-hover:bg-brand-oxford group-hover:text-white transition-colors text-brand-oxford">
+                    <MessageSquare className="w-10 h-10" aria-hidden="true" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-brand-oxford mb-4">Client Support</h3>
+                  <p className="text-brand-slate text-base mb-8 leading-relaxed">
+                    For existing partners. Submit regular maintenance requests, user provisioning,
+                    or general inquiries.
                   </p>
                 </div>
+                <Button
+                  onClick={() => openModal("support", "", "Support - Client Support")}
+                  className="w-full bg-brand-oxford hover:bg-brand-oxford/90 text-white py-6"
+                  withArrow
+                >
+                  Submit Request
+                </Button>
+              </div>
 
-                {/* Emergency Hotline */}
-                <div className="bg-red-50 border-2 border-red-500 rounded-lg p-5 mb-6">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="bg-red-500 p-2 rounded-full">
-                      <Phone className="w-5 h-5 text-white" />
-                    </div>
-                    <h3 className="font-bold text-red-700 text-lg">Emergency Hotline</h3>
+              {/* Rapid Response */}
+              <div className="bg-brand-oxford p-8 md:p-10 rounded-xl shadow-2xl border border-brand-copper/20 flex flex-col justify-between relative overflow-hidden group hover:border-brand-copper/40 transition-colors min-h-[400px]">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-brand-copper/10 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none transition-opacity opacity-50 group-hover:opacity-100"></div>
+                <div className="relative z-10">
+                  <div className="bg-brand-copper/20 p-5 rounded-full w-20 h-20 flex items-center justify-center mb-8 text-brand-copper backdrop-blur-sm">
+                    <Shield className="w-10 h-10" aria-hidden="true" />
                   </div>
-                  <p className="text-sm text-red-700 mb-3">
-                    For critical P1 issues (system down, active breach, data loss) call us directly:
-                  </p>
-                  <a
-                    href="tel:+19284401505"
-                    className="inline-flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-5 rounded-lg transition-colors text-lg"
-                  >
-                    <Phone className="w-5 h-5" />
-                    (928) 440-1505
-                  </a>
-                  <p className="text-xs text-red-600 mt-2">
-                    Available 24/7 for critical emergencies
+                  <h3 className="text-2xl font-bold text-white mb-4">Rapid Response</h3>
+                  <p className="text-gray-300 text-base mb-8 leading-relaxed opacity-90">
+                    For new engagements. Immediate "Tactical Deployment" for active breaches,
+                    outages, or mission-critical failures. We stabilize first, contract later.
                   </p>
                 </div>
+                <Button
+                  onClick={() => openModal("support", "", "Support - Rapid Response")}
+                  className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white font-bold h-14 text-lg shadow-lg hover:shadow-brand-copper/20 relative z-10"
+                  withArrow
+                >
+                  Deploy Team
+                </Button>
+              </div>
+            </div>
 
-                <div className="space-y-4">
-                  <div className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-red-500">
-                    <div className="flex items-center gap-3 mb-2">
-                      <Clock className="w-5 h-5 text-red-500" />
-                      <h3 className="font-bold text-brand-oxford">Critical (P1)</h3>
-                    </div>
-                    <p className="text-sm text-brand-slate">
-                      System down or data breach. Response within 15 minutes.
-                    </p>
-                  </div>
+            {/* Critical Infrastructure Strip */}
+            <div className="bg-brand-oxford-deep border border-brand-copper/20 rounded-2xl p-8 mb-16 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+              <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid.svg')] opacity-5 pointer-events-none"></div>
 
-                  <div className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-orange-500">
-                    <div className="flex items-center gap-3 mb-2">
-                      <Clock className="w-5 h-5 text-orange-500" />
-                      <h3 className="font-bold text-brand-oxford">High (P2)</h3>
-                    </div>
-                    <p className="text-sm text-brand-slate">
-                      Major functionality impacted. Response within 1 hour.
-                    </p>
-                  </div>
-
-                  <div className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-yellow-500">
-                    <div className="flex items-center gap-3 mb-2">
-                      <Clock className="w-5 h-5 text-yellow-500" />
-                      <h3 className="font-bold text-brand-oxford">Medium (P3)</h3>
-                    </div>
-                    <p className="text-sm text-brand-slate">
-                      Minor issue with workaround. Response within 4 hours.
-                    </p>
-                  </div>
-
-                  <div className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
-                    <div className="flex items-center gap-3 mb-2">
-                      <Clock className="w-5 h-5 text-blue-500" />
-                      <h3 className="font-bold text-brand-oxford">Low (P4)</h3>
-                    </div>
-                    <p className="text-sm text-brand-slate">
-                      General question or request. Response within 24 hours.
-                    </p>
-                  </div>
+              <div className="flex flex-col md:flex-row items-start md:items-center gap-6 relative z-10">
+                <div className="bg-brand-copper/10 p-4 rounded-xl border border-brand-copper/20">
+                  <Phone className="w-8 h-8 text-brand-copper" />
                 </div>
-
-                <div className="bg-brand-oxford p-6 rounded-lg text-white">
-                  <div className="flex items-center gap-3 mb-3">
-                    <Shield className="w-5 h-5 text-brand-copper" />
-                    <h3 className="font-bold">Security Issues?</h3>
-                  </div>
-                  <p className="text-sm text-gray-300 mb-4">
-                    For security vulnerabilities, please email security@humaneers.dev directly with
-                    details.
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <Headphones className="w-5 h-5 text-brand-copper" />
-                    <h3 className="font-bold">New to Humaneers?</h3>
-                  </div>
-                  <p className="text-sm text-gray-300 mt-2">
-                    Crisis response is in our DNA. We prioritize immediate remediation for active
-                    threats, regardless of your contract status.
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-3">
+                    Emergency Command Line
+                    <span className="flex h-2 w-2 relative">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                    </span>
+                  </h3>
+                  <p className="text-gray-400 text-sm max-w-md">
+                    24/7 Direct access for P1 Critical issues (System Down, Active Breach). Bypasses
+                    standard queues.
                   </p>
                 </div>
               </div>
 
-              {/* Form Side */}
-              <div className="lg:w-2/3">
-                <div className="bg-white p-8 rounded-xl shadow-lg">
-                  {isSuccess ? (
-                    <div className="py-10 text-center space-y-4">
-                      <div className="mx-auto w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
-                        <CheckCircle2 className="w-10 h-10" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-gray-900">Ticket Submitted!</h3>
-                      <p className="text-gray-600 max-w-sm mx-auto">
-                        We've received your support request and will respond based on the priority
-                        level.
-                      </p>
-                    </div>
-                  ) : (
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label htmlFor="name">Full Name</Label>
-                          <Input
-                            id="name"
-                            name="name"
-                            placeholder="Jane Doe"
-                            required
-                            className="h-12 bg-gray-50 border-gray-200"
-                            value={formData.name}
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="email">Email Address</Label>
-                          <Input
-                            id="email"
-                            name="email"
-                            type="email"
-                            placeholder="jane@company.com"
-                            required
-                            className="h-12 bg-gray-50 border-gray-200"
-                            value={formData.email}
-                            onChange={handleChange}
-                          />
-                        </div>
-                      </div>
+              <a
+                href="tel:+19284401505"
+                className="relative z-10 flex items-center gap-3 bg-brand-copper hover:bg-brand-copper-dark text-white font-bold py-4 px-8 rounded-lg transition-all shadow-lg hover:shadow-brand-copper/20 text-lg group w-full md:w-auto justify-center"
+              >
+                <Phone className="w-5 h-5" />
+                <span>(928) 440-1505</span>
+              </a>
+            </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label htmlFor="phone">Phone (Optional)</Label>
-                          <Input
-                            id="phone"
-                            name="phone"
-                            type="tel"
-                            placeholder="(555) 123-4567"
-                            className="h-12 bg-gray-50 border-gray-200"
-                            value={formData.phone}
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="company">Company (Optional)</Label>
-                          <Input
-                            id="company"
-                            name="company"
-                            placeholder="Acme Inc."
-                            className="h-12 bg-gray-50 border-gray-200"
-                            value={formData.company}
-                            onChange={handleChange}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label htmlFor="priority">Priority Level</Label>
-                          <Select onValueChange={handleSelectChange("priority")} required>
-                            <SelectTrigger
-                              id="priority"
-                              className="h-12 bg-gray-50 border-gray-200"
-                            >
-                              <SelectValue placeholder="Select priority" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="critical">Critical (P1) | System Down</SelectItem>
-                              <SelectItem value="high">High (P2) | Major Impact</SelectItem>
-                              <SelectItem value="medium">Medium (P3) | Minor Issue</SelectItem>
-                              <SelectItem value="low">Low (P4) | General Question</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="category">Category</Label>
-                          <Select onValueChange={handleSelectChange("category")} required>
-                            <SelectTrigger
-                              id="category"
-                              className="h-12 bg-gray-50 border-gray-200"
-                            >
-                              <SelectValue placeholder="Select category" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="technical">Technical Issue</SelectItem>
-                              <SelectItem value="account">Account / Billing</SelectItem>
-                              <SelectItem value="security">Security Concern</SelectItem>
-                              <SelectItem value="feature">Feature Request</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="subject">Subject</Label>
-                        <Input
-                          id="subject"
-                          name="subject"
-                          placeholder="Brief description of the issue"
-                          required
-                          className="h-12 bg-gray-50 border-gray-200"
-                          value={formData.subject}
-                          onChange={handleChange}
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="description">Description</Label>
-                        <Textarea
-                          id="description"
-                          name="description"
-                          placeholder="Please provide as much detail as possible: What happened? What were you trying to do? Any error messages?"
-                          className="min-h-[150px] bg-gray-50 border-gray-200"
-                          required
-                          value={formData.description}
-                          onChange={handleChange}
-                        />
-                      </div>
-
-                      <Button
-                        type="submit"
-                        className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white text-lg py-6 h-auto"
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? (
-                          <>
-                            Submitting... <Loader2 className="ml-2 w-5 h-5 animate-spin" />
-                          </>
-                        ) : (
-                          <>
-                            Send Support Ticket <ArrowRight className="ml-2 w-5 h-5" />
-                          </>
-                        )}
-                      </Button>
-                    </form>
-                  )}
+            {/* Service Standards Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+              <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                <div className="flex items-center gap-2 mb-3 text-red-600">
+                  <Clock className="w-5 h-5" />
+                  <span className="font-bold text-sm">Priority 1</span>
                 </div>
+                <div className="text-brand-oxford font-bold mb-1">Critical</div>
+                <div className="text-xs text-brand-slate">15 Min Response</div>
+              </div>
+
+              <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                <div className="flex items-center gap-2 mb-3 text-orange-500">
+                  <Clock className="w-5 h-5" />
+                  <span className="font-bold text-sm">Priority 2</span>
+                </div>
+                <div className="text-brand-oxford font-bold mb-1">High</div>
+                <div className="text-xs text-brand-slate">1 Hour Response</div>
+              </div>
+
+              <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                <div className="flex items-center gap-2 mb-3 text-yellow-500">
+                  <Clock className="w-5 h-5" />
+                  <span className="font-bold text-sm">Priority 3</span>
+                </div>
+                <div className="text-brand-oxford font-bold mb-1">Medium</div>
+                <div className="text-xs text-brand-slate">4 Hour Response</div>
+              </div>
+
+              <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                <div className="flex items-center gap-2 mb-3 text-blue-500">
+                  <Clock className="w-5 h-5" />
+                  <span className="font-bold text-sm">Priority 4</span>
+                </div>
+                <div className="text-brand-oxford font-bold mb-1">Low</div>
+                <div className="text-xs text-brand-slate">24 Hour Response</div>
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* FAQ Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-6 max-w-4xl">
-            <h2 className="text-3xl font-bold text-brand-oxford mb-8 text-center">
-              Frequently Asked Questions
-            </h2>
-            <div className="space-y-4">
-              {faqItems.map((item, index) => (
-                <div key={index} className="bg-brand-cream rounded-lg overflow-hidden">
-                  <button
-                    onClick={() => toggleFaq(index)}
-                    className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-brand-cream/80 transition-colors"
-                  >
-                    <span className="font-semibold text-brand-oxford">{item.question}</span>
-                    <ChevronDown
-                      className={`w-5 h-5 text-brand-copper transition-transform ${openFaq === index ? "rotate-180" : ""}`}
-                    />
-                  </button>
-                  {openFaq === index && (
-                    <div className="px-6 pb-4">
-                      <p className="text-brand-slate">{item.answer}</p>
-                    </div>
-                  )}
-                </div>
-              ))}
+            <div className="text-center">
+              <p className="text-sm text-brand-slate">
+                Security concerns? Email{" "}
+                <a
+                  href="mailto:security@humaneers.dev"
+                  className="text-brand-copper hover:text-brand-copper-dark font-medium underline decoration-brand-copper/30 underline-offset-4"
+                >
+                  security@humaneers.dev
+                </a>{" "}
+                directly.
+              </p>
             </div>
           </div>
-        </section>
-      </div>
-    </Seo>
+        </div>
+      </section>
+
+      <section className="py-16 bg-brand-cream">
+        <div className="container mx-auto px-6 max-w-4xl">
+          <h2 className="text-3xl font-bold text-brand-oxford mb-8 text-center">
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-4">
+            {faqItems.map((item, index) => (
+              <div key={index} className="bg-brand-cream rounded-lg overflow-hidden">
+                <button
+                  onClick={() => toggleFaq(index)}
+                  aria-expanded={openFaq === index}
+                  aria-controls={`faq-panel-${index}`}
+                  id={`faq-button-${index}`}
+                  className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-brand-cream/80 transition-colors"
+                >
+                  <span className="font-semibold text-brand-oxford">{item.question}</span>
+                  <ChevronDown
+                    className={`w-5 h-5 text-brand-copper transition-transform ${openFaq === index ? "rotate-180" : ""}`}
+                    aria-hidden="true"
+                  />
+                </button>
+                {openFaq === index && (
+                  <div
+                    id={`faq-panel-${index}`}
+                    role="region"
+                    aria-labelledby={`faq-button-${index}`}
+                    className="px-6 pb-4"
+                  >
+                    <p className="text-brand-slate">{item.answer}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

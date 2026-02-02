@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { FamilyProtectionClient } from "../../components/views/FamilyProtectionClient";
+import { FamilyProtectionClient } from "../../features/services/FamilyProtectionClient";
 import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
 import { StructuredData, schemas } from "../../components/StructuredData";

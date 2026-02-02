@@ -59,7 +59,7 @@ export function PricingComparisonTable({ mode }: PricingComparisonTableProps) {
   }
 
   const businessTiers = ["Core", "Growth", "Enterprise"];
-  const householdTiers = ["Solo", "Household", "Legacy", "Estate"];
+  const householdTiers = ["Solo", "Household", "Legacy Care", "Estate"];
   const incubationTiers = ["Incubator", "Hold Co"];
 
   const businessCategories: ComparisonCategory[] = [
@@ -69,7 +69,7 @@ export function PricingComparisonTable({ mode }: PricingComparisonTableProps) {
         {
           name: "Plan Users Included",
           tooltip: "Number of users included in the base price",
-          tiers: { Core: "2 Users", Growth: "2 Users", Enterprise: "2 Users" },
+          tiers: { Core: "Two Users", Growth: "Two Users", Enterprise: "Two Users" },
         },
         {
           name: "Unlimited Remote Support",
@@ -192,36 +192,36 @@ export function PricingComparisonTable({ mode }: PricingComparisonTableProps) {
           name: "Humans (and their devices) Included",
           tooltip: "Number of family members and their personal devices covered",
           tiers: {
-            Solo: "2 Humans",
-            Household: "4 Humans",
-            Legacy: "4 Humans",
-            Estate: "4 Humans",
+            Solo: "Two Humans",
+            Household: "Four Humans",
+            "Legacy Care": "Two Humans",
+            Estate: "Four Humans",
           },
         },
         {
           name: "Priority 'Red Button' Support",
           tooltip: "Immediate access to support team when you need us",
-          tiers: { Solo: false, Household: false, Legacy: true, Estate: true },
+          tiers: { Solo: false, Household: false, "Legacy Care": true, Estate: true },
         },
         {
-          name: "Digital Legacy Planning",
+          name: "Digital Legacy Care Planning",
           tooltip: "Organizing digital assets and accounts for next of kin",
-          tiers: { Solo: false, Household: false, Legacy: true, Estate: true },
+          tiers: { Solo: false, Household: false, "Legacy Care": true, Estate: true },
         },
         {
           name: "Family Proxy (God Mode)",
           tooltip: "Authorized family member access to accounts in emergencies",
-          tiers: { Solo: false, Household: false, Legacy: true, Estate: true },
+          tiers: { Solo: false, Household: true, "Legacy Care": true, Estate: true },
         },
         {
           name: "Home Network Management",
           tooltip: "Enterprise-grade Wi-Fi setup and ongoing optimization",
-          tiers: { Solo: false, Household: true, Legacy: true, Estate: true },
+          tiers: { Solo: false, Household: true, "Legacy Care": true, Estate: true },
         },
         {
           name: "ISP & Vendor Diplomacy",
           tooltip: "We deal with the cable company, phone company, and tech vendors for you",
-          tiers: { Solo: false, Household: false, Legacy: false, Estate: true },
+          tiers: { Solo: false, Household: false, "Legacy Care": true, Estate: true },
         },
       ],
     },
@@ -231,17 +231,17 @@ export function PricingComparisonTable({ mode }: PricingComparisonTableProps) {
         {
           name: "Remote Tech Support",
           tooltip: "Helpdesk for personal device and software issues",
-          tiers: { Solo: true, Household: true, Legacy: true, Estate: true },
+          tiers: { Solo: true, Household: true, "Legacy Care": true, Estate: true },
         },
         {
           name: "Email Admin (G-Suite/Microsoft 365)",
           tooltip: "Setup and management of personal email domains",
-          tiers: { Solo: true, Household: true, Legacy: true, Estate: true },
+          tiers: { Solo: true, Household: true, "Legacy Care": false, Estate: true },
         },
         {
           name: "Domain & Digital Asset Management",
           tooltip: "Secure registration, DNS, and renewal management for family domains",
-          tiers: { Solo: true, Household: true, Legacy: true, Estate: true },
+          tiers: { Solo: true, Household: true, "Legacy Care": false, Estate: true },
         },
       ],
     },
@@ -251,22 +251,22 @@ export function PricingComparisonTable({ mode }: PricingComparisonTableProps) {
         {
           name: "Enterprise Endpoint Security",
           tooltip: "Commercial-grade antivirus for personal devices",
-          tiers: { Solo: false, Household: true, Legacy: true, Estate: true },
+          tiers: { Solo: false, Household: true, "Legacy Care": true, Estate: true },
         },
         {
           name: "Identity Theft Monitoring",
           tooltip: "Dark web scanning and alert system",
-          tiers: { Solo: false, Household: true, Legacy: true, Estate: true },
+          tiers: { Solo: false, Household: true, "Legacy Care": true, Estate: true },
         },
         {
           name: "Content Filtering",
           tooltip: "Parental controls and granular device supervision",
-          tiers: { Solo: false, Household: true, Legacy: true, Estate: true },
+          tiers: { Solo: false, Household: true, "Legacy Care": true, Estate: true },
         },
         {
           name: "Fraud/Scam Air-Gapping",
           tooltip: "Aggressive filtering of unknown callers and emails",
-          tiers: { Solo: false, Household: false, Legacy: true, Estate: true },
+          tiers: { Solo: false, Household: false, "Legacy Care": true, Estate: true },
         },
       ],
     },

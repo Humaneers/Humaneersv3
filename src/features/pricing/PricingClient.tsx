@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { setSessionContext } from "@/lib/session";
-import { datadog } from "@/lib/datadog";
+
 import {
   Check,
   Shield,
@@ -49,7 +49,7 @@ export function PricingClient() {
       perUserPrice: 15,
       description: "Defense-grade security hygiene for lean teams.",
       features: [
-        "Includes 2 Free Users",
+        "Includes Two Free Users",
         "Unified Hybrid & Cloud Infrastructure",
         "Unlimited Premier Support",
         "Enterprise Endpoint Security",
@@ -69,7 +69,7 @@ export function PricingClient() {
       perUserPrice: 29,
       description: "Operational velocity and scalability for expanding brands.",
       features: [
-        "Includes 2 Free Users",
+        "Includes Two Free Users",
         "Everything in Core",
         "Strategic Growth Roadmap",
         "Priority On-site Support",
@@ -86,7 +86,7 @@ export function PricingClient() {
       perUserPrice: 49,
       description: "Strategic leadership and sovereignty for market leaders.",
       features: [
-        "Includes 2 Free Users",
+        "Includes Two Free Users",
         "Everything in Growth",
         "Americanization Strategy",
         "Fractional CIO Access",
@@ -112,7 +112,7 @@ export function PricingClient() {
       perUserPrice: 4,
       description: "Digital identity protection for high-profile individuals.",
       features: [
-        "Includes 2 Free Users",
+        "Includes One Free User",
         "Concierge Domain Management",
         "DNS Record Configuration",
         "Email (G-Suite/O365) Admin",
@@ -129,7 +129,7 @@ export function PricingClient() {
       perUserPrice: 9,
       description: "Cyber-physical security for the modern connected family.",
       features: [
-        "Includes 4 Free Users",
+        "Includes Four Free Users",
         "Enterprise Endpoint Protection (Mac/PC)",
         "Home Network Management",
         "Fleet Command (MDM)",
@@ -144,12 +144,11 @@ export function PricingClient() {
       ],
     },
     {
-      name: "Legacy",
+      name: "Legacy Care",
       basePrice: 49,
-      perUserPrice: 9,
       description: "Dignity, privacy, and fraud insulation for elders.",
       features: [
-        "Includes 4 Free Users",
+        "Includes Two Free Users",
         "Home WiFi Management",
         "Enterprise Endpoint Protection",
         "Content Filtering & Parental Controls",
@@ -170,7 +169,7 @@ export function PricingClient() {
       perUserPrice: 15,
       description: "Concierge technology management for multi-property estates.",
       features: [
-        "Includes 2 Free Users",
+        "Includes Two Free Users",
         "Everything in Household",
         "Custom Personal Email (@surname.com)",
         "Enterprise Wi-Fi Management",
@@ -190,7 +189,7 @@ export function PricingClient() {
       perUserPrice: "Cost",
       description: "Flat-rate service fee plus at-cost licensing.",
       features: [
-        "Includes 2 Free Users",
+        "Includes Two Free Users",
         "Flat Organization Service Fee",
         "Per-User Licensing Cost Only",
         "Unlimited Remote Support",
@@ -448,12 +447,7 @@ export function PricingClient() {
                   "I manage multiple operating entities and need centralized infrastructure.";
               }
 
-              datadog.trackAction("select_tier", {
-                tier: tierName,
-                mode: pricingMode,
-                basePrice: tier.basePrice,
-                source: "pricing_card_cta",
-              });
+
 
               openModal("sales", message, source);
             };
@@ -488,26 +482,28 @@ export function PricingClient() {
                       </span>
                       <span className="text-gray-500 text-sm font-medium">base / mo</span>
                     </div>
-                    <div className="flex items-baseline gap-2 text-brand-copper">
-                      <span className="text-xl font-bold">
-                        +{" "}
-                        {typeof tier.perUserPrice === "number"
-                          ? `$${tier.perUserPrice}`
-                          : tier.perUserPrice}
-                      </span>
-                      <span className="text-sm font-medium opacity-80">
-                        {pricingMode === "incubation"
-                          ? "/ asset costs"
-                          : "/ additional user / mo"}
-                      </span>
-                      <span className="ml-1 relative -top-1">
-                        <DefinitionTooltip
-                          term="*"
-                          definition="Base price covers infrastructure & support and includes your first 2 users. Per-user price applies for 3+ users."
-                          className="text-xs text-brand-copper/60 no-underline border-none"
-                        />
-                      </span>
-                    </div>
+                    {tier.perUserPrice !== undefined && (
+                      <div className="flex items-baseline gap-2 text-brand-copper">
+                        <span className="text-xl font-bold">
+                          +{" "}
+                          {typeof tier.perUserPrice === "number"
+                            ? `$${tier.perUserPrice}`
+                            : tier.perUserPrice}
+                        </span>
+                        <span className="text-sm font-medium opacity-80">
+                          {pricingMode === "incubation"
+                            ? "/ asset costs"
+                            : "/ additional user / mo"}
+                        </span>
+                        <span className="ml-1 relative -top-1">
+                          <DefinitionTooltip
+                            term="*"
+                            definition="Base price covers infrastructure & support and includes your first 2 users. Per-user price applies for 3+ users."
+                            className="text-xs text-brand-copper/60 no-underline border-none"
+                          />
+                        </span>
+                      </div>
+                    )}
                   </div>
                   <p className="text-sm text-gray-500 mb-8 h-10">{tier.description}</p>
 

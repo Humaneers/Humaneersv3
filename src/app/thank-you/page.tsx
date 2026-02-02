@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ThankYouClient } from "../../components/views/ThankYouClient";
+import { ThankYouClient } from "../../features/shared/ThankYouClient";
 
 export const metadata: Metadata = {
   title: "Humaneers | Thank You",

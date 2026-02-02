@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SupportClient } from "../../components/views/SupportClient";
+import { Support } from "../../features/support/Support";
 import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function SupportPage() {
   return (
     <Suspense fallback={<PageLoader />}>
-      <SupportClient />
+      <Support />
     </Suspense>
   );
 }

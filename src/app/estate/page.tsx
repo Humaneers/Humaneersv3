@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { EstateClient } from "../../components/views/EstateClient";
+import { EstateClient } from "../../features/industries/EstateClient";
 import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
 
