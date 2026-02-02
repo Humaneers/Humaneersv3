@@ -148,7 +148,6 @@ export function PricingClient() {
       basePrice: 49,
       description: "Dignity, privacy, and fraud insulation for elders.",
       features: [
-        "Includes Two Free Users",
         "Home WiFi Management",
         "Enterprise Endpoint Protection",
         "Content Filtering & Parental Controls",
@@ -482,30 +481,31 @@ export function PricingClient() {
                       </span>
                       <span className="text-gray-500 text-sm font-medium">base / mo</span>
                     </div>
-                    <div
-                      className={`flex items-baseline gap-2 ${tier.perUserPrice !== undefined
-                          ? "text-brand-copper"
-                          : "invisible pointer-events-none select-none"
-                        }`}
-                    >
-                      <span className="text-xl font-bold">
-                        +{" "}
-                        {typeof tier.perUserPrice === "number"
-                          ? `$${tier.perUserPrice}`
-                          : tier.perUserPrice || "$0"}
-                      </span>
-                      <span className="text-sm font-medium opacity-80">
-                        {pricingMode === "incubation"
-                          ? "/ asset costs"
-                          : "/ additional user / mo"}
-                      </span>
-                      <span className="ml-1 relative -top-1">
-                        <DefinitionTooltip
-                          term="*"
-                          definition="Base price covers infrastructure & support and includes your first 2 users. Per-user price applies for 3+ users."
-                          className="text-xs text-brand-copper/60 no-underline border-none"
-                        />
-                      </span>
+                    <div className="flex items-baseline gap-2 text-brand-copper">
+                      {tier.perUserPrice !== undefined ? (
+                        <>
+                          <span className="text-xl font-bold">
+                            +{" "}
+                            {typeof tier.perUserPrice === "number"
+                              ? `$${tier.perUserPrice}`
+                              : tier.perUserPrice}
+                          </span>
+                          <span className="text-sm font-medium opacity-80">
+                            {pricingMode === "incubation"
+                              ? "/ asset costs"
+                              : "/ additional user / mo"}
+                          </span>
+                          <span className="ml-1 relative -top-1">
+                            <DefinitionTooltip
+                              term="*"
+                              definition="Base price covers infrastructure & support and includes your first 2 users. Per-user price applies for 3+ users."
+                              className="text-xs text-brand-copper/60 no-underline border-none"
+                            />
+                          </span>
+                        </>
+                      ) : (
+                        <span className="text-lg font-bold mt-1">Two users included</span>
+                      )}
                     </div>
                   </div>
                   <p className="text-sm text-gray-500 mb-8 h-10">{tier.description}</p>
