@@ -556,251 +556,257 @@ export function PricingClient() {
         </div>
 
         <div className="mt-8 text-center text-xs text-brand-slate/60 text-balance max-w-2xl mx-auto mb-16">
-          <strong>Transparent Structure. Predictable Growth.</strong> We distinguish between
-          infrastructure (Base) and seat costs (Per User) to ensure efficiency at scale.
-          &quot;Users&quot; are active human accounts; we never charge for service accounts or
-          administrative aliases.
-        </div>
-
-        {/* Comparison Table */}
-        <PricingComparisonTable mode={pricingMode} />
-
-        {/* --- Trust Strip --- */}
-        <div className="mt-24 border-y border-gray-200 py-12">
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-50 grayscale transition-all hover:grayscale-0">
-            <div className="flex items-center gap-2 text-brand-oxford font-serif text-xl border-r pr-12 border-gray-200">
-              <Shield className="text-brand-copper" /> Security First
-            </div>
-            <div className="flex items-center gap-2 text-brand-oxford font-serif text-xl border-r pr-12 border-gray-200">
-              <Zap className="text-brand-copper" /> Rapid Response
-            </div>
-            <div className="flex items-center gap-2 text-brand-oxford font-serif text-xl">
-              <Users className="text-brand-copper" /> Human Experts
-            </div>
-          </div>
-        </div>
-
-        {/* --- Digital Asset Sovereignty --- */}
-        <div className="mt-12 max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-brand-slate to-brand-oxford rounded-2xl p-8 md:p-12 text-white relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid.svg')] opacity-10"></div>
-
-            <div className="relative z-10">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="bg-brand-cream/10 p-2 rounded-lg backdrop-blur-sm border border-white/10">
-                      <Zap className="w-6 h-6 text-brand-cream" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-white">Digital Asset Sovereignty</h3>
-                  </div>
-                  <p className="text-gray-300 max-w-xl">
-                    Your digital portfolio is your modern reputation. We secure it—managing domains,
-                    DNS, and email hosting so you're never held hostage by a provider.
-                  </p>
-                </div>
-                <div className="text-right shrink-0">
-                  <div className="text-4xl font-bold text-white mb-1">
-                    $15<span className="text-lg font-normal text-gray-400">/mo</span>
-                  </div>
-                  <div className="text-sm text-brand-cream font-medium">
-                    + pass-through domain fees
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-6 mb-8 border-t border-white/10 pt-8">
-                <div>
-                  <h4 className="font-bold mb-2 text-brand-cream">At-Cost Renewals</h4>
-                  <p className="text-sm text-gray-400">
-                    We pass through the direct cost of domain registration. No markup on the asset
-                    itself.
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-bold mb-2 text-brand-cream">DNS Management</h4>
-                  <p className="text-sm text-gray-400">
-                    We configure SPF, DKIM, and DMARC records to ensure your emails actually land in
-                    inbexes.
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-bold mb-2 text-brand-cream">Portfolio Security</h4>
-                  <p className="text-sm text-gray-400">
-                    Enterprise-grade locking and privacy protection to prevent unauthorized
-                    transfers.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex justify-center md:justify-start">
-                <Button
-                  onClick={() => {
-                    setSessionContext({ entrySource: "Pricing Page - Digital Concierge" });
-                    openModal(
-                      "sales",
-                      "I'm interested in the Digital Concierge service for domain and email management.",
-                      "Pricing Page - Digital Concierge"
-                    );
-                  }}
-                  className="bg-white text-brand-oxford hover:bg-gray-100 px-8 py-3 font-bold"
-                  withArrow
-                >
-                  Manage My Portfolio
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-20 max-w-4xl mx-auto">
-          <div className="bg-brand-oxford rounded-2xl p-8 md:p-12 text-white relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-copper opacity-10 rounded-full blur-3xl -mr-32 -mt-32"></div>
-
-            <div className="relative z-10">
-              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-8">
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="bg-brand-copper p-2 rounded-lg">
-                      <Clock className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-bold">Retainer & Hourly Packs</h3>
-                  </div>
-                  <p className="text-gray-300 max-w-xl">
-                    Need support but not ready for a monthly subscription? Purchase a bucket of
-                    hours that never expires. Perfect for one-off projects or seasonal help.
-                  </p>
-                </div>
-                <div className="text-right shrink-0">
-                  <div className="text-4xl font-bold text-white mb-1">
-                    $150<span className="text-lg font-normal text-gray-400">/hr</span>
-                    <span className="ml-1 relative -top-3">
-                      <DefinitionTooltip
-                        term="*"
-                        definition="Subject to Terms of Service. unused hours never expire."
-                        className="text-xs text-gray-400 no-underline border-none"
-                      />
-                    </span>
-                  </div>
-                  <div className="text-sm text-brand-copper font-medium">Sold in 10hr packs</div>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-6 mb-8 border-t border-gray-700 pt-8">
-                <div>
-                  <h4 className="font-bold mb-2 text-brand-copper">Flexible Usage</h4>
-                  <p className="text-sm text-gray-400">
-                    Use for IT support, strategy, or crisis response. Hours are deducted as we work.
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-bold mb-2 text-brand-copper">Never Expires</h4>
-                  <p className="text-sm text-gray-400">
-                    Your hours stay in your account forever. Use them next week or next year.
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-bold mb-2 text-brand-copper">Priority Queue</h4>
-                  <p className="text-sm text-gray-400">
-                    Retainer clients get priority scheduling over standard ad-hoc requests.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex justify-center md:justify-start">
-                <Button
-                  onClick={() => {
-                    setSessionContext({ entrySource: "Pricing Page - Hourly Pack" });
-                    openModal(
-                      "sales",
-                      "I'm interested in purchasing a 10-hour pack of support/strategy hours.",
-                      "Pricing Page - Hourly Pack"
-                    );
-                  }}
-                  className="bg-white text-brand-oxford hover:bg-gray-100 px-8 py-3 font-bold"
-                  withArrow
-                >
-                  Purchase Hours
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-24 max-w-3xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-brand-oxford mb-4">Executive Briefing</h2>
-            <p className="text-brand-slate">Anticipating your questions before you ask them.</p>
-          </div>
-          <div className="space-y-4">
-            {faqs.map((faq, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
-              >
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
-                >
-                  <span className="font-bold text-brand-oxford">{faq.question}</span>
-                  <ChevronDown
-                    className={`w-5 h-5 text-gray-400 transition-transform ${openFaq === i ? "rotate-180" : ""}`}
-                  />
-                </button>
-                {openFaq === i && (
-                  <div className="px-6 pb-6 text-brand-slate animate-in fade-in slide-in-from-top-2 duration-200 text-sm leading-relaxed">
-                    {faq.answer}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-24 text-center">
-          <h3 className="text-3xl font-bold text-brand-oxford mb-6">
-            Need a custom enterprise solution?
-          </h3>
-          <p className="text-brand-slate mb-12 max-w-2xl mx-auto text-lg">
-            We work with larger organizations to build custom infrastructure and growth plans.
+          <p>
+            <b>Transparent Structure. Predictable Growth. </b>Maintenance and support costs are fixed (base), while service delivery costs scale linearly (per-user).
+            A "user" is a human with an email account; we never charge for service
+            accounts, shared inboxes, or admin aliases.
           </p>
 
-          <div className="bg-white rounded-3xl shadow-xl overflow-hidden max-w-4xl mx-auto flex flex-col md:flex-row items-center border border-gray-100">
-            <div className="w-full md:w-1/3 relative h-64 md:h-auto self-stretch">
-              <Image
-                src="/team/lead_strategist.png"
-                alt="Lead Strategist"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="p-10 md:p-12 text-left flex-grow">
-              <MessageSquare className="w-10 h-10 text-brand-copper/20 mb-6" />
-              <blockquote className="text-xl italic text-brand-oxford mb-8">
-                "We don't just manage servers; we protect the people running them. Let's build a
-                plan that fits your culture."
-              </blockquote>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-bold text-brand-oxford">Sarah Chen</p>
-                  <p className="text-sm text-gray-500">Lead Technology Strategist</p>
-                </div>
+          <p><br></br>
+            Device allocations range from 5-12 managed devices per user depending on the tier.
+            <br></br>All active support plans include unlimited IoT devices.
+          </p>
+        </div>
+      </div>
 
-                <Button
-                  variant="outline"
-                  onClick={() =>
-                    openModal(
-                      "sales",
-                      "I'm interested in a custom enterprise solution or a strategic partnership.",
-                      "Pricing Page Enterprise CTA"
-                    )
-                  }
-                  className="border-brand-oxford text-brand-oxford hover:bg-brand-oxford hover:text-white px-8 py-6 font-bold"
-                  withArrow
-                >
-                  Contact Strategic Sales
-                </Button>
+      {/* Comparison Table */}
+      <PricingComparisonTable mode={pricingMode} />
+
+      {/* --- Trust Strip --- */}
+      <div className="mt-24 border-y border-gray-200 py-12">
+        <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-50 grayscale transition-all hover:grayscale-0">
+          <div className="flex items-center gap-2 text-brand-oxford font-serif text-xl border-r pr-12 border-gray-200">
+            <Shield className="text-brand-copper" /> Security First
+          </div>
+          <div className="flex items-center gap-2 text-brand-oxford font-serif text-xl border-r pr-12 border-gray-200">
+            <Zap className="text-brand-copper" /> Rapid Response
+          </div>
+          <div className="flex items-center gap-2 text-brand-oxford font-serif text-xl">
+            <Users className="text-brand-copper" /> Human Experts
+          </div>
+        </div>
+      </div>
+
+      {/* --- Digital Asset Sovereignty --- */}
+      <div className="mt-12 max-w-4xl mx-auto">
+        <div className="bg-gradient-to-br from-brand-slate to-brand-oxford rounded-2xl p-8 md:p-12 text-white relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid.svg')] opacity-10"></div>
+
+          <div className="relative z-10">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="bg-brand-cream/10 p-2 rounded-lg backdrop-blur-sm border border-white/10">
+                    <Zap className="w-6 h-6 text-brand-cream" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white">Digital Asset Sovereignty</h3>
+                </div>
+                <p className="text-gray-300 max-w-xl">
+                  Your digital portfolio is your modern reputation. We secure it—managing domains,
+                  DNS, and email hosting so you're never held hostage by a provider.
+                </p>
               </div>
+              <div className="text-right shrink-0">
+                <div className="text-4xl font-bold text-white mb-1">
+                  $15<span className="text-lg font-normal text-gray-400">/mo</span>
+                </div>
+                <div className="text-sm text-brand-cream font-medium">
+                  + pass-through domain fees
+                </div>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 mb-8 border-t border-white/10 pt-8">
+              <div>
+                <h4 className="font-bold mb-2 text-brand-cream">At-Cost Renewals</h4>
+                <p className="text-sm text-gray-400">
+                  We pass through the direct cost of domain registration. No markup on the asset
+                  itself.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-bold mb-2 text-brand-cream">DNS Management</h4>
+                <p className="text-sm text-gray-400">
+                  We configure SPF, DKIM, and DMARC records to ensure your emails actually land in
+                  inbexes.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-bold mb-2 text-brand-cream">Portfolio Security</h4>
+                <p className="text-sm text-gray-400">
+                  Enterprise-grade locking and privacy protection to prevent unauthorized
+                  transfers.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex justify-center md:justify-start">
+              <Button
+                onClick={() => {
+                  setSessionContext({ entrySource: "Pricing Page - Digital Concierge" });
+                  openModal(
+                    "sales",
+                    "I'm interested in the Digital Concierge service for domain and email management.",
+                    "Pricing Page - Digital Concierge"
+                  );
+                }}
+                className="bg-white text-brand-oxford hover:bg-gray-100 px-8 py-3 font-bold"
+                withArrow
+              >
+                Manage My Portfolio
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-20 max-w-4xl mx-auto">
+        <div className="bg-brand-oxford rounded-2xl p-8 md:p-12 text-white relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-brand-copper opacity-10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+
+          <div className="relative z-10">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-8">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="bg-brand-copper p-2 rounded-lg">
+                    <Clock className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold">Retainer & Hourly Packs</h3>
+                </div>
+                <p className="text-gray-300 max-w-xl">
+                  Need support but not ready for a monthly subscription? Purchase a bucket of
+                  hours that never expires. Perfect for one-off projects or seasonal help.
+                </p>
+              </div>
+              <div className="text-right shrink-0">
+                <div className="text-4xl font-bold text-white mb-1">
+                  $150<span className="text-lg font-normal text-gray-400">/hr</span>
+                  <span className="ml-1 relative -top-3">
+                    <DefinitionTooltip
+                      term="*"
+                      definition="Subject to Terms of Service. unused hours never expire."
+                      className="text-xs text-gray-400 no-underline border-none"
+                    />
+                  </span>
+                </div>
+                <div className="text-sm text-brand-copper font-medium">Sold in 10hr packs</div>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 mb-8 border-t border-gray-700 pt-8">
+              <div>
+                <h4 className="font-bold mb-2 text-brand-copper">Flexible Usage</h4>
+                <p className="text-sm text-gray-400">
+                  Use for IT support, strategy, or crisis response. Hours are deducted as we work.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-bold mb-2 text-brand-copper">Never Expires</h4>
+                <p className="text-sm text-gray-400">
+                  Your hours stay in your account forever. Use them next week or next year.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-bold mb-2 text-brand-copper">Priority Queue</h4>
+                <p className="text-sm text-gray-400">
+                  Retainer clients get priority scheduling over standard ad-hoc requests.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex justify-center md:justify-start">
+              <Button
+                onClick={() => {
+                  setSessionContext({ entrySource: "Pricing Page - Hourly Pack" });
+                  openModal(
+                    "sales",
+                    "I'm interested in purchasing a 10-hour pack of support/strategy hours.",
+                    "Pricing Page - Hourly Pack"
+                  );
+                }}
+                className="bg-white text-brand-oxford hover:bg-gray-100 px-8 py-3 font-bold"
+                withArrow
+              >
+                Purchase Hours
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-24 max-w-3xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-brand-oxford mb-4">Executive Briefing</h2>
+          <p className="text-brand-slate">Anticipating your questions before you ask them.</p>
+        </div>
+        <div className="space-y-4">
+          {faqs.map((faq, i) => (
+            <div
+              key={i}
+              className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
+            >
+              <button
+                onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                className="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+              >
+                <span className="font-bold text-brand-oxford">{faq.question}</span>
+                <ChevronDown
+                  className={`w-5 h-5 text-gray-400 transition-transform ${openFaq === i ? "rotate-180" : ""}`}
+                />
+              </button>
+              {openFaq === i && (
+                <div className="px-6 pb-6 text-brand-slate animate-in fade-in slide-in-from-top-2 duration-200 text-sm leading-relaxed">
+                  {faq.answer}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-24 text-center">
+        <h3 className="text-3xl font-bold text-brand-oxford mb-6">
+          Need a custom enterprise solution?
+        </h3>
+        <p className="text-brand-slate mb-12 max-w-2xl mx-auto text-lg">
+          We work with larger organizations to build custom infrastructure and growth plans.
+        </p>
+
+        <div className="bg-white rounded-3xl shadow-xl overflow-hidden max-w-4xl mx-auto flex flex-col md:flex-row items-center border border-gray-100">
+          <div className="w-full md:w-1/3 relative h-64 md:h-auto self-stretch">
+            <Image
+              src="/team/lead_strategist.png"
+              alt="Lead Strategist"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="p-10 md:p-12 text-left flex-grow">
+            <MessageSquare className="w-10 h-10 text-brand-copper/20 mb-6" />
+            <blockquote className="text-xl italic text-brand-oxford mb-8">
+              "We don't just manage servers; we protect the people running them. Let's build a
+              plan that fits your culture."
+            </blockquote>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-bold text-brand-oxford">Sarah Chen</p>
+                <p className="text-sm text-gray-500">Lead Technology Strategist</p>
+              </div>
+
+              <Button
+                variant="outline"
+                onClick={() =>
+                  openModal(
+                    "sales",
+                    "I'm interested in a custom enterprise solution or a strategic partnership.",
+                    "Pricing Page Enterprise CTA"
+                  )
+                }
+                className="border-brand-oxford text-brand-oxford hover:bg-brand-oxford hover:text-white px-8 py-6 font-bold"
+                withArrow
+              >
+                Contact Strategic Sales
+              </Button>
             </div>
           </div>
         </div>
