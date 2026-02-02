@@ -82,8 +82,8 @@ export function PricingClient() {
     },
     {
       name: "Enterprise",
-      basePrice: 499,
-      perUserPrice: 49,
+      basePrice: 399,
+      perUserPrice: 40,
       description: "Strategic leadership and sovereignty for market leaders.",
       features: [
         "Includes Two Free Users",
@@ -185,7 +185,7 @@ export function PricingClient() {
   const nonprofitTiers = [
     {
       name: "Nonprofit Foundation",
-      basePrice: 299,
+      basePrice: 199,
       perUserPrice: "Cost",
       description: "Flat-rate service fee plus at-cost licensing.",
       features: [
@@ -196,7 +196,7 @@ export function PricingClient() {
         "Donor Data Protection",
         "Volunteer Management",
       ],
-      cta: "Verify 501(c)(3)",
+      cta: "Verify 501(c)(3) Status",
       highlighted: true,
       links: [
         { label: "Nonprofit Details", icon: <Shield size={12} />, to: routePaths.nonProfits },
@@ -482,28 +482,31 @@ export function PricingClient() {
                       </span>
                       <span className="text-gray-500 text-sm font-medium">base / mo</span>
                     </div>
-                    {tier.perUserPrice !== undefined && (
-                      <div className="flex items-baseline gap-2 text-brand-copper">
-                        <span className="text-xl font-bold">
-                          +{" "}
-                          {typeof tier.perUserPrice === "number"
-                            ? `$${tier.perUserPrice}`
-                            : tier.perUserPrice}
-                        </span>
-                        <span className="text-sm font-medium opacity-80">
-                          {pricingMode === "incubation"
-                            ? "/ asset costs"
-                            : "/ additional user / mo"}
-                        </span>
-                        <span className="ml-1 relative -top-1">
-                          <DefinitionTooltip
-                            term="*"
-                            definition="Base price covers infrastructure & support and includes your first 2 users. Per-user price applies for 3+ users."
-                            className="text-xs text-brand-copper/60 no-underline border-none"
-                          />
-                        </span>
-                      </div>
-                    )}
+                    <div
+                      className={`flex items-baseline gap-2 ${tier.perUserPrice !== undefined
+                          ? "text-brand-copper"
+                          : "invisible pointer-events-none select-none"
+                        }`}
+                    >
+                      <span className="text-xl font-bold">
+                        +{" "}
+                        {typeof tier.perUserPrice === "number"
+                          ? `$${tier.perUserPrice}`
+                          : tier.perUserPrice || "$0"}
+                      </span>
+                      <span className="text-sm font-medium opacity-80">
+                        {pricingMode === "incubation"
+                          ? "/ asset costs"
+                          : "/ additional user / mo"}
+                      </span>
+                      <span className="ml-1 relative -top-1">
+                        <DefinitionTooltip
+                          term="*"
+                          definition="Base price covers infrastructure & support and includes your first 2 users. Per-user price applies for 3+ users."
+                          className="text-xs text-brand-copper/60 no-underline border-none"
+                        />
+                      </span>
+                    </div>
                   </div>
                   <p className="text-sm text-gray-500 mb-8 h-10">{tier.description}</p>
 
