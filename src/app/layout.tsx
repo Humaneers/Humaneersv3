@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import Script from "next/script";
 import "../styles/globals.css";
 import { Header } from "../components/layout/Header";
 import { Footer } from "../components/layout/Footer";
@@ -84,6 +85,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+        <Script
+          src="https://t.contentsquare.net/uxa/741b931013a01.js"
+          strategy="beforeInteractive"
+        />
         <StructuredData data={schemas.organization()} />
       </head>
       <body

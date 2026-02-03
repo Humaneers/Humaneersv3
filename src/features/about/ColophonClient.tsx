@@ -363,6 +363,87 @@ export function ColophonClient() {
 
               <div className="mt-8 pt-8 border-t border-gray-200">
                 <h3 className="font-bold text-brand-oxford mb-4 flex items-center gap-2">
+                  <Shield className="w-5 h-5 text-brand-copper" /> Analytics & Monitoring
+                </h3>
+                <p className="text-xs text-gray-500 mb-4">
+                  Analytics tools used to improve user experience and site performance. Loaded only with your explicit consent (except essential support chat).
+                </p>
+                <ul className="space-y-3 text-sm">
+                  <li className="flex flex-col gap-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium text-gray-700">Vercel Analytics</span>
+                      <a
+                        href="https://vercel.com/analytics"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-brand-copper hover:underline text-xs"
+                      >
+                        ↗
+                      </a>
+                    </div>
+                    <span className="text-xs text-gray-500">Privacy-friendly web analytics</span>
+                  </li>
+                  <li className="flex flex-col gap-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium text-gray-700">Vercel Speed Insights</span>
+                      <a
+                        href="https://vercel.com/docs/speed-insights"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-brand-copper hover:underline text-xs"
+                      >
+                        ↗
+                      </a>
+                    </div>
+                    <span className="text-xs text-gray-500">Core Web Vitals monitoring</span>
+                  </li>
+                  <li className="flex flex-col gap-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium text-gray-700">ContentSquare</span>
+                      <a
+                        href="https://contentsquare.com"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-brand-copper hover:underline text-xs"
+                      >
+                        ↗
+                      </a>
+                    </div>
+                    <span className="text-xs text-gray-500">Digital experience analytics</span>
+                  </li>
+                  <li className="flex flex-col gap-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium text-gray-700">Zoho PageSense</span>
+                      <a
+                        href="https://www.zoho.com/pagesense/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-brand-copper hover:underline text-xs"
+                      >
+                        ↗
+                      </a>
+                    </div>
+                    <span className="text-xs text-gray-500">Heatmaps & session recordings</span>
+                  </li>
+                  <li className="flex flex-col gap-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium text-gray-700">Zoho SalesIQ</span>
+                      <a
+                        href="https://www.zoho.com/salesiq/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-brand-copper hover:underline text-xs"
+                      >
+                        ↗
+                      </a>
+                    </div>
+                    <span className="text-xs text-gray-500">Live chat support (essential service)</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="mt-8 pt-8 border-t border-gray-200">
+                <h3 className="font-bold text-brand-oxford mb-4 flex items-center gap-2">
                   <Users className="w-5 h-5 text-brand-copper" /> Business Operations
                 </h3>
                 <p className="text-xs text-gray-500 mb-4">

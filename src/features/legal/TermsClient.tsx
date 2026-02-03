@@ -4,7 +4,7 @@ export function TermsClient() {
   return (
     <div className="container mx-auto px-6 py-24 max-w-4xl text-brand-slate text-lg leading-relaxed">
       <h1 className="text-4xl md:text-5xl font-bold text-brand-oxford mb-8">Terms of Service</h1>
-      <p className="mb-4">Last updated: Jan 21, 2026</p>
+      <p className="mb-4">Last updated: Feb 2, 2026</p>
 
       <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">1. Agreement to Terms</h2>
       <p>
