@@ -13,7 +13,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Check, AlertCircle, Loader2, Lock } from "lucide-react";
+import { AlertCircle, Loader2, Lock } from "lucide-react";
+import { FormSuccessDisplay } from "@/components/FormSuccessDisplay";
 
 // --- Types ---
 interface FormStatus {
@@ -103,18 +104,11 @@ function SalesForm() {
   if (status.state === "success") {
     return (
       <div
-        className="flex flex-col items-center justify-center py-12 text-center animate-in fade-in duration-300"
+        className="py-6 animate-in fade-in duration-300"
         role="status"
         aria-live="polite"
       >
-        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-          <Check className="w-8 h-8 text-green-600" aria-hidden="true" />
-        </div>
-        <h3 className="text-xl font-bold text-brand-oxford mb-2">Message Received</h3>
-        <p className="text-gray-600 max-w-xs mx-auto">
-          Thanks for reaching out. A human from our team will review your inquiry and get back to
-          you shortly.
-        </p>
+        <FormSuccessDisplay type="sales" />
       </div>
     );
   }
@@ -336,17 +330,11 @@ function SupportForm() {
   if (status.state === "success") {
     return (
       <div
-        className="flex flex-col items-center justify-center py-12 text-center animate-in zoom-in-95 duration-300"
+        className="py-6 animate-in zoom-in-95 duration-300"
         role="status"
         aria-live="polite"
       >
-        <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-          <Check className="w-8 h-8 text-blue-600" aria-hidden="true" />
-        </div>
-        <h3 className="text-xl font-bold text-brand-oxford mb-2">Ticket Created</h3>
-        <p className="text-gray-600 max-w-xs mx-auto">
-          Your support request has been logged. You will receive a confirmation email shortly.
-        </p>
+        <FormSuccessDisplay type="support" />
       </div>
     );
   }
@@ -581,17 +569,11 @@ function NewsletterForm() {
   if (status.state === "success") {
     return (
       <div
-        className="flex flex-col items-center justify-center py-12 text-center animate-in zoom-in-95 duration-300"
+        className="py-6 animate-in zoom-in-95 duration-300"
         role="status"
         aria-live="polite"
       >
-        <div className="w-16 h-16 bg-brand-copper/20 rounded-full flex items-center justify-center mb-4">
-          <Check className="w-8 h-8 text-brand-copper" aria-hidden="true" />
-        </div>
-        <h3 className="text-xl font-bold text-brand-oxford mb-2">Subscribed!</h3>
-        <p className="text-gray-600 max-w-xs mx-auto">
-          You're on the list. Watch your inbox for updates.
-        </p>
+        <FormSuccessDisplay type="newsletter" />
       </div>
     );
   }
