@@ -108,8 +108,8 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="text-sm leading-relaxed hover:text-white transition-colors text-center md:text-left"
               >
-                60 E Rio Salado Pkwy <br />
-                Suite 900, Tempe, AZ 85281
+                60 East Rio Salado Parkway <br />
+                Suite 900 <br />Tempe, Arizona 85281
               </a>
             </div>
           </div>
@@ -143,7 +143,7 @@ export function Footer() {
             </p>
             <p className="text-[10px] text-gray-600 text-left md:text-right max-w-xs leading-relaxed">
               Read our <Link href="/colophon">Intellectual Property Policy</Link>
-            </p>  
+            </p>
           </div>
         </div>
       </div>

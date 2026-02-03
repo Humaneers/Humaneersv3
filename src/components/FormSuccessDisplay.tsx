@@ -27,7 +27,7 @@ export function FormSuccessDisplay({
       sales:
         "Thank you for your interest! We'll be in touch within 24 hours to discuss how we can help.",
       support:
-        "Your support request has been received. Our team will respond within 4 hours during business hours.",
+        "Your support request has been received. Our team will respond within four business hours.",
       newsletter: "Welcome! You've been successfully subscribed to our newsletter.",
     };
 
