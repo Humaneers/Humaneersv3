@@ -18,42 +18,54 @@ export function ZohoTracking() {
 
     useEffect(() => {
         // Only track if consent is given or initialized
-        // Note: Zoho SalesIQ often loads regardless for support, but PageSense respects analytics consent
         if (!pathname) return;
 
-        let url = window.location.origin + pathname;
-        if (searchParams && searchParams.toString()) {
-            url += `?${searchParams.toString()}`;
-        }
+        // 1. Identify User from URL (e.g. newsletter clickthroughs)
+        const email = searchParams.get("email");
+        const name = searchParams.get("name");
 
-        // Zoho PageSense - Manual Virtual Page View
-        if (typeof window !== "undefined" && (window as any).Pagesense) {
-            try {
-                // Force PageSense to re-evaluate experiments/heatmaps for the new URL
-                // Currently utilizing private/undocumented API pattern common for SPAs if standard history API hook fails
-                // But standard PageSense should auto-detect. 
-                // If not, we can re-trigger:
-                // window.Pagesense.auto_submit = false; 
-                // window.Pagesense.track();
-
-                // However, standard PageSense usually hooks History API. 
-                // If the user specificially asked, we can verify by logging or triggering a custom event.
-
-                // Safer approach for pure analytics: push a custom event just in case
-                // window.Pagesense.trackCustomEvent('Page View', { url });
-            } catch (e) {
-                console.warn("Zoho PageSense tracking error:", e);
+        if (email) {
+            // SalesIQ
+            if (window.$zoho?.salesiq) {
+                window.$zoho.salesiq.visitor.email(email);
+                if (name) window.$zoho.salesiq.visitor.name(name);
             }
         }
 
-        // Zoho SalesIQ - API to update current page info if it gets stuck
-        if (typeof window !== "undefined" && window.$zoho?.salesiq) {
+        // 2. Push Session Context to SalesIQ
+        // We defer slightly to ensure the session is initialized
+        setTimeout(() => {
+            if (typeof window !== "undefined" && window.$zoho?.salesiq) {
+                // Read latest session context (it's in sessionStorage)
+                // We import dynamically or just read from storage to avoid hydration mismatches, 
+                // but simpler to just trust the stored session if available.
+                try {
+                    const sessionData = sessionStorage.getItem("humaneers_session_v1");
+                    if (sessionData) {
+                        const ctx = JSON.parse(sessionData);
+                        const info: any = {};
+                        if (ctx.segment) info["Segment"] = ctx.segment;
+                        if (ctx.entrySource) info["Entry Source"] = ctx.entrySource;
+                        if (ctx.landingPage) info["Landing Page"] = ctx.landingPage;
+
+                        window.$zoho.salesiq.visitor.info(info);
+                    }
+                } catch (e) {
+                    // ignore
+                }
+            }
+        }, 1000);
+
+        // 3. Zoho PageSense - Virtual Page View
+        if (typeof window !== "undefined" && (window as any).Pagesense) {
             try {
-                // SalesIQ automatically hooks into History API usually.
-                // But we can force a track event if needed.
-                // window.$zoho.salesiq.track(pathname); // 'track' is generic, check if valid
+                const pagesense = (window as any).Pagesense;
+                if (email) pagesense.user?.email(email);
+
+                // Track page view for SPA
+                // Standard PageSense snippet handles history, but we can hint it if needed
             } catch (e) {
-                console.warn("Zoho SalesIQ tracking error:", e);
+                console.warn("Zoho PageSense tracking error:", e);
             }
         }
 
