@@ -1,9 +1,6 @@
 import { z } from "zod";
 import { validateEnv } from "./env";
 
-// Validate environment variables on module load
-validateEnv();
-
 // --- Configuration & Constants ---
 
 const ZOHO_CONFIG = {
@@ -86,6 +83,9 @@ let tokenExpiry: number = 0;
  * Implements basic in-memory caching to reduce latency.
  */
 export async function getZohoAccessToken(): Promise<string> {
+  // Validate env vars at runtime (not build time) to avoid Cloudflare build failures
+  validateEnv();
+
   const now = Date.now();
 
   // Use cached token if valid (with 30s buffer)

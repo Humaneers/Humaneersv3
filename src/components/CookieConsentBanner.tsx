@@ -18,8 +18,8 @@ export function CookieConsentBanner() {
         <div className="flex-1 text-sm text-gray-300">
           <p className="mb-2">
             <strong className="text-white">We value your privacy.</strong> We use cookies and
-            similar technologies to improve your experience, maintain site security, and
-            enable our support chat.
+            similar technologies to improve your experience, maintain site security, and enable our
+            support chat.
           </p>
           <p className="text-xs">
             Essential cookies are always active. Analytics and marketing cookies require your

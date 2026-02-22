@@ -2,7 +2,6 @@
 
 import { createContext, useContext, useState, ReactNode } from "react";
 
-
 type ModalTab = "sales" | "support" | "newsletter" | "general";
 
 interface ContactModalContextType {
@@ -31,8 +30,6 @@ export function ContactModalProvider({ children }: { children: ReactNode }) {
     setPrefillMessage(message);
     setSource(source);
     setIsOpen(true);
-
-
   };
 
   const closeModal = () => {

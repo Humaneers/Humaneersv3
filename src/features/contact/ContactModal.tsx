@@ -103,11 +103,7 @@ function SalesForm() {
 
   if (status.state === "success") {
     return (
-      <div
-        className="py-6 animate-in fade-in duration-300"
-        role="status"
-        aria-live="polite"
-      >
+      <div className="py-6 animate-in fade-in duration-300" role="status" aria-live="polite">
         <FormSuccessDisplay type="sales" />
       </div>
     );
@@ -329,11 +325,7 @@ function SupportForm() {
 
   if (status.state === "success") {
     return (
-      <div
-        className="py-6 animate-in zoom-in-95 duration-300"
-        role="status"
-        aria-live="polite"
-      >
+      <div className="py-6 animate-in zoom-in-95 duration-300" role="status" aria-live="polite">
         <FormSuccessDisplay type="support" />
       </div>
     );
@@ -568,11 +560,7 @@ function NewsletterForm() {
 
   if (status.state === "success") {
     return (
-      <div
-        className="py-6 animate-in zoom-in-95 duration-300"
-        role="status"
-        aria-live="polite"
-      >
+      <div className="py-6 animate-in zoom-in-95 duration-300" role="status" aria-live="polite">
         <FormSuccessDisplay type="newsletter" />
       </div>
     );

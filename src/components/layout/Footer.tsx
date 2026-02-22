@@ -109,7 +109,8 @@ export function Footer() {
                 className="text-sm leading-relaxed hover:text-white transition-colors text-center md:text-left"
               >
                 60 East Rio Salado Parkway <br />
-                Suite 900 <br />Tempe, Arizona 85281
+                Suite 900 <br />
+                Tempe, Arizona 85281
               </a>
             </div>
           </div>
@@ -131,7 +132,9 @@ export function Footer() {
           {/* Rights & Identity */}
           <div className="flex flex-col items-start md:items-end gap-4 w-full">
             <div className="flex items-center gap-3">
-              <span className="text-xs text-gray-500 italic">Built by humans in Arizona & Texas with ❤️ + ☕️</span>
+              <span className="text-xs text-gray-500 italic">
+                Built by humans in Arizona & Texas with ❤️ + ☕️
+              </span>
               <span className="w-[1px] h-4 bg-white/10 hidden sm:block"></span>
               <span className="text-[10px] text-gray-600 font-mono py-1 px-2 bg-white/5 rounded">
                 v{APP_VERSION}
@@ -139,7 +142,9 @@ export function Footer() {
             </div>
             <p className="text-[10px] text-gray-600 text-left md:text-right max-w-xs leading-relaxed">
               &copy; {new Date().getFullYear()} Humaneers Limited Company. <br />
-              Humaneers is a trademark of Human IP LP; used under license. All non-Humaneers trademarks, trade names, product names, service marks and other marks are the property of their respective owners.
+              Humaneers is a trademark of Human IP LP; used under license. All non-Humaneers
+              trademarks, trade names, product names, service marks and other marks are the property
+              of their respective owners.
             </p>
             <p className="text-[10px] text-gray-600 text-left md:text-right max-w-xs leading-relaxed">
               Read our <Link href="/colophon">Intellectual Property Policy</Link>

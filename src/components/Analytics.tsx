@@ -36,7 +36,6 @@ export function Analytics() {
           <VercelAnalytics />
           <SpeedInsights />
 
-
           {/* Zoho SPA Tracking */}
           <ZohoTracking />
 
@@ -46,8 +45,6 @@ export function Analytics() {
             src="https://cdn.pagesense.io/js/911811328/0172b61c43a2473c98eef23da6d865af.js"
             strategy="lazyOnload"
           />
-
-
         </>
       )}
     </>
