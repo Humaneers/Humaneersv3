@@ -2,8 +2,11 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ShieldCheck, AlertCircle } from "lucide-react";
+import { useContactModal } from "@/components/providers/ContactModalProvider";
+import { Button } from "@/components/ui/button";
 
 export function TalkToSalesClient() {
+  const { openModal } = useContactModal();
   return (
     <div className="bg-brand-cream min-h-screen">
       <div className="bg-brand-oxford text-white py-16">
@@ -71,6 +74,21 @@ export function TalkToSalesClient() {
                 technical support under an active service agreement, please proceed to the support
                 section.
               </div>
+
+              <div className="w-full max-w-md mx-auto p-5 bg-brand-cream rounded-xl border border-brand-copper/20 text-center mb-6 animate-in fade-in duration-300">
+                <p className="text-sm text-brand-slate mb-4 font-medium leading-relaxed">
+                  While we cannot accept new clients at this time, we encourage you to subscribe to
+                  our newsletter, <strong>The Human Brief</strong>, to receive strategic insights
+                  and be notified as soon as we open capacity.
+                </p>
+                <Button
+                  onClick={() => openModal("newsletter")}
+                  className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white font-bold uppercase tracking-wider text-xs py-3 h-auto cursor-pointer"
+                >
+                  Subscribe to The Human Brief
+                </Button>
+              </div>
+
               <p className="text-xs text-gray-500">
                 Please check back later or contact{" "}
                 <a

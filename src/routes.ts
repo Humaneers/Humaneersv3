@@ -14,7 +14,7 @@ export const routePaths = {
   venture: "/venture-portfolio",
   services: "/services",
   talkToSales: "/talk-to-sales",
-  personal: "/personal",
+  personal: "/personal-it",
   estate: "/estate",
   seniorCare: "/senior-care",
   crisisManagement: "/crisis-management",
@@ -24,7 +24,6 @@ export const routePaths = {
   status: "/status",
   support: "/support",
   clientCare: "/client-care",
-  changelog: "/changelog",
 } as const;
 
 export type RoutePath = (typeof routePaths)[keyof typeof routePaths];
