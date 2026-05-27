@@ -24,13 +24,23 @@ function SalesForm() {
       </div>
       <h3 className="text-xl font-bold text-brand-oxford mb-3">Service Capacity Reached</h3>
       <p className="text-brand-slate text-sm max-w-sm mx-auto mb-6 leading-relaxed">
-        We appreciate your interest in Humaneers. Due to high demand and our commitment to maintaining enterprise-grade standards for our active partners, we have reached our capacity for new clients at this time.
+        We appreciate your interest in Humaneers. Due to high demand and our commitment to
+        maintaining enterprise-grade standards for our active partners, we have reached our capacity
+        for new clients at this time.
       </p>
       <div className="p-4 bg-gray-50 rounded-xl border border-gray-100 max-w-sm mx-auto text-xs text-brand-slate">
-        <strong>Existing Partners:</strong> If you are an active client needing assistance, please switch to the <strong>Support</strong> tab.
+        <strong>Existing Partners:</strong> If you are an active client needing assistance, please
+        switch to the <strong>Support</strong> tab.
       </div>
       <p className="text-[11px] text-gray-400 mt-6">
-        Please check back later or contact <a href="mailto:hello@humaneers.dev" className="text-brand-copper hover:underline font-semibold">hello@humaneers.dev</a> for inquiries.
+        Please check back later or contact{" "}
+        <a
+          href="mailto:hello@humaneers.dev"
+          className="text-brand-copper hover:underline font-semibold"
+        >
+          hello@humaneers.dev
+        </a>{" "}
+        for inquiries.
       </p>
     </div>
   );
@@ -50,13 +60,23 @@ function SupportForm() {
         </div>
         <h3 className="text-xl font-bold text-brand-oxford mb-3">Service Capacity Reached</h3>
         <p className="text-brand-slate text-sm max-w-sm mx-auto mb-6 leading-relaxed">
-          We appreciate your interest. Due to high demand and our commitment to maintaining enterprise-grade standards for our existing partners, we have reached our capacity for new clients and new rapid response engagements at this time.
+          We appreciate your interest. Due to high demand and our commitment to maintaining
+          enterprise-grade standards for our existing partners, we have reached our capacity for new
+          clients and new rapid response engagements at this time.
         </p>
         <div className="p-4 bg-gray-50 rounded-xl border border-gray-100 max-w-sm mx-auto text-xs text-brand-slate">
-          <strong>Existing Partners:</strong> Active clients requiring emergency dispatch should contact their dedicated command line directly.
+          <strong>Existing Partners:</strong> Active clients requiring emergency dispatch should
+          contact their dedicated command line directly.
         </div>
         <p className="text-[11px] text-gray-400 mt-6">
-          Please check back later or contact <a href="mailto:hello@humaneers.dev" className="text-brand-copper hover:underline font-semibold">hello@humaneers.dev</a> for inquiries.
+          Please check back later or contact{" "}
+          <a
+            href="mailto:hello@humaneers.dev"
+            className="text-brand-copper hover:underline font-semibold"
+          >
+            hello@humaneers.dev
+          </a>{" "}
+          for inquiries.
         </p>
       </div>
     );

@@ -62,13 +62,24 @@ export function TalkToSalesClient() {
             </CardHeader>
             <CardContent className="text-center py-6">
               <p className="text-brand-slate text-base leading-relaxed mb-6 max-w-md mx-auto">
-                We appreciate your interest in Humaneers. Due to exceptionally high demand and our commitment to maintaining enterprise-grade standards for our existing partners, we have reached our capacity for new clients at this time.
+                We appreciate your interest in Humaneers. Due to exceptionally high demand and our
+                commitment to maintaining enterprise-grade standards for our existing partners, we
+                have reached our capacity for new clients at this time.
               </p>
               <div className="p-4 bg-gray-50 rounded-xl border border-gray-100 max-w-md mx-auto text-sm text-brand-slate mb-6">
-                <strong>Existing Clients & Support:</strong> If you are an active partner or need technical support under an active service agreement, please proceed to the support section.
+                <strong>Existing Clients & Support:</strong> If you are an active partner or need
+                technical support under an active service agreement, please proceed to the support
+                section.
               </div>
               <p className="text-xs text-gray-500">
-                Please check back later or contact <a href="mailto:hello@humaneers.dev" className="text-brand-copper hover:underline font-semibold">hello@humaneers.dev</a> for general inquiries.
+                Please check back later or contact{" "}
+                <a
+                  href="mailto:hello@humaneers.dev"
+                  className="text-brand-copper hover:underline font-semibold"
+                >
+                  hello@humaneers.dev
+                </a>{" "}
+                for general inquiries.
               </p>
             </CardContent>
           </Card>
