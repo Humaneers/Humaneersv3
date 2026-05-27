@@ -116,7 +116,7 @@ export function StatusClient() {
                 <h4 className="font-bold text-brand-oxford">
                   Minor Service Disruption - Client Portal
                 </h4>
-                <div className="text-sm text-gray-500 mb-2">Dec 14, 2024 - Resolved</div>
+                <div className="text-sm text-gray-500 mb-2">May 14, 2026 - Resolved</div>
                 <p className="text-sm text-brand-slate">
                   A scheduled database maintenance window caused slightly higher latency than
                   expected for approximately 12 minutes. No data was lost.
@@ -141,7 +141,7 @@ export function StatusClient() {
                 We will be upgrading our core switch firmware. Brief intermittent connectivity may
                 occur during the 2am - 4am EST window.
               </p>
-              <div className="text-xs text-gray-500">Scheduled for: Jan 15, 2025</div>
+              <div className="text-xs text-gray-500">Scheduled for: July 15, 2026</div>
             </div>
           </div>
         </div>

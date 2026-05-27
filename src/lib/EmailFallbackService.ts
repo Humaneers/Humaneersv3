@@ -258,7 +258,7 @@ Generated at: ${new Date().toISOString()}
         <div class="footer">
           <p>This confirmation was sent because our primary system experienced a temporary issue.</p>
           <p>Your submission has been received and will be processed normally.</p>
-          <p>&copy; 2024 Humaneers. All rights reserved.</p>
+          <p>&copy; 2026 Humaneers. All rights reserved.</p>
         </div>
       </body>
       </html>
@@ -323,7 +323,7 @@ Business Hours: Monday-Friday, 9 AM - 6 PM EST
 This confirmation was sent because our primary system experienced a temporary issue.
 Your submission has been received and will be processed normally.
 
-© 2024 Humaneers. All rights reserved.
+© 2026 Humaneers. All rights reserved.
     `;
     return baseText;
   }
