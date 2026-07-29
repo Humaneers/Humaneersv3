@@ -9,7 +9,7 @@ export function TermsClient() {
       <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">1. Agreement to Terms</h2>
       <p>
         These Terms of Service ("Terms") constitute a legally binding agreement between you (whether
-        personally or on behalf of an entity) and Humaneers Limited Company ("Humaneers," "we,"
+        personally or on behalf of an entity) and Humaneers, LLC ("Humaneers," "we,"
         "us," or "our") concerning your access to and use of our website and services. By accessing
         our website or engaging our services, you agree to be bound by these Terms and our Privacy
         Policy. If you do not agree with these Terms, you must not access the website or use our
@@ -407,7 +407,7 @@ export function TermsClient() {
       <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">19. Contact Information</h2>
       <p>For questions about these Terms or our services, please contact:</p>
       <p className="mt-4">
-        <strong>Humaneers Limited Company</strong>
+        <strong>Humaneers, LLC</strong>
         <br />
         Email:{" "}
         <a href="mailto:hello@humaneers.dev" className="text-brand-copper hover:underline">

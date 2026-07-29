@@ -447,7 +447,7 @@ export function Layout() {
               Built in Arizona & Texas by humans with ❤️ + ☕️.
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-1">
-              <span>&copy; {new Date().getFullYear()} Humaneers Limited Company.</span>
+              <span>&copy; {new Date().getFullYear()} Humaneers, LLC.</span>
               <span className="text-white/20">v{APP_VERSION}</span>
             </div>
             <p className="leading-tight opacity-60 max-w-lg">

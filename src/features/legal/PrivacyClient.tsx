@@ -8,7 +8,7 @@ export function PrivacyClient() {
 
       <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">1. Introduction</h2>
       <p>
-        Humaneers Limited Company ("we," "our," or "us") respects your privacy and is committed to
+        Humaneers, LLC ("we," "our," or "us") respects your privacy and is committed to
         protecting your personal data. This privacy policy explains how we collect, use, and protect
         your information when you visit our website or use our services, and informs you about your
         privacy rights under applicable laws including GDPR and CCPA.
@@ -342,7 +342,7 @@ export function PrivacyClient() {
         concerns, please contact:
       </p>
       <p className="mt-4">
-        <strong>Humaneers Limited Company</strong>
+        <strong>Humaneers, LLC</strong>
         <br />
         Email:{" "}
         <a href="mailto:privacy@humaneers.dev" className="text-brand-copper hover:underline">
