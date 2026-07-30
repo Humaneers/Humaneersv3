@@ -121,15 +121,10 @@ export function HomeClient() {
                 Security & Trust You Can Rely On
               </h2>
               <p className="text-brand-slate mb-8 text-lg leading-relaxed">
-                We take security seriously. All of our services are SOC 2 compliant and we are proud
-                to be 100% US-based. Your data never leaves domestic soil without your explicit
-                permission.
+                We take security seriously. We are proud to be 100% US-based. Your data never leaves
+                domestic soil without your explicit permission.
               </p>
               <div className="flex flex-wrap gap-4">
-                <div className="bg-white/60 backdrop-blur-md px-4 py-3 rounded-xl border border-white/40 flex items-center gap-2 font-bold text-brand-oxford shadow-sm transition-all hover:bg-white/80">
-                  <Shield size={18} className="text-brand-copper" aria-hidden="true" /> SOC 2
-                  Compliant
-                </div>
                 <div className="bg-white/60 backdrop-blur-md px-4 py-3 rounded-xl border border-white/40 flex items-center gap-2 font-bold text-brand-oxford shadow-sm transition-all hover:bg-white/80">
                   <MapPin size={18} className="text-brand-copper" aria-hidden="true" /> 100%
                   US-Based

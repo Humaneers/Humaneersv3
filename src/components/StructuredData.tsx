@@ -78,7 +78,7 @@ export const schemas = {
     name: "Humaneers",
     image: "https://humaneers.dev/og-image.jpg",
     description:
-      "SOC 2 compliant managed IT, cybersecurity, and brand growth for businesses and families. Offices in Tempe AZ, El Paso TX, and Flint MI.",
+      "Managed IT, cybersecurity, and brand growth for businesses and families. Offices in Tempe AZ, El Paso TX, and Flint MI.",
     address: [
       {
         "@type": "PostalAddress",

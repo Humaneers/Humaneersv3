@@ -13,7 +13,6 @@ import {
   Heart,
   Building2,
 } from "lucide-react";
-import { DefinitionTooltip } from "@/components/DefinitionTooltip";
 import { routePaths } from "../../routes";
 import Image from "next/image";
 
@@ -210,13 +209,8 @@ export function ServicesClient() {
               </p>
             </div>
             <div className="p-6">
-              <div className="text-4xl font-bold text-brand-copper mb-4 flex items-center justify-center gap-2">
-                <DefinitionTooltip
-                  term="SOC 2"
-                  definition="System and Organization Controls 2: An auditing procedure that ensures service providers securely manage your data to protect the interests of your organization and the privacy of its clients."
-                />
-              </div>
-              <h3 className="text-xl font-bold text-brand-oxford mb-2">Compliant</h3>
+              <div className="text-4xl font-bold text-brand-copper mb-4">AES-256</div>
+              <h3 className="text-xl font-bold text-brand-oxford mb-2">Encrypted</h3>
               <p className="text-brand-slate">
                 Enterprise-grade security controls applied to every client, big or small.
               </p>

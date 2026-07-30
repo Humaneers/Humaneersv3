@@ -265,11 +265,13 @@ export function ColophonClient() {
               </h3>
               <div className="flex items-center gap-3 mb-2">
                 <ShieldCheck className="w-8 h-8 text-brand-copper shrink-0" />
-                <span className="font-bold text-brand-oxford">SOC 2 Type II Compliant</span>
+                <span className="font-bold text-brand-oxford">
+                  Encrypted in Transit and at Rest
+                </span>
               </div>
               <p className="text-xs text-brand-slate">
-                We independently audit our controls to ensure client data security, availability,
-                and confidentiality.
+                Client data is encrypted with TLS 1.2+ in transit and AES-256 at rest, and
+                multi-factor authentication is required for all administrative access.
               </p>
             </div>
 

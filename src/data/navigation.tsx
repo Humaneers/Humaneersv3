@@ -83,7 +83,7 @@ export const navSections: NavSection[] = [
       },
       {
         title: "Cybersecurity Center",
-        description: "SOC 2 compliant endpoint protection and monitoring.",
+        description: "Enterprise endpoint protection and monitoring.",
         to: routePaths.familyProtection,
       },
       {

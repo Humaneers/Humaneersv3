@@ -42,7 +42,7 @@ export function ManagedITClient() {
     },
     {
       icon: <Shield className="w-6 h-6 text-brand-copper" />,
-      title: "SOC 2 Type II Security",
+      title: "Endpoint Security & Monitoring",
       desc: "Enterprise-grade endpoint protection, DNS filtering, and 24/7 SOC monitoring included.",
       moreInfo: "Behavioral AI analysis.",
     },
@@ -103,8 +103,7 @@ export function ManagedITClient() {
             <span className="text-brand-copper">So You Don't Have To.</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">
-            Enterprise-grade infrastructure, US-based support, and SOC 2 security—scaled for small
-            business budgets.
+            Enterprise-grade infrastructure and US-based support—scaled for small business budgets.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
@@ -123,9 +122,6 @@ export function ManagedITClient() {
             </Button>
           </div>
           <div className="mt-12 flex items-center justify-center gap-8 text-sm text-gray-400 font-medium">
-            <div className="flex items-center gap-2">
-              <Shield className="w-5 h-5 text-brand-copper" /> SOC 2 Compliant
-            </div>
             <div className="flex items-center gap-2">
               <MapPin className="w-5 h-5 text-brand-copper" /> 100% US-Based
             </div>

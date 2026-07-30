@@ -7,14 +7,14 @@ import { StructuredData, schemas } from "../../components/StructuredData";
 export const metadata: Metadata = {
   title: "Humaneers | Managed IT Services | US-Based Support",
   description:
-    "Enterprise-grade managed IT for small businesses. 100% US-based helpdesk, hybrid cloud infrastructure, and SOC 2 security compliance.",
+    "Enterprise-grade managed IT for small businesses. 100% US-based helpdesk and hybrid cloud infrastructure.",
   alternates: {
     canonical: "/managed-it",
   },
   openGraph: {
     title: "Humaneers | Managed IT Services | US-Based Support",
     description:
-      "Enterprise-grade managed IT for small businesses. 100% US-based helpdesk, hybrid cloud infrastructure, and SOC 2 security compliance.",
+      "Enterprise-grade managed IT for small businesses. 100% US-based helpdesk and hybrid cloud infrastructure.",
     url: "https://humaneers.dev/managed-it",
     type: "website",
     images: [
@@ -41,7 +41,7 @@ export default function ManagedITPage() {
         data={[
           schemas.service(
             "IT Support",
-            "Enterprise-grade managed IT for small businesses. 100% US-based helpdesk and SOC 2 security."
+            "Enterprise-grade managed IT for small businesses. 100% US-based helpdesk."
           ),
           schemas.breadcrumb([
             { name: "Home", url: "https://humaneers.dev" },

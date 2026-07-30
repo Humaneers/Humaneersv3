@@ -31,15 +31,6 @@ export function Footer() {
               Built with precision, delivered with soul.
             </p>
 
-            <div className="flex flex-wrap gap-3 mb-8">
-              <span className="inline-flex items-center px-3 py-1.5 border border-white/10 rounded-lg text-[10px] font-bold text-brand-copper uppercase tracking-[0.2em] bg-white/5 backdrop-blur-sm">
-                SOC 2 Type II
-              </span>
-              <span className="inline-flex items-center px-3 py-1.5 border border-white/10 rounded-lg text-[10px] font-bold text-brand-copper uppercase tracking-[0.2em] bg-white/5 backdrop-blur-sm">
-                HIPAA Compliant
-              </span>
-            </div>
-
             <div className="inline-flex items-center gap-2 bg-brand-slate/40 px-4 py-2 rounded-full text-xs font-medium text-brand-copper border border-white/5">
               <span className="w-1.5 h-1.5 rounded-full bg-brand-copper animate-pulse"></span>
               Tempe, AZ &middot; El Paso, TX &middot; Flint, MI

@@ -104,28 +104,7 @@ export function TermsClient() {
       <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">4. Security & Compliance</h2>
 
       <h3 className="text-xl font-semibold text-brand-oxford mt-6 mb-3">
-        4.1 SOC 2 Type II Compliance
-      </h3>
-      <p>Humaneers maintains SOC 2 Type II certification, demonstrating our commitment to:</p>
-      <ul className="list-disc pl-6 mb-4 space-y-2">
-        <li>
-          <strong>Security</strong>: Protection of systems and data from unauthorized access.
-        </li>
-        <li>
-          <strong>Availability</strong>: Systems are available for operation and use as committed.
-        </li>
-        <li>
-          <strong>Confidentiality</strong>: Confidential information is protected as committed.
-        </li>
-        <li>
-          <strong>Privacy</strong>: Personal information is collected, used, retained, and disclosed
-          in conformity with our Privacy Policy.
-        </li>
-      </ul>
-      <p>SOC 2 reports are available to clients under NDA upon request.</p>
-
-      <h3 className="text-xl font-semibold text-brand-oxford mt-6 mb-3">
-        4.2 Data Security Commitments
+        4.1 Data Security Commitments
       </h3>
       <ul className="list-disc pl-6 mb-4 space-y-2">
         <li>Encryption of data in transit (TLS 1.2+) and at rest (AES-256).</li>
@@ -135,18 +114,11 @@ export function TermsClient() {
         <li>Annual third-party security audits and compliance reviews.</li>
       </ul>
 
-      <h3 className="text-xl font-semibold text-brand-oxford mt-6 mb-3">4.3 Industry Compliance</h3>
+      <h3 className="text-xl font-semibold text-brand-oxford mt-6 mb-3">4.2 Industry Compliance</h3>
       <p>For clients in regulated industries, we provide compliance-ready services including:</p>
       <ul className="list-disc pl-6 mb-4 space-y-2">
         <li>
-          <strong>HIPAA</strong>: Business Associate Agreements (BAA) available for healthcare
-          clients.
-        </li>
-        <li>
           <strong>GDPR</strong>: Data Processing Agreements (DPA) for EU data handling.
-        </li>
-        <li>
-          <strong>PCI DSS</strong>: Support for payment card data security requirements.
         </li>
         <li>
           <strong>SOX</strong>: IT controls for financial reporting compliance.

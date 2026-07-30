@@ -12,10 +12,9 @@ import { ContactModalWrapper } from "../components/ContactModalWrapper";
 export const metadata: Metadata = {
   title: "Humaneers | Enterprise Strategy. Built with Precision.",
   description:
-    "Enterprise strategy for businesses and families. Built with precision, delivered with soul. SOC 2 compliant managed IT, cybersecurity, and brand growth.",
+    "Enterprise strategy for businesses and families. Built with precision, delivered with soul. Managed IT, cybersecurity, and brand growth.",
   keywords: [
     "managed IT services",
-    "SOC 2 compliance",
     "family cybersecurity",
     "fractional CTO",
     "fractional CMO",

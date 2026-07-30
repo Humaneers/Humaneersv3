@@ -7,14 +7,14 @@ import { StructuredData, schemas } from "../../components/StructuredData";
 export const metadata: Metadata = {
   title: "Humaneers | Family Office Cyber Security | High Net Worth Protection",
   description:
-    "Enterprise cybersecurity for your family. Protect your home network, devices, and identity with SOC 2 compliant tools.",
+    "Enterprise cybersecurity for your family. Protect your home network, devices, and identity.",
   alternates: {
     canonical: "/family-protection",
   },
   openGraph: {
     title: "Humaneers | Family Office Cyber Security | High Net Worth Protection",
     description:
-      "Enterprise cybersecurity for your family. Protect your home network, devices, and identity with SOC 2 compliant tools.",
+      "Enterprise cybersecurity for your family. Protect your home network, devices, and identity.",
     url: "https://humaneers.dev/family-protection",
     type: "website",
     images: [

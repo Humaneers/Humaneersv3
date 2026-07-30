@@ -64,7 +64,6 @@ export function EthicsClient() {
                     </h4>
                     <p className="text-sm text-brand-slate">
                       We are custodians, not owners, of your data. We never sell client information.
-                      We adhere to SOC 2 Type II standards for all data handling.
                     </p>
                   </div>
                   <div className="border-l-4 border-brand-copper pl-6 py-2">

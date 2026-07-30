@@ -281,7 +281,7 @@ export function PrivacyClient() {
       <ul className="list-disc pl-6 mb-4 space-y-2">
         <li>Encryption of data in transit and at rest (HTTPS, TLS).</li>
         <li>Access controls limiting data access to authorized personnel only.</li>
-        <li>Regular security assessments and SOC 2 Type II compliance.</li>
+        <li>Regular security assessments and vulnerability scanning.</li>
         <li>Secure data backup and disaster recovery procedures.</li>
         <li>Employee training on data protection and confidentiality.</li>
         <li>

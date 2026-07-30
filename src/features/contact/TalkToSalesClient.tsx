@@ -31,10 +31,6 @@ export function TalkToSalesClient() {
               <ul className="space-y-3">
                 <li className="flex items-start gap-2">
                   <ShieldCheck className="w-5 h-5 shrink-0 mt-0.5" aria-hidden="true" />
-                  <span className="text-sm">SOC 2 Compliant Security</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <ShieldCheck className="w-5 h-5 shrink-0 mt-0.5" aria-hidden="true" />
                   <span className="text-sm">100% US-Based Team</span>
                 </li>
                 <li className="flex items-start gap-2">
