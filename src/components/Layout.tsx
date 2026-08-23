@@ -451,7 +451,7 @@ export function Layout() {
               <span className="text-white/20">v{APP_VERSION}</span>
             </div>
             <p className="leading-tight opacity-60 max-w-lg">
-              "Humaneers" is a trademark of Human IP LP and is used under license.
+              "Humaneers" is a trademark of DMX McArthur IP Holdings LLC and is used under license.
             </p>
           </div>
 

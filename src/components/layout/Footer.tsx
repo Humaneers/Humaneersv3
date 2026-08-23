@@ -133,7 +133,7 @@ export function Footer() {
             </div>
             <p className="text-[10px] text-gray-600 text-left md:text-right max-w-xs leading-relaxed">
               &copy; {new Date().getFullYear()} Humaneers, LLC. <br />
-              Humaneers is a trademark of Human IP LP; used under license. All non-Humaneers
+              Humaneers is a trademark of DMX McArthur IP Holdings LLC; used under license. All non-Humaneers
               trademarks, trade names, product names, service marks and other marks are the property
               of their respective owners.
             </p>
