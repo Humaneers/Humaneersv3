@@ -1,4 +1,3 @@
-import { APP_VERSION } from "../version";
 import { Suspense, useState, useEffect, forwardRef } from "react";
 import { PageLoader } from "./PageLoader";
 import { Link, NavLink, Outlet } from "react-router-dom";
@@ -448,7 +447,6 @@ export function Layout() {
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-1">
               <span>&copy; {new Date().getFullYear()} Humaneers, LLC.</span>
-              <span className="text-white/20">v{APP_VERSION}</span>
             </div>
             <p className="leading-tight opacity-60 max-w-lg">
               "Humaneers" is a trademark of DMX McArthur IP Holdings LLC and is used under license.
