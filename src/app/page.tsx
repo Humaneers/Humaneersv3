@@ -7,14 +7,14 @@ import { StructuredData, schemas } from "../components/StructuredData";
 export const metadata: Metadata = {
   title: "Humaneers | Enterprise Strategy. Built with Precision.",
   description:
-    "Enterprise strategy for businesses and families. Built with precision, delivered with soul. Modern IT, security, and brand growth.",
+    "Enterprise strategy for businesses and families. Built with precision. Delivered with soul. Modern IT, security, and brand growth.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Humaneers | Enterprise Strategy. Built with Precision.",
     description:
-      "Enterprise strategy for businesses and families. Built with precision, delivered with soul.",
+      "Enterprise strategy for businesses and families. Built with precision. Delivered with soul.",
     url: "https://humaneers.dev",
     type: "website",
     images: [
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Humaneers | Enterprise Strategy. Built with Precision.",
     description:
-      "Enterprise strategy for businesses and families. Built with precision, delivered with soul.",
+      "Enterprise strategy for businesses and families. Built with precision. Delivered with soul.",
     images: ["/og-image.jpg"],
   },
 };

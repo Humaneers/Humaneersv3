@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "Humaneers",
     name: "Humaneers | Enterprise Strategy",
     description:
-      "Enterprise strategy for businesses and families. Built with precision, delivered with soul.",
+      "Enterprise strategy for businesses and families. Built with precision. Delivered with soul.",
     start_url: "/",
     display: "standalone",
     background_color: "#F5F5F5", // brand-cream

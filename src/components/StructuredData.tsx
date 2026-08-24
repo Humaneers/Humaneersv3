@@ -41,7 +41,7 @@ export const schemas = {
     url: "https://humaneers.dev",
     logo: "https://humaneers.dev/logo.png",
     description:
-      "Enterprise strategy for businesses and families. Built with precision, delivered with soul.",
+      "Enterprise strategy for businesses and families. Built with precision. Delivered with soul.",
     address: [
       {
         "@type": "PostalAddress",

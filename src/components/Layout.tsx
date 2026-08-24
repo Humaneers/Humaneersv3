@@ -376,7 +376,7 @@ export function Layout() {
                 />
               </div>
               <p className="max-w-xs mb-6 text-sm">
-                Enterprise strategy for businesses and families. Built with precision, delivered
+                Enterprise strategy for businesses and families. Built with precision. Delivered
                 with soul.
               </p>
               <div className="inline-flex items-center gap-2 bg-brand-slate/30 px-3 py-1 rounded-full text-xs font-medium text-brand-copper">

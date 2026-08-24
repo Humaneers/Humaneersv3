@@ -49,7 +49,7 @@ export function AboutClient() {
               Crafting Digital Resilience.
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mb-10">
-              Enterprise strategy for businesses and families. Built with precision, delivered with
+              Enterprise strategy for businesses and families. Built with precision. Delivered with
               soul.
             </p>
             <div className="flex flex-wrap gap-6 items-center text-sm font-medium text-brand-copper uppercase tracking-widest">
