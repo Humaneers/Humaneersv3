@@ -283,12 +283,23 @@ export function PricingClient() {
     <div className="bg-brand-cream min-h-screen py-12 md:py-24">
       <div className="container mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
+          {/* Availability belongs above the prices, not behind the button.
+              Matches the notice on /talk-to-sales so the two pages tell one
+              story: a visitor should know the state before they start pricing
+              a plan, not after they have chosen one. */}
+          <span className="inline-block mb-4 rounded-full border border-brand-copper/40 bg-brand-copper/10 px-4 py-1 text-xs font-bold uppercase tracking-wider text-brand-copper">
+            At capacity: joining the waitlist
+          </span>
           <h1 className="text-4xl md:text-5xl font-bold text-brand-oxford mb-6 tracking-tight">
             Infrastructure as <span className="text-brand-copper">Strategy.</span>
           </h1>
-          <p className="text-lg text-brand-slate mb-6 leading-relaxed">
+          <p className="text-lg text-brand-slate mb-4 leading-relaxed">
             We don't just "fix computers." We architect sovereignty, resilience, and operational
             velocity for industry leaders and private families.
+          </p>
+          <p className="text-base text-brand-slate mb-6 leading-relaxed">
+            These are our real rates, published so you can plan against them. We are full at the
+            moment, so choosing a plan joins the waitlist rather than starting onboarding.
           </p>
 
           <div className="inline-flex bg-gray-100/50 p-1.5 rounded-xl shadow-inner border border-gray-200/50 mb-10 relative overflow-hidden w-full max-w-xl mx-auto">
@@ -542,16 +553,17 @@ export function PricingClient() {
                 </div>
 
                 <div className="p-8 bg-gray-50/50 pt-0 mt-auto rounded-b-2xl">
+                  {/* One verb, because every tier now leads to the same place.
+                      This used to render six different buying phrases across
+                      one page ("Secure My Team", "Choose Growth", "Talk to
+                      Strategy", "Get Concierge", and so on), all of which
+                      opened a waitlist. The tier's own `cta` string is parked
+                      in the data above rather than deleted, ready for the day
+                      capacity reopens. Nothing is lost by not rendering it:
+                      handleTierClick already sends a tier-specific message and
+                      source to the CRM, so the intent still reaches Zoho. */}
                   <Button onClick={handleTierClick} className={buttonClasses} withArrow>
-                    {tier.name === "Core" && pricingMode === "business"
-                      ? "Secure My Team"
-                      : tier.name === "Enterprise"
-                        ? "Talk to Strategy"
-                        : tier.name === "Legacy"
-                          ? "Protect My Parents"
-                          : tier.name === "Estate"
-                            ? "Get Concierge"
-                            : tier.cta}
+                    Join the waitlist
                   </Button>
                 </div>
               </motion.div>
