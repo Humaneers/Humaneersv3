@@ -12,7 +12,6 @@ import {
   Lock,
   Clock,
   Heart,
-  Award,
   Zap,
   ChevronDown,
   MessageSquare,
@@ -472,11 +471,11 @@ export function PricingClient() {
                     : "shadow-lg hover:shadow-xl border border-gray-100"
                 }`}
               >
-                {tier.highlighted && (
-                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-brand-copper text-white px-6 py-1.5 rounded-full text-xs font-black shadow-lg uppercase tracking-widest flex items-center gap-2">
-                    <Award size={14} /> Most Popular
-                  </div>
-                )}
+                {/* "Most Popular" came off with the capacity wall. It is a
+                    claim about client counts nobody publishes, on a page whose
+                    every CTA now leads to a waitlist. The copper ring still
+                    marks the tier we point most people at, which is a
+                    recommendation rather than a statistic. */}
                 <div className="p-8 flex-grow flex flex-col">
                   <h3 className="text-2xl font-bold text-brand-oxford mb-2">{tier.name}</h3>
                   <div className="mb-6 space-y-1">
@@ -726,14 +725,14 @@ export function PricingClient() {
                   setSessionContext({ entrySource: "Pricing Page - Hourly Pack" });
                   openModal(
                     "sales",
-                    "I'm interested in purchasing a 10-hour pack of support/strategy hours.",
+                    "I'd like a 10-hour pack of support/strategy hours when capacity opens.",
                     "Pricing Page - Hourly Pack"
                   );
                 }}
                 className="bg-white text-brand-oxford hover:bg-gray-100 px-8 py-3 font-bold"
                 withArrow
               >
-                Purchase Hours
+                Join the waitlist
               </Button>
             </div>
           </div>
