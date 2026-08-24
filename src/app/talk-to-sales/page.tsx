@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { TalkToSalesClient } from "../../features/contact/TalkToSalesClient";
 
 export const metadata: Metadata = {
-  title: "Contact Sales | Humaneers | Schedule a Consultation",
+  title: "Join the Waitlist | Humaneers",
   description:
-    "Ready to secure your business or home? Schedule a consultation with our US-based team to discuss your IT and security needs.",
+    "Humaneers is at capacity, so new engagements are joining a waitlist. Tell us what you need and a partner will come back to you when we can take it on properly.",
   alternates: {
     canonical: "/talk-to-sales",
   },

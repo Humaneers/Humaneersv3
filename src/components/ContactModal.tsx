@@ -7,7 +7,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
-import { Check, AlertCircle, Loader2 } from "lucide-react";
+import { Check, AlertCircle, Loader2, Phone } from "lucide-react";
+import { WaitlistForm } from "./WaitlistForm";
 
 // --- Types ---
 interface FormStatus {
@@ -16,48 +17,24 @@ interface FormStatus {
 }
 
 // --- Sales Form ---
+// We are at capacity, so this is a waitlist rather than an intake. It says so up
+// front instead of collecting nothing and refusing the visitor at the end, which
+// is what the old "Service Capacity Reached" wall did.
 function SalesForm() {
-  const { openModal } = useContactModal();
   return (
-    <div className="flex flex-col items-center justify-center py-8 text-center animate-in fade-in duration-300">
-      <div className="w-12 h-12 bg-brand-copper/10 rounded-full flex items-center justify-center mb-4">
-        <AlertCircle className="w-6 h-6 text-brand-copper" aria-hidden="true" />
-      </div>
-      <h3 className="text-xl font-bold text-brand-oxford mb-3">Service Capacity Reached</h3>
-      <p className="text-brand-slate text-sm max-w-sm mx-auto mb-4 leading-relaxed">
-        We appreciate your interest in Humaneers. Due to high demand and our commitment to
-        maintaining enterprise-grade standards for our active partners, we have reached our capacity
-        for new clients at this time.
-      </p>
-      <div className="p-4 bg-gray-50 rounded-xl border border-gray-100 max-w-sm mx-auto text-xs text-brand-slate mb-6">
-        <strong>Existing Partners:</strong> If you are an active client needing assistance, please
-        switch to the <strong>Support</strong> tab.
-      </div>
-
-      <div className="w-full max-w-sm mx-auto p-4 bg-brand-cream rounded-xl border border-brand-copper/20 text-center mb-6">
-        <p className="text-xs text-brand-slate mb-3 font-medium">
-          While we cannot accept new clients at this time, we encourage you to subscribe to our
-          newsletter, <strong>The Human Brief</strong>, to receive strategic insights and be
-          notified as soon as we open capacity.
+    <div className="animate-in fade-in duration-300">
+      <div className="mb-5 rounded-xl border border-brand-copper/20 bg-brand-cream p-4">
+        <p className="text-xs text-brand-slate leading-relaxed">
+          <strong className="text-brand-oxford">We are at capacity right now.</strong> New
+          engagements are joining a waitlist rather than going straight into onboarding. Tell us
+          what you need and a partner will come back to you when we can take it on properly.
         </p>
-        <Button
-          onClick={() => openModal("newsletter")}
-          size="sm"
-          className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white font-bold uppercase tracking-wider text-[10px] py-2 h-auto cursor-pointer"
-        >
-          Subscribe to The Human Brief
-        </Button>
       </div>
 
-      <p className="text-[11px] text-gray-400">
-        Please check back later or contact{" "}
-        <a
-          href="mailto:hello@humaneers.dev"
-          className="text-brand-copper hover:underline font-semibold"
-        >
-          hello@humaneers.dev
-        </a>{" "}
-        for inquiries.
+      <WaitlistForm source="Waitlist - Contact Modal" compact />
+
+      <p className="mt-4 text-[11px] text-gray-400 text-center">
+        Already a client and need help? Switch to the <strong>Support</strong> tab.
       </p>
     </div>
   );
@@ -65,55 +42,17 @@ function SalesForm() {
 
 // --- Support Form ---
 function SupportForm() {
-  const { source, openModal } = useContactModal();
+  const { source } = useContactModal();
   const isRapidResponse = source?.includes("New Client") || source?.includes("Rapid Response");
   const [status, setStatus] = useState<FormStatus>({ state: "idle" });
 
-  if (isRapidResponse) {
-    return (
-      <div className="flex flex-col items-center justify-center py-8 text-center animate-in fade-in duration-300">
-        <div className="w-12 h-12 bg-brand-copper/10 rounded-full flex items-center justify-center mb-4">
-          <AlertCircle className="w-6 h-6 text-brand-copper" aria-hidden="true" />
-        </div>
-        <h3 className="text-xl font-bold text-brand-oxford mb-3">Service Capacity Reached</h3>
-        <p className="text-brand-slate text-sm max-w-sm mx-auto mb-4 leading-relaxed">
-          We appreciate your interest. Due to high demand and our commitment to maintaining
-          enterprise-grade standards for our existing partners, we have reached our capacity for new
-          clients and new rapid response engagements at this time.
-        </p>
-        <div className="p-4 bg-gray-50 rounded-xl border border-gray-100 max-w-sm mx-auto text-xs text-brand-slate mb-6">
-          <strong>Existing Partners:</strong> Active clients requiring emergency dispatch should
-          contact their dedicated command line directly.
-        </div>
-
-        <div className="w-full max-w-sm mx-auto p-4 bg-brand-cream rounded-xl border border-brand-copper/20 text-center mb-6">
-          <p className="text-xs text-brand-slate mb-3 font-medium">
-            While we cannot accept new clients at this time, we encourage you to subscribe to our
-            newsletter, <strong>The Human Brief</strong>, to receive strategic insights and be
-            notified as soon as we open capacity.
-          </p>
-          <Button
-            onClick={() => openModal("newsletter")}
-            size="sm"
-            className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white font-bold uppercase tracking-wider text-[10px] py-2 h-auto cursor-pointer"
-          >
-            Subscribe to The Human Brief
-          </Button>
-        </div>
-
-        <p className="text-[11px] text-gray-400">
-          Please check back later or contact{" "}
-          <a
-            href="mailto:hello@humaneers.dev"
-            className="text-brand-copper hover:underline font-semibold"
-          >
-            hello@humaneers.dev
-          </a>{" "}
-          for inquiries.
-        </p>
-      </div>
-    );
-  }
+  // A capacity wall used to render here and swallow every rapid-response
+  // request, including active breaches, offering a newsletter and telling the
+  // caller to use "their dedicated command line" without printing a number.
+  // The ticket form below already handles this case properly: High priority,
+  // phone required, context new_client_critical. The wall was intercepting it.
+  // Capacity is a sales constraint; it is not a reason to drop someone whose
+  // systems are on fire, so the number goes first and the form still works.
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -210,6 +149,26 @@ function SupportForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 pt-4">
+      {isRapidResponse && (
+        <div className="rounded-xl border border-red-200 bg-red-50 p-4">
+          <p className="text-sm font-bold text-red-900 mb-1">Systems down right now?</p>
+          <p className="text-xs text-red-900/80 leading-relaxed mb-3">
+            Call us. A phone call reaches a person faster than this form does, and you should not be
+            typing during an active incident.
+          </p>
+          <a
+            href="tel:+19284401505"
+            className="inline-flex items-center gap-2 rounded-md bg-red-700 px-4 py-2 text-sm font-bold text-white hover:bg-red-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-900 focus-visible:ring-offset-2"
+          >
+            <Phone className="h-4 w-4" aria-hidden="true" />
+            (928) 440-1505
+          </a>
+          <p className="text-[11px] text-red-900/70 mt-3">
+            Prefer to write it down? Fill this in as well and it reaches the same queue.
+          </p>
+        </div>
+      )}
+
       {status.state === "error" && (
         <Alert variant="destructive">
           <AlertCircle className="h-4 w-4" />
