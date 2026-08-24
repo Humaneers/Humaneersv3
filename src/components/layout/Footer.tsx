@@ -27,7 +27,7 @@ export function Footer() {
             </div>
             <p className="max-w-sm mb-8 text-base leading-relaxed text-gray-400 font-light">
               Enterprise strategy for businesses and families. <br />
-              Built with precision, delivered with soul.
+              Built with precision. Delivered with soul.
             </p>
 
             <div className="inline-flex items-center gap-2 bg-brand-slate/40 px-4 py-2 rounded-full text-xs font-medium text-brand-copper border border-white/5">
