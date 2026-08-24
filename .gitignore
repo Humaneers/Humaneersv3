@@ -34,3 +34,9 @@ dist/
 _pgbackup/
 _pginfo/
 pinegrow.json
+
+# Design-critique tool output, not deployment source
+.impeccable/
+
+# TypeScript incremental build artifact
+tsconfig.tsbuildinfo
