@@ -65,7 +65,7 @@ export function ThankYouClient() {
 
             <Link href="/">
               <Button
-                className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white py-6"
+                className="w-full bg-brand-copper-text hover:bg-brand-copper-text-dark text-white py-6"
                 withArrow
               >
                 Return Home

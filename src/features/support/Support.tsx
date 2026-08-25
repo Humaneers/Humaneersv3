@@ -113,7 +113,7 @@ export function Support() {
                 </div>
                 <Button
                   onClick={() => openModal("support", "", "Support - Rapid Response")}
-                  className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white font-bold h-14 text-lg shadow-lg hover:shadow-brand-copper/20 relative z-10"
+                  className="w-full bg-brand-copper-text hover:bg-brand-copper-text-dark text-white font-bold h-14 text-lg shadow-lg hover:shadow-brand-copper/20 relative z-10"
                   withArrow
                 >
                   Deploy Team
@@ -146,7 +146,7 @@ export function Support() {
 
               <a
                 href="tel:+19284401505"
-                className="relative z-10 flex items-center gap-3 bg-brand-copper hover:bg-brand-copper-dark text-white font-bold py-4 px-8 rounded-lg transition-all shadow-lg hover:shadow-brand-copper/20 text-lg group w-full md:w-auto justify-center"
+                className="relative z-10 flex items-center gap-3 bg-brand-copper-text hover:bg-brand-copper-text-dark text-white font-bold py-4 px-8 rounded-lg transition-all shadow-lg hover:shadow-brand-copper/20 text-lg group w-full md:w-auto justify-center"
               >
                 <Phone className="w-5 h-5" />
                 <span>(928) 440-1505</span>
@@ -197,7 +197,7 @@ export function Support() {
                 Security concerns? Email{" "}
                 <a
                   href="mailto:security@humaneers.dev"
-                  className="text-brand-copper hover:text-brand-copper-dark font-medium underline decoration-brand-copper/30 underline-offset-4"
+                  className="text-brand-copper-text hover:text-brand-copper-text-dark font-medium underline decoration-brand-copper/30 underline-offset-4"
                 >
                   security@humaneers.dev
                 </a>{" "}
@@ -225,7 +225,7 @@ export function Support() {
                 >
                   <span className="font-semibold text-brand-oxford">{item.question}</span>
                   <ChevronDown
-                    className={`w-5 h-5 text-brand-copper transition-transform ${openFaq === index ? "rotate-180" : ""}`}
+                    className={`w-5 h-5 text-brand-copper-text transition-transform ${openFaq === index ? "rotate-180" : ""}`}
                     aria-hidden="true"
                   />
                 </button>

@@ -99,7 +99,7 @@ export function FractionalLeadershipClient() {
               onClick={() =>
                 router.push(`${routePaths.talkToSales}?interest=Fractional%20Leadership`)
               }
-              className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg"
+              className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg"
               withArrow
             >
               Match with a Leader
@@ -121,7 +121,7 @@ export function FractionalLeadershipClient() {
                   {r.icon}
                 </div>
                 <h3 className="text-2xl font-bold mb-1">{r.title}</h3>
-                <div className="text-brand-copper text-sm font-bold uppercase tracking-widest mb-4">
+                <div className="text-brand-copper-light text-sm font-bold uppercase tracking-widest mb-4">
                   {r.subtitle}
                 </div>
                 <p className="text-gray-300 leading-relaxed">{r.desc}</p>
@@ -136,7 +136,7 @@ export function FractionalLeadershipClient() {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row gap-16 items-center">
             <div className="md:w-1/2">
-              <h2 className="text-brand-copper font-bold tracking-widest uppercase mb-4 text-sm">
+              <h2 className="text-brand-copper-text font-bold tracking-widest uppercase mb-4 text-sm">
                 What We Do
               </h2>
               <h3 className="text-3xl md:text-5xl font-bold text-brand-oxford mb-6 leading-tight">
@@ -205,7 +205,7 @@ export function FractionalLeadershipClient() {
               onClick={() =>
                 router.push(`${routePaths.talkToSales}?interest=Fractional%20Leadership`)
               }
-              className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-12 py-8 h-auto rounded-full shadow-lg"
+              className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-xl px-12 py-8 h-auto rounded-full shadow-lg"
               withArrow
             >
               Contact Us

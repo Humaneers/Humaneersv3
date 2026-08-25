@@ -30,7 +30,7 @@ export function Footer() {
               Built with precision. Delivered with soul.
             </p>
 
-            <div className="inline-flex items-center gap-2 bg-brand-slate/40 px-4 py-2 rounded-full text-xs font-medium text-brand-copper border border-white/5">
+            <div className="inline-flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full text-xs font-medium text-brand-copper-light border border-brand-copper/30">
               <span className="w-1.5 h-1.5 rounded-full bg-brand-copper animate-pulse"></span>
               Tempe, AZ &middot; El Paso, TX &middot; Flint, MI
             </div>
@@ -47,7 +47,7 @@ export function Footer() {
                   <li key={item.label}>
                     <Link
                       href={item.to ?? "#"}
-                      className="hover:text-brand-copper transition-all duration-300 flex items-center group"
+                      className="hover:text-brand-copper-light transition-all duration-300 flex items-center group"
                     >
                       <span className="w-0 group-hover:w-2 h-[1px] bg-brand-copper mr-0 group-hover:mr-2 transition-all"></span>
                       {item.label}
@@ -68,7 +68,7 @@ export function Footer() {
             </p>
             <Button
               onClick={() => openModal("newsletter")}
-              className="w-full bg-brand-copper hover:bg-brand-copper-dark justify-center h-auto py-3.5 text-xs font-bold tracking-widest uppercase gap-2 transition-all hover:translate-y-[-2px] shadow-lg hover:shadow-brand-copper/20"
+              className="w-full bg-brand-copper-text hover:bg-brand-copper-text-dark justify-center h-auto py-3.5 text-xs font-bold tracking-widest uppercase gap-2 transition-all hover:translate-y-[-2px] shadow-lg hover:shadow-brand-copper/20"
             >
               <Mail className="w-4 h-4" />
               Subscribe
@@ -77,7 +77,7 @@ export function Footer() {
         </div>
 
         {/* Lower Footer */}
-        <div className="pt-12 border-t border-white/5 flex flex-col md:grid md:grid-cols-3 gap-12 items-center md:items-start opacity-80">
+        <div className="pt-12 border-t border-white/5 flex flex-col md:grid md:grid-cols-3 gap-12 items-center md:items-start">
           {/* Contact Row */}
           <div className="flex flex-col gap-5 items-center md:items-start">
             <div className="flex items-center gap-4 group">
@@ -112,7 +112,7 @@ export function Footer() {
                 key={item.label}
                 href={item.to || item.href || "#"}
                 target={item.external ? "_blank" : undefined}
-                className="text-xs font-medium hover:text-brand-copper transition-colors whitespace-nowrap"
+                className="text-xs font-medium hover:text-brand-copper-light transition-colors whitespace-nowrap"
               >
                 {item.label}
               </Link>
@@ -122,17 +122,17 @@ export function Footer() {
           {/* Rights & Identity */}
           <div className="flex flex-col items-start md:items-end gap-4 w-full">
             <div className="flex items-center gap-3">
-              <span className="text-xs text-gray-500 italic">
+              <span className="text-xs text-gray-400 italic">
                 Built by humans in Arizona & Texas with ❤️ + ☕️
               </span>
             </div>
-            <p className="text-[10px] text-gray-600 text-left md:text-right max-w-xs leading-relaxed">
+            <p className="text-[10px] text-gray-400 text-left md:text-right max-w-xs leading-relaxed">
               &copy; {new Date().getFullYear()} Humaneers, LLC. <br />
               Humaneers is a trademark of DMX McArthur IP Holdings LLC; used under license. All
               non-Humaneers trademarks, trade names, product names, service marks and other marks
               are the property of their respective owners.
             </p>
-            <p className="text-[10px] text-gray-600 text-left md:text-right max-w-xs leading-relaxed">
+            <p className="text-[10px] text-gray-400 text-left md:text-right max-w-xs leading-relaxed">
               Read our <Link href="/colophon">Intellectual Property Policy</Link>
             </p>
           </div>

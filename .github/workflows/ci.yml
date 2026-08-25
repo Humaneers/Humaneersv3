@@ -28,5 +28,8 @@ jobs:
       - name: Type Check
         run: npm run typecheck
 
+      - name: Claims Guard
+        run: npm run claims
+
       - name: Build
         run: npm run build

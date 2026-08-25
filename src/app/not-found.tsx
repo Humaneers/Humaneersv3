@@ -32,7 +32,7 @@ export default function NotFound() {
           </Link>
           <Link href="/contact" className="w-full">
             <Button
-              className="w-full py-6 text-lg bg-brand-copper hover:bg-brand-copper/90 text-white shadow-lg transition-all"
+              className="w-full py-6 text-lg bg-brand-copper-text hover:bg-brand-copper-text-dark text-white shadow-lg transition-all"
               withArrow
             >
               <MessageSquare className="mr-2 h-5 w-5" /> Get Support
@@ -47,25 +47,25 @@ export default function NotFound() {
           <div className="flex flex-wrap justify-center gap-6">
             <Link
               href="/managed-it"
-              className="text-brand-oxford hover:text-brand-copper transition-colors font-medium"
+              className="text-brand-oxford hover:text-brand-copper-text transition-colors font-medium"
             >
               Managed IT
             </Link>
             <Link
               href="/pricing"
-              className="text-brand-oxford hover:text-brand-copper transition-colors font-medium"
+              className="text-brand-oxford hover:text-brand-copper-text transition-colors font-medium"
             >
               Pricing
             </Link>
             <Link
               href="/security"
-              className="text-brand-oxford hover:text-brand-copper transition-colors font-medium"
+              className="text-brand-oxford hover:text-brand-copper-text transition-colors font-medium"
             >
               Security
             </Link>
             <Link
               href="/about"
-              className="text-brand-oxford hover:text-brand-copper transition-colors font-medium"
+              className="text-brand-oxford hover:text-brand-copper-text transition-colors font-medium"
             >
               Our Story
             </Link>

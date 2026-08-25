@@ -120,9 +120,9 @@ export function ServicesClient() {
           />
         </div>
         <div className="container mx-auto px-6 relative z-10 text-center">
-          <div className="inline-flex items-center justify-center p-3 bg-brand-copper/20 rounded-full mb-6">
+          <div className="inline-flex items-center justify-center p-3 bg-white/5 rounded-full mb-6">
             <Layers className="w-6 h-6 text-brand-copper mr-2" />
-            <span className="text-brand-copper font-bold uppercase tracking-widest text-sm">
+            <span className="text-brand-copper-light font-bold uppercase tracking-widest text-sm">
               Full Spectrum Support
             </span>
           </div>
@@ -184,7 +184,7 @@ export function ServicesClient() {
                   </div>
                   <Button
                     onClick={() => router.push(service.link)}
-                    className="w-full bg-gray-100 text-brand-oxford hover:bg-gray-200 justify-between group-hover:bg-brand-copper group-hover:text-white transition-colors"
+                    className="w-full bg-gray-100 text-brand-oxford hover:bg-gray-200 justify-between group-hover:bg-brand-copper-text group-hover:text-white transition-colors"
                     withArrow
                   >
                     Learn More
@@ -238,7 +238,7 @@ export function ServicesClient() {
             onClick={() =>
               router.push(`${routePaths.talkToSales}?source=Services%20Overview%20Page`)
             }
-            className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-10 py-6 h-auto rounded-full"
+            className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-xl px-10 py-6 h-auto rounded-full"
             withArrow
           >
             Talk to Sales

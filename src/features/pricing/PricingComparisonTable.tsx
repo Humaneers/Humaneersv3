@@ -112,8 +112,9 @@ export function PricingComparisonTable({ mode }: PricingComparisonTableProps) {
           tiers: { Core: "Optional", Growth: true, Enterprise: true },
         },
         {
-          name: "SOC 2 / HIPAA Alignment",
-          tooltip: "Configurations mapped to compliance frameworks",
+          name: "SOC 2 / HIPAA Control Mapping",
+          tooltip:
+            "We map your configurations to the framework's controls. This is preparation work, not an audit, and it does not certify you or us.",
           tiers: { Core: false, Growth: "Assisted", Enterprise: true },
         },
       ],
@@ -358,7 +359,7 @@ export function PricingComparisonTable({ mode }: PricingComparisonTableProps) {
                 <tr key={category.title} className="bg-brand-cream/30">
                   <td
                     colSpan={tiers.length + 1}
-                    className="p-4 font-bold text-brand-copper uppercase tracking-wider text-sm border-b border-gray-100"
+                    className="p-4 font-bold text-brand-copper-text uppercase tracking-wider text-sm border-b border-gray-100"
                   >
                     {category.title}
                   </td>

@@ -115,7 +115,10 @@ export function WaitlistForm({
         </p>
         <p className="text-sm text-brand-slate">
           Something urgent in the meantime?{" "}
-          <a href="tel:+19284401505" className="text-brand-copper font-semibold hover:underline">
+          <a
+            href="tel:+19284401505"
+            className="text-brand-copper-text font-semibold hover:underline"
+          >
             (928) 440-1505
           </a>
         </p>
@@ -253,7 +256,7 @@ export function WaitlistForm({
       <Button
         type="submit"
         disabled={status.state === "submitting"}
-        className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white font-bold uppercase tracking-wider text-xs py-3 h-auto cursor-pointer disabled:opacity-70"
+        className="w-full bg-brand-copper-text hover:bg-brand-copper-text-dark text-white font-bold uppercase tracking-wider text-xs py-3 h-auto cursor-pointer disabled:opacity-70"
       >
         {status.state === "submitting" ? (
           <>

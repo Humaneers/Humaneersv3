@@ -122,7 +122,7 @@ export function SolutionSwitcher() {
                         className={cn(
                           "absolute -bottom-7 md:-bottom-8 left-1/2 -translate-x-1/2 px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-wide text-center whitespace-nowrap transition-all duration-300 rounded-full",
                           isActive
-                            ? "opacity-100 translate-y-0 bg-brand-copper text-white shadow-md"
+                            ? "opacity-100 translate-y-0 bg-brand-copper-text text-white shadow-md"
                             : "opacity-0 translate-y-2 bg-white text-brand-oxford"
                         )}
                       >
@@ -138,7 +138,7 @@ export function SolutionSwitcher() {
           {/* Center core - static */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-40 md:h-40 rounded-full bg-white shadow-2xl flex items-center justify-center border-2 border-gray-100 z-10">
             <div className="text-center">
-              <div className="text-brand-copper text-xs md:text-sm font-bold uppercase tracking-wider mb-2">
+              <div className="text-brand-copper-text text-xs md:text-sm font-bold uppercase tracking-wider mb-2">
                 Precision
               </div>
               <div className="w-8 md:w-10 h-px bg-brand-copper/30 mx-auto my-2" />

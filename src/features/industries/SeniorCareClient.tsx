@@ -25,7 +25,7 @@ export function SeniorCareClient() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               onClick={() => router.push(`${routePaths.pricing}?mode=household&highlight=senior`)}
-              className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg"
+              className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg"
               withArrow
             >
               View Pricing
@@ -113,7 +113,7 @@ export function SeniorCareClient() {
                 status remotely.
               </p>
               <div className="mt-0 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-4 transition-all duration-300 overflow-hidden">
-                <p className="text-sm text-brand-copper font-medium">
+                <p className="text-sm text-brand-copper-text font-medium">
                   Includes real-time dashboard.
                 </p>
               </div>
@@ -126,7 +126,7 @@ export function SeniorCareClient() {
                 automated menus.
               </p>
               <div className="mt-0 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-4 transition-all duration-300 overflow-hidden">
-                <p className="text-sm text-brand-copper font-medium">
+                <p className="text-sm text-brand-copper-text font-medium">
                   Direct line to US-based humans.
                 </p>
               </div>
@@ -139,7 +139,9 @@ export function SeniorCareClient() {
                 accessible to executors.
               </p>
               <div className="mt-0 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-4 transition-all duration-300 overflow-hidden">
-                <p className="text-sm text-brand-copper font-medium">Bank-grade security vault.</p>
+                <p className="text-sm text-brand-copper-text font-medium">
+                  Bank-grade security vault.
+                </p>
               </div>
             </div>
           </div>

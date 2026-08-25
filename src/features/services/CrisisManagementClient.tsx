@@ -28,7 +28,7 @@ export function CrisisManagementClient() {
               onClick={() =>
                 router.push(`${routePaths.talkToSales}?interest=Reputation%20Management`)
               }
-              className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg border-2 border-brand-copper"
+              className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg border-2 border-brand-copper"
               withArrow
             >
               Confidential Consultation

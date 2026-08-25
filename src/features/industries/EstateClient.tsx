@@ -31,7 +31,7 @@ export function EstateClient() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               onClick={() => router.push(`${routePaths.pricing}?mode=household&tier=estate`)}
-              className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg"
+              className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg"
               withArrow
             >
               View Concierge Plans
@@ -45,7 +45,7 @@ export function EstateClient() {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row gap-16 items-center">
             <div className="md:w-1/2">
-              <h2 className="text-brand-copper font-bold tracking-widest uppercase mb-4 text-sm">
+              <h2 className="text-brand-copper-text font-bold tracking-widest uppercase mb-4 text-sm">
                 The Problem
               </h2>
               <h3 className="text-3xl md:text-4xl font-bold text-brand-oxford mb-6 leading-tight">
@@ -129,7 +129,7 @@ export function EstateClient() {
                 `${routePaths.talkToSales}?interest=Estate%20/%20Private%20Client%20Services`
               )
             }
-            className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-12 py-8 h-auto rounded-full shadow-lg"
+            className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-xl px-12 py-8 h-auto rounded-full shadow-lg"
             withArrow
           >
             Get a Private Consultation

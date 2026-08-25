@@ -45,7 +45,7 @@ export function BookClient() {
                 <Button
                   onClick={() => openModal("newsletter")}
                   size="sm"
-                  className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white font-bold uppercase tracking-wider text-[10px] py-2 h-auto"
+                  className="w-full bg-brand-copper-text hover:bg-brand-copper-text-dark text-white font-bold uppercase tracking-wider text-[10px] py-2 h-auto"
                 >
                   Subscribe to The Human Brief
                 </Button>
@@ -55,7 +55,7 @@ export function BookClient() {
                 Please check back later or contact{" "}
                 <a
                   href="mailto:hello@humaneers.dev"
-                  className="text-brand-copper hover:underline font-semibold"
+                  className="text-brand-copper-text hover:underline font-semibold"
                 >
                   hello@humaneers.dev
                 </a>{" "}

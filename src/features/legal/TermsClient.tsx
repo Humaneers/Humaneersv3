@@ -9,11 +9,10 @@ export function TermsClient() {
       <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">1. Agreement to Terms</h2>
       <p>
         These Terms of Service ("Terms") constitute a legally binding agreement between you (whether
-        personally or on behalf of an entity) and Humaneers, LLC ("Humaneers," "we,"
-        "us," or "our") concerning your access to and use of our website and services. By accessing
-        our website or engaging our services, you agree to be bound by these Terms and our Privacy
-        Policy. If you do not agree with these Terms, you must not access the website or use our
-        services.
+        personally or on behalf of an entity) and Humaneers, LLC ("Humaneers," "we," "us," or "our")
+        concerning your access to and use of our website and services. By accessing our website or
+        engaging our services, you agree to be bound by these Terms and our Privacy Policy. If you
+        do not agree with these Terms, you must not access the website or use our services.
       </p>
 
       <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">2. Services Overview</h2>
@@ -382,17 +381,17 @@ export function TermsClient() {
         <strong>Humaneers, LLC</strong>
         <br />
         Email:{" "}
-        <a href="mailto:hello@humaneers.dev" className="text-brand-copper hover:underline">
+        <a href="mailto:hello@humaneers.dev" className="text-brand-copper-text hover:underline">
           hello@humaneers.dev
         </a>
         <br />
         Legal:{" "}
-        <a href="mailto:legal@humaneers.dev" className="text-brand-copper hover:underline">
+        <a href="mailto:legal@humaneers.dev" className="text-brand-copper-text hover:underline">
           legal@humaneers.dev
         </a>
         <br />
         Security:{" "}
-        <a href="mailto:security@humaneers.dev" className="text-brand-copper hover:underline">
+        <a href="mailto:security@humaneers.dev" className="text-brand-copper-text hover:underline">
           security@humaneers.dev
         </a>
       </p>

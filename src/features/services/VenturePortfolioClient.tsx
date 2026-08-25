@@ -47,7 +47,7 @@ export function VenturePortfolioClient() {
 
         <div className="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 bg-brand-copper/20 border border-brand-copper/30 text-brand-copper px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 bg-white/5 border border-brand-copper/30 text-brand-copper-light px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
               <Lightbulb size={16} /> Venture Studio Infrastructure
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
@@ -66,7 +66,7 @@ export function VenturePortfolioClient() {
                     "Venture Portfolio Hero"
                   )
                 }
-                className="bg-brand-copper hover:bg-brand-copper-dark text-white px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-brand-copper/30 transition-all font-bold"
+                className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-brand-copper/30 transition-all font-bold"
                 withArrow
               >
                 Secure My Portfolio
@@ -100,7 +100,7 @@ export function VenturePortfolioClient() {
             <div className="absolute top-20 right-10 bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20 shadow-2xl skew-y-3 animate-in hover:scale-105 transition-transform duration-500">
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-3 h-3 rounded-full bg-green-500" />
-                <span className="font-mono text-xs text-brand-copper">PROJECT_ALPHA.COM</span>
+                <span className="font-mono text-xs text-brand-copper-light">PROJECT_ALPHA.COM</span>
               </div>
               <div className="text-2xl font-bold text-white mb-1">$0.00 Cost</div>
               <div className="text-xs text-gray-400">Ad Revenue Offset Active</div>
@@ -259,7 +259,7 @@ export function VenturePortfolioClient() {
                       -${estimatedParkingRevenue.toLocaleString()}/yr
                     </span>
                   </div>
-                  <div className="flex justify-between items-center text-brand-copper pt-2">
+                  <div className="flex justify-between items-center text-brand-copper-text pt-2">
                     <span className="text-sm font-bold">NET ANNUAL COST</span>
                     <span className="font-mono font-bold text-xl">
                       ${(annualManagementFee - estimatedParkingRevenue).toLocaleString()}
@@ -298,7 +298,7 @@ export function VenturePortfolioClient() {
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button
               onClick={() => router.push(routePaths.pricing)}
-              className="bg-brand-copper hover:bg-brand-copper-dark text-white px-8 py-6 rounded-full font-bold shadow-lg"
+              className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white px-8 py-6 rounded-full font-bold shadow-lg"
             >
               View Pricing
             </Button>

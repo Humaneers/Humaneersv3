@@ -74,7 +74,7 @@ export function ContactClient() {
                     <p className="text-brand-slate">
                       <a
                         href="tel:+19284401505"
-                        className="hover:text-brand-copper transition-colors"
+                        className="hover:text-brand-copper-text transition-colors"
                       >
                         (928) 440-1505
                       </a>
@@ -155,7 +155,7 @@ export function ContactClient() {
                     </p>
                     <a
                       href="mailto:hello@humaneers.dev"
-                      className="inline-flex items-center gap-2 text-brand-copper font-semibold hover:underline"
+                      className="inline-flex items-center gap-2 text-brand-copper-text font-semibold hover:underline"
                     >
                       <Mail className="w-4 h-4" />
                       hello@humaneers.dev
@@ -170,7 +170,7 @@ export function ContactClient() {
                     </p>
                     <a
                       href="mailto:hello@humaneers.dev"
-                      className="inline-flex items-center gap-2 text-brand-copper font-semibold text-lg hover:underline"
+                      className="inline-flex items-center gap-2 text-brand-copper-text font-semibold text-lg hover:underline"
                     >
                       <Mail className="w-5 h-5" />
                       hello@humaneers.dev

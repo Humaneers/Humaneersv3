@@ -50,7 +50,7 @@ export function HomeClient() {
             className="max-w-3xl"
           >
             <div className="mb-8">
-              <p className="text-brand-copper font-bold tracking-widest uppercase text-sm md:text-base mb-4">
+              <p className="text-brand-copper-text font-bold tracking-widest uppercase text-sm md:text-base mb-4">
                 Enterprise Strategy for Businesses & Families
               </p>
               <h1 className="text-4xl md:text-7xl font-bold text-white leading-tight mb-6">
@@ -68,7 +68,7 @@ export function HomeClient() {
 
                   openModal("sales");
                 }}
-                className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 h-14 rounded-md shadow-lg hover:shadow-xl transition-all w-fit"
+                className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-lg px-8 h-14 rounded-md shadow-lg hover:shadow-xl transition-all w-fit"
                 withArrow
               >
                 Get Started
@@ -92,7 +92,7 @@ export function HomeClient() {
         </div>
       </section>
 
-      <div className="bg-brand-copper text-white py-6 relative z-20 shadow-md">
+      <div className="bg-brand-copper-text text-white py-6 relative z-20 shadow-md">
         <div className="container mx-auto px-6 text-center font-medium text-lg tracking-wide">
           No user minimums. No offshore NOCs. 100% US-Based engineering.
         </div>
@@ -103,7 +103,7 @@ export function HomeClient() {
 
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h3 className="text-brand-copper font-bold tracking-widest uppercase mb-3 text-sm">
+            <h3 className="text-brand-copper-text font-bold tracking-widest uppercase mb-3 text-sm">
               Our Expertise
             </h3>
             <h2 className="text-4xl font-bold text-brand-oxford">Everything You Need to Grow</h2>
@@ -140,7 +140,7 @@ export function HomeClient() {
                   className="object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -left-4 bg-brand-copper p-6 rounded-lg text-white shadow-lg hidden md:block">
+              <div className="absolute -bottom-6 -left-4 bg-brand-copper-text p-6 rounded-lg text-white shadow-lg hidden md:block">
                 <p className="text-2xl font-bold">100+</p>
                 <p className="text-sm opacity-90">Families Protected Nationwide</p>
               </div>
@@ -172,7 +172,7 @@ export function HomeClient() {
 
               openModal("sales");
             }}
-            className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-10 py-7 h-auto rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
+            className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-xl px-10 py-7 h-auto rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
           >
             Let's get to work
           </Button>

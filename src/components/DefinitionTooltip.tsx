@@ -39,7 +39,7 @@ export function DefinitionTooltip({ term, definition, className = "" }: Definiti
               e.preventDefault();
             }
           }}
-          className={`cursor-help border-b border-dotted border-brand-copper hover:text-brand-copper focus:text-brand-copper focus:border-solid focus:outline-none transition-colors inline-flex items-center gap-0.5 ${className}`}
+          className={`cursor-help border-b border-dotted border-brand-copper hover:text-brand-copper-text focus:text-brand-copper-text focus:border-solid focus:outline-none transition-colors inline-flex items-center gap-0.5 ${className}`}
         >
           {term}
         </span>

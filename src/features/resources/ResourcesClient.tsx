@@ -149,7 +149,7 @@ export function ResourcesClient() {
               className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all group flex flex-col h-full"
             >
               <div className="flex justify-between items-start mb-4">
-                <div className="w-10 h-10 bg-brand-cream rounded-lg flex items-center justify-center text-brand-copper">
+                <div className="w-10 h-10 bg-brand-cream rounded-lg flex items-center justify-center text-brand-copper-text">
                   <resource.icon size={20} />
                 </div>
                 <Badge
@@ -160,7 +160,7 @@ export function ResourcesClient() {
                 </Badge>
               </div>
 
-              <h3 className="text-lg font-bold text-brand-oxford mb-2 group-hover:text-brand-copper transition-colors">
+              <h3 className="text-lg font-bold text-brand-oxford mb-2 group-hover:text-brand-copper-text transition-colors">
                 {resource.title}
               </h3>
               <p className="text-gray-500 text-sm mb-6 flex-grow">{resource.description}</p>
@@ -170,7 +170,7 @@ export function ResourcesClient() {
                   <Tag size={12} />
                   <span>{resource.audience}</span>
                 </div>
-                <button className="text-brand-copper text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                <button className="text-brand-copper-text text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                   Read <ArrowRight size={14} />
                 </button>
               </div>
@@ -197,7 +197,7 @@ export function ResourcesClient() {
                 </div>
                 <Link
                   href="/status"
-                  className="text-sm font-medium text-brand-copper hover:text-brand-copper-dark"
+                  className="text-sm font-medium text-brand-copper-text hover:text-brand-copper-text-dark"
                 >
                   Check Status →
                 </Link>
@@ -211,7 +211,7 @@ export function ResourcesClient() {
                   href="https://support.humaneers.dev/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm font-medium text-brand-copper hover:text-brand-copper-dark"
+                  className="text-sm font-medium text-brand-copper-text hover:text-brand-copper-text-dark"
                 >
                   Open Portal →
                 </a>
@@ -224,7 +224,7 @@ export function ResourcesClient() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-brand-copper hover:text-brand-copper-dark"
+                  className="text-brand-copper-text hover:text-brand-copper-text-dark"
                 >
                   Download PDF
                 </Button>
@@ -243,7 +243,7 @@ export function ResourcesClient() {
                   key={item.term}
                   className="border-b border-gray-700 pb-4 last:border-0 last:pb-0"
                 >
-                  <h4 className="font-bold text-brand-copper mb-1">{item.term}</h4>
+                  <h4 className="font-bold text-brand-copper-light mb-1">{item.term}</h4>
                   <p className="text-gray-300 text-sm leading-relaxed">{item.def}</p>
                 </div>
               ))}

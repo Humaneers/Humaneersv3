@@ -72,7 +72,7 @@ export const schemas = {
     },
   }),
 
-  localBusiness: (includeRating = false) => ({
+  localBusiness: () => ({
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     name: "Humaneers",
@@ -100,13 +100,9 @@ export const schemas = {
       },
     ],
     priceRange: "$$$",
-    ...(includeRating && {
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "5.0",
-        reviewCount: "200",
-      },
-    }),
+    // claims-guard-allow: names the forbidden field on purpose. No rating schema here —
+    // Humaneers has no collected review corpus, and a fabricated aggregateRating is
+    // structured-data spam. Do not reintroduce without real, attributable reviews.
   }),
 
   service: (serviceType: string, description: string) => ({

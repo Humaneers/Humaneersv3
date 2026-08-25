@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      <StructuredData data={schemas.localBusiness(false)} />
+      <StructuredData data={schemas.localBusiness()} />
       <Suspense fallback={<PageLoader />}>
         <HomeClient />
       </Suspense>
