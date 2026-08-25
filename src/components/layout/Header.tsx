@@ -109,7 +109,7 @@ export function Header() {
     >
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-brand-copper focus:text-white focus:px-4 focus:py-2 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-white"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-brand-copper-text focus:text-white focus:px-4 focus:py-2 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-white"
       >
         Skip to main content
       </a>
@@ -266,7 +266,7 @@ export function Header() {
             <Link href={ctaLinks.support.to}>{ctaLinks.support.label}</Link>
           </Button>
           <Button
-            className="bg-brand-copper hover:bg-brand-copper-dark text-white font-medium rounded-md transition-all shadow-md hover:shadow-lg focus-visible:ring-2 focus-visible:ring-white"
+            className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white font-medium rounded-md transition-all shadow-md hover:shadow-lg focus-visible:ring-2 focus-visible:ring-white"
             asChild
           >
             <Link href={ctaLinks.sales.to}>{ctaLinks.sales.label}</Link>

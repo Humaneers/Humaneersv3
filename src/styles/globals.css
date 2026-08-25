@@ -123,7 +123,19 @@
   --color-brand-oxford: #1b263b;
   --color-brand-oxford-muted: #2c3b55;
   --color-brand-oxford-deep: #0f1521;
+  /*
+   * Copper carries the brand but not always the contrast. #b87333 measures
+   * 3.79:1 on white, 3.37:1 on cream and 3.99:1 on the oxford navy — fine for
+   * display type, borders, icons and washes, and short of WCAG AA 4.5:1
+   * everywhere it carries small text. Three tokens, one job each:
+   *   copper        display type 24px and up, borders, icons, washes  (3:1)
+   *   copper-text   small text and CTA fills on light surfaces        (5.7:1 on white, 5.1:1 on cream)
+   *   copper-light  small text on the oxford navy                     (6.9:1 on navy)
+   * Measured 24 Aug 2026. If you change a value here, re-measure all three.
+   */
   --color-brand-copper: #b87333;
+  --color-brand-copper-text: #8f5a28;
+  --color-brand-copper-text-dark: #7a4d22;
   --color-brand-copper-dark: #a0632a;
   --color-brand-copper-light: #e5a060;
   --color-brand-slate: #4e596f;

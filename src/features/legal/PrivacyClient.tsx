@@ -8,9 +8,9 @@ export function PrivacyClient() {
 
       <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">1. Introduction</h2>
       <p>
-        Humaneers, LLC ("we," "our," or "us") respects your privacy and is committed to
-        protecting your personal data. This privacy policy explains how we collect, use, and protect
-        your information when you visit our website or use our services, and informs you about your
+        Humaneers, LLC ("we," "our," or "us") respects your privacy and is committed to protecting
+        your personal data. This privacy policy explains how we collect, use, and protect your
+        information when you visit our website or use our services, and informs you about your
         privacy rights under applicable laws including GDPR and CCPA.
       </p>
 
@@ -147,7 +147,10 @@ export function PrivacyClient() {
       <ul className="list-disc pl-6 mb-4 space-y-2">
         <li>Standard Contractual Clauses approved by the European Commission.</li>
         <li>Data Processing Agreements with our service providers.</li>
-        <li>Ensuring processors are Privacy Shield certified or have equivalent protections.</li>
+        <li>
+          Reliance on a European Commission adequacy decision where one covers the destination
+          country.
+        </li>
       </ul>
 
       <h2 className="text-2xl font-bold text-brand-oxford mt-8 mb-4">8. Data Retention</h2>
@@ -209,7 +212,7 @@ export function PrivacyClient() {
       </ul>
       <p>
         To exercise any of these rights, please contact us at{" "}
-        <a href="mailto:privacy@humaneers.dev" className="text-brand-copper hover:underline">
+        <a href="mailto:privacy@humaneers.dev" className="text-brand-copper-text hover:underline">
           privacy@humaneers.dev
         </a>
         . We will respond within 30 days.
@@ -267,7 +270,7 @@ export function PrivacyClient() {
       </ul>
       <p>
         To exercise these rights, contact us at{" "}
-        <a href="mailto:privacy@humaneers.dev" className="text-brand-copper hover:underline">
+        <a href="mailto:privacy@humaneers.dev" className="text-brand-copper-text hover:underline">
           privacy@humaneers.dev
         </a>
         .
@@ -345,17 +348,17 @@ export function PrivacyClient() {
         <strong>Humaneers, LLC</strong>
         <br />
         Email:{" "}
-        <a href="mailto:privacy@humaneers.dev" className="text-brand-copper hover:underline">
+        <a href="mailto:privacy@humaneers.dev" className="text-brand-copper-text hover:underline">
           privacy@humaneers.dev
         </a>
         <br />
         General Inquiries:{" "}
-        <a href="mailto:hello@humaneers.dev" className="text-brand-copper hover:underline">
+        <a href="mailto:hello@humaneers.dev" className="text-brand-copper-text hover:underline">
           hello@humaneers.dev
         </a>
         <br />
         Security Issues:{" "}
-        <a href="mailto:security@humaneers.dev" className="text-brand-copper hover:underline">
+        <a href="mailto:security@humaneers.dev" className="text-brand-copper-text hover:underline">
           security@humaneers.dev
         </a>
       </p>

@@ -42,7 +42,7 @@ export function MobileNav() {
           href={href}
           target={item.external ? "_blank" : undefined}
           rel={item.external ? "noopener noreferrer" : undefined}
-          className="text-left text-gray-600 hover:text-brand-copper transition-colors font-medium text-sm block py-1"
+          className="text-left text-gray-600 hover:text-brand-copper-text transition-colors font-medium text-sm block py-1"
           onClick={handleLinkClick}
         >
           {label}
@@ -55,7 +55,9 @@ export function MobileNav() {
         href={href}
         className={cn(
           "text-left transition-colors font-medium text-sm block py-1",
-          pathname === href ? "text-brand-copper" : "text-gray-600 hover:text-brand-copper"
+          pathname === href
+            ? "text-brand-copper-text"
+            : "text-gray-600 hover:text-brand-copper-text"
         )}
         onClick={handleLinkClick}
       >
@@ -70,7 +72,7 @@ export function MobileNav() {
         <Button
           variant="ghost"
           size="icon"
-          className="md:hidden text-white hover:text-brand-copper hover:bg-white/10"
+          className="md:hidden text-white hover:text-brand-copper-light hover:bg-white/10"
           aria-label="Toggle navigation menu"
         >
           <Menu className="h-6 w-6" aria-hidden="true" />
@@ -111,7 +113,7 @@ export function MobileNav() {
 
             return (
               <div key={section.id}>
-                <h4 className="text-brand-copper font-bold uppercase text-xs tracking-wider mb-3">
+                <h4 className="text-brand-copper-text font-bold uppercase text-xs tracking-wider mb-3">
                   {section.label}
                 </h4>
                 <div className="flex flex-col gap-1 pl-3 border-l-2 border-brand-copper/20">
@@ -125,7 +127,7 @@ export function MobileNav() {
 
           <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-brand-copper/10">
             <Button
-              className="bg-brand-copper hover:bg-brand-copper-dark text-white w-full"
+              className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white w-full"
               asChild
               onClick={handleLinkClick}
             >

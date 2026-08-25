@@ -102,7 +102,7 @@ export function GrowthClient() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               onClick={() => router.push(`${routePaths.pricing}?mode=business`)}
-              className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
+              className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
               withArrow
             >
               Book a Strategy Call
@@ -133,7 +133,7 @@ export function GrowthClient() {
       <section className="py-24 bg-brand-cream">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center mb-20">
-            <h2 className="text-brand-copper font-bold tracking-widest uppercase mb-4 text-sm">
+            <h2 className="text-brand-copper-text font-bold tracking-widest uppercase mb-4 text-sm">
               The Gap
             </h2>
             <h3 className="text-3xl md:text-4xl font-bold text-brand-oxford mb-6">
@@ -143,7 +143,7 @@ export function GrowthClient() {
               Hiring a full-time Chief Marketing Officer costs $250k+. Hiring an agency gets you a
               junior team juggling 20 other clients. We provide a third option:
               <strong> Senior Fractional Leadership </strong> for{" "}
-              <span className="text-brand-copper font-bold">1/10th the cost</span>.
+              <span className="text-brand-copper-text font-bold">1/10th the cost</span>.
             </p>
           </div>
 
@@ -170,7 +170,7 @@ export function GrowthClient() {
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row items-center gap-16">
             <div className="md:w-1/2">
-              <div className="inline-block bg-brand-copper/10 text-brand-copper font-bold px-4 py-2 rounded-full text-sm mb-6">
+              <div className="inline-block bg-brand-copper/10 text-brand-copper-text font-bold px-4 py-2 rounded-full text-sm mb-6">
                 Our Methodology
               </div>
               <h2 className="text-3xl md:text-5xl font-bold text-brand-oxford mb-6 leading-tight">
@@ -203,7 +203,7 @@ export function GrowthClient() {
                   className="w-full h-auto"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-brand-oxford/90 backdrop-blur-sm p-6 text-white border-t border-brand-copper">
-                  <div className="text-sm uppercase tracking-widest text-brand-copper font-bold mb-1">
+                  <div className="text-sm uppercase tracking-widest text-brand-copper-text font-bold mb-1">
                     Case Study
                   </div>
                   <div className="font-bold text-lg mb-2">Construction Firm Rebrand</div>
@@ -250,7 +250,7 @@ export function GrowthClient() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               onClick={() => router.push(`${routePaths.talkToSales}?interest=Fractional%20Growth`)}
-              className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-10 py-8 h-auto rounded-full shadow-xl hover:shadow-2xl transition-all"
+              className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-xl px-10 py-8 h-auto rounded-full shadow-xl hover:shadow-2xl transition-all"
               withArrow
             >
               Calculate Your Savings

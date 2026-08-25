@@ -9,7 +9,7 @@ export function EthicsClient() {
       {/* Header */}
       <section className="bg-brand-oxford text-white py-20 relative overflow-hidden">
         <div className="container mx-auto px-6 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 bg-brand-copper/20 text-brand-copper px-4 py-1.5 rounded-full text-sm font-medium mb-6 border border-brand-copper/30">
+          <div className="inline-flex items-center gap-2 bg-white/5 text-brand-copper-light px-4 py-1.5 rounded-full text-sm font-medium mb-6 border border-brand-copper/30">
             <Scale size={16} /> Corporate Governance
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6">Ethics Charter</h1>
@@ -122,7 +122,7 @@ export function EthicsClient() {
                 label="Submit Ethics Report"
                 email="compliance@humaneers.dev"
                 subject="CONFIDENTIAL: Ethics Report"
-                className="w-full bg-brand-copper hover:bg-brand-copper-dark"
+                className="w-full bg-brand-copper-text hover:bg-brand-copper-text-dark"
               />
 
               <p className="text-[10px] text-center text-gray-400 mt-6">

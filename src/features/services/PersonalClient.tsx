@@ -25,7 +25,7 @@ export function PersonalClient() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               onClick={() => router.push(`${routePaths.pricing}?mode=household`)}
-              className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg"
+              className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg"
               withArrow
             >
               View Pricing
@@ -54,7 +54,7 @@ export function PersonalClient() {
                 (@yourname.com).
               </p>
               <div className="mt-0 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-2 transition-all duration-300 overflow-hidden">
-                <p className="text-sm text-brand-copper font-medium">
+                <p className="text-sm text-brand-copper-text font-medium">
                   Professional identity aligned.
                 </p>
               </div>
@@ -67,7 +67,9 @@ export function PersonalClient() {
                 software.
               </p>
               <div className="mt-0 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-2 transition-all duration-300 overflow-hidden">
-                <p className="text-sm text-brand-copper font-medium">Zero-touch configuration.</p>
+                <p className="text-sm text-brand-copper-text font-medium">
+                  Zero-touch configuration.
+                </p>
               </div>
             </div>
             <div className="p-6 bg-brand-cream rounded-xl hover:-translate-y-1 transition-transform group cursor-default">
@@ -78,7 +80,7 @@ export function PersonalClient() {
                 protection.
               </p>
               <div className="mt-0 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-2 transition-all duration-300 overflow-hidden">
-                <p className="text-sm text-brand-copper font-medium">
+                <p className="text-sm text-brand-copper-text font-medium">
                   CrowdStrike/SentinelOne agents.
                 </p>
               </div>
@@ -91,7 +93,9 @@ export function PersonalClient() {
                 errors.
               </p>
               <div className="mt-0 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-2 transition-all duration-300 overflow-hidden">
-                <p className="text-sm text-brand-copper font-medium">15-minute response SLA.</p>
+                <p className="text-sm text-brand-copper-text font-medium">
+                  15-minute response SLA.
+                </p>
               </div>
             </div>
           </div>
@@ -159,7 +163,7 @@ export function PersonalClient() {
                 <div className="bg-gray-100 p-3 rounded-lg rounded-tl-none self-start max-w-[80%] text-brand-oxford">
                   Help! My laptop was stolen at the airport. It has all my client contracts on it.
                 </div>
-                <div className="bg-brand-copper text-white p-3 rounded-lg rounded-tr-none self-end max-w-[80%] ml-auto text-right">
+                <div className="bg-brand-copper-text text-white p-3 rounded-lg rounded-tr-none self-end max-w-[80%] ml-auto text-right">
                   Don't panic. We just initiated a remote wipe command. Your data is gone from that
                   machine. We are shipping you a configured replacement to your hotel now.
                 </div>
@@ -174,7 +178,7 @@ export function PersonalClient() {
         <h2 className="text-3xl font-bold text-brand-oxford mb-8">Plans start at $25/month.</h2>
         <Button
           onClick={() => router.push(`${routePaths.pricing}?mode=household`)}
-          className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-12 py-6 h-auto rounded-full shadow-lg"
+          className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-xl px-12 py-6 h-auto rounded-full shadow-lg"
           withArrow
         >
           View Pricing

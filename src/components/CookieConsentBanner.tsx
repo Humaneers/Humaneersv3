@@ -24,7 +24,7 @@ export function CookieConsentBanner() {
           <p className="text-xs">
             Essential cookies are always active. Analytics and marketing cookies require your
             consent.{" "}
-            <Link href="/privacy" className="text-brand-copper hover:underline">
+            <Link href="/privacy" className="text-brand-copper-light hover:underline">
               Learn more
             </Link>
           </p>
@@ -39,7 +39,7 @@ export function CookieConsentBanner() {
           </Button>
           <Button
             onClick={acceptConsent}
-            className="bg-brand-copper hover:bg-brand-copper-dark text-white"
+            className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white"
           >
             Accept All
           </Button>

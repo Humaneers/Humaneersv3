@@ -50,7 +50,7 @@ export function StatusClient() {
           </p>
           <a
             href="/support"
-            className="inline-flex items-center gap-2 bg-brand-copper hover:bg-brand-copper/90 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200"
+            className="inline-flex items-center gap-2 bg-brand-copper-text hover:bg-brand-copper-text-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200"
           >
             <AlertCircle size={20} />
             Report an Issue

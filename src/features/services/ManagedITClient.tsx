@@ -108,7 +108,7 @@ export function ManagedITClient() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               onClick={() => router.push(`${routePaths.talkToSales}?interest=Managed%20IT`)}
-              className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
+              className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
               withArrow
             >
               Get a Network Assessment
@@ -137,7 +137,7 @@ export function ManagedITClient() {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row gap-16 items-start">
             <div className="md:w-1/2 md:sticky md:top-24">
-              <h2 className="text-brand-copper font-bold tracking-widest uppercase mb-4 text-sm">
+              <h2 className="text-brand-copper-text font-bold tracking-widest uppercase mb-4 text-sm">
                 The Problem
               </h2>
               <h3 className="text-3xl md:text-4xl font-bold text-brand-oxford mb-6 leading-tight">
@@ -168,7 +168,7 @@ export function ManagedITClient() {
               </div>
             </div>
             <div className="md:w-1/2">
-              <h2 className="text-brand-copper font-bold tracking-widest uppercase mb-4 text-sm">
+              <h2 className="text-brand-copper-text font-bold tracking-widest uppercase mb-4 text-sm">
                 The Humaneers Way
               </h2>
               <h3 className="text-3xl md:text-4xl font-bold text-brand-oxford mb-6 leading-tight">
@@ -189,7 +189,7 @@ export function ManagedITClient() {
                       <h4 className="font-bold text-brand-oxford text-lg mb-2">{f.title}</h4>
                       <p className="text-brand-slate text-sm leading-relaxed">{f.desc}</p>
                       <div className="mt-0 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-2 transition-all duration-300 overflow-hidden">
-                        <p className="text-sm text-brand-copper font-medium">{f.moreInfo}</p>
+                        <p className="text-sm text-brand-copper-text font-medium">{f.moreInfo}</p>
                       </div>
                     </div>
                   </div>
@@ -277,13 +277,14 @@ export function ManagedITClient() {
             Ready to upgrade your infrastructure?
           </h2>
           <p className="text-xl text-brand-slate mb-10 max-w-2xl mx-auto">
-            Plans start at just <span className="font-bold text-brand-copper">$90/user/mo</span>.
-            Get a free roadmap before you commit.
+            Plans start at just{" "}
+            <span className="font-bold text-brand-copper-text">$90/user/mo</span>. Get a free
+            roadmap before you commit.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               onClick={() => router.push(`${routePaths.pricing}?mode=business`)}
-              className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg hover:shadow-xl transition-all"
+              className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg hover:shadow-xl transition-all"
               withArrow
             >
               View Pricing

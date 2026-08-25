@@ -290,7 +290,7 @@ export function ColophonClient() {
                     href="https://nextjs.org"
                     target="_blank"
                     rel="noreferrer"
-                    className="text-brand-copper hover:underline"
+                    className="text-brand-copper-text hover:underline"
                   >
                     Next.js 15 (App Router)
                   </a>
@@ -301,7 +301,7 @@ export function ColophonClient() {
                     href="https://tailwindcss.com"
                     target="_blank"
                     rel="noreferrer"
-                    className="text-brand-copper hover:underline"
+                    className="text-brand-copper-text hover:underline"
                   >
                     Tailwind CSS 4
                   </a>
@@ -312,7 +312,7 @@ export function ColophonClient() {
                     href="https://typescriptlang.org"
                     target="_blank"
                     rel="noreferrer"
-                    className="text-brand-copper hover:underline"
+                    className="text-brand-copper-text hover:underline"
                   >
                     TypeScript 5
                   </a>
@@ -323,7 +323,7 @@ export function ColophonClient() {
                     href="https://ui.shadcn.com"
                     target="_blank"
                     rel="noreferrer"
-                    className="text-brand-copper hover:underline"
+                    className="text-brand-copper-text hover:underline"
                   >
                     shadcn/ui
                   </a>
@@ -334,7 +334,7 @@ export function ColophonClient() {
                     href="https://lucide.dev"
                     target="_blank"
                     rel="noreferrer"
-                    className="text-brand-copper hover:underline"
+                    className="text-brand-copper-text hover:underline"
                   >
                     Lucide React
                   </a>
@@ -345,7 +345,7 @@ export function ColophonClient() {
                     href="https://motion.dev"
                     target="_blank"
                     rel="noreferrer"
-                    className="text-brand-copper hover:underline"
+                    className="text-brand-copper-text hover:underline"
                   >
                     Motion
                   </a>
@@ -356,7 +356,7 @@ export function ColophonClient() {
                     href="https://vercel.com"
                     target="_blank"
                     rel="noreferrer"
-                    className="text-brand-copper hover:underline"
+                    className="text-brand-copper-text hover:underline"
                   >
                     Vercel
                   </a>
@@ -379,7 +379,7 @@ export function ColophonClient() {
                         href="https://vercel.com/analytics"
                         target="_blank"
                         rel="noreferrer"
-                        className="text-brand-copper hover:underline text-xs"
+                        className="text-brand-copper-text hover:underline text-xs"
                       >
                         ↗
                       </a>
@@ -393,7 +393,7 @@ export function ColophonClient() {
                         href="https://vercel.com/docs/speed-insights"
                         target="_blank"
                         rel="noreferrer"
-                        className="text-brand-copper hover:underline text-xs"
+                        className="text-brand-copper-text hover:underline text-xs"
                       >
                         ↗
                       </a>
@@ -407,7 +407,7 @@ export function ColophonClient() {
                         href="https://contentsquare.com"
                         target="_blank"
                         rel="noreferrer"
-                        className="text-brand-copper hover:underline text-xs"
+                        className="text-brand-copper-text hover:underline text-xs"
                       >
                         ↗
                       </a>
@@ -421,7 +421,7 @@ export function ColophonClient() {
                         href="https://www.zoho.com/pagesense/"
                         target="_blank"
                         rel="noreferrer"
-                        className="text-brand-copper hover:underline text-xs"
+                        className="text-brand-copper-text hover:underline text-xs"
                       >
                         ↗
                       </a>
@@ -435,7 +435,7 @@ export function ColophonClient() {
                         href="https://www.zoho.com/salesiq/"
                         target="_blank"
                         rel="noreferrer"
-                        className="text-brand-copper hover:underline text-xs"
+                        className="text-brand-copper-text hover:underline text-xs"
                       >
                         ↗
                       </a>
@@ -462,7 +462,7 @@ export function ColophonClient() {
                         href="https://zoho.com"
                         target="_blank"
                         rel="noreferrer"
-                        className="text-brand-copper hover:underline text-xs"
+                        className="text-brand-copper-text hover:underline text-xs"
                       >
                         ↗
                       </a>
@@ -475,7 +475,7 @@ export function ColophonClient() {
                         href="https://workspace.google.com"
                         target="_blank"
                         rel="noreferrer"
-                        className="text-brand-copper hover:underline text-xs"
+                        className="text-brand-copper-text hover:underline text-xs"
                       >
                         ↗
                       </a>
@@ -488,7 +488,7 @@ export function ColophonClient() {
                         href="https://stripe.com"
                         target="_blank"
                         rel="noreferrer"
-                        className="text-brand-copper hover:underline text-xs"
+                        className="text-brand-copper-text hover:underline text-xs"
                       >
                         ↗
                       </a>
@@ -511,7 +511,7 @@ export function ColophonClient() {
                       href="https://unsplash.com"
                       target="_blank"
                       rel="noreferrer"
-                      className="text-brand-copper hover:underline truncate"
+                      className="text-brand-copper-text hover:underline truncate"
                     >
                       Unsplash
                     </a>

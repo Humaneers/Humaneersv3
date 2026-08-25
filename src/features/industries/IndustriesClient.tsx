@@ -51,7 +51,7 @@ export function IndustriesClient() {
               onClick={() =>
                 router.push(`${routePaths.talkToSales}?interest=Regulated%20Industries`)
               }
-              className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg"
+              className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg"
               withArrow
             >
               Schedule Compliance Review
@@ -73,7 +73,7 @@ export function IndustriesClient() {
                   {ind.icon}
                 </div>
                 <h3 className="text-2xl font-bold text-brand-oxford mb-1">{ind.title}</h3>
-                <div className="text-brand-copper text-xs font-bold uppercase tracking-wider mb-4">
+                <div className="text-brand-copper-text text-xs font-bold uppercase tracking-wider mb-4">
                   {ind.subtitle}
                 </div>
                 <p className="text-brand-slate mb-6 text-sm leading-relaxed">{ind.desc}</p>
@@ -136,25 +136,28 @@ export function IndustriesClient() {
             <div className="md:w-1/2">
               <div className="bg-brand-oxford text-white p-8 rounded-2xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 -mt-8 -mr-8 w-32 h-32 bg-brand-copper rounded-full opacity-20 blur-2xl"></div>
-                <h3 className="text-xl font-bold mb-4">Compliance Scorecard</h3>
+                <h3 className="text-xl font-bold mb-2">What the Risk Assessment Covers</h3>
+                <p className="text-sm text-gray-400 mb-6">
+                  Four control sets we read your environment against. The score is yours, not ours.
+                </p>
                 <div className="space-y-4">
                   {[
                     "HIPAA Security Rule",
                     "NIST CSF Alignment",
-                    "SOC 2 Type II Controls",
-                    "GDPR Readiness",
+                    "SOC 2 Type II control mapping",
+                    "GDPR readiness",
                   ].map((item) => (
                     <div
                       key={item}
-                      className="flex items-center justify-between border-b border-white/10 pb-2"
+                      className="flex items-center gap-3 border-b border-white/10 pb-2"
                     >
+                      <CheckCircle2 className="w-4 h-4 text-brand-copper-light shrink-0" />
                       <span>{item}</span>
-                      <span className="text-green-400 font-mono text-sm">100%</span>
                     </div>
                   ))}
                 </div>
                 <div className="mt-8 pt-6 border-t border-white/20 text-center">
-                  <p className="text-sm text-gray-400 mb-4">Don't know your score?</p>
+                  <p className="text-sm text-gray-400 mb-4">Not sure where you stand?</p>
                   <Button
                     onClick={() => router.push(routePaths.contact)}
                     variant="outline"

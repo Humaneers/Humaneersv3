@@ -448,7 +448,7 @@ function NewsletterForm() {
           id="consent"
           name="consent"
           required
-          className="rounded border-gray-300 text-brand-copper focus:ring-brand-copper"
+          className="rounded border-gray-300 text-brand-copper-text focus:ring-brand-copper"
         />
         <label htmlFor="consent" className="text-xs text-gray-500">
           I agree to receive marketing communications from Humaneers.
@@ -495,8 +495,8 @@ export function ContactModal() {
 
   return (
     <Dialog open={isOpen} onOpenChange={closeModal}>
-      <DialogContent className="sm:max-w-[600px] p-0 overflow-hidden gap-0 border-none rounded-2xl">
-        <div className="bg-brand-oxford p-6 text-white">
+      <DialogContent className="sm:max-w-[600px] p-0 gap-0 border-none rounded-2xl flex flex-col max-h-[85svh] overflow-hidden [&_[data-slot=dialog-close]]:text-brand-cream [&_[data-slot=dialog-close]]:z-10">
+        <div className="bg-brand-oxford p-6 pr-16 text-white shrink-0">
           <DialogHeader>
             <DialogTitle className="text-2xl font-serif">
               {activeTab === "sales"
@@ -519,7 +519,7 @@ export function ContactModal() {
           </DialogHeader>
         </div>
 
-        <div className="p-6 bg-white">
+        <div className="p-6 bg-white flex-1 overflow-y-auto overscroll-contain">
           <Tabs
             value={activeTab}
             onValueChange={(v) => openModal(v as "sales" | "support" | "newsletter")}

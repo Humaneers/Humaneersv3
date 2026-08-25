@@ -192,7 +192,7 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
 
                 <Button
                   type="submit"
-                  className="w-full bg-brand-copper hover:bg-brand-copper-dark text-white h-14 mt-6"
+                  className="w-full bg-brand-copper-text hover:bg-brand-copper-text-dark text-white h-14 mt-6"
                 >
                   Continue <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
@@ -275,7 +275,7 @@ export function TalkToSalesModal({ open, onOpenChange, initialData }: TalkToSale
                   </Button>
                   <Button
                     type="submit"
-                    className="flex-1 bg-brand-copper hover:bg-brand-copper-dark text-white h-14"
+                    className="flex-1 bg-brand-copper-text hover:bg-brand-copper-text-dark text-white h-14"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (

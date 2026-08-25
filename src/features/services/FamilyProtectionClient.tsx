@@ -94,7 +94,7 @@ export function FamilyProtectionClient() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               onClick={() => router.push(`${routePaths.pricing}?mode=household`)}
-              className="bg-brand-copper hover:bg-brand-copper-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
+              className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
               withArrow
             >
               Secure My Family
@@ -141,7 +141,7 @@ export function FamilyProtectionClient() {
               />
             </div>
             <div className="md:w-1/2">
-              <h2 className="text-brand-copper font-bold tracking-widest uppercase mb-4 text-sm">
+              <h2 className="text-brand-copper-text font-bold tracking-widest uppercase mb-4 text-sm">
                 The Risk
               </h2>
               <h3 className="text-3xl md:text-4xl font-bold text-brand-oxford mb-6 leading-tight">
@@ -187,13 +187,13 @@ export function FamilyProtectionClient() {
                 key={i}
                 className="bg-gray-50 p-8 rounded-2xl hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-brand-copper group cursor-default"
               >
-                <div className="mb-6 bg-white w-14 h-14 rounded-xl shadow-sm flex items-center justify-center group-hover:bg-brand-copper transition-colors text-brand-copper group-hover:text-white">
+                <div className="mb-6 bg-white w-14 h-14 rounded-xl shadow-sm flex items-center justify-center group-hover:bg-brand-copper transition-colors text-brand-copper-text group-hover:text-white">
                   {f.icon}
                 </div>
                 <h3 className="text-xl font-bold text-brand-oxford mb-3">{f.title}</h3>
                 <p className="text-brand-slate text-sm leading-relaxed">{f.desc}</p>
                 <div className="mt-0 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-4 transition-all duration-300 overflow-hidden">
-                  <p className="text-sm text-brand-copper font-medium">{f.moreInfo}</p>
+                  <p className="text-sm text-brand-copper-text font-medium">{f.moreInfo}</p>
                 </div>
               </div>
             ))}
@@ -268,7 +268,7 @@ export function FamilyProtectionClient() {
           </p>
           <Button
             onClick={() => router.push(`${routePaths.talkToSales}?interest=Family%20Protection`)}
-            className="bg-brand-copper hover:bg-brand-copper-dark text-white text-xl px-12 py-8 h-auto rounded-full shadow-lg"
+            className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-xl px-12 py-8 h-auto rounded-full shadow-lg"
             withArrow
           >
             Get a Home Network Health Check

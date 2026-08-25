@@ -91,7 +91,7 @@ export function ObjectionsSection() {
                       <div className="w-12 h-12 rounded-full bg-brand-copper/10 flex items-center justify-center shrink-0">
                         <Check className="w-6 h-6 text-brand-copper" />
                       </div>
-                      <h3 className="text-sm font-bold tracking-wider text-brand-copper uppercase">
+                      <h3 className="text-sm font-bold tracking-wider text-brand-copper-text uppercase">
                         The Reality
                       </h3>
                     </div>

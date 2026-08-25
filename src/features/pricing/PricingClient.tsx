@@ -16,7 +16,6 @@ import {
   ChevronDown,
   MessageSquare,
 } from "lucide-react";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { DefinitionTooltip } from "@/components/DefinitionTooltip";
@@ -287,7 +286,7 @@ export function PricingClient() {
               Matches the notice on /talk-to-sales so the two pages tell one
               story: a visitor should know the state before they start pricing
               a plan, not after they have chosen one. */}
-          <span className="inline-block mb-4 rounded-full border border-brand-copper/40 bg-brand-copper/10 px-4 py-1 text-xs font-bold uppercase tracking-wider text-brand-copper">
+          <span className="inline-block mb-4 rounded-full border border-brand-copper/40 bg-brand-copper/10 px-4 py-1 text-xs font-bold uppercase tracking-wider text-brand-copper-text">
             At capacity: joining the waitlist
           </span>
           <h1 className="text-4xl md:text-5xl font-bold text-brand-oxford mb-6 tracking-tight">
@@ -335,13 +334,13 @@ export function PricingClient() {
                 className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
                   pricingMode === "household"
                     ? "text-white"
-                    : "text-brand-slate hover:text-brand-copper"
+                    : "text-brand-slate hover:text-brand-copper-text"
                 }`}
               >
                 {pricingMode === "household" && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute inset-0 bg-brand-copper rounded-lg shadow-md"
+                    className="absolute inset-0 bg-brand-copper-text rounded-lg shadow-md"
                     transition={{ type: "spring", stiffness: 500, damping: 30 }}
                   />
                 )}
@@ -381,13 +380,13 @@ export function PricingClient() {
                 className={`relative py-3 rounded-lg text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand-oxford focus-visible:ring-offset-2 ${
                   pricingMode === "incubation"
                     ? "text-white"
-                    : "text-brand-slate hover:text-brand-copper"
+                    : "text-brand-slate hover:text-brand-copper-text"
                 }`}
               >
                 {pricingMode === "incubation" && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute inset-0 bg-brand-copper rounded-lg shadow-md"
+                    className="absolute inset-0 bg-brand-copper-text rounded-lg shadow-md"
                     transition={{ type: "spring", stiffness: 500, damping: 30 }}
                   />
                 )}
@@ -466,7 +465,7 @@ export function PricingClient() {
 
             const buttonClasses = `w-full py-6 text-lg font-bold shadow-md transition-all rounded-xl ${
               tier.highlighted
-                ? "bg-brand-copper hover:bg-brand-copper-dark text-white hover:shadow-xl hover:-translate-y-1"
+                ? "bg-brand-copper-text hover:bg-brand-copper-text-dark text-white hover:shadow-xl hover:-translate-y-1"
                 : "bg-white border-2 border-brand-oxford text-brand-oxford hover:bg-brand-oxford hover:text-white"
             }`;
 
@@ -496,7 +495,7 @@ export function PricingClient() {
                       </span>
                       <span className="text-gray-500 text-sm font-medium">base / mo</span>
                     </div>
-                    <div className="flex items-baseline gap-2 text-brand-copper">
+                    <div className="flex items-baseline gap-2 text-brand-copper-text">
                       {tier.perUserPrice !== undefined ? (
                         <>
                           <span className="text-xl font-bold">
@@ -519,7 +518,7 @@ export function PricingClient() {
                           </span>
                         </>
                       ) : (
-                        <span className="text-sm font-medium opacity-80 mt-1 text-brand-copper">
+                        <span className="text-sm font-medium opacity-80 mt-1 text-brand-copper-text">
                           Two users included
                         </span>
                       )}
@@ -706,25 +705,27 @@ export function PricingClient() {
                     />
                   </span>
                 </div>
-                <div className="text-sm text-brand-copper font-medium">Sold in 10hr packs</div>
+                <div className="text-sm text-brand-copper-light font-medium">
+                  Sold in 10hr packs
+                </div>
               </div>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6 mb-8 border-t border-gray-700 pt-8">
               <div>
-                <h4 className="font-bold mb-2 text-brand-copper">Flexible Usage</h4>
+                <h4 className="font-bold mb-2 text-brand-copper-light">Flexible Usage</h4>
                 <p className="text-sm text-gray-400">
                   Use for IT support, strategy, or crisis response. Hours are deducted as we work.
                 </p>
               </div>
               <div>
-                <h4 className="font-bold mb-2 text-brand-copper">Never Expires</h4>
+                <h4 className="font-bold mb-2 text-brand-copper-light">Never Expires</h4>
                 <p className="text-sm text-gray-400">
                   Your hours stay in your account forever. Use them next week or next year.
                 </p>
               </div>
               <div>
-                <h4 className="font-bold mb-2 text-brand-copper">Priority Queue</h4>
+                <h4 className="font-bold mb-2 text-brand-copper-light">Priority Queue</h4>
                 <p className="text-sm text-gray-400">
                   Retainer clients get priority scheduling over standard ad-hoc requests.
                 </p>
@@ -789,25 +790,17 @@ export function PricingClient() {
           We work with larger organizations to build custom infrastructure and growth plans.
         </p>
 
-        <div className="bg-white rounded-3xl shadow-xl overflow-hidden max-w-4xl mx-auto flex flex-col md:flex-row items-center border border-gray-100">
-          <div className="w-full md:w-1/3 relative h-64 md:h-auto self-stretch">
-            <Image
-              src="/team/lead_strategist.png"
-              alt="Lead Strategist"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="p-10 md:p-12 text-left flex-grow">
+        <div className="bg-white rounded-3xl shadow-xl overflow-hidden max-w-3xl mx-auto border border-gray-100">
+          <div className="p-10 md:p-12 text-left">
             <MessageSquare className="w-10 h-10 text-brand-copper/20 mb-6" />
-            <blockquote className="text-xl italic text-brand-oxford mb-8">
-              "We don't just manage servers; we protect the people running them. Let's build a plan
-              that fits your culture."
-            </blockquote>
-            <div className="flex items-center justify-between">
+            <p className="text-xl text-brand-oxford mb-8">
+              We don't just manage servers; we protect the people running them. Enterprise
+              engagements start with a conversation about how your organization actually works.
+            </p>
+            <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
-                <p className="font-bold text-brand-oxford">Sarah Chen</p>
-                <p className="text-sm text-gray-500">Lead Technology Strategist</p>
+                <p className="font-bold text-brand-oxford">Strategic Sales</p>
+                <p className="text-sm text-gray-500">Humaneers, LLC</p>
               </div>
 
               <Button

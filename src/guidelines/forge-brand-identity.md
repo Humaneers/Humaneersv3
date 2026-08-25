@@ -239,7 +239,7 @@
 **Quality Standards**:
 
 - All developers vetted by Humaneers engineering team
-- SOC 2 compliant background checks
+- Background checks and reference verification on every developer
 - NDA coverage under your company
 - Work-for-hire agreements (you own all IP)
 
@@ -656,7 +656,7 @@ The Forge Team
 
 **Member Data**:
 
-- SOC 2 Type II compliant storage
+- Encrypted storage with access logging and least-privilege access control
 - No selling or sharing of member data
 - Opt-in for member directory and community features
 - GDPR and CCPA compliance

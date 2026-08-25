@@ -12,7 +12,7 @@ export function TalkToSalesClient() {
           {/* The availability state belongs at the top of the funnel. The page
               this replaced let a visitor read all the way down and then refused
               them, after the header had promised to help. */}
-          <span className="inline-block mb-4 rounded-full border border-brand-copper/40 bg-brand-copper/15 px-4 py-1 text-xs font-bold uppercase tracking-wider text-brand-copper">
+          <span className="inline-block mb-4 rounded-full border border-brand-copper/40 bg-white/5 px-4 py-1 text-xs font-bold uppercase tracking-wider text-brand-copper-light">
             At capacity: joining the waitlist
           </span>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Let's Build Your Strategy</h1>
@@ -28,7 +28,7 @@ export function TalkToSalesClient() {
         <div className="grid md:grid-cols-5 gap-8 max-w-6xl mx-auto">
           {/* Sidebar */}
           <div className="md:col-span-2 space-y-6">
-            <div className="bg-brand-copper text-white p-6 rounded-lg shadow-lg">
+            <div className="bg-brand-copper-text text-white p-6 rounded-lg shadow-lg">
               <h3 className="font-bold text-xl mb-2">Why Humaneers?</h3>
               <p className="text-white/90 mb-4">
                 We don't just fix computers. We align technology with your goals, at work or at

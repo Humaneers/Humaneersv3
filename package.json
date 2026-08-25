@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
+    "claims": "node scripts/claims-guard.mjs",
+    "prebuild": "npm run claims",
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
@@ -12,7 +14,7 @@
     "lint:fix": "eslint src/ --fix",
     "format": "prettier --write src/",
     "format:check": "prettier --check src/",
-    "check": "npm run typecheck && npm run lint && npm run format:check",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm run claims",
     "test": "vitest",
     "test:run": "vitest run",
     "release": "npx tsx scripts/release.ts",

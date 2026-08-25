@@ -32,7 +32,7 @@ export function AboutClient() {
     { title: "Chief Technologist", role: "Infrastructure and Security Architecture" },
     { title: "Head of Brand Strategy", role: "Market Positioning and Growth" },
     { title: "Senior Network Engineer", role: "Mesh Systems and Connectivity" },
-    { title: "Compliance Officer", role: "SOC 2 and Regulatory Affairs" },
+    { title: "Compliance Officer", role: "Client Compliance and Regulatory Affairs" },
     { title: "Client Success Director", role: "Account Management and Quality Assurance" },
   ];
 
@@ -52,7 +52,7 @@ export function AboutClient() {
               Enterprise strategy for businesses and families. Built with precision. Delivered with
               soul.
             </p>
-            <div className="flex flex-wrap gap-6 items-center text-sm font-medium text-brand-copper uppercase tracking-widest">
+            <div className="flex flex-wrap gap-6 items-center text-sm font-medium text-brand-copper-light uppercase tracking-widest">
               <span className="flex items-center gap-2">
                 <CheckCircle2 size={16} /> 8 Year Track Record
               </span>
@@ -173,7 +173,7 @@ export function AboutClient() {
                       className="flex flex-col sm:flex-row sm:justify-between sm:items-center group gap-2 px-2"
                     >
                       <span className="font-bold text-brand-oxford">{leader.title}</span>
-                      <span className="text-sm text-brand-copper font-medium bg-brand-copper/10 px-3 py-1 rounded-full group-hover:bg-brand-copper group-hover:text-white transition-colors self-start sm:self-auto">
+                      <span className="text-sm text-brand-copper-text font-medium bg-brand-copper/10 px-3 py-1 rounded-full group-hover:bg-brand-copper-text group-hover:text-white transition-colors self-start sm:self-auto">
                         {leader.role}
                       </span>
                     </li>
@@ -229,7 +229,7 @@ export function AboutClient() {
                   key={i}
                   className="bg-white p-6 rounded-lg shadow-sm text-center border border-gray-100"
                 >
-                  <div className="w-12 h-12 bg-brand-cream text-brand-copper rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-12 h-12 bg-brand-cream text-brand-copper-text rounded-full flex items-center justify-center mx-auto mb-4">
                     <metric.icon size={24} />
                   </div>
                   <div className="text-3xl font-bold text-brand-oxford mb-1">{metric.value}</div>
@@ -275,7 +275,7 @@ export function AboutClient() {
                 </p>
                 <Button
                   onClick={() => router.push(routePaths.colophon)}
-                  className="bg-brand-copper hover:bg-brand-copper-dark text-white self-center"
+                  className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white self-center"
                 >
                   View Transparency Report
                 </Button>
@@ -431,7 +431,7 @@ export function AboutClient() {
                   "About Page Strategy CTA"
                 )
               }
-              className="bg-brand-copper hover:bg-brand-copper-dark text-white px-10 py-7 text-lg font-bold rounded-full group shadow-lg hover:shadow-brand-copper/20"
+              className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white px-10 py-7 text-lg font-bold rounded-full group shadow-lg hover:shadow-brand-copper/20"
               withArrow
             >
               Book a Strategy Session
