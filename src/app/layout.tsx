@@ -10,7 +10,7 @@ import { ContactModalProvider } from "../components/providers/ContactModalProvid
 import { ContactModalWrapper } from "../components/ContactModalWrapper";
 
 export const metadata: Metadata = {
-  title: "Humaneers | Enterprise Strategy. Built with Precision.",
+  title: "Humaneers | Built with precision. Delivered with soul.",
   description:
     "Enterprise strategy for businesses and families. Built with precision. Delivered with soul. Managed IT, cybersecurity, and brand growth.",
   keywords: [
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://humaneers.dev",
     siteName: "Humaneers",
-    title: "Humaneers | Enterprise Strategy. Built with Precision.",
+    title: "Humaneers | Built with precision. Delivered with soul.",
     description:
       "Enterprise strategy for businesses and families. Built with precision. Delivered with soul.",
     images: [
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Humaneers | Enterprise Strategy. Built with Precision.",
+    title: "Humaneers | Built with precision. Delivered with soul.",
     description:
       "Enterprise strategy for businesses and families. Built with precision. Delivered with soul.",
     images: ["/og-image.jpg"],
