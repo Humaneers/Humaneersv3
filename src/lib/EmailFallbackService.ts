@@ -250,7 +250,7 @@ Generated at: ${new Date().toISOString()}
           <div class="contact-info">
             <h3>Contact Information</h3>
             <p><strong>Email:</strong> support@humaneers.dev</p>
-            <p><strong>Emergency Support:</strong> +1-555-0123</p>
+            <p><strong>Emergency Support:</strong> (928) 440-1505</p>
             <p><strong>Business Hours:</strong> Monday-Friday, 9 AM - 6 PM EST</p>
           </div>
         </div>
@@ -317,7 +317,7 @@ ${this.getUserConfirmationContent(formType, formData)
 
 CONTACT INFORMATION:
 Email: support@humaneers.dev
-Emergency Support: +1-555-0123
+Emergency Support: (928) 440-1505
 Business Hours: Monday-Friday, 9 AM - 6 PM EST
 
 This confirmation was sent because our primary system experienced a temporary issue.

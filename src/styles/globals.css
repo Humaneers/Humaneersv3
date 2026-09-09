@@ -306,7 +306,21 @@ header nav [data-radix-navigation-menu-trigger] {
   background-color: transparent !important;
   color: #d1d5db !important;
   border: none !important;
-  outline: none !important;
+}
+
+/* Keyboard focus indicator (WCAG 2.4.7) - must read as distinct from both
+   :hover and [data-state="open"], which share the same background tint.
+   Note: the current @radix-ui/react-navigation-menu + shadcn markup renders
+   data-slot="navigation-menu-trigger" on the trigger (and data-slot=
+   "navigation-menu" on the nav root), not the data-radix-navigation-menu-*
+   attributes the other rules in this block target - those never match any
+   element in the rendered DOM. This rule targets the attribute that is
+   actually present so the ring renders. */
+.navigation-menu-override [data-slot="navigation-menu-trigger"]:focus-visible,
+nav[data-slot="navigation-menu"] [data-slot="navigation-menu-trigger"]:focus-visible,
+header nav [data-slot="navigation-menu-trigger"]:focus-visible {
+  outline: 2px solid var(--color-brand-copper-light) !important;
+  outline-offset: 2px !important;
 }
 
 .navigation-menu-override [data-radix-navigation-menu-trigger]:hover,

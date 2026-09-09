@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { routePaths } from "../../routes";
 import Image from "next/image";
+import { FAMILIES_PROTECTED } from "@/data/pricing";
 
 export function FamilyProtectionClient() {
   const router = useRouter();
@@ -60,7 +61,7 @@ export function FamilyProtectionClient() {
   const stats = [
     { label: "Identity Theft Victims", value: "1 in 3" },
     { label: "Home Network Attacks", value: "+400%" },
-    { label: "Families Protected", value: "200+" },
+    { label: "Families Protected", value: FAMILIES_PROTECTED },
   ];
 
   return (

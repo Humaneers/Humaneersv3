@@ -40,3 +40,6 @@ pinegrow.json
 
 # TypeScript incremental build artifact
 tsconfig.tsbuildinfo
+
+# Agent tooling: local settings and dev-server launch config, not deployment source.
+.claude/

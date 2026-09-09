@@ -5,6 +5,7 @@ import { LifeBuoy, Phone, Clock, Shield, ChevronDown, MessageSquare } from "luci
 import { Button } from "@/components/ui/button";
 import { useContactModal } from "@/components/providers/ContactModalProvider";
 import { trackInteraction } from "@/lib/session";
+import { SLA_WINDOW } from "@/data/pricing";
 
 // Kept trackInteraction for FAQ if needed, though mostly used for form.
 // Faq toggle uses it.
@@ -161,7 +162,7 @@ export function Support() {
                   <span className="font-bold text-sm">Priority 1</span>
                 </div>
                 <div className="text-brand-oxford font-bold mb-1">Critical</div>
-                <div className="text-xs text-brand-slate">15 Min Response</div>
+                <div className="text-xs text-brand-slate">Response in {SLA_WINDOW.critical}</div>
               </div>
 
               <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">

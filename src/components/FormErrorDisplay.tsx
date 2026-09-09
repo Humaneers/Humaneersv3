@@ -100,7 +100,7 @@ export function FormErrorDisplay({
                 </a>
 
                 <a
-                  href="tel:+1-555-0123"
+                  href="tel:+19284401505"
                   className="inline-flex items-center gap-2 px-3 py-1.5 text-sm text-blue-700 hover:text-blue-800 hover:bg-blue-50 rounded transition-colors"
                 >
                   <Phone className="h-3 w-3" />

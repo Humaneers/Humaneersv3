@@ -22,6 +22,7 @@ import { DefinitionTooltip } from "@/components/DefinitionTooltip";
 import { routePaths } from "../../routes";
 import { useContactModal } from "@/components/providers/ContactModalProvider";
 import { PricingComparisonTable } from "./PricingComparisonTable";
+import { getTier, tierNamesWithSla, SLA_WINDOW } from "@/data/pricing";
 
 export function PricingClient() {
   const router = useRouter();
@@ -43,8 +44,8 @@ export function PricingClient() {
   const businessTiers = [
     {
       name: "Core",
-      basePrice: 99,
-      perUserPrice: 15,
+      basePrice: getTier("Core").basePrice,
+      perUserPrice: getTier("Core").perUserPrice,
       description: "Defense-grade security hygiene for lean teams.",
       features: [
         "Includes Two Free Users",
@@ -63,8 +64,8 @@ export function PricingClient() {
     },
     {
       name: "Growth",
-      basePrice: 249,
-      perUserPrice: 29,
+      basePrice: getTier("Growth").basePrice,
+      perUserPrice: getTier("Growth").perUserPrice,
       description: "Operational velocity and scalability for expanding brands.",
       features: [
         "Includes Two Free Users",
@@ -80,8 +81,8 @@ export function PricingClient() {
     },
     {
       name: "Enterprise",
-      basePrice: 399,
-      perUserPrice: 40,
+      basePrice: getTier("Enterprise").basePrice,
+      perUserPrice: getTier("Enterprise").perUserPrice,
       description: "Strategic leadership and sovereignty for market leaders.",
       features: [
         "Includes Two Free Users",
@@ -106,8 +107,8 @@ export function PricingClient() {
   const householdTiers = [
     {
       name: "Solo",
-      basePrice: 19,
-      perUserPrice: 4,
+      basePrice: getTier("Solo").basePrice,
+      perUserPrice: getTier("Solo").perUserPrice,
       description: "Digital identity protection for high-profile individuals.",
       features: [
         "Includes One Free User",
@@ -123,8 +124,8 @@ export function PricingClient() {
     },
     {
       name: "Household",
-      basePrice: 49,
-      perUserPrice: 9,
+      basePrice: getTier("Household").basePrice,
+      perUserPrice: getTier("Household").perUserPrice,
       description: "Cyber-physical security for the modern connected family.",
       features: [
         "Includes Four Free Users",
@@ -143,7 +144,7 @@ export function PricingClient() {
     },
     {
       name: "Legacy Care",
-      basePrice: 49,
+      basePrice: getTier("Legacy Care").basePrice,
       description: "Dignity, privacy, and fraud insulation for elders.",
       features: [
         "Home WiFi Management",
@@ -162,8 +163,8 @@ export function PricingClient() {
     },
     {
       name: "Estate",
-      basePrice: 149,
-      perUserPrice: 15,
+      basePrice: getTier("Estate").basePrice,
+      perUserPrice: getTier("Estate").perUserPrice,
       description: "Concierge technology management for multi-property estates.",
       features: [
         "Includes Two Free Users",
@@ -182,8 +183,8 @@ export function PricingClient() {
   const nonprofitTiers = [
     {
       name: "Nonprofit Foundation",
-      basePrice: 199,
-      perUserPrice: "Cost",
+      basePrice: getTier("Nonprofit Foundation").basePrice,
+      perUserPrice: getTier("Nonprofit Foundation").perUserPrice,
       description: "Flat-rate service fee plus at-cost licensing.",
       features: [
         "Includes Two Free Users",
@@ -204,8 +205,8 @@ export function PricingClient() {
   const incubationTiers = [
     {
       name: "Incubator",
-      basePrice: 15,
-      perUserPrice: "Pass-through",
+      basePrice: getTier("Incubator").basePrice,
+      perUserPrice: getTier("Incubator").perUserPrice,
       description: "Digital Asset Sovereignty for domains and IP.",
       features: [
         "Enterprise Registry Locks",
@@ -221,8 +222,8 @@ export function PricingClient() {
     },
     {
       name: "Hold Co",
-      basePrice: 499,
-      perUserPrice: "Entity",
+      basePrice: getTier("Hold Co").basePrice,
+      perUserPrice: getTier("Hold Co").perUserPrice,
       description: "Fractional Ops for multi-entity portfolios.",
       features: [
         "Consolidated Billing",
@@ -272,7 +273,9 @@ export function PricingClient() {
     {
       question: "Do you offer emergency support?",
       answer:
-        "Absolutely. Growth and Scale tiers include priority support, while our Hourly Packs can be used for urgent crisis response if we have capacity.",
+        `Absolutely. ${tierNamesWithSla("business", "priority").join(" and ")} tiers include ` +
+        `priority support (${SLA_WINDOW.priority} response), while our Hourly Packs can be used ` +
+        `for urgent crisis response ${SLA_WINDOW.capacity}.`,
     },
   ];
 
@@ -397,7 +400,6 @@ export function PricingClient() {
             </div>
 
             {/* Mobile-friendly overflow hint if needed, or adjust grid cols */}
-            {/* Note: The grid above is grid-cols-3, we need grid-cols-4 now or scrollable */}
           </div>
         </div>
 
@@ -625,7 +627,8 @@ export function PricingClient() {
               </div>
               <div className="text-right shrink-0">
                 <div className="text-4xl font-bold text-white mb-1">
-                  $15<span className="text-lg font-normal text-gray-400">/mo</span>
+                  ${getTier("Incubator").basePrice}
+                  <span className="text-lg font-normal text-gray-400">/mo</span>
                 </div>
                 <div className="text-sm text-brand-cream font-medium">
                   + pass-through domain fees
@@ -645,7 +648,7 @@ export function PricingClient() {
                 <h4 className="font-bold mb-2 text-brand-cream">DNS Management</h4>
                 <p className="text-sm text-gray-400">
                   We configure SPF, DKIM, and DMARC records to ensure your emails actually land in
-                  inbexes.
+                  inboxes.
                 </p>
               </div>
               <div>
@@ -700,7 +703,7 @@ export function PricingClient() {
                   <span className="ml-1 relative -top-3">
                     <DefinitionTooltip
                       term="*"
-                      definition="Subject to Terms of Service. unused hours never expire."
+                      definition="Subject to Terms of Service. Unused hours never expire."
                       className="text-xs text-gray-400 no-underline border-none"
                     />
                   </span>
