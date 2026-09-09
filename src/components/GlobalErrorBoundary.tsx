@@ -145,7 +145,7 @@ export class GlobalErrorBoundary extends Component<Props, State> {
                 </a>
 
                 <a
-                  href="tel:+1-555-0123"
+                  href="tel:+19284401505"
                   className="flex items-center justify-center gap-2 px-4 py-2 text-sm text-brand-oxford hover:text-brand-oxford-muted transition-colors"
                 >
                   <Phone className="w-4 h-4" />
