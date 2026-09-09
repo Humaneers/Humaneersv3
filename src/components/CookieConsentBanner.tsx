@@ -29,7 +29,7 @@ export function CookieConsentBanner() {
             </Link>
           </p>
         </div>
-        <div className="flex gap-3 items-center">
+        <div className="flex gap-3 items-center lg:pr-[88px]">
           <Button
             onClick={declineConsent}
             variant="ghost"
