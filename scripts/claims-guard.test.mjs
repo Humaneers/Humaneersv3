@@ -1,3 +1,8 @@
+// @vitest-environment node
+//
+// claims-guard resolves paths from import.meta.url; under the suite's default
+// jsdom environment that is an http:// URL and fileURLToPath rejects it.
+
 import { describe, expect, it } from "vitest";
 
 import { scanRepo, scanText } from "./claims-guard.mjs";
