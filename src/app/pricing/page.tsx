@@ -3,6 +3,7 @@ import { PricingClient } from "../../features/pricing/PricingClient";
 import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
 import { StructuredData, schemas } from "../../components/StructuredData";
+import { tierNamesWithSla, SLA_WINDOW } from "../../data/pricing";
 
 export const metadata: Metadata = {
   title: "Humaneers | Transparent Managed IT Pricing | No Hidden Fees",
@@ -49,7 +50,9 @@ const faqs = [
   {
     question: "Do you offer emergency support?",
     answer:
-      "Absolutely. Growth and Scale tiers include priority support, while our Hourly Packs can be used for urgent crisis response if we have capacity.",
+      `Absolutely. ${tierNamesWithSla("business", "priority").join(" and ")} tiers include ` +
+      `priority support (${SLA_WINDOW.priority} response), while our Hourly Packs can be used ` +
+      `for urgent crisis response ${SLA_WINDOW.capacity}.`,
   },
 ];
 

@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { User, Mail, Shield, Smartphone, Laptop, Fingerprint, ArrowRight } from "lucide-react";
 import { routePaths } from "../../routes";
+import { getTier, startingPrice, SLA_LABEL } from "@/data/pricing";
 
 export function PersonalClient() {
   const router = useRouter();
@@ -94,7 +95,7 @@ export function PersonalClient() {
               </p>
               <div className="mt-0 max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-2 transition-all duration-300 overflow-hidden">
                 <p className="text-sm text-brand-copper-text font-medium">
-                  15-minute response SLA.
+                  {SLA_LABEL[getTier("Solo").slaLevel]} response, no fixed SLA.
                 </p>
               </div>
             </div>
@@ -175,7 +176,9 @@ export function PersonalClient() {
 
       {/* CTA */}
       <section className="py-20 bg-brand-cream text-center">
-        <h2 className="text-3xl font-bold text-brand-oxford mb-8">Plans start at $25/month.</h2>
+        <h2 className="text-3xl font-bold text-brand-oxford mb-8">
+          Plans start at ${startingPrice("household")}/month.
+        </h2>
         <Button
           onClick={() => router.push(`${routePaths.pricing}?mode=household`)}
           className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-xl px-12 py-6 h-auto rounded-full shadow-lg"

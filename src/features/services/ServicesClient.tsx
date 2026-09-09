@@ -15,9 +15,11 @@ import {
 } from "lucide-react";
 import { routePaths } from "../../routes";
 import Image from "next/image";
+import { getTier } from "@/data/pricing";
 
 export function ServicesClient() {
   const router = useRouter();
+  const essentialsTier = getTier("Core");
 
   const initialServices = [
     {
@@ -231,8 +233,8 @@ export function ServicesClient() {
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold mb-6">Not Sure Where to Start?</h2>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Our "Foundation" plan covers the essentials for most businesses. Let's chat about your
-            needs.
+            Our "{essentialsTier.name}" plan covers the essentials for most businesses. Let's chat
+            about your needs.
           </p>
           <Button
             onClick={() =>

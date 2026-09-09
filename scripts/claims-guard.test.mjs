@@ -47,6 +47,28 @@ const SHIPPED_DEFECTS = {
     rule: "self-certification",
     source: `- SOC 2 Type II compliant storage`,
   },
+  "a phantom tier named in the pricing FAQ ('Scale' was never a real tier)": {
+    file: "PricingClient.tsx",
+    rule: "phantom-tier",
+    source: `"Absolutely. Growth and Scale tiers include priority support, while our Hourly Packs can be used for urgent crisis response if we have capacity."`,
+  },
+  "a business plan borrowing the nonprofit tier's name": {
+    file: "ServicesClient.tsx",
+    rule: "phantom-tier",
+    source: `Our "Foundation" plan covers the essentials for most businesses. Let's chat about your needs.`,
+  },
+  "placeholder emergency number in an error path": {
+    file: "GlobalErrorBoundary.tsx",
+    rule: "placeholder-contact",
+    source: `
+              <a
+                href="tel:+1-555-0123"
+                className="flex items-center justify-center gap-2"
+              >
+                <Phone className="w-4 h-4" />
+                Emergency Support
+              </a>`,
+  },
 };
 
 describe("claims-guard rules", () => {
@@ -84,8 +106,61 @@ describe("claims-guard allowances", () => {
   });
 });
 
+describe("phantom-tier rule", () => {
+  it("does not flag the fixed strings, which name only real tiers", () => {
+    const source = [
+      `"Absolutely. Growth and Enterprise tiers include priority support (under 1 hour response), while our Hourly Packs can be used for urgent crisis response if we have capacity."`,
+      `Our "Core" plan covers the essentials for most businesses. Let's chat about your needs.`,
+    ].join("\n");
+    expect(scanText(source, "x.tsx").map((f) => f.rule.id)).not.toContain("phantom-tier");
+  });
+
+  it("does not flag ordinary prose that merely mentions the word tier or plan", () => {
+    // "Keep" and "The" are sentence-initial capitals, not tier names — the
+    // rule requires an "X and Y tiers/plans" list or a quoted "X" plan
+    // before it treats a capitalized word as a tier reference at all.
+    const source =
+      "Keep tier objects on this shape so the reader keeps working. The tier's own naming stays stable. Ask about our plan today.";
+    expect(scanText(source, "x.ts").map((f) => f.rule.id)).not.toContain("phantom-tier");
+  });
+
+  it("honours the same allow-line escape hatch as the other rules", () => {
+    const source = `"Growth and Scale tiers include priority support." // claims-guard-allow: Leo, 25 Aug 2026`;
+    expect(scanText(source, "x.tsx").map((f) => f.rule.id)).not.toContain("phantom-tier");
+  });
+});
+
 describe("the shipped tree", () => {
   it("publishes no unsupported claims", () => {
     expect(scanRepo().map((f) => `${f.path}:${f.line} [${f.rule.id}]`)).toEqual([]);
+  });
+});
+
+describe("placeholder-contact rule", () => {
+  it("does not flag the canonical Humaneers number", () => {
+    const source = `<a href="tel:+19284401505">(928) 440-1505</a>`;
+    expect(scanText(source, "x.tsx").map((f) => f.rule.id)).not.toContain("placeholder-contact");
+  });
+
+  it("catches a 555 tel: link whatever the formatting", () => {
+    for (const href of [
+      "tel:+1-555-0123",
+      "tel:(555) 123-4567",
+      "tel:555.0142",
+      "tel:+1 928 555 0110",
+    ]) {
+      const ids = scanText(`<a href="${href}">Emergency</a>`, "x.tsx").map((f) => f.rule.id);
+      expect(ids, href).toContain("placeholder-contact");
+    }
+  });
+
+  it("does not flag a plain formatted number outside a tel: link", () => {
+    const source = `const sample = "(555) 123-4567";`;
+    expect(scanText(source, "x.ts").map((f) => f.rule.id)).not.toContain("placeholder-contact");
+  });
+
+  it("does not flag ordinary numbers that merely contain 555", () => {
+    const source = `const price = 555; const total = 15550; const hex = "#555555";`;
+    expect(scanText(source, "x.ts").map((f) => f.rule.id)).not.toContain("placeholder-contact");
   });
 });

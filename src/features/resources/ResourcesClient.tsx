@@ -16,6 +16,7 @@ import {
   Lock,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { SLA_WINDOW } from "@/data/pricing";
 
 type Audience = "All" | "Founder" | "IT Admin" | "Ops";
 
@@ -270,7 +271,8 @@ export function ResourcesClient() {
               </h4>
               <p className="text-brand-slate text-sm">
                 Any outage affecting &gt;50% of users, a confirmed data breach, or active ransomware
-                attack. P1 incidents trigger our 15-minute SLA response protocol.
+                attack. P1 incidents trigger our SLA response protocol, which targets a first
+                response within {SLA_WINDOW.critical}.
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">

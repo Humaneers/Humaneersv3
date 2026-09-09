@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { EyeOff, AlertTriangle, Fingerprint, Search, Lock, History } from "lucide-react";
 import { routePaths } from "../../routes";
+import { SLA_WINDOW } from "@/data/pricing";
 
 export function CrisisManagementClient() {
   const router = useRouter();
@@ -135,7 +136,7 @@ export function CrisisManagementClient() {
               Get Help Now
             </Button>
             <p className="mt-4 text-stone-500">
-              Response time typically under 1 hour for urgent requests.
+              Response time typically {SLA_WINDOW.priority} for urgent requests.
             </p>
           </div>
         </div>

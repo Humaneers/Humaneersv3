@@ -24,6 +24,83 @@ const MARKUP_EXTENSIONS = [".tsx", ".jsx"];
 const SKIP_DIRS = new Set(["node_modules", ".next", "dist", "build", "coverage"]);
 
 /**
+ * phantom-tier support — catches a tier or plan name in customer-facing
+ * prose that isn't one of the tiers defined in src/data/pricing.ts. This is
+ * the rule that would have caught "Growth and Scale tiers" (Scale was never
+ * a real tier) and 'Our "Foundation" plan' (Foundation is the nonprofit
+ * tier's name, not a business plan) before either shipped.
+ *
+ * It reads tier names out of the tier module as text — the same way the
+ * rest of this file treats source as text rather than as a program — so it
+ * never has to execute TypeScript.
+ */
+const TIER_MODULE_PATH = join(ROOT, "src/data/pricing.ts");
+
+function loadKnownTierNames() {
+  let text;
+  try {
+    text = readFileSync(TIER_MODULE_PATH, "utf8");
+  } catch {
+    return new Set();
+  }
+  const names = new Set();
+  const nameRe = /name:\s*"([^"]+)"/g;
+  let match;
+  while ((match = nameRe.exec(text))) names.add(match[1]);
+  return names;
+}
+
+const KNOWN_TIER_NAMES = loadKnownTierNames();
+
+// One or two capitalized words - "Core", "Nonprofit Foundation", "Hold Co".
+const TIER_NAME_SHAPE = "[A-Z][A-Za-z']*(?:\\s[A-Z][A-Za-z']*)?";
+// Either a quoted name directly in front of "plan"/"plans" (the 'Our
+// "Foundation" plan' shape), or an "X and Y" / "X & Y" list directly in
+// front of the plural "tiers"/"plans" (the "Growth and Scale tiers" shape).
+// Requiring the list form for the unquoted case - never a single bare name -
+// is what keeps this from tripping on ordinary sentence-initial capitals
+// like "Keep tier objects..." or "The tier's own...".
+const TIER_REFERENCE = new RegExp(
+  `(?:"(${TIER_NAME_SHAPE})"\\s+plans?\\b)` +
+    `|(\\b${TIER_NAME_SHAPE}(?:\\s(?:and|&)\\s${TIER_NAME_SHAPE})+)\\s+(?:tiers|plans)\\b`,
+  "g"
+);
+
+const tierReferenceTest = {
+  test(line) {
+    TIER_REFERENCE.lastIndex = 0;
+    let match;
+    while ((match = TIER_REFERENCE.exec(line))) {
+      const candidates = match[1] ? [match[1]] : match[2].split(/\s(?:and|&)\s/);
+      for (const raw of candidates) {
+        const name = raw.trim();
+        if (name && !KNOWN_TIER_NAMES.has(name)) return true;
+      }
+    }
+    return false;
+  },
+};
+
+const placeholderContactTest = {
+  test(line) {
+    // The NANP block reserved for fiction, written out in prose.
+    if (/\b555[-. ]01\d{2}\b/.test(line)) return true;
+    // Any tel: link whose national number uses 555 as its area code or its
+    // exchange. Normalising to digits first is what makes this survive the
+    // formatting - tel:+1-555-0123 and tel:(555) 123-4567 are the same defect
+    // written two ways, and a literal regex catches one and misses the other.
+    for (const match of line.matchAll(/tel:([+\d\-.()\s]{7,})/gi)) {
+      let digits = match[1].replace(/\D/g, "");
+      if (digits.length === 11 || digits.length === 8) digits = digits.replace(/^1/, "");
+      if (digits.length === 10 && (digits.slice(0, 3) === "555" || digits.slice(3, 6) === "555"))
+        return true;
+      if (digits.length === 7 && digits.startsWith("555")) return true;
+    }
+    return false;
+  },
+};
+
+/**
  * mode "line"      — one line at a time; the cheapest and most precise.
  * mode "proximity" — a whole-file window, for defects that span JSX elements,
  *                    which is how the Compliance Scorecard survived two scrubs.
@@ -72,6 +149,26 @@ export const RULES = [
     test: /<blockquote/i,
     message:
       "A quotation attributed to a named person must be a real person who is verifiable elsewhere on the site. The Sarah Chen and Human IP LP incidents were both this shape. Annotate with the person, the date the quote was given, and where it is corroborated.",
+  },
+  {
+    id: "phantom-tier",
+    mode: "line",
+    test: tierReferenceTest,
+    message:
+      "This names a tier or plan that isn't defined in src/data/pricing.ts. Either it's a typo for a real tier name (the 'Scale' and 'Foundation' incidents were both this shape), or the tier module is missing the new tier and needs it added first.",
+  },
+
+  {
+    id: "placeholder-contact",
+    mode: "line",
+    // 555-01xx is the NANP block reserved for fiction, so it is never a real
+    // number; any 555 exchange inside a tel: link is the same mistake. Caught
+    // after tel:+1-555-0123 shipped in five places - all of them error and
+    // fallback paths, which is why no page render ever exposed it and a
+    // manual scrub of the normal pages could not have found it.
+    test: placeholderContactTest,
+    message:
+      "This is a placeholder contact detail, not a real one. The site publishes 24/7 emergency response, and these strings live in the paths that render when something is already broken - the worst possible place for a number that does not connect. Use the canonical (928) 440-1505 / tel:+19284401505. Scoped to phone numbers on purpose: example.com is the RFC 2606 reserved domain and is correct in test fixtures and form placeholders.",
   },
 ];
 

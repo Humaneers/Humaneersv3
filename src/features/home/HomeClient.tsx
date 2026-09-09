@@ -10,6 +10,7 @@ import { setSessionContext } from "@/lib/session";
 import Image from "next/image";
 import { useContactModal } from "@/components/providers/ContactModalProvider";
 import { SolutionSwitcher } from "./SolutionSwitcher";
+import { FAMILIES_PROTECTED } from "@/data/pricing";
 
 // Porting ObjectionsSection later or keeping as lazy for now
 const ObjectionsSection = lazy(() =>
@@ -141,7 +142,7 @@ export function HomeClient() {
                 />
               </div>
               <div className="absolute -bottom-6 -left-4 bg-brand-copper-text p-6 rounded-lg text-white shadow-lg hidden md:block">
-                <p className="text-2xl font-bold">100+</p>
+                <p className="text-2xl font-bold">{FAMILIES_PROTECTED}</p>
                 <p className="text-sm opacity-90">Families Protected Nationwide</p>
               </div>
             </div>

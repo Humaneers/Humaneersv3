@@ -3,8 +3,9 @@
 import React from "react";
 import { Check, X, HelpCircle } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { getTier, tiersForSegment, SLA_LABEL, type TierSegment } from "@/data/pricing";
 
-type PricingMode = "business" | "nonprofit" | "household" | "incubation";
+type PricingMode = TierSegment;
 
 interface PricingComparisonTableProps {
   mode: PricingMode;
@@ -39,7 +40,8 @@ export function PricingComparisonTable({ mode }: PricingComparisonTableProps) {
             <div className="p-4 bg-gray-50 rounded-lg">
               <h4 className="font-bold text-brand-oxford mb-2">What You Pay Us</h4>
               <p className="text-3xl font-bold text-brand-copper mb-1">
-                $199<span className="text-sm text-gray-500 font-normal">/mo</span>
+                ${getTier("Nonprofit Foundation").basePrice}
+                <span className="text-sm text-gray-500 font-normal">/mo</span>
               </p>
               <p className="text-sm text-gray-500">
                 Flat organization retainer for support, management, and strategic guidance.
@@ -58,9 +60,9 @@ export function PricingComparisonTable({ mode }: PricingComparisonTableProps) {
     );
   }
 
-  const businessTiers = ["Core", "Growth", "Enterprise"];
-  const householdTiers = ["Solo", "Household", "Legacy Care", "Estate"];
-  const incubationTiers = ["Incubator", "Hold Co"];
+  const businessTiers = tiersForSegment("business").map((tier) => tier.name);
+  const householdTiers = tiersForSegment("household").map((tier) => tier.name);
+  const incubationTiers = tiersForSegment("incubation").map((tier) => tier.name);
 
   const businessCategories: ComparisonCategory[] = [
     {
@@ -154,7 +156,11 @@ export function PricingComparisonTable({ mode }: PricingComparisonTableProps) {
       features: [
         {
           name: "Response Time",
-          tiers: { Core: "Standard", Growth: "Priority", Enterprise: "Priority" },
+          tiers: {
+            Core: SLA_LABEL[getTier("Core").slaLevel],
+            Growth: SLA_LABEL[getTier("Growth").slaLevel],
+            Enterprise: SLA_LABEL[getTier("Enterprise").slaLevel],
+          },
         },
         {
           name: "On-site Support",
@@ -167,8 +173,7 @@ export function PricingComparisonTable({ mode }: PricingComparisonTableProps) {
       features: [
         {
           name: "Concierge Domain Management",
-          tooltip:
-            "Purchase, DNS configuration, and renewal management at cost + $15/mo service fee",
+          tooltip: `Purchase, DNS configuration, and renewal management at cost + $${getTier("Incubator").basePrice}/mo service fee`,
           tiers: { Core: true, Growth: true, Enterprise: true },
         },
         {
