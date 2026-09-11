@@ -113,8 +113,9 @@ const placeholderContactTest = {
  * { label: "Clients Supported", value: "140+" }. The tile is checked across the
  * whole literal, so Prettier breaking it over several lines does not hide it.
  *
- * FAMILIES_PROTECTED is out of scope here: its label names families, and pages
- * render it through the constant, never as a literal.
+ * Families are out of scope here: "families" is not one of the counted nouns.
+ * The FAMILIES_PROTECTED "100+" stat had no record behind it either, and was
+ * removed from the site by hand on 11 Sep 2026.
  */
 const COUNTED_NOUN = "(?:clients|businesses|customers|companies|devices)";
 const INLINE_CLIENT_COUNT = new RegExp(
@@ -226,6 +227,16 @@ export const RULES = [
     test: bareClientCountTest,
     message:
       "A count of clients, businesses, customers, companies or devices with no record behind it. 'Trusted by 200+ businesses' and the About page's '140+ Clients Supported' and '4,500+ Devices Managed' tiles shipped this way and were removed on 11 Sep 2026. Publish a count only when a client list or asset register produces it, and annotate the line with who checked the number and when.",
+  },
+  {
+    id: "unmeasured-performance-percent",
+    mode: "line",
+    // A share of issues, tickets, requests or incidents is a rate that only a
+    // ticketing system can produce. Uptime targets, market statistics and
+    // prices are other shapes and pass.
+    test: /\b\d+(?:\.\d+)?\s?%\s+of\s+(?:our\s+)?(?:issues|tickets|requests|incidents)\b/i,
+    message:
+      "A percentage of issues, tickets, requests or incidents is a measured performance rate. The Managed IT page's '99% of issues fixed remotely' and '99% of tickets are resolved remotely' shipped with no ticket data behind them and were removed on 11 Sep 2026. Publish a rate only when the ticketing system produces it, and annotate the line with the source, the period it covers, and who checked it.",
   },
 ];
 

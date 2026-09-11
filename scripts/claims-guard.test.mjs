@@ -3,6 +3,9 @@
 // claims-guard resolves paths from import.meta.url; under the suite's default
 // jsdom environment that is an http:// URL and fileURLToPath rejects it.
 
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+
 import { describe, expect, it } from "vitest";
 
 import { scanRepo, scanText } from "./claims-guard.mjs";
@@ -92,6 +95,20 @@ const SHIPPED_DEFECTS = {
     { label: "Avg Response Time", value: "12m", icon: Clock },
     { label: "Years in Operation", value: "8", icon: Calendar },
   ];`,
+  },
+  "a remote fix rate on a Managed IT feature card": {
+    file: "ManagedITClient.tsx",
+    rule: "unmeasured-performance-percent",
+    source: `      desc: "99% of issues fixed remotely. For the other 1%, we dispatch engineers to any US zip code.",`,
+  },
+  "a remote ticket rate on the Managed IT Remote First card": {
+    file: "ManagedITClient.tsx",
+    rule: "unmeasured-performance-percent",
+    source: `
+              <p className="text-brand-slate text-sm">
+                99% of tickets are resolved remotely via our secure agents. No waiting for a truck
+                roll.
+              </p>`,
   },
 };
 
@@ -291,5 +308,47 @@ describe("bare-client-count rule", () => {
   it("honours the same allow-line escape hatch as the other rules", () => {
     const source = `<p>140+ clients</p> {/* claims-guard-allow: client list checked by Leo, 11 Sep 2026 */}`;
     expect(ids(source)).not.toContain("bare-client-count");
+  });
+});
+
+describe("unmeasured-performance-percent rule", () => {
+  const ids = (source, file = "x.tsx") => scanText(source, file).map((f) => f.rule.id);
+
+  it("catches a share of issues, tickets, requests or incidents", () => {
+    for (const text of [
+      "99% of issues fixed remotely",
+      "99% of tickets are resolved remotely",
+      "95% of our requests are answered the same day",
+      "99.5 % Of Incidents are contained",
+    ]) {
+      expect(ids(`<p>${text}</p>`), text).toContain("unmeasured-performance-percent");
+    }
+  });
+
+  it("does not flag uptime targets, market statistics, prices or support hours", () => {
+    for (const text of [
+      "99.9% uptime for managed cloud services",
+      "+400%",
+      "1 in 3",
+      "$19/month",
+      "24/7 support",
+    ]) {
+      expect(ids(`<p>${text}</p>`), text).not.toContain("unmeasured-performance-percent");
+    }
+  });
+
+  it("does not flag the uptime guarantee and service credits in the Terms", () => {
+    const terms = readFileSync(
+      fileURLToPath(new URL("../src/features/legal/TermsClient.tsx", import.meta.url)),
+      "utf8"
+    );
+    expect(ids(terms, "src/features/legal/TermsClient.tsx")).not.toContain(
+      "unmeasured-performance-percent"
+    );
+  });
+
+  it("honours the same allow-line escape hatch as the other rules", () => {
+    const source = `<p>99% of tickets are resolved remotely</p> {/* claims-guard-allow: ticket export checked by Leo, 11 Sep 2026 */}`;
+    expect(ids(source)).not.toContain("unmeasured-performance-percent");
   });
 });
