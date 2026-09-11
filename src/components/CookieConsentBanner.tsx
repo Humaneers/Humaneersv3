@@ -24,7 +24,9 @@ export function CookieConsentBanner() {
           <p className="text-xs">
             Essential cookies are always active. Analytics and marketing cookies require your
             consent.{" "}
-            <Link href="/privacy" className="text-brand-copper-light hover:underline">
+            {/* Underlined: the copper alone is 1.49:1 against the gray text around
+                it, so color could not be the only cue (axe link-in-text-block). */}
+            <Link href="/privacy" className="text-brand-copper-light underline underline-offset-2">
               Learn more
             </Link>
           </p>

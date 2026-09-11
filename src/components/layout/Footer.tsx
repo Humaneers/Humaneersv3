@@ -39,9 +39,12 @@ export function Footer() {
           {/* Navigation Columns */}
           {footerSections.map((section) => (
             <div key={section.title} className="lg:col-span-2">
-              <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-6 border-b border-white/5 pb-2">
+              {/* Column labels, not headings: an h4 here followed every page's
+                  last heading and skipped a level on almost every page.
+                  font-heading keeps the face the h4 had. */}
+              <p className="font-heading text-white font-bold text-sm uppercase tracking-widest mb-6 border-b border-white/5 pb-2">
                 {section.title}
-              </h4>
+              </p>
               <ul className="space-y-4 text-sm">
                 {section.items.map((item) => (
                   <li key={item.label}>
@@ -60,9 +63,9 @@ export function Footer() {
 
           {/* Newsletter Column */}
           <div className="lg:col-span-2 flex flex-col items-start">
-            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-6 border-b border-white/5 pb-2">
+            <p className="font-heading text-white font-bold text-sm uppercase tracking-widest mb-6 border-b border-white/5 pb-2">
               The Human Brief
-            </h4>
+            </p>
             <p className="text-sm mb-6 leading-relaxed">
               Strategic insights on security, brand, and digital resilience.
             </p>
@@ -133,7 +136,10 @@ export function Footer() {
               are the property of their respective owners.
             </p>
             <p className="text-[10px] text-gray-400 text-left md:text-right max-w-xs leading-relaxed">
-              Read our <Link href="/colophon">Intellectual Property Policy</Link>
+              Read our{" "}
+              <Link href="/colophon" className="underline underline-offset-2">
+                Intellectual Property Policy
+              </Link>
             </p>
           </div>
         </div>
