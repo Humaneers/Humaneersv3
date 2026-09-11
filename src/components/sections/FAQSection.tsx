@@ -23,9 +23,9 @@ export type FAQSectionProps = {
  * transition-none on the trigger and its chevron: the section has no motion,
  * so there is nothing for reduced motion to switch off.
  *
- * The question's size sits on a span, not the trigger: accordion.tsx merges
- * classes with the cn in src/components/ui/utils.ts, which does not know the
- * type ramp, so text-medium on the trigger lost to the primitive's text-sm.
+ * The chevron's box is one line tall and unshifted, so the 16px glyph centers
+ * on the question's first line at both text-medium sizes. The primitive's
+ * 2px nudge suits its own 14px text only.
  */
 export function FAQSection({ heading, items }: FAQSectionProps) {
   return (
@@ -36,8 +36,8 @@ export function FAQSection({ heading, items }: FAQSectionProps) {
           <Accordion type="multiple">
             {items.map((item, index) => (
               <AccordionItem key={index} value={`item-${index}`} className="border-scheme-border">
-                <AccordionTrigger className="font-bold transition-none focus-visible:ring-scheme-text/50 md:py-5 [&>svg]:text-scheme-text [&>svg]:transition-none">
-                  <span className="text-medium">{item.question}</span>
+                <AccordionTrigger className="text-medium font-bold transition-none focus-visible:ring-scheme-text/50 md:py-5 [&>svg]:h-[1lh] [&>svg]:translate-y-0 [&>svg]:text-scheme-text [&>svg]:transition-none">
+                  {item.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-regular md:pb-6">{item.answer}</AccordionContent>
               </AccordionItem>

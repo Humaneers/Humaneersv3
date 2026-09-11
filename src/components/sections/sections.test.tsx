@@ -223,6 +223,17 @@ describe("FAQSection", () => {
     expectSectionBasics(container);
   });
 
+  it("sets each question in text-medium in place of the primitive's text-sm", () => {
+    // The primitives merge classes with the cn in src/components/ui/utils.ts.
+    // Unless that cn knows the type ramp, both classes stay and text-sm wins.
+    render(<FAQSection heading="Questions" items={items} />);
+    for (const trigger of screen.getAllByRole("button")) {
+      const classes = trigger.className.split(" ");
+      expect(classes).toContain("text-medium");
+      expect(classes).not.toContain("text-sm");
+    }
+  });
+
   it("opens and closes a question from the keyboard", async () => {
     const user = userEvent.setup();
     render(<FAQSection heading="Questions" items={items} />);
