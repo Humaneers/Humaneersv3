@@ -74,6 +74,25 @@ const SHIPPED_DEFECTS = {
                 Emergency Support
               </a>`,
   },
+  "a client count on the home hero": {
+    file: "HomeClient.tsx",
+    rule: "bare-client-count",
+    source: `
+                  <p className="text-white font-bold text-base leading-tight shadow-black drop-shadow-sm">
+                    Trusted by 200+ businesses
+                  </p>`,
+  },
+  "stat tiles pairing a client label with a bare number": {
+    file: "AboutClient.tsx",
+    rule: "bare-client-count",
+    source: `
+  const metrics = [
+    { label: "Clients Supported", value: "140+", icon: Users },
+    { label: "Devices Managed", value: "4,500+", icon: Server },
+    { label: "Avg Response Time", value: "12m", icon: Clock },
+    { label: "Years in Operation", value: "8", icon: Calendar },
+  ];`,
+  },
 };
 
 describe("claims-guard rules", () => {
@@ -167,5 +186,110 @@ describe("placeholder-contact rule", () => {
   it("does not flag ordinary numbers that merely contain 555", () => {
     const source = `const price = 555; const total = 15550; const hex = "#555555";`;
     expect(scanText(source, "x.ts").map((f) => f.rule.id)).not.toContain("placeholder-contact");
+  });
+});
+
+describe("bare-client-count rule", () => {
+  const ids = (source, file = "x.tsx") => scanText(source, file).map((f) => f.rule.id);
+
+  it("catches an inline count however it is phrased", () => {
+    for (const text of [
+      "140+ Clients",
+      "Trusted by 200+ businesses",
+      "trusted by over 1,000 companies",
+      "4,500+ managed devices",
+      "10k+ customers",
+      "serving 200+ businesses for 8 years",
+    ]) {
+      expect(ids(`<p>${text}</p>`), text).toContain("bare-client-count");
+    }
+  });
+
+  it("catches a count in markdown prose, which the guard also scans", () => {
+    const source =
+      "→ You have a direct line to the team that's been quietly serving 200+ businesses";
+    expect(ids(source, "forge-brand-identity.md")).toContain("bare-client-count");
+  });
+
+  it("catches a stat tile that Prettier has broken over several lines", () => {
+    const source = `
+  const metrics = [
+    {
+      label: "Small Businesses Supported Across Arizona",
+      value: "140+",
+      icon: Users,
+    },
+  ];`;
+    expect(ids(source)).toContain("bare-client-count");
+  });
+
+  it("catches a stat tile with the value first or as a number literal", () => {
+    expect(ids(`{ value: "4,500+", label: "Devices Managed" }`)).toContain("bare-client-count");
+    expect(ids(`{ label: "Customers", value: 140 }`)).toContain("bare-client-count");
+  });
+
+  it("reports one finding per tile, on the value line", () => {
+    const source = [
+      "const tile = {",
+      '  label: "Clients Supported",',
+      '  value: "140+",',
+      "};",
+    ].join("\n");
+    const findings = scanText(source, "x.tsx").filter((f) => f.rule.id === "bare-client-count");
+    expect(findings.map((f) => f.line)).toEqual([3]);
+  });
+
+  it("does not flag support hours, response windows, prices or phone numbers", () => {
+    const source = [
+      "<span>24/7 support</span>",
+      "<span>15-minute response</span>",
+      '<div className="text-4xl font-bold">$19<span>/mo</span></div>',
+      '<a href="tel:+19284401505">(928) 440-1505</a>',
+      "<p>Call (928) 440-1505 for help.</p>",
+    ].join("\n");
+    expect(ids(source)).not.toContain("bare-client-count");
+  });
+
+  it("does not flag the FAMILIES_PROTECTED constant or the tiles that render it", () => {
+    const source = `
+      <p className="text-2xl font-bold">{FAMILIES_PROTECTED}</p>
+      <p className="text-sm opacity-90">Families Protected Nationwide</p>
+      const stats = [
+        { label: "Identity Theft Victims", value: "1 in 3" },
+        { label: "Home Network Attacks", value: "+400%" },
+        { label: "Families Protected", value: FAMILIES_PROTECTED },
+      ];
+      export const FAMILIES_PROTECTED = "100+";`;
+    expect(ids(source)).not.toContain("bare-client-count");
+  });
+
+  it("does not let one tile's label bleed into the next tile's value", () => {
+    const source = [
+      '{ label: "Clients Supported", value: FAMILIES_PROTECTED },',
+      '{ label: "Years in Operation", value: "8" },',
+      "{",
+      '  label: "Devices Managed",',
+      "  value: DEVICE_COUNT,",
+      "},",
+      "{",
+      '  label: "Avg Response Time",',
+      '  value: "12",',
+      "},",
+    ].join("\n");
+    expect(ids(source)).not.toContain("bare-client-count");
+  });
+
+  it("does not flag device and user allowances in pricing copy", () => {
+    const source = [
+      "Device allocations range from 5-12 managed devices per user depending on the tier.",
+      "Base price covers infrastructure & support and includes your first 2 users. Per-user price applies for 3+ users.",
+      "All active support plans include unlimited IoT devices.",
+    ].join("\n");
+    expect(ids(source)).not.toContain("bare-client-count");
+  });
+
+  it("honours the same allow-line escape hatch as the other rules", () => {
+    const source = `<p>140+ clients</p> {/* claims-guard-allow: client list checked by Leo, 11 Sep 2026 */}`;
+    expect(ids(source)).not.toContain("bare-client-count");
   });
 });
