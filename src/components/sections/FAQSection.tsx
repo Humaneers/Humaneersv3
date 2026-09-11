@@ -1,0 +1,50 @@
+// Relume faq1.
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+export type FAQItem = {
+  question: string;
+  answer: string;
+};
+
+export type FAQSectionProps = {
+  heading: string;
+  items: readonly FAQItem[];
+};
+
+/**
+ * The section heading is the h2. The accordion renders each question as a
+ * button inside an h3, so questions sit one level below it. Radix supplies the
+ * keyboard handling: Tab reaches each question, Enter or Space toggles it.
+ * transition-none on the trigger and its chevron: the section has no motion,
+ * so there is nothing for reduced motion to switch off.
+ *
+ * The question's size sits on a span, not the trigger: accordion.tsx merges
+ * classes with the cn in src/components/ui/utils.ts, which does not know the
+ * type ramp, so text-medium on the trigger lost to the primitive's text-sm.
+ */
+export function FAQSection({ heading, items }: FAQSectionProps) {
+  return (
+    <section className="bg-scheme-background px-[5%] py-16 text-scheme-text md:py-24 lg:py-28">
+      <div className="section-container">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="mb-12 text-center text-h2 font-bold md:mb-18 lg:mb-20">{heading}</h2>
+          <Accordion type="multiple">
+            {items.map((item, index) => (
+              <AccordionItem key={index} value={`item-${index}`} className="border-scheme-border">
+                <AccordionTrigger className="font-bold transition-none focus-visible:ring-scheme-text/50 md:py-5 [&>svg]:text-scheme-text [&>svg]:transition-none">
+                  <span className="text-medium">{item.question}</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-regular md:pb-6">{item.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </div>
+    </section>
+  );
+}
