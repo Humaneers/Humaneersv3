@@ -129,7 +129,7 @@ export const navSections: NavSection[] = [
       },
       {
         title: "Service Status",
-        description: "Real-time system performance and uptime.",
+        description: "How to report an active problem, and our uptime commitment.",
         to: routePaths.status,
       },
       {

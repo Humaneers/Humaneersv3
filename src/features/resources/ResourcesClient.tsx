@@ -187,13 +187,13 @@ export function ResourcesClient() {
               <Server className="text-brand-oxford" /> Operational Documentation
             </h2>
             <p className="text-brand-slate mb-6">
-              Technical manuals and live system status for active clients. These resources are
-              maintained by our engineering team.
+              Technical manuals and system status for active clients. These resources are maintained
+              by our engineering team.
             </p>
             <div className="space-y-4">
               <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100">
                 <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                  <Server size={16} className="text-gray-400" />
                   <span className="font-medium text-brand-oxford">System Status</span>
                 </div>
                 <Link

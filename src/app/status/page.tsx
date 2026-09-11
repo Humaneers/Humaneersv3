@@ -6,7 +6,7 @@ import { PageLoader } from "../../components/PageLoader";
 export const metadata: Metadata = {
   title: "System Status | Humaneers Infrastructure",
   description:
-    "Real-time status of Humaneers systems and services. View uptime incidents and scheduled maintenance.",
+    "Live system monitoring is not published on this page yet. For an active problem, call Humaneers or open a support request.",
   alternates: {
     canonical: "/status",
   },
