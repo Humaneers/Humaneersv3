@@ -115,7 +115,7 @@ export function Header() {
       </a>
       <div className="container mx-auto px-6 flex items-center justify-between">
         <Link
-          className="flex items-center cursor-pointer shrink-0 mr-4 md:mr-8 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-brand-copper"
+          className="flex items-center cursor-pointer shrink-0 mr-4 lg:mr-8 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-brand-copper"
           href={routePaths.home}
         >
           <Image
@@ -128,7 +128,10 @@ export function Header() {
           />
         </Link>
 
-        <div className="hidden md:flex flex-1 justify-center">
+        {/* The desktop nav and CTAs need a viewport of about 910px, so below
+            lg (1024px) the header uses the menu instead. Shown from md, they
+            overflowed the row by 76px and cut off "Let's Get Started". */}
+        <div className="hidden lg:flex flex-1 justify-center">
           <NavigationMenu className="navigation-menu-override">
             <NavigationMenuList>
               {whoWeHelpSection && (
@@ -257,7 +260,7 @@ export function Header() {
           </NavigationMenu>
         </div>
 
-        <div className="hidden md:flex items-center gap-3 shrink-0 ml-4">
+        <div className="hidden lg:flex items-center gap-3 shrink-0 ml-4">
           <Button
             variant="ghost"
             className="text-gray-300 hover:text-white hover:bg-white/10 font-medium hidden lg:inline-flex focus-visible:ring-2 focus-visible:ring-brand-copper"
@@ -273,12 +276,12 @@ export function Header() {
           </Button>
         </div>
 
-        {/* Below md the emergency line sits in the header, so a caller on a phone
-            reaches it on every page without scrolling. The number fits beside
-            the logo and menu from 359px; narrower, its text goes to screen
-            readers only and the icon stays. The logo's mr-4 below md makes
-            that room. */}
-        <div className="md:hidden ml-auto flex items-center gap-1">
+        {/* Below lg the emergency line sits in the header, so a caller on a phone
+            or tablet reaches it on every page without scrolling. The number
+            fits beside the logo and menu from 359px; narrower, its text goes
+            to screen readers only and the icon stays. The logo's mr-4 below
+            lg makes that room. */}
+        <div className="lg:hidden ml-auto flex items-center gap-1">
           <a
             href="tel:+19284401505"
             aria-label="Call (928) 440-1505"
