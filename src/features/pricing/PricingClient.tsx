@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { CTASection } from "@/components/sections/CTASection";
 import { FAQSection } from "@/components/sections/FAQSection";
@@ -37,16 +37,33 @@ const SESSION_SEGMENT: Record<TierSegment, NonNullable<SessionContext["segment"]
   incubation: "venture",
 };
 
-export function PricingClient() {
-  const searchParams = useSearchParams();
-  const [segment, setSegment] = useState(() =>
-    segmentFromParam(searchParams.get("mode") ?? undefined)
-  );
+/**
+ * `segment` is the ?mode= the server rendered, so the first HTML already holds
+ * that segment's plans and prices. A tab change updates the page at once and
+ * writes ?mode= back to the URL, so a copied link opens on the same segment.
+ */
+export function PricingClient({ segment: requested }: { segment: TierSegment }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const [segment, setSegment] = useState(requested);
+
+  // A link elsewhere can land on this page with another ?mode= while it is
+  // mounted (the header's Pricing link, say). Follow the server's value then.
+  const [lastRequested, setLastRequested] = useState(requested);
+  if (requested !== lastRequested) {
+    setLastRequested(requested);
+    setSegment(requested);
+  }
 
   function selectSegment(value: string) {
     const next = segmentFromParam(value);
     setSegment(next);
     setSessionContext({ segment: SESSION_SEGMENT[next] });
+    // replace, not push: a tab is not a page, so Back leaves the page instead of
+    // stepping through tabs. Other query parameters are kept.
+    const params = new URLSearchParams(window.location.search);
+    params.set("mode", next);
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
   const comparison = COMPARISON[segment];

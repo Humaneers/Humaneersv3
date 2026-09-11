@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { PricingClient } from "../../features/pricing/PricingClient";
-import { Suspense } from "react";
-import { PageLoader } from "../../components/PageLoader";
-import { FAQS } from "../../features/pricing/content";
+import { FAQS, segmentFromParam } from "../../features/pricing/content";
 import { StructuredData, schemas } from "../../components/StructuredData";
 import { getTier, startingPrice } from "../../data/pricing";
 
@@ -40,7 +38,19 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PricingPage() {
+/**
+ * Reads ?mode= on the server so the HTML already holds the requested segment's
+ * plans and prices: crawlers, clients without JavaScript and anyone opening a
+ * shared link get them in the first response. Reading searchParams makes this
+ * route render per request instead of at build time.
+ */
+export default async function PricingPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const { mode } = await searchParams;
+
   return (
     <>
       <StructuredData
@@ -56,9 +66,7 @@ export default function PricingPage() {
           ]),
         ]}
       />
-      <Suspense fallback={<PageLoader />}>
-        <PricingClient />
-      </Suspense>
+      <PricingClient segment={segmentFromParam(mode)} />
     </>
   );
 }
