@@ -1,152 +1,73 @@
 "use client";
 
-import { lazy, Suspense } from "react";
+import type { ReactNode } from "react";
 
-import { MapPin } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { motion } from "motion/react";
+import { CTASection } from "@/components/sections/CTASection";
+import { PageHeader } from "@/components/sections/PageHeader";
+import { SplitFeature } from "@/components/sections/SplitFeature";
 import { setSessionContext } from "@/lib/session";
+import { routePaths } from "@/routes";
 
-import Image from "next/image";
-import { useContactModal } from "@/components/providers/ContactModalProvider";
+import { ObjectionsSection } from "./ObjectionsSection";
 import { Solutions } from "./SolutionSwitcher";
 
-// Porting ObjectionsSection later or keeping as lazy for now
-const ObjectionsSection = lazy(() =>
-  import("@/features/home/ObjectionsSection").then((m) => ({ default: m.ObjectionsSection }))
-);
+/**
+ * The page's one primary CTA. Every body CTA says this and goes here: the
+ * waitlist form on /talk-to-sales. We are at capacity, and the page says so
+ * beside the CTA, in the words ContactModal's sales tab and /talk-to-sales
+ * use, rather than after the click.
+ */
+const WAITLIST = { label: "Join the waitlist", href: routePaths.talkToSales } as const;
+
+/**
+ * Notes where a waitlist click came from; ZohoTracking passes entrySource to
+ * the SalesIQ visitor record. The section library's CTA row takes no click
+ * handler, so this listens around the section instead.
+ */
+function EntrySource({ source, children }: { source: string; children: ReactNode }) {
+  return (
+    <div
+      onClickCapture={(event) => {
+        if (event.target instanceof Element && event.target.closest(`a[href="${WAITLIST.href}"]`)) {
+          setSessionContext({ entrySource: source });
+        }
+      }}
+    >
+      {children}
+    </div>
+  );
+}
 
 export function HomeClient() {
-  const { openModal } = useContactModal();
-
   return (
-    <div className="w-full relative">
-      <div
-        className="fixed inset-0 pointer-events-none z-50 mix-blend-overlay opacity-[0.03] select-none"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-        }}
-      />
-
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="https://images.unsplash.com/photo-1673563978245-b5d4adb056fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxUZW1wZSUyMEFyaXpvbmElMjBzdW5yaXNlJTIwd2FybSUyMGxpZ2h0fGVufDF8fHx8MTc2NjQ0ODcyOXww&ixlib=rb-4.1.0&q=80&w=1080"
-            alt="Tempe Arizona Morning"
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-brand-oxford/70 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-oxford via-transparent to-transparent opacity-90" />
-        </div>
-
-        <div className="container mx-auto px-6 relative z-10 pt-20">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl"
-          >
-            <div className="mb-8">
-              <p className="text-brand-copper-text font-bold tracking-widest uppercase text-sm md:text-base mb-4">
-                Enterprise Strategy for Businesses & Families
-              </p>
-              <h1 className="text-4xl md:text-7xl font-bold text-white leading-tight mb-6">
-                Built with precision. <br />
-                <span className="text-white/80">Delivered with soul.</span>
-              </h1>
-              <p className="text-xl md:text-2xl text-gray-200 leading-relaxed font-light max-w-2xl">
-                IT, security, and brand growth for those who demand excellence.
-              </p>
-            </div>
-            <div className="flex flex-col gap-4 max-w-lg">
-              <Button
-                onClick={() => {
-                  setSessionContext({ entrySource: "Homepage Hero CTA" });
-
-                  openModal("sales");
-                }}
-                className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-lg px-8 h-14 rounded-md shadow-lg hover:shadow-xl transition-all w-fit"
-                withArrow
-              >
-                Get Started
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      <div className="bg-brand-copper-text text-white py-6 relative z-20 shadow-md">
-        <div className="container mx-auto px-6 text-center font-medium text-lg tracking-wide">
-          No user minimums. No offshore NOCs. 100% US-Based engineering.
-        </div>
-      </div>
+    <>
+      <EntrySource source="Homepage Hero CTA">
+        <PageHeader
+          heading="Built with precision. Delivered with soul."
+          description="Enterprise strategy for businesses and families. IT, security, and brand growth for those who demand excellence. We are at capacity right now, so new engagements are joining a waitlist rather than going straight into onboarding."
+          ctas={[WAITLIST]}
+          scheme="dark"
+        />
+      </EntrySource>
 
       <Solutions />
 
-      <section className="py-24 bg-brand-cream">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-12">
-            <div className="md:w-1/2">
-              <h2 className="text-3xl font-bold text-brand-oxford mb-6">
-                Security & Trust You Can Rely On
-              </h2>
-              <p className="text-brand-slate mb-8 text-lg leading-relaxed">
-                We take security seriously. We are proud to be 100% US-based. Your data never leaves
-                domestic soil without your explicit permission.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <div className="bg-white/60 backdrop-blur-md px-4 py-3 rounded-xl border border-white/40 flex items-center gap-2 font-bold text-brand-oxford shadow-sm transition-all hover:bg-white/80">
-                  <MapPin size={18} className="text-brand-copper" aria-hidden="true" /> 100%
-                  US-Based
-                </div>
-              </div>
-            </div>
-            <div className="md:w-1/2">
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg shadow-2xl">
-                <Image
-                  src="https://images.unsplash.com/photo-1643292710805-0c32e5ca2a2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxtb2Rlcm4lMjBzbWFsbCUyMGJ1c2luZXNzJTIwb2ZmaWNlJTIwdGVhbSUyMHdhcm0lMjB0b25lc3xlbnwxfHx8fDE3NjY0NDg3Mjl8MA&ixlib=rb-4.1.0&q=80&w=1080"
-                  alt="Office Team"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <SplitFeature
+        heading="Security & Trust You Can Rely On"
+        body="We take security seriously. Your data never leaves domestic soil without your explicit permission."
+        points={["No user minimums", "No offshore NOCs", "100% US-based engineering"]}
+      />
 
-      <Suspense fallback={<div className="h-96 bg-brand-cream" />}>
-        <ObjectionsSection />
-      </Suspense>
+      <ObjectionsSection />
 
-      <section className="py-24 bg-brand-oxford relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M0 100 C 20 0 50 0 100 100 Z" fill="var(--brand-copper)" />
-          </svg>
-        </div>
-        <div className="container mx-auto px-6 relative z-10 text-center">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-            Ready to upgrade your business or protect your home?
-          </h2>
-          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            Get the enterprise-grade support you deserve with the personal touch you need.
-          </p>
-          <Button
-            onClick={() => {
-              setSessionContext({ entrySource: "Homepage Bottom CTA" });
-
-              openModal("sales");
-            }}
-            className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-xl px-10 py-7 h-auto rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
-          >
-            Let's get to work
-          </Button>
-        </div>
-      </section>
-    </div>
+      <EntrySource source="Homepage Bottom CTA">
+        <CTASection
+          heading="Ready to upgrade your business or protect your home?"
+          text="Get the enterprise-grade support you deserve with the personal touch you need. New engagements are joining a waitlist while we are at capacity."
+          ctas={[WAITLIST]}
+          scheme="dark"
+        />
+      </EntrySource>
+    </>
   );
 }
