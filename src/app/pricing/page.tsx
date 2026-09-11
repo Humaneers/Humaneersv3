@@ -2,8 +2,14 @@ import type { Metadata } from "next";
 import { PricingClient } from "../../features/pricing/PricingClient";
 import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
+import { FAQS } from "../../features/pricing/content";
 import { StructuredData, schemas } from "../../components/StructuredData";
-import { tierNamesWithSla, SLA_WINDOW } from "../../data/pricing";
+import { getTier, startingPrice } from "../../data/pricing";
+
+// Both figures come from pricing.ts. The previous copy read "$90/user" and
+// "$45/month", neither of which is a price the site publishes.
+const BUSINESS_FROM = `$${startingPrice("business")}/month`;
+const FAMILY_FROM = `$${getTier("Household").basePrice}/month`;
 
 export const metadata: Metadata = {
   title: "Humaneers | Transparent Managed IT Pricing | No Hidden Fees",
@@ -14,8 +20,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Transparent Pricing | Humaneers",
-    description:
-      "Enterprise-grade managed IT starting at $90/user. Family protection from $45/month. No hidden fees, no per-device charges.",
+    description: `Enterprise-grade managed IT starting at ${BUSINESS_FROM}. Family protection from ${FAMILY_FROM}. No hidden fees, no per-device charges.`,
     url: "https://humaneers.dev/pricing",
     type: "website",
     images: [
@@ -30,38 +35,17 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Transparent Pricing | Humaneers",
-    description:
-      "Enterprise-grade managed IT starting at $90/user. Family protection from $45/month.",
+    description: `Enterprise-grade managed IT starting at ${BUSINESS_FROM}. Family protection from ${FAMILY_FROM}.`,
     images: ["/og-image.jpg"],
   },
 };
-
-const faqs = [
-  {
-    question: "What counts as a 'User'?",
-    answer:
-      "A user is a human being with a unique account. We don't charge for service accounts (like 'info@') or inactive shared mailboxes.",
-  },
-  {
-    question: "Can I upgrade or downgrade my plan?",
-    answer:
-      "Yes, you can change your plan at the beginning of any billing cycle. There are no long-term lock-ins for our standard tiers.",
-  },
-  {
-    question: "Do you offer emergency support?",
-    answer:
-      `Absolutely. ${tierNamesWithSla("business", "priority").join(" and ")} tiers include ` +
-      `priority support (${SLA_WINDOW.priority} response), while our Hourly Packs can be used ` +
-      `for urgent crisis response ${SLA_WINDOW.capacity}.`,
-  },
-];
 
 export default function PricingPage() {
   return (
     <>
       <StructuredData
         data={[
-          schemas.faqPage(faqs),
+          schemas.faqPage([...FAQS]),
           schemas.service(
             "IT Support Pricing",
             "Transparent pricing for managed IT, family protection, and fractional leadership."
