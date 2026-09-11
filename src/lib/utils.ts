@@ -3,7 +3,25 @@
  */
 
 import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { extendTailwindMerge } from "tailwind-merge";
+
+/**
+ * tailwind-merge with the Relume type ramp registered as font sizes. Out of
+ * the box it reads text-h1 or text-medium as a text color, so a ramp class
+ * and a color passed together had one of them silently dropped. The names
+ * are the --text-* tokens in src/styles/globals.css.
+ */
+const twMerge = extendTailwindMerge({
+  extend: {
+    classGroups: {
+      "font-size": [
+        {
+          text: ["h1", "h2", "h3", "h4", "h5", "h6", "large", "medium", "regular", "small", "tiny"],
+        },
+      ],
+    },
+  },
+});
 
 /**
  * Combines multiple class names using clsx and merges Tailwind classes
