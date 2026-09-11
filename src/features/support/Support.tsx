@@ -8,19 +8,23 @@ import { ContactSection } from "@/components/sections/ContactSection";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { FeatureGrid } from "@/components/sections/FeatureGrid";
 import { PageHeader } from "@/components/sections/PageHeader";
-import { SLA_WINDOW } from "@/data/pricing";
+import { INCIDENT_RESPONSE_WINDOW, type IncidentPriority } from "@/data/pricing";
 
 const EMERGENCY_LINE = { label: "(928) 440-1505", href: "tel:+19284401505" } as const;
 
-// src/data/pricing.ts carries the P1 and P2 windows. P3 and P4 have no entry
-// there yet; the figures below match section 3.2 of the Terms and are written
-// once, here, for both the grid and the FAQ answer.
-const PRIORITIES = [
-  { level: 1, name: "Critical", scope: "System down", window: SLA_WINDOW.critical },
-  { level: 2, name: "High", scope: "Major impact", window: SLA_WINDOW.priority },
-  { level: 3, name: "Medium", scope: "Minor issue with a workaround", window: "4 hours" },
-  { level: 4, name: "Low", scope: "Questions and requests", window: "24 hours" },
-] as const;
+// The response windows come from INCIDENT_RESPONSE_WINDOW, which mirrors
+// section 3.2 of the Terms. The grid and the FAQ answer both read them here.
+const PRIORITIES: readonly {
+  priority: IncidentPriority;
+  level: number;
+  name: string;
+  scope: string;
+}[] = [
+  { priority: "P1", level: 1, name: "Critical", scope: "System down" },
+  { priority: "P2", level: 2, name: "High", scope: "Major impact" },
+  { priority: "P3", level: 3, name: "Medium", scope: "Minor issue with a workaround" },
+  { priority: "P4", level: 4, name: "Low", scope: "Questions and requests" },
+];
 
 const FAQ_ITEMS = [
   {
@@ -41,7 +45,8 @@ const FAQ_ITEMS = [
   {
     question: "How do priority levels work?",
     answer: PRIORITIES.map(
-      (p) => `P${p.level} (${p.name}): ${p.scope}, response in ${p.window}.`
+      (p) =>
+        `${p.priority} (${p.name}): ${p.scope}, response in ${INCIDENT_RESPONSE_WINDOW[p.priority]}.`
     ).join(" "),
   },
   {
@@ -116,7 +121,7 @@ export function Support() {
         items={PRIORITIES.map((p) => ({
           icon: Clock,
           heading: `Priority ${p.level}: ${p.name}`,
-          text: `${p.scope}. Response in ${p.window}.`,
+          text: `${p.scope}. Response in ${INCIDENT_RESPONSE_WINDOW[p.priority]}.`,
         }))}
       />
 
