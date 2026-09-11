@@ -28,7 +28,7 @@ const services = [
     title: "Managed IT",
     desc: "Cloud-native infrastructure that just works. We handle the tech so you can handle the business.",
     link: routePaths.managedIt,
-    details: ["24/7 US-Based Support", "Network Security", "Cloud Migration"],
+    details: ["24/7 emergency line", "Network Security", "Cloud Migration"],
   },
   {
     id: "growth",

@@ -54,7 +54,7 @@ export function HomeClient() {
 
       <SplitFeature
         heading="Security & Trust You Can Rely On"
-        body="We take security seriously. Your data never leaves domestic soil without your explicit permission."
+        body="We take security seriously."
         points={["No user minimums", "No offshore NOCs", "100% US-based engineering"]}
       />
 
