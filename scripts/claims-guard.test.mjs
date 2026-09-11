@@ -352,3 +352,54 @@ describe("unmeasured-performance-percent rule", () => {
     expect(ids(source)).not.toContain("unmeasured-performance-percent");
   });
 });
+
+describe("relume-default-content rule", () => {
+  // One line per pattern, each in the shape Relume's own defaults take.
+  const DEFAULTS = {
+    "placeholder image host": `src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg",`,
+    "lorem ipsum body copy": `description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",`,
+    "heading placeholder": `heading: "Medium length section heading goes here",`,
+    "feature text placeholder": `<p>Feature text goes here</p>`,
+    "placeholder alt text": `alt: "Relume placeholder image",`,
+    "testimonial name": `name: "Name Surname",`,
+    "testimonial byline": `position: "Position, Company name",`,
+  };
+
+  for (const [name, source] of Object.entries(DEFAULTS)) {
+    it(`catches the ${name}`, () => {
+      expect(scanText(source, "Section.tsx").map((f) => f.rule.id)).toContain(
+        "relume-default-content"
+      );
+    });
+  }
+
+  it("catches a default whatever its case", () => {
+    const source = `<h2>HEADING GOES HERE</h2>`;
+    expect(scanText(source, "x.tsx").map((f) => f.rule.id)).toContain("relume-default-content");
+  });
+
+  it("does not flag real section content", () => {
+    const source = [
+      `<PageHeader`,
+      `  heading="Technology support for your business"`,
+      `  description="We look after your computers, accounts and network."`,
+      `  ctas={[{ label: "Talk to us", href: "/contact" }]}`,
+      `/>`,
+    ].join("\n");
+    expect(scanText(source, "x.tsx").map((f) => f.rule.id)).not.toContain("relume-default-content");
+  });
+
+  it("does not flag another CloudFront host or ordinary form copy", () => {
+    const source = [
+      `src: "https://d111111abcdef8.cloudfront.net/logo.svg",`,
+      `<p>Add your name, surname and company name to the form.</p>`,
+      `<label>Position at your company</label>`,
+    ].join("\n");
+    expect(scanText(source, "x.tsx").map((f) => f.rule.id)).not.toContain("relume-default-content");
+  });
+
+  it("honours a file-level allowance, as the section tests use", () => {
+    const source = `// claims-guard-allow-file: relume-default-content this test lists the patterns\nconst patterns = [/lorem ipsum/i];`;
+    expect(scanText(source, "sections.test.tsx")).toHaveLength(0);
+  });
+});
