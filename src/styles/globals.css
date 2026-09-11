@@ -240,6 +240,22 @@
   margin-inline: auto;
 }
 
+/*
+ * Type families. Headings are Caladea, the open-license metric clone of
+ * Cambria (DMX McArthur's heading face), loaded through next/font in
+ * src/app/layout.tsx, which sets --font-caladea on <html>. Caladea ships 400
+ * and 700 only, so a font-medium heading renders at 400 and a font-semibold
+ * one at 700. Body text stays on the system sans stack it has always used.
+ * Swapping either face is a one-line change here.
+ */
+@theme {
+  --font-heading: var(--font-caladea, Caladea), Cambria, Georgia, serif;
+  --font-body:
+    ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+  --default-font-family: var(--font-body);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -250,6 +266,15 @@
     /* Prevent white flash during hydration */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
   }
 }
 

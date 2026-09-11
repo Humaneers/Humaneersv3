@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import Script from "next/script";
+import { Caladea } from "next/font/google";
 import "../styles/globals.css";
 import { Header } from "../components/layout/Header";
 import { Footer } from "../components/layout/Footer";
@@ -8,6 +9,17 @@ import { PageLoader } from "../components/PageLoader";
 import { TooltipProvider } from "../components/ui/tooltip";
 import { ContactModalProvider } from "../components/providers/ContactModalProvider";
 import { ContactModalWrapper } from "../components/ContactModalWrapper";
+
+// Heading face: Caladea, the open-license metric clone of Cambria (DMX
+// McArthur's heading face). next/font downloads it at build time and serves it
+// from this origin, which is what the CSP's font-src 'self' allows.
+const caladea = Caladea({
+  weight: ["400", "700"],
+  style: ["normal"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-caladea",
+});
 
 export const metadata: Metadata = {
   title: "Humaneers | Built with precision. Delivered with soul.",
@@ -82,7 +94,7 @@ import { StructuredData, schemas } from "../components/StructuredData";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={caladea.variable}>
       <head>
         <Script
           src="https://t.contentsquare.net/uxa/741b931013a01.js"
