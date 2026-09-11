@@ -9,7 +9,7 @@ import { setSessionContext } from "@/lib/session";
 
 import Image from "next/image";
 import { useContactModal } from "@/components/providers/ContactModalProvider";
-import { SolutionSwitcher } from "./SolutionSwitcher";
+import { Solutions } from "./SolutionSwitcher";
 
 // Porting ObjectionsSection later or keeping as lazy for now
 const ObjectionsSection = lazy(() =>
@@ -84,20 +84,7 @@ export function HomeClient() {
         </div>
       </div>
 
-      <section className="py-24 bg-brand-cream relative">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-brand-copper to-transparent opacity-50" />
-
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="text-brand-copper-text font-bold tracking-widest uppercase mb-3 text-sm">
-              Our Expertise
-            </p>
-            <h2 className="text-4xl font-bold text-brand-oxford">Everything You Need to Grow</h2>
-          </div>
-
-          <SolutionSwitcher />
-        </div>
-      </section>
+      <Solutions />
 
       <section className="py-24 bg-brand-cream">
         <div className="container mx-auto px-6">
