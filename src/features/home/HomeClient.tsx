@@ -2,7 +2,7 @@
 
 import { lazy, Suspense } from "react";
 
-import { Shield, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
 import { setSessionContext } from "@/lib/session";
@@ -10,7 +10,6 @@ import { setSessionContext } from "@/lib/session";
 import Image from "next/image";
 import { useContactModal } from "@/components/providers/ContactModalProvider";
 import { SolutionSwitcher } from "./SolutionSwitcher";
-import { FAMILIES_PROTECTED } from "@/data/pricing";
 
 // Porting ObjectionsSection later or keeping as lazy for now
 const ObjectionsSection = lazy(() =>
@@ -74,20 +73,6 @@ export function HomeClient() {
               >
                 Get Started
               </Button>
-
-              <div className="mt-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 flex items-center gap-4 max-w-md shadow-2xl">
-                <div className="bg-brand-copper/20 p-2 rounded-full border border-brand-copper/30">
-                  <Shield className="text-brand-copper w-6 h-6" aria-hidden="true" />
-                </div>
-                <div>
-                  <p className="text-white font-bold text-base leading-tight shadow-black drop-shadow-sm">
-                    Trusted by 200+ businesses
-                  </p>
-                  <p className="text-white/70 text-xs font-medium">
-                    Invitation-only heritage. Now open to all.
-                  </p>
-                </div>
-              </div>
             </div>
           </motion.div>
         </div>
@@ -104,9 +89,9 @@ export function HomeClient() {
 
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h3 className="text-brand-copper-text font-bold tracking-widest uppercase mb-3 text-sm">
+            <p className="text-brand-copper-text font-bold tracking-widest uppercase mb-3 text-sm">
               Our Expertise
-            </h3>
+            </p>
             <h2 className="text-4xl font-bold text-brand-oxford">Everything You Need to Grow</h2>
           </div>
 
@@ -132,7 +117,7 @@ export function HomeClient() {
                 </div>
               </div>
             </div>
-            <div className="md:w-1/2 relative">
+            <div className="md:w-1/2">
               <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg shadow-2xl">
                 <Image
                   src="https://images.unsplash.com/photo-1643292710805-0c32e5ca2a2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxtb2Rlcm4lMjBzbWFsbCUyMGJ1c2luZXNzJTIwb2ZmaWNlJTIwdGVhbSUyMHdhcm0lMjB0b25lc3xlbnwxfHx8fDE3NjY0NDg3Mjl8MA&ixlib=rb-4.1.0&q=80&w=1080"
@@ -140,10 +125,6 @@ export function HomeClient() {
                   fill
                   className="object-cover"
                 />
-              </div>
-              <div className="absolute -bottom-6 -left-4 bg-brand-copper-text p-6 rounded-lg text-white shadow-lg hidden md:block">
-                <p className="text-2xl font-bold">{FAMILIES_PROTECTED}</p>
-                <p className="text-sm opacity-90">Families Protected Nationwide</p>
               </div>
             </div>
           </div>

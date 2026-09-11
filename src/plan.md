@@ -72,7 +72,7 @@ _Focus: Redesigning key pages for "Modern Craftsman" aesthetic, ensuring reliabi
 - [ ] **Real-time Status**: `Status.tsx` uses hardcoded mock data. Needs to fetch real data from an incident management system.
 - [ ] **Resources & Knowledge Base**:
   - **Search**: The search bar in `Resources.tsx` is cosmetic. Needs implementation of search logic across the site content.
-  - **Download Buttons**: The "Download PDF" buttons in `Resources.tsx` are non-functional placeholders.
+  - **Download Buttons**: Removed on 11 Sep 2026. The placeholder PDF button in `Resources.tsx` had no file or handler behind it.
   - **Article Links**: The "Read" buttons in the resource grid do not navigate to actual content.
 - [ ] **Client Portal**:
   - "Open Portal" buttons currently redirect to the Contact page.

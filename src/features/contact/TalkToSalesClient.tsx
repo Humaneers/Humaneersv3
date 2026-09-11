@@ -62,16 +62,6 @@ export function TalkToSalesClient() {
                 (928) 440-1505
               </a>
             </div>
-
-            <div className="bg-white p-6 rounded-lg shadow text-brand-slate">
-              <p className="italic font-medium">
-                "They fixed our immediate crisis in hours, then built a roadmap that actually made
-                sense. Finally, IT that feels like a partner, not a vendor."
-              </p>
-              <div className="mt-4 text-sm font-bold text-brand-oxford">
-                — Managing Partner, Accounting Firm
-              </div>
-            </div>
           </div>
 
           {/* Waitlist */}

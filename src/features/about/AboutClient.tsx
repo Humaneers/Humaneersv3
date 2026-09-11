@@ -3,38 +3,12 @@
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Users,
-  Server,
-  Clock,
-  Calendar,
-  Heart,
-  Shield,
-  Target,
-  Award,
-  Quote,
-  CheckCircle2,
-} from "lucide-react";
+import { Users, Server, Calendar, Heart, Shield, Target, Quote, CheckCircle2 } from "lucide-react";
 import { routePaths } from "../../routes";
 import { useContactModal } from "@/components/providers/ContactModalProvider";
 
 export function AboutClient() {
   const router = useRouter();
-
-  const metrics = [
-    { label: "Clients Supported", value: "140+", icon: Users },
-    { label: "Devices Managed", value: "4,500+", icon: Server },
-    { label: "Avg Response Time", value: "12m", icon: Clock },
-    { label: "Years in Operation", value: "8", icon: Calendar },
-  ];
-
-  const leadership = [
-    { title: "Chief Technologist", role: "Infrastructure and Security Architecture" },
-    { title: "Head of Brand Strategy", role: "Market Positioning and Growth" },
-    { title: "Senior Network Engineer", role: "Mesh Systems and Connectivity" },
-    { title: "Compliance Officer", role: "Client Compliance and Regulatory Affairs" },
-    { title: "Client Success Director", role: "Account Management and Quality Assurance" },
-  ];
 
   const { openModal } = useContactModal();
 
@@ -54,9 +28,6 @@ export function AboutClient() {
             </p>
             <div className="flex flex-wrap gap-6 items-center text-sm font-medium text-brand-copper-light uppercase tracking-widest">
               <span className="flex items-center gap-2">
-                <CheckCircle2 size={16} /> 8 Year Track Record
-              </span>
-              <span className="flex items-center gap-2">
                 <CheckCircle2 size={16} /> Stealth Heritage
               </span>
               <span className="flex items-center gap-2">
@@ -66,26 +37,6 @@ export function AboutClient() {
           </div>
         </div>
       </section>
-
-      {/* Trust Strip */}
-      <div className="bg-white/40 backdrop-blur-md border-b border-white/20 py-10 relative z-20">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-wrap justify-between items-center gap-8 opacity-70">
-            <span className="text-brand-oxford font-bold text-sm md:text-lg tracking-tight">
-              Global Enterprise Standards
-            </span>
-            <span className="text-brand-oxford font-bold text-sm md:text-lg tracking-tight">
-              Family Office Security
-            </span>
-            <span className="text-brand-oxford font-bold text-sm md:text-lg tracking-tight">
-              Nonprofit Stewardship
-            </span>
-            <span className="text-brand-oxford font-bold text-sm md:text-lg tracking-tight">
-              Stealth to Service
-            </span>
-          </div>
-        </div>
-      </div>
 
       <div className="container mx-auto px-6 py-12">
         <Tabs defaultValue="story" className="w-full">
@@ -123,62 +74,41 @@ export function AboutClient() {
             value="story"
             className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500"
           >
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-3xl font-bold text-brand-oxford mb-6">
-                  Stealth Heritage, Public Standard.
-                </h2>
-                <div className="prose text-brand-slate leading-relaxed space-y-6 text-lg">
-                  <p>
-                    Humaneers began in stealth mode, serving a select roster of clients by referral
-                    only. These individuals and organizations required enterprise-grade solutions
-                    without the burden of enterprise bureaucracy. We built our reputation one
-                    bespoke engagement at a time, delivering the same caliber of strategy, security,
-                    and infrastructure typically reserved for global enterprise companies to
-                    businesses, families, and nonprofits who had been too often underserved.
-                  </p>
-                  <p>
-                    Word travels fast when you solve problems that others cannot. Our clients, many
-                    of whom came to us after exhausting traditional options, began to ask a
-                    consistent question: Why aren't you available to everyone?
-                  </p>
-                  <p>
-                    The answer, for many years, was capacity. We believed that maintaining boutique
-                    quality required staying small. But as our team matured and our internal
-                    processes crystallized, we realized we had built something scalable without ever
-                    sacrificing soul. Our clients encouraged our public transition, not because they
-                    wanted to share us, but because they believed others deserved access to what we
-                    had proven we could deliver.
-                  </p>
-                  <p className="text-brand-oxford font-bold">
-                    So here we are. No longer invitation only, but still uncompromisingly focused on
-                    precision, transparency, and results.
-                  </p>
-                  <p>
-                    We bring the same rigor, the same vendor neutrality, and the same refusal to cut
-                    corners that our earliest clients relied on. The only difference is that now,
-                    you do not need a referral to work with us. You just need a problem worth
-                    solving.
-                  </p>
-                </div>
-              </div>
-              <div className="bg-white p-6 sm:p-8 rounded-xl shadow-sm border border-gray-100">
-                <h3 className="text-xl font-bold text-brand-oxford mb-6 border-b border-gray-100 pb-4">
-                  Leadership & Structure
-                </h3>
-                <ul className="space-y-4">
-                  {leadership.map((leader, i) => (
-                    <li
-                      key={i}
-                      className="flex flex-col sm:flex-row sm:justify-between sm:items-center group gap-2 px-2"
-                    >
-                      <span className="font-bold text-brand-oxford">{leader.title}</span>
-                      <span className="text-sm text-brand-copper-text font-medium bg-brand-copper/10 px-3 py-1 rounded-full group-hover:bg-brand-copper-text group-hover:text-white transition-colors self-start sm:self-auto">
-                        {leader.role}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl font-bold text-brand-oxford mb-6">
+                Stealth Heritage, Public Standard.
+              </h2>
+              <div className="prose text-brand-slate leading-relaxed space-y-6 text-lg">
+                <p>
+                  Humaneers began in stealth mode, serving a select roster of clients by referral
+                  only. These individuals and organizations required enterprise-grade solutions
+                  without the burden of enterprise bureaucracy. We built our reputation one bespoke
+                  engagement at a time, delivering the same caliber of strategy, security, and
+                  infrastructure typically reserved for global enterprise companies to businesses,
+                  families, and nonprofits who had been too often underserved.
+                </p>
+                <p>
+                  Word travels fast when you solve problems that others cannot. Our clients, many of
+                  whom came to us after exhausting traditional options, began to ask a consistent
+                  question: Why aren't you available to everyone?
+                </p>
+                <p>
+                  The answer, for many years, was capacity. We believed that maintaining boutique
+                  quality required staying small. But as our team matured and our internal processes
+                  crystallized, we realized we had built something scalable without ever sacrificing
+                  soul. Our clients encouraged our public transition, not because they wanted to
+                  share us, but because they believed others deserved access to what we had proven
+                  we could deliver.
+                </p>
+                <p className="text-brand-oxford font-bold">
+                  So here we are. No longer invitation only, but still uncompromisingly focused on
+                  precision, transparency, and results.
+                </p>
+                <p>
+                  We bring the same rigor, the same vendor neutrality, and the same refusal to cut
+                  corners that our earliest clients relied on. The only difference is that now, you
+                  do not need a referral to work with us. You just need a problem worth solving.
+                </p>
               </div>
             </div>
           </TabsContent>
@@ -188,6 +118,7 @@ export function AboutClient() {
             value="values"
             className="animate-in fade-in slide-in-from-bottom-4 duration-500"
           >
+            <h2 className="sr-only">Our Values</h2>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="bg-white p-10 rounded-2xl border-t-4 border-brand-copper shadow-xl hover:-translate-y-1 transition-all duration-300">
                 <Target className="w-12 h-12 text-brand-copper mb-6" />
@@ -223,63 +154,30 @@ export function AboutClient() {
             value="customers"
             className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500"
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {metrics.map((metric, i) => (
-                <div
-                  key={i}
-                  className="bg-white p-6 rounded-lg shadow-sm text-center border border-gray-100"
-                >
-                  <div className="w-12 h-12 bg-brand-cream text-brand-copper-text rounded-full flex items-center justify-center mx-auto mb-4">
-                    <metric.icon size={24} />
-                  </div>
-                  <div className="text-3xl font-bold text-brand-oxford mb-1">{metric.value}</div>
-                  <div className="text-sm text-gray-500 uppercase tracking-wide font-medium">
-                    {metric.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-12">
-              <div>
-                <h3 className="text-2xl font-bold text-brand-oxford mb-6">Who We Serve</h3>
-                <ul className="space-y-4">
-                  <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-                    <span className="font-medium text-brand-oxford">High-Growth Startups</span>
-                    <span className="text-sm text-gray-500">Seed to Series B</span>
-                  </li>
-                  <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-                    <span className="font-medium text-brand-oxford">Family Offices & Estates</span>
-                    <span className="text-sm text-gray-500">High Net Worth Individuals</span>
-                  </li>
-                  <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-                    <span className="font-medium text-brand-oxford">Families & Individuals</span>
-                    <span className="text-sm text-gray-500">Home networks & digital safety</span>
-                  </li>
-                  <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-                    <span className="font-medium text-brand-oxford">Nonprofit Organizations</span>
-                    <span className="text-sm text-gray-500">501(c)(3) Certified</span>
-                  </li>
-                  <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-                    <span className="font-medium text-brand-oxford">Regulated Industries</span>
-                    <span className="text-sm text-gray-500">Healthcare, Finance, Legal</span>
-                  </li>
-                </ul>
-              </div>
-              <div className="bg-brand-oxford text-white p-8 rounded-xl flex flex-col justify-center text-center">
-                <Award className="w-12 h-12 text-brand-copper mx-auto mb-4" />
-                <h4 className="text-xl font-bold mb-4">Quarterly Performance Report</h4>
-                <p className="text-gray-300 mb-8">
-                  We publish our uptime, response times, and customer satisfaction scores every
-                  quarter. View our latest full report in the Colophon.
-                </p>
-                <Button
-                  onClick={() => router.push(routePaths.colophon)}
-                  className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white self-center"
-                >
-                  View Transparency Report
-                </Button>
-              </div>
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-2xl font-bold text-brand-oxford mb-6">Who We Serve</h2>
+              <ul className="space-y-4">
+                <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
+                  <span className="font-medium text-brand-oxford">High-Growth Startups</span>
+                  <span className="text-sm text-gray-500">Seed to Series B</span>
+                </li>
+                <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
+                  <span className="font-medium text-brand-oxford">Family Offices & Estates</span>
+                  <span className="text-sm text-gray-500">High Net Worth Individuals</span>
+                </li>
+                <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
+                  <span className="font-medium text-brand-oxford">Families & Individuals</span>
+                  <span className="text-sm text-gray-500">Home networks & digital safety</span>
+                </li>
+                <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
+                  <span className="font-medium text-brand-oxford">Nonprofit Organizations</span>
+                  <span className="text-sm text-gray-500">501(c)(3) Certified</span>
+                </li>
+                <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
+                  <span className="font-medium text-brand-oxford">Regulated Industries</span>
+                  <span className="text-sm text-gray-500">Healthcare, Finance, Legal</span>
+                </li>
+              </ul>
             </div>
           </TabsContent>
 
@@ -349,8 +247,7 @@ export function AboutClient() {
                   </p>
                   <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
                     <li>
-                      <strong>90% Remote Workforce:</strong> drastically reducing our Scope 3
-                      emissions from employee commuting.
+                      <strong>Remote Team:</strong> Our team works remotely by default.
                     </li>
                     <li>
                       <strong>Minimal Real Estate:</strong> We maintain a small HQ footprint in

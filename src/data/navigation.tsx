@@ -96,22 +96,17 @@ export const navSections: NavSection[] = [
         description: "Digital cleanup and PR crisis management.",
         to: routePaths.crisisManagement,
       },
-      {
-        title: "Compliance Engine",
-        description: "Automated compliance tracking and reporting.",
-        to: routePaths.about,
-      },
     ],
   },
   {
     id: "resources",
     label: "Resources",
-    featured: {
-      title: "Knowledge Base Hub",
-      description: "Explore guides, security explainers, and operational docs.",
-      to: routePaths.resources,
-    },
     items: [
+      {
+        title: "IT Glossary & Incident FAQ",
+        description: "A short IT glossary, an incident FAQ, and client links.",
+        to: routePaths.resources,
+      },
       {
         title: "Transparency & Colophon",
         description: "Our operating framework, open source credits, and ethics.",
@@ -129,7 +124,7 @@ export const navSections: NavSection[] = [
       },
       {
         title: "Service Status",
-        description: "Real-time system performance and uptime.",
+        description: "How to report an active problem, and our uptime commitment.",
         to: routePaths.status,
       },
       {
@@ -156,7 +151,7 @@ export const navSections: NavSection[] = [
     items: [
       {
         title: "About Us",
-        description: "Meet the team behind Humaneers.",
+        description: "Our story, values, who we serve, and impact commitments.",
         to: routePaths.about,
       },
       {

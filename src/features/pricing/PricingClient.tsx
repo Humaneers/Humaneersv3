@@ -591,23 +591,8 @@ export function PricingClient() {
       {/* Comparison Table */}
       <PricingComparisonTable mode={pricingMode} />
 
-      {/* --- Trust Strip --- */}
-      <div className="mt-24 border-y border-gray-200 py-12">
-        <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-50 grayscale transition-all hover:grayscale-0">
-          <div className="flex items-center gap-2 text-brand-oxford font-serif text-xl border-r pr-12 border-gray-200">
-            <Shield className="text-brand-copper" /> Security First
-          </div>
-          <div className="flex items-center gap-2 text-brand-oxford font-serif text-xl border-r pr-12 border-gray-200">
-            <Zap className="text-brand-copper" /> Rapid Response
-          </div>
-          <div className="flex items-center gap-2 text-brand-oxford font-serif text-xl">
-            <Users className="text-brand-copper" /> Human Experts
-          </div>
-        </div>
-      </div>
-
       {/* --- Digital Asset Sovereignty --- */}
-      <div className="mt-12 max-w-4xl mx-auto">
+      <div className="mt-24 max-w-4xl mx-auto">
         <div className="bg-gradient-to-br from-brand-slate to-brand-oxford rounded-2xl p-8 md:p-12 text-white relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid.svg')] opacity-10"></div>
 

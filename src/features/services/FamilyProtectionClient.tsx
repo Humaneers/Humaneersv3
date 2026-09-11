@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 import { routePaths } from "../../routes";
 import Image from "next/image";
-import { FAMILIES_PROTECTED } from "@/data/pricing";
 
 export function FamilyProtectionClient() {
   const router = useRouter();
@@ -61,7 +60,6 @@ export function FamilyProtectionClient() {
   const stats = [
     { label: "Identity Theft Victims", value: "1 in 3" },
     { label: "Home Network Attacks", value: "+400%" },
-    { label: "Families Protected", value: FAMILIES_PROTECTED },
   ];
 
   return (
@@ -114,7 +112,7 @@ export function FamilyProtectionClient() {
       {/* Stats / Reality Check */}
       <section className="py-20 bg-brand-oxford-deep border-t border-white/10">
         <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-8 text-center text-white">
+          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto text-center text-white">
             {stats.map((s, i) => (
               <div key={i} className="p-6">
                 <div className="text-4xl md:text-5xl font-bold text-brand-copper mb-2">

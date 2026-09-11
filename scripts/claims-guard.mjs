@@ -101,7 +101,58 @@ const placeholderContactTest = {
 };
 
 /**
+ * bare-client-count — a headcount of clients, businesses, customers,
+ * companies or devices with no record behind it. "Trusted by 200+ businesses"
+ * on the home hero and the About page's "140+ Clients Supported" and "4,500+
+ * Devices Managed" tiles both shipped this way.
+ *
+ * Two shapes. Inline prose: a number with a "+" floor in front of the noun
+ * ("200+ businesses", "4,500+ managed devices"), or "trusted by" followed by a
+ * number. And the stat tile, where the number and the noun sit in separate
+ * fields of one object literal and only meet at render time:
+ * { label: "Clients Supported", value: "140+" }. The tile is checked across the
+ * whole literal, so Prettier breaking it over several lines does not hide it.
+ *
+ * Families are out of scope here: "families" is not one of the counted nouns.
+ * The FAMILIES_PROTECTED "100+" stat had no record behind it either, and was
+ * removed from the site by hand on 11 Sep 2026.
+ */
+const COUNTED_NOUN = "(?:clients|businesses|customers|companies|devices)";
+const INLINE_CLIENT_COUNT = new RegExp(
+  `\\b\\d[\\d,]*(?:\\.\\d+)?k?\\+\\s*(?:[a-z-]+\\s+)?${COUNTED_NOUN}\\b`,
+  "i"
+);
+const TRUSTED_BY_COUNT = /\btrusted\s+by\s+(?:over\s+|more\s+than\s+|nearly\s+)?\d/i;
+const COUNT_LABEL = new RegExp(`\\blabel\\s*:\\s*["'\`][^"'\`\\n]*\\b${COUNTED_NOUN}\\b`, "i");
+// "140+", '4,500+', "10k+" or a numeric literal. Not "1 in 3", "+400%", "12m"
+// or an identifier such as FAMILIES_PROTECTED.
+const BARE_NUMBER_VALUE =
+  /\bvalue\s*:\s*(?:["'`]\s*\d[\d,.]*k?\+?\s*["'`]|\d[\d_.]*\s*(?:[,}]|$))/i;
+
+// The object literal around line i: from the nearest line at or above it that
+// opens a brace to the nearest line at or below it that closes one. Bounded,
+// because a stat tile is a handful of lines.
+function enclosingObject(lines, i, reach = 8) {
+  let start = i;
+  while (start > 0 && i - start < reach && !lines[start].includes("{")) start--;
+  let end = i;
+  while (end < lines.length - 1 && end - i < reach && !lines[end].includes("}")) end++;
+  return lines.slice(start, end + 1).join("\n");
+}
+
+const bareClientCountTest = {
+  test(line, lines = [line], i = 0) {
+    if (INLINE_CLIENT_COUNT.test(line) || TRUSTED_BY_COUNT.test(line)) return true;
+    // Stat tile: report the value line only, so one tile is one finding.
+    if (!BARE_NUMBER_VALUE.test(line)) return false;
+    return COUNT_LABEL.test(enclosingObject(lines, i));
+  },
+};
+
+/**
  * mode "line"      — one line at a time; the cheapest and most precise.
+ *                    A custom test also receives the file's lines and the
+ *                    line's index, for a claim split across one literal.
  * mode "proximity" — a whole-file window, for defects that span JSX elements,
  *                    which is how the Compliance Scorecard survived two scrubs.
  *                    Markup only: prose bullets legitimately put a percentage
@@ -170,6 +221,23 @@ export const RULES = [
     message:
       "This is a placeholder contact detail, not a real one. The site publishes 24/7 emergency response, and these strings live in the paths that render when something is already broken - the worst possible place for a number that does not connect. Use the canonical (928) 440-1505 / tel:+19284401505. Scoped to phone numbers on purpose: example.com is the RFC 2606 reserved domain and is correct in test fixtures and form placeholders.",
   },
+  {
+    id: "bare-client-count",
+    mode: "line",
+    test: bareClientCountTest,
+    message:
+      "A count of clients, businesses, customers, companies or devices with no record behind it. 'Trusted by 200+ businesses' and the About page's '140+ Clients Supported' and '4,500+ Devices Managed' tiles shipped this way and were removed on 11 Sep 2026. Publish a count only when a client list or asset register produces it, and annotate the line with who checked the number and when.",
+  },
+  {
+    id: "unmeasured-performance-percent",
+    mode: "line",
+    // A share of issues, tickets, requests or incidents is a rate that only a
+    // ticketing system can produce. Uptime targets, market statistics and
+    // prices are other shapes and pass.
+    test: /\b\d+(?:\.\d+)?\s?%\s+of\s+(?:our\s+)?(?:issues|tickets|requests|incidents)\b/i,
+    message:
+      "A percentage of issues, tickets, requests or incidents is a measured performance rate. The Managed IT page's '99% of issues fixed remotely' and '99% of tickets are resolved remotely' shipped with no ticket data behind them and were removed on 11 Sep 2026. Publish a rate only when the ticketing system produces it, and annotate the line with the source, the period it covers, and who checked it.",
+  },
 ];
 
 const ALLOW_LINE = /claims-guard-allow:\s*\S/;
@@ -189,7 +257,7 @@ export function scanText(text, path = "input.tsx", rules = RULES) {
 
     if (rule.mode === "line") {
       lines.forEach((line, i) => {
-        if (!rule.test.test(line)) return;
+        if (!rule.test.test(line, lines, i)) return;
         if (ALLOW_LINE.test(line)) return;
         if (i > 0 && ALLOW_LINE.test(lines[i - 1])) return;
         findings.push({ path, line: i + 1, rule, excerpt: line.trim().slice(0, 120) });

@@ -579,7 +579,7 @@ You're officially a member of Forge by Humaneers. Here's what that means:
 
 → You now have access to enterprise-grade infrastructure (parking, co-working, vetted developers)
 → You're part of a community of builders who value craft over shortcuts
-→ You have a direct line to the team that's been quietly serving 200+ businesses for 8 years
+→ You have a direct line to the Humaneers team
 
 Your next steps:
 1. Join our Slack workspace [Link]
