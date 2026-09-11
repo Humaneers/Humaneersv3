@@ -2,7 +2,7 @@
 
 import { lazy, Suspense } from "react";
 
-import { Shield, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
 import { setSessionContext } from "@/lib/session";
@@ -74,20 +74,6 @@ export function HomeClient() {
               >
                 Get Started
               </Button>
-
-              <div className="mt-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 flex items-center gap-4 max-w-md shadow-2xl">
-                <div className="bg-brand-copper/20 p-2 rounded-full border border-brand-copper/30">
-                  <Shield className="text-brand-copper w-6 h-6" aria-hidden="true" />
-                </div>
-                <div>
-                  <p className="text-white font-bold text-base leading-tight shadow-black drop-shadow-sm">
-                    Trusted by 200+ businesses
-                  </p>
-                  <p className="text-white/70 text-xs font-medium">
-                    Invitation-only heritage. Now open to all.
-                  </p>
-                </div>
-              </div>
             </div>
           </motion.div>
         </div>

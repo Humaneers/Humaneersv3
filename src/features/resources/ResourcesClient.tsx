@@ -1,85 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-import {
-  BookOpen,
-  Shield,
-  FileText,
-  HelpCircle,
-  ArrowRight,
-  Tag,
-  Server,
-  Zap,
-  Lock,
-} from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { BookOpen, HelpCircle, Server } from "lucide-react";
 import { SLA_WINDOW } from "@/data/pricing";
 
-type Audience = "All" | "Founder" | "IT Admin" | "Ops";
-
 export function ResourcesClient() {
-  const [activeTab, setActiveTab] = useState<Audience>("All");
-
-  const resources = [
-    {
-      id: 1,
-      title: "Incident Response Playbook",
-      category: "Operational",
-      type: "Guide",
-      audience: "IT Admin" as Audience,
-      description: "Step-by-step protocols for when systems go down or a breach is detected.",
-      icon: Server,
-    },
-    {
-      id: 2,
-      title: "Zero Trust Architecture Explained",
-      category: "Security",
-      type: "Explainer",
-      audience: "IT Admin" as Audience,
-      description: "Why the old 'castle and moat' security model is dead, and what replaces it.",
-      icon: Shield,
-    },
-    {
-      id: 3,
-      title: "The Solo Founder's Tech Stack",
-      category: "Strategic",
-      type: "Guide",
-      audience: "Founder" as Audience,
-      description: "Essential tools for the company of one to operate like a company of ten.",
-      icon: Zap,
-    },
-    {
-      id: 4,
-      title: "SOC 2 Compliance Checklist",
-      category: "Strategic",
-      type: "Checklist",
-      audience: "Ops" as Audience,
-      description: "Preparing your operational processes for your first security audit.",
-      icon: FileText,
-    },
-    {
-      id: 5,
-      title: "Phishing Resistance Training",
-      category: "Security",
-      type: "Training",
-      audience: "All" as Audience,
-      description: "How to spot sophisticated email attacks that bypass spam filters.",
-      icon: Lock,
-    },
-    {
-      id: 6,
-      title: "Hardware Lifecycle Policy Template",
-      category: "Operational",
-      type: "Template",
-      audience: "Ops" as Audience,
-      description: "Copy-paste policy for managing device procurement and e-waste.",
-      icon: FileText,
-    },
-  ];
-
   const glossaryTerms = [
     {
       term: "MFA (Multi-Factor Authentication)",
@@ -99,11 +26,6 @@ export function ResourcesClient() {
     },
   ];
 
-  const filteredResources =
-    activeTab === "All"
-      ? resources
-      : resources.filter((r) => r.audience === activeTab || r.audience === "All");
-
   return (
     <div className="bg-brand-cream min-h-screen">
       {/* Hero */}
@@ -112,73 +34,13 @@ export function ResourcesClient() {
         <div className="container mx-auto px-6 relative z-10 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Knowledge Base & Resources</h1>
           <p className="text-xl max-w-2xl mx-auto text-gray-300 font-light mb-8">
-            Detailed documentation, strategic guides, and security explainers to help you manage
-            your digital infrastructure.
+            Links for active clients, a short IT glossary, and answers to common incident response
+            questions.
           </p>
         </div>
       </section>
 
       <div className="container mx-auto px-6 py-12">
-        {/* Audience Filters */}
-        <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
-          <div className="flex bg-white p-1 rounded-lg border border-gray-200 shadow-sm">
-            {(["All", "Founder", "IT Admin", "Ops"] as Audience[]).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
-                  activeTab === tab
-                    ? "bg-brand-oxford text-white shadow-sm"
-                    : "text-gray-500 hover:text-brand-oxford hover:bg-gray-50"
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-          <div className="text-sm text-gray-500 italic">
-            Showing resources for:{" "}
-            <span className="font-semibold text-brand-oxford">{activeTab}</span>
-          </div>
-        </div>
-
-        {/* Main Resource Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-          {filteredResources.map((resource) => (
-            <div
-              key={resource.id}
-              className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all group flex flex-col h-full"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div className="w-10 h-10 bg-brand-cream rounded-lg flex items-center justify-center text-brand-copper-text">
-                  <resource.icon size={20} />
-                </div>
-                <Badge
-                  variant="outline"
-                  className="text-xs font-normal border-gray-200 text-gray-500"
-                >
-                  {resource.category}
-                </Badge>
-              </div>
-
-              <h3 className="text-lg font-bold text-brand-oxford mb-2 group-hover:text-brand-copper-text transition-colors">
-                {resource.title}
-              </h3>
-              <p className="text-gray-500 text-sm mb-6 flex-grow">{resource.description}</p>
-
-              <div className="pt-4 border-t border-gray-100 flex justify-between items-center mt-auto">
-                <div className="flex items-center gap-2 text-xs text-gray-400">
-                  <Tag size={12} />
-                  <span>{resource.audience}</span>
-                </div>
-                <button className="text-brand-copper-text text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
-                  Read <ArrowRight size={14} />
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-
         {/* Operational Docs vs Strategic Content Split */}
         <div className="grid lg:grid-cols-2 gap-12 mb-20">
           {/* Operational Documentation */}

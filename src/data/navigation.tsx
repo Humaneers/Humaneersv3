@@ -106,11 +106,6 @@ export const navSections: NavSection[] = [
   {
     id: "resources",
     label: "Resources",
-    featured: {
-      title: "Knowledge Base Hub",
-      description: "Explore guides, security explainers, and operational docs.",
-      to: routePaths.resources,
-    },
     items: [
       {
         title: "Transparency & Colophon",
@@ -156,7 +151,7 @@ export const navSections: NavSection[] = [
     items: [
       {
         title: "About Us",
-        description: "Meet the team behind Humaneers.",
+        description: "Our story, values, who we serve, and impact commitments.",
         to: routePaths.about,
       },
       {

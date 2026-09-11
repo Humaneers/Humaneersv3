@@ -202,15 +202,6 @@ export function GrowthClient() {
                   height={400}
                   className="w-full h-auto"
                 />
-                <div className="absolute bottom-0 left-0 right-0 bg-brand-oxford/90 backdrop-blur-sm p-6 text-white border-t border-brand-copper">
-                  <div className="text-sm uppercase tracking-widest text-brand-copper-text font-bold mb-1">
-                    Case Study
-                  </div>
-                  <div className="font-bold text-lg mb-2">Construction Firm Rebrand</div>
-                  <div className="text-sm text-gray-300">
-                    Increased lead velocity by 340% in 90 days.
-                  </div>
-                </div>
               </div>
             </div>
           </div>
