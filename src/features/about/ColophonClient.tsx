@@ -38,7 +38,7 @@ export function ColophonClient() {
                 <Scale className="text-brand-copper" /> The Humaneers Digital Constitution
               </h2>
               <p className="text-brand-slate mb-8 leading-relaxed">
-                Serving businesses and families requires more than technical expertise—it demands
+                Serving businesses and families requires more than technical expertise. It demands
                 transparent communication, ethical operations, and a user-centric digital
                 experience. We have adopted this framework to design our policies and processes,
                 ensuring we build trust and foster long-term relationships with our clients.
@@ -108,9 +108,9 @@ export function ColophonClient() {
                     Information
                   </h3>
                   <p className="text-brand-slate mb-4">
-                    <strong>Mission and Story:</strong> We explain the "why"—bringing
+                    <strong>Mission and Story:</strong> We explain the "why": bringing
                     enterprise-grade discipline to businesses and families, without the enterprise
-                    price tag. We share our metrics and our origins to demonstrate stability.
+                    price tag. We share our origins.
                   </p>
                   <p className="text-brand-slate mb-4">
                     <strong>Values and Ethics:</strong>
@@ -139,13 +139,11 @@ export function ColophonClient() {
                   </h3>
                   <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
                     <li>
-                      <strong>GHG Assessments:</strong> We measure Scope 1, 2 and 3 emissions. As a
-                      remote-first company, we drastically reduce commuting emissions.
+                      <strong>Remote-First:</strong> Our team works remotely by default.
                     </li>
                     <li>
                       <strong>Hardware Lifecycle:</strong> We partner with certified recyclers to
-                      ensure 100% of decommissioned client equipment is refurbished or recycled
-                      responsibly, aiming for zero e-waste by 2026.
+                      refurbish or recycle decommissioned client equipment.
                     </li>
                     <li>
                       <strong>Supplier Engagement:</strong> We evaluate major hardware vendors
@@ -245,7 +243,7 @@ export function ColophonClient() {
                     <li>
                       <strong>Human Decision-Making:</strong> All strategic decisions, client
                       communications, and critical recommendations are made by experienced
-                      professionals—never automated.
+                      professionals, never automated.
                     </li>
                     <li>
                       <strong>AI as a Tool:</strong> We use machine learning tools to enhance code
