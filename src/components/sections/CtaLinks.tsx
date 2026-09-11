@@ -12,7 +12,7 @@ export type CtaLink = {
 /** One or two CTAs. The first renders as the filled button, the second as the outlined one. */
 export type CtaLinkList = readonly [CtaLink] | readonly [CtaLink, CtaLink];
 
-// Scheme tokens only, so the row reads correctly inside a .scheme-dark section.
+// Scheme tokens only, so the row follows the section's scheme (light, cream or oxford).
 const FOCUS = "ring-offset-scheme-background focus-visible:ring-scheme-text";
 const FILLED = "bg-scheme-accent text-scheme-btn-text hover:bg-scheme-accent/90";
 const OUTLINED =

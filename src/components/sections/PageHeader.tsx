@@ -4,6 +4,7 @@ import Image, { type StaticImageData } from "next/image";
 import { cn } from "@/lib/utils";
 
 import { CtaLinks, type CtaLinkList } from "./CtaLinks";
+import { sectionBandClass, type SectionScheme } from "./scheme";
 
 /**
  * A statically imported image carries its own dimensions; a path or URL has to
@@ -17,6 +18,7 @@ export type PageHeaderProps = {
   heading: string;
   description: string;
   ctas?: CtaLinkList;
+  scheme?: SectionScheme;
 } & (
   | { align?: "left"; image?: PageHeaderImage }
   // header62 has no image column, so a centered header takes no image.
@@ -24,7 +26,14 @@ export type PageHeaderProps = {
 );
 
 /** The page's single h1. Render one per page, at the top. */
-export function PageHeader({ heading, description, ctas, align = "left", image }: PageHeaderProps) {
+export function PageHeader({
+  heading,
+  description,
+  ctas,
+  align = "left",
+  image,
+  scheme,
+}: PageHeaderProps) {
   const centered = align === "center";
 
   const text = (
@@ -38,7 +47,7 @@ export function PageHeader({ heading, description, ctas, align = "left", image }
   );
 
   return (
-    <section className="bg-scheme-background px-[5%] py-16 text-scheme-text md:py-24 lg:py-28">
+    <section className={sectionBandClass(scheme)}>
       {image ? (
         <div className="section-container grid grid-cols-1 gap-x-20 gap-y-12 md:gap-y-16 lg:grid-cols-2 lg:items-center">
           {text}

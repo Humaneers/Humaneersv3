@@ -1,24 +1,17 @@
 // Relume cta25.
-import { cn } from "@/lib/utils";
-
 import { CtaLinks, type CtaLinkList } from "./CtaLinks";
+import { sectionBandClass, type SectionScheme } from "./scheme";
 
 export type CTASectionProps = {
   heading: string;
   text: string;
   ctas: CtaLinkList;
-  /** "dark" sets the section on oxford with cream text and copper-light accents. */
-  scheme?: "light" | "dark";
+  scheme?: SectionScheme;
 };
 
-export function CTASection({ heading, text, ctas, scheme = "light" }: CTASectionProps) {
+export function CTASection({ heading, text, ctas, scheme }: CTASectionProps) {
   return (
-    <section
-      className={cn(
-        "bg-scheme-background px-[5%] py-16 text-scheme-text md:py-24 lg:py-28",
-        scheme === "dark" && "scheme-dark"
-      )}
-    >
+    <section className={sectionBandClass(scheme)}>
       <div className="section-container">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="mb-5 text-h2 font-bold md:mb-6">{heading}</h2>

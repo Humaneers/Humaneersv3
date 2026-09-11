@@ -183,16 +183,20 @@
   --text-tiny--line-height: 1.5;
 
   /*
-   * Color schemes. Light is the default; .scheme-dark re-points the same
-   * six variables. Accent is small copper text and the primary button fill:
-   * copper-text on light, copper-light on oxford (the three-token rule above).
+   * Color schemes. Light (white) is the default; .scheme-cream and
+   * .scheme-oxford below re-point the same six variables. Accent is small
+   * copper text and the primary button fill: copper-text on white and cream,
+   * copper-light on oxford (the three-token rule above).
    * Small-text contrast, measured 11 Sep 2026:
-   *   light  text on background 15.1:1, on foreground 13.4:1
-   *          accent on background 5.7:1, on foreground 5.1:1
-   *          btn-text on an accent fill 5.7:1
-   *   dark   text on background 13.4:1, on foreground 10.0:1
-   *          accent on background 6.9:1, on foreground 5.1:1
-   *          btn-text on an accent fill 6.9:1
+   *   light   text on background 15.1:1, on foreground 13.4:1
+   *           accent on background 5.7:1, on foreground 5.1:1
+   *           btn-text on an accent fill 5.7:1, on the 90% hover fill 4.6:1
+   *   cream   text on background 13.4:1, on foreground 15.1:1
+   *           accent on background 5.1:1, on foreground 5.7:1
+   *           btn-text on an accent fill 5.7:1, on the 90% hover fill 4.7:1
+   *   oxford  text on background 13.4:1, on foreground 10.0:1
+   *           accent on background 6.9:1, on foreground 5.1:1
+   *           btn-text on an accent fill 6.9:1, on the 90% hover fill 5.8:1
    */
   --color-scheme-background: #ffffff;
   --color-scheme-foreground: var(--color-brand-cream);
@@ -223,7 +227,19 @@
   }
 }
 
-@utility scheme-dark {
+/* Scheme utilities. Not named scheme-dark or scheme-light: Tailwind v4 ships
+   utilities with those names that set color-scheme, and a custom @utility of
+   the same name would add these variables to them rather than replace them. */
+@utility scheme-cream {
+  --color-scheme-background: var(--color-brand-cream);
+  --color-scheme-foreground: #ffffff;
+  --color-scheme-text: var(--color-brand-oxford);
+  --color-scheme-border: var(--color-brand-neutral-200);
+  --color-scheme-accent: var(--color-brand-copper-text);
+  --color-scheme-btn-text: #ffffff;
+}
+
+@utility scheme-oxford {
   --color-scheme-background: var(--color-brand-oxford);
   --color-scheme-foreground: var(--color-brand-oxford-muted);
   --color-scheme-text: var(--color-brand-cream);

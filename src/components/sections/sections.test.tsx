@@ -8,6 +8,7 @@ import { CTASection, type CTASectionProps } from "./CTASection";
 import { FAQSection } from "./FAQSection";
 import { FeatureGrid, type FeatureGridProps } from "./FeatureGrid";
 import { PageHeader, type PageHeaderProps } from "./PageHeader";
+import type { SectionScheme } from "./scheme";
 import { SplitFeature } from "./SplitFeature";
 
 afterEach(cleanup);
@@ -182,20 +183,80 @@ describe("CTASection", () => {
     ctas: [TALK, PRICING],
   } satisfies CTASectionProps;
 
-  it("renders an h2, text and link CTAs on the light scheme by default", () => {
+  it("renders an h2, text and link CTAs", () => {
     const { container } = render(<CTASection {...content} />);
     expect(headingLevels(container)).toEqual([2]);
     expectCtaLinks(container, [TALK, PRICING]);
     expect(container.querySelectorAll("button")).toHaveLength(0);
-    expect(container.querySelector("section")?.classList.contains("scheme-dark")).toBe(false);
     expectSectionBasics(container);
   });
+});
 
-  it("switches the section to the dark scheme", () => {
-    const { container } = render(<CTASection {...content} scheme="dark" />);
-    expect(container.querySelector("section")?.classList.contains("scheme-dark")).toBe(true);
-    expectSectionBasics(container);
-  });
+describe("section schemes", () => {
+  const SECTIONS: Record<string, (scheme?: SectionScheme) => React.ReactElement> = {
+    PageHeader: (scheme) => (
+      <PageHeader
+        heading="Technology support for your business"
+        description="We look after your computers."
+        ctas={[TALK, PRICING]}
+        scheme={scheme}
+      />
+    ),
+    SplitFeature: (scheme) => (
+      <SplitFeature heading="How we work with you" body="We agree the next step." scheme={scheme} />
+    ),
+    FeatureGrid: (scheme) => (
+      <FeatureGrid
+        heading="Support that fits your team"
+        items={[{ icon: Laptop, heading: "Devices", text: "Laptops and phones set up." }]}
+        scheme={scheme}
+      />
+    ),
+    CTASection: (scheme) => (
+      <CTASection
+        heading="Ready to talk?"
+        text="Tell us about your setup."
+        ctas={[TALK]}
+        scheme={scheme}
+      />
+    ),
+    FAQSection: (scheme) => (
+      <FAQSection
+        heading="Questions"
+        items={[{ question: "How do I ask for help?", answer: "Use the support page." }]}
+        scheme={scheme}
+      />
+    ),
+  };
+
+  // Light is the :root default and needs no class. Dark is scheme-oxford, not
+  // Tailwind's built-in dark scheme utility, which also sets color-scheme.
+  const EXPECTED: Record<SectionScheme, string[]> = {
+    light: [],
+    cream: ["scheme-cream"],
+    dark: ["scheme-oxford"],
+  };
+
+  function schemeClasses(root: HTMLElement) {
+    const section = root.querySelector("section");
+    expect(section?.classList.contains("bg-scheme-background")).toBe(true);
+    return Array.from(section?.classList ?? []).filter((c) => c.startsWith("scheme-"));
+  }
+
+  for (const [name, renderSection] of Object.entries(SECTIONS)) {
+    it(`${name} defaults to the light scheme`, () => {
+      const { container } = render(renderSection());
+      expect(schemeClasses(container)).toEqual([]);
+    });
+
+    for (const scheme of ["light", "cream", "dark"] as const) {
+      it(`${name} applies the ${scheme} scheme`, () => {
+        const { container } = render(renderSection(scheme));
+        expect(schemeClasses(container)).toEqual(EXPECTED[scheme]);
+        expectSectionBasics(container);
+      });
+    }
+  }
 });
 
 describe("FAQSection", () => {

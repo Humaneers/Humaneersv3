@@ -6,6 +6,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+import { sectionBandClass, type SectionScheme } from "./scheme";
+
 export type FAQItem = {
   question: string;
   answer: string;
@@ -14,6 +16,7 @@ export type FAQItem = {
 export type FAQSectionProps = {
   heading: string;
   items: readonly FAQItem[];
+  scheme?: SectionScheme;
 };
 
 /**
@@ -27,9 +30,9 @@ export type FAQSectionProps = {
  * on the question's first line at both text-medium sizes. The primitive's
  * 2px nudge suits its own 14px text only.
  */
-export function FAQSection({ heading, items }: FAQSectionProps) {
+export function FAQSection({ heading, items, scheme }: FAQSectionProps) {
   return (
-    <section className="bg-scheme-background px-[5%] py-16 text-scheme-text md:py-24 lg:py-28">
+    <section className={sectionBandClass(scheme)}>
       <div className="section-container">
         <div className="mx-auto max-w-3xl">
           <h2 className="mb-12 text-center text-h2 font-bold md:mb-18 lg:mb-20">{heading}</h2>

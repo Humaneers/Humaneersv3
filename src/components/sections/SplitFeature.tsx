@@ -1,17 +1,19 @@
 // Relume layout71.
 import { CtaLinks, type CtaLinkList } from "./CtaLinks";
+import { sectionBandClass, type SectionScheme } from "./scheme";
 
 export type SplitFeatureProps = {
   heading: string;
   body: string;
   points?: readonly string[];
   ctas?: CtaLinkList;
+  scheme?: SectionScheme;
 };
 
 /** An h2 on one side; body text, then points and/or CTAs on the other. Stacks below md. */
-export function SplitFeature({ heading, body, points, ctas }: SplitFeatureProps) {
+export function SplitFeature({ heading, body, points, ctas, scheme }: SplitFeatureProps) {
   return (
-    <section className="bg-scheme-background px-[5%] py-16 text-scheme-text md:py-24 lg:py-28">
+    <section className={sectionBandClass(scheme)}>
       <div className="section-container grid grid-cols-1 items-start gap-5 md:grid-cols-2 md:gap-x-12 lg:gap-x-20">
         <h2 className="text-h2 font-bold">{heading}</h2>
         <div>

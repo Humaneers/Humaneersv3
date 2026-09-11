@@ -5,6 +5,7 @@ import { ChevronRight, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import type { CtaLink } from "./CtaLinks";
+import { sectionBandClass, type SectionScheme } from "./scheme";
 
 export type FeatureGridItem = {
   icon: LucideIcon;
@@ -19,6 +20,7 @@ export type FeatureGridProps = {
   items: readonly FeatureGridItem[];
   /** Columns from md up; one column below. Four drop to two between md and lg. */
   columns?: 2 | 3 | 4;
+  scheme?: SectionScheme;
 };
 
 // Whole class names, so Tailwind's scanner sees each one.
@@ -28,9 +30,9 @@ const COLUMNS = {
   4: "md:grid-cols-2 lg:grid-cols-4",
 } as const;
 
-export function FeatureGrid({ eyebrow, heading, items, columns = 3 }: FeatureGridProps) {
+export function FeatureGrid({ eyebrow, heading, items, columns = 3, scheme }: FeatureGridProps) {
   return (
-    <section className="bg-scheme-background px-[5%] py-16 text-scheme-text md:py-24 lg:py-28">
+    <section className={sectionBandClass(scheme)}>
       <div className="section-container">
         <div className="mb-12 max-w-3xl md:mb-18 lg:mb-20">
           {eyebrow && <p className="mb-3 font-semibold text-scheme-accent md:mb-4">{eyebrow}</p>}
