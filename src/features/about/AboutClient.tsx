@@ -28,9 +28,6 @@ export function AboutClient() {
             </p>
             <div className="flex flex-wrap gap-6 items-center text-sm font-medium text-brand-copper-light uppercase tracking-widest">
               <span className="flex items-center gap-2">
-                <CheckCircle2 size={16} /> 8 Year Track Record
-              </span>
-              <span className="flex items-center gap-2">
                 <CheckCircle2 size={16} /> Stealth Heritage
               </span>
               <span className="flex items-center gap-2">
@@ -121,6 +118,7 @@ export function AboutClient() {
             value="values"
             className="animate-in fade-in slide-in-from-bottom-4 duration-500"
           >
+            <h2 className="sr-only">Our Values</h2>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="bg-white p-10 rounded-2xl border-t-4 border-brand-copper shadow-xl hover:-translate-y-1 transition-all duration-300">
                 <Target className="w-12 h-12 text-brand-copper mb-6" />
@@ -157,7 +155,7 @@ export function AboutClient() {
             className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500"
           >
             <div className="max-w-4xl mx-auto">
-              <h3 className="text-2xl font-bold text-brand-oxford mb-6">Who We Serve</h3>
+              <h2 className="text-2xl font-bold text-brand-oxford mb-6">Who We Serve</h2>
               <ul className="space-y-4">
                 <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
                   <span className="font-medium text-brand-oxford">High-Growth Startups</span>
@@ -249,8 +247,7 @@ export function AboutClient() {
                   </p>
                   <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
                     <li>
-                      <strong>90% Remote Workforce:</strong> drastically reducing our Scope 3
-                      emissions from employee commuting.
+                      <strong>Remote Team:</strong> Our team works remotely by default.
                     </li>
                     <li>
                       <strong>Minimal Real Estate:</strong> We maintain a small HQ footprint in

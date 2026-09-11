@@ -126,10 +126,3 @@ export const SLA_WINDOW: Record<SlaLevel, string> = {
   standard: "no fixed time",
   capacity: "if we have capacity",
 };
-
-/**
- * Families Protected Nationwide. Two pages shipped "100+" and "200+" for the
- * same stat with no corpus behind either number; 100+ is the conservative
- * reading and is now the one number every page renders.
- */
-export const FAMILIES_PROTECTED = "100+";

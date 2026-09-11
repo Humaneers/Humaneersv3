@@ -49,7 +49,7 @@ export function ManagedITClient() {
     {
       icon: <Wifi className="w-6 h-6 text-brand-copper" />,
       title: "Remote & On-Site Support",
-      desc: "99% of issues fixed remotely. For the other 1%, we dispatch engineers to any US zip code.",
+      desc: "We fix issues remotely where we can. When an issue cannot be fixed remotely, we dispatch an engineer to any US zip code.",
       moreInfo: "Next-business-day dispatch.",
     },
     {
@@ -219,8 +219,8 @@ export function ManagedITClient() {
               </div>
               <h3 className="font-bold text-xl text-brand-oxford mb-3">Remote First</h3>
               <p className="text-brand-slate text-sm">
-                99% of tickets are resolved remotely via our secure agents. No waiting for a truck
-                roll.
+                We resolve tickets remotely through our secure agents whenever we can, so a fix does
+                not wait for a truck roll.
               </p>
             </div>
             <div className="bg-gray-50 p-8 rounded-2xl text-center">

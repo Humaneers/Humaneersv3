@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   Code,
   Image as ImageIcon,
@@ -12,6 +13,7 @@ import {
   Layout,
   ArrowRight,
 } from "lucide-react";
+import { routePaths } from "../../routes";
 
 export function ColophonClient() {
   return (
@@ -183,8 +185,15 @@ export function ColophonClient() {
                   </h3>
                   <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
                     <li>
-                      <strong>Status Visibility:</strong> We believe in showing our uptime. We
-                      provide transparency on system status and maintenance windows.
+                      <strong>Status Page:</strong> Our{" "}
+                      <Link
+                        href={routePaths.status}
+                        className="text-brand-copper-text underline hover:text-brand-copper-text-dark"
+                      >
+                        status page
+                      </Link>{" "}
+                      explains how to report an active problem and links to the uptime commitment in
+                      our Terms of Service. It does not show live monitoring yet.
                     </li>
                     <li>
                       <strong>Support Availability:</strong> We are available via multiple channels

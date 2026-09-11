@@ -96,17 +96,17 @@ export const navSections: NavSection[] = [
         description: "Digital cleanup and PR crisis management.",
         to: routePaths.crisisManagement,
       },
-      {
-        title: "Compliance Engine",
-        description: "Automated compliance tracking and reporting.",
-        to: routePaths.about,
-      },
     ],
   },
   {
     id: "resources",
     label: "Resources",
     items: [
+      {
+        title: "IT Glossary & Incident FAQ",
+        description: "A short IT glossary, an incident FAQ, and client links.",
+        to: routePaths.resources,
+      },
       {
         title: "Transparency & Colophon",
         description: "Our operating framework, open source credits, and ethics.",

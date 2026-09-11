@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 import { BookOpen, HelpCircle, Server } from "lucide-react";
 import { SLA_WINDOW } from "@/data/pricing";
@@ -32,7 +31,9 @@ export function ResourcesClient() {
       <section className="bg-brand-oxford text-white py-20 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-copper/10 skew-y-12 transform translate-x-20"></div>
         <div className="container mx-auto px-6 relative z-10 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Knowledge Base & Resources</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            Client Links, IT Glossary, and Incident FAQ
+          </h1>
           <p className="text-xl max-w-2xl mx-auto text-gray-300 font-light mb-8">
             Links for active clients, a short IT glossary, and answers to common incident response
             questions.
@@ -41,16 +42,14 @@ export function ResourcesClient() {
       </section>
 
       <div className="container mx-auto px-6 py-12">
-        {/* Operational Docs vs Strategic Content Split */}
         <div className="grid lg:grid-cols-2 gap-12 mb-20">
-          {/* Operational Documentation */}
+          {/* Client Links */}
           <div className="bg-white p-8 rounded-xl border-l-4 border-brand-oxford shadow-sm">
             <h2 className="text-2xl font-bold text-brand-oxford mb-6 flex items-center gap-3">
-              <Server className="text-brand-oxford" /> Operational Documentation
+              <Server className="text-brand-oxford" /> Client Links
             </h2>
             <p className="text-brand-slate mb-6">
-              Technical manuals and system status for active clients. These resources are maintained
-              by our engineering team.
+              System status and the support portal for active clients.
             </p>
             <div className="space-y-4">
               <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100">
@@ -79,19 +78,6 @@ export function ResourcesClient() {
                   Open Portal →
                 </a>
               </div>
-              <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100">
-                <div className="flex items-center gap-3">
-                  <BookOpen size={16} className="text-gray-400" />
-                  <span className="font-medium text-brand-oxford">Client Onboarding Manual</span>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="text-brand-copper-text hover:text-brand-copper-text-dark"
-                >
-                  Download PDF
-                </Button>
-              </div>
             </div>
           </div>
 
@@ -106,18 +92,11 @@ export function ResourcesClient() {
                   key={item.term}
                   className="border-b border-gray-700 pb-4 last:border-0 last:pb-0"
                 >
-                  <h4 className="font-bold text-brand-copper-light mb-1">{item.term}</h4>
+                  <h3 className="font-bold text-brand-copper-light mb-1">{item.term}</h3>
                   <p className="text-gray-300 text-sm leading-relaxed">{item.def}</p>
                 </div>
               ))}
             </div>
-            <Button
-              variant="outline"
-              className="w-full mt-8 border-gray-600 text-gray-300 bg-transparent hover:text-white hover:bg-white/10"
-              withArrow
-            >
-              View Full Glossary
-            </Button>
           </div>
         </div>
 
@@ -128,9 +107,9 @@ export function ResourcesClient() {
           </h2>
           <div className="space-y-4">
             <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-              <h4 className="font-bold text-brand-oxford mb-2">
+              <h3 className="font-bold text-brand-oxford mb-2">
                 What qualifies as a P1 Critical Incident?
-              </h4>
+              </h3>
               <p className="text-brand-slate text-sm">
                 Any outage affecting &gt;50% of users, a confirmed data breach, or active ransomware
                 attack. P1 incidents trigger our SLA response protocol, which targets a first
@@ -138,9 +117,9 @@ export function ResourcesClient() {
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-              <h4 className="font-bold text-brand-oxford mb-2">
+              <h3 className="font-bold text-brand-oxford mb-2">
                 How do I report a security vulnerability?
-              </h4>
+              </h3>
               <p className="text-brand-slate text-sm">
                 We maintain a responsible disclosure program. Please email security@humaneers.co
                 (PGP key available in Colophon) with details. We do not offer bounties but we
@@ -148,9 +127,9 @@ export function ResourcesClient() {
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-              <h4 className="font-bold text-brand-oxford mb-2">
+              <h3 className="font-bold text-brand-oxford mb-2">
                 What is your data retention policy on logs?
-              </h4>
+              </h3>
               <p className="text-brand-slate text-sm">
                 Security logs are retained for 365 days in cold storage (immutable). Operational
                 logs are cycled every 30 days.

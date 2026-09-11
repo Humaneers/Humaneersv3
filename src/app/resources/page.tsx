@@ -4,9 +4,9 @@ import { Suspense } from "react";
 import { PageLoader } from "../../components/PageLoader";
 
 export const metadata: Metadata = {
-  title: "Humaneers | Resources | IT Glossary & Incident FAQ",
+  title: "Humaneers | Resources | Client Links, IT Glossary & Incident FAQ",
   description:
-    "A short IT glossary, answers to common incident response questions, and links to system status and the Humaneers support portal.",
+    "Links to system status and the Humaneers support portal, a short IT glossary, and answers to common incident response questions.",
   alternates: {
     canonical: "/resources",
   },
