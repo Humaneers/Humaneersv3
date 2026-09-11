@@ -4,7 +4,7 @@ import { useState, useEffect, forwardRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { BookOpen } from "lucide-react";
+import { BookOpen, Phone } from "lucide-react";
 import { routePaths } from "../../routes";
 import { Button } from "../ui/button";
 import {
@@ -115,7 +115,7 @@ export function Header() {
       </a>
       <div className="container mx-auto px-6 flex items-center justify-between">
         <Link
-          className="flex items-center cursor-pointer shrink-0 mr-8 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-brand-copper"
+          className="flex items-center cursor-pointer shrink-0 mr-4 md:mr-8 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-brand-copper"
           href={routePaths.home}
         >
           <Image
@@ -273,7 +273,20 @@ export function Header() {
           </Button>
         </div>
 
-        <div className="md:hidden ml-auto">
+        {/* Below md the emergency line sits in the header, so a caller on a phone
+            reaches it on every page without scrolling. The number fits beside
+            the logo and menu from 359px; narrower, its text goes to screen
+            readers only and the icon stays. The logo's mr-4 below md makes
+            that room. */}
+        <div className="md:hidden ml-auto flex items-center gap-1">
+          <a
+            href="tel:+19284401505"
+            aria-label="Call (928) 440-1505"
+            className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-md px-1.5 py-2 text-sm font-semibold text-white hover:bg-white/10 hover:text-brand-copper-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-copper"
+          >
+            <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
+            <span className="max-[359px]:sr-only">(928) 440-1505</span>
+          </a>
           <MobileNav />
         </div>
       </div>
