@@ -26,7 +26,7 @@ const services = [
     id: "managed-it",
     icon: Shield,
     title: "Managed IT",
-    desc: "Cloud-native infrastructure that just works. No downtime, just uptime. We handle the tech so you can handle the business.",
+    desc: "Cloud-native infrastructure that just works. We handle the tech so you can handle the business.",
     link: routePaths.managedIt,
     details: ["24/7 US-Based Support", "Network Security", "Cloud Migration"],
   },

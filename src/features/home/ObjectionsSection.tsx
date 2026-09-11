@@ -19,7 +19,7 @@ const OBJECTIONS: readonly FAQItem[] = [
   {
     question: "“Switching sounds painful.”",
     answer:
-      "We migrate in phases with no downtime and clear handoffs. We handle the awkward breakups with old vendors for you.",
+      "We migrate in phases with clear handoffs. We handle the awkward breakups with old vendors for you.",
   },
 ];
 
