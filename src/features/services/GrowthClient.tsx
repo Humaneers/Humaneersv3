@@ -1,254 +1,115 @@
-"use client";
-
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import {
   BarChart3,
-  Target,
+  Hammer,
+  LayoutTemplate,
   Megaphone,
   PenTool,
-  Search,
-  LayoutTemplate,
-  CheckCircle2,
   Rocket,
-  LineChart,
-  Users,
+  Search,
+  Target,
 } from "lucide-react";
+
+import { CTASection } from "@/components/sections/CTASection";
+import { FeatureGrid } from "@/components/sections/FeatureGrid";
+import { PageHeader } from "@/components/sections/PageHeader";
+import { SplitFeature } from "@/components/sections/SplitFeature";
 import { routePaths } from "../../routes";
-import Image from "next/image";
+
+const SALES_HREF = `${routePaths.talkToSales}?interest=Fractional%20Growth`;
+
+const SERVICES = [
+  {
+    icon: Target,
+    heading: "Strategic positioning",
+    text: "We define who you are, who you serve and why you matter.",
+  },
+  {
+    icon: PenTool,
+    heading: "Visual identity and design",
+    text: "Branding that holds its own next to companies much larger than yours.",
+  },
+  {
+    icon: Search,
+    heading: "SEO and content strategy",
+    text: "Content that answers the questions your buyers are already searching for.",
+  },
+  {
+    icon: LayoutTemplate,
+    heading: "Website engineering",
+    text: "Fast websites built on modern stacks, React and Next.js among them.",
+  },
+  {
+    icon: Megaphone,
+    heading: "Go to market execution",
+    text: "Launch plans, automated email flows and paid media management.",
+  },
+  {
+    icon: BarChart3,
+    heading: "Revenue operations",
+    text: "Your CRM, marketing tools and sales data connected into one source of truth.",
+  },
+] as const;
+
+const METHOD = [
+  "Stop talking about features and start selling outcomes.",
+  "Design that builds trust before you say a word.",
+  "Automations that follow up on leads while you sleep.",
+] as const;
+
+const PROCESS = [
+  {
+    icon: Search,
+    heading: "Step one: diagnosis",
+    text: "We audit your brand, your traffic and your conversion funnels to find where they leak.",
+  },
+  {
+    icon: Hammer,
+    heading: "Step two: foundation",
+    text: "We fix the messaging and build the assets you need, the website, the decks and the collateral.",
+  },
+  {
+    icon: Rocket,
+    heading: "Step three: acceleration",
+    text: "We turn on the traffic sources and tune them against real revenue data.",
+  },
+] as const;
 
 export function GrowthClient() {
-  const router = useRouter();
-
-  const services = [
-    {
-      icon: <Target className="w-8 h-8 text-brand-copper" />,
-      title: "Strategic Positioning",
-      desc: "We define who you are, who you serve, and why you matter. No fluff, just market fit.",
-    },
-    {
-      icon: <PenTool className="w-8 h-8 text-brand-copper" />,
-      title: "Visual Identity & Design",
-      desc: "Enterprise-grade branding that makes you look 10x larger than you are.",
-    },
-    {
-      icon: <Search className="w-8 h-8 text-brand-copper" />,
-      title: "SEO & Content Strategy",
-      desc: "Dominate search results with content that educates rather than just sells.",
-    },
-    {
-      icon: <LayoutTemplate className="w-8 h-8 text-brand-copper" />,
-      title: "Website Engineering",
-      desc: "High-performance websites built on modern tech stacks (React/Next.js) for speed and conversion.",
-    },
-    {
-      icon: <Megaphone className="w-8 h-8 text-brand-copper" />,
-      title: "Go-to-Market Execution",
-      desc: "Launch plans, automated email flows, and paid media management.",
-    },
-    {
-      icon: <BarChart3 className="w-8 h-8 text-brand-copper" />,
-      title: "Revenue Operations",
-      desc: "Connecting your CRM, marketing tools, and sales data into a single source of truth.",
-    },
-  ];
-
-  const processSteps = [
-    {
-      number: "01",
-      title: "Diagnosis",
-      desc: "We audit your current brand, traffic, and conversion funnels to find the leaks.",
-    },
-    {
-      number: "02",
-      title: "Foundation",
-      desc: "We fix the messaging and build the assets (website, decks, collateral) you need.",
-    },
-    {
-      number: "03",
-      title: "Acceleration",
-      desc: "We turn on the traffic sources and optimize based on real revenue data.",
-    },
-  ];
-
   return (
-    <div className="bg-white">
-      {/* Hero */}
-      <section className="bg-brand-oxford text-white py-24 relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80"
-            alt="Planning"
-            fill
-            className="object-cover opacity-10 mix-blend-overlay"
-            priority
-          />
-        </div>
-        <div className="container mx-auto px-6 relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 bg-brand-oxford-muted/50 border border-brand-copper/30 rounded-full px-4 py-1.5 mb-8 backdrop-blur-sm">
-            <span className="flex h-2 w-2 rounded-full bg-brand-copper animate-pulse"></span>
-            <span className="text-sm font-medium text-brand-cream tracking-wide">
-              Strategy & Execution
-            </span>
-          </div>
-          <h1 className="text-4xl md:text-7xl font-bold mb-6 leading-tight">
-            Make Your Brand <br />
-            <span className="text-brand-copper">Impossible to Ignore.</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-10">
-            We bring enterprise-level marketing leadership to small businesses. No agencies. No
-            junior account managers. Just senior strategy.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              onClick={() => router.push(`${routePaths.pricing}?mode=business`)}
-              className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-lg px-8 py-6 h-auto rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
-              withArrow
-            >
-              Book a Strategy Call
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => router.push(routePaths.pricing)}
-              className="border-white/30 text-white bg-transparent hover:bg-white/10 text-lg px-8 py-6 h-auto rounded-full backdrop-blur-sm"
-            >
-              View Plans
-            </Button>
-          </div>
-          <div className="mt-12 flex items-center justify-center gap-8 text-sm text-gray-400 font-medium">
-            <div className="flex items-center gap-2">
-              <Users className="w-5 h-5 text-brand-copper" /> Fractional Leadership
-            </div>
-            <div className="flex items-center gap-2">
-              <LineChart className="w-5 h-5 text-brand-copper" /> Data-Driven
-            </div>
-            <div className="flex items-center gap-2">
-              <Rocket className="w-5 h-5 text-brand-copper" /> Full-Funnel
-            </div>
-          </div>
-        </div>
-      </section>
+    <>
+      <PageHeader
+        align="center"
+        scheme="dark"
+        heading="Make your brand impossible to ignore."
+        description="We bring senior marketing leadership to small businesses. No agencies and no junior account managers."
+        ctas={[
+          { label: "See business plans", href: `${routePaths.pricing}?mode=business` },
+          { label: "Book a strategy call", href: SALES_HREF },
+        ]}
+      />
 
-      {/* The Problem / Solution */}
-      <section className="py-24 bg-brand-cream">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center mb-20">
-            <h2 className="text-brand-copper-text font-bold tracking-widest uppercase mb-4 text-sm">
-              The Gap
-            </h2>
-            <h3 className="text-3xl md:text-4xl font-bold text-brand-oxford mb-6">
-              You're too big for DIY, but too small for a CMO.
-            </h3>
-            <p className="text-brand-slate text-lg leading-relaxed">
-              Hiring a full-time Chief Marketing Officer costs $250k+. Hiring an agency gets you a
-              junior team juggling 20 other clients. We provide a third option:
-              <strong> Senior Fractional Leadership </strong> for{" "}
-              <span className="text-brand-copper-text font-bold">1/10th the cost</span>.
-            </p>
-          </div>
+      <FeatureGrid scheme="cream" heading="What we do" items={SERVICES} />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((s, i) => (
-              <div
-                key={i}
-                className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-brand-copper/10 group"
-              >
-                <div className="mb-6 bg-brand-cream w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  {s.icon}
-                </div>
-                <h3 className="text-xl font-bold text-brand-oxford mb-3">{s.title}</h3>
-                <p className="text-brand-slate leading-relaxed text-sm">{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <SplitFeature
+        heading="Too big to do it yourself, too small for a full time CMO."
+        body="A full time marketing executive is a salaried hire with a search to run first. An agency gives you a junior team working across a roster of other clients. We are the third option: senior fractional leadership, bought as a service."
+      />
 
-      {/* Americanization / Concept */}
-      <section className="py-24 bg-white relative overflow-hidden">
-        <div className="absolute right-0 top-1/4 w-1/2 h-full bg-gray-50 -skew-x-12 opacity-50 z-0 pointer-events-none" />
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="flex flex-col md:flex-row items-center gap-16">
-            <div className="md:w-1/2">
-              <div className="inline-block bg-brand-copper/10 text-brand-copper-text font-bold px-4 py-2 rounded-full text-sm mb-6">
-                Our Methodology
-              </div>
-              <h2 className="text-3xl md:text-5xl font-bold text-brand-oxford mb-6 leading-tight">
-                The "Americanization" of Enterprise Tech.
-              </h2>
-              <p className="text-brand-slate text-lg mb-6 leading-relaxed">
-                We borrow the playbook used by Silicon Valley giants—clean design, clear messaging,
-                and product-led growth—and apply it to service businesses.
-              </p>
-              <div className="space-y-4">
-                {[
-                  "Stop talking about features; start selling outcomes.",
-                  "Design that builds trust before you say a word.",
-                  "Automations that nurture leads while you sleep.",
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-6 h-6 text-brand-copper shrink-0 mt-0.5" />
-                    <span className="text-brand-oxford font-medium">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="md:w-1/2">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
-                <Image
-                  src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80"
-                  alt="Strategic Planning"
-                  width={600}
-                  height={400}
-                  className="w-full h-auto"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <SplitFeature
+        scheme="cream"
+        heading={'The "Americanization" of enterprise tech.'}
+        body="We borrow the playbook the large technology companies use, which is clean design, clear messaging and product led growth, and we apply it to service businesses."
+        points={METHOD}
+      />
 
-      {/* Process */}
-      <section className="py-24 bg-brand-oxford text-white">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center">How We Scale You</h2>
-          <div className="grid md:grid-cols-3 gap-12 relative">
-            <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-brand-copper to-transparent opacity-30"></div>
+      <FeatureGrid scheme="dark" heading="How we scale you" items={PROCESS} />
 
-            {processSteps.map((step, i) => (
-              <div key={i} className="relative z-10 text-center group">
-                <div className="w-24 h-24 bg-brand-oxford border-4 border-brand-copper rounded-full flex items-center justify-center mx-auto mb-8 text-3xl font-bold shadow-[0_0_20px_rgba(184,115,51,0.3)] group-hover:bg-brand-copper group-hover:text-white transition-colors duration-300">
-                  {step.number}
-                </div>
-                <h3 className="text-2xl font-bold mb-4">{step.title}</h3>
-                <p className="text-gray-400 leading-relaxed px-4">{step.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-24 bg-brand-cream relative">
-        <div className="container mx-auto px-6 max-w-4xl text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-brand-oxford mb-8">
-            Stop guessing. Start growing.
-          </h2>
-          <p className="text-xl text-brand-slate mb-10">
-            Ready to professionalize your brand? Let's audit your current setup and find the
-            low-hanging fruit.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              onClick={() => router.push(`${routePaths.talkToSales}?interest=Fractional%20Growth`)}
-              className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-xl px-10 py-8 h-auto rounded-full shadow-xl hover:shadow-2xl transition-all"
-              withArrow
-            >
-              Calculate Your Savings
-            </Button>
-          </div>
-        </div>
-      </section>
-    </div>
+      <CTASection
+        scheme="cream"
+        heading="Stop guessing. Start growing."
+        text="Let us audit your current setup and find what is worth fixing first."
+        ctas={[{ label: "Book a strategy call", href: SALES_HREF }]}
+      />
+    </>
   );
 }
