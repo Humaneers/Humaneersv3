@@ -366,21 +366,6 @@ export function ColophonClient() {
             </li>
           </ul>
         </div>
-
-        <div>
-          <h3>Photography Credits</h3>
-          <p>Visuals courtesy of the talented community at Unsplash.</p>
-          <dl>
-            <div>
-              <dt>Tempe Morning</dt>
-              <dd>
-                <a href="https://unsplash.com" target="_blank" rel="noreferrer">
-                  Unsplash
-                </a>
-              </dd>
-            </div>
-          </dl>
-        </div>
       </ProseSection>
     </>
   );
