@@ -84,7 +84,7 @@ export const navSections: NavSection[] = [
       {
         title: "Cybersecurity Center",
         description: "Enterprise endpoint protection and monitoring.",
-        to: routePaths.familyProtection,
+        to: routePaths.managedIt,
       },
       {
         title: "Strategic Consulting",
@@ -179,7 +179,7 @@ export const footerSections = [
     items: [
       { label: "Managed IT", to: routePaths.managedIt },
       { label: "Infrastructure", to: routePaths.managedIt },
-      { label: "Cybersecurity", to: routePaths.familyProtection },
+      { label: "Cybersecurity", to: routePaths.managedIt },
       { label: "Fractional Leadership", to: routePaths.fractionalLeadership },
       { label: "Crisis Management", to: routePaths.crisisManagement },
     ],
