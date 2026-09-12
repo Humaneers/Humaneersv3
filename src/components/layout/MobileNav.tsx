@@ -72,7 +72,7 @@ export function MobileNav() {
         <Button
           variant="ghost"
           size="icon"
-          className="md:hidden text-white hover:text-brand-copper-light hover:bg-white/10"
+          className="lg:hidden text-white hover:text-brand-copper-light hover:bg-white/10"
           aria-label="Toggle navigation menu"
         >
           <Menu className="h-6 w-6" aria-hidden="true" />

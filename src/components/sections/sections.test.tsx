@@ -1,13 +1,19 @@
 // claims-guard-allow-file: relume-default-content this test lists Relume's placeholder strings to prove no section renders them
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Laptop, LifeBuoy, ShieldCheck } from "lucide-react";
+import { Laptop, LifeBuoy, Mail, Phone, ShieldCheck } from "lucide-react";
 
+import { ActionCards, type ActionCardsProps } from "./ActionCards";
+import { ContactSection, type ContactItem } from "./ContactSection";
 import { CTASection, type CTASectionProps } from "./CTASection";
+import { FormSection } from "./FormSection";
 import { FAQSection } from "./FAQSection";
 import { FeatureGrid, type FeatureGridProps } from "./FeatureGrid";
 import { PageHeader, type PageHeaderProps } from "./PageHeader";
+import { PricingComparison, type PricingComparisonProps } from "./PricingComparison";
+import { PricingOffer, type PricingOfferProps } from "./PricingOffer";
+import { PricingPlans, type PricingPlan, type PricingPlansProps } from "./PricingPlans";
 import { ProseSection } from "./ProseSection";
 import type { SectionScheme } from "./scheme";
 import { SplitFeature } from "./SplitFeature";
@@ -43,7 +49,8 @@ function expectSectionBasics(root: HTMLElement) {
     expect(heading.parentElement?.closest(HEADING_SELECTOR) ?? null).toBeNull();
   }
   for (const link of Array.from(root.querySelectorAll("a"))) {
-    expect(link.getAttribute("href")).toMatch(/^\//);
+    // A route, or a phone or email channel (ContactSection, FormSection).
+    expect(link.getAttribute("href")).toMatch(/^(\/|tel:|mailto:)/);
     expect(link.textContent?.trim()).not.toBe("");
     expect(link.closest("button")).toBeNull();
     expect(link.querySelector("button")).toBeNull();
@@ -249,6 +256,206 @@ describe("ProseSection", () => {
   });
 });
 
+const WAITLIST = { label: "Join the waitlist", href: "/talk-to-sales" };
+
+function planFixture(name: string, recommended = false): PricingPlan {
+  return {
+    name,
+    price: "$10",
+    priceUnit: "base / mo",
+    priceDetail: "+ $2 / additional user / mo",
+    footnoteMark: true,
+    description: `What the ${name} option covers.`,
+    features: ["Remote help", "Device updates"],
+    links: [{ label: `${name} details`, href: "/managed-it" }],
+    cta: WAITLIST,
+    recommended,
+  };
+}
+
+const PLANS_TABS: PricingPlansProps["tabs"] = [
+  {
+    value: "teams",
+    label: "Teams",
+    plans: [planFixture("Starter"), planFixture("Team", true)],
+    footnote: "* The base price includes the users listed on each option.",
+  },
+  {
+    value: "homes",
+    label: "Homes",
+    note: { title: "How home pricing works:", text: "One flat fee for the household." },
+    plans: [planFixture("Home")],
+  },
+];
+
+const COMPARISON_CONTENT = {
+  heading: "Compare options",
+  plans: ["Starter", "Team"],
+  categories: [
+    {
+      title: "Support",
+      features: [
+        {
+          name: "Remote help",
+          description: "Help by phone and screen share.",
+          values: { Starter: true, Team: true },
+        },
+        { name: "On-site visits", values: { Starter: false, Team: "Included" } },
+      ],
+    },
+    {
+      title: "Security",
+      features: [{ name: "Device updates", values: { Starter: "Billable", Team: true } }],
+    },
+  ],
+} satisfies PricingComparisonProps;
+
+const OFFER_CONTENT = {
+  heading: "Hourly help",
+  description: "Buy a block of hours and use them when you need them.",
+  points: [
+    { heading: "Use them for anything", text: "Support, planning or a one-off project." },
+    { heading: "Keep them", text: "Hours stay on your account until you use them." },
+  ],
+  price: "$50",
+  priceUnit: "/hr",
+  priceDetail: "Sold in 5-hour blocks",
+  fineprint: "Subject to the Terms of Service.",
+  cta: WAITLIST,
+} satisfies PricingOfferProps;
+
+describe("PricingPlans", () => {
+  function renderPlans(value = "teams", onValueChange = vi.fn()) {
+    const utils = render(
+      <PricingPlans
+        eyebrow="Waitlist open"
+        heading="Plans and rates"
+        description="Rates for each kind of client."
+        tabsLabel="Who the plans are for"
+        tabs={PLANS_TABS}
+        value={value}
+        onValueChange={onValueChange}
+        notes={["A user is a person with an email account."]}
+      />
+    );
+    return { ...utils, onValueChange };
+  }
+
+  it("renders an h2, a named tab list and the selected tab's plans as h3s", () => {
+    const { container } = renderPlans();
+    expect(headingLevels(container)).toEqual([2, 3, 3]);
+    expect(screen.getByRole("tablist", { name: "Who the plans are for" })).toBeTruthy();
+    const tabs = screen.getAllByRole("tab");
+    expect(tabs.map((tab) => tab.textContent)).toEqual(["Teams", "Homes"]);
+    expect(tabs[0].getAttribute("aria-selected")).toBe("true");
+    expect(tabs[1].getAttribute("aria-selected")).toBe("false");
+    expect(screen.queryByRole("heading", { name: "Home" })).toBeNull();
+    // The only buttons are the tabs: every plan CTA is a link.
+    expect(container.querySelectorAll("button")).toHaveLength(2);
+    expectSectionBasics(container);
+  });
+
+  it("gives each plan a link CTA named for its plan, and its detail links", () => {
+    const { container } = renderPlans();
+    for (const name of ["Starter", "Team"]) {
+      const cta = screen.getByRole("link", { name: `Join the waitlist for ${name}` });
+      expect(cta.tagName).toBe("A");
+      expect(cta.getAttribute("href")).toBe("/talk-to-sales");
+    }
+    expectCtaLinks(container, [{ label: "Starter details", href: "/managed-it" }]);
+  });
+
+  it("shows the price, the footnote and the notes as visible text, the asterisk hidden from speech", () => {
+    const { container } = renderPlans();
+    expect(screen.getAllByText("$10")).toHaveLength(2);
+    expect(screen.getByText(PLANS_TABS[0].footnote!)).toBeTruthy();
+    expect(screen.getByText("A user is a person with an email account.")).toBeTruthy();
+    const marks = Array.from(container.querySelectorAll('[aria-hidden="true"]')).filter(
+      (el) => el.textContent === "*"
+    );
+    expect(marks).toHaveLength(2);
+  });
+
+  it("reports a new tab from the keyboard and from a click", async () => {
+    const user = userEvent.setup();
+    const { onValueChange } = renderPlans();
+    await user.tab();
+    expect(document.activeElement).toBe(screen.getByRole("tab", { name: "Teams" }));
+    await user.keyboard("{ArrowRight}");
+    expect(onValueChange).toHaveBeenLastCalledWith("homes");
+
+    onValueChange.mockClear();
+    cleanup();
+    const second = renderPlans();
+    await user.click(screen.getByRole("tab", { name: "Homes" }));
+    expect(second.onValueChange).toHaveBeenLastCalledWith("homes");
+  });
+
+  it("renders the tab it is given, with that tab's note", () => {
+    const { container } = renderPlans("homes");
+    expect(screen.getByRole("heading", { level: 3 }).textContent).toBe("Home");
+    expect(screen.getByText("How home pricing works:")).toBeTruthy();
+    expect(screen.getByRole("tab", { name: "Homes" }).getAttribute("aria-selected")).toBe("true");
+    expect(container.querySelector(".max-w-md")).not.toBeNull();
+    expectSectionBasics(container);
+  });
+});
+
+describe("PricingComparison", () => {
+  it("renders an h2, a table named by it and an h3 per category", () => {
+    const { container } = render(<PricingComparison {...COMPARISON_CONTENT} />);
+    expect(headingLevels(container)).toEqual([2, 3, 3]);
+    expect(screen.getByRole("table", { name: "Compare options" })).toBeTruthy();
+    expect(screen.getAllByRole("columnheader").map((th) => th.textContent)).toEqual([
+      "Feature",
+      "Starter",
+      "Team",
+    ]);
+    expect(container.querySelectorAll("button, a")).toHaveLength(0);
+    expectSectionBasics(container);
+  });
+
+  it("gives each feature a row header with its visible description and one value per plan", () => {
+    render(<PricingComparison {...COMPARISON_CONTENT} />);
+    const rowHeaders = screen.getAllByRole("rowheader");
+    expect(rowHeaders.map((rh) => rh.textContent)).toEqual([
+      "Remote help Help by phone and screen share.",
+      "On-site visits",
+      "Device updates",
+    ]);
+    const valuesFor = (feature: string) =>
+      within(screen.getByRole("rowheader", { name: new RegExp(`^${feature}`) }).parentElement!)
+        .getAllByRole("cell")
+        .map((cell) => cell.textContent);
+    expect(valuesFor("Remote help")).toEqual(["Included", "Included"]);
+    expect(valuesFor("On-site visits")).toEqual(["Not included", "Included"]);
+    expect(valuesFor("Device updates")).toEqual(["Billable", "Included"]);
+  });
+
+  it("hides the check and cross icons from speech and sets the column count", () => {
+    const { container } = render(
+      <PricingComparison {...COMPARISON_CONTENT} plans={["Starter", "Team", "Office", "Group"]} />
+    );
+    container.querySelectorAll("svg").forEach((svg) => {
+      expect(svg.getAttribute("aria-hidden")).toBe("true");
+    });
+    expect(container.querySelector(".grid-cols-4")).not.toBeNull();
+  });
+});
+
+describe("PricingOffer", () => {
+  it("renders an h2, an h3 per point, the price as text and one link CTA", () => {
+    const { container } = render(<PricingOffer {...OFFER_CONTENT} />);
+    expect(headingLevels(container)).toEqual([2, 3, 3]);
+    expect(screen.getByText("$50").tagName).toBe("SPAN");
+    expect(screen.getByText("Sold in 5-hour blocks")).toBeTruthy();
+    expect(screen.getByText("Subject to the Terms of Service.")).toBeTruthy();
+    expectCtaLinks(container, [WAITLIST]);
+    expect(container.querySelectorAll("button")).toHaveLength(0);
+    expectSectionBasics(container);
+  });
+});
+
 describe("section schemes", () => {
   const SECTIONS: Record<string, (scheme?: SectionScheme) => React.ReactElement> = {
     PageHeader: (scheme) => (
@@ -284,6 +491,18 @@ describe("section schemes", () => {
         scheme={scheme}
       />
     ),
+    PricingPlans: (scheme) => (
+      <PricingPlans
+        heading="Plans and rates"
+        tabsLabel="Who the plans are for"
+        tabs={PLANS_TABS}
+        value="teams"
+        onValueChange={() => {}}
+        scheme={scheme}
+      />
+    ),
+    PricingComparison: (scheme) => <PricingComparison {...COMPARISON_CONTENT} scheme={scheme} />,
+    PricingOffer: (scheme) => <PricingOffer {...OFFER_CONTENT} scheme={scheme} />,
     ProseSection: (scheme) => (
       <ProseSection heading="How we work" scheme={scheme}>
         <p>We agree the next step with you.</p>
@@ -401,5 +620,217 @@ describe("prop types", () => {
       image: { src: "/og-image.jpg", width: 1, height: 1 },
     };
     expect([tooManyCtas, centeredWithImage, imageWithoutAlt]).toHaveLength(3);
+  });
+});
+
+// Sections added in cut 4: ContactSection (contact19), ActionCards (layout364)
+// and FormSection (contact5).
+
+const CALL = { label: "(928) 440-1505", href: "tel:+19284401505" } as const;
+const HELLO = { label: "hello@humaneers.dev", href: "mailto:hello@humaneers.dev" } as const;
+
+function sectionSchemeClasses(root: HTMLElement) {
+  const section = root.querySelector("section");
+  expect(section?.classList.contains("bg-scheme-background")).toBe(true);
+  return Array.from(section?.classList ?? []).filter((c) => c.startsWith("scheme-"));
+}
+
+describe("ContactSection", () => {
+  const items: ContactItem[] = [
+    {
+      icon: Mail,
+      heading: "Email",
+      text: "For general questions, email us directly.",
+      link: HELLO,
+    },
+    { icon: Phone, heading: "Phone", link: CALL },
+    { icon: LifeBuoy, heading: "Office", text: "Tempe, Arizona" },
+  ];
+
+  it("renders an h2, an h3 per item, decorative icons and underlined channel links", () => {
+    const { container } = render(
+      <ContactSection
+        eyebrow="Contact"
+        heading="Get in touch"
+        description="Pick the channel that suits you."
+        items={items}
+      />
+    );
+    expect(headingLevels(container)).toEqual([2, 3, 3, 3]);
+    expect(screen.getByText("Contact").tagName).toBe("P");
+    expect(screen.getByText("Pick the channel that suits you.")).toBeTruthy();
+    container
+      .querySelectorAll("svg")
+      .forEach((svg) => expect(svg.getAttribute("aria-hidden")).toBe("true"));
+    for (const channel of [CALL, HELLO]) {
+      const link = screen.getByRole("link", { name: channel.label });
+      expect(link.getAttribute("href")).toBe(channel.href);
+      expect(link.className).toContain("underline");
+    }
+    // The office has text and no link.
+    expect(container.querySelectorAll("a")).toHaveLength(2);
+    expect(container.querySelectorAll("button")).toHaveLength(0);
+    expect(container.querySelector(".md\\:grid-cols-3")).not.toBeNull();
+    expectSectionBasics(container);
+  });
+
+  it("leaves out the eyebrow and description when none is given and sets two columns", () => {
+    const { container } = render(
+      <ContactSection heading="Reach us directly" items={items.slice(0, 2)} columns={2} />
+    );
+    expect(headingLevels(container)).toEqual([2, 3, 3]);
+    expect(container.querySelectorAll("p.text-scheme-accent")).toHaveLength(0);
+    expect(container.querySelector(".md\\:grid-cols-2")).not.toBeNull();
+    expectSectionBasics(container);
+  });
+});
+
+describe("ActionCards", () => {
+  it("renders an h2, an h3 per card, a route action as a link and an in-page action as a button", async () => {
+    const user = userEvent.setup();
+    const onClick = vi.fn();
+    const cards: ActionCardsProps["cards"] = [
+      {
+        icon: LifeBuoy,
+        heading: "Existing clients",
+        text: "Send us a maintenance request.",
+        action: { label: "Open a request", onClick },
+      },
+      {
+        icon: Laptop,
+        heading: "New clients",
+        text: "Tell us about your setup.",
+        action: TALK,
+      },
+    ];
+    const { container } = render(
+      <ActionCards
+        heading="How can we help?"
+        description="Pick the path that fits."
+        cards={cards}
+      />
+    );
+    expect(headingLevels(container)).toEqual([2, 3, 3]);
+    expectCtaLinks(container, [TALK]);
+
+    const button = screen.getByRole("button", { name: "Open a request" });
+    expect(button.tagName).toBe("BUTTON");
+    // type="button": the action runs in place and never submits a surrounding form.
+    expect(button.getAttribute("type")).toBe("button");
+    await user.click(button);
+    expect(onClick).toHaveBeenCalledTimes(1);
+
+    container
+      .querySelectorAll("svg")
+      .forEach((svg) => expect(svg.getAttribute("aria-hidden")).toBe("true"));
+    expectSectionBasics(container);
+  });
+});
+
+describe("FormSection", () => {
+  it("renders an h2, the icon rows and the form it is given, untouched", () => {
+    const { container } = render(
+      <FormSection
+        eyebrow="Waitlist"
+        heading="Join the waitlist"
+        description="A person reads every entry."
+        details={[
+          { icon: Phone, label: CALL.label, href: CALL.href },
+          { icon: ShieldCheck, label: "US-based team" },
+        ]}
+      >
+        <form aria-label="Waitlist">
+          <label htmlFor="test-email">Email</label>
+          <input id="test-email" name="email" />
+          <button type="submit">Join</button>
+        </form>
+      </FormSection>
+    );
+    expect(headingLevels(container)).toEqual([2]);
+    expect(screen.getByText("Waitlist", { selector: "p" })).toBeTruthy();
+    const call = screen.getByRole("link", { name: CALL.label });
+    expect(call.getAttribute("href")).toBe(CALL.href);
+    expect(call.className).toContain("underline");
+    expect(screen.getByText("US-based team").closest("a")).toBeNull();
+    expect(screen.getAllByRole("listitem")).toHaveLength(2);
+
+    const form = screen.getByRole("form", { name: "Waitlist" });
+    expect(within(form).getByLabelText("Email").getAttribute("name")).toBe("email");
+    expect(within(form).getByRole("button", { name: "Join" }).getAttribute("type")).toBe("submit");
+    expectSectionBasics(container);
+  });
+
+  it("renders without details", () => {
+    const { container } = render(
+      <FormSection heading="Join the waitlist" description="A person reads every entry.">
+        <p>Form</p>
+      </FormSection>
+    );
+    expect(container.querySelector("ul")).toBeNull();
+    expect(headingLevels(container)).toEqual([2]);
+  });
+});
+
+describe("cut 4 section schemes", () => {
+  const SECTIONS: Record<string, (scheme?: SectionScheme) => React.ReactElement> = {
+    ContactSection: (scheme) => (
+      <ContactSection
+        heading="Get in touch"
+        items={[{ icon: Phone, heading: "Phone", link: CALL }]}
+        scheme={scheme}
+      />
+    ),
+    ActionCards: (scheme) => (
+      <ActionCards
+        heading="How can we help?"
+        cards={[{ icon: Laptop, heading: "New clients", text: "Tell us.", action: TALK }]}
+        scheme={scheme}
+      />
+    ),
+    FormSection: (scheme) => (
+      <FormSection heading="Join the waitlist" description="A person reads it." scheme={scheme}>
+        <p>Form</p>
+      </FormSection>
+    ),
+  };
+
+  const EXPECTED: Record<SectionScheme, string[]> = {
+    light: [],
+    cream: ["scheme-cream"],
+    dark: ["scheme-oxford"],
+  };
+
+  for (const [name, renderSection] of Object.entries(SECTIONS)) {
+    it(`${name} defaults to the light scheme`, () => {
+      const { container } = render(renderSection());
+      expect(sectionSchemeClasses(container)).toEqual([]);
+    });
+
+    for (const scheme of ["light", "cream", "dark"] as const) {
+      it(`${name} applies the ${scheme} scheme`, () => {
+        const { container } = render(renderSection(scheme));
+        expect(sectionSchemeClasses(container)).toEqual(EXPECTED[scheme]);
+        expectSectionBasics(container);
+      });
+    }
+  }
+});
+
+describe("cut 4 prop types", () => {
+  it("reject a route as a contact channel and a card with no action", () => {
+    const routeAsChannel: ContactItem = {
+      icon: Phone,
+      heading: "Phone",
+      // @ts-expect-error a contact link is a tel: or mailto: channel, not a route
+      link: { label: "Contact", href: "/contact" },
+    };
+    const cardWithoutAction: ActionCardsProps["cards"][number] = {
+      icon: Laptop,
+      heading: "New clients",
+      text: "Tell us.",
+      // @ts-expect-error every card carries one action
+      action: undefined,
+    };
+    expect([routeAsChannel, cardWithoutAction]).toHaveLength(2);
   });
 });

@@ -126,3 +126,20 @@ export const SLA_WINDOW: Record<SlaLevel, string> = {
   standard: "no fixed time",
   capacity: "if we have capacity",
 };
+
+/** Incident priorities, P1 (critical) to P4 (low), as the Terms define them. */
+export type IncidentPriority = "P1" | "P2" | "P3" | "P4";
+
+/**
+ * Initial response window per incident priority. This mirrors section 3.2
+ * (Support Response Times) of the Terms of Service in
+ * src/features/legal/TermsClient.tsx, and the Terms govern: if the two ever
+ * disagree, the Terms are right and this map is the one to fix. It is keyed
+ * by incident, not by tier; SLA_WINDOW above is the per-tier promise.
+ */
+export const INCIDENT_RESPONSE_WINDOW: Record<IncidentPriority, string> = {
+  P1: "15 minutes",
+  P2: "1 hour",
+  P3: "4 hours",
+  P4: "24 hours",
+};
