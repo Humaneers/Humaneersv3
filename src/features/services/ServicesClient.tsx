@@ -1,252 +1,123 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import {
-  Shield,
-  BarChart3,
-  Users,
-  Server,
-  CheckCircle2,
-  Layers,
   AlertTriangle,
-  Heart,
+  BarChart3,
   Building2,
+  Heart,
+  Lock,
+  MapPin,
+  Server,
+  Shield,
+  Unlock,
+  Users,
 } from "lucide-react";
-import { routePaths } from "../../routes";
-import Image from "next/image";
+
+import { CTASection } from "@/components/sections/CTASection";
+import { FeatureGrid } from "@/components/sections/FeatureGrid";
+import { PageHeader } from "@/components/sections/PageHeader";
 import { getTier } from "@/data/pricing";
 
+import { routePaths } from "../../routes";
+
+const LEARN_MORE = "Learn more";
+
+const SERVICES = [
+  {
+    icon: Server,
+    heading: "Managed IT",
+    text: "Enterprise infrastructure with a craftsman touch. US-based helpdesk, hybrid and cloud infrastructure, and proactive security monitoring.",
+    link: { label: LEARN_MORE, href: routePaths.managedIt },
+  },
+  {
+    icon: BarChart3,
+    heading: "Brand Growth",
+    text: "US-ready brand and go-to-market strategy. Brand localization, visual identity refinement, and go-to-market planning.",
+    link: { label: LEARN_MORE, href: routePaths.growth },
+  },
+  {
+    icon: Shield,
+    heading: "Family Protection",
+    text: "Secure home-office tech for families and execs. Home network segmentation, content filtering, and dark web monitoring.",
+    link: { label: LEARN_MORE, href: routePaths.familyProtection },
+  },
+  {
+    icon: Users,
+    heading: "Fractional Leadership",
+    text: "vCIO and vCMO strategy without the full-time cost. Quarterly business reviews, budgeting and procurement, and board representation.",
+    link: { label: LEARN_MORE, href: routePaths.fractionalLeadership },
+  },
+  {
+    icon: AlertTriangle,
+    heading: "Reputation Management",
+    text: "Digital scrubbing and reputation defense. SEO suppression, digital scrubbing, and social media lockdown.",
+    link: { label: LEARN_MORE, href: routePaths.crisisManagement },
+  },
+  {
+    icon: Heart,
+    heading: "Senior Care",
+    text: "Dignified tech support and fraud protection for seniors. Fraud air-gapping, device simplification, and red button support.",
+    link: { label: LEARN_MORE, href: routePaths.seniorCare },
+  },
+  {
+    icon: Building2,
+    heading: "Nonprofit IT",
+    text: "Mission-focused IT at nonprofit rates. Grant-ready policies, donor data protection, and at-cost licensing.",
+    link: { label: LEARN_MORE, href: routePaths.nonProfits },
+  },
+] as const;
+
+const HOW_WE_WORK = [
+  {
+    icon: MapPin,
+    heading: "US-Based",
+    text: "No offshore call centers. Every engineer and strategist is local.",
+  },
+  {
+    icon: Lock,
+    heading: "Encrypted",
+    text: "Enterprise-grade security controls applied to every client, big or small.",
+  },
+  {
+    icon: Unlock,
+    heading: "No Vendor Lock-in",
+    text: "We build on standard stacks (Microsoft, AWS) so you own your infrastructure.",
+  },
+] as const;
+
 export function ServicesClient() {
-  const router = useRouter();
   const essentialsTier = getTier("Core");
 
-  const initialServices = [
-    {
-      id: "managed-it",
-      title: "Managed IT",
-      icon: <Server className="w-8 h-8 text-white" />,
-      image:
-        "https://images.unsplash.com/photo-1591238372358-dbbb7a59f22c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYW5hZ2VkJTIwaXQlMjBzZXJ2ZXIlMjByb29tJTIwZW5naW5lZXJ8ZW58MXx8fHwxNzY2OTUyMTUxfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      description: "Enterprise infrastructure with a craftsman touch.",
-      features: [
-        "100% US-Based Helpdesk",
-        "Hybrid & Cloud Infrastructure",
-        "Proactive Security Monitoring",
-      ],
-      link: routePaths.managedIt,
-      color: "bg-brand-oxford",
-    },
-    {
-      id: "growth",
-      title: "Brand Growth",
-      icon: <BarChart3 className="w-8 h-8 text-white" />,
-      image:
-        "https://images.unsplash.com/photo-1758873272540-439a105db676?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMGJyYW5kaW5nJTIwbWVldGluZyUyMG9mZmljZXxlbnwxfHx8fDE3NjY5NTIxNTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      description: "US-ready brand and go-to-market strategy.",
-      features: ["Brand Localization", "Visual Identity Refinement", "Go-To-Market Planning"],
-      link: routePaths.growth,
-      color: "bg-brand-copper",
-    },
-    {
-      id: "family-protection",
-      title: "Family Protection",
-      icon: <Shield className="w-8 h-8 text-white" />,
-      image:
-        "https://images.unsplash.com/photo-1640622304233-7335e936f11b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYW1pbHklMjB1c2luZyUyMHRhYmxldCUyMGhvbWUlMjBzZWN1cmV8ZW58MXx8fHwxNzY2OTUyMTUxfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      description: "Secure home-office tech for families and execs.",
-      features: ["Home Network Segmentation", "Content Filtering", "Dark Web Monitoring"],
-      link: routePaths.familyProtection,
-      color: "bg-brand-slate",
-    },
-    {
-      id: "fractional-leadership",
-      title: "Fractional Leadership",
-      icon: <Users className="w-8 h-8 text-white" />,
-      image:
-        "https://images.unsplash.com/photo-1764810815228-b7f9432eec5c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxleGVjdXRpdmUlMjBib2FyZHJvb20lMjBtZWV0aW5nfGVufDF8fHx8MTc2Njk1MjE1MXww&ixlib=rb-4.1.0&q=80&w=1080",
-      description: "vCIO/vCMO strategy without the full-time cost.",
-      features: ["Quarterly Business Reviews", "Budgeting & Procurement", "Board Representation"],
-      link: routePaths.fractionalLeadership,
-      color: "bg-brand-oxford",
-    },
-  ];
-
-  const additionalServices = [
-    {
-      id: "crisis-management",
-      title: "Reputation Management",
-      icon: <AlertTriangle className="w-8 h-8 text-white" />,
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80",
-      description: "Digital scrubbing and reputation defense.",
-      features: ["SEO Suppression", "Digital Scrubbing", "Social Media Lockdown"],
-      link: routePaths.crisisManagement,
-      color: "bg-brand-oxford",
-    },
-    {
-      id: "senior-care",
-      title: "Senior Care",
-      icon: <Heart className="w-8 h-8 text-white" />,
-      image:
-        "https://images.unsplash.com/photo-1516307365426-bea591f05011?auto=format&fit=crop&q=80",
-      description: "Dignified tech support and fraud protection for seniors.",
-      features: ["Fraud Air-Gapping", "Simplification", "Red Button Support"],
-      link: routePaths.seniorCare,
-      color: "bg-brand-copper",
-    },
-    {
-      id: "nonprofit-it",
-      title: "Nonprofit IT",
-      icon: <Building2 className="w-8 h-8 text-white" />,
-      image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&q=80",
-      description: "Mission-focused IT at nonprofit rates.",
-      features: ["Grant-Ready Policies", "Donor Data Protection", "At-Cost Licensing"],
-      link: routePaths.nonProfits,
-      color: "bg-brand-oxford",
-    },
-  ];
-
-  const services = [...initialServices, ...additionalServices];
-
   return (
-    <div className="bg-brand-cream">
-      {/* Hero */}
-      <section className="bg-brand-oxford text-white py-20 relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80"
-            alt="Collaboration"
-            fill
-            className="object-cover opacity-10 mix-blend-overlay"
-            priority
-          />
-        </div>
-        <div className="container mx-auto px-6 relative z-10 text-center">
-          <div className="inline-flex items-center justify-center p-3 bg-white/5 rounded-full mb-6">
-            <Layers className="w-6 h-6 text-brand-copper mr-2" />
-            <span className="text-brand-copper-light font-bold uppercase tracking-widest text-sm">
-              Full Spectrum Support
-            </span>
-          </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Comprehensive Services <br />
-            for Modern Growth.
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-8">
-            From the server room to the board room, we provide the technology and strategy you need
-            to scale.
-          </p>
-        </div>
-      </section>
+    <>
+      <PageHeader
+        align="center"
+        scheme="dark"
+        heading="Comprehensive Services for Modern Growth."
+        description="From the server room to the board room, we provide the technology and strategy you need to scale."
+      />
 
-      {/* Services Grid */}
-      <section className="py-24 bg-brand-cream">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-8">
-            {services.map((service) => (
-              <div
-                key={service.id}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col group hover:shadow-xl transition-shadow"
-              >
-                <div className="h-64 overflow-hidden relative">
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div
-                    className={`absolute inset-0 ${service.color} opacity-80 mix-blend-multiply`}
-                  />
-                  <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/50 to-transparent">
-                    <div className="flex items-center gap-4">
-                      <div className="bg-white/20 p-2 rounded-xl backdrop-blur-sm">
-                        {service.icon}
-                      </div>
-                      <h2 className="text-3xl font-bold text-white">{service.title}</h2>
-                    </div>
-                  </div>
-                </div>
+      <FeatureGrid
+        scheme="cream"
+        eyebrow="Full spectrum support"
+        heading="Every service we run, in one place."
+        items={SERVICES}
+        columns={3}
+      />
 
-                <div className="p-8 flex-grow flex flex-col justify-between">
-                  <div>
-                    <div className="text-brand-slate text-lg mb-6 leading-relaxed">
-                      {service.description}
-                    </div>
-                    <ul className="space-y-3 mb-8">
-                      {service.features.map((feature) => (
-                        <li
-                          key={feature}
-                          className="flex items-center gap-3 text-brand-oxford font-medium"
-                        >
-                          <CheckCircle2 className="w-5 h-5 text-brand-copper shrink-0" /> {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <Button
-                    onClick={() => router.push(service.link)}
-                    className="w-full bg-gray-100 text-brand-oxford hover:bg-gray-200 justify-between group-hover:bg-brand-copper-text group-hover:text-white transition-colors"
-                    withArrow
-                  >
-                    Learn More
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FeatureGrid heading="How we work." items={HOW_WE_WORK} columns={3} />
 
-      {/* The Humaneers Difference */}
-      <section className="py-24 bg-brand-cream">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold text-brand-oxford mb-12">Why Clients Choose Us</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="p-6">
-              <div className="text-4xl font-bold text-brand-copper mb-4">100%</div>
-              <h3 className="text-xl font-bold text-brand-oxford mb-2">US-Based</h3>
-              <p className="text-brand-slate">
-                No offshore call centers. Every engineer and strategist is local.
-              </p>
-            </div>
-            <div className="p-6">
-              <div className="text-4xl font-bold text-brand-copper mb-4">AES-256</div>
-              <h3 className="text-xl font-bold text-brand-oxford mb-2">Encrypted</h3>
-              <p className="text-brand-slate">
-                Enterprise-grade security controls applied to every client, big or small.
-              </p>
-            </div>
-            <div className="p-6">
-              <div className="text-4xl font-bold text-brand-copper mb-4">No</div>
-              <h3 className="text-xl font-bold text-brand-oxford mb-2">Vendor Lock-in</h3>
-              <p className="text-brand-slate">
-                We build on standard stacks (Microsoft, AWS) so you own your infrastructure.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-20 bg-brand-oxford text-white text-center">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-6">Not Sure Where to Start?</h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Our "{essentialsTier.name}" plan covers the essentials for most businesses. Let's chat
-            about your needs.
-          </p>
-          <Button
-            onClick={() =>
-              router.push(`${routePaths.talkToSales}?source=Services%20Overview%20Page`)
-            }
-            className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white text-xl px-10 py-6 h-auto rounded-full"
-            withArrow
-          >
-            Talk to Sales
-          </Button>
-        </div>
-      </section>
-    </div>
+      <CTASection
+        scheme="dark"
+        heading="Not sure where to start?"
+        text={`Our "${essentialsTier.name}" plan covers the essentials for most businesses. Tell us what you need and we will point you at the right one.`}
+        ctas={[
+          {
+            label: "Talk to Sales",
+            href: `${routePaths.talkToSales}?source=Services%20Overview%20Page`,
+          },
+        ]}
+      />
+    </>
   );
 }
