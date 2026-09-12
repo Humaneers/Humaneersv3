@@ -14,6 +14,7 @@ import { PageHeader, type PageHeaderProps } from "./PageHeader";
 import { PricingComparison, type PricingComparisonProps } from "./PricingComparison";
 import { PricingOffer, type PricingOfferProps } from "./PricingOffer";
 import { PricingPlans, type PricingPlan, type PricingPlansProps } from "./PricingPlans";
+import { ProseSection } from "./ProseSection";
 import type { SectionScheme } from "./scheme";
 import { SplitFeature } from "./SplitFeature";
 
@@ -196,6 +197,62 @@ describe("CTASection", () => {
     expectCtaLinks(container, [TALK, PRICING]);
     expect(container.querySelectorAll("button")).toHaveLength(0);
     expectSectionBasics(container);
+  });
+});
+
+describe("ProseSection", () => {
+  const body = (
+    <>
+      <p>We look after your computers, accounts and network.</p>
+      <h3>What we keep</h3>
+      <p>
+        Read the <a href="/terms">terms of service</a> for the response times we commit to.
+      </p>
+      <ul>
+        <li>
+          <strong>Devices</strong>: laptops and phones set up and kept up to date.
+        </li>
+      </ul>
+    </>
+  );
+
+  it("renders an h2, the children, and no heading nested in a heading", () => {
+    const { container } = render(<ProseSection heading="How we work">{body}</ProseSection>);
+    expect(headingLevels(container)).toEqual([2, 3]);
+    expect(screen.getByRole("heading", { level: 2 }).textContent).toBe("How we work");
+    expect(screen.getByRole("heading", { level: 3 }).textContent).toBe("What we keep");
+    expect(screen.getByRole("listitem").textContent).toContain("Devices");
+    expectSectionBasics(container);
+  });
+
+  it("renders an eyebrow as a paragraph above the heading", () => {
+    const { container } = render(
+      <ProseSection eyebrow="Our story" heading="How we work">
+        {body}
+      </ProseSection>
+    );
+    expect(screen.getByText("Our story").tagName).toBe("P");
+    expect(headingLevels(container)).toEqual([2, 3]);
+    expectSectionBasics(container);
+  });
+
+  it("omits the heading block entirely when a block continues the one above it", () => {
+    const { container } = render(
+      <ProseSection>
+        <p>A second block of the same document.</p>
+      </ProseSection>
+    );
+    expect(headingLevels(container)).toEqual([]);
+    expect(container.querySelector("p")?.textContent).toBe("A second block of the same document.");
+    expectSectionBasics(container);
+  });
+
+  it("underlines links in running text, which is what axe link-in-text-block asks for", () => {
+    const { container } = render(<ProseSection heading="How we work">{body}</ProseSection>);
+    const prose = container.querySelector("section > div > div:last-child");
+    expect(prose?.className).toContain("[&_a]:underline");
+    const link = screen.getByRole("link", { name: "terms of service" });
+    expect(link.getAttribute("href")).toBe("/terms");
   });
 });
 
@@ -446,6 +503,11 @@ describe("section schemes", () => {
     ),
     PricingComparison: (scheme) => <PricingComparison {...COMPARISON_CONTENT} scheme={scheme} />,
     PricingOffer: (scheme) => <PricingOffer {...OFFER_CONTENT} scheme={scheme} />,
+    ProseSection: (scheme) => (
+      <ProseSection heading="How we work" scheme={scheme}>
+        <p>We agree the next step with you.</p>
+      </ProseSection>
+    ),
   };
 
   // Light is the :root default and needs no class. Dark is scheme-oxford, not
