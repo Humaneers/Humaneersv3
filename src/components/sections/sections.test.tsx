@@ -1,5 +1,5 @@
 // claims-guard-allow-file: relume-default-content this test lists Relume's placeholder strings to prove no section renders them
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Laptop, LifeBuoy, ShieldCheck } from "lucide-react";
@@ -8,6 +8,9 @@ import { CTASection, type CTASectionProps } from "./CTASection";
 import { FAQSection } from "./FAQSection";
 import { FeatureGrid, type FeatureGridProps } from "./FeatureGrid";
 import { PageHeader, type PageHeaderProps } from "./PageHeader";
+import { PricingComparison, type PricingComparisonProps } from "./PricingComparison";
+import { PricingOffer, type PricingOfferProps } from "./PricingOffer";
+import { PricingPlans, type PricingPlan, type PricingPlansProps } from "./PricingPlans";
 import type { SectionScheme } from "./scheme";
 import { SplitFeature } from "./SplitFeature";
 
@@ -192,6 +195,206 @@ describe("CTASection", () => {
   });
 });
 
+const WAITLIST = { label: "Join the waitlist", href: "/talk-to-sales" };
+
+function planFixture(name: string, recommended = false): PricingPlan {
+  return {
+    name,
+    price: "$10",
+    priceUnit: "base / mo",
+    priceDetail: "+ $2 / additional user / mo",
+    footnoteMark: true,
+    description: `What the ${name} option covers.`,
+    features: ["Remote help", "Device updates"],
+    links: [{ label: `${name} details`, href: "/managed-it" }],
+    cta: WAITLIST,
+    recommended,
+  };
+}
+
+const PLANS_TABS: PricingPlansProps["tabs"] = [
+  {
+    value: "teams",
+    label: "Teams",
+    plans: [planFixture("Starter"), planFixture("Team", true)],
+    footnote: "* The base price includes the users listed on each option.",
+  },
+  {
+    value: "homes",
+    label: "Homes",
+    note: { title: "How home pricing works:", text: "One flat fee for the household." },
+    plans: [planFixture("Home")],
+  },
+];
+
+const COMPARISON_CONTENT = {
+  heading: "Compare options",
+  plans: ["Starter", "Team"],
+  categories: [
+    {
+      title: "Support",
+      features: [
+        {
+          name: "Remote help",
+          description: "Help by phone and screen share.",
+          values: { Starter: true, Team: true },
+        },
+        { name: "On-site visits", values: { Starter: false, Team: "Included" } },
+      ],
+    },
+    {
+      title: "Security",
+      features: [{ name: "Device updates", values: { Starter: "Billable", Team: true } }],
+    },
+  ],
+} satisfies PricingComparisonProps;
+
+const OFFER_CONTENT = {
+  heading: "Hourly help",
+  description: "Buy a block of hours and use them when you need them.",
+  points: [
+    { heading: "Use them for anything", text: "Support, planning or a one-off project." },
+    { heading: "Keep them", text: "Hours stay on your account until you use them." },
+  ],
+  price: "$50",
+  priceUnit: "/hr",
+  priceDetail: "Sold in 5-hour blocks",
+  fineprint: "Subject to the Terms of Service.",
+  cta: WAITLIST,
+} satisfies PricingOfferProps;
+
+describe("PricingPlans", () => {
+  function renderPlans(value = "teams", onValueChange = vi.fn()) {
+    const utils = render(
+      <PricingPlans
+        eyebrow="Waitlist open"
+        heading="Plans and rates"
+        description="Rates for each kind of client."
+        tabsLabel="Who the plans are for"
+        tabs={PLANS_TABS}
+        value={value}
+        onValueChange={onValueChange}
+        notes={["A user is a person with an email account."]}
+      />
+    );
+    return { ...utils, onValueChange };
+  }
+
+  it("renders an h2, a named tab list and the selected tab's plans as h3s", () => {
+    const { container } = renderPlans();
+    expect(headingLevels(container)).toEqual([2, 3, 3]);
+    expect(screen.getByRole("tablist", { name: "Who the plans are for" })).toBeTruthy();
+    const tabs = screen.getAllByRole("tab");
+    expect(tabs.map((tab) => tab.textContent)).toEqual(["Teams", "Homes"]);
+    expect(tabs[0].getAttribute("aria-selected")).toBe("true");
+    expect(tabs[1].getAttribute("aria-selected")).toBe("false");
+    expect(screen.queryByRole("heading", { name: "Home" })).toBeNull();
+    // The only buttons are the tabs: every plan CTA is a link.
+    expect(container.querySelectorAll("button")).toHaveLength(2);
+    expectSectionBasics(container);
+  });
+
+  it("gives each plan a link CTA named for its plan, and its detail links", () => {
+    const { container } = renderPlans();
+    for (const name of ["Starter", "Team"]) {
+      const cta = screen.getByRole("link", { name: `Join the waitlist for ${name}` });
+      expect(cta.tagName).toBe("A");
+      expect(cta.getAttribute("href")).toBe("/talk-to-sales");
+    }
+    expectCtaLinks(container, [{ label: "Starter details", href: "/managed-it" }]);
+  });
+
+  it("shows the price, the footnote and the notes as visible text, the asterisk hidden from speech", () => {
+    const { container } = renderPlans();
+    expect(screen.getAllByText("$10")).toHaveLength(2);
+    expect(screen.getByText(PLANS_TABS[0].footnote!)).toBeTruthy();
+    expect(screen.getByText("A user is a person with an email account.")).toBeTruthy();
+    const marks = Array.from(container.querySelectorAll('[aria-hidden="true"]')).filter(
+      (el) => el.textContent === "*"
+    );
+    expect(marks).toHaveLength(2);
+  });
+
+  it("reports a new tab from the keyboard and from a click", async () => {
+    const user = userEvent.setup();
+    const { onValueChange } = renderPlans();
+    await user.tab();
+    expect(document.activeElement).toBe(screen.getByRole("tab", { name: "Teams" }));
+    await user.keyboard("{ArrowRight}");
+    expect(onValueChange).toHaveBeenLastCalledWith("homes");
+
+    onValueChange.mockClear();
+    cleanup();
+    const second = renderPlans();
+    await user.click(screen.getByRole("tab", { name: "Homes" }));
+    expect(second.onValueChange).toHaveBeenLastCalledWith("homes");
+  });
+
+  it("renders the tab it is given, with that tab's note", () => {
+    const { container } = renderPlans("homes");
+    expect(screen.getByRole("heading", { level: 3 }).textContent).toBe("Home");
+    expect(screen.getByText("How home pricing works:")).toBeTruthy();
+    expect(screen.getByRole("tab", { name: "Homes" }).getAttribute("aria-selected")).toBe("true");
+    expect(container.querySelector(".max-w-md")).not.toBeNull();
+    expectSectionBasics(container);
+  });
+});
+
+describe("PricingComparison", () => {
+  it("renders an h2, a table named by it and an h3 per category", () => {
+    const { container } = render(<PricingComparison {...COMPARISON_CONTENT} />);
+    expect(headingLevels(container)).toEqual([2, 3, 3]);
+    expect(screen.getByRole("table", { name: "Compare options" })).toBeTruthy();
+    expect(screen.getAllByRole("columnheader").map((th) => th.textContent)).toEqual([
+      "Feature",
+      "Starter",
+      "Team",
+    ]);
+    expect(container.querySelectorAll("button, a")).toHaveLength(0);
+    expectSectionBasics(container);
+  });
+
+  it("gives each feature a row header with its visible description and one value per plan", () => {
+    render(<PricingComparison {...COMPARISON_CONTENT} />);
+    const rowHeaders = screen.getAllByRole("rowheader");
+    expect(rowHeaders.map((rh) => rh.textContent)).toEqual([
+      "Remote help Help by phone and screen share.",
+      "On-site visits",
+      "Device updates",
+    ]);
+    const valuesFor = (feature: string) =>
+      within(screen.getByRole("rowheader", { name: new RegExp(`^${feature}`) }).parentElement!)
+        .getAllByRole("cell")
+        .map((cell) => cell.textContent);
+    expect(valuesFor("Remote help")).toEqual(["Included", "Included"]);
+    expect(valuesFor("On-site visits")).toEqual(["Not included", "Included"]);
+    expect(valuesFor("Device updates")).toEqual(["Billable", "Included"]);
+  });
+
+  it("hides the check and cross icons from speech and sets the column count", () => {
+    const { container } = render(
+      <PricingComparison {...COMPARISON_CONTENT} plans={["Starter", "Team", "Office", "Group"]} />
+    );
+    container.querySelectorAll("svg").forEach((svg) => {
+      expect(svg.getAttribute("aria-hidden")).toBe("true");
+    });
+    expect(container.querySelector(".grid-cols-4")).not.toBeNull();
+  });
+});
+
+describe("PricingOffer", () => {
+  it("renders an h2, an h3 per point, the price as text and one link CTA", () => {
+    const { container } = render(<PricingOffer {...OFFER_CONTENT} />);
+    expect(headingLevels(container)).toEqual([2, 3, 3]);
+    expect(screen.getByText("$50").tagName).toBe("SPAN");
+    expect(screen.getByText("Sold in 5-hour blocks")).toBeTruthy();
+    expect(screen.getByText("Subject to the Terms of Service.")).toBeTruthy();
+    expectCtaLinks(container, [WAITLIST]);
+    expect(container.querySelectorAll("button")).toHaveLength(0);
+    expectSectionBasics(container);
+  });
+});
+
 describe("section schemes", () => {
   const SECTIONS: Record<string, (scheme?: SectionScheme) => React.ReactElement> = {
     PageHeader: (scheme) => (
@@ -227,6 +430,18 @@ describe("section schemes", () => {
         scheme={scheme}
       />
     ),
+    PricingPlans: (scheme) => (
+      <PricingPlans
+        heading="Plans and rates"
+        tabsLabel="Who the plans are for"
+        tabs={PLANS_TABS}
+        value="teams"
+        onValueChange={() => {}}
+        scheme={scheme}
+      />
+    ),
+    PricingComparison: (scheme) => <PricingComparison {...COMPARISON_CONTENT} scheme={scheme} />,
+    PricingOffer: (scheme) => <PricingOffer {...OFFER_CONTENT} scheme={scheme} />,
   };
 
   // Light is the :root default and needs no class. Dark is scheme-oxford, not
