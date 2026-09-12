@@ -23,4 +23,17 @@ describe("cn utility", () => {
   it("handles empty inputs", () => {
     expect(cn()).toBe("");
   });
+
+  it("keeps a Relume type-ramp class beside a text color", () => {
+    expect(cn("text-h1 text-scheme-text")).toBe("text-h1 text-scheme-text");
+    expect(cn("text-medium", "text-brand-oxford")).toBe("text-medium text-brand-oxford");
+  });
+
+  it("merges a Relume type-ramp class with another font size", () => {
+    expect(cn("text-sm", "text-medium")).toBe("text-medium");
+  });
+
+  it("leaves the existing size-and-color pattern unchanged", () => {
+    expect(cn("text-sm text-brand-oxford")).toBe("text-sm text-brand-oxford");
+  });
 });

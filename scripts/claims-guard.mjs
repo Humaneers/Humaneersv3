@@ -238,6 +238,18 @@ export const RULES = [
     message:
       "A percentage of issues, tickets, requests or incidents is a measured performance rate. The Managed IT page's '99% of issues fixed remotely' and '99% of tickets are resolved remotely' shipped with no ticket data behind them and were removed on 11 Sep 2026. Publish a rate only when the ticketing system produces it, and annotate the line with the source, the period it covers, and who checked it.",
   },
+  {
+    id: "relume-default-content",
+    mode: "line",
+    // Every Relume component ships with default copy and a placeholder image
+    // served from Relume's own CloudFront host. The sections in
+    // src/components/sections take their content as required props and export
+    // no defaults, so this catches a default pasted in from the library by hand.
+    // The host is matched exactly: other CloudFront distributions are fine.
+    test: /d22po4pjz3o32e\.cloudfront\.net|lorem\s+ipsum|heading\s+goes\s+here|feature\s+text\s+goes\s+here|relume\s+placeholder|name\s+surname|position,\s*company\s+name/i,
+    message:
+      "This is Relume's default content: placeholder copy, a placeholder testimonial byline, or the placeholder image on Relume's CDN. Replace it with the page's real content, or leave the prop out if the section marks it optional. A test that lists these strings on purpose takes a claims-guard-allow-file annotation.",
+  },
 ];
 
 const ALLOW_LINE = /claims-guard-allow:\s*\S/;
