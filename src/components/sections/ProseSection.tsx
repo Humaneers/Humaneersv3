@@ -31,8 +31,11 @@ export type ProseSectionProps = {
 const PROSE = [
   "max-w-3xl text-medium",
   "[&_p]:mb-4 [&_p:last-child]:mb-0",
-  "[&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-h4 [&_h3]:font-bold [&_h3:first-child]:mt-0",
-  "[&_h4]:mt-6 [&_h4]:mb-2 [&_h4]:text-h5 [&_h4]:font-bold",
+  // A document that carries its own h2s renders without the heading prop, so
+  // the clause headings on the legal pages keep the level they already had.
+  "[&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:text-h4 [&_h2]:font-bold [&_h2:first-child]:mt-0",
+  "[&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:text-h5 [&_h3]:font-bold [&_h3:first-child]:mt-0",
+  "[&_h4]:mt-6 [&_h4]:mb-2 [&_h4]:text-h6 [&_h4]:font-bold",
   "[&_ul]:mb-4 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-6",
   "[&_ol]:mb-4 [&_ol]:list-decimal [&_ol]:space-y-2 [&_ol]:pl-6",
   "[&_li]:pl-1",
@@ -49,9 +52,7 @@ export function ProseSection({ heading, eyebrow, children, scheme }: ProseSectio
       <div className="section-container">
         {(eyebrow || heading) && (
           <div className="mb-5 max-w-3xl md:mb-6">
-            {eyebrow && (
-              <p className="mb-3 font-semibold text-scheme-accent md:mb-4">{eyebrow}</p>
-            )}
+            {eyebrow && <p className="mb-3 font-semibold text-scheme-accent md:mb-4">{eyebrow}</p>}
             {heading && <h2 className="text-h2 font-bold">{heading}</h2>}
           </div>
         )}
