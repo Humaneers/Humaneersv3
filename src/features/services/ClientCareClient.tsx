@@ -1,63 +1,56 @@
-"use client";
+import { Clock, Shield, Smartphone } from "lucide-react";
 
 import { EmailActionButton } from "@/components/ui/email-action-button";
-import { Shield, Clock, Smartphone } from "lucide-react";
+import { FeatureGrid } from "@/components/sections/FeatureGrid";
+import { PageHeader } from "@/components/sections/PageHeader";
+import { sectionBandClass } from "@/components/sections/scheme";
+
+const COVERAGE = [
+  {
+    icon: Clock,
+    heading: "A senior engineer, directly",
+    text: "You reach a senior engineer without a ticket queue or a tier one script in between.",
+  },
+  {
+    icon: Smartphone,
+    heading: "Text, call or email",
+    text: "Your dedicated partner takes your text, call or email. The emergency line is open 24/7.",
+  },
+  {
+    icon: Shield,
+    heading: "Proactive security",
+    text: "We monitor your systems and look for threats on your behalf, rather than waiting for you to report one.",
+  },
+] as const;
 
 export function ClientCareClient() {
   return (
-    <div className="bg-brand-cream min-h-screen">
-      {/* Hero section */}
-      <section className="bg-brand-oxford text-white py-20">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">Client Care</h1>
-          <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-2xl mx-auto">
-            Concierge support for our private clients.
-          </p>
-        </div>
-      </section>
+    <>
+      <PageHeader
+        align="center"
+        scheme="dark"
+        heading="Client Care"
+        description="Concierge support for our private clients."
+      />
 
-      <section className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
-            <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-              <Clock className="w-10 h-10 text-brand-copper mb-4" />
-              <h3 className="text-xl font-bold text-brand-oxford mb-2">Zero Wait Time</h3>
-              <p className="text-brand-slate">
-                Direct access to senior engineers. No ticketing queues or tier-1 support scripts.
-              </p>
-            </div>
-            <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-              <Smartphone className="w-10 h-10 text-brand-copper mb-4" />
-              <h3 className="text-xl font-bold text-brand-oxford mb-2">Direct Access</h3>
-              <p className="text-brand-slate">
-                Text, call, or email your dedicated partner directly. 24/7 emergency availability.
-              </p>
-            </div>
-            <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-              <Shield className="w-10 h-10 text-brand-copper mb-4" />
-              <h3 className="text-xl font-bold text-brand-oxford mb-2">Proactive Security</h3>
-              <p className="text-brand-slate">
-                Continuous monitoring and threat hunting on your behalf, before issues arise.
-              </p>
-            </div>
-          </div>
+      <FeatureGrid heading="What Client Care covers" items={COVERAGE} />
 
-          <div className="max-w-md mx-auto text-center">
-            <div className="bg-white p-8 rounded-xl shadow-lg inline-block border border-gray-100">
-              <h3 className="text-xl font-bold text-brand-oxford mb-2">Client Portal Access</h3>
-              <p className="text-brand-slate mb-6">
-                Our portal is currently invite-only. Please contact your account manager for access.
-              </p>
-              <EmailActionButton
-                label="Request Portal Access"
-                email="support@humaneers.dev"
-                subject="Portal Access Request"
-                className="w-full bg-brand-oxford hover:bg-brand-oxford/90 text-white"
-              />
-            </div>
+      <section className={sectionBandClass("cream")}>
+        <div className="section-container">
+          <div className="mx-auto max-w-lg text-center">
+            <h2 className="mb-5 text-h3 font-bold md:mb-6">Client portal access</h2>
+            <p className="text-medium">
+              Our portal is invite only. Contact your account manager for access.
+            </p>
+            <EmailActionButton
+              label="Request portal access"
+              email="support@humaneers.dev"
+              subject="Portal Access Request"
+              className="mt-6 bg-scheme-accent text-scheme-btn-text hover:bg-scheme-accent/90 md:mt-8"
+            />
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 }
