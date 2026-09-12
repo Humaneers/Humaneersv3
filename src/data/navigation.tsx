@@ -84,7 +84,7 @@ export const navSections: NavSection[] = [
       {
         title: "Cybersecurity Center",
         description: "Enterprise endpoint protection and monitoring.",
-        to: routePaths.familyProtection,
+        to: routePaths.managedIt,
       },
       {
         title: "Strategic Consulting",
