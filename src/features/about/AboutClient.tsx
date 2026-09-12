@@ -1,363 +1,212 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Users, Server, Calendar, Heart, Shield, Target, Quote, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
+import { Calendar, Heart, Server, Shield, Target, Users } from "lucide-react";
+
+import { CTASection } from "@/components/sections/CTASection";
+import { FeatureGrid } from "@/components/sections/FeatureGrid";
+import { PageHeader } from "@/components/sections/PageHeader";
+import { ProseSection } from "@/components/sections/ProseSection";
 import { routePaths } from "../../routes";
-import { useContactModal } from "@/components/providers/ContactModalProvider";
+
+/**
+ * The four blocks below sat in Radix tabs until this cut. Radix renders an
+ * inactive tab's panel only once it is selected, so three quarters of the page
+ * was absent from the server HTML and from any client without JavaScript.
+ * They are sequential sections now, each with its own h2, all in the markup.
+ */
+const VALUES = [
+  {
+    icon: Target,
+    heading: "Vendor Neutrality",
+    text: "We sell solutions, not licenses. If open source software is better for your budget than a proprietary subscription, that is what we recommend. We have no preferred partners that pay us kickbacks.",
+  },
+  {
+    icon: Shield,
+    heading: "Security as a Right",
+    text: "Privacy and digital safety should not be luxury goods. We apply the same zero trust architecture to a solo founder's laptop as we do to a fifty person corporate network.",
+  },
+  {
+    icon: Heart,
+    heading: "Radical Transparency",
+    text: "You own your data. You own your code. You own your strategy. We document everything we do so you never feel tied to our services by obscurity.",
+  },
+] as const;
+
+const CUSTOMERS = [
+  { name: "High-Growth Startups", detail: "Seed to Series B" },
+  { name: "Family Offices & Estates", detail: "High Net Worth Individuals" },
+  { name: "Families & Individuals", detail: "Home networks & digital safety" },
+  { name: "Nonprofit Organizations", detail: "501(c)(3) Certified" },
+  { name: "Regulated Industries", detail: "Healthcare, Finance, Legal" },
+] as const;
+
+const INITIATIVES = [
+  {
+    icon: Server,
+    heading: "Hardware Lifecycle Management",
+    text: "E-waste is the tech industry's silent crisis. We reject the industry standard of three year refresh cycles.",
+    points: [
+      ["Repair First", "We prioritize component repair over device replacement."],
+      [
+        "Secondary Market",
+        "Retired functional equipment is wiped and donated to nonprofits or resold.",
+      ],
+      [
+        "Certified Recycling",
+        "End-of-life hardware is processed exclusively by R2v3 certified recyclers.",
+      ],
+    ],
+  },
+  {
+    icon: Users,
+    heading: "Remote-First Operations",
+    text: "Our most effective sustainability metric is the commute that doesn't happen.",
+    points: [
+      ["Remote Team", "Our team works remotely by default."],
+      [
+        "Minimal Real Estate",
+        "We maintain a small HQ footprint in Tempe Arizona, reducing energy consumption for heating and cooling.",
+      ],
+      [
+        "Digital Delivery",
+        "We prioritize remote support sessions over truck rolls whenever physical intervention isn't strictly necessary.",
+      ],
+    ],
+  },
+  {
+    icon: Shield,
+    heading: "Ethical Supply Chain",
+    text: "We vote with our procurement dollars.",
+    points: [
+      [
+        "Vendor Screening",
+        "We evaluate partners on their labor practices and environmental transparency, not just price.",
+      ],
+      [
+        "Local Preference",
+        "We prioritize US based and local Arizona vendors for operational supplies.",
+      ],
+      [
+        "Open Source Support",
+        "We contribute financially to the open source projects that power our infrastructure.",
+      ],
+    ],
+  },
+] as const;
 
 export function AboutClient() {
-  const router = useRouter();
-
-  const { openModal } = useContactModal();
-
   return (
-    <div className="bg-brand-cream min-h-screen">
-      {/* Header */}
-      <section className="bg-brand-oxford text-white py-20 md:py-32 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-copper/5 -skew-x-12 transform translate-x-32"></div>
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl">
-            <h1 className="text-5xl md:text-7xl font-bold mb-8 tracking-tight">
-              Crafting Digital Resilience.
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-3xl mb-10">
-              Enterprise strategy for businesses and families. Built with precision. Delivered with
-              soul.
-            </p>
-            <div className="flex flex-wrap gap-6 items-center text-sm font-medium text-brand-copper-light uppercase tracking-widest">
-              <span className="flex items-center gap-2">
-                <CheckCircle2 size={16} /> Stealth Heritage
-              </span>
-              <span className="flex items-center gap-2">
-                <CheckCircle2 size={16} /> Human Expert Led
-              </span>
+    <>
+      <PageHeader
+        scheme="dark"
+        heading="Crafting Digital Resilience."
+        description="Enterprise strategy for businesses and families. Built with precision. Delivered with soul."
+      />
+
+      <ProseSection heading="Stealth Heritage, Public Standard." eyebrow="Our story">
+        <p>
+          Humaneers began in stealth mode, serving a select roster of clients by referral only.
+          These individuals and organizations required enterprise-grade solutions without the burden
+          of enterprise bureaucracy. We built our reputation one bespoke engagement at a time,
+          delivering the same caliber of strategy, security, and infrastructure typically reserved
+          for global enterprise companies to businesses, families, and nonprofits who had been too
+          often underserved.
+        </p>
+        <p>
+          Word travels fast when you solve problems that others cannot. Our clients, many of whom
+          came to us after exhausting traditional options, began to ask a consistent question: Why
+          aren't you available to everyone?
+        </p>
+        <p>
+          The answer, for many years, was capacity. We believed that maintaining boutique quality
+          required staying small. But as our team matured and our internal processes crystallized,
+          we realized we had built something scalable without ever sacrificing soul. Our clients
+          encouraged our public transition, not because they wanted to share us, but because they
+          believed others deserved access to what we had proven we could deliver.
+        </p>
+        <p>
+          <strong>
+            So here we are. No longer invitation only, but still uncompromisingly focused on
+            precision, transparency, and results.
+          </strong>
+        </p>
+        <p>
+          We bring the same rigor, the same vendor neutrality, and the same refusal to cut corners
+          that our earliest clients relied on. The only difference is that now, you do not need a
+          referral to work with us. You just need a problem worth solving.
+        </p>
+      </ProseSection>
+
+      <FeatureGrid scheme="cream" heading="Our Values" items={VALUES} />
+
+      <ProseSection heading="Who We Serve">
+        <dl>
+          {CUSTOMERS.map((customer) => (
+            <div key={customer.name}>
+              <dt>{customer.name}</dt>
+              <dd>{customer.detail}</dd>
             </div>
-          </div>
-        </div>
-      </section>
+          ))}
+        </dl>
+      </ProseSection>
 
-      <div className="container mx-auto px-6 py-12">
-        <Tabs defaultValue="story" className="w-full">
-          <div className="flex justify-center mb-12 px-4">
-            <TabsList className="bg-white p-1 rounded-lg border border-gray-200 shadow-sm inline-flex overflow-x-auto max-w-full snap-x snap-mandatory">
-              <TabsTrigger
-                value="story"
-                className="px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all whitespace-nowrap snap-start"
-              >
-                Our Story
-              </TabsTrigger>
-              <TabsTrigger
-                value="values"
-                className="px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all whitespace-nowrap snap-start"
-              >
-                Our Values
-              </TabsTrigger>
-              <TabsTrigger
-                value="customers"
-                className="px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all whitespace-nowrap snap-start"
-              >
-                Our Customers
-              </TabsTrigger>
-              <TabsTrigger
-                value="impact"
-                className="px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm md:text-base data-[state=active]:bg-brand-oxford data-[state=active]:text-white data-[state=active]:shadow-md rounded-md transition-all whitespace-nowrap snap-start"
-              >
-                Impact & Responsibility
-              </TabsTrigger>
-            </TabsList>
-          </div>
-
-          {/* OUR STORY */}
-          <TabsContent
-            value="story"
-            className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500"
-          >
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold text-brand-oxford mb-6">
-                Stealth Heritage, Public Standard.
-              </h2>
-              <div className="prose text-brand-slate leading-relaxed space-y-6 text-lg">
-                <p>
-                  Humaneers began in stealth mode, serving a select roster of clients by referral
-                  only. These individuals and organizations required enterprise-grade solutions
-                  without the burden of enterprise bureaucracy. We built our reputation one bespoke
-                  engagement at a time, delivering the same caliber of strategy, security, and
-                  infrastructure typically reserved for global enterprise companies to businesses,
-                  families, and nonprofits who had been too often underserved.
-                </p>
-                <p>
-                  Word travels fast when you solve problems that others cannot. Our clients, many of
-                  whom came to us after exhausting traditional options, began to ask a consistent
-                  question: Why aren't you available to everyone?
-                </p>
-                <p>
-                  The answer, for many years, was capacity. We believed that maintaining boutique
-                  quality required staying small. But as our team matured and our internal processes
-                  crystallized, we realized we had built something scalable without ever sacrificing
-                  soul. Our clients encouraged our public transition, not because they wanted to
-                  share us, but because they believed others deserved access to what we had proven
-                  we could deliver.
-                </p>
-                <p className="text-brand-oxford font-bold">
-                  So here we are. No longer invitation only, but still uncompromisingly focused on
-                  precision, transparency, and results.
-                </p>
-                <p>
-                  We bring the same rigor, the same vendor neutrality, and the same refusal to cut
-                  corners that our earliest clients relied on. The only difference is that now, you
-                  do not need a referral to work with us. You just need a problem worth solving.
-                </p>
-              </div>
-            </div>
-          </TabsContent>
-
-          {/* OUR VALUES */}
-          <TabsContent
-            value="values"
-            className="animate-in fade-in slide-in-from-bottom-4 duration-500"
-          >
-            <h2 className="sr-only">Our Values</h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-white p-10 rounded-2xl border-t-4 border-brand-copper shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <Target className="w-12 h-12 text-brand-copper mb-6" />
-                <h3 className="text-2xl font-bold text-brand-oxford mb-4">Vendor Neutrality</h3>
-                <p className="text-brand-slate leading-relaxed">
-                  We sell solutions, not licenses. If open source software is better for your budget
-                  than a proprietary subscription, that is what we recommend. We have no preferred
-                  partners that pay us kickbacks.
-                </p>
-              </div>
-              <div className="bg-white p-10 rounded-2xl border-t-4 border-brand-copper shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <Shield className="w-12 h-12 text-brand-copper mb-6" />
-                <h3 className="text-2xl font-bold text-brand-oxford mb-4">Security as a Right</h3>
-                <p className="text-brand-slate leading-relaxed">
-                  Privacy and digital safety should not be luxury goods. We apply the same zero
-                  trust architecture to a solo founder's laptop as we do to a fifty person corporate
-                  network.
-                </p>
-              </div>
-              <div className="bg-white p-10 rounded-2xl border-t-4 border-brand-copper shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <Heart className="w-12 h-12 text-brand-copper mb-6" />
-                <h3 className="text-2xl font-bold text-brand-oxford mb-4">Radical Transparency</h3>
-                <p className="text-brand-slate leading-relaxed">
-                  You own your data. You own your code. You own your strategy. We document
-                  everything we do so you never feel tied to our services by obscurity.
-                </p>
-              </div>
-            </div>
-          </TabsContent>
-
-          {/* OUR CUSTOMERS */}
-          <TabsContent
-            value="customers"
-            className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500"
-          >
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl font-bold text-brand-oxford mb-6">Who We Serve</h2>
-              <ul className="space-y-4">
-                <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-                  <span className="font-medium text-brand-oxford">High-Growth Startups</span>
-                  <span className="text-sm text-gray-500">Seed to Series B</span>
-                </li>
-                <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-                  <span className="font-medium text-brand-oxford">Family Offices & Estates</span>
-                  <span className="text-sm text-gray-500">High Net Worth Individuals</span>
-                </li>
-                <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-                  <span className="font-medium text-brand-oxford">Families & Individuals</span>
-                  <span className="text-sm text-gray-500">Home networks & digital safety</span>
-                </li>
-                <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-                  <span className="font-medium text-brand-oxford">Nonprofit Organizations</span>
-                  <span className="text-sm text-gray-500">501(c)(3) Certified</span>
-                </li>
-                <li className="bg-white p-4 rounded-lg border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-                  <span className="font-medium text-brand-oxford">Regulated Industries</span>
-                  <span className="text-sm text-gray-500">Healthcare, Finance, Legal</span>
-                </li>
+      <ProseSection scheme="cream" heading="Our Impact Commitments">
+        <p>
+          We believe that small actions, consistently applied, compound into significant change. We
+          are not a "green" company by marketing definition, but we are an operationally conscious
+          one. We acknowledge our footprint and actively manage it.
+        </p>
+        <p>
+          <strong>"State intent, not perfection."</strong> Our guiding principle for sustainability.
+          We prioritize realistic, measurable improvements over performative pledges.
+        </p>
+        {INITIATIVES.map((initiative) => {
+          const Icon = initiative.icon;
+          return (
+            <div key={initiative.heading}>
+              <h3>
+                <Icon aria-hidden="true" className="mr-3 inline-block size-6 align-text-bottom" />
+                {initiative.heading}
+              </h3>
+              <p>{initiative.text}</p>
+              <ul>
+                {initiative.points.map(([term, detail]) => (
+                  <li key={term}>
+                    <strong>{term}:</strong> {detail}
+                  </li>
+                ))}
               </ul>
             </div>
-          </TabsContent>
+          );
+        })}
+        <h3>
+          <Calendar aria-hidden="true" className="mr-3 inline-block size-6 align-text-bottom" />
+          Annual Accountability Review
+        </h3>
+        <p>
+          Transparency requires maintenance. We commit to an annual internal audit of these
+          initiatives.
+        </p>
+        <p>
+          Each Q4, we will update this section and our{" "}
+          <Link href={routePaths.colophon}>Colophon</Link> with our progress, failures, and adjusted
+          goals for the coming year. We believe that acknowledging where we fall short is as
+          important as celebrating where we succeed. Our{" "}
+          <Link href={routePaths.ethics}>Ethics Charter</Link> sets out the commitments we hold
+          ourselves to.
+        </p>
+      </ProseSection>
 
-          {/* IMPACT & RESPONSIBILITY */}
-          <TabsContent
-            value="impact"
-            className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500"
-          >
-            <div className="max-w-4xl mx-auto">
-              <div className="mb-12">
-                <h2 className="text-3xl font-bold text-brand-oxford mb-6">
-                  Our Impact Commitments
-                </h2>
-                <p className="text-brand-slate text-lg leading-relaxed mb-6">
-                  We believe that small actions, consistently applied, compound into significant
-                  change. We are not a "green" company by marketing definition, but we are an
-                  operationally conscious one. We acknowledge our footprint and actively manage it.
-                </p>
-                <div className="bg-brand-copper/10 border-l-4 border-brand-copper p-4 rounded-r-md">
-                  <p className="text-sm text-brand-oxford font-medium italic">
-                    "State intent, not perfection."
-                  </p>
-                  <p className="text-sm text-brand-slate mt-1">
-                    Our guiding principle for sustainability. We prioritize realistic, measurable
-                    improvements over performative pledges.
-                  </p>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-10">
-                {/* Initiative 1 */}
-                <div className="space-y-4">
-                  <div className="w-12 h-12 bg-brand-cream rounded-full flex items-center justify-center">
-                    <Server className="text-brand-oxford" size={24} />
-                  </div>
-                  <h3 className="text-xl font-bold text-brand-oxford">
-                    Hardware Lifecycle Management
-                  </h3>
-                  <p className="text-brand-slate text-sm leading-relaxed">
-                    E-waste is the tech industry's silent crisis. We reject the industry standard of
-                    three year refresh cycles.
-                  </p>
-                  <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
-                    <li>
-                      <strong>Repair First:</strong> We prioritize component repair over device
-                      replacement.
-                    </li>
-                    <li>
-                      <strong>Secondary Market:</strong> Retired functional equipment is wiped and
-                      donated to nonprofits or resold.
-                    </li>
-                    <li>
-                      <strong>Certified Recycling:</strong> End-of-life hardware is processed
-                      exclusively by R2v3 certified recyclers.
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Initiative 2 */}
-                <div className="space-y-4">
-                  <div className="w-12 h-12 bg-brand-cream rounded-full flex items-center justify-center">
-                    <Users className="text-brand-oxford" size={24} />
-                  </div>
-                  <h3 className="text-xl font-bold text-brand-oxford">Remote-First Operations</h3>
-                  <p className="text-brand-slate text-sm leading-relaxed">
-                    Our most effective sustainability metric is the commute that doesn't happen.
-                  </p>
-                  <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
-                    <li>
-                      <strong>Remote Team:</strong> Our team works remotely by default.
-                    </li>
-                    <li>
-                      <strong>Minimal Real Estate:</strong> We maintain a small HQ footprint in
-                      Tempe Arizona, reducing energy consumption for heating and cooling.
-                    </li>
-                    <li>
-                      <strong>Digital Delivery:</strong> We prioritize remote support sessions over
-                      truck rolls whenever physical intervention isn't strictly necessary.
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Initiative 3 */}
-                <div className="space-y-4">
-                  <div className="w-12 h-12 bg-brand-cream rounded-full flex items-center justify-center">
-                    <Shield className="text-brand-oxford" size={24} />
-                  </div>
-                  <h3 className="text-xl font-bold text-brand-oxford">Ethical Supply Chain</h3>
-                  <p className="text-brand-slate text-sm leading-relaxed">
-                    We vote with our procurement dollars.
-                  </p>
-                  <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
-                    <li>
-                      <strong>Vendor Screening:</strong> We evaluate partners on their labor
-                      practices and environmental transparency, not just price.
-                    </li>
-                    <li>
-                      <strong>Local Preference:</strong> We prioritize US based and local Arizona
-                      vendors for operational supplies.
-                    </li>
-                    <li>
-                      <strong>Open Source Support:</strong> We contribute financially to the open
-                      source projects that power our infrastructure.
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Annual Review */}
-                <div className="space-y-4">
-                  <div className="w-12 h-12 bg-brand-cream rounded-full flex items-center justify-center">
-                    <Calendar className="text-brand-oxford" size={24} />
-                  </div>
-                  <h3 className="text-xl font-bold text-brand-oxford">
-                    Annual Accountability Review
-                  </h3>
-                  <p className="text-brand-slate text-sm leading-relaxed">
-                    Transparency requires maintenance. We commit to an annual internal audit of
-                    these initiatives.
-                  </p>
-                  <p className="text-brand-slate text-sm leading-relaxed">
-                    Each Q4, we will update this section and our Colophon with our progress,
-                    failures, and adjusted goals for the coming year. We believe that acknowledging
-                    where we fall short is as important as celebrating where we succeed.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </TabsContent>
-        </Tabs>
-
-        <div className="mt-20 p-12 bg-white rounded-3xl shadow-2xl border border-gray-100 relative overflow-hidden text-center group">
-          <div className="absolute top-0 left-0 w-2 h-full bg-brand-copper group-hover:w-4 transition-all"></div>
-          <Quote className="w-16 h-16 text-brand-copper/10 absolute top-8 right-8 hidden sm:block" />
-          <h3 className="text-3xl font-bold text-brand-oxford mb-6 relative z-10">
-            {" "}
-            Ready to Secure Your Growth?
-          </h3>
-          <p className="text-brand-slate text-lg mb-10 max-w-2xl mx-auto relative z-10">
-            Whether you are protecting a fifty person team or your own family estate, we bring the
-            same precision and soul to every engagement.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-6 relative z-10">
-            <Button
-              onClick={() =>
-                openModal(
-                  "sales",
-                  "I would like to discuss a strategy for my organization.",
-                  "About Page Strategy CTA"
-                )
-              }
-              className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white px-10 py-7 text-lg font-bold rounded-full group shadow-lg hover:shadow-brand-copper/20"
-              withArrow
-            >
-              Book a Strategy Session
-            </Button>
-            <Button
-              onClick={() => router.push(routePaths.pricing)}
-              variant="outline"
-              className="border-brand-oxford text-brand-oxford hover:bg-brand-oxford hover:text-white px-10 py-7 text-lg font-bold rounded-full"
-            >
-              View Transparent Pricing
-            </Button>
-          </div>
-
-          <div className="mt-12 pt-8 border-t border-gray-100 flex justify-center gap-8">
-            <button
-              onClick={() => router.push(routePaths.ethics)}
-              className="text-sm font-medium text-gray-400 hover:text-brand-oxford transition-colors"
-            >
-              Ethics Charter
-            </button>
-            <button
-              onClick={() => router.push(routePaths.colophon)}
-              className="text-sm font-medium text-gray-400 hover:text-brand-oxford transition-colors"
-            >
-              Operating Framework
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+      <CTASection
+        scheme="dark"
+        heading="Ready to Secure Your Growth?"
+        text="Whether you are protecting a fifty person team or your own family estate, we bring the same precision and soul to every engagement."
+        ctas={[
+          { label: "Book a Strategy Session", href: routePaths.talkToSales },
+          { label: "View Transparent Pricing", href: routePaths.pricing },
+        ]}
+      />
+    </>
   );
 }
