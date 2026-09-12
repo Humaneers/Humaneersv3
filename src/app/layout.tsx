@@ -103,7 +103,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <StructuredData data={schemas.organization()} />
       </head>
       <body
-        className="font-sans antialiased text-brand-slate bg-brand-cream min-h-screen flex flex-col"
+        className="font-sans antialiased text-brand-slate bg-brand-cream min-h-screen flex flex-col overflow-x-clip"
         suppressHydrationWarning
       >
         <ConsentProvider>
