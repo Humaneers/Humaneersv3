@@ -1,534 +1,387 @@
 "use client";
 
 import Link from "next/link";
-import {
-  Code,
-  Image as ImageIcon,
-  Scale,
-  Heart,
-  Shield,
-  ShieldCheck,
-  Users,
-  Globe,
-  Layout,
-  ArrowRight,
-} from "lucide-react";
+
+import { PageHeader } from "@/components/sections/PageHeader";
+import { ProseSection } from "@/components/sections/ProseSection";
 import { routePaths } from "../../routes";
 
+/**
+ * The page was a two-column grid whose eight constitution clauses were styled
+ * as copper side tabs, with a card stack beside them. It is long-form content
+ * now and the words are unchanged.
+ *
+ * The credit rows in the card stack were flex rows of a label and a link. They
+ * are description lists, so the label and the value stay on separate lines. In
+ * the analytics and business rows the whole link was the glyph the row ended
+ * with, which is no name for a link; the product name is the link instead.
+ */
 export function ColophonClient() {
   return (
-    <div className="bg-brand-cream min-h-screen">
-      {/* Header */}
-      <section className="bg-brand-oxford text-white py-16">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">Colophon & Transparency</h1>
-          <p className="text-gray-300 max-w-2xl mx-auto">
-            How we built this site, and how we build our company. We believe in radical openness in
-            our code, our pricing, and our values.
+    <>
+      <PageHeader
+        scheme="dark"
+        align="center"
+        heading="Colophon & Transparency"
+        description="How we built this site, and how we build our company. We believe in radical openness in our code, our pricing, and our values."
+      />
+
+      <ProseSection>
+        <h2>The Humaneers Digital Constitution</h2>
+        <p>
+          Serving businesses and families requires more than technical expertise. It demands
+          transparent communication, ethical operations, and a user-centric digital experience. We
+          have adopted this framework to design our policies and processes, ensuring we build trust
+          and foster long-term relationships with our clients.
+        </p>
+
+        <div className="space-y-12">
+          {/* 1. Clear Navigation */}
+          <div>
+            <h3>1. Clear and Segment‑Oriented Navigation</h3>
+            <p>
+              A well‑structured navigation is essential for users to understand our offerings and
+              values.
+            </p>
+            <ul>
+              <li>
+                <strong>Sticky Header:</strong> We keep a minimal high‑contrast bar fixed at the top
+                of the page so that key actions remain visible during scrolling.
+              </li>
+              <li>
+                <strong>Segmented Service Menu:</strong> We split our offerings into clear
+                categories (Managed IT, Brand Growth, Personal Security) to help visitors quickly
+                find the solution relevant to their needs.
+              </li>
+              <li>
+                <strong>Action-Oriented Design:</strong> Our "Get Started" buttons are
+                context-aware, ensuring you are directed to the right team immediately.
+              </li>
+              <li>
+                <strong>Integrated About Links:</strong> We believe corporate information shouldn't
+                be hidden. Our story and values are front and center.
+              </li>
+            </ul>
+          </div>
+
+          {/* 2. Comprehensive Footer */}
+          <div>
+            <h3>2. Comprehensive Footer as Trust Anchor</h3>
+            <p>Our footer acts as a complete sitemap and trust‑building tool.</p>
+            <ul>
+              <li>
+                <strong>Customer Service:</strong> We provide support availability and contact
+                channels directly at the bottom of every page.
+              </li>
+              <li>
+                <strong>Service Index:</strong> A complete list of our specialized services, from
+                mesh networks to SOC 2 compliance.
+              </li>
+              <li>
+                <strong>Legal & Compliance:</strong> Direct links to our Privacy Policy, Terms, and
+                this Transparency page.
+              </li>
+            </ul>
+          </div>
+
+          {/* 3. Transparent Corporate Information */}
+          <div>
+            <h3>3. Transparent Corporate Information</h3>
+            <p>
+              <strong>Mission and Story:</strong> We explain the "why": bringing enterprise-grade
+              discipline to businesses and families, without the enterprise price tag. We share our
+              origins.
+            </p>
+            <p>
+              <strong>Values and Ethics:</strong>
+            </p>
+            <ul>
+              <li>
+                <strong>Ethics Charter:</strong> We do not sell client data. We openly declare that
+                our charter is a moral imperative guiding all decision-making, not just a compliance
+                checklist.
+              </li>
+              <li>
+                <strong>Whistleblower Policy:</strong> We empower employees, contractors, and
+                suppliers to report wrongdoing without fear of retaliation.
+              </li>
+              <li>
+                <strong>"No-BS" Promise:</strong> We will always tell you when a cheaper solution
+                exists, even if it means we make less money.
+              </li>
+            </ul>
+          </div>
+
+          {/* 4. Sustainability */}
+          <div>
+            <h3>4. Commitment to Sustainability</h3>
+            <ul>
+              <li>
+                <strong>Remote-First:</strong> Our team works remotely by default.
+              </li>
+              <li>
+                <strong>Hardware Lifecycle:</strong> We partner with certified recyclers to
+                refurbish or recycle decommissioned client equipment.
+              </li>
+              <li>
+                <strong>Supplier Engagement:</strong> We evaluate major hardware vendors against ESG
+                criteria and integrate sustainability commitments into our procurement advice.
+              </li>
+            </ul>
+          </div>
+
+          {/* 5. DEI */}
+          <div>
+            <h3>5. Diversity, Equity & Inclusion (DEI)</h3>
+            <ul>
+              <li>
+                <strong>Inclusive Culture:</strong> We offer diversity training and have adopted
+                flexible working policies that support parents and caregivers.
+              </li>
+              <li>
+                <strong>Bias‑free Recruitment:</strong> We recruit based on skills, utilizing
+                interview panels with diverse backgrounds to reduce unconscious bias.
+              </li>
+              <li>
+                <strong>Advocacy:</strong> We believe that a team with varied life experiences
+                identifies security blind spots that a homogenous team would miss.
+              </li>
+            </ul>
+          </div>
+
+          {/* 6. Operational Transparency */}
+          <div>
+            <h3>6. Operational Transparency and Reliability</h3>
+            <ul>
+              <li>
+                <strong>Status Page:</strong> Our <Link href={routePaths.status}>status page</Link>{" "}
+                explains how to report an active problem and links to the uptime commitment in our
+                Terms of Service. It does not show live monitoring yet.
+              </li>
+              <li>
+                <strong>Support Availability:</strong> We are available via multiple channels (chat,
+                email, phone) to address issues quickly, with clear SLAs for our retainer clients.
+              </li>
+              <li>
+                <strong>Policy Access:</strong> Our privacy, security, and AI usage guidelines are
+                always just one click away in our footer.
+              </li>
+            </ul>
+          </div>
+
+          {/* 7. Roadmap */}
+          <div>
+            <h3>7. Our Continuous Improvement Roadmap</h3>
+            <p>
+              Transparency is a journey, not a destination. Here is what we are working on next:
+            </p>
+            <ul>
+              <li>
+                <strong>Annual Reporting:</strong> We are compiling our first public Sustainability
+                and DEI report for release next fiscal year.
+              </li>
+              <li>
+                <strong>Status Page Evolution:</strong> We are building a public-facing dashboard
+                for real-time network health monitoring for our managed clients.
+              </li>
+              <li>
+                <strong>Community Training:</strong> We are launching free cybersecurity workshops
+                for local nonprofits to give back to our community.
+              </li>
+            </ul>
+          </div>
+
+          {/* 8. AI Usage Policy */}
+          <div>
+            <h3>8. Human-First, AI-Second</h3>
+            <p>We believe technology should amplify human expertise, not replace it.</p>
+            <ul>
+              <li>
+                <strong>Human Decision-Making:</strong> All strategic decisions, client
+                communications, and critical recommendations are made by experienced professionals,
+                never automated.
+              </li>
+              <li>
+                <strong>AI as a Tool:</strong> We use machine learning tools to enhance code
+                quality, catch errors, optimize configurations, and accelerate research. These tools
+                help us deliver higher quality work, faster.
+              </li>
+              <li>
+                <strong>Quality Over Speed:</strong> AI helps us produce better deliverables, but we
+                review, validate, and take full accountability for everything we ship.
+              </li>
+              <li>
+                <strong>Transparency:</strong> If we use AI-assisted tools on your project, we
+                disclose it. You always know how your work is being produced.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </ProseSection>
+
+      <ProseSection scheme="cream">
+        <h3>Security</h3>
+        <p>
+          <strong>Encrypted in Transit and at Rest</strong>
+        </p>
+        <p>
+          Client data is encrypted with TLS 1.2+ in transit and AES-256 at rest, and multi-factor
+          authentication is required for all administrative access.
+        </p>
+      </ProseSection>
+
+      <ProseSection>
+        <h3>Technical Colophon</h3>
+        <p>
+          This site is built on the shoulders of giants. We utilize open-source software to deliver
+          a fast, secure experience.
+        </p>
+        <dl>
+          <div>
+            <dt>Framework</dt>
+            <dd>
+              <a href="https://nextjs.org" target="_blank" rel="noreferrer">
+                Next.js 15 (App Router)
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt>Styling</dt>
+            <dd>
+              <a href="https://tailwindcss.com" target="_blank" rel="noreferrer">
+                Tailwind CSS 4
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt>TypeScript</dt>
+            <dd>
+              <a href="https://typescriptlang.org" target="_blank" rel="noreferrer">
+                TypeScript 5
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt>Components</dt>
+            <dd>
+              <a href="https://ui.shadcn.com" target="_blank" rel="noreferrer">
+                shadcn/ui
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt>Icons</dt>
+            <dd>
+              <a href="https://lucide.dev" target="_blank" rel="noreferrer">
+                Lucide React
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt>Animation</dt>
+            <dd>
+              <a href="https://motion.dev" target="_blank" rel="noreferrer">
+                Motion
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt>Deployment</dt>
+            <dd>
+              <a href="https://vercel.com" target="_blank" rel="noreferrer">
+                Vercel
+              </a>
+            </dd>
+          </div>
+        </dl>
+
+        <div>
+          <h3>Analytics & Monitoring</h3>
+          <p>
+            Analytics tools used to improve user experience and site performance. Loaded only with
+            your explicit consent (except essential support chat).
           </p>
-        </div>
-      </section>
-
-      <div className="container mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-12 gap-12">
-          {/* Main Content: The Framework */}
-          <div className="md:col-span-8 space-y-16">
-            <section>
-              <h2 className="text-2xl font-bold text-brand-oxford mb-6 flex items-center gap-2">
-                <Scale className="text-brand-copper" /> The Humaneers Digital Constitution
-              </h2>
-              <p className="text-brand-slate mb-8 leading-relaxed">
-                Serving businesses and families requires more than technical expertise. It demands
-                transparent communication, ethical operations, and a user-centric digital
-                experience. We have adopted this framework to design our policies and processes,
-                ensuring we build trust and foster long-term relationships with our clients.
-              </p>
-
-              <div className="space-y-12">
-                {/* 1. Clear Navigation */}
-                <div className="border-l-4 border-brand-copper pl-6 py-1">
-                  <h3 className="text-xl font-bold text-brand-oxford mb-3 flex items-center gap-2">
-                    <Layout className="w-5 h-5 text-brand-copper" /> 1. Clear and Segment‑Oriented
-                    Navigation
-                  </h3>
-                  <p className="text-brand-slate mb-4">
-                    A well‑structured navigation is essential for users to understand our offerings
-                    and values.
-                  </p>
-                  <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
-                    <li>
-                      <strong>Sticky Header:</strong> We keep a minimal high‑contrast bar fixed at
-                      the top of the page so that key actions remain visible during scrolling.
-                    </li>
-                    <li>
-                      <strong>Segmented Service Menu:</strong> We split our offerings into clear
-                      categories (Managed IT, Brand Growth, Personal Security) to help visitors
-                      quickly find the solution relevant to their needs.
-                    </li>
-                    <li>
-                      <strong>Action-Oriented Design:</strong> Our "Get Started" buttons are
-                      context-aware, ensuring you are directed to the right team immediately.
-                    </li>
-                    <li>
-                      <strong>Integrated About Links:</strong> We believe corporate information
-                      shouldn't be hidden. Our story and values are front and center.
-                    </li>
-                  </ul>
-                </div>
-
-                {/* 2. Comprehensive Footer */}
-                <div className="border-l-4 border-brand-copper pl-6 py-1">
-                  <h3 className="text-xl font-bold text-brand-oxford mb-3 flex items-center gap-2">
-                    <Layout className="w-5 h-5 text-brand-copper" /> 2. Comprehensive Footer as
-                    Trust Anchor
-                  </h3>
-                  <p className="text-brand-slate mb-4">
-                    Our footer acts as a complete sitemap and trust‑building tool.
-                  </p>
-                  <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
-                    <li>
-                      <strong>Customer Service:</strong> We provide support availability and contact
-                      channels directly at the bottom of every page.
-                    </li>
-                    <li>
-                      <strong>Service Index:</strong> A complete list of our specialized services,
-                      from mesh networks to SOC 2 compliance.
-                    </li>
-                    <li>
-                      <strong>Legal & Compliance:</strong> Direct links to our Privacy Policy,
-                      Terms, and this Transparency page.
-                    </li>
-                  </ul>
-                </div>
-
-                {/* 3. Transparent Corporate Information */}
-                <div className="border-l-4 border-brand-copper pl-6 py-1">
-                  <h3 className="text-xl font-bold text-brand-oxford mb-3 flex items-center gap-2">
-                    <Heart className="w-5 h-5 text-brand-copper" /> 3. Transparent Corporate
-                    Information
-                  </h3>
-                  <p className="text-brand-slate mb-4">
-                    <strong>Mission and Story:</strong> We explain the "why": bringing
-                    enterprise-grade discipline to businesses and families, without the enterprise
-                    price tag. We share our origins.
-                  </p>
-                  <p className="text-brand-slate mb-4">
-                    <strong>Values and Ethics:</strong>
-                  </p>
-                  <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
-                    <li>
-                      <strong>Ethics Charter:</strong> We do not sell client data. We openly declare
-                      that our charter is a moral imperative guiding all decision-making, not just a
-                      compliance checklist.
-                    </li>
-                    <li>
-                      <strong>Whistleblower Policy:</strong> We empower employees, contractors, and
-                      suppliers to report wrongdoing without fear of retaliation.
-                    </li>
-                    <li>
-                      <strong>"No-BS" Promise:</strong> We will always tell you when a cheaper
-                      solution exists, even if it means we make less money.
-                    </li>
-                  </ul>
-                </div>
-
-                {/* 4. Sustainability */}
-                <div className="border-l-4 border-brand-copper pl-6 py-1">
-                  <h3 className="text-xl font-bold text-brand-oxford mb-3 flex items-center gap-2">
-                    <Globe className="w-5 h-5 text-brand-copper" /> 4. Commitment to Sustainability
-                  </h3>
-                  <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
-                    <li>
-                      <strong>Remote-First:</strong> Our team works remotely by default.
-                    </li>
-                    <li>
-                      <strong>Hardware Lifecycle:</strong> We partner with certified recyclers to
-                      refurbish or recycle decommissioned client equipment.
-                    </li>
-                    <li>
-                      <strong>Supplier Engagement:</strong> We evaluate major hardware vendors
-                      against ESG criteria and integrate sustainability commitments into our
-                      procurement advice.
-                    </li>
-                  </ul>
-                </div>
-
-                {/* 5. DEI */}
-                <div className="border-l-4 border-brand-copper pl-6 py-1">
-                  <h3 className="text-xl font-bold text-brand-oxford mb-3 flex items-center gap-2">
-                    <Users className="w-5 h-5 text-brand-copper" /> 5. Diversity, Equity & Inclusion
-                    (DEI)
-                  </h3>
-                  <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
-                    <li>
-                      <strong>Inclusive Culture:</strong> We offer diversity training and have
-                      adopted flexible working policies that support parents and caregivers.
-                    </li>
-                    <li>
-                      <strong>Bias‑free Recruitment:</strong> We recruit based on skills, utilizing
-                      interview panels with diverse backgrounds to reduce unconscious bias.
-                    </li>
-                    <li>
-                      <strong>Advocacy:</strong> We believe that a team with varied life experiences
-                      identifies security blind spots that a homogenous team would miss.
-                    </li>
-                  </ul>
-                </div>
-
-                {/* 6. Operational Transparency */}
-                <div className="border-l-4 border-brand-copper pl-6 py-1">
-                  <h3 className="text-xl font-bold text-brand-oxford mb-3 flex items-center gap-2">
-                    <Shield className="w-5 h-5 text-brand-copper" /> 6. Operational Transparency and
-                    Reliability
-                  </h3>
-                  <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
-                    <li>
-                      <strong>Status Page:</strong> Our{" "}
-                      <Link
-                        href={routePaths.status}
-                        className="text-brand-copper-text underline hover:text-brand-copper-text-dark"
-                      >
-                        status page
-                      </Link>{" "}
-                      explains how to report an active problem and links to the uptime commitment in
-                      our Terms of Service. It does not show live monitoring yet.
-                    </li>
-                    <li>
-                      <strong>Support Availability:</strong> We are available via multiple channels
-                      (chat, email, phone) to address issues quickly, with clear SLAs for our
-                      retainer clients.
-                    </li>
-                    <li>
-                      <strong>Policy Access:</strong> Our privacy, security, and AI usage guidelines
-                      are always just one click away in our footer.
-                    </li>
-                  </ul>
-                </div>
-
-                {/* 7. Roadmap */}
-                <div className="border-l-4 border-brand-copper pl-6 py-1">
-                  <h3 className="text-xl font-bold text-brand-oxford mb-3 flex items-center gap-2">
-                    <ArrowRight className="w-5 h-5 text-brand-copper" /> 7. Our Continuous
-                    Improvement Roadmap
-                  </h3>
-                  <p className="text-brand-slate mb-4">
-                    Transparency is a journey, not a destination. Here is what we are working on
-                    next:
-                  </p>
-                  <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
-                    <li>
-                      <strong>Annual Reporting:</strong> We are compiling our first public
-                      Sustainability and DEI report for release next fiscal year.
-                    </li>
-                    <li>
-                      <strong>Status Page Evolution:</strong> We are building a public-facing
-                      dashboard for real-time network health monitoring for our managed clients.
-                    </li>
-                    <li>
-                      <strong>Community Training:</strong> We are launching free cybersecurity
-                      workshops for local nonprofits to give back to our community.
-                    </li>
-                  </ul>
-                </div>
-
-                {/* 8. AI Usage Policy */}
-                <div className="border-l-4 border-brand-copper pl-6 py-1">
-                  <h3 className="text-xl font-bold text-brand-oxford mb-3 flex items-center gap-2">
-                    <Users className="w-5 h-5 text-brand-copper" /> 8. Human-First, AI-Second
-                  </h3>
-                  <p className="text-brand-slate mb-4">
-                    We believe technology should amplify human expertise, not replace it.
-                  </p>
-                  <ul className="list-disc pl-5 space-y-2 text-sm text-brand-slate">
-                    <li>
-                      <strong>Human Decision-Making:</strong> All strategic decisions, client
-                      communications, and critical recommendations are made by experienced
-                      professionals, never automated.
-                    </li>
-                    <li>
-                      <strong>AI as a Tool:</strong> We use machine learning tools to enhance code
-                      quality, catch errors, optimize configurations, and accelerate research. These
-                      tools help us deliver higher quality work, faster.
-                    </li>
-                    <li>
-                      <strong>Quality Over Speed:</strong> AI helps us produce better deliverables,
-                      but we review, validate, and take full accountability for everything we ship.
-                    </li>
-                    <li>
-                      <strong>Transparency:</strong> If we use AI-assisted tools on your project, we
-                      disclose it. You always know how your work is being produced.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </section>
-          </div>
-
-          {/* Sidebar: Colophon Credits */}
-          <div className="md:col-span-4 space-y-12">
-            <div className="bg-brand-oxford/5 p-6 rounded-xl border border-brand-copper/20">
-              <h3 className="font-bold text-brand-oxford mb-4 flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-brand-copper" /> Security
-              </h3>
-              <div className="flex items-center gap-3 mb-2">
-                <ShieldCheck className="w-8 h-8 text-brand-copper shrink-0" />
-                <span className="font-bold text-brand-oxford">
-                  Encrypted in Transit and at Rest
-                </span>
-              </div>
-              <p className="text-xs text-brand-slate">
-                Client data is encrypted with TLS 1.2+ in transit and AES-256 at rest, and
-                multi-factor authentication is required for all administrative access.
-              </p>
+          <dl>
+            <div>
+              <dt>
+                <a href="https://vercel.com/analytics" target="_blank" rel="noreferrer">
+                  Vercel Analytics
+                </a>
+              </dt>
+              <dd>Privacy-friendly web analytics</dd>
             </div>
-
-            <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
-              <h3 className="font-bold text-brand-oxford mb-4 flex items-center gap-2">
-                <Code className="w-5 h-5 text-brand-copper" /> Technical Colophon
-              </h3>
-              <p className="text-xs text-gray-500 mb-4">
-                This site is built on the shoulders of giants. We utilize open-source software to
-                deliver a fast, secure experience.
-              </p>
-              <ul className="space-y-3 text-sm">
-                <li className="flex items-center justify-between">
-                  <span className="font-medium text-gray-700">Framework</span>
-                  <a
-                    href="https://nextjs.org"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-brand-copper-text hover:underline"
-                  >
-                    Next.js 15 (App Router)
-                  </a>
-                </li>
-                <li className="flex items-center justify-between">
-                  <span className="font-medium text-gray-700">Styling</span>
-                  <a
-                    href="https://tailwindcss.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-brand-copper-text hover:underline"
-                  >
-                    Tailwind CSS 4
-                  </a>
-                </li>
-                <li className="flex items-center justify-between">
-                  <span className="font-medium text-gray-700">TypeScript</span>
-                  <a
-                    href="https://typescriptlang.org"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-brand-copper-text hover:underline"
-                  >
-                    TypeScript 5
-                  </a>
-                </li>
-                <li className="flex items-center justify-between">
-                  <span className="font-medium text-gray-700">Components</span>
-                  <a
-                    href="https://ui.shadcn.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-brand-copper-text hover:underline"
-                  >
-                    shadcn/ui
-                  </a>
-                </li>
-                <li className="flex items-center justify-between">
-                  <span className="font-medium text-gray-700">Icons</span>
-                  <a
-                    href="https://lucide.dev"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-brand-copper-text hover:underline"
-                  >
-                    Lucide React
-                  </a>
-                </li>
-                <li className="flex items-center justify-between">
-                  <span className="font-medium text-gray-700">Animation</span>
-                  <a
-                    href="https://motion.dev"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-brand-copper-text hover:underline"
-                  >
-                    Motion
-                  </a>
-                </li>
-                <li className="flex items-center justify-between">
-                  <span className="font-medium text-gray-700">Deployment</span>
-                  <a
-                    href="https://vercel.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-brand-copper-text hover:underline"
-                  >
-                    Vercel
-                  </a>
-                </li>
-              </ul>
-
-              <div className="mt-8 pt-8 border-t border-gray-200">
-                <h3 className="font-bold text-brand-oxford mb-4 flex items-center gap-2">
-                  <Shield className="w-5 h-5 text-brand-copper" /> Analytics & Monitoring
-                </h3>
-                <p className="text-xs text-gray-500 mb-4">
-                  Analytics tools used to improve user experience and site performance. Loaded only
-                  with your explicit consent (except essential support chat).
-                </p>
-                <ul className="space-y-3 text-sm">
-                  <li className="flex flex-col gap-1">
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium text-gray-700">Vercel Analytics</span>
-                      <a
-                        href="https://vercel.com/analytics"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-brand-copper-text hover:underline text-xs"
-                      >
-                        ↗
-                      </a>
-                    </div>
-                    <span className="text-xs text-gray-500">Privacy-friendly web analytics</span>
-                  </li>
-                  <li className="flex flex-col gap-1">
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium text-gray-700">Vercel Speed Insights</span>
-                      <a
-                        href="https://vercel.com/docs/speed-insights"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-brand-copper-text hover:underline text-xs"
-                      >
-                        ↗
-                      </a>
-                    </div>
-                    <span className="text-xs text-gray-500">Core Web Vitals monitoring</span>
-                  </li>
-                  <li className="flex flex-col gap-1">
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium text-gray-700">ContentSquare</span>
-                      <a
-                        href="https://contentsquare.com"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-brand-copper-text hover:underline text-xs"
-                      >
-                        ↗
-                      </a>
-                    </div>
-                    <span className="text-xs text-gray-500">Digital experience analytics</span>
-                  </li>
-                  <li className="flex flex-col gap-1">
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium text-gray-700">Zoho PageSense</span>
-                      <a
-                        href="https://www.zoho.com/pagesense/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-brand-copper-text hover:underline text-xs"
-                      >
-                        ↗
-                      </a>
-                    </div>
-                    <span className="text-xs text-gray-500">Heatmaps & session recordings</span>
-                  </li>
-                  <li className="flex flex-col gap-1">
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium text-gray-700">Zoho SalesIQ</span>
-                      <a
-                        href="https://www.zoho.com/salesiq/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-brand-copper-text hover:underline text-xs"
-                      >
-                        ↗
-                      </a>
-                    </div>
-                    <span className="text-xs text-gray-500">
-                      Live chat support (essential service)
-                    </span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="mt-8 pt-8 border-t border-gray-200">
-                <h3 className="font-bold text-brand-oxford mb-4 flex items-center gap-2">
-                  <Users className="w-5 h-5 text-brand-copper" /> Business Operations
-                </h3>
-                <p className="text-xs text-gray-500 mb-4">
-                  The tools we use to run our business and serve our clients.
-                </p>
-                <ul className="space-y-3 text-sm">
-                  <li className="flex flex-col gap-1">
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium text-gray-700">Zoho CRM & Desk</span>
-                      <a
-                        href="https://zoho.com"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-brand-copper-text hover:underline text-xs"
-                      >
-                        ↗
-                      </a>
-                    </div>
-                  </li>
-                  <li className="flex flex-col gap-1">
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium text-gray-700">Google Workspace</span>
-                      <a
-                        href="https://workspace.google.com"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-brand-copper-text hover:underline text-xs"
-                      >
-                        ↗
-                      </a>
-                    </div>
-                  </li>
-                  <li className="flex flex-col gap-1">
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium text-gray-700">Stripe</span>
-                      <a
-                        href="https://stripe.com"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-brand-copper-text hover:underline text-xs"
-                      >
-                        ↗
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="mt-8 pt-8 border-t border-gray-200">
-                <h3 className="font-bold text-brand-oxford mb-4 flex items-center gap-2">
-                  <ImageIcon className="w-5 h-5 text-brand-copper" /> Photography Credits
-                </h3>
-                <p className="text-xs text-gray-500 mb-4">
-                  Visuals courtesy of the talented community at Unsplash.
-                </p>
-                <ul className="space-y-3 text-xs">
-                  <li className="flex flex-col gap-1">
-                    <span className="font-medium text-gray-700">Tempe Morning</span>
-                    <a
-                      href="https://unsplash.com"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-brand-copper-text hover:underline truncate"
-                    >
-                      Unsplash
-                    </a>
-                  </li>
-                </ul>
-              </div>
+            <div>
+              <dt>
+                <a href="https://vercel.com/docs/speed-insights" target="_blank" rel="noreferrer">
+                  Vercel Speed Insights
+                </a>
+              </dt>
+              <dd>Core Web Vitals monitoring</dd>
             </div>
-          </div>
+            <div>
+              <dt>
+                <a href="https://contentsquare.com" target="_blank" rel="noreferrer">
+                  ContentSquare
+                </a>
+              </dt>
+              <dd>Digital experience analytics</dd>
+            </div>
+            <div>
+              <dt>
+                <a href="https://www.zoho.com/pagesense/" target="_blank" rel="noreferrer">
+                  Zoho PageSense
+                </a>
+              </dt>
+              <dd>Heatmaps & session recordings</dd>
+            </div>
+            <div>
+              <dt>
+                <a href="https://www.zoho.com/salesiq/" target="_blank" rel="noreferrer">
+                  Zoho SalesIQ
+                </a>
+              </dt>
+              <dd>Live chat support (essential service)</dd>
+            </div>
+          </dl>
         </div>
-      </div>
-    </div>
+
+        <div>
+          <h3>Business Operations</h3>
+          <p>The tools we use to run our business and serve our clients.</p>
+          <ul>
+            <li>
+              <a href="https://zoho.com" target="_blank" rel="noreferrer">
+                Zoho CRM & Desk
+              </a>
+            </li>
+            <li>
+              <a href="https://workspace.google.com" target="_blank" rel="noreferrer">
+                Google Workspace
+              </a>
+            </li>
+            <li>
+              <a href="https://stripe.com" target="_blank" rel="noreferrer">
+                Stripe
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Photography Credits</h3>
+          <p>Visuals courtesy of the talented community at Unsplash.</p>
+          <dl>
+            <div>
+              <dt>Tempe Morning</dt>
+              <dd>
+                <a href="https://unsplash.com" target="_blank" rel="noreferrer">
+                  Unsplash
+                </a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </ProseSection>
+    </>
   );
 }
