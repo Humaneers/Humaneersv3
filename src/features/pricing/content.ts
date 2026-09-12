@@ -643,6 +643,6 @@ export const FAQ_HEADING = "Executive Briefing";
 
 export const ENTERPRISE_CTA = {
   heading: "Need a custom enterprise solution?",
-  text: "We work with larger organizations to build custom infrastructure and growth plans. Enterprise engagements start with a conversation about how your organization actually works.",
+  text: "We work with larger organizations to build custom infrastructure and growth plans. We don't just manage servers; we protect the people running them. Enterprise engagements start with a conversation about how your organization actually works.",
   ctas: [{ label: "Contact Strategic Sales", href: routePaths.talkToSales }],
 } satisfies CTASectionProps;
