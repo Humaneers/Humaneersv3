@@ -2,9 +2,12 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Laptop, LifeBuoy, ShieldCheck } from "lucide-react";
+import { Laptop, LifeBuoy, Mail, Phone, ShieldCheck } from "lucide-react";
 
+import { ActionCards, type ActionCardsProps } from "./ActionCards";
+import { ContactSection, type ContactItem } from "./ContactSection";
 import { CTASection, type CTASectionProps } from "./CTASection";
+import { FormSection } from "./FormSection";
 import { FAQSection } from "./FAQSection";
 import { FeatureGrid, type FeatureGridProps } from "./FeatureGrid";
 import { PageHeader, type PageHeaderProps } from "./PageHeader";
@@ -45,7 +48,8 @@ function expectSectionBasics(root: HTMLElement) {
     expect(heading.parentElement?.closest(HEADING_SELECTOR) ?? null).toBeNull();
   }
   for (const link of Array.from(root.querySelectorAll("a"))) {
-    expect(link.getAttribute("href")).toMatch(/^\//);
+    // A route, or a phone or email channel (ContactSection, FormSection).
+    expect(link.getAttribute("href")).toMatch(/^(\/|tel:|mailto:)/);
     expect(link.textContent?.trim()).not.toBe("");
     expect(link.closest("button")).toBeNull();
     expect(link.querySelector("button")).toBeNull();
@@ -554,5 +558,217 @@ describe("prop types", () => {
       image: { src: "/og-image.jpg", width: 1, height: 1 },
     };
     expect([tooManyCtas, centeredWithImage, imageWithoutAlt]).toHaveLength(3);
+  });
+});
+
+// Sections added in cut 4: ContactSection (contact19), ActionCards (layout364)
+// and FormSection (contact5).
+
+const CALL = { label: "(928) 440-1505", href: "tel:+19284401505" } as const;
+const HELLO = { label: "hello@humaneers.dev", href: "mailto:hello@humaneers.dev" } as const;
+
+function sectionSchemeClasses(root: HTMLElement) {
+  const section = root.querySelector("section");
+  expect(section?.classList.contains("bg-scheme-background")).toBe(true);
+  return Array.from(section?.classList ?? []).filter((c) => c.startsWith("scheme-"));
+}
+
+describe("ContactSection", () => {
+  const items: ContactItem[] = [
+    {
+      icon: Mail,
+      heading: "Email",
+      text: "For general questions, email us directly.",
+      link: HELLO,
+    },
+    { icon: Phone, heading: "Phone", link: CALL },
+    { icon: LifeBuoy, heading: "Office", text: "Tempe, Arizona" },
+  ];
+
+  it("renders an h2, an h3 per item, decorative icons and underlined channel links", () => {
+    const { container } = render(
+      <ContactSection
+        eyebrow="Contact"
+        heading="Get in touch"
+        description="Pick the channel that suits you."
+        items={items}
+      />
+    );
+    expect(headingLevels(container)).toEqual([2, 3, 3, 3]);
+    expect(screen.getByText("Contact").tagName).toBe("P");
+    expect(screen.getByText("Pick the channel that suits you.")).toBeTruthy();
+    container
+      .querySelectorAll("svg")
+      .forEach((svg) => expect(svg.getAttribute("aria-hidden")).toBe("true"));
+    for (const channel of [CALL, HELLO]) {
+      const link = screen.getByRole("link", { name: channel.label });
+      expect(link.getAttribute("href")).toBe(channel.href);
+      expect(link.className).toContain("underline");
+    }
+    // The office has text and no link.
+    expect(container.querySelectorAll("a")).toHaveLength(2);
+    expect(container.querySelectorAll("button")).toHaveLength(0);
+    expect(container.querySelector(".md\\:grid-cols-3")).not.toBeNull();
+    expectSectionBasics(container);
+  });
+
+  it("leaves out the eyebrow and description when none is given and sets two columns", () => {
+    const { container } = render(
+      <ContactSection heading="Reach us directly" items={items.slice(0, 2)} columns={2} />
+    );
+    expect(headingLevels(container)).toEqual([2, 3, 3]);
+    expect(container.querySelectorAll("p.text-scheme-accent")).toHaveLength(0);
+    expect(container.querySelector(".md\\:grid-cols-2")).not.toBeNull();
+    expectSectionBasics(container);
+  });
+});
+
+describe("ActionCards", () => {
+  it("renders an h2, an h3 per card, a route action as a link and an in-page action as a button", async () => {
+    const user = userEvent.setup();
+    const onClick = vi.fn();
+    const cards: ActionCardsProps["cards"] = [
+      {
+        icon: LifeBuoy,
+        heading: "Existing clients",
+        text: "Send us a maintenance request.",
+        action: { label: "Open a request", onClick },
+      },
+      {
+        icon: Laptop,
+        heading: "New clients",
+        text: "Tell us about your setup.",
+        action: TALK,
+      },
+    ];
+    const { container } = render(
+      <ActionCards
+        heading="How can we help?"
+        description="Pick the path that fits."
+        cards={cards}
+      />
+    );
+    expect(headingLevels(container)).toEqual([2, 3, 3]);
+    expectCtaLinks(container, [TALK]);
+
+    const button = screen.getByRole("button", { name: "Open a request" });
+    expect(button.tagName).toBe("BUTTON");
+    // type="button": the action runs in place and never submits a surrounding form.
+    expect(button.getAttribute("type")).toBe("button");
+    await user.click(button);
+    expect(onClick).toHaveBeenCalledTimes(1);
+
+    container
+      .querySelectorAll("svg")
+      .forEach((svg) => expect(svg.getAttribute("aria-hidden")).toBe("true"));
+    expectSectionBasics(container);
+  });
+});
+
+describe("FormSection", () => {
+  it("renders an h2, the icon rows and the form it is given, untouched", () => {
+    const { container } = render(
+      <FormSection
+        eyebrow="Waitlist"
+        heading="Join the waitlist"
+        description="A person reads every entry."
+        details={[
+          { icon: Phone, label: CALL.label, href: CALL.href },
+          { icon: ShieldCheck, label: "US-based team" },
+        ]}
+      >
+        <form aria-label="Waitlist">
+          <label htmlFor="test-email">Email</label>
+          <input id="test-email" name="email" />
+          <button type="submit">Join</button>
+        </form>
+      </FormSection>
+    );
+    expect(headingLevels(container)).toEqual([2]);
+    expect(screen.getByText("Waitlist", { selector: "p" })).toBeTruthy();
+    const call = screen.getByRole("link", { name: CALL.label });
+    expect(call.getAttribute("href")).toBe(CALL.href);
+    expect(call.className).toContain("underline");
+    expect(screen.getByText("US-based team").closest("a")).toBeNull();
+    expect(screen.getAllByRole("listitem")).toHaveLength(2);
+
+    const form = screen.getByRole("form", { name: "Waitlist" });
+    expect(within(form).getByLabelText("Email").getAttribute("name")).toBe("email");
+    expect(within(form).getByRole("button", { name: "Join" }).getAttribute("type")).toBe("submit");
+    expectSectionBasics(container);
+  });
+
+  it("renders without details", () => {
+    const { container } = render(
+      <FormSection heading="Join the waitlist" description="A person reads every entry.">
+        <p>Form</p>
+      </FormSection>
+    );
+    expect(container.querySelector("ul")).toBeNull();
+    expect(headingLevels(container)).toEqual([2]);
+  });
+});
+
+describe("cut 4 section schemes", () => {
+  const SECTIONS: Record<string, (scheme?: SectionScheme) => React.ReactElement> = {
+    ContactSection: (scheme) => (
+      <ContactSection
+        heading="Get in touch"
+        items={[{ icon: Phone, heading: "Phone", link: CALL }]}
+        scheme={scheme}
+      />
+    ),
+    ActionCards: (scheme) => (
+      <ActionCards
+        heading="How can we help?"
+        cards={[{ icon: Laptop, heading: "New clients", text: "Tell us.", action: TALK }]}
+        scheme={scheme}
+      />
+    ),
+    FormSection: (scheme) => (
+      <FormSection heading="Join the waitlist" description="A person reads it." scheme={scheme}>
+        <p>Form</p>
+      </FormSection>
+    ),
+  };
+
+  const EXPECTED: Record<SectionScheme, string[]> = {
+    light: [],
+    cream: ["scheme-cream"],
+    dark: ["scheme-oxford"],
+  };
+
+  for (const [name, renderSection] of Object.entries(SECTIONS)) {
+    it(`${name} defaults to the light scheme`, () => {
+      const { container } = render(renderSection());
+      expect(sectionSchemeClasses(container)).toEqual([]);
+    });
+
+    for (const scheme of ["light", "cream", "dark"] as const) {
+      it(`${name} applies the ${scheme} scheme`, () => {
+        const { container } = render(renderSection(scheme));
+        expect(sectionSchemeClasses(container)).toEqual(EXPECTED[scheme]);
+        expectSectionBasics(container);
+      });
+    }
+  }
+});
+
+describe("cut 4 prop types", () => {
+  it("reject a route as a contact channel and a card with no action", () => {
+    const routeAsChannel: ContactItem = {
+      icon: Phone,
+      heading: "Phone",
+      // @ts-expect-error a contact link is a tel: or mailto: channel, not a route
+      link: { label: "Contact", href: "/contact" },
+    };
+    const cardWithoutAction: ActionCardsProps["cards"][number] = {
+      icon: Laptop,
+      heading: "New clients",
+      text: "Tell us.",
+      // @ts-expect-error every card carries one action
+      action: undefined,
+    };
+    expect([routeAsChannel, cardWithoutAction]).toHaveLength(2);
   });
 });
