@@ -109,7 +109,7 @@ export const TIER_COPY: Readonly<Record<string, TierCopy>> = {
     recommended: true,
     parkedCta: "Choose Growth",
   },
-  Enterprise: {
+  BusinessOne: {
     description: "Strategic leadership and sovereignty for market leaders.",
     features: [
       "Includes Two Free Users",
@@ -237,6 +237,18 @@ const SEGMENT_NOTE: Partial<Record<TierSegment, PricingPlansTab["note"]>> = {
 const PER_USER_FOOTNOTE =
   "* The base price covers infrastructure and support and includes the users listed on each plan. The per-user price applies to each user beyond those.";
 
+/** U+2120 SERVICE MARK, written as an escape so the source stays ASCII. */
+const SERVICE_MARK = "\u2120";
+
+/**
+ * The mark set after a plan name where the name is most prominent: the plan
+ * card heading and the comparison column heading. Keyed by tier name. Prose,
+ * the FAQ and the structured data use the bare name.
+ */
+export const PLAN_MARKS: Readonly<Record<string, string>> = Object.fromEntries(
+  PRICING_TIERS.filter((tier) => tier.serviceMark).map((tier) => [tier.name, SERVICE_MARK])
+);
+
 function formatPrice(value: number | string) {
   return typeof value === "number" ? `$${value}` : value;
 }
@@ -248,6 +260,7 @@ function planFor(tier: PricingTier): PricingPlan {
   const assetCosts = tier.segment === "incubation";
   return {
     name: tier.name,
+    nameMark: PLAN_MARKS[tier.name],
     price: formatPrice(tier.basePrice),
     priceUnit: "base / mo",
     priceDetail:
@@ -304,22 +317,22 @@ export const COMPARISON: Partial<Record<TierSegment, readonly ComparisonCategory
         {
           name: "Plan Users Included",
           description: "Number of users included in the base price",
-          values: { Core: "Two Users", Growth: "Two Users", Enterprise: "Two Users" },
+          values: { Core: "Two Users", Growth: "Two Users", BusinessOne: "Two Users" },
         },
         {
           name: "Unlimited Remote Support",
           description: "Helpdesk access for all covered users",
-          values: { Core: true, Growth: true, Enterprise: true },
+          values: { Core: true, Growth: true, BusinessOne: true },
         },
         {
           name: "Microsoft 365 Management",
           description: "Administration of users, licenses, and security policies",
-          values: { Core: true, Growth: true, Enterprise: true },
+          values: { Core: true, Growth: true, BusinessOne: true },
         },
         {
           name: "Vendor Diplomacy",
           description: "We handle ISP and software vendor support tickets",
-          values: { Core: false, Growth: true, Enterprise: true },
+          values: { Core: false, Growth: true, BusinessOne: true },
         },
       ],
     },
@@ -329,28 +342,28 @@ export const COMPARISON: Partial<Record<TierSegment, readonly ComparisonCategory
         {
           name: "Endpoint Security (EDR)",
           description: "Next-gen antivirus and threat detection",
-          values: { Core: true, Growth: true, Enterprise: true },
+          values: { Core: true, Growth: true, BusinessOne: true },
         },
         {
           name: "Fleet Command (MDM)",
           description: "Remote wipe, encryption enforcement, and patch management",
-          values: { Core: true, Growth: true, Enterprise: true },
+          values: { Core: true, Growth: true, BusinessOne: true },
         },
         {
           name: "Advanced Threat Protection",
           description: "AI-driven behavioral analysis and hunt team",
-          values: { Core: false, Growth: true, Enterprise: true },
+          values: { Core: false, Growth: true, BusinessOne: true },
         },
         {
           name: "Security Awareness Training",
           description: "Phishing simulations and education for staff",
-          values: { Core: "Optional", Growth: true, Enterprise: true },
+          values: { Core: "Optional", Growth: true, BusinessOne: true },
         },
         {
           name: "SOC 2 / HIPAA Control Mapping",
           description:
             "We map your configurations to the framework's controls. This is preparation work, not an audit, and it does not certify you or us.",
-          values: { Core: false, Growth: "Assisted", Enterprise: true },
+          values: { Core: false, Growth: "Assisted", BusinessOne: true },
         },
       ],
     },
@@ -360,27 +373,27 @@ export const COMPARISON: Partial<Record<TierSegment, readonly ComparisonCategory
         {
           name: "Quarterly Health Checks",
           description: "Review of technology performance and risks",
-          values: { Core: false, Growth: true, Enterprise: true },
+          values: { Core: false, Growth: true, BusinessOne: true },
         },
         {
           name: "Americanization Strategy",
           description: "Adapting foreign brands for the US market",
-          values: { Core: false, Growth: true, Enterprise: true },
+          values: { Core: false, Growth: true, BusinessOne: true },
         },
         {
           name: "Fractional CIO Access",
           description: "Strategic technology leadership and roadmapping",
-          values: { Core: false, Growth: false, Enterprise: true },
+          values: { Core: false, Growth: false, BusinessOne: true },
         },
         {
           name: "Annual Strategy Retreat",
           description: "In-depth planning session for long-term goals",
-          values: { Core: false, Growth: false, Enterprise: true },
+          values: { Core: false, Growth: false, BusinessOne: true },
         },
         {
           name: "Dedicated Success Manager",
           description: "A single point of contact for your account",
-          values: { Core: false, Growth: false, Enterprise: true },
+          values: { Core: false, Growth: false, BusinessOne: true },
         },
       ],
     },
@@ -390,7 +403,7 @@ export const COMPARISON: Partial<Record<TierSegment, readonly ComparisonCategory
         { name: "Response Time", values: slaRow("business") },
         {
           name: "On-site Support",
-          values: { Core: "Billable", Growth: "Included", Enterprise: "Included" },
+          values: { Core: "Billable", Growth: "Included", BusinessOne: "Included" },
         },
       ],
     },
@@ -400,17 +413,17 @@ export const COMPARISON: Partial<Record<TierSegment, readonly ComparisonCategory
         {
           name: "Concierge Domain Management",
           description: `Purchase, DNS configuration, and renewal management at cost + $${getTier("Incubator").basePrice}/mo service fee`,
-          values: { Core: true, Growth: true, Enterprise: true },
+          values: { Core: true, Growth: true, BusinessOne: true },
         },
         {
           name: "Web Hosting Management",
           description: "Coordination with hosting providers and technical setup",
-          values: { Core: "Available", Growth: true, Enterprise: true },
+          values: { Core: "Available", Growth: true, BusinessOne: true },
         },
         {
           name: "Email Hosting Admin",
           description: "Setup and management of G-Suite / Microsoft 365 mailboxes",
-          values: { Core: true, Growth: true, Enterprise: true },
+          values: { Core: true, Growth: true, BusinessOne: true },
         },
       ],
     },

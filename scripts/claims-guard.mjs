@@ -74,8 +74,63 @@ const tierReferenceTest = {
       const candidates = match[1] ? [match[1]] : match[2].split(/\s(?:and|&)\s/);
       for (const raw of candidates) {
         const name = raw.trim();
-        if (name && !KNOWN_TIER_NAMES.has(name)) return true;
+        // A retired name is retired-tier-name's finding, with its own message.
+        if (name && !KNOWN_TIER_NAMES.has(name) && !RETIRED_NAMES.has(name)) return true;
       }
+    }
+    return false;
+  },
+};
+
+/**
+ * retired-tier-name support — tier names that were renamed and must not
+ * survive in prose. Each entry is the old name and the name that replaced it.
+ *
+ * phantom-tier alone cannot hold a rename: it deliberately lets a bare
+ * "X tier" pass, so "the Enterprise tier" would outlive the rename unnoticed.
+ * This list closes that gap for names we know were in use.
+ *
+ * Enterprise: renamed BusinessOne on 7 Oct 2026 (Leo). A $399 managed plan
+ * called "Enterprise" read as the way into the planned Enterprise Client
+ * Service department.
+ */
+export const RETIRED_TIER_NAMES = [{ name: "Enterprise", current: "BusinessOne" }];
+
+const RETIRED_NAMES = new Set(RETIRED_TIER_NAMES.map((tier) => tier.name));
+const escapeRegExp = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const RETIRED_ALTERNATION = RETIRED_TIER_NAMES.map((tier) => escapeRegExp(tier.name)).join("|");
+// "tier" or "plan", capitalized or not, singular or plural.
+const TIER_WORD = "(?:[Tt]iers?|[Pp]lans?)\\b";
+// The name is matched case-sensitively, as written: lower-case "enterprise"
+// is an ordinary adjective ("enterprise-grade", "a custom enterprise
+// solution") and is never the tier. The name must also stand alone, so
+// "Enterprise strategy", "Enterprise Client Service" and "Enterprise-grade"
+// do not match; only a following "tier" or "plan" makes it a tier reference.
+// A closing tag may sit between the two: "<strong>Enterprise</strong> plan".
+const RETIRED_BARE = new RegExp(
+  `(?<![\\w-])(?:${RETIRED_ALTERNATION})(?:</[A-Za-z][\\w.]*>)?[\\s-]+${TIER_WORD}`
+);
+const RETIRED_QUOTED = new RegExp(
+  `["'\u201c\u2018](?:${RETIRED_ALTERNATION})["'\u201d\u2019]\\s+${TIER_WORD}`
+);
+// A list of tier-shaped names in front of "tier(s)"/"plan(s)": "Growth and
+// Enterprise tiers", "Core, Growth & Enterprise plans", "Growth or Enterprise
+// plan". Any member that is a retired name is a finding.
+const TIER_LIST_SEPARATOR = "(?:,\\s*(?:(?:and|or|&)\\s+)?|\\s+(?:and|or|&)\\s+)";
+const RETIRED_LIST = new RegExp(
+  `\\b(${TIER_NAME_SHAPE}(?:${TIER_LIST_SEPARATOR}${TIER_NAME_SHAPE})+)\\s+${TIER_WORD}`,
+  "g"
+);
+
+const retiredTierTest = {
+  test(line) {
+    if (!RETIRED_ALTERNATION) return false;
+    if (RETIRED_BARE.test(line) || RETIRED_QUOTED.test(line)) return true;
+    RETIRED_LIST.lastIndex = 0;
+    let match;
+    while ((match = RETIRED_LIST.exec(line))) {
+      const members = match[1].split(new RegExp(TIER_LIST_SEPARATOR));
+      if (members.some((name) => RETIRED_NAMES.has(name.trim()))) return true;
     }
     return false;
   },
@@ -207,6 +262,14 @@ export const RULES = [
     test: tierReferenceTest,
     message:
       "This names a tier or plan that isn't defined in src/data/pricing.ts. Either it's a typo for a real tier name (the 'Scale' and 'Foundation' incidents were both this shape), or the tier module is missing the new tier and needs it added first.",
+  },
+  {
+    id: "retired-tier-name",
+    mode: "line",
+    test: retiredTierTest,
+    message: `This names a tier by a name it no longer has. ${RETIRED_TIER_NAMES.map(
+      (tier) => `"${tier.name}" is now "${tier.current}".`
+    ).join(" ")} Use the current name, read from src/data/pricing.ts where the copy allows it.`,
   },
 
   {

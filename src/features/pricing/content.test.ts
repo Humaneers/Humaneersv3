@@ -12,6 +12,7 @@ import {
   HOURLY_PACKS,
   NONPROFIT_FLAT_RATE,
   PLANS_INTRO,
+  PLAN_MARKS,
   PLAN_NOTES,
   PLAN_TABS,
   SEGMENTS,
@@ -67,6 +68,18 @@ describe("pricing page content", () => {
     for (const tier of tiersForSegment("business")) {
       expect(row.values[tier.name]).toBe(SLA_LABEL[tier.slaLevel]);
     }
+  });
+
+  it("marks BusinessOne as a service mark on its card, and no other plan", () => {
+    expect(PLAN_MARKS).toEqual({ BusinessOne: "\u2120" });
+    const marked = PLAN_TABS.flatMap((tab) => tab.plans).filter((plan) => plan.nameMark);
+    expect(marked.map((plan) => [plan.name, plan.nameMark])).toEqual([["BusinessOne", "\u2120"]]);
+  });
+
+  it("names the priority tiers in the emergency-support answer by their current names, unmarked", () => {
+    const answer = FAQS.find((faq) => faq.question === "Do you offer emergency support?")!.answer;
+    expect(answer).toContain("Growth and BusinessOne tiers include priority support");
+    expect(answer).not.toContain("\u2120");
   });
 
   it("opens the default segment for a missing, unknown or repeated ?mode=", () => {
