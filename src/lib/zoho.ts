@@ -3,15 +3,39 @@ import { validateEnv } from "./env";
 
 // --- Configuration & Constants ---
 
-const ZOHO_CONFIG = {
+const ZOHO_ENDPOINTS = {
   authBaseUrl: "https://accounts.zoho.com",
   apiBaseUrl: "https://www.zohoapis.com/crm/v2",
   deskBaseUrl: "https://desk.zoho.com/api/v1",
-  clientId: process.env.ZOHO_CLIENT_ID,
-  clientSecret: process.env.ZOHO_CLIENT_SECRET,
-  refreshToken: process.env.ZOHO_REFRESH_TOKEN,
-  // Hardcoded for now, but should ideally be env var if multi-tenant
-  deskOrgId: process.env.ZOHO_DESK_ORG_ID,
+};
+
+// Credentials are read at call time, not module load, so a value set or
+// rotated in the runtime environment is picked up without a rebuild.
+function zohoCredentials() {
+  return {
+    clientId: process.env.ZOHO_CLIENT_ID,
+    clientSecret: process.env.ZOHO_CLIENT_SECRET,
+    refreshToken: process.env.ZOHO_REFRESH_TOKEN,
+  };
+}
+
+/**
+ * Retry budget for calls made on behalf of the contact routes.
+ *
+ * The whole Zoho phase (token refresh, request, retries, backoff) has to end
+ * inside `budgetMs`, so the email fallback in `leadFallback.ts` still has time
+ * to run before the function limit (`maxDuration` on the routes). Worst case
+ * is budgetMs for Zoho plus the SMTP overall timeout, about 9.5 seconds.
+ *
+ * Exported so tests can shrink the delays. Nothing in production mutates it.
+ */
+export const ZOHO_RETRY_POLICY = {
+  maxAttempts: 3,
+  baseDelayMs: 250,
+  attemptTimeoutMs: 3000,
+  budgetMs: 5000,
+  /** Do not start an attempt with less time than this left in the budget. */
+  minAttemptMs: 500,
 };
 
 // --- Schemas (Contract-Driven Development) ---
@@ -51,26 +75,171 @@ export type SalesContact = z.infer<typeof SalesContactSchema>;
 export type SupportTicket = z.infer<typeof SupportTicketSchema>;
 export type NewsletterSubscriber = z.infer<typeof NewsletterSubscriberSchema>;
 
-// --- Form Data Types for UI Components ---
+// --- Errors ---
 
-// UI-specific types that extend the base schemas with UI-only fields
-export interface SupportFormData extends Omit<SupportTicket, "contactName" | "priority"> {
-  name: string; // Mapped to contactName
-  category: string; // UI only
-  priority: string; // Allow empty string for initial state
-  source?: string; // Analytics source
-  company?: string; // UI field
+/**
+ * What kind of failure ended a Zoho call. This is what the `[LEAD_FALLBACK]`
+ * log line reports as `errorClass`.
+ */
+export type ZohoErrorClass =
+  | "config" // env var or credential missing; nothing was sent to Zoho
+  | "auth" // token refresh refused, or the API kept rejecting the token
+  | "network" // fetch threw: DNS, reset, TLS
+  | "timeout" // our per-attempt timer aborted the request
+  | "rate_limited" // HTTP 429
+  | "server" // HTTP 5xx
+  | "rejected" // any other 4xx: Zoho refused the payload
+  | "logic" // 2xx whose body does not confirm the record was created
+  | "unknown";
+
+const TRANSIENT_CLASSES: ReadonlySet<ZohoErrorClass> = new Set([
+  "network",
+  "timeout",
+  "rate_limited",
+  "server",
+]);
+
+interface ZohoErrorInfo {
+  status?: number;
+  zohoCode?: string;
+  detail?: string;
+  retryAfterMs?: number;
+  /** The CRM/Desk API (not the token endpoint) answered 401. */
+  tokenRejected?: boolean;
 }
 
-export interface SalesFormData extends Omit<SalesContact, "description" | "interests"> {
-  // Description is optional in UI, constructed from message + interests
-  description?: string;
-  message?: string;
-  website?: string;
-  role?: string;
-  employees?: string;
-  budget?: string;
-  interests?: string[];
+export class ZohoError extends Error {
+  readonly errorClass: ZohoErrorClass;
+  readonly status?: number;
+  readonly zohoCode?: string;
+  readonly detail?: string;
+  readonly retryAfterMs?: number;
+  readonly tokenRejected: boolean;
+  /**
+   * Retry-loop iterations before this error was final. Stays 0 when a
+   * pre-check (e.g. missing department id) failed before any attempt.
+   */
+  attempts = 0;
+
+  constructor(message: string, errorClass: ZohoErrorClass, info: ZohoErrorInfo = {}) {
+    super(message);
+    this.name = "ZohoError";
+    this.errorClass = errorClass;
+    this.status = info.status;
+    this.zohoCode = info.zohoCode;
+    this.detail = info.detail;
+    this.retryAfterMs = info.retryAfterMs;
+    this.tokenRejected = info.tokenRejected ?? false;
+  }
+
+  get transient(): boolean {
+    return TRANSIENT_CLASSES.has(this.errorClass);
+  }
+}
+
+// --- HTTP helpers ---
+
+interface ZohoHttpResult {
+  status: number;
+  ok: boolean;
+  headers: Headers;
+  text: string;
+}
+
+/**
+ * One fetch with a hard timeout that also covers reading the body, so a slow
+ * body cannot hold the route past its budget. Throws a classified ZohoError
+ * for network failures and timeouts; returns the response for any HTTP status.
+ */
+async function timedRequest(
+  url: string,
+  init: RequestInit,
+  timeoutMs: number,
+  label: string
+): Promise<ZohoHttpResult> {
+  const controller = new AbortController();
+  const ms = Math.max(1, Math.floor(timeoutMs));
+  const timer = setTimeout(() => controller.abort(), ms);
+  try {
+    const response = await fetch(url, {
+      ...init,
+      cache: "no-store", // Never cache auth or CRM traffic
+      signal: controller.signal,
+    });
+    const text = await response.text();
+    return { status: response.status, ok: response.ok, headers: response.headers, text };
+  } catch (error) {
+    if (controller.signal.aborted) {
+      throw new ZohoError(`${label} timed out after ${ms}ms`, "timeout");
+    }
+    const name = error instanceof Error ? error.name : "unknown";
+    throw new ZohoError(`${label} network error (${name})`, "network");
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+function parseJson(text: string): unknown {
+  try {
+    return JSON.parse(text);
+  } catch {
+    return undefined;
+  }
+}
+
+function asRecord(value: unknown): Record<string, unknown> | undefined {
+  return value && typeof value === "object" ? (value as Record<string, unknown>) : undefined;
+}
+
+/**
+ * Error codes and field names from Zoho are useful in logs, but the response
+ * body as a whole can echo submitted values. Keep only short identifier-like
+ * tokens.
+ */
+function safeToken(value: unknown): string | undefined {
+  if (typeof value !== "string") return undefined;
+  const cleaned = value.replace(/[^A-Za-z0-9_./-]/g, "").slice(0, 64);
+  return cleaned || undefined;
+}
+
+function parseRetryAfterMs(headers: Headers): number | undefined {
+  const raw = headers.get("retry-after");
+  if (!raw) return undefined;
+  const seconds = Number(raw);
+  return Number.isFinite(seconds) && seconds >= 0 ? seconds * 1000 : undefined;
+}
+
+/** Builds a classified error from a non-2xx response of the CRM or Desk API. */
+function apiHttpError(label: string, res: ZohoHttpResult): ZohoError {
+  const body = asRecord(parseJson(res.text));
+  const firstRecord = Array.isArray(body?.data) ? asRecord(body.data[0]) : undefined;
+  const zohoCode = safeToken(body?.code ?? body?.errorCode ?? firstRecord?.code);
+
+  // Desk lists offending fields in `errors[].fieldName`; CRM puts one in `details.api_name`.
+  let detail: string | undefined;
+  if (Array.isArray(body?.errors)) {
+    detail = body.errors
+      .map((e) => safeToken(asRecord(e)?.fieldName))
+      .filter(Boolean)
+      .join(",")
+      .slice(0, 200);
+  } else {
+    detail = safeToken(asRecord(body?.details ?? firstRecord?.details)?.api_name);
+  }
+
+  const info: ZohoErrorInfo = { status: res.status, zohoCode, detail: detail || undefined };
+  const message = `${label} failed: HTTP ${res.status}${zohoCode ? ` ${zohoCode}` : ""}`;
+
+  if (res.status === 429) {
+    return new ZohoError(message, "rate_limited", {
+      ...info,
+      retryAfterMs: parseRetryAfterMs(res.headers),
+    });
+  }
+  if (res.status >= 500) return new ZohoError(message, "server", info);
+  if (res.status === 401) return new ZohoError(message, "auth", { ...info, tokenRejected: true });
+  if (res.status === 403) return new ZohoError(message, "auth", info);
+  return new ZohoError(message, "rejected", info);
 }
 
 // --- Auth Handling ---
@@ -81,86 +250,177 @@ let tokenExpiry: number = 0;
 /**
  * Retrieves a valid Zoho Access Token, refreshing it if necessary.
  * Implements basic in-memory caching to reduce latency.
+ *
+ * `forceRefresh` skips the cache; the retry loop uses it once after the API
+ * answers 401. Failures throw a classified ZohoError.
  */
-export async function getZohoAccessToken(): Promise<string> {
-  // Validate env vars at runtime (not build time) to avoid Cloudflare build failures
-  validateEnv();
+export async function getZohoAccessToken(
+  options: { forceRefresh?: boolean; timeoutMs?: number } = {}
+): Promise<string> {
+  // Validate env vars at runtime (not build time) to avoid build failures
+  try {
+    validateEnv();
+  } catch (error) {
+    throw new ZohoError(error instanceof Error ? error.message : "Invalid environment", "config");
+  }
 
   const now = Date.now();
 
   // Use cached token if valid (with 30s buffer)
-  if (cachedAccessToken && now < tokenExpiry - 30000) {
+  if (!options.forceRefresh && cachedAccessToken && now < tokenExpiry - 30000) {
     return cachedAccessToken;
   }
+  cachedAccessToken = null;
 
-  if (!ZOHO_CONFIG.clientId || !ZOHO_CONFIG.clientSecret || !ZOHO_CONFIG.refreshToken) {
-    throw new Error("Missing Zoho API Credentials");
+  const { clientId, clientSecret, refreshToken } = zohoCredentials();
+  if (!clientId || !clientSecret || !refreshToken) {
+    throw new ZohoError("Missing Zoho API Credentials", "config");
   }
 
+  const params = new URLSearchParams({
+    refresh_token: refreshToken,
+    client_id: clientId,
+    client_secret: clientSecret,
+    grant_type: "refresh_token",
+  });
+
   try {
-    const params = new URLSearchParams({
-      refresh_token: ZOHO_CONFIG.refreshToken,
-      client_id: ZOHO_CONFIG.clientId,
-      client_secret: ZOHO_CONFIG.clientSecret,
-      grant_type: "refresh_token",
-    });
+    const res = await timedRequest(
+      `${ZOHO_ENDPOINTS.authBaseUrl}/oauth/v2/token`,
+      { method: "POST", body: params },
+      options.timeoutMs ?? 10000,
+      "Zoho token refresh"
+    );
 
-    // HIGH PRIORITY FIX: Add timeout to prevent hanging requests
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+    const data = asRecord(parseJson(res.text));
 
-    try {
-      const response = await fetch(`${ZOHO_CONFIG.authBaseUrl}/oauth/v2/token`, {
-        method: "POST",
-        body: params,
-        cache: "no-store", // CIO Requirement: Never cache auth tokens on disk/CDN
-        signal: controller.signal,
+    if (!res.ok) {
+      // CIO Requirement: Log security failures. The token endpoint's error body
+      // carries an error code, not credentials.
+      console.error("[Zoho Auth Critical]", res.status, safeToken(data?.error) ?? "");
+      if (res.status === 429) {
+        throw new ZohoError(`Zoho Auth Failed: ${res.status}`, "rate_limited", {
+          status: res.status,
+          retryAfterMs: parseRetryAfterMs(res.headers),
+        });
+      }
+      throw new ZohoError(
+        `Zoho Auth Failed: ${res.status}`,
+        res.status >= 500 ? "server" : "auth",
+        { status: res.status, zohoCode: safeToken(data?.error) }
+      );
+    }
+
+    // Zoho answers 200 with { error } for a bad or revoked refresh token.
+    if (!data || data.error || typeof data.access_token !== "string") {
+      const code = safeToken(data?.error) ?? "no_access_token";
+      console.error("[Zoho Auth Critical]", code);
+      throw new ZohoError(`Zoho Auth Error: ${code}`, "auth", {
+        status: res.status,
+        zohoCode: code,
       });
+    }
 
-      clearTimeout(timeoutId);
+    const expiresInSeconds = typeof data.expires_in === "number" ? data.expires_in : 3600;
+    cachedAccessToken = data.access_token;
+    tokenExpiry = now + expiresInSeconds * 1000;
+    return data.access_token;
+  } catch (error) {
+    console.error(
+      "Critical: Failed to refresh Zoho Token",
+      error instanceof ZohoError ? `${error.errorClass}: ${error.message}` : error
+    );
+    throw error;
+  }
+}
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("[Zoho Auth Critical]", errorText);
-        throw new Error(`Zoho Auth Failed: ${response.status}`);
-      }
+// --- Retry loop ---
 
-      const data = await response.json();
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
-      if (data.error) {
-        throw new Error(`Zoho Auth Error: ${data.error}`);
-      }
+function backoffMs(attempt: number): number {
+  const { baseDelayMs } = ZOHO_RETRY_POLICY;
+  const jitter = Math.floor(Math.random() * (baseDelayMs / 2 + 1));
+  return baseDelayMs * 3 ** (attempt - 1) + jitter;
+}
 
-      cachedAccessToken = data.access_token;
-      // Set expiry based on response (usually 3600s)
-      tokenExpiry = now + data.expires_in * 1000;
+/**
+ * Calls a Zoho API with bounded retries.
+ *
+ * - Network error, timeout, 5xx, 429: retry with backoff (Retry-After honoured
+ *   when it fits the budget).
+ * - 401 from the API: drop the cached token, force one refresh, retry once.
+ * - Anything else: fail at once.
+ *
+ * Every attempt and every wait must fit inside ZOHO_RETRY_POLICY.budgetMs.
+ * The final error carries `attempts`.
+ */
+async function callZohoWithRetry<T>(
+  label: string,
+  buildRequest: (token: string) => { url: string; init: RequestInit },
+  interpret: (res: ZohoHttpResult) => T
+): Promise<T> {
+  const policy = ZOHO_RETRY_POLICY;
+  const deadline = Date.now() + policy.budgetMs;
+  let attempts = 0;
+  let forceRefresh = false;
+  let refreshedAfter401 = false;
 
-      return cachedAccessToken as string;
-    } catch (error) {
-      clearTimeout(timeoutId);
+  for (;;) {
+    attempts++;
+    try {
+      const token = await getZohoAccessToken({
+        forceRefresh,
+        timeoutMs: Math.min(policy.attemptTimeoutMs, deadline - Date.now()),
+      });
+      forceRefresh = false;
 
-      if (error instanceof Error && error.name === "AbortError") {
-        throw new Error("Zoho API request timed out after 10 seconds");
+      const { url, init } = buildRequest(token);
+      const res = await timedRequest(
+        url,
+        init,
+        Math.min(policy.attemptTimeoutMs, deadline - Date.now()),
+        label
+      );
+      if (!res.ok) throw apiHttpError(label, res);
+      return interpret(res);
+    } catch (caught) {
+      const error =
+        caught instanceof ZohoError
+          ? caught
+          : new ZohoError(`${label} failed unexpectedly`, "unknown");
+      error.attempts = attempts;
+
+      const fits = (delayMs: number) =>
+        attempts < policy.maxAttempts && Date.now() + delayMs + policy.minAttemptMs <= deadline;
+
+      if (error.tokenRejected && !refreshedAfter401) {
+        refreshedAfter401 = true;
+        forceRefresh = true;
+        cachedAccessToken = null;
+        if (fits(0)) continue;
+      } else if (error.transient) {
+        const delayMs = error.retryAfterMs ?? backoffMs(attempts);
+        if (fits(delayMs)) {
+          await sleep(delayMs);
+          continue;
+        }
       }
       throw error;
     }
-  } catch (error) {
-    // CIO Requirement: Log security failures
-    console.error("Critical: Failed to refresh Zoho Token", error);
-    throw error;
   }
 }
 
 // --- API Functions ---
 
 /**
- * Creates a Lead in Zoho CRM.
- * CTO Requirement: Includes retry logic implicitly via upstream error handling or could be added here.
- * Currently fails fast to trigger email backup.
+ * Creates a Lead in Zoho CRM, with bounded retries (see callZohoWithRetry).
+ * Throws a ZohoError when the lead was not confirmed; the route then runs the
+ * email fallback.
  */
 export async function createLead(data: SalesContact) {
-  const token = await getZohoAccessToken();
-
   // Mapping Schema to Zoho CRM Fields
   const zohoRecord = {
     First_Name: data.firstName,
@@ -175,30 +435,59 @@ export async function createLead(data: SalesContact) {
     GCLID: data.utm?.gclid,
   };
 
-  const response = await fetch(`${ZOHO_CONFIG.apiBaseUrl}/Leads`, {
-    method: "POST",
-    headers: {
-      Authorization: `Zoho-oauthtoken ${token}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ data: [zohoRecord] }),
-  });
-
-  const valid = await handleZohoResponse(response, "Create Lead");
-  return valid; // Returns success ID or throws
+  return callZohoWithRetry(
+    "Create Lead",
+    (token) => ({
+      url: `${ZOHO_ENDPOINTS.apiBaseUrl}/Leads`,
+      init: {
+        method: "POST",
+        headers: {
+          Authorization: `Zoho-oauthtoken ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data: [zohoRecord] }),
+      },
+    }),
+    (res) => {
+      // CRM answers 2xx even when the record was refused; only a per-record
+      // "success" status counts.
+      const json = asRecord(parseJson(res.text));
+      const first = Array.isArray(json?.data) ? asRecord(json.data[0]) : undefined;
+      if (first?.status !== "success") {
+        const zohoCode = safeToken(first?.code);
+        throw new ZohoError(
+          `Create Lead not confirmed${zohoCode ? `: ${zohoCode}` : ""}`,
+          "logic",
+          { status: res.status, zohoCode, detail: safeToken(asRecord(first?.details)?.api_name) }
+        );
+      }
+      return json;
+    }
+  );
 }
 
 /**
- * Creates a Ticket in Zoho Desk.
+ * Creates a Ticket in Zoho Desk, with bounded retries.
+ *
+ * Desk rejects a ticket without `departmentId` (thread hum-36), so a missing
+ * ZOHO_DESK_DEPARTMENT_ID fails here, before any call to Zoho, and the route
+ * goes straight to the email fallback.
  */
 export async function createTicket(data: SupportTicket) {
-  const token = await getZohoAccessToken(); // Note: Desk often uses different scopes/tokens; assuming same OAuth app covers both for now.
-  // If Desk requires a different token/scope, we might need a separate auth flow.
-  // For simplicity MVP, we'll try the same token (common in "self-client" apps) or assume the refresh token covers both scopes.
+  const departmentId = process.env.ZOHO_DESK_DEPARTMENT_ID?.trim();
+  if (!departmentId) {
+    console.error("[CRITICAL] ZOHO_DESK_DEPARTMENT_ID missing");
+    throw new ZohoError("ZOHO_DESK_DEPARTMENT_ID missing", "config", {
+      detail: "ZOHO_DESK_DEPARTMENT_ID",
+    });
+  }
 
-  if (!ZOHO_CONFIG.deskOrgId) {
+  const orgId = process.env.ZOHO_DESK_ORG_ID?.trim();
+  if (!orgId) {
     console.warn("Zoho Desk Org ID missing, skipping ticket creation");
-    throw new Error("Configuration Error: Missing Desk Org ID");
+    throw new ZohoError("Configuration Error: Missing Desk Org ID", "config", {
+      detail: "ZOHO_DESK_ORG_ID",
+    });
   }
 
   // Append Context and Phone to description to ensure agents see it immediately
@@ -207,6 +496,7 @@ export async function createTicket(data: SupportTicket) {
   const fullDescription = `${contextPrefix}${data.description}${phoneInfo}`;
 
   const deskRecord = {
+    departmentId,
     subject: `${contextPrefix}${data.subject}`,
     description: fullDescription,
     email: data.email,
@@ -225,27 +515,38 @@ export async function createTicket(data: SupportTicket) {
     },
   };
 
-  const response = await fetch(`${ZOHO_CONFIG.deskBaseUrl}/tickets`, {
-    method: "POST",
-    headers: {
-      Authorization: `Zoho-oauthtoken ${token}`,
-      orgId: ZOHO_CONFIG.deskOrgId,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(deskRecord),
-  });
-
-  // Desk API response structure differs slightly from CRM
-  if (!response.ok) {
-    const err = await response.text();
-    throw new Error(`Zoho Desk API Error: ${err}`);
-  }
-  return await response.json();
+  return callZohoWithRetry(
+    "Create Ticket",
+    (token) => ({
+      url: `${ZOHO_ENDPOINTS.deskBaseUrl}/tickets`,
+      init: {
+        method: "POST",
+        headers: {
+          Authorization: `Zoho-oauthtoken ${token}`,
+          orgId,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(deskRecord),
+      },
+    }),
+    (res) => {
+      // A created ticket always comes back with its id.
+      const json = asRecord(parseJson(res.text));
+      if (!json?.id) {
+        throw new ZohoError("Create Ticket not confirmed: no ticket id", "logic", {
+          status: res.status,
+        });
+      }
+      return json;
+    }
+  );
 }
 
 /**
  * Creates a Marketing Contact (Lead) strictly for Newsletter.
  * CIO Requirement: Sets "Opt_Out" to safe default if not explicitly opted in (handled by caller, here we assume it's just a sub).
+ *
+ * Single attempt, no fallback: out of scope for the lead-reliability work.
  */
 export async function createMarketingContact(data: NewsletterSubscriber) {
   const token = await getZohoAccessToken();
@@ -258,7 +559,7 @@ export async function createMarketingContact(data: NewsletterSubscriber) {
     Company: "Newsletter Subscriber",
   };
 
-  const response = await fetch(`${ZOHO_CONFIG.apiBaseUrl}/Leads`, {
+  const response = await fetch(`${ZOHO_ENDPOINTS.apiBaseUrl}/Leads`, {
     method: "POST",
     headers: {
       Authorization: `Zoho-oauthtoken ${token}`,
@@ -286,125 +587,4 @@ async function handleZohoResponse(response: Response, contexts: string) {
   }
 
   return json;
-}
-
-/**
- * Derives the lead source from context and referrer.
- */
-export function deriveLeadSource(context?: string | null, referrer?: string | null): string {
-  if (context?.includes("Newsletter")) return "Newsletter";
-  if (referrer?.includes("google")) return "Organic Search";
-  if (referrer?.includes("linkedin")) return "LinkedIn";
-  if (referrer?.includes("twitter") || referrer?.includes("t.co")) return "X (Twitter)";
-  return "Website Contact Form";
-}
-
-// --- Form Submission and Validation Functions ---
-
-/**
- * Validates sales form data for client-side validation
- */
-export function validateSalesForm(data: unknown): { valid: boolean; errors: string[] } {
-  const formSchema = SalesContactSchema.omit({ description: true }).extend({
-    message: z.string().optional(),
-    interests: z.array(z.string()).optional().default([]),
-  });
-
-  const result = formSchema.safeParse(data);
-  if (result.success) {
-    return { valid: true, errors: [] };
-  }
-
-  // Extract field-specific errors for better user feedback
-  const fieldErrors = result.error.flatten().fieldErrors;
-  const formErrors = result.error.flatten().formErrors;
-
-  const allErrors = [
-    ...formErrors,
-    ...Object.entries(fieldErrors).map(
-      ([field, errors]) => `${field}: ${errors?.join(", ") || "Invalid"}`
-    ),
-  ];
-
-  return { valid: false, errors: allErrors };
-}
-
-/**
- * Validates support form data for client-side validation
- */
-export function validateSupportForm(data: unknown): { valid: boolean; errors: string[] } {
-  const uiSchema = z.object({
-    name: z.string().min(1, "Name is required"),
-    email: z.string().email("Invalid email address"),
-    subject: z.string().min(5, "Subject is required"),
-    description: z.string().min(20, "Description must be at least 20 characters"),
-    priority: z
-      .string()
-      .refine((val) => ["High", "Medium", "Low"].includes(val), "Please select a priority"),
-    category: z.string().min(1, "Please select a category"),
-    phone: z.string().optional(),
-    context: z.enum(["existing_client", "new_client_critical"]).optional(),
-    honeypot: z.string().optional(),
-  });
-
-  const result = uiSchema.safeParse(data);
-  if (result.success) {
-    return { valid: true, errors: [] };
-  }
-
-  // Extract field-specific errors for better user feedback
-  const fieldErrors = result.error.flatten().fieldErrors;
-  const formErrors = result.error.flatten().formErrors;
-
-  const allErrors = [
-    ...formErrors,
-    ...Object.entries(fieldErrors).map(
-      ([field, errors]) => `${field}: ${errors?.join(", ") || "Invalid"}`
-    ),
-  ];
-
-  return { valid: false, errors: allErrors };
-}
-
-/**
- * Submits a sales lead to Zoho CRM
- */
-export async function submitSalesLead(data: SalesFormData) {
-  try {
-    // Adapter: Construct description
-    const finalData: SalesContact = {
-      ...data,
-      description:
-        data.description ||
-        (data.message
-          ? `${data.message}\n\nInterests: ${(data.interests || []).join(", ")}`
-          : "No description"),
-    } as SalesContact;
-
-    const result = await createLead(finalData);
-    return { success: true, data: result };
-  } catch (error) {
-    console.error("Failed to submit sales lead:", error);
-    return { success: false, error: error instanceof Error ? error.message : "Unknown error" };
-  }
-}
-
-/**
- * Submits a support ticket to Zoho Desk
- */
-export async function submitSupportTicket(data: SupportFormData) {
-  try {
-    // Adapter: Map UI fields to Zoho Schema
-    const ticketData: SupportTicket = {
-      ...data,
-      contactName: data.name,
-      priority: data.priority as "High" | "Medium" | "Low",
-    };
-
-    const result = await createTicket(ticketData);
-    return { success: true, data: result };
-  } catch (error) {
-    console.error("Failed to submit support ticket:", error);
-    return { success: false, error: error instanceof Error ? error.message : "Unknown error" };
-  }
 }

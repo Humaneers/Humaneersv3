@@ -1,7 +1,12 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { createTicket, SupportTicketSchema } from "@/lib/zoho";
+import { createTicket, SupportTicketSchema, type SupportTicket } from "@/lib/zoho";
+import { deliverWithFallback, supportFallbackMessage } from "@/lib/leadFallback";
 import { hashIp } from "@/lib/hash";
-import { z } from "zod";
+
+// nodemailer needs the Node.js runtime. The Zoho retry budget (5s) plus the
+// SMTP fallback timeout (4.5s) stays under this limit.
+export const runtime = "nodejs";
+export const maxDuration = 15;
 
 const supportRateLimit = new Map<string, { count: number; firstAttempt: number }>();
 const RATE_LIMIT_WINDOW = 60 * 60 * 1000;
@@ -31,32 +36,41 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  // A body that does not parse or validate has nothing to keep; don't expose
+  // the zod error structure.
+  let validData: SupportTicket;
   try {
-    const body = await request.json();
-    const validData = SupportTicketSchema.parse(body);
-
-    if (validData.honeypot) {
-      return NextResponse.json({ success: true });
-    }
-
-    await createTicket(validData);
-
-    return NextResponse.json({ success: true, message: "Ticket created successfully" });
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      // HIGH PRIORITY FIX: Don't expose internal Zod error structure
-      return NextResponse.json({ error: "Please check your form and try again." }, { status: 400 });
-    }
-
-    const hashedIp = await hashIp(ip);
-    console.error(`[CRITICAL] Support Ticket Failed`, {
-      ipHash: hashedIp,
-      error: error instanceof Error ? error.message : error,
-    });
-
-    return NextResponse.json(
-      { error: "Unable to create ticket automatically. Please email support@humaneers.dev." },
-      { status: 500 }
-    );
+    validData = SupportTicketSchema.parse(await request.json());
+  } catch {
+    return NextResponse.json({ error: "Please check your form and try again." }, { status: 400 });
   }
+
+  if (validData.honeypot) {
+    return NextResponse.json({ success: true });
+  }
+
+  // Zoho Desk with retries, then the email fallback. A missing
+  // ZOHO_DESK_DEPARTMENT_ID skips Desk and goes straight to email.
+  const submissionId = crypto.randomUUID();
+  const receivedAt = new Date().toISOString();
+  const result = await deliverWithFallback({
+    formType: "support",
+    submissionId,
+    deliver: () => createTicket(validData),
+    message: () => supportFallbackMessage(validData, { submissionId, receivedAt }),
+    ipHash: () => hashIp(ip),
+  });
+
+  if (result.via === "zoho") {
+    return NextResponse.json({ success: true, message: "Ticket created successfully" });
+  }
+  if (result.accepted) {
+    return NextResponse.json({ success: true });
+  }
+
+  // Neither Desk nor the email fallback took it. Tell the visitor so.
+  return NextResponse.json(
+    { error: "Unable to create ticket automatically. Please email support@humaneers.dev." },
+    { status: 500 }
+  );
 }

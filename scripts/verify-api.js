@@ -42,32 +42,34 @@ async function runTests() {
 
     const results = [];
 
+    // The /api/zoho/* routes were removed (cut E0). These hit the live
+    // /api/contact/* routes, which create real Zoho records when Zoho
+    // credentials are set. Run against a local server only.
+
     // 1. CRM Lead (Talk to Sales)
-    results.push(await testEndpoint("CRM: Lead Submission", "/api/zoho/leads", "POST", {
+    results.push(await testEndpoint("CRM: Lead Submission", "/api/contact/sales", "POST", {
         firstName: "Test",
         lastName: "User",
         email: "test@example.com",
         company: "Test Corp",
-        role: "CTO",
-        employees: "1-10",
-        message: "Test submission",
-        context: "Unit Test"
-    }, 200)); // Should ideally be 200, but might be 400/500 if env vars are missing/mocked, checking for valid handling.
+        description: "Test submission from verify-api.js",
+        source: "Verification Script"
+    }, 200)); // 500 means neither Zoho nor the email fallback took it.
 
     // 2. Desk Ticket (Support)
-    results.push(await testEndpoint("Desk: Ticket Creation", "/api/zoho/tickets", "POST", {
-        name: "Test User",
+    results.push(await testEndpoint("Desk: Ticket Creation", "/api/contact/support", "POST", {
+        contactName: "Test User",
         email: "test@example.com",
         subject: "Test Ticket",
-        description: "Test Description",
-        priority: "low",
-        category: "Support"
+        description: "Test description from verify-api.js",
+        priority: "Low"
     }, 200));
 
     // 3. Newsletter
-    results.push(await testEndpoint("Newsletter: Subscribe", "/api/zoho/newsletter", "POST", {
+    results.push(await testEndpoint("Newsletter: Subscribe", "/api/contact/newsletter", "POST", {
         email: "newsletter-test@example.com",
-        source: "Verification Script"
+        source: "Verification Script",
+        consent: true
     }, 200));
 
     // 4. Ethics (Known Missing)

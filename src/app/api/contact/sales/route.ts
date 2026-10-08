@@ -1,7 +1,12 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { createLead, SalesContactSchema } from "@/lib/zoho";
+import { createLead, SalesContactSchema, type SalesContact } from "@/lib/zoho";
+import { deliverWithFallback, salesFallbackMessage } from "@/lib/leadFallback";
 import { hashIp } from "@/lib/hash";
-import { z } from "zod";
+
+// nodemailer needs the Node.js runtime. The Zoho retry budget (5s) plus the
+// SMTP fallback timeout (4.5s) stays under this limit.
+export const runtime = "nodejs";
+export const maxDuration = 15;
 
 // --- Rate Limiting Strategy (In-Memory per Container) ---
 // Note: In serverless, this applies per lambda instance. For strict global limiting, use Redis/KV.
@@ -39,41 +44,40 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  // 2. Validation & Sanitization. A body that does not parse or validate has
+  // nothing to keep; don't expose the zod error structure.
+  let validData: SalesContact;
   try {
-    const body = await request.json();
-
-    // 2. Validation & Sanitization
-    const validData = SalesContactSchema.parse(body);
-
-    // 3. Security (Honeypot) - CIO Requirement
-    if (validData.honeypot) {
-      console.warn(`[Bot Detected] Honeypot filled by IP: ${ip}`);
-      // Return success to confuse bot, but do nothing
-      return NextResponse.json({ success: true });
-    }
-
-    // 4. Execution
-    await createLead(validData);
-
-    return NextResponse.json({ success: true });
-  } catch (error) {
-    // 5. Resilience & Fallback Logging (CTO Requirement)
-    if (error instanceof z.ZodError) {
-      // HIGH PRIORITY FIX: Don't expose internal Zod error structure
-      return NextResponse.json({ error: "Please check your form and try again." }, { status: 400 });
-    }
-
-    // Log full context for recovery (Datadog/Sentry would pick this up)
-    const hashedIp = await hashIp(ip);
-    console.error(`[CRITICAL] Sales Lead Submission Failed`, {
-      ipHash: hashedIp,
-      error: error instanceof Error ? error.message : error,
-      payload: "check-request-body-logs-if-safe", // Avoid dumping PII in plain text if possible, or use a secure logger
-    });
-
-    return NextResponse.json(
-      { error: "Our systems are busy. Please email hello@humaneers.dev directly." },
-      { status: 500 }
-    );
+    validData = SalesContactSchema.parse(await request.json());
+  } catch {
+    return NextResponse.json({ error: "Please check your form and try again." }, { status: 400 });
   }
+
+  // 3. Security (Honeypot) - CIO Requirement
+  if (validData.honeypot) {
+    console.warn(`[Bot Detected] Honeypot filled. IP Hash: ${await hashIp(ip)}`);
+    // Return success to confuse bot, but do nothing
+    return NextResponse.json({ success: true });
+  }
+
+  // 4. Execution: Zoho CRM with retries, then the email fallback.
+  const submissionId = crypto.randomUUID();
+  const receivedAt = new Date().toISOString();
+  const result = await deliverWithFallback({
+    formType: "sales",
+    submissionId,
+    deliver: () => createLead(validData),
+    message: () => salesFallbackMessage(validData, { submissionId, receivedAt }),
+    ipHash: () => hashIp(ip),
+  });
+
+  if (result.accepted) {
+    return NextResponse.json({ success: true });
+  }
+
+  // 5. Neither Zoho nor the email fallback took it. Tell the visitor so.
+  return NextResponse.json(
+    { error: "Our systems are busy. Please email hello@humaneers.dev directly." },
+    { status: 500 }
+  );
 }
