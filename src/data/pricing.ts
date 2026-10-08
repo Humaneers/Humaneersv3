@@ -34,6 +34,12 @@ export interface PricingTier {
   /** Per-additional-user price. A string for cost-pass-through tiers. */
   perUserPrice?: number | string;
   slaLevel: SlaLevel;
+  /**
+   * The name is a service mark. /pricing sets a superscript service-mark sign
+   * after it on the plan card and the comparison column heading; everywhere
+   * else the name stands alone.
+   */
+  serviceMark?: boolean;
 }
 
 export const PRICING_TIERS: readonly PricingTier[] = [
@@ -41,11 +47,12 @@ export const PRICING_TIERS: readonly PricingTier[] = [
   { name: "Core", segment: "business", basePrice: 99, perUserPrice: 15, slaLevel: "standard" },
   { name: "Growth", segment: "business", basePrice: 249, perUserPrice: 29, slaLevel: "priority" },
   {
-    name: "Enterprise",
+    name: "BusinessOne",
     segment: "business",
     basePrice: 399,
     perUserPrice: 40,
     slaLevel: "priority",
+    serviceMark: true,
   },
   // Household
   { name: "Solo", segment: "household", basePrice: 19, perUserPrice: 4, slaLevel: "standard" },

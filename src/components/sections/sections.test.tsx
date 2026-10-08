@@ -391,6 +391,29 @@ describe("PricingPlans", () => {
     expect(second.onValueChange).toHaveBeenLastCalledWith("homes");
   });
 
+  it("sets a plan's name mark as a superscript the heading's accessible name leaves out", () => {
+    const tabs: PricingPlansProps["tabs"] = [
+      {
+        value: "teams",
+        label: "Teams",
+        plans: [{ ...planFixture("Starter"), nameMark: "\u2120" }],
+      },
+    ];
+    render(
+      <PricingPlans
+        heading="Plans and rates"
+        tabsLabel="Who the plans are for"
+        tabs={tabs}
+        value="teams"
+        onValueChange={vi.fn()}
+      />
+    );
+    const heading = screen.getByRole("heading", { level: 3, name: "Starter" });
+    expect(heading.textContent).toBe("Starter\u2120");
+    expect(heading.querySelector("sup")?.getAttribute("aria-hidden")).toBe("true");
+    expect(screen.getByRole("link", { name: "Join the waitlist for Starter" })).toBeTruthy();
+  });
+
   it("renders the tab it is given, with that tab's note", () => {
     const { container } = renderPlans("homes");
     expect(screen.getByRole("heading", { level: 3 }).textContent).toBe("Home");
@@ -430,6 +453,14 @@ describe("PricingComparison", () => {
     expect(valuesFor("Remote help")).toEqual(["Included", "Included"]);
     expect(valuesFor("On-site visits")).toEqual(["Not included", "Included"]);
     expect(valuesFor("Device updates")).toEqual(["Billable", "Included"]);
+  });
+
+  it("sets a plan's mark after its column heading, left out of the column's accessible name", () => {
+    render(<PricingComparison {...COMPARISON_CONTENT} planMarks={{ Team: "\u2120" }} />);
+    const team = screen.getByRole("columnheader", { name: "Team" });
+    expect(team.textContent).toBe("Team\u2120");
+    expect(team.querySelector("sup")?.getAttribute("aria-hidden")).toBe("true");
+    expect(screen.getByRole("columnheader", { name: "Starter" }).querySelector("sup")).toBeNull();
   });
 
   it("hides the check and cross icons from speech and sets the column count", () => {

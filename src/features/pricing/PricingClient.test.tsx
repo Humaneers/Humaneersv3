@@ -66,6 +66,22 @@ describe("PricingClient", () => {
     levels.slice(1).forEach((level, index) => expect(level).toBeLessThanOrEqual(levels[index] + 1));
   });
 
+  it("sets the service mark after BusinessOne on its card and column, hidden from speech", () => {
+    render(<PricingClient segment="business" />);
+    const card = screen.getByRole("heading", { level: 3, name: "BusinessOne" });
+    expect(card.textContent).toBe("BusinessOne\u2120");
+    const column = screen.getByRole("columnheader", { name: "BusinessOne" });
+    expect(column.textContent).toBe("BusinessOne\u2120");
+    for (const owner of [card, column]) {
+      const sup = owner.querySelector("sup");
+      expect(sup?.textContent).toBe("\u2120");
+      expect(sup?.getAttribute("aria-hidden")).toBe("true");
+    }
+    // The CTA and every other tier carry the bare name.
+    expect(screen.getByRole("link", { name: "Join the waitlist for BusinessOne" })).toBeTruthy();
+    expect(document.querySelectorAll("sup")).toHaveLength(2);
+  });
+
   it("makes every tier CTA a link, not a button", () => {
     render(<PricingClient segment="household" />);
     for (const tier of tiersForSegment("household")) {

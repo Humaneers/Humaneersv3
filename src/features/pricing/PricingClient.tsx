@@ -24,6 +24,7 @@ import {
   HOURLY_PACKS,
   NONPROFIT_FLAT_RATE,
   PLANS_INTRO,
+  PLAN_MARKS,
   PLAN_NOTES,
   PLAN_TABS,
   segmentFromParam,
@@ -85,6 +86,7 @@ export function PricingClient({ segment: requested }: { segment: TierSegment }) 
           <PricingComparison
             {...COMPARISON_INTRO}
             plans={tiersForSegment(segment).map((tier) => tier.name)}
+            planMarks={PLAN_MARKS}
             categories={comparison}
             scheme="cream"
           />

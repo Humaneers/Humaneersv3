@@ -27,6 +27,12 @@ export type PricingComparisonProps = {
   description?: string;
   /** Column headings, in column order. Two to four plans. */
   plans: readonly string[];
+  /**
+   * A mark set after a plan's column heading as a superscript, keyed by plan
+   * name: the service-mark sign, say. Hidden from assistive technology, so each
+   * value is announced with the plan name alone.
+   */
+  planMarks?: Readonly<Record<string, string>>;
   categories: readonly ComparisonCategory[];
   scheme?: SectionScheme;
 };
@@ -55,6 +61,7 @@ export function PricingComparison({
   heading,
   description,
   plans,
+  planMarks,
   categories,
   scheme,
 }: PricingComparisonProps) {
@@ -89,6 +96,7 @@ export function PricingComparison({
                 className="px-1 py-4 text-center text-small font-bold wrap-break-word hyphens-auto md:px-4 md:text-regular"
               >
                 {plan}
+                {planMarks?.[plan] && <sup aria-hidden="true">{planMarks[plan]}</sup>}
               </span>
             ))}
           </div>

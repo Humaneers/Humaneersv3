@@ -11,6 +11,12 @@ import { sectionBandClass, type SectionScheme } from "./scheme";
 
 export type PricingPlan = {
   name: string;
+  /**
+   * A mark set after the name as a superscript, such as the service-mark sign.
+   * Hidden from assistive technology, so the heading's accessible name is the
+   * plan name alone.
+   */
+  nameMark?: string;
   /** The headline figure, formatted: "$99". */
   price: string;
   /** What the headline figure buys: "base / mo". */
@@ -155,7 +161,10 @@ function PlanCard({ plan }: { plan: PricingPlan }) {
       )}
     >
       <div>
-        <h3 className="mb-2 text-h5 font-bold">{plan.name}</h3>
+        <h3 className="mb-2 text-h5 font-bold">
+          {plan.name}
+          {plan.nameMark && <sup aria-hidden="true">{plan.nameMark}</sup>}
+        </h3>
         <p className="flex flex-wrap items-baseline gap-x-2">
           <span className="text-h2 font-bold">{plan.price}</span>
           <span className="text-small font-semibold">{plan.priceUnit}</span>

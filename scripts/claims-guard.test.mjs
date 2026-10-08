@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 
 import { describe, expect, it } from "vitest";
 
-import { scanRepo, scanText } from "./claims-guard.mjs";
+import { RETIRED_TIER_NAMES, scanRepo, scanText } from "./claims-guard.mjs";
 
 /**
  * Every fixture below is the verbatim shape of a claim that actually shipped to
@@ -150,7 +150,7 @@ describe("claims-guard allowances", () => {
 describe("phantom-tier rule", () => {
   it("does not flag the fixed strings, which name only real tiers", () => {
     const source = [
-      `"Absolutely. Growth and Enterprise tiers include priority support (under 1 hour response), while our Hourly Packs can be used for urgent crisis response if we have capacity."`,
+      `"Absolutely. Growth and BusinessOne tiers include priority support (under 1 hour response), while our Hourly Packs can be used for urgent crisis response if we have capacity."`,
       `Our "Core" plan covers the essentials for most businesses. Let's chat about your needs.`,
     ].join("\n");
     expect(scanText(source, "x.tsx").map((f) => f.rule.id)).not.toContain("phantom-tier");
@@ -168,6 +168,92 @@ describe("phantom-tier rule", () => {
   it("honours the same allow-line escape hatch as the other rules", () => {
     const source = `"Growth and Scale tiers include priority support." // claims-guard-allow: Leo, 25 Aug 2026`;
     expect(scanText(source, "x.tsx").map((f) => f.rule.id)).not.toContain("phantom-tier");
+  });
+});
+
+describe("retired-tier-name rule", () => {
+  const ids = (source, file = "x.tsx") => scanText(source, file).map((f) => f.rule.id);
+
+  it("retires Enterprise in favour of BusinessOne", () => {
+    expect(RETIRED_TIER_NAMES).toContainEqual({ name: "Enterprise", current: "BusinessOne" });
+  });
+
+  it("lists no name that src/data/pricing.ts still defines, and points each at one it does", () => {
+    const tierModule = readFileSync(
+      fileURLToPath(new URL("../src/data/pricing.ts", import.meta.url)),
+      "utf8"
+    );
+    const defined = new Set([...tierModule.matchAll(/name:\s*"([^"]+)"/g)].map((m) => m[1]));
+    for (const { name, current } of RETIRED_TIER_NAMES) {
+      expect(defined.has(name), name).toBe(false);
+      expect(defined.has(current), current).toBe(true);
+    }
+  });
+
+  it("catches the pricing FAQ answer as it read before the rename", () => {
+    const source = `"Absolutely. Growth and Enterprise tiers include priority support (under 1 hour response), while our Hourly Packs can be used for urgent crisis response if we have capacity."`;
+    expect(ids(source)).toContain("retired-tier-name");
+  });
+
+  it("catches the bare name in front of tier or plan, which phantom-tier lets pass", () => {
+    for (const text of [
+      "Upgrade to the Enterprise tier for a dedicated success manager.",
+      "Enterprise plan",
+      "Enterprise Plan",
+      "Enterprise Plans start at $399",
+      "Enterprise tiers",
+      "Enterprise-tier support",
+      "<strong>Enterprise</strong> plan",
+    ]) {
+      expect(ids(`<p>${text}</p>`), text).toContain("retired-tier-name");
+      expect(ids(`<p>${text}</p>`), text).not.toContain("phantom-tier");
+    }
+  });
+
+  it("catches the quoted and the paired shapes", () => {
+    for (const text of [
+      `Our "Enterprise" plan covers strategy.`,
+      `The 'Enterprise' tier`,
+      "Our \u201cEnterprise\u201d plan",
+      "Growth and Enterprise tiers",
+      "Enterprise and Growth tiers",
+      "Core, Growth and Enterprise plans",
+      "Core, Growth, and Enterprise plans",
+      "Growth & Enterprise plans",
+      "Growth or Enterprise plan",
+    ]) {
+      expect(ids(text), text).toContain("retired-tier-name");
+    }
+  });
+
+  it("reports a paired list once, under its own rule, not again as a phantom tier", () => {
+    expect(ids("Growth and Enterprise tiers include priority support.")).toEqual([
+      "retired-tier-name",
+    ]);
+  });
+
+  it("does not fire on the generic word, in the shapes the site uses it", () => {
+    for (const text of [
+      "Enterprise-grade managed IT for small businesses.",
+      "No minimums. You get enterprise-grade support scaled to your team size.",
+      "Enterprise strategy for businesses and families. Built with precision. Delivered with soul.",
+      "Humaneers | Enterprise Strategy, Small Business Soul",
+      "Enterprise Client Service",
+      "Talk to our Enterprise Client Service team about plans for your organization.",
+      "Need a custom enterprise solution?",
+      "We work with larger organizations to build custom infrastructure and growth plans. Enterprise engagements start with a conversation.",
+      "Enterprise Endpoint Security",
+      "Enterprise Wi-Fi Management",
+      "Ask about an enterprise plan for a larger organization.",
+      "Growth and BusinessOne tiers include priority support (under 1 hour response).",
+    ]) {
+      expect(ids(`<p>${text}</p>`), text).not.toContain("retired-tier-name");
+    }
+  });
+
+  it("honours the same allow-line escape hatch as the other rules", () => {
+    const source = `<p>The Enterprise tier was renamed.</p> {/* claims-guard-allow: rename notice, Leo, 7 Oct 2026 */}`;
+    expect(ids(source)).not.toContain("retired-tier-name");
   });
 });
 
