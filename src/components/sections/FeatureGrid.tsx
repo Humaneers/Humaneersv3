@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { ChevronRight, type LucideIcon } from "lucide-react";
 
+import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/utils";
 
 import type { CtaLink } from "./CtaLinks";
@@ -33,7 +34,7 @@ const COLUMNS = {
 export function FeatureGrid({ eyebrow, heading, items, columns = 3, scheme }: FeatureGridProps) {
   return (
     <section className={sectionBandClass(scheme)}>
-      <div className="section-container">
+      <Reveal className="section-container">
         <div className="mb-12 max-w-3xl md:mb-18 lg:mb-20">
           {eyebrow && <p className="mb-3 font-semibold text-scheme-accent md:mb-4">{eyebrow}</p>}
           <h2 className="text-h3 font-bold">{heading}</h2>
@@ -64,7 +65,7 @@ export function FeatureGrid({ eyebrow, heading, items, columns = 3, scheme }: Fe
             );
           })}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

@@ -491,3 +491,356 @@ html body header nav .nav-item-title {
 html body header nav .nav-item-description {
   color: #4e596f !important;
 }
+
+/* ==========================================================================
+   Homepage and shell redesign, 20 Oct 2026: a scroll-driven structure and
+   motion layer in Humaneers' palette and faces.
+
+   Colors and radii reuse the brand, scheme and radius tokens above; each new
+   token below states why it exists. They are plain :root variables, not
+   @theme: a --text-* theme token would mint a text-* utility that
+   tailwind-merge reads as a text color, so the utilities are named type-*.
+
+   Every motion rule below opts in under `screen and (prefers-reduced-motion:
+   no-preference)`, and the scroll-linked ones also under @supports. Outside
+   those gates nothing is hidden, blurred or moved: no JS, no support, reduced
+   motion and print all show the resting state, which is the full content.
+   ========================================================================== */
+
+:root {
+  /* Hero h1: the reference's 100px display at 1440 wide, 48px at 375. */
+  --type-display: clamp(3rem, 1.75rem + 5.5vw, 6.25rem);
+  /* Display tracking: half the reference's -0.06em, as Caladea's serifs touch sooner. */
+  --tracking-display: -0.03em;
+  /* Manifesto: the reference's 48px statement size, 32px on a phone. */
+  --type-manifesto: clamp(2rem, 1.5rem + 2.2vw, 3rem);
+  /* One long-tail ease for reveals and the arc; the shadcn easings are tuned for short UI. */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Section and word reveals: slow enough to read as a settle, not a pop. */
+  --duration-reveal: 800ms;
+  /* Arc: one card's travel. */
+  --duration-arc: 640ms;
+  /* Header: the blur, hairline and surface fade. */
+  --duration-header: 300ms;
+  /* Arc card width: 4:5 cards near the reference's size, at most 64 percent of a phone.
+     Never wider than the 90vw the band's 5 percent gutters leave: at 200 percent
+     text size the 15rem floor is 480px, and on a phone the band's clip cut off
+     the front card's text. At the default size the 90vw cap never binds. */
+  --arc-card-w: min(clamp(15rem, 64vw, 18rem), 90vw);
+  /* Arc depth: the cylinder's radius; at 2.6 card widths neighbours sit a card and a gap apart. */
+  --arc-depth: calc(var(--arc-card-w) * 2.6);
+  /* Arc step: the turn between neighbouring cards. */
+  --arc-step: 24deg;
+  /* Arc viewing distance: nearer than this and the outer cards balloon. */
+  --arc-perspective: 1400px;
+  /* Word reveal start opacity. The reference starts at .25, which puts oxford
+     on cream at 1.6:1 before and while a statement enters; at .6 the faintest
+     state still clears 3:1 for large text (about 4:1), so axe stays at zero. */
+  --word-reveal-from: 0.6;
+}
+
+/* Hero h1. Caladea 400, as the reference sets its display at weight 400. */
+@utility type-display {
+  font-size: var(--type-display);
+  line-height: 1;
+  letter-spacing: var(--tracking-display);
+}
+
+/* The manifesto statement. */
+@utility type-manifesto {
+  font-size: var(--type-manifesto);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- Header ----------
+   At the top of the page the header is the oxford bar it always was. After
+   8px of scroll the 16px blur and the 1px hairline fade in, and over a light
+   band (Header.tsx reads the band under it) the surface turns light. */
+.site-header {
+  background-color: color-mix(in srgb, var(--color-brand-oxford) 95%, transparent);
+  border-bottom: 1px solid transparent;
+  transition-property: background-color, border-color, backdrop-filter, padding;
+  transition-duration: var(--duration-header);
+  transition-timing-function: ease-out;
+}
+.site-header[data-scrolled="true"] {
+  background-color: color-mix(in srgb, var(--color-brand-oxford) 82%, transparent);
+  border-bottom-color: color-mix(in srgb, var(--color-brand-cream) 8%, transparent);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+.site-header[data-surface="light"] {
+  background-color: color-mix(in srgb, var(--background) 86%, transparent);
+  border-bottom-color: color-mix(in srgb, var(--color-brand-oxford) 10%, transparent);
+}
+/* The wordmark is white artwork; on the light surface it prints dark, as it does in MobileNav. */
+.site-header__logo {
+  transition: filter var(--duration-header) ease-out;
+}
+.site-header[data-surface="light"] .site-header__logo {
+  filter: brightness(0);
+}
+/* MobileNav's menu button is white on oxford; on the light surface it turns oxford. */
+.site-header[data-surface="light"] [data-slot="sheet-trigger"] {
+  color: var(--color-brand-oxford);
+}
+/* copper-text-dark, not copper-text: the light surface is 86 percent white, so
+   over an oxford band copper-text on the hover tint measured 3.99:1.
+   copper-text-dark there is 5.02:1, and 6.56:1 over a white band. */
+.site-header[data-surface="light"] [data-slot="sheet-trigger"]:hover {
+  color: var(--color-brand-copper-text-dark);
+  background-color: color-mix(in srgb, var(--color-brand-oxford) 5%, transparent);
+}
+/* The button's own grey ring (--ring) measures about 2.6:1 against its white
+   offset; on the light surface it takes copper-text, 5.74:1, as the desktop
+   triggers below do. */
+.site-header[data-surface="light"] [data-slot="sheet-trigger"]:focus-visible {
+  --tw-ring-color: var(--color-brand-copper-text);
+}
+/* The trigger focus outline above (copper-light) measures about 2.2:1 on the
+   light surface. There it takes copper-text, 5.7:1 on white, so the ring a
+   keyboard user follows stays visible on both surfaces. */
+.site-header[data-surface="light"] nav [data-slot="navigation-menu-trigger"]:focus-visible {
+  outline-color: var(--color-brand-copper-text) !important;
+}
+
+/* ---------- Reveal (src/components/motion/Reveal.tsx) ----------
+   Content that starts below the fold rises 24px and fades in, once. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  [data-reveal="armed"] {
+    opacity: 0;
+    translate: 0 24px;
+  }
+  [data-reveal="in"] {
+    transition:
+      opacity var(--duration-reveal) var(--ease-out-soft),
+      translate var(--duration-reveal) var(--ease-out-soft);
+  }
+}
+
+/* ---------- Word reveal (src/components/motion/WordReveal.tsx) ----------
+   Each word resolves from --word-reveal-from and an 8px blur to sharp, staggered
+   through the statement by its position --p, and finished by the time the
+   statement reaches the middle of the screen. */
+.word-reveal__word {
+  display: inline-block;
+}
+@supports (animation-timeline: view()) {
+  @media screen and (prefers-reduced-motion: no-preference) {
+    .word-reveal {
+      view-timeline-name: --word-reveal;
+    }
+    .word-reveal__word {
+      animation: word-reveal-in linear both;
+      animation-timeline: --word-reveal;
+      animation-range: cover calc(10% + var(--p) * 30%) cover calc(20% + var(--p) * 30%);
+    }
+  }
+}
+/* The IntersectionObserver fallback, where view timelines are missing. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  .word-reveal[data-word-reveal="armed"] .word-reveal__word {
+    opacity: var(--word-reveal-from);
+    filter: blur(8px);
+  }
+  .word-reveal[data-word-reveal="in"] .word-reveal__word {
+    transition:
+      opacity var(--duration-reveal) var(--ease-out-soft),
+      filter var(--duration-reveal) var(--ease-out-soft);
+    transition-delay: calc(var(--p) * 600ms);
+  }
+}
+@keyframes word-reveal-in {
+  from {
+    opacity: var(--word-reveal-from);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* ---------- Arc (src/components/motion/ArcCarousel.tsx) ----------
+   Resting state: a plain row of sharp cards that scrolls sideways when it
+   has to. The server render, no JS, reduced motion and print all get this. */
+.arc__stage {
+  display: flex;
+  gap: 1.5rem;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  padding: 0.5rem 0.5rem 1.5rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+}
+.arc__slot {
+  flex: 0 0 var(--arc-card-w);
+  scroll-snap-align: center;
+}
+.arc__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  aspect-ratio: 4 / 5;
+  padding: 2rem 1.75rem;
+  border-radius: var(--radius-card);
+  background-color: var(--color-brand-cream);
+  color: var(--color-brand-oxford);
+  text-decoration: none;
+  -webkit-user-drag: none;
+}
+.arc__card:focus-visible {
+  outline: 2px solid var(--color-brand-copper-light);
+  outline-offset: 4px;
+}
+/* break-word: at 200 percent text on a 320px phone "Leadership" is wider than
+   the card and ran off its edge onto the oxford ground. It breaks only a word
+   that cannot fit a line, so the default text size is unchanged. */
+.arc__label {
+  padding-right: 2rem;
+  overflow-wrap: break-word;
+  font-family: var(--font-heading);
+  font-size: var(--text-h4);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+/* Oxford, not slate: the outer cards are dimmed, and slate on a dimmed cream
+   card measured 4.1:1. Oxford there stays above 9:1. */
+.arc__line {
+  margin-top: auto;
+  font-size: var(--text-regular);
+  line-height: 1.5;
+  color: var(--color-brand-oxford);
+}
+.arc__icon {
+  position: absolute;
+  top: 2rem;
+  right: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--color-brand-copper-text);
+}
+.arc__controls {
+  display: none;
+}
+.arc__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  /* Cream at 45 percent on oxford: 3.89:1 (35 percent was 2.91:1, short of 3:1). */
+  border: 1px solid color-mix(in srgb, var(--color-brand-cream) 45%, transparent);
+  border-radius: var(--radius-button);
+  color: var(--color-brand-cream);
+}
+.arc__button:focus-visible {
+  outline: 2px solid var(--color-brand-copper-light);
+  outline-offset: 2px;
+}
+.arc__button[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: default;
+}
+@media (hover: hover) {
+  .arc__button:not([aria-disabled="true"]):hover {
+    background-color: color-mix(in srgb, var(--color-brand-cream) 10%, transparent);
+  }
+}
+
+/* The 3D stage: JS has run and motion is allowed. The cards share one grid
+   cell and sit on the inside of a cylinder --arc-depth away: each turns by
+   its distance from the front card (--o) and comes toward the viewer as it
+   goes, the reference's concave arc. Outer cards dim and soften; their text
+   stays in the DOM and in the tab order, and a focused card comes to the
+   front. Card text drifts against the card's travel for a slight parallax. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  .arc[data-arc="3d"] .arc__stage {
+    display: grid;
+    width: auto;
+    max-width: none;
+    padding: calc(var(--arc-card-w) * 0.14) 0;
+    overflow: visible;
+    scroll-snap-type: none;
+    perspective: var(--arc-perspective);
+    touch-action: pan-y;
+    user-select: none;
+    cursor: grab;
+  }
+  .arc[data-arc="3d"][data-dragging] .arc__stage {
+    cursor: grabbing;
+  }
+  .arc[data-arc="3d"] .arc__slot {
+    grid-area: 1 / 1;
+    justify-self: center;
+    width: var(--arc-card-w);
+    transform: translateZ(var(--arc-depth)) rotateY(calc(var(--o) * var(--arc-step) * -1))
+      translateZ(calc(var(--arc-depth) * -1));
+    opacity: calc(1 - min(var(--a), 2) * 0.09);
+    filter: blur(calc(max(var(--a) - 1, 0) * 3px));
+    transition:
+      transform var(--duration-arc) var(--ease-out-soft),
+      opacity var(--duration-arc) var(--ease-out-soft),
+      filter var(--duration-arc) var(--ease-out-soft);
+  }
+  .arc[data-arc="3d"] .arc__card > * {
+    translate: calc(var(--o) * -10px) 0;
+    transition: translate var(--duration-arc) var(--ease-out-soft);
+  }
+  .arc[data-arc="3d"][data-dragging] .arc__slot,
+  .arc[data-arc="3d"][data-dragging] .arc__card > * {
+    transition: none;
+  }
+  .arc[data-arc="3d"] .arc__controls {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 2.5rem;
+  }
+}
+
+/* ---------- Service cards (homepage) ----------
+   Hover lift on devices that hover, and only with motion allowed. */
+.service-card {
+  transition:
+    translate 300ms var(--ease-out-soft),
+    box-shadow 300ms var(--ease-out-soft);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .service-card:hover {
+    translate: 0 -4px;
+    box-shadow: 0 24px 48px -32px color-mix(in srgb, var(--color-brand-oxford) 55%, transparent);
+  }
+}
+
+/* ---------- Trust tiles (homepage) ----------
+   From md the tiles sit in a grid whose column floor is 16rem. "engineering"
+   at the md heading size is about 10.7rem wide, and the tile padding is 1.5rem
+   a side to lg and 2.5rem from lg, so a 16rem column always holds the word
+   inside its padding. In rem, the floor grows with the text: at 200 percent
+   text the row drops to two or one across instead of pushing the word out of
+   its tile. At the default size that gives two across at 768 with the third
+   tile on a second row, and three across from about 925px. */
+@media (width >= 48rem) {
+  .trust-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  }
+}
+
+/* ---------- Print ----------
+   The arc prints as a wrapped row of cards, without its controls. */
+@media print {
+  .arc__stage {
+    flex-wrap: wrap;
+    width: auto;
+    overflow: visible;
+  }
+  .arc__controls {
+    display: none;
+  }
+}

@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { cleanup, render, screen, waitFor, within } from "@testing-library/react";
+import { cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { HomeClient } from "./HomeClient";
@@ -12,14 +12,15 @@ const SOLUTIONS = [
 ];
 const WAITLIST = { label: "Join the waitlist", href: "/talk-to-sales" };
 const SESSION_KEY = "humaneers_session_v1";
+const TRUST_POINTS = ["No user minimums", "No offshore NOCs", "100% US-based engineering"];
 
-/** jsdom has no matchMedia. Answers the md query and the reduced-motion query. */
-function stubMedia({ mdUp, reduceMotion = false }: { mdUp: boolean; reduceMotion?: boolean }) {
+/** jsdom has no matchMedia. Answers the two reduced-motion queries; nothing else matches. */
+function stubMedia({ reduceMotion }: { reduceMotion: boolean }) {
   window.matchMedia = ((query: string) => ({
-    matches: query.includes("prefers-reduced-motion")
-      ? reduceMotion
-      : query.includes("min-width: 48rem")
-        ? mdUp
+    matches: query.includes("no-preference")
+      ? !reduceMotion
+      : query.includes("prefers-reduced-motion")
+        ? reduceMotion
         : false,
     media: query,
     onchange: null,
@@ -37,6 +38,10 @@ function headingLevels(root: HTMLElement) {
   );
 }
 
+function session() {
+  return JSON.parse(sessionStorage.getItem(SESSION_KEY) ?? "{}");
+}
+
 // jsdom logs "not implemented: navigation" when a link's default action runs.
 const stopNavigation = (event: Event) => event.preventDefault();
 
@@ -51,10 +56,10 @@ afterEach(() => {
 });
 
 describe.each([
-  { width: "below md", mdUp: false },
-  { width: "md and up", mdUp: true },
-])("HomeClient $width", ({ mdUp }) => {
-  beforeEach(() => stubMedia({ mdUp }));
+  { motion: "motion allowed", reduceMotion: false },
+  { motion: "reduced motion", reduceMotion: true },
+])("HomeClient, $motion", ({ reduceMotion }) => {
+  beforeEach(() => stubMedia({ reduceMotion }));
 
   it("has one h1, no skipped heading level and no image", () => {
     const { container } = render(<HomeClient />);
@@ -64,9 +69,13 @@ describe.each([
     levels.forEach((level, i) => {
       if (i > 0) expect(level).toBeLessThanOrEqual(levels[i - 1] + 1);
     });
-    expect(screen.getByRole("heading", { level: 1 }).textContent).toBe(
-      "Built with precision. Delivered with soul."
-    );
+    const h1 = screen.getByRole("heading", { level: 1 });
+    expect(h1.textContent).toBe("Built with precision. Delivered with soul.");
+    // Only the two accent words are set apart.
+    expect(Array.from(h1.querySelectorAll("span")).map((s) => s.textContent)).toEqual([
+      "precision",
+      "soul",
+    ]);
     // D3: no stock photography, and nothing else stands in for it.
     expect(container.querySelector("img")).toBeNull();
     expect(container.innerHTML).not.toMatch(/images\.unsplash\.com/);
@@ -89,7 +98,7 @@ describe.each([
     expect(within(closing).getByText(/joining a waitlist while we are at capacity/)).toBeTruthy();
   });
 
-  it("navigates only through links; every button toggles in place", () => {
+  it("navigates only through links; every button toggles in place or moves the arc", () => {
     const { container } = render(<HomeClient />);
     for (const link of Array.from(container.querySelectorAll("a"))) {
       expect(link.getAttribute("href")).toMatch(/^\//);
@@ -99,32 +108,59 @@ describe.each([
     for (const button of buttons) {
       expect(button.getAttribute("type")).toBe("button");
       expect(button.closest("a")).toBeNull();
-      // Each is an objection (FAQ trigger) or, from md up, a wheel selector.
-      expect(button.hasAttribute("aria-expanded") || button.hasAttribute("aria-pressed")).toBe(
+      // Each is an objection (FAQ trigger) or one of the arc's two controls.
+      expect(button.hasAttribute("aria-expanded") || button.hasAttribute("aria-controls")).toBe(
         true
       );
     }
     expect(buttons.filter((b) => b.hasAttribute("aria-expanded"))).toHaveLength(4);
-    expect(buttons.filter((b) => b.hasAttribute("aria-pressed"))).toHaveLength(mdUp ? 4 : 0);
+    const arc = screen.getByRole("region", { name: "Services" });
+    const stage = within(arc).getByRole("list");
+    const controls = [
+      screen.getByRole("button", { name: "Previous service" }),
+      screen.getByRole("button", { name: "Next service" }),
+    ];
+    for (const control of controls) expect(control.getAttribute("aria-controls")).toBe(stage.id);
+    expect(buttons).toHaveLength(6);
   });
 
-  it("renders the solutions block once, under one h2", () => {
+  it("shows the four service lines in the arc and as cards under one h2", () => {
     render(<HomeClient />);
-    expect(screen.getAllByRole("heading", { name: "Everything You Need to Grow" })).toHaveLength(1);
-    const explore = screen.getAllByRole("link", { name: /^Explore / });
-    if (mdUp) {
-      // The wheel: four selectors and one link, for the active solution.
-      expect(screen.getAllByRole("button", { pressed: true })).toHaveLength(1);
-      expect(explore.map((a) => a.getAttribute("href"))).toEqual([SOLUTIONS[0].href]);
-    } else {
-      // The grid: the same four solutions, each with its label and link.
-      for (const { label } of SOLUTIONS) {
-        expect(screen.getByRole("heading", { level: 3, name: label })).toBeTruthy();
-      }
-      expect(explore.map((a) => [a.textContent, a.getAttribute("href")])).toEqual(
-        SOLUTIONS.map(({ label, href }) => [`Explore ${label}`, href])
-      );
+    const arc = screen.getByRole("region", { name: "Services" });
+    expect(
+      within(arc)
+        .getAllByRole("link")
+        .map((a) => a.getAttribute("href"))
+    ).toEqual(SOLUTIONS.map(({ href }) => href));
+    for (const [index, link] of within(arc).getAllByRole("link").entries()) {
+      expect(link.textContent).toContain(SOLUTIONS[index].label);
     }
+
+    expect(screen.getAllByRole("heading", { name: "Everything You Need to Grow" })).toHaveLength(1);
+    for (const { label } of SOLUTIONS) {
+      expect(screen.getByRole("heading", { level: 3, name: label })).toBeTruthy();
+    }
+    const explore = screen.getAllByRole("link", { name: /^Explore / });
+    expect(explore.map((a) => [a.textContent, a.getAttribute("href")])).toEqual(
+      SOLUTIONS.map(({ label, href }) => [`Explore ${label}`, href])
+    );
+  });
+
+  it("reads the manifesto once, whole, and keeps the trust points word for word", () => {
+    const { container } = render(<HomeClient />);
+    const manifesto = "Enterprise strategy for businesses and families.";
+    const statement = screen.getByText(manifesto, { selector: ".sr-only" }).closest("p");
+    expect(statement?.querySelector('[aria-hidden="true"]')?.textContent).toBe(manifesto);
+    expect(statement?.querySelectorAll(".word-reveal__word")).toHaveLength(6);
+
+    const trust = screen.getByRole("heading", { name: "Security & Trust You Can Rely On" })
+      .parentElement as HTMLElement;
+    expect(
+      within(trust)
+        .getAllByRole("listitem")
+        .map((li) => li.textContent)
+    ).toEqual(TRUST_POINTS);
+    expect(container.textContent).not.toContain("We take security seriously.");
   });
 
   it("records which CTA a waitlist click came from", async () => {
@@ -132,46 +168,15 @@ describe.each([
     render(<HomeClient />);
     const [hero, closing] = screen.getAllByRole("link", { name: WAITLIST.label });
     await user.click(hero);
-    expect(JSON.parse(sessionStorage.getItem(SESSION_KEY) ?? "{}").entrySource).toBe(
-      "Homepage Hero CTA"
-    );
+    expect(session().entrySource).toBe("Homepage Hero CTA");
     await user.click(closing);
-    expect(JSON.parse(sessionStorage.getItem(SESSION_KEY) ?? "{}").entrySource).toBe(
-      "Homepage Bottom CTA"
-    );
+    expect(session().entrySource).toBe("Homepage Bottom CTA");
   });
-});
 
-describe("the wheel, from md up", () => {
-  beforeEach(() => stubMedia({ mdUp: true }));
-
-  it("brings the chosen solution to the right of the circle and shows its panel", async () => {
+  it("records which service a visitor opened", async () => {
     const user = userEvent.setup();
     render(<HomeClient />);
-    const growth = screen.getByRole("button", { name: "Brand Growth" });
-    expect(growth.getAttribute("aria-pressed")).toBe("false");
-
-    await user.click(growth);
-
-    expect(growth.getAttribute("aria-pressed")).toBe("true");
-    expect(screen.getByRole("button", { name: "Managed IT" }).getAttribute("aria-pressed")).toBe(
-      "false"
-    );
-    const panel = document.getElementById("solution-panel") as HTMLElement;
-    expect(
-      await within(panel).findByRole("heading", { level: 3, name: "Brand Growth" })
-    ).toBeTruthy();
-    expect(within(panel).getByRole("link", { name: "Explore Brand Growth" })).toBeTruthy();
-    // Each solution travels the circle itself; nothing rotates. The active one
-    // comes to rest at the right: 50% + 40% across, halfway down.
-    const item = growth.parentElement as HTMLElement;
-    await waitFor(
-      () => {
-        expect(parseFloat(item.style.left)).toBeCloseTo(90);
-        expect(parseFloat(item.style.top)).toBeCloseTo(50);
-      },
-      { timeout: 4000 }
-    );
-    expect(item.style.transform).not.toMatch(/rotate/);
+    await user.click(screen.getByRole("link", { name: "Explore Family Protection" }));
+    expect(session().lastViewedService).toBe("Family Protection");
   });
 });

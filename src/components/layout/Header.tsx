@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, forwardRef } from "react";
+import { useState, useEffect, useRef, forwardRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
@@ -19,17 +19,103 @@ import { cn } from "../ui/utils";
 import { navSections, ctaLinks, type NavItem } from "../../data/navigation";
 import { MobileNav } from "./MobileNav";
 
+/** Scroll distance, in px, before the header's blur and hairline border fade in. */
+const SCROLL_THRESHOLD = 8;
+
+export type HeaderSurface = "dark" | "light";
+
+/**
+ * Reads a computed background color and says whether it is light. Handles the
+ * forms browsers return: rgb()/rgba(), color(srgb ...), and oklab()/oklch(),
+ * which Chrome returns for a color-mix(). Returns null for a color that is
+ * missing or mostly transparent, so the caller can look further up the tree.
+ */
+export function isLightColor(color: string): boolean | null {
+  const match = /^(rgba?|color|oklab|oklch)\((.*)\)$/i.exec(color.trim());
+  if (!match) return null;
+  const fn = match[1].toLowerCase();
+  const body = match[2].replace(/^srgb\s+/i, "");
+  const [channels, alphaPart] = body.split("/");
+  const parts = channels
+    .split(/[\s,]+/)
+    .filter(Boolean)
+    .map((part) => (part.endsWith("%") ? parseFloat(part) / 100 : parseFloat(part)));
+  const alpha = alphaPart !== undefined ? parseFloat(alphaPart) : fn === "rgba" ? parts[3] : 1;
+  if (parts.some(Number.isNaN) || parts.length < 3 || (alpha ?? 1) < 0.5) return null;
+
+  if (fn === "oklab" || fn === "oklch") return parts[0] > 0.62;
+
+  // rgb() channels are 0 to 255; color(srgb) channels are 0 to 1.
+  const scale = fn === "color" ? 1 : 255;
+  const [r, g, b] = parts.slice(0, 3).map((channel) => {
+    const c = channel / scale;
+    return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b > 0.4;
+}
+
+/**
+ * The surface of the band under the middle of the header: the nearest
+ * section, footer or [data-surface] there, or failing that the first opaque
+ * background up the tree. A card or an image inside a band does not count,
+ * so the header follows the band and does not flicker over its contents.
+ */
+function surfaceUnder(header: HTMLElement): HeaderSurface {
+  if (typeof document.elementsFromPoint !== "function") return "dark";
+  const { bottom } = header.getBoundingClientRect();
+  const below = document
+    .elementsFromPoint(window.innerWidth / 2, bottom / 2)
+    .find((el) => !header.contains(el));
+  if (!below) return "dark";
+
+  const band = below.closest("section, footer, [data-surface]") ?? below;
+  for (let node: Element | null = band; node; node = node.parentElement) {
+    const light = isLightColor(getComputedStyle(node).backgroundColor);
+    if (light !== null) return light ? "light" : "dark";
+  }
+  return "dark";
+}
+
+// The four menu triggers, by surface. Each keeps the copper focus ring; the
+// global :focus-visible outline in globals.css applies on both surfaces.
+const TRIGGER = {
+  dark: "bg-transparent text-gray-300 hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-white focus-visible:ring-2 focus-visible:ring-brand-copper",
+  light:
+    "bg-transparent text-brand-oxford hover:text-brand-oxford hover:bg-brand-oxford/5 focus:bg-brand-oxford/5 focus:text-brand-oxford data-[active]:bg-brand-oxford/5 data-[state=open]:bg-brand-oxford/5 data-[state=open]:text-brand-oxford focus-visible:ring-2 focus-visible:ring-brand-copper",
+} as const;
+
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [surface, setSurface] = useState<HeaderSurface>("dark");
+  const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
 
+  // One measurement per frame at most. At the top of the page the header is
+  // the oxford bar it has always been; once scrolled it takes the blur and
+  // border, and flips to the light surface over a light band.
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+    let frame = 0;
+    const measure = () => {
+      frame = 0;
+      const header = headerRef.current;
+      const scrolled = window.scrollY > SCROLL_THRESHOLD;
+      setIsScrolled(scrolled);
+      setSurface(scrolled && header ? surfaceUnder(header) : "dark");
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const schedule = () => {
+      if (!frame) frame = window.requestAnimationFrame(measure);
+    };
+    measure();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, [pathname]);
+
+  const light = surface === "light";
 
   const renderNavItem = (item: NavItem, className?: string) => {
     if (item.disabled) {
@@ -102,10 +188,13 @@ export function Header() {
   const companySection = navSections.find((section) => section.id === "company");
 
   return (
+    // Surface colors, blur and border live in globals.css (.site-header), keyed
+    // on these two attributes, so the fade between states is one transition.
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-brand-oxford shadow-lg py-3" : "bg-brand-oxford/95 backdrop-blur-sm py-5"
-      }`}
+      ref={headerRef}
+      data-scrolled={isScrolled ? "true" : "false"}
+      data-surface={surface}
+      className={cn("site-header fixed top-0 left-0 right-0 z-50", isScrolled ? "py-3" : "py-5")}
     >
       <a
         href="#main-content"
@@ -123,7 +212,7 @@ export function Header() {
             alt="Humaneers"
             width={200}
             height={44}
-            className="h-6 sm:h-7 md:h-8 w-auto"
+            className="site-header__logo h-6 sm:h-7 md:h-8 w-auto"
             priority
           />
         </Link>
@@ -136,7 +225,7 @@ export function Header() {
             <NavigationMenuList>
               {whoWeHelpSection && (
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent text-gray-300 hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-white focus-visible:ring-2 focus-visible:ring-brand-copper">
+                  <NavigationMenuTrigger className={TRIGGER[surface]}>
                     {whoWeHelpSection.label}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
@@ -174,7 +263,7 @@ export function Header() {
 
               {platformSection && (
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent text-gray-300 hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-white focus-visible:ring-2 focus-visible:ring-brand-copper">
+                  <NavigationMenuTrigger className={TRIGGER[surface]}>
                     {platformSection.label}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
@@ -189,7 +278,7 @@ export function Header() {
 
               {resourcesSection && (
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent text-gray-300 hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-white focus-visible:ring-2 focus-visible:ring-brand-copper">
+                  <NavigationMenuTrigger className={TRIGGER[surface]}>
                     {resourcesSection.label}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
@@ -223,7 +312,7 @@ export function Header() {
 
               {companySection && (
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent text-gray-300 hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-white focus-visible:ring-2 focus-visible:ring-brand-copper">
+                  <NavigationMenuTrigger className={TRIGGER[surface]}>
                     {companySection.label}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
@@ -263,13 +352,22 @@ export function Header() {
         <div className="hidden lg:flex items-center gap-3 shrink-0 ml-4">
           <Button
             variant="ghost"
-            className="text-gray-300 hover:text-white hover:bg-white/10 font-medium hidden lg:inline-flex focus-visible:ring-2 focus-visible:ring-brand-copper"
+            className={cn(
+              "font-medium hidden lg:inline-flex focus-visible:ring-2 focus-visible:ring-brand-copper",
+              light
+                ? "text-brand-oxford hover:text-brand-oxford hover:bg-brand-oxford/5"
+                : "text-gray-300 hover:text-white hover:bg-white/10"
+            )}
             asChild
           >
             <Link href={ctaLinks.support.to}>{ctaLinks.support.label}</Link>
           </Button>
+          {/* A white ring disappears on the light surface, so it turns oxford there. */}
           <Button
-            className="bg-brand-copper-text hover:bg-brand-copper-text-dark text-white font-medium rounded-md transition-all shadow-md hover:shadow-lg focus-visible:ring-2 focus-visible:ring-white"
+            className={cn(
+              "bg-brand-copper-text hover:bg-brand-copper-text-dark text-white font-medium rounded-md transition-all shadow-md hover:shadow-lg focus-visible:ring-2",
+              light ? "focus-visible:ring-brand-oxford" : "focus-visible:ring-white"
+            )}
             asChild
           >
             <Link href={ctaLinks.sales.to}>{ctaLinks.sales.label}</Link>
@@ -285,7 +383,12 @@ export function Header() {
           <a
             href="tel:+19284401505"
             aria-label="Call (928) 440-1505"
-            className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-md px-1.5 py-2 text-sm font-semibold text-white hover:bg-white/10 hover:text-brand-copper-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-copper"
+            className={cn(
+              "inline-flex items-center gap-1.5 whitespace-nowrap rounded-md px-1.5 py-2 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-copper",
+              light
+                ? "text-brand-oxford hover:bg-brand-oxford/5 hover:text-brand-copper-text-dark"
+                : "text-white hover:bg-white/10 hover:text-brand-copper-light"
+            )}
           >
             <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
             <span className="max-[359px]:sr-only">(928) 440-1505</span>
