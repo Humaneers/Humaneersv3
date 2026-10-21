@@ -26,7 +26,7 @@ The installed React 18.3.1 is used by:
 
 ## Pins and conflicts
 
-Of 47 direct dependencies, 16 declare a `react` peer range. 15 of the 16 admit React 19.3.0. The one that does not is `react-dom@18.3.1`, which moves with `react`. A scan of all 53 lockfile packages that declare a `react` peer found no other failing range.
+Of 44 direct dependencies, 13 declare a `react` peer range. 12 of the 13 admit React 19.3.0. The one that does not is `react-dom@18.3.1`, which moves with `react`. A scan of all 49 lockfile packages that declare a `react` peer found no other failing range.
 
 | Package | Installed | Peer range for `react` | Admits 19 | Imported by live code |
 |---|---|---|---|---|
@@ -34,16 +34,15 @@ Of 47 direct dependencies, 16 declare a `react` peer range. 15 of the 16 admit R
 | `@types/react-dom` | 18.3.7 | peers `@types/react ^18` | must move to `^19` | n/a |
 | `react-dom` | 18.3.1 | `^18.3.1` | must move with `react` | yes |
 | `next` | 16.4.2 | `^18.2.0 \|\| ^19.0.0` | yes | yes |
-| Radix (8 packages) | various | `^16.8 \|\| ... \|\| ^19.0` | yes | 6 of 8: accordion, dialog, navigation-menu, slot, tabs, tooltip. `checkbox` and `label` only through the unreachable `TalkToSalesModal.tsx` |
+| Radix (6 packages) | various | `^16.8 \|\| ... \|\| ^19.0` | yes | all 6: accordion, dialog, navigation-menu, slot, tabs, tooltip |
 | `lucide-react` | 0.487.0 | `^16.5.1 \|\| ... \|\| ^19.0.0` | yes | yes (36 files) |
 | `motion` | 11.18.2 | `^18.0.0 \|\| ^19.0.0` | yes | yes (`SolutionSwitcher.tsx` on main) |
 | `@vercel/analytics`, `@vercel/speed-insights` | 1.6.1, 1.3.1 | `^18 \|\| ^19` | yes | yes |
-| `sonner` | 2.0.7 | `^18.0.0 \|\| ^19.0.0` | yes | no (only `TalkToSalesModal.tsx`) |
 | `@testing-library/react` | 16.3.2 | `^18.0.0 \|\| ^19.0.0` | yes | tests only |
 
-"Live" means reachable from `src/app/**` or `src/proxy.ts` in an import graph over the 131 code files (`.ts`, `.tsx`, `.js`, `.mjs`) in `src/`. Six source files are not reachable: `TalkToSalesModal.tsx` and the four files it imports (`ui/checkbox.tsx`, `ui/label.tsx`, `ui/textarea.tsx`, `lib/cal.ts`), which were kept because it is a form, and `version.ts`, which `scripts/release.ts` writes. `src/vitest.setup.ts` is also unreachable: it imports `@testing-library/jest-dom`, but `vitest.config.ts` sets no `setupFiles`, so it is never loaded. Only 17 packages are imported by live code: the six Radix packages above, `@vercel/analytics`, `@vercel/speed-insights`, `class-variance-authority`, `clsx`, `lucide-react`, `motion`, `next`, `nodemailer`, `react`, `tailwind-merge` and `zod`.
+"Live" means reachable from `src/app/**` or `src/proxy.ts` in an import graph over the 126 code files (`.ts`, `.tsx`, `.js`, `.mjs`) in `src/`. Two files are not reachable: `version.ts`, which `scripts/release.ts` writes on each release, and `vitest.setup.ts`, which imports `@testing-library/jest-dom` but is never loaded because `vitest.config.ts` sets no `setupFiles`. Only 17 packages are imported by live code: the six Radix packages above, `@vercel/analytics`, `@vercel/speed-insights`, `class-variance-authority`, `clsx`, `lucide-react`, `motion`, `next`, `nodemailer`, `react`, `tailwind-merge` and `zod`.
 
-Removed from `package.json`: `react-day-picker`, `recharts`, `next-themes`, `embla-carousel-react`, `cmdk`, `input-otp`, `react-hook-form`, `react-resizable-panels` and `vaul`, along with 18 other Radix packages, `@datadog/browser-rum` and `date-fns`. No live code imported any of them. Before removal every one of them had a peer range that admitted React 19. Two notes for anyone who re-adds one:
+Removed from `package.json`: `react-day-picker`, `recharts`, `next-themes`, `embla-carousel-react`, `cmdk`, `input-otp`, `react-hook-form`, `react-resizable-panels` and `vaul`, along with 20 other Radix packages, `sonner`, `@datadog/browser-rum` and `date-fns`. No live code imported any of them. Before removal every one of them had a peer range that admitted React 19. Two notes for anyone who re-adds one:
 
 - **`react-day-picker` 8** peers `date-fns` (`^2.28.0 || ^3.0.0`). v9 and later are a different API.
 - **`recharts` 2** carries its own dependency on `react-is ^18.3.1`. Recharts 3.10.1 lists `react-is` as a peer dependency with a range that includes `^19.0.0`. Under React 19, use recharts 3 or add an `overrides` entry for `react-is`.
@@ -55,7 +54,7 @@ The only hard pin left is `@types/react` 18. It has to move together with `@type
 Searched all of `src/` for patterns React 19 removes or changes:
 
 - Zero uses of `defaultProps`, `propTypes`, `ReactDOM.render`, `hydrate`, `findDOMNode`, string refs, legacy context, `react-dom/test-utils`, `createFactory`, `React.ElementRef`, the global `JSX` namespace, or `useRef()` with no argument.
-- Four files use `forwardRef` (`ui/button.tsx`, `ui/input.tsx` and `layout/Header.tsx` are live; `ui/textarea.tsx` is not). `forwardRef` still works in React 19. Passing `ref` as a plain prop is the replacement and is optional.
+- Three files use `forwardRef`: `ui/button.tsx`, `ui/input.tsx` and `layout/Header.tsx`, all live. `forwardRef` still works in React 19. Passing `ref` as a plain prop is the replacement and is optional.
 - Class error boundaries were deleted with the unreachable files. No class components remain.
 
 ## Trial result
@@ -70,9 +69,9 @@ On a copy of the final tree placed outside the repository, with `react` and `rea
 | `npm run test:run` | 10 files, 206 tests, all pass |
 | `npm run build` | pass, 35 pages, no React version warning |
 | `npm ls` | no invalid or unmet peers |
-| JS and CSS bytes under `.next/static` | 1,185,210 and 89,015, identical to a React 18 build of the same copy in the same directory |
+| JS and CSS bytes under `.next/static` | 1,185,210 and 86,982, identical to a React 18 build of the same copy in the same directory |
 
-Byte sums depend slightly on the directory the build runs in. The same source built in the repository directory gives 1,185,313 JS and 89,015 CSS. Compare byte sums only within one directory.
+Byte sums depend slightly on the directory the build runs in. The same source built in the repository directory gives 1,185,313 JS and 86,982 CSS. Compare byte sums only within one directory.
 
 The trial did not include a browser pass. The interactive components that matter (accordion, dialog, tabs, navigation menu, tooltip) already run on React 19 in production through Next's vendored copy.
 
@@ -80,7 +79,7 @@ The trial did not include a browser pass. The interactive components that matter
 
 1. In `package.json`: `react` and `react-dom` to `^19.3.1`; `@types/react` and `@types/react-dom` to `^19.3.0`.
 2. `npm install`, then run the five checks and a clean build. Expect no source changes.
-3. Optional, separate commit: replace `forwardRef` in the four files with a `ref` prop. Not required.
+3. Optional, separate commit: replace `forwardRef` in the three files with a `ref` prop. Not required.
 4. Conflict risk: the lockfile. Any other branch that touches `package-lock.json` will need a rebase and a fresh `npm install`.
 
 ## Out of scope here
