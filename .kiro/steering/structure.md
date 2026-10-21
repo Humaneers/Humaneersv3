@@ -23,7 +23,7 @@ src/
 ├── components/            # React components
 ├── lib/                   # Utility functions and configurations
 ├── styles/                # Global CSS and Tailwind config
-└── middleware.ts          # Next.js middleware
+└── proxy.ts               # Next.js proxy (formerly middleware)
 ```
 
 ### Component Architecture
