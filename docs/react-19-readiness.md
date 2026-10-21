@@ -40,7 +40,7 @@ Of 44 direct dependencies, 13 declare a `react` peer range. 12 of the 13 admit R
 | `@vercel/analytics`, `@vercel/speed-insights` | 1.6.1, 1.3.1 | `^18 \|\| ^19` | yes | yes |
 | `@testing-library/react` | 16.3.2 | `^18.0.0 \|\| ^19.0.0` | yes | tests only |
 
-"Live" means reachable from `src/app/**` or `src/proxy.ts` in an import graph over the 125 code files (`.ts`, `.tsx`, `.js`, `.mjs`) in `src/`. One file is not reachable: `version.ts`, which `scripts/release.ts` writes on each release. Only 17 packages are imported by live code: the six Radix packages above, `@vercel/analytics`, `@vercel/speed-insights`, `class-variance-authority`, `clsx`, `lucide-react`, `motion`, `next`, `nodemailer`, `react`, `tailwind-merge` and `zod`.
+"Live" means reachable from `src/app/**` or `src/proxy.ts` in an import graph over the 124 code files (`.ts`, `.tsx`, `.js`, `.mjs`) in `src/`. Every non-test file is reachable. Only 17 packages are imported by live code: the six Radix packages above, `@vercel/analytics`, `@vercel/speed-insights`, `class-variance-authority`, `clsx`, `lucide-react`, `motion`, `next`, `nodemailer`, `react`, `tailwind-merge` and `zod`.
 
 Removed from `package.json`: `react-day-picker`, `recharts`, `next-themes`, `embla-carousel-react`, `cmdk`, `input-otp`, `react-hook-form`, `react-resizable-panels` and `vaul`, along with 20 other Radix packages, `sonner`, `@datadog/browser-rum` and `date-fns`. No live code imported any of them. Before removal every one of them had a peer range that admitted React 19. Two notes for anyone who re-adds one:
 
