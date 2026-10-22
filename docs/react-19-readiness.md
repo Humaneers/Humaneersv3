@@ -26,11 +26,11 @@ The installed React 18.3.1 is used by:
 
 ## Pins and conflicts
 
-Of 43 direct dependencies, 13 declare a `react` peer range. 12 of the 13 admit React 19.3.0. The one that does not is `react-dom@18.3.1`, which moves with `react`. A scan of all 49 lockfile packages that declare a `react` peer found no other failing range.
+Of 44 direct dependencies, 13 declare a `react` peer range. 12 of the 13 admit React 19.3.0. The one that does not is `react-dom@18.3.1`, which moves with `react`. A scan of all 49 lockfile packages that declare a `react` peer found no other failing range.
 
 | Package | Installed | Peer range for `react` | Admits 19 | Imported by live code |
 |---|---|---|---|---|
-| `@types/react` | 18.3.29 | n/a (pinned `^18.3.0` in devDependencies) | must move to `^19` | n/a |
+| `@types/react` | 18.3.29 | n/a (range `^18.3.0` in devDependencies) | must move to `^19` | n/a |
 | `@types/react-dom` | 18.3.7 | peers `@types/react ^18` | must move to `^19` | n/a |
 | `react-dom` | 18.3.1 | `^18.3.1` | must move with `react` | yes |
 | `next` | 16.4.2 | `^18.2.0 \|\| ^19.0.0` | yes | yes |
