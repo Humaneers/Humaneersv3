@@ -19,7 +19,6 @@
 
 ## Integrations
 - **Zoho CRM/Desk** for lead management and support tickets
-- **Datadog RUM** for monitoring and analytics
 - **Vercel Analytics** and **Speed Insights**
 
 ## Development Tools
