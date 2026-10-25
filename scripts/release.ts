@@ -9,7 +9,6 @@ const __dirname = path.dirname(__filename);
 
 const ROOT_DIR = path.resolve(__dirname, "..");
 const PACKAGE_JSON_PATH = path.join(ROOT_DIR, "package.json");
-const VERSION_TS_PATH = path.join(ROOT_DIR, "src/version.ts");
 const REPO_DOCS_CHANGELOG_PATH = path.join(ROOT_DIR, "docs/CHANGELOG.md");
 const OBSIDIAN_CHANGELOG_PATH = "/Users/arron/Library/Mobile Documents/iCloud~md~obsidian/Documents/Local/Humaneers/Website Dev/CHANGELOG.md";
 
@@ -87,44 +86,10 @@ async function main() {
     packageJson.version = newVersion;
     fs.writeFileSync(PACKAGE_JSON_PATH, JSON.stringify(packageJson, null, 2) + "\n");
 
-    // NEW: Parse Changelog to JSON for frontend
-    const changelogLines = newChangelogContent.split("\n");
-    const changelogJson: { version: string; date: string; changes: string[] }[] = [];
-    let currentEntry: { version: string; date: string; changes: string[] } | null = null;
-
-    const versionRegex = /^## \[(.+)\] - (.+)$/;
-    const changeRegex = /^- (.+)$/;
-
-    for (const line of changelogLines) {
-        const vMatch = line.match(versionRegex);
-        if (vMatch) {
-            if (currentEntry) {
-                changelogJson.push(currentEntry);
-            }
-            currentEntry = {
-                version: vMatch[1],
-                date: vMatch[2],
-                changes: [],
-            };
-            continue;
-        }
-
-        const cMatch = line.match(changeRegex);
-        if (cMatch && currentEntry) {
-            currentEntry.changes.push(cMatch[1]);
-        }
-    }
-    if (currentEntry) {
-        changelogJson.push(currentEntry);
-    }
-
-    const versionFileContent = `export const APP_VERSION = "${newVersion}";\n\nexport const CHANGELOG = ${JSON.stringify(changelogJson, null, 2)};\n`;
-    fs.writeFileSync(VERSION_TS_PATH, versionFileContent);
-
     // 4. Git Commit & Push
     console.log("\n💾 Committing changes...");
     try {
-        run(`git add package.json src/version.ts docs/`);
+        run(`git add package.json docs/`);
         run(`git commit -m "chore: release v${newVersion}"`);
 
         if (noPush) {
