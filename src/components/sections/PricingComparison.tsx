@@ -56,6 +56,16 @@ const GRID: Record<number, string> = {
  * The plan-name row sticks under the site header (64px once the page scrolls,
  * hence top-16) while the matrix is in view. The section heading is the h2 and
  * each category title an h3. No motion, so nothing for reduced motion to stop.
+ *
+ * From md the matrix sits on a card in the band's foreground tint, and the
+ * sticky row takes the same tint so the rows passing under it stay hidden. The
+ * card reaches out into the band's gutter by exactly its own padding, so the
+ * columns keep their width and a plan name and its mark keep their line. The
+ * reach is capped at 4 percent of the container, inside the band's 5 percent
+ * gutter, so at a large text size the card still stops short of the screen
+ * edge. Below md the gutter is too narrow for that and the matrix sits on the
+ * band as it did. No column is sticky: the grid never scrolls sideways, and below md the
+ * feature name has a row of its own.
  */
 export function PricingComparison({
   heading,
@@ -77,11 +87,15 @@ export function PricingComparison({
           </h2>
           {description && <p className="text-medium">{description}</p>}
         </div>
-        <div role="table" aria-labelledby={headingId}>
+        <div
+          role="table"
+          aria-labelledby={headingId}
+          className="md:-mx-[min(1.5rem,4%)] md:rounded-card md:bg-scheme-foreground md:px-[min(1.5rem,4%)] md:pt-2 md:pb-6 lg:-mx-[min(2rem,4%)] lg:px-[min(2rem,4%)]"
+        >
           <div
             role="row"
             className={cn(
-              "sticky top-16 z-10 grid border-b border-scheme-border bg-scheme-background",
+              "sticky top-16 z-10 grid border-b border-scheme-border bg-scheme-background md:bg-scheme-foreground",
               grid
             )}
           >

@@ -43,6 +43,7 @@ export function ThankYouClient() {
   return (
     <>
       <PageHeader
+        variant="display"
         scheme="cream"
         align="center"
         heading="Request Received!"

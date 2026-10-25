@@ -71,7 +71,7 @@ export function PricingClient({ segment: requested }: { segment: TierSegment }) 
 
   return (
     <>
-      <PageHeader {...HERO} scheme="cream" />
+      <PageHeader {...HERO} variant="display" scheme="dark" />
       <PricingPlans
         {...PLANS_INTRO}
         tabs={PLAN_TABS}

@@ -40,6 +40,7 @@ export function IndustriesClient() {
   return (
     <>
       <PageHeader
+        variant="display"
         align="center"
         scheme="dark"
         heading="Compliance is not optional."

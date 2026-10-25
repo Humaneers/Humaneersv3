@@ -537,12 +537,23 @@ html body header nav .nav-item-description {
      on cream at 1.6:1 before and while a statement enters; at .6 the faintest
      state still clears 3:1 for large text (about 4:1), so axe stays at zero. */
   --word-reveal-from: 0.6;
+  /* Inner page head h1: between the h1 ramp's 3.5rem and the hero; 44px at 375, 76px at 1440. */
+  --type-page-display: clamp(2.75rem, 2.05rem + 3vw, 4.75rem);
+  /* Feature cards: the delay between one card's entrance and the next. */
+  --stagger-step: 90ms;
 }
 
 /* Hero h1. Caladea 400, as the reference sets its display at weight 400. */
 @utility type-display {
   font-size: var(--type-display);
   line-height: 1;
+  letter-spacing: var(--tracking-display);
+}
+
+/* Inner page head h1 (PageHeader variant="display"): the hero's tracking at a page head's scale. */
+@utility type-page-display {
+  font-size: var(--type-page-display);
+  line-height: 1.05;
   letter-spacing: var(--tracking-display);
 }
 
@@ -804,15 +815,49 @@ html body header nav .nav-item-description {
   }
 }
 
-/* ---------- Service cards (homepage) ----------
-   Hover lift on devices that hover, and only with motion allowed. */
-.service-card {
+/* ---------- Page head (PageHeader variant="display") ----------
+   The description and CTAs rise 24px and fade in once, on load. A page head is
+   on screen at first paint, where Reveal leaves content still, so this is a
+   plain CSS animation from a hidden start to the resting state. It needs no
+   JS, and with no animation support, reduced motion or print it never applies. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+  }
+}
+@media screen and (prefers-reduced-motion: no-preference) {
+  .page-head__lede {
+    animation: rise-in var(--duration-reveal) var(--ease-out-soft) backwards;
+  }
+}
+
+/* ---------- Feature cards (src/components/sections/FeatureGrid.tsx) ----------
+   When the grid's Reveal comes in, the cards follow one after another, each
+   delayed by its position (--card-index, set inline), capped at six steps so
+   a long single column on a phone does not wait. Without JS, or with content
+   already on screen, the Reveal never arms and the cards rest in place. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  [data-reveal="in"] .feature-card {
+    animation: rise-in var(--duration-reveal) var(--ease-out-soft) backwards;
+    animation-delay: calc(min(var(--card-index, 0), 6) * var(--stagger-step));
+  }
+}
+
+/* ---------- Service, feature and plan cards ----------
+   Hover lift on devices that hover, and only with motion allowed. plan-card
+   is the pricing plan cards and the priced offer card. */
+.service-card,
+.feature-card,
+.plan-card {
   transition:
     translate 300ms var(--ease-out-soft),
     box-shadow 300ms var(--ease-out-soft);
 }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .service-card:hover {
+  .service-card:hover,
+  .feature-card:hover,
+  .plan-card:hover {
     translate: 0 -4px;
     box-shadow: 0 24px 48px -32px color-mix(in srgb, var(--color-brand-oxford) 55%, transparent);
   }
@@ -829,6 +874,123 @@ html body header nav .nav-item-description {
 @media (width >= 48rem) {
   .trust-grid {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  }
+}
+
+/* ---------- Long-form prose (src/components/sections/ProseSection.tsx) ----------
+   The legal pages, the ethics charter, the colophon, /about and /resources.
+   A reading measure, the heading rhythm in the heading face, list spacing and
+   the inline link style. Colors come from the section's scheme. In the
+   components layer, so a utility set on an element inside the text (the
+   ethics note's text-small and mt-6) still wins. Nothing here moves, fades or
+   hides text. */
+@layer components {
+  /* About 70 characters a line at both body sizes. In em, not ch: the system
+     face's zero is wider than its average letter, and 65ch measured 86. */
+  .prose-body {
+    max-width: 34em;
+    overflow-wrap: break-word;
+  }
+  .prose-body :where(p, li, dd) {
+    line-height: 1.65;
+  }
+  .prose-body p {
+    margin-bottom: 1.25rem;
+  }
+  .prose-body p:last-child {
+    margin-bottom: 0;
+  }
+  /* The numbered clause headings on /terms and /privacy: a hairline and air
+     above each, so a clause starts where the eye expects it. */
+  .prose-body h2 {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--color-scheme-border);
+    font-size: var(--text-h4);
+    font-weight: 700;
+    line-height: var(--text-h4--line-height);
+    letter-spacing: -0.01em;
+  }
+  .prose-body h3 {
+    margin-top: 2.25rem;
+    margin-bottom: 0.75rem;
+    font-size: var(--text-h5);
+    font-weight: 700;
+    line-height: var(--text-h5--line-height);
+    letter-spacing: -0.01em;
+  }
+  .prose-body h2 + h3 {
+    margin-top: 1.5rem;
+  }
+  .prose-body h4 {
+    margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
+    font-size: var(--text-h6);
+    font-weight: 700;
+    line-height: var(--text-h6--line-height);
+  }
+  /* Only the text's own first element loses its top space. A heading that
+     opens a nested block keeps it, so a run of blocks keeps one rhythm. */
+  .prose-body > :first-child {
+    margin-top: 0;
+  }
+  .prose-body > h2:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+  .prose-body ul,
+  .prose-body ol {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+  }
+  .prose-body ul {
+    list-style-type: disc;
+  }
+  .prose-body ol {
+    list-style-type: decimal;
+  }
+  .prose-body li {
+    padding-left: 0.375rem;
+  }
+  .prose-body li + li {
+    margin-top: 0.625rem;
+  }
+  .prose-body li::marker {
+    color: var(--color-scheme-accent);
+  }
+  .prose-body dl {
+    margin-bottom: 1.25rem;
+  }
+  .prose-body dl > * + * {
+    margin-top: 1rem;
+  }
+  .prose-body dt,
+  .prose-body strong {
+    font-weight: 700;
+  }
+  .prose-body dd {
+    margin-top: 0.25rem;
+  }
+  /* Inline links only: a link rendered as a button (the ethics report
+     button) carries its own classes and keeps its own look. The underline is
+     the scheme accent, the text keeps the body color. */
+  .prose-body a:not([class]) {
+    border-radius: 2px;
+    text-decoration-line: underline;
+    text-decoration-color: var(--color-scheme-accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+  }
+  .prose-body a:not([class]):focus-visible {
+    outline: 2px solid var(--color-scheme-text);
+    outline-offset: 2px;
+    text-decoration-color: currentColor;
+  }
+  @media (hover: hover) {
+    .prose-body a:not([class]):hover {
+      text-decoration-thickness: 2px;
+    }
   }
 }
 

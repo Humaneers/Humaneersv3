@@ -11,7 +11,11 @@ import { ProseSection } from "@/components/sections/ProseSection";
 export function TermsClient() {
   return (
     <>
-      <PageHeader heading="Terms of Service" description="Last updated: Feb 2, 2026" />
+      <PageHeader
+        variant="display"
+        heading="Terms of Service"
+        description="Last updated: Feb 2, 2026"
+      />
 
       <ProseSection>
         <h2>1. Agreement to Terms</h2>

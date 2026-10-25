@@ -81,6 +81,7 @@ export function ManagedITClient() {
   return (
     <>
       <PageHeader
+        variant="display"
         align="center"
         scheme="dark"
         heading="Managed IT that Sleeps So You Don't Have To."

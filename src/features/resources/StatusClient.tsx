@@ -20,6 +20,7 @@ export function StatusClient() {
   return (
     <>
       <PageHeader
+        variant="display"
         scheme="dark"
         align="center"
         heading="System Status"

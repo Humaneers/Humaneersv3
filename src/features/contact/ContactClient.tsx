@@ -12,6 +12,7 @@ export function ContactClient() {
   return (
     <>
       <PageHeader
+        variant="display"
         scheme="dark"
         align="center"
         heading="Let's Build Something That Lasts."

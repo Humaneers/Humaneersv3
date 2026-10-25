@@ -14,6 +14,7 @@ export function TalkToSalesClient() {
           this replaced let a visitor read all the way down and then refused
           them, after the header had promised to help. */}
       <PageHeader
+        variant="display"
         scheme="dark"
         align="center"
         heading="Let's Build Your Strategy"
@@ -24,6 +25,7 @@ export function TalkToSalesClient() {
           mid-incident without a number to call, so the number sits beside the
           form and, on a phone, above it. */}
       <FormSection
+        scheme="cream"
         eyebrow="At capacity: joining the waitlist"
         heading="Join the waitlist"
         description="A partner reads every entry. No sequences, no drip, no junior associate. Something on fire right now? The waitlist is for planned work. If you have an active outage or breach, call instead of filling in a form."
@@ -33,7 +35,6 @@ export function TalkToSalesClient() {
       </FormSection>
 
       <SplitFeature
-        scheme="cream"
         heading="Why Humaneers?"
         body="We don't just fix computers. We align technology with your goals, at work or at home."
         points={["US-based team", "No long-term lock-in"]}

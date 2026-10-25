@@ -57,6 +57,7 @@ export function PersonalClient() {
   return (
     <>
       <PageHeader
+        variant="display"
         align="center"
         scheme="dark"
         heading="Powerful Tools for the Company of One."

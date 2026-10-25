@@ -59,6 +59,7 @@ export function FractionalLeadershipClient() {
   return (
     <>
       <PageHeader
+        variant="display"
         align="center"
         scheme="dark"
         heading="Executive strategy, fractional cost."

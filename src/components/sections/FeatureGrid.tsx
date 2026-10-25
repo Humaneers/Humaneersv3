@@ -1,4 +1,5 @@
 // Relume layout242.
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import { ChevronRight, type LucideIcon } from "lucide-react";
 
@@ -39,23 +40,26 @@ export function FeatureGrid({ eyebrow, heading, items, columns = 3, scheme }: Fe
           {eyebrow && <p className="mb-3 font-semibold text-scheme-accent md:mb-4">{eyebrow}</p>}
           <h2 className="text-h3 font-bold">{heading}</h2>
         </div>
-        <div
-          className={cn(
-            "grid grid-cols-1 items-start gap-y-12 md:gap-x-8 md:gap-y-16 lg:gap-x-12",
-            COLUMNS[columns]
-          )}
-        >
+        <div className={cn("grid grid-cols-1 gap-6 md:gap-8", COLUMNS[columns])}>
           {items.map((item, index) => {
             const Icon = item.icon;
             return (
-              <div key={index}>
-                <Icon aria-hidden="true" className="mb-5 size-12 text-scheme-accent md:mb-6" />
-                <h3 className="mb-3 text-h5 font-bold md:mb-4">{item.heading}</h3>
-                <p>{item.text}</p>
+              // The card takes the scheme's foreground: cream on a white band,
+              // white on cream, oxford-muted on oxford. A link sits on the
+              // card's bottom edge. --card-index staggers the cards' entrance
+              // (feature-card in globals.css).
+              <div
+                key={index}
+                className="feature-card flex flex-col rounded-card bg-scheme-foreground p-6 md:p-8"
+                style={{ "--card-index": index } as CSSProperties}
+              >
+                <Icon aria-hidden="true" className="mb-5 size-10 text-scheme-accent md:mb-6" />
+                <h3 className="mb-3 text-h5 font-bold wrap-break-word md:mb-4">{item.heading}</h3>
+                <p className={item.link ? "mb-5 md:mb-6" : undefined}>{item.text}</p>
                 {item.link && (
                   <Link
                     href={item.link.href}
-                    className="mt-5 inline-flex items-center gap-2 font-semibold text-scheme-text underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-scheme-text md:mt-6"
+                    className="mt-auto inline-flex items-center gap-2 self-start font-semibold text-scheme-text underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-scheme-text"
                   >
                     {item.link.label}
                     <ChevronRight aria-hidden="true" className="size-4" />

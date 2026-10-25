@@ -67,11 +67,15 @@ const GRID: Record<number, string> = {
   4: "md:grid-cols-2 xl:grid-cols-4",
 };
 
-// Scheme tokens only, matching CtaLinks, so the buttons follow the section's scheme.
-const FOCUS = "ring-offset-scheme-background focus-visible:ring-scheme-text";
-const FILLED = "bg-scheme-accent text-scheme-btn-text hover:bg-scheme-accent/90";
+// Scheme tokens only, matching CtaLinks, so the buttons follow the scheme. The
+// recommended card is oxford and its focus ring offsets onto the card's own
+// ground; the others sit on the band's foreground tint, so the outlined button
+// lightens to the band's background on hover rather than to its own tint.
+const FOCUS = "focus-visible:ring-scheme-text";
+const FILLED =
+  "ring-offset-scheme-background bg-scheme-accent text-scheme-btn-text hover:bg-scheme-accent/90";
 const OUTLINED =
-  "border-scheme-text bg-transparent text-scheme-text hover:bg-scheme-foreground hover:text-scheme-text";
+  "ring-offset-scheme-foreground border-scheme-text bg-transparent text-scheme-text hover:bg-scheme-background hover:text-scheme-text";
 
 /**
  * The section heading is the h2 and each plan name an h3. Radix supplies the
@@ -152,12 +156,20 @@ export function PricingPlans({
   );
 }
 
+/**
+ * A tinted card, as FeatureGrid's are. The recommended plan turns to the oxford
+ * ground (scheme-oxford re-points every scheme color inside it) and keeps a
+ * 2px copper border, which also sets it apart in forced colors, where card
+ * grounds are dropped. The plan name and its mark keep their type exactly.
+ */
 function PlanCard({ plan }: { plan: PricingPlan }) {
   return (
     <div
       className={cn(
-        "flex h-full flex-col justify-between rounded-card bg-scheme-background p-6 md:p-8",
-        plan.recommended ? "border-2 border-scheme-accent" : "border border-scheme-border"
+        "plan-card flex h-full flex-col justify-between rounded-card p-6 md:p-8",
+        plan.recommended
+          ? "scheme-oxford border-2 border-brand-copper bg-scheme-background text-scheme-text"
+          : "border border-transparent bg-scheme-foreground"
       )}
     >
       <div>
@@ -166,7 +178,7 @@ function PlanCard({ plan }: { plan: PricingPlan }) {
           {plan.nameMark && <sup aria-hidden="true">{plan.nameMark}</sup>}
         </h3>
         <p className="flex flex-wrap items-baseline gap-x-2">
-          <span className="text-h2 font-bold">{plan.price}</span>
+          <span className="font-heading text-h2 font-bold">{plan.price}</span>
           <span className="text-small font-semibold">{plan.priceUnit}</span>
         </p>
         {plan.priceDetail && (
@@ -176,7 +188,7 @@ function PlanCard({ plan }: { plan: PricingPlan }) {
           </p>
         )}
         <p className="mt-4">{plan.description}</p>
-        <div className="my-6 h-px w-full bg-scheme-border md:my-8" />
+        <div className="my-6 h-px w-full bg-scheme-text/15 md:my-8" />
         <ul className="grid grid-cols-1 gap-y-4">
           {plan.features.map((feature, index) => (
             <li key={index} className="flex items-start gap-3">

@@ -42,6 +42,7 @@ export function EstateClient() {
   return (
     <>
       <PageHeader
+        variant="display"
         align="center"
         scheme="dark"
         heading="The smart home, managed."

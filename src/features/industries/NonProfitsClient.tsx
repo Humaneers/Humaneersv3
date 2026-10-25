@@ -40,6 +40,7 @@ export function NonProfitsClient() {
   return (
     <>
       <PageHeader
+        variant="display"
         align="center"
         scheme="dark"
         heading="Focus on the Mission. We'll Handle the Machines."

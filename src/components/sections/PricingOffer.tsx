@@ -26,7 +26,9 @@ export type PricingOfferProps = {
 
 /**
  * The heading is the h2 and each point an h3. The price is text, not a heading:
- * it is the largest thing in the card, but it does not start a section.
+ * it is the largest thing in the card, but it does not start a section. The
+ * card is the band's foreground tint, as the plan cards are, and each point
+ * opens on a hairline.
  */
 export function PricingOffer({
   eyebrow,
@@ -51,20 +53,20 @@ export function PricingOffer({
         <div className="grid grid-cols-1 items-start gap-y-12 md:gap-y-16 lg:grid-cols-2 lg:gap-x-20">
           <div className="grid grid-cols-1 gap-y-8">
             {points.map((point, index) => (
-              <div key={index}>
+              <div key={index} className="border-t border-scheme-border pt-6">
                 <h3 className="mb-3 text-h6 font-bold md:mb-4">{point.heading}</h3>
                 <p>{point.text}</p>
               </div>
             ))}
           </div>
-          <div className="rounded-card border border-scheme-border bg-scheme-foreground px-6 py-8 md:p-8">
-            <p className="flex flex-wrap items-baseline gap-x-1">
+          <div className="plan-card rounded-card border border-transparent bg-scheme-foreground px-6 py-8 md:p-10">
+            <p className="flex flex-wrap items-baseline gap-x-1 font-heading">
               <span className="text-h1 font-bold">{price}</span>
               <span className="text-h5 font-bold">{priceUnit}</span>
             </p>
             {priceDetail && <p className="mt-2 font-semibold text-scheme-accent">{priceDetail}</p>}
             {fineprint && <p className="mt-4 text-small">{fineprint}</p>}
-            <div className="my-6 h-px w-full bg-scheme-border md:my-8" />
+            <div className="my-6 h-px w-full bg-scheme-text/15 md:my-8" />
             <CtaLinks ctas={[cta]} />
           </div>
         </div>

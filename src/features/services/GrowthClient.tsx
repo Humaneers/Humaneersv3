@@ -78,6 +78,7 @@ export function GrowthClient() {
   return (
     <>
       <PageHeader
+        variant="display"
         align="center"
         scheme="dark"
         heading="Make your brand impossible to ignore."

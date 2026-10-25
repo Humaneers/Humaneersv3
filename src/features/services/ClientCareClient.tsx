@@ -27,6 +27,7 @@ export function ClientCareClient() {
   return (
     <>
       <PageHeader
+        variant="display"
         align="center"
         scheme="dark"
         heading="Client Care"

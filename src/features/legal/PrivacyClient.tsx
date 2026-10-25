@@ -14,7 +14,11 @@ import { ProseSection } from "@/components/sections/ProseSection";
 export function PrivacyClient() {
   return (
     <>
-      <PageHeader heading="Privacy Policy" description="Last updated: Feb 2, 2026" />
+      <PageHeader
+        variant="display"
+        heading="Privacy Policy"
+        description="Last updated: Feb 2, 2026"
+      />
 
       <ProseSection>
         <h2>1. Introduction</h2>
