@@ -81,7 +81,7 @@ export function GrowthClient() {
         variant="display"
         align="center"
         scheme="dark"
-        heading="Make your brand impossible to ignore."
+        heading="Make your brand impossible to ignore"
         description="We bring senior marketing leadership to small businesses. No agencies and no junior account managers."
         ctas={[
           { label: "See business plans", href: `${routePaths.pricing}?mode=business` },

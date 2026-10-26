@@ -15,7 +15,7 @@ export function ContactClient() {
         variant="display"
         scheme="dark"
         align="center"
-        heading="Let's Build Something That Lasts."
+        heading="Let's build something that lasts"
         description="Whether you need a full IT overhaul or a fractional leader, we're ready to listen."
       />
 

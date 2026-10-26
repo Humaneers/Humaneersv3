@@ -46,7 +46,7 @@ export function ThankYouClient() {
         variant="display"
         scheme="cream"
         align="center"
-        heading="Request Received!"
+        heading="Request received!"
         description="Thank you for reaching out. We've received your information and our team will review it shortly. Expect to hear from us within 1 business day."
         ctas={[{ label: "Return Home", href: "/" }]}
       />

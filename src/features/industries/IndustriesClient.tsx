@@ -43,7 +43,7 @@ export function IndustriesClient() {
         variant="display"
         align="center"
         scheme="dark"
-        heading="Compliance is not optional."
+        heading="Compliance is not optional"
         description="In a regulated industry, IT that is only good enough gets you fined. We build infrastructure that survives audits and protects your license to operate."
         ctas={[
           {

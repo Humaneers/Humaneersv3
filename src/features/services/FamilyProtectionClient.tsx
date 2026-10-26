@@ -64,7 +64,7 @@ export function FamilyProtectionClient() {
         variant="display"
         align="center"
         scheme="dark"
-        heading="Enterprise Security, Now for Your Living Room."
+        heading="Enterprise security available for the living room"
         description="Hackers know your home Wi-Fi is the backdoor to your business and bank accounts. We close that door."
         ctas={[
           { label: "Secure My Family", href: `${routePaths.pricing}?mode=household` },

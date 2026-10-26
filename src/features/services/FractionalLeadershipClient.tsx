@@ -62,7 +62,7 @@ export function FractionalLeadershipClient() {
         variant="display"
         align="center"
         scheme="dark"
-        heading="Executive strategy, fractional cost."
+        heading="Executive strategy at a fraction of the cost"
         description="We embed in your leadership team and take responsibility for the outcome rather than the hours."
         ctas={[{ label: "Match with a leader", href: SALES_HREF }]}
       />

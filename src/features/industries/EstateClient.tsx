@@ -45,7 +45,7 @@ export function EstateClient() {
         variant="display"
         align="center"
         scheme="dark"
-        heading="The smart home, managed."
+        heading="The smart home, now managed"
         description="For homes that run like businesses. We provide enterprise grade Wi-Fi, vendor management and a 24/7 emergency line for the modern estate."
         ctas={[
           {

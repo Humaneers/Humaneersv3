@@ -59,7 +59,11 @@ export function SeniorCareClient() {
         variant="display"
         align="center"
         scheme="dark"
-        heading="Technology with Dignity."
+        heading={
+          <>
+            Technology <em>with</em> dignity
+          </>
+        }
         description="For seniors, technology is a lifeline to family, not just a tool. We protect them from scams, simplify their devices, and provide patient, respectful support."
         ctas={[
           { label: PHONE_LABEL, href: PHONE_HREF },

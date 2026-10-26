@@ -52,7 +52,7 @@ const SEGMENT_LABEL: Record<TierSegment, string> = {
 const WAITLIST: CtaLink = { label: "Join the waitlist", href: routePaths.talkToSales };
 
 export const HERO = {
-  heading: "Infrastructure as Strategy.",
+  heading: "Infrastructure-as-your-Strategy",
   description:
     'We don\'t just "fix computers." We architect sovereignty, resilience, and operational velocity for industry leaders and private families.',
   align: "center",

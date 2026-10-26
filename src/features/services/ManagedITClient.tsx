@@ -84,7 +84,7 @@ export function ManagedITClient() {
         variant="display"
         align="center"
         scheme="dark"
-        heading="Managed IT that Sleeps So You Don't Have To."
+        heading="Managed IT that worries for you"
         description="Enterprise-grade infrastructure and US-based support, scaled for small business budgets. We are accepting new clients for Q1."
         ctas={[
           {

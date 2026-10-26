@@ -1,5 +1,6 @@
 // Relume header44 (align left) and header62 (align center); the optional image column is header1's.
 import Image, { type StaticImageData } from "next/image";
+import type { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -15,7 +16,7 @@ export type PageHeaderImage =
   | { src: string; alt: string; width: number; height: number };
 
 export type PageHeaderProps = {
-  heading: string;
+  heading: ReactNode;
   description: string;
   ctas?: CtaLinkList;
   scheme?: SectionScheme;

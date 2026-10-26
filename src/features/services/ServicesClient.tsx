@@ -94,7 +94,7 @@ export function ServicesClient() {
         variant="display"
         align="center"
         scheme="dark"
-        heading="Comprehensive Services for Modern Growth."
+        heading="Comprehensive services for modern growth"
         description="From the server room to the board room, we provide the technology and strategy you need to scale."
       />
 
