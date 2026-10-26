@@ -43,7 +43,7 @@ export function NonProfitsClient() {
         variant="display"
         align="center"
         scheme="dark"
-        heading="Focus on the Mission. We'll Handle the Machines."
+        heading="Focus on your mission. We'll handle the machines."
         description="Grant applications ask for cybersecurity and data privacy policies. We write those sections and run the IT behind them, at rates built for 501(c)(3) organizations."
         ctas={[{ label: "View Nonprofit Plans", href: `${routePaths.pricing}?mode=nonprofit` }]}
       />

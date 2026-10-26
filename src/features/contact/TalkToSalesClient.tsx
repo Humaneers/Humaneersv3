@@ -17,7 +17,7 @@ export function TalkToSalesClient() {
         variant="display"
         scheme="dark"
         align="center"
-        heading="Let's Build Your Strategy"
+        heading="Let's build your strategy"
         description="We are full at the moment, so new engagements are joining a waitlist rather than going straight into onboarding. Tell us what you need and a partner will come back to you when we can take it on properly."
       />
 

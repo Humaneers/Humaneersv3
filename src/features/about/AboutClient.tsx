@@ -101,7 +101,7 @@ export function AboutClient() {
       <PageHeader
         variant="display"
         scheme="dark"
-        heading="Crafting Digital Resilience."
+        heading="Crafting digital resilience for families and enterprise"
         description="Enterprise strategy for businesses and families. Built with precision. Delivered with soul."
       />
 

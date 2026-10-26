@@ -60,7 +60,7 @@ export function PersonalClient() {
         variant="display"
         align="center"
         scheme="dark"
-        heading="Powerful Tools for the Company of One."
+        heading="Powerful tools for the company of one"
         description="Just because you're solo doesn't mean you should look small. Get the enterprise email, security, and support you need to win big clients."
         ctas={[
           { label: "View Pricing", href: `${routePaths.pricing}?mode=household` },

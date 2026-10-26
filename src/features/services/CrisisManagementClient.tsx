@@ -24,7 +24,7 @@ export function CrisisManagementClient() {
       <PageHeader
         variant="display"
         scheme="dark"
-        heading="Reputation Assurance. Control the Narrative."
+        heading="Reputation assurance and control of your narrative"
         description="When the internet turns against you, we turn it off. Digital scrubbing, search suppression, and strategic communications. Historically, these capabilities were reserved for Fortune 500s. We bring them to you. Non-disclosure agreements are standard for all inquiries."
         ctas={[CONSULTATION, CALL]}
       />
