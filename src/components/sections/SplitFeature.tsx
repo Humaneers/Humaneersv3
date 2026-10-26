@@ -1,4 +1,6 @@
 // Relume layout71.
+import { Reveal } from "@/components/motion/Reveal";
+
 import { CtaLinks, type CtaLinkList } from "./CtaLinks";
 import { sectionBandClass, type SectionScheme } from "./scheme";
 
@@ -14,7 +16,7 @@ export type SplitFeatureProps = {
 export function SplitFeature({ heading, body, points, ctas, scheme }: SplitFeatureProps) {
   return (
     <section className={sectionBandClass(scheme)}>
-      <div className="section-container grid grid-cols-1 items-start gap-5 md:grid-cols-2 md:gap-x-12 lg:gap-x-20">
+      <Reveal className="section-container grid grid-cols-1 items-start gap-5 md:grid-cols-2 md:gap-x-12 lg:gap-x-20">
         <h2 className="text-h2 font-bold">{heading}</h2>
         <div>
           <p className="text-medium">{body}</p>
@@ -29,7 +31,7 @@ export function SplitFeature({ heading, body, points, ctas, scheme }: SplitFeatu
           )}
           {ctas && <CtaLinks ctas={ctas} className="mt-6 md:mt-8" />}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

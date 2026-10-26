@@ -91,6 +91,7 @@ export function ServicesClient() {
   return (
     <>
       <PageHeader
+        variant="display"
         align="center"
         scheme="dark"
         heading="Comprehensive Services for Modern Growth."

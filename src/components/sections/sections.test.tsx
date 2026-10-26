@@ -117,6 +117,47 @@ describe("PageHeader", () => {
     expect(headingLevels(container)).toEqual([1]);
     expectSectionBasics(container);
   });
+
+  it("keeps the standard markup when no variant is given", () => {
+    const { container } = render(<PageHeader {...content} ctas={[TALK]} />);
+    const h1 = screen.getByRole("heading", { level: 1 });
+    expect(h1.className).toBe("mb-5 text-h1 font-bold md:mb-6");
+    expect(container.querySelector(".page-head__lede")).toBeNull();
+    expect(container.querySelector("section")?.classList.contains("-mt-20")).toBe(false);
+  });
+
+  it("sets the display variant on the oxford ground with the same single h1, text and CTAs", () => {
+    const { container } = render(
+      <PageHeader {...content} variant="display" ctas={[TALK, PRICING]} />
+    );
+    expect(headingLevels(container)).toEqual([1]);
+    const h1 = screen.getByRole("heading", { level: 1 });
+    expect(h1.textContent).toBe(content.heading);
+    expect(h1.classList.contains("type-page-display")).toBe(true);
+    const section = container.querySelector("section");
+    expect(section?.classList.contains("scheme-oxford")).toBe(true);
+    // The description and both CTAs sit in the block that rises in on load.
+    const lede = container.querySelector(".page-head__lede");
+    expect(lede).not.toBeNull();
+    expect(within(lede as HTMLElement).getByText(content.description)).toBeTruthy();
+    expectCtaLinks(lede as HTMLElement, [TALK, PRICING]);
+    expect(container.textContent).toBe(
+      `${content.heading}${content.description}${TALK.label}${PRICING.label}`
+    );
+    expectSectionBasics(container);
+  });
+
+  it("centers the display variant when align is center and keeps a given scheme", () => {
+    const { container } = render(
+      <PageHeader {...content} variant="display" align="center" scheme="cream" ctas={[TALK]} />
+    );
+    expect(screen.getByRole("heading", { level: 1 }).parentElement?.className).toContain(
+      "text-center"
+    );
+    expect(container.querySelector("section")?.classList.contains("scheme-cream")).toBe(true);
+    expectCtaLinks(container, [TALK]);
+    expectSectionBasics(container);
+  });
 });
 
 describe("SplitFeature", () => {
@@ -181,6 +222,20 @@ describe("FeatureGrid", () => {
     expect(container.querySelectorAll("p.text-scheme-accent")).toHaveLength(0);
     expect(container.querySelector(".lg\\:grid-cols-4")).not.toBeNull();
     expectSectionBasics(container);
+  });
+
+  it("sets each item on a tinted card that carries its position for the staggered entrance", () => {
+    const { container } = render(
+      <FeatureGrid heading="Support that fits your team" items={items} />
+    );
+    const cards = Array.from(container.querySelectorAll<HTMLElement>(".feature-card"));
+    expect(cards).toHaveLength(items.length);
+    cards.forEach((card, index) => {
+      expect(card.classList.contains("bg-scheme-foreground")).toBe(true);
+      expect(card.classList.contains("rounded-card")).toBe(true);
+      expect(card.style.getPropertyValue("--card-index")).toBe(String(index));
+      expect(card.querySelector("h3")?.textContent).toBe(items[index].heading);
+    });
   });
 });
 
@@ -249,10 +304,30 @@ describe("ProseSection", () => {
 
   it("underlines links in running text, which is what axe link-in-text-block asks for", () => {
     const { container } = render(<ProseSection heading="How we work">{body}</ProseSection>);
+    // prose-body (globals.css) underlines every inline link, one with no class of its own.
     const prose = container.querySelector("section > div > div:last-child");
-    expect(prose?.className).toContain("[&_a]:underline");
+    expect(prose?.classList.contains("prose-body")).toBe(true);
     const link = screen.getByRole("link", { name: "terms of service" });
     expect(link.getAttribute("href")).toBe("/terms");
+    expect(link.hasAttribute("class")).toBe(false);
+    expect(prose?.contains(link)).toBe(true);
+  });
+
+  it("sets a headed section's heading beside the text from lg, and a headless one as text alone", () => {
+    const { container } = render(<ProseSection heading="How we work">{body}</ProseSection>);
+    const inner = container.querySelector("section > div");
+    expect(inner?.className).toContain("lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]");
+    expect(inner?.children).toHaveLength(2);
+    cleanup();
+    const headless = render(
+      <ProseSection>
+        <p>A second block of the same document.</p>
+      </ProseSection>
+    );
+    const only = headless.container.querySelector("section > div");
+    expect(only?.className).not.toContain("lg:grid");
+    expect(only?.children).toHaveLength(1);
+    expect(only?.firstElementChild?.classList.contains("prose-body")).toBe(true);
   });
 });
 
@@ -412,6 +487,23 @@ describe("PricingPlans", () => {
     expect(heading.textContent).toBe("Starter\u2120");
     expect(heading.querySelector("sup")?.getAttribute("aria-hidden")).toBe("true");
     expect(screen.getByRole("link", { name: "Join the waitlist for Starter" })).toBeTruthy();
+  });
+
+  it("sets every plan on a tinted card and the recommended one on the oxford ground with a copper border", () => {
+    renderPlans();
+    const cardFor = (name: string) =>
+      screen.getByRole("heading", { level: 3, name }).closest(".plan-card") as HTMLElement;
+    const starter = cardFor("Starter");
+    const team = cardFor("Team");
+    expect(starter.classList.contains("bg-scheme-foreground")).toBe(true);
+    expect(starter.classList.contains("scheme-oxford")).toBe(false);
+    expect(team.classList.contains("scheme-oxford")).toBe(true);
+    expect(team.classList.contains("border-brand-copper")).toBe(true);
+    for (const card of [starter, team]) {
+      expect(card.classList.contains("rounded-card")).toBe(true);
+      // The CTA is the card's last child, so it sits on the card's bottom edge.
+      expect(card.lastElementChild?.tagName).toBe("A");
+    }
   });
 
   it("renders the tab it is given, with that tab's note", () => {
@@ -788,6 +880,12 @@ describe("FormSection", () => {
     const form = screen.getByRole("form", { name: "Waitlist" });
     expect(within(form).getByLabelText("Email").getAttribute("name")).toBe("email");
     expect(within(form).getByRole("button", { name: "Join" }).getAttribute("type")).toBe("submit");
+    // The form is the card's only child, on a white ground whatever the band:
+    // a card from md, a full-width panel below it.
+    const card = form.parentElement as HTMLElement;
+    expect(card.children).toHaveLength(1);
+    expect(card.classList.contains("bg-white")).toBe(true);
+    expect(card.classList.contains("md:rounded-card")).toBe(true);
     expectSectionBasics(container);
   });
 

@@ -54,6 +54,7 @@ export function ResourcesClient() {
   return (
     <>
       <PageHeader
+        variant="display"
         scheme="dark"
         align="center"
         heading="Client Links, IT Glossary, and Incident FAQ"

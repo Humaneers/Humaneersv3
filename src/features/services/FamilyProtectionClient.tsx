@@ -61,6 +61,7 @@ export function FamilyProtectionClient() {
   return (
     <>
       <PageHeader
+        variant="display"
         align="center"
         scheme="dark"
         heading="Enterprise Security, Now for Your Living Room."

@@ -44,6 +44,7 @@ export function EthicsClient() {
   return (
     <>
       <PageHeader
+        variant="display"
         scheme="dark"
         align="center"
         heading="Ethics Charter"

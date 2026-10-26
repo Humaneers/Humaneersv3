@@ -12,10 +12,11 @@ import { ContactModalWrapper } from "../components/ContactModalWrapper";
 
 // Heading face: Caladea, the open-license metric clone of Cambria (DMX
 // McArthur's heading face). next/font downloads it at build time and serves it
-// from this origin, which is what the CSP's font-src 'self' allows.
+// from this origin, which is what the CSP's font-src 'self' allows. The italic
+// sets the two accent words in the homepage hero.
 const caladea = Caladea({
   weight: ["400", "700"],
-  style: ["normal"],
+  style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-caladea",

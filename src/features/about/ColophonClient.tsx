@@ -20,8 +20,8 @@ export function ColophonClient() {
   return (
     <>
       <PageHeader
+        variant="display"
         scheme="dark"
-        align="center"
         heading="Colophon & Transparency"
         description="How we built this site, and how we build our company. We believe in radical openness in our code, our pricing, and our values."
       />

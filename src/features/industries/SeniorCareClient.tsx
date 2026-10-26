@@ -56,6 +56,7 @@ export function SeniorCareClient() {
   return (
     <>
       <PageHeader
+        variant="display"
         align="center"
         scheme="dark"
         heading="Technology with Dignity."

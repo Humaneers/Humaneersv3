@@ -2,6 +2,7 @@
 import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
 
+import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -40,7 +41,7 @@ const BUTTON =
 export function ActionCards({ eyebrow, heading, description, cards, scheme }: ActionCardsProps) {
   return (
     <section className={sectionBandClass(scheme)}>
-      <div className="section-container">
+      <Reveal className="section-container">
         <div className="mx-auto mb-12 max-w-lg text-center md:mb-18 lg:mb-20">
           {eyebrow && <p className="mb-3 font-semibold text-scheme-accent md:mb-4">{eyebrow}</p>}
           <h2 className={cn("text-h2 font-bold", description && "mb-5 md:mb-6")}>{heading}</h2>
@@ -73,7 +74,7 @@ export function ActionCards({ eyebrow, heading, description, cards, scheme }: Ac
             );
           })}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

@@ -40,6 +40,7 @@ export function VenturePortfolioClient() {
   return (
     <>
       <PageHeader
+        variant="display"
         scheme="dark"
         heading="Your ideas deserve a safe harbor."
         description="From a raw domain to an operating entity. We hold the infrastructure a holding company needs, so your attention goes to the next idea instead of the renewals."

@@ -99,6 +99,7 @@ export function AboutClient() {
   return (
     <>
       <PageHeader
+        variant="display"
         scheme="dark"
         heading="Crafting Digital Resilience."
         description="Enterprise strategy for businesses and families. Built with precision. Delivered with soul."

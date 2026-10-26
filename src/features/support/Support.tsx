@@ -64,6 +64,7 @@ export function Support() {
       {/* The emergency line is the header's CTA so a caller mid-incident
           reaches it in the first viewport on a phone. */}
       <PageHeader
+        variant="display"
         scheme="dark"
         heading="Support Center"
         description="Submit a support ticket and our engineering team will respond promptly. We support new clients in crisis. We'll stabilize your systems first and handle the paperwork later. For a P1 critical issue, such as a system down or an active breach, call the emergency line. It gives 24/7 direct access and bypasses standard queues."

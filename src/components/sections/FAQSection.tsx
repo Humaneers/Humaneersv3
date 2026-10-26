@@ -1,4 +1,5 @@
 // Relume faq1.
+import { Reveal } from "@/components/motion/Reveal";
 import {
   Accordion,
   AccordionContent,
@@ -33,7 +34,7 @@ export type FAQSectionProps = {
 export function FAQSection({ heading, items, scheme }: FAQSectionProps) {
   return (
     <section className={sectionBandClass(scheme)}>
-      <div className="section-container">
+      <Reveal className="section-container">
         <div className="mx-auto max-w-3xl">
           <h2 className="mb-12 text-center text-h2 font-bold md:mb-18 lg:mb-20">{heading}</h2>
           <Accordion type="multiple">
@@ -47,7 +48,7 @@ export function FAQSection({ heading, items, scheme }: FAQSectionProps) {
             ))}
           </Accordion>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
